@@ -1,27 +1,35 @@
 {
   "compilerOptions": {
-    "outDir": "build/lib",
-    "module": "commonjs",
+    "baseUrl": "./",
+    "allowSyntheticDefaultImports": true,
+    "module": "es2015",
     "target": "es5",
-    "lib": ["es5", "es6", "es7", "es2017", "dom"],
+    "lib": ["es6", "dom"],
     "sourceMap": true,
     "allowJs": false,
     "jsx": "react",
     "moduleResolution": "node",
-    "rootDirs": ["lib"],
-    "baseUrl": "lib",
-    "forceConsistentCasingInFileNames": true,
+    "rootDir": "../",
+    "outDir": "dist",
     "noImplicitReturns": true,
     "noImplicitThis": true,
     "noImplicitAny": true,
     "strictNullChecks": true,
-    "suppressImplicitAnyIndexErrors": true,
-    "noUnusedLocals": true,
-    "declaration": true,
-    "allowSyntheticDefaultImports": true,
-    "experimentalDecorators": true,
-    "emitDecoratorMetadata": true
+    "declaration": true
   },
-  "include": ["lib/**/*"],
-  "exclude": ["node_modules", "build", "scripts"]
+  "include": [
+    "src/**/*"
+  ],
+  "exclude": [
+    "node_modules",
+    "build",
+    "dist",
+    "scripts",
+    "acceptance-tests",
+    "webpack",
+    "jest",
+    "src/setupTests.ts",
+    "**/*/*.test.ts",
+    "examples"
+  ]
 }

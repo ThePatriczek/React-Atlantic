@@ -1,13 +1,25 @@
 import * as React from "react";
+import { StyledButton } from "./Button.style";
 
-interface ButtonProps {
-  text: string;
+export interface ButtonProps extends React.HTMLProps<HTMLButtonElement> {
+  secondary?: boolean;
+  withIcon?: boolean;
+  nextTo?: boolean;
 }
 
-export const Button: React.FC<ButtonProps> = (
-  props: ButtonProps
-): React.ReactElement => {
-  const { text } = props;
+export const Button: React.FC<ButtonProps> = (props: ButtonProps) => {
+  const { value, withIcon, ...others } = props;
 
-  return <button>{text}</button>;
+  // TODO: Types for Styled components
+  return (
+    <StyledButton {...(others as any)}>
+      {value}
+      {withIcon && <i>{` >`}</i>}
+    </StyledButton>
+  );
+};
+
+Button.defaultProps = {
+  secondary: false,
+  nextTo: false
 };
