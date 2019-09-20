@@ -1,25 +1,31 @@
 import * as React from "react";
 import { StyledButton } from "./Button.style";
 
-export interface ButtonProps extends React.HTMLProps<HTMLButtonElement> {
-  secondary?: boolean;
-  withIcon?: boolean;
-  nextTo?: boolean;
+export interface ButtonProps {
+  onClick?: () => void;
+  isDisabled?: boolean;
+  children?: React.ReactText;
+  icon?: string;
+  iconPosition?: "left" | "right";
+  /** Test description */
+  type?: "submit" | "button";
 }
 
 export const Button: React.FC<ButtonProps> = (props: ButtonProps) => {
-  const { value, withIcon, ...others } = props;
+  const { children, type, isDisabled, onClick, icon, iconPosition } = props;
 
-  // TODO: Types for Styled components
   return (
-    <StyledButton {...(others as any)}>
-      {value}
-      {withIcon && <i>{` >`}</i>}
+    <StyledButton type={type} disabled={isDisabled} onClick={onClick}>
+      {icon && iconPosition === "left" && <i className={icon} />}
+      {children}
+      {icon && iconPosition === "right" && <i className={icon} />}
     </StyledButton>
   );
 };
 
 Button.defaultProps = {
-  secondary: false,
-  nextTo: false
+  type: "button",
+  iconPosition: "left"
 };
+
+Button.displayName = `Button`;

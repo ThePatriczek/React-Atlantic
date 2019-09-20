@@ -1,9 +1,6 @@
 import styled from "styled-components";
 
-interface StyledButtonProps {
-  secondary: boolean;
-  nextTo: boolean;
-}
+interface StyledButtonProps {}
 
 export const StyledButton = styled.button<StyledButtonProps>`
   cursor: pointer;
@@ -12,10 +9,7 @@ export const StyledButton = styled.button<StyledButtonProps>`
   border-radius: 4px;
   font-size: 16px;
   outline: none;
-  margin-left: ${({ nextTo }) => (nextTo ? `10px` : `0px`)};
-  background-color: ${({ secondary, theme }) =>
-    secondary ? `transparent` : theme.colors.primary};
-  color: ${({ secondary, theme }) =>
-    secondary ? theme.colors.primary : `white`};
+  background-color: ${({ theme }) => theme.colors.primary};
+  color: ${({ theme }) => `white`};
   border: 1px solid ${({ theme }) => theme.colors.primary};
 `;

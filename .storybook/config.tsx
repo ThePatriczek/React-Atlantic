@@ -1,3 +1,4 @@
+import * as React from "react";
 import { addDecorator, configure } from "@storybook/react";
 import { withInfo } from "@storybook/addon-info";
 import { ThemeProvider } from "styled-components";
@@ -15,7 +16,7 @@ addDecorator(
 );
 
 addDecorator(storyFn => (
-  <ThemeProvider theme={theme}>{storyFn()}</ThemeProvider>
+  <ThemeProvider theme={theme}>{storyFn() as any}</ThemeProvider>
 ));
 
 configure(loadStories, module);
