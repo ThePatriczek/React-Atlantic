@@ -28,6 +28,7 @@
     "@storybook/addon-links": "^5.2.1",
     "@storybook/addons": "^5.2.1",
     "@storybook/react": "^5.2.1",
-    "babel-loader": "^8.0.6"
+    "babel-loader": "^8.0.6",
+    "prettier": "^1.18.2"
   }
 }

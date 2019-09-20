@@ -7,5 +7,5 @@ export default {
 };
 
 export const primary = () => (
-    <Button onClick={action("clicked")}>{`Button`}</Button>
+  <Button onClick={action("clicked")}>{`Button`}</Button>
 );
