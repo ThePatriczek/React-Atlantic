@@ -1,4 +1,5 @@
 import { withInfo } from '@storybook/addon-info';
+import { INITIAL_VIEWPORTS } from '@storybook/addon-viewport';
 import { addDecorator, addParameters, configure } from '@storybook/react';
 import * as React from 'react';
 import { theme } from '../src/theme';
@@ -22,8 +23,14 @@ addDecorator(
   })
 );
 
-// addDecorator(storyFn => (
-//   <ThemeProvider theme={theme}>{storyFn() as any}</ThemeProvider>
-// ));
+addParameters({
+  viewport: {
+    viewports: INITIAL_VIEWPORTS
+  }
+});
+
+addDecorator(storyFn => (
+  <ThemeProvider theme={theme}>{storyFn() as any}</ThemeProvider>
+));
 
 configure(loadStories, module);
