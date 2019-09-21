@@ -1,5 +1,5 @@
-import { COLORS } from "./colors";
-import { FONT_SIZE } from "./fontSize";
+import { COLORS } from './colors';
+import { FONT_SIZE } from './fontSize';
 
 export const theme = {
   colors: {

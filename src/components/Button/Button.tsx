@@ -1,14 +1,14 @@
-import * as React from "react";
-import { StyledButton } from "./Button.style";
+import * as React from 'react';
+import { StyledButton } from './Button.style';
 
 export interface ButtonProps {
   onClick?: () => void;
   isDisabled?: boolean;
   children?: React.ReactText;
   icon?: string;
-  iconPosition?: "left" | "right";
+  iconPosition?: 'left' | 'right';
   /** Test description */
-  type?: "submit" | "button";
+  type?: 'submit' | 'button';
 }
 
 export const Button: React.FC<ButtonProps> = (props: ButtonProps) => {
@@ -16,16 +16,16 @@ export const Button: React.FC<ButtonProps> = (props: ButtonProps) => {
 
   return (
     <StyledButton type={type} disabled={isDisabled} onClick={onClick}>
-      {icon && iconPosition === "left" && <i className={icon} />}
+      {icon && iconPosition === 'left' && <i className={icon} />}
       {children}
-      {icon && iconPosition === "right" && <i className={icon} />}
+      {icon && iconPosition === 'right' && <i className={icon} />}
     </StyledButton>
   );
 };
 
 Button.defaultProps = {
-  type: "button",
-  iconPosition: "left"
+  type: 'button',
+  iconPosition: 'left'
 };
 
 Button.displayName = `Button`;
