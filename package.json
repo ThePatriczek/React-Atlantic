@@ -1,11 +1,11 @@
 {
   "name": "react-atlantic",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "React Atlantic UI Library",
   "main": "index.js",
   "scripts": {
     "storybook": "start-storybook -p 6006",
-    "prepublish": "tsc -p tsconfig.publish.json && build-storybook -o docs"
+    "prepublishOnly": "tsc -p tsconfig.publish.json && build-storybook -o docs"
   },
   "repository": {
     "type": "git",
