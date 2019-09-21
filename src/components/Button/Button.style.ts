@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { theme } from '../../theme';
 
 interface StyledButtonProps {}
 
@@ -13,3 +14,7 @@ export const StyledButton = styled.button<StyledButtonProps>`
   color: ${({ theme }) => `white`};
   border: 1px solid ${({ theme }) => theme.colors.primary};
 `;
+
+StyledButton.defaultProps = {
+  theme
+};
