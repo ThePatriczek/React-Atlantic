@@ -15,14 +15,14 @@ stories.add(
   'Button',
   () => {
     const button = (
-      <Button isDisabled={boolean('Disabled', false)}>
+      <Button isDisabled={boolean('Disabled', true)}>
         {text('Label', 'Test')}
       </Button>
     );
 
     specs(() =>
       describe('Hello World', () => {
-        it('Should have the Hello World label', () => {
+        it('Should have the Test label', () => {
           const output = mount(button);
           expect(output.text()).toContain('Test');
         });
