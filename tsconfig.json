@@ -10,7 +10,6 @@
     "jsx": "react",
     "moduleResolution": "node",
     "rootDir": "../",
-    "outDir": "lib",
     "noImplicitReturns": true,
     "noImplicitThis": true,
     "noImplicitAny": true,
