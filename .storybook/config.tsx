@@ -1,12 +1,15 @@
 import { withInfo } from '@storybook/addon-info';
-import { addDecorator, addParameters, configure } from '@storybook/react';
+import { INITIAL_VIEWPORTS } from '@storybook/addon-viewport';
+import {
+  addDecorator,
+  addParameters,
+  configure as reactConfig
+} from '@storybook/react';
+import { configure as enzymeConfig } from 'enzyme';
+import Adapter from 'enzyme-adapter-react-16';
 import * as React from 'react';
 import { theme } from '../src/theme';
 import { ThemeProvider } from '../src/theme/ThemeProvider';
-
-import { configure as enzymeConfig } from 'enzyme';
-
-import Adapter from 'enzyme-adapter-react-16';
 
 enzymeConfig({ adapter: new Adapter() });
 
