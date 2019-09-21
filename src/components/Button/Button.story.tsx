@@ -14,5 +14,5 @@ stories.add(
       {text('Label', 'Test')}
     </Button>
   ),
-  { info: { inline: true } }
+  { info: { inline: true }, notes: 'A very simple example of addon notes' }
 );
