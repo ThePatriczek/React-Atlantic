@@ -12,7 +12,8 @@ const loadStories = () => req.keys().forEach(req);
 addParameters({
   options: {
     panelPosition: `right`,
-    showPanel: false
+    showPanel: true,
+    hierarchySeparator: /[\/.]/
   }
 });
 
