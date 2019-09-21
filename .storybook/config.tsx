@@ -1,18 +1,23 @@
 import { withInfo } from '@storybook/addon-info';
-import { INITIAL_VIEWPORTS } from '@storybook/addon-viewport';
 import { addDecorator, addParameters, configure } from '@storybook/react';
 import * as React from 'react';
 import { theme } from '../src/theme';
 import { ThemeProvider } from '../src/theme/ThemeProvider';
 
-const req = require.context('../src', true, /\.story\.tsx$/);
+import { configure as enzymeConfig } from 'enzyme';
+
+import Adapter from 'enzyme-adapter-react-16';
+
+enzymeConfig({ adapter: new Adapter() });
+
+const req = require.context('../src', true, /\.story\.jsx$/);
 
 const loadStories = () => req.keys().forEach(req);
 
 addParameters({
   options: {
-    panelPosition: `right`,
-    showPanel: false
+    panelPosition: 'bottom',
+    showPanel: true
   }
 });
 
@@ -33,4 +38,4 @@ addDecorator(storyFn => (
   <ThemeProvider theme={theme}>{storyFn() as any}</ThemeProvider>
 ));
 
-configure(loadStories, module);
+reactConfig(loadStories, module);
