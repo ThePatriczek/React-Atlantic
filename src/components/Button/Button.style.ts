@@ -5,7 +5,7 @@ import { Size } from '../../types';
 import { ButtonType } from './Button';
 
 interface StyledButtonProps {
-  type?: ButtonType;
+  styleType?: ButtonType;
   isRounded: boolean;
   size: Size;
   isFullWide: boolean;
@@ -42,8 +42,8 @@ export const StyledButton = styled(defaultButton)<StyledButtonProps>`
 
   ${props =>
     !props.disabled &&
-    props.type !== 'transparent' &&
-    props.type !== 'rounded' &&
+    props.styleType !== 'transparent' &&
+    !props.isRounded &&
     css`
       &.animation {
         &:after {
@@ -70,29 +70,29 @@ export const StyledButton = styled(defaultButton)<StyledButtonProps>`
     let borderColor = darken(0.1, bgColor);
     let borderType = `solid`;
 
-    if (props.type === 'primary') {
+    if (props.styleType === 'primary') {
       bgColor = props.theme.color.primary;
       hoverBgColor = lighten(0.1, bgColor);
       color = `white`;
       borderColor = bgColor;
-    } else if (props.type === 'success') {
+    } else if (props.styleType === 'success') {
       bgColor = props.theme.color.success;
       hoverBgColor = lighten(0.05, bgColor);
       color = `white`;
       borderColor = bgColor;
-    } else if (props.type === 'warning') {
+    } else if (props.styleType === 'warning') {
       bgColor = props.theme.color.warning;
       hoverBgColor = lighten(0.15, bgColor);
       color = `white`;
       borderColor = bgColor;
-    } else if (props.type === 'error') {
+    } else if (props.styleType === 'error') {
       bgColor = props.theme.color.error;
       hoverBgColor = lighten(0.15, bgColor);
       color = `white`;
       borderColor = bgColor;
-    } else if (props.type === 'dashed') {
+    } else if (props.styleType === 'dashed') {
       borderType = `dashed`;
-    } else if (props.type === 'transparent') {
+    } else if (props.styleType === 'transparent') {
       bgColor = `transparent`;
       color = props.theme.color.primary;
       borderColor = bgColor;
@@ -105,7 +105,7 @@ export const StyledButton = styled(defaultButton)<StyledButtonProps>`
 
       &:hover {
         background-color: ${hoverBgColor};
-        ${props.type === 'transparent' &&
+        ${props.styleType === 'transparent' &&
           css`
             border: 1px ${borderType} ${color};
           `}

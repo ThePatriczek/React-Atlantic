@@ -19,6 +19,7 @@ export interface ButtonProps {
   children?: React.ReactText;
   /** primary | success | warning | error | dashed | transparent */
   type?: ButtonType;
+  htmlType?: 'submit' | 'button';
   icon?: string;
   /** right | left */
   iconPosition?: HorizontalPosition;
@@ -27,7 +28,15 @@ export interface ButtonProps {
 }
 
 export const Button: React.FC<ButtonProps> = (props: ButtonProps) => {
-  const { children, type, isDisabled, isRounded, size, isFullWide } = props;
+  const {
+    children,
+    type,
+    isDisabled,
+    isRounded,
+    size,
+    isFullWide,
+    htmlType
+  } = props;
   const [animation, setAnimation] = React.useState<boolean>(false);
 
   const onClick = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -41,7 +50,8 @@ export const Button: React.FC<ButtonProps> = (props: ButtonProps) => {
 
   return (
     <StyledButton
-      type={type as any}
+      type={htmlType}
+      styleType={type}
       disabled={isDisabled}
       onClick={onClick}
       isRounded={!!isRounded}
