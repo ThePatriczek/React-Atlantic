@@ -1,31 +1,67 @@
 import * as React from 'react';
+import { HorizontalPosition, Size } from '../../types';
 import { StyledButton } from './Button.style';
+
+export type ButtonType =
+  | 'default'
+  | 'primary'
+  | 'success'
+  | 'warning'
+  | 'error'
+  | 'dashed'
+  | 'transparent';
 
 export interface ButtonProps {
   onClick?: () => void;
   isDisabled?: boolean;
+  isRounded?: boolean;
+  isFullWide?: boolean;
   children?: React.ReactText;
+  /** primary | success | warning | error | dashed | transparent */
+  type?: ButtonType;
   icon?: string;
-  iconPosition?: 'left' | 'right';
-  /** Test description */
-  type?: 'submit' | 'button';
+  /** right | left */
+  iconPosition?: HorizontalPosition;
+  /** small | medium | large */
+  size?: Size;
 }
 
 export const Button: React.FC<ButtonProps> = (props: ButtonProps) => {
-  const { children, type, isDisabled, onClick, icon, iconPosition } = props;
+  const { children, type, isDisabled, isRounded, size, isFullWide } = props;
+  const [animation, setAnimation] = React.useState<boolean>(false);
+
+  const onClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    setAnimation(true);
+
+    if (props.onClick) {
+      props.onClick();
+    }
+  };
 
   return (
-    <StyledButton type={type} disabled={isDisabled} onClick={onClick}>
-      {icon && iconPosition === 'left' && <i className={icon} />}
+    <StyledButton
+      type={type as any}
+      disabled={isDisabled}
+      onClick={onClick}
+      isRounded={!!isRounded}
+      size={size as any}
+      isFullWide={!!isFullWide}
+      onAnimationEnd={() => setAnimation(false)}
+      className={animation ? `animation` : ``}
+    >
       {children}
-      {icon && iconPosition === 'right' && <i className={icon} />}
     </StyledButton>
   );
 };
 
 Button.defaultProps = {
-  type: 'button',
-  iconPosition: 'left'
+  size: 'medium',
+  isFullWide: false,
+  isDisabled: false,
+  isRounded: false,
+  iconPosition: 'left',
+  type: 'default'
 };
 
 Button.displayName = `Button`;
