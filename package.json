@@ -1,11 +1,11 @@
 {
   "name": "react-atlantic",
-  "version": "1.0.0",
+  "version": "0.0.5",
   "description": "React Atlantic UI Library",
   "main": "index.js",
   "scripts": {
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "prepublish": "tsc -p tsconfig.publish.json && build-storybook -o docs"
   },
   "repository": {
     "type": "git",
@@ -20,15 +20,28 @@
   "homepage": "https://github.com/ThePatriczek/React-Atlantic#readme",
   "dependencies": {
     "react": "^16.9.0",
-    "react-dom": "^16.9.0"
+    "react-dom": "^16.9.0",
+    "styled-components": "^4.3.2"
   },
   "devDependencies": {
     "@babel/core": "^7.6.0",
-    "@storybook/addon-actions": "^5.2.1",
-    "@storybook/addon-links": "^5.2.1",
-    "@storybook/addons": "^5.2.1",
-    "@storybook/react": "^5.2.1",
+    "@storybook/addon-actions": "5.0.0",
+    "@storybook/addon-info": "5.0.0",
+    "@storybook/addon-links": "5.0.0",
+    "@storybook/addons": "5.0.0",
+    "@storybook/react": "5.0.0",
+    "@types/node": "^12.7.5",
+    "@types/react": "^16.9.2",
+    "@types/react-dom": "^16.9.0",
+    "@types/storybook__addon-info": "^4.1.2",
+    "@types/storybook__react": "^4.0.2",
+    "@types/styled-components": "4.1.8",
+    "awesome-typescript-loader": "^5.2.1",
     "babel-loader": "^8.0.6",
-    "prettier": "^1.18.2"
+    "prettier": "^1.18.2",
+    "react-docgen-typescript-loader": "^3.2.1",
+    "tslint": "^5.20.0",
+    "tslint-config-prettier": "^1.18.0",
+    "typescript": "^3.6.3"
   }
 }
