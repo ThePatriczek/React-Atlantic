@@ -1,26 +1,28 @@
-import { COLORS } from './colors';
-import { FONT_SIZE } from './fontSize';
 export declare const theme: {
-    colors: {
-        primary: COLORS;
-        heading: COLORS;
-        appBackground: COLORS;
-        panelBackground: COLORS;
-        shadow: COLORS;
+    color: {
+        default: string;
+        primary: string;
+        success: string;
+        info: string;
+        warning: string;
+        error: string;
+        border: string;
     };
-    layout: {
-        maxWidth: string;
+    padding: {
+        xs: string;
+        sm: string;
+        md: string;
+        lg: string;
+        xl: string;
     };
-    font: {
-        size: {
-            logo: FONT_SIZE;
-            large: FONT_SIZE;
-            normal: FONT_SIZE;
-            small: FONT_SIZE;
-        };
-        colors: {
-            table: COLORS;
-        };
+    margin: {
+        xs: string;
+        sm: string;
+        md: string;
+        lg: string;
+        xl: string;
     };
+    radius: string;
+    rounded: string;
 };
 export declare type Theme = typeof theme;

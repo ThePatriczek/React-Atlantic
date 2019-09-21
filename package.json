@@ -1,6 +1,6 @@
 {
   "name": "react-atlantic",
-  "version": "0.0.7",
+  "version": "0.0.9",
   "description": "React Atlantic UI Library",
   "main": "index.js",
   "scripts": {
@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/ThePatriczek/React-Atlantic#readme",
   "dependencies": {
+    "polished": "^3.4.1",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
     "styled-components": "^4.3.2"
@@ -38,6 +39,7 @@
     "@types/node": "^12.7.5",
     "@types/react": "^16.9.2",
     "@types/react-dom": "^16.9.0",
+    "@types/storybook__addon-actions": "^3.4.3",
     "@types/storybook__addon-info": "^4.1.2",
     "@types/storybook__addon-knobs": "^5.0.4",
     "@types/storybook__addon-viewport": "^4.1.1",
@@ -48,11 +50,13 @@
     "enzyme": "^3.10.0",
     "enzyme-adapter-react-16": "^1.14.0",
     "expect": "^24.9.0",
+    "jest-mock": "^24.9.0",
     "prettier": "^1.18.2",
     "react-docgen-typescript-loader": "^3.2.1",
     "storybook-addon-specifications": "^2.1.5",
     "tslint": "^5.20.0",
     "tslint-config-prettier": "^1.18.0",
-    "typescript": "^3.6.3"
+    "typescript": "^3.6.3",
+    "react-test-renderer": "latest"
   }
 }

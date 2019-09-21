@@ -5,12 +5,12 @@ module.exports = ({ config }) => {
       {
         loader: require.resolve('awesome-typescript-loader')
       },
-      // Optional
       {
         loader: require.resolve('react-docgen-typescript-loader')
       }
     ]
   });
-  config.resolve.extensions.push(".ts", ".tsx");
+
+  config.resolve.extensions.push('.ts', '.tsx', '.jsx', '.js');
   return config;
 };
