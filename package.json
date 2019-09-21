@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/ThePatriczek/React-Atlantic#readme",
   "dependencies": {
+    "polished": "^3.4.1",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
     "styled-components": "^4.3.2"
