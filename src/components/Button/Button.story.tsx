@@ -2,9 +2,10 @@ import { action } from '@storybook/addon-actions';
 import { boolean, select, text, withKnobs } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/react';
 import * as React from 'react';
+import { Icon } from '../Icon';
 import { Button } from './Button';
 
-const stories = storiesOf('Components/Button', module);
+const stories = storiesOf('Button', module);
 
 stories.addDecorator(withKnobs);
 
@@ -32,6 +33,19 @@ stories.add(
         <Button size={'small'}>{`Small`}</Button>
         <Button>{`Medium (default)`}</Button>
         <Button size={'large'}>{`Large`}</Button>
+      </div>
+      <div>
+        <Button>
+          <Icon name={'hamburger'} />
+        </Button>
+        <Button>
+          <Icon name={'arrowLeft'} />
+          <span>{`Icon Left`}</span>
+        </Button>
+        <Button>
+          <span>{`Icon right`}</span>
+          <Icon name={'arrowRight'} />
+        </Button>
       </div>
       <div>
         <Button isFullWide>{`Full Wide default`}</Button>
@@ -68,7 +82,7 @@ stories.add(
       )}
       onClick={action(`onClick`)}
     >
-      {text(`Text:`, `Change me!`)}
+      {text(`Text:`, `Change me, please 🥺`)}
     </Button>
   ),
   {
