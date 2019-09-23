@@ -89,7 +89,7 @@ stories.add(
         it(`Should have the right text: ${value}`, () =>
           expect(wrapper.text()).toEqual(value));
 
-        it(`onClick should have been called if Button isn't disabled`, () => {
+        it(`onClick should have been called if Button is not disabled`, () => {
           const mockClick = jest.fn();
 
           wrapper.setProps({
@@ -100,6 +100,8 @@ stories.add(
 
           if (!isDisabled) {
             expect(mockClick).toHaveBeenCalled();
+          } else {
+            expect(mockClick).not.toHaveBeenCalled();
           }
         });
 
