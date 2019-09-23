@@ -6,9 +6,9 @@ import { ButtonType } from './Button';
 
 interface StyledButtonProps {
   styleType?: ButtonType;
-  isRounded: boolean;
+  isRound: boolean;
   size: Size;
-  isFullWide: boolean;
+  isFullWidth: boolean;
 }
 
 const defaultButton = styled.button`
@@ -43,7 +43,7 @@ export const StyledButton = styled(defaultButton)<StyledButtonProps>`
   ${props =>
     !props.disabled &&
     props.styleType !== 'transparent' &&
-    !props.isRounded &&
+    !props.isRound &&
     css`
       &.animation {
         &:after {
@@ -125,7 +125,7 @@ export const StyledButton = styled(defaultButton)<StyledButtonProps>`
     `}
   
   ${props =>
-    props.isRounded &&
+    props.isRound &&
     css`
       border-radius: ${props.theme.rounded};
     `}
@@ -162,7 +162,7 @@ export const StyledButton = styled(defaultButton)<StyledButtonProps>`
     `}
     
   ${props =>
-    props.isFullWide &&
+    props.isFullWidth &&
     css`
       width: 100%;
     `}

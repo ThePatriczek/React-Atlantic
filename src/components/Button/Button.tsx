@@ -14,8 +14,8 @@ export type ButtonType =
 export interface ButtonProps {
   onClick?: () => void;
   isDisabled?: boolean;
-  isRounded?: boolean;
-  isFullWide?: boolean;
+  isRound?: boolean;
+  isFullWidth?: boolean;
   children?: React.ReactText;
   /** primary | success | warning | error | dashed | transparent */
   type?: ButtonType;
@@ -32,9 +32,9 @@ export const Button: React.FC<ButtonProps> = (props: ButtonProps) => {
     children,
     type,
     isDisabled,
-    isRounded,
+    isRound,
     size,
-    isFullWide,
+    isFullWidth,
     htmlType
   } = props;
   const [animation, setAnimation] = React.useState<boolean>(false);
@@ -54,9 +54,9 @@ export const Button: React.FC<ButtonProps> = (props: ButtonProps) => {
       styleType={type}
       disabled={isDisabled}
       onClick={onClick}
-      isRounded={!!isRounded}
+      isRound={!!isRound}
       size={size as any}
-      isFullWide={!!isFullWide}
+      isFullWidth={!!isFullWidth}
       onAnimationEnd={() => setAnimation(false)}
       className={animation ? `animation` : ``}
     >
@@ -67,9 +67,9 @@ export const Button: React.FC<ButtonProps> = (props: ButtonProps) => {
 
 Button.defaultProps = {
   size: 'medium',
-  isFullWide: false,
+  isFullWidth: false,
   isDisabled: false,
-  isRounded: false,
+  isRound: false,
   iconPosition: 'left',
   type: 'default'
 };

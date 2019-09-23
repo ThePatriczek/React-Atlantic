@@ -5,7 +5,7 @@ import * as React from 'react';
 import { specs, describe, it } from 'storybook-addon-specifications';
 import { mount, shallow } from 'enzyme';
 import expect from 'expect';
-import { Button } from './Button';
+import { Button, ButtonType } from './Button';
 
 const stories = storiesOf('Components/Button', module);
 
@@ -29,7 +29,7 @@ stories.add(
         <Button type={'error'}>{`Error`}</Button>
       </div>
       <div>
-        <Button isRounded>{`Rounded`}</Button>
+        <Button isRound>{`Rounded`}</Button>
       </div>
       <div>
         <Button size={'small'}>{`Small`}</Button>
@@ -37,11 +37,11 @@ stories.add(
         <Button size={'large'}>{`Large`}</Button>
       </div>
       <div>
-        <Button isFullWide>{`Full Wide default`}</Button>
-        <Button isFullWide type={'primary'}>{`Full Wide primary`}</Button>
-        <Button isFullWide type={'success'}>{`Full Wide success`}</Button>
-        <Button isFullWide type={'warning'}>{`Full Wide warning`}</Button>
-        <Button isFullWide type={'error'}>{`Full Wide error`}</Button>
+        <Button isFullWidth>{`Full Wide default`}</Button>
+        <Button isFullWidth type={'primary'}>{`Full Wide primary`}</Button>
+        <Button isFullWidth type={'success'}>{`Full Wide success`}</Button>
+        <Button isFullWidth type={'warning'}>{`Full Wide warning`}</Button>
+        <Button isFullWidth type={'error'}>{`Full Wide error`}</Button>
       </div>
     </div>
   ),
@@ -54,8 +54,8 @@ stories.add(
     const button = (
       <Button
         isDisabled={boolean(`isDisabled:`, false)}
-        isFullWide={boolean(`isFullWide:`, false)}
-        isRounded={boolean(`isRounded:`, false)}
+        isFullWidth={boolean(`isFullWidth:`, false)}
+        isRound={boolean(`isRound:`, false)}
         size={select(`Size:`, ['small', `medium`, 'large'], 'medium')}
         type={select(
           `Type:`,
@@ -78,22 +78,36 @@ stories.add(
 
     specs(() =>
       describe('Hello World', () => {
+        const wrapper = mount(button);
         it('Should have the "Change me!" label', () => {
           const text = 'Change me!';
-          const wrapper = mount(button);
 
           expect(wrapper.text()).toEqual(text);
         });
-        it('onClick should have been called once', () => {
-          const onClick = jest.fn();
-          const wrapper = mount(button);
+        it('"onClick" should have been called once', () => {
+          const mockClick = jest.fn();
 
           wrapper.setProps({
-            onClick: onClick
+            onClick: mockClick
           });
           wrapper.simulate('click');
 
-          expect(onClick).toHaveBeenCalledTimes(5);
+          expect(mockClick).toHaveBeenCalledTimes(1);
+        });
+        it('Should have "Disabled" (false) prop', () => {
+          expect(wrapper.prop('isDisabled')).toEqual(false);
+        });
+        it('Should have "isRound" (false) prop', () => {
+          expect(wrapper.prop('isRound')).toEqual(false);
+        });
+        it('Should have "isFullWidth" (false) prop', () => {
+          expect(wrapper.prop('isFullWidth')).toEqual(false);
+        });
+        it('Should have "type" prop defined', () => {
+          expect(wrapper.prop('type')).toBeDefined();
+        });
+        it('Should have "size" prop defined', () => {
+          expect(wrapper.prop('size')).toBeDefined();
         });
       })
     );
