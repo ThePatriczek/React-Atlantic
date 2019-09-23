@@ -51,28 +51,35 @@ stories.add(
 stories.add(
   'Playground',
   () => {
+    const falsy = false;
+    const size = select(`Size:`, ['small', `medium`, 'large'], 'medium');
+    const type = select(
+      `Type:`,
+      [
+        'default',
+        'primary',
+        'success',
+        'warning',
+        'error',
+        'dashed',
+        'transparent'
+      ],
+      'default'
+    );
+    const isDisabled = boolean(`isDisabled:`, falsy);
+    const isFullWidth = boolean(`isFullWidth:`, falsy);
+    const isRound = boolean(`isRound:`, falsy);
+    const txt = text(`Text:`, `Change me!`);
     const button = (
       <Button
-        isDisabled={boolean(`isDisabled:`, false)}
-        isFullWidth={boolean(`isFullWidth:`, false)}
-        isRound={boolean(`isRound:`, false)}
-        size={select(`Size:`, ['small', `medium`, 'large'], 'medium')}
-        type={select(
-          `Type:`,
-          [
-            'default',
-            'primary',
-            'success',
-            'warning',
-            'error',
-            'dashed',
-            'transparent'
-          ],
-          'default'
-        )}
+        isDisabled={isDisabled}
+        isFullWidth={isFullWidth}
+        isRound={isRound}
+        size={size}
+        type={type}
         onClick={action(`onClick`)}
       >
-        {text(`Text:`, `Change me!`)}
+        {txt}
       </Button>
     );
 
@@ -94,14 +101,14 @@ stories.add(
 
           expect(mockClick).toHaveBeenCalledTimes(1);
         });
-        it('Should have "Disabled" (false) prop', () => {
-          expect(wrapper.prop('isDisabled')).toEqual(false);
+        it(`Should have "Disabled" prop to equal ${falsy}`, () => {
+          expect(wrapper.prop('isDisabled')).toEqual(falsy);
         });
-        it('Should have "isRound" (false) prop', () => {
-          expect(wrapper.prop('isRound')).toEqual(false);
+        it(`Should have "isRound" prop to equal ${falsy}`, () => {
+          expect(wrapper.prop('isRound')).toEqual(falsy);
         });
-        it('Should have "isFullWidth" (false) prop', () => {
-          expect(wrapper.prop('isFullWidth')).toEqual(false);
+        it(`Should have "isFullWidth" prop to equal ${falsy}`, () => {
+          expect(wrapper.prop('isFullWidth')).toEqual(falsy);
         });
         it('Should have "type" prop defined', () => {
           expect(wrapper.prop('type')).toBeDefined();
