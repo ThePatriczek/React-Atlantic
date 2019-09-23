@@ -55,7 +55,6 @@ stories.add(
     const isFullWidth = boolean(`isFullWidth:`, false);
     const isRound = boolean(`isRound:`, false);
     const size = select(`Size:`, ['small', `medium`, 'large'], 'medium');
-    const value = text(`Text:`, `Change me!`);
     const type = select(
       `Type:`,
       [
@@ -69,6 +68,7 @@ stories.add(
       ],
       'default'
     );
+    const value = text(`Text:`, `Change me!`);
     const button = (
       <Button
         isDisabled={isDisabled}
