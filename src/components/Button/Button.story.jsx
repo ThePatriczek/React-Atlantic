@@ -2,10 +2,10 @@ import { action } from '@storybook/addon-actions';
 import { boolean, select, text, withKnobs } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/react';
 import * as React from 'react';
-import { specs, describe, it } from 'storybook-addon-specifications';
-import { mount, shallow } from 'enzyme';
+import { describe, it, specs } from 'storybook-addon-specifications';
+import { mount } from 'enzyme';
 import expect from 'expect';
-import { Button, ButtonType } from './Button';
+import { Button } from './Button';
 
 const stories = storiesOf('Components/Button', module);
 
@@ -51,8 +51,11 @@ stories.add(
 stories.add(
   'Playground',
   () => {
-    const falsy = false;
+    const isDisabled = boolean(`isDisabled:`, false);
+    const isFullWidth = boolean(`isFullWidth:`, false);
+    const isRound = boolean(`isRound:`, false);
     const size = select(`Size:`, ['small', `medium`, 'large'], 'medium');
+    const value = text(`Text:`, `Change me!`);
     const type = select(
       `Type:`,
       [
@@ -66,10 +69,6 @@ stories.add(
       ],
       'default'
     );
-    const isDisabled = boolean(`isDisabled:`, falsy);
-    const isFullWidth = boolean(`isFullWidth:`, falsy);
-    const isRound = boolean(`isRound:`, falsy);
-    const txt = text(`Text:`, `Change me!`);
     const button = (
       <Button
         isDisabled={isDisabled}
@@ -79,42 +78,49 @@ stories.add(
         type={type}
         onClick={action(`onClick`)}
       >
-        {txt}
+        {value}
       </Button>
     );
 
     specs(() =>
-      describe('Hello World', () => {
+      describe('Button', () => {
         const wrapper = mount(button);
-        it('Should have the "Change me!" label', () => {
-          const text = 'Change me!';
 
-          expect(wrapper.text()).toEqual(text);
-        });
-        it('"onClick" should have been called once', () => {
+        it(`Should have the right text: ${value}`, () =>
+          expect(wrapper.text()).toEqual(value));
+
+        it(`onClick should have been called if Button isn't disabled`, () => {
           const mockClick = jest.fn();
 
           wrapper.setProps({
             onClick: mockClick
           });
+
           wrapper.simulate('click');
 
-          expect(mockClick).toHaveBeenCalledTimes(1);
+          if (!isDisabled) {
+            expect(mockClick).toHaveBeenCalled();
+          }
         });
-        it(`Should have "Disabled" prop to equal ${falsy}`, () => {
-          expect(wrapper.prop('isDisabled')).toEqual(falsy);
+
+        it(`Should have isDisabled: ${isDisabled}`, () => {
+          expect(wrapper.prop('isDisabled')).toEqual(isDisabled);
         });
-        it(`Should have "isRound" prop to equal ${falsy}`, () => {
-          expect(wrapper.prop('isRound')).toEqual(falsy);
+
+        it(`Should have isRound: ${isRound}`, () => {
+          expect(wrapper.prop('isRound')).toEqual(isRound);
         });
-        it(`Should have "isFullWidth" prop to equal ${falsy}`, () => {
-          expect(wrapper.prop('isFullWidth')).toEqual(falsy);
+
+        it(`Should have isFullWidth: ${isFullWidth}`, () => {
+          expect(wrapper.prop('isFullWidth')).toEqual(isFullWidth);
         });
-        it('Should have "type" prop defined', () => {
-          expect(wrapper.prop('type')).toBeDefined();
+
+        it(`Should have type: ${type}`, () => {
+          expect(wrapper.prop('type')).toEqual(type);
         });
-        it('Should have "size" prop defined', () => {
-          expect(wrapper.prop('size')).toBeDefined();
+
+        it(`Should have size: ${size}`, () => {
+          expect(wrapper.prop('size')).toEqual(size);
         });
       })
     );
