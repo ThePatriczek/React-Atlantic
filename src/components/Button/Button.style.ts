@@ -142,8 +142,8 @@ export const StyledButton = styled(defaultButton)<StyledButtonProps>`
         vertical-align: -3px;
       }
 
-      .icon + span,
-      span + .icon {
+      i + span,
+      span + i {
         margin-left: ${props.theme.margin.sm};
       }
     `}
@@ -155,8 +155,8 @@ export const StyledButton = styled(defaultButton)<StyledButtonProps>`
       height: 40px;
       font-size: 16px;
 
-      .icon + span,
-      span + .icon {
+      i + span,
+      span + i {
         margin-left: ${props.theme.margin.lg};
       }
     `}

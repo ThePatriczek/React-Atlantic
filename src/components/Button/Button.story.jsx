@@ -37,6 +37,11 @@ stories.add(
         <Button size={'large'}>{`Large`}</Button>
       </div>
       <div>
+        <Button size={'small'}>{`Small`}</Button>
+        <Button>{`Medium (default)`}</Button>
+        <Button size={'large'}>{`Large`}</Button>
+      </div>
+      <div>
         <Button isFullWidth>{`Full Wide default`}</Button>
         <Button isFullWidth type={'primary'}>{`Full Wide primary`}</Button>
         <Button isFullWidth type={'success'}>{`Full Wide success`}</Button>

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { HorizontalPosition, Size } from '../../types';
+import { Size } from '../../types';
 import { StyledButton } from './Button.style';
 
 export type ButtonType =
@@ -16,18 +16,16 @@ export interface ButtonProps {
   isDisabled?: boolean;
   isRound?: boolean;
   isFullWidth?: boolean;
-  children?: React.ReactText;
   /** primary | success | warning | error | dashed | transparent */
   type?: ButtonType;
   htmlType?: 'submit' | 'button';
-  icon?: string;
-  /** right | left */
-  iconPosition?: HorizontalPosition;
   /** small | medium | large */
   size?: Size;
 }
 
-export const Button: React.FC<ButtonProps> = (props: ButtonProps) => {
+export const Button: React.FC<React.PropsWithChildren<ButtonProps>> = (
+  props: React.PropsWithChildren<ButtonProps>
+) => {
   const {
     children,
     type,
@@ -51,7 +49,7 @@ export const Button: React.FC<ButtonProps> = (props: ButtonProps) => {
   return (
     <StyledButton
       type={htmlType}
-      styleType={type}
+      styleType={isDisabled ? 'default' : type}
       disabled={isDisabled}
       onClick={onClick}
       isRound={!!isRound}
@@ -70,7 +68,6 @@ Button.defaultProps = {
   isFullWidth: false,
   isDisabled: false,
   isRound: false,
-  iconPosition: 'left',
   type: 'default'
 };
 
