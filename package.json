@@ -1,6 +1,6 @@
 {
   "name": "react-atlantic",
-  "version": "0.0.9",
+  "version": "0.1.0",
   "description": "React Atlantic UI Library",
   "main": "index.js",
   "scripts": {
@@ -53,10 +53,10 @@
     "jest-mock": "^24.9.0",
     "prettier": "^1.18.2",
     "react-docgen-typescript-loader": "^3.2.1",
+    "react-test-renderer": "latest",
     "storybook-addon-specifications": "^2.1.5",
     "tslint": "^5.20.0",
     "tslint-config-prettier": "^1.18.0",
-    "typescript": "^3.6.3",
-    "react-test-renderer": "latest"
+    "typescript": "^3.6.3"
   }
 }
