@@ -12,8 +12,9 @@ interface StyledButtonProps {
 }
 
 const defaultButton = styled.button`
+  font-family: ${props => props.theme.font.family};
   padding: 0 ${props => props.theme.padding.md};
-  height: 34px;
+  height: ${props => props.theme.height.md};
   line-height: 1.5;
   position: relative;
   display: inline-block;
@@ -25,7 +26,7 @@ const defaultButton = styled.button`
   border-radius: ${props => props.theme.radius};
   outline: 0;
   cursor: pointer;
-  font-size: 14px;
+  font-size: ${props => props.theme.font.size.md};;
   user-select: none;
   touch-action: manipulation;
   transition: background-color 0.1s ease;
@@ -134,8 +135,8 @@ export const StyledButton = styled(defaultButton)<StyledButtonProps>`
     props.size === 'small' &&
     css`
       padding: 0 ${props.theme.padding.sm};
-      height: 26px;
-      font-size: 12px;
+      height: ${props.theme.height.sm};
+      font-size: ${props.theme.font.size.sm};
 
       > span,
       > i {
@@ -152,8 +153,8 @@ export const StyledButton = styled(defaultButton)<StyledButtonProps>`
     props.size === 'large' &&
     css`
       padding: 0 ${props.theme.padding.lg};
-      height: 40px;
-      font-size: 16px;
+      height: ${props.theme.height.lg};
+      font-size: ${props.theme.font.size.lg};
 
       i + span,
       span + i {

@@ -23,7 +23,20 @@ export const theme = {
     xl: `20px`
   },
   radius: `4px`,
-  rounded: `20px`
+  rounded: `20px`,
+  font: {
+    size: {
+      sm: `10px`,
+      md: `14px`,
+      lg: `16px`
+    },
+    family: `-apple-system,BlinkMacSystemFont,‘Segoe UI’,‘PingFang SC’,‘Hiragino Sans GB’,‘Microsoft YaHei’,‘Helvetica Neue’,Helvetica,Arial,sans-serif,‘Apple Color Emoji’,‘Segoe UI Emoji’,‘Segoe UI Symbol’`
+  },
+  height: {
+    sm: `26px`,
+    md: `34px`,
+    lg: `40px`
+  }
 };
 
 export type Theme = typeof theme;

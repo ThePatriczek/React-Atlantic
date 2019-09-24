@@ -7,7 +7,7 @@ import { mount } from 'enzyme';
 import expect from 'expect';
 import { Button } from './Button';
 
-const stories = storiesOf('Components/Button', module);
+const stories = storiesOf('Button', module);
 
 stories.addDecorator(withKnobs);
 
@@ -73,7 +73,7 @@ stories.add(
       ],
       'default'
     );
-    const value = text(`Text:`, `Change me!`);
+    const value = text(`Text:`, `Change me, please 🥺`);
     const button = (
       <Button
         isDisabled={isDisabled}
