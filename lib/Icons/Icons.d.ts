@@ -1,0 +1,10 @@
+/// <reference types="react" />
+export declare const ArrowUp: () => JSX.Element;
+export declare const ArrowDoubleUp: () => JSX.Element;
+export declare const ArrowRight: () => JSX.Element;
+export declare const ArrowDoubleRight: () => JSX.Element;
+export declare const ArrowDown: () => JSX.Element;
+export declare const ArrowDoubleDown: () => JSX.Element;
+export declare const ArrowLeft: () => JSX.Element;
+export declare const ArrowDoubleLeft: () => JSX.Element;
+export declare const Hamburger: () => JSX.Element;
