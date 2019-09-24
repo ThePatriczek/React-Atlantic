@@ -1,6 +1,5 @@
 import { Size } from '../../types';
 import { ButtonType } from './Button';
-
 interface StyledButtonProps {
     styleType?: ButtonType;
     isRound: boolean;

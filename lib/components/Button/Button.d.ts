@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { Size } from '../../types';
-
 export declare type ButtonType = 'default' | 'primary' | 'success' | 'warning' | 'error' | 'dashed' | 'transparent';
 export interface ButtonProps {
     onClick?: () => void;
