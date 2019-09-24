@@ -11,70 +11,78 @@ export type IconName =
   | 'arrowDoubleDown'
   | 'arrowLeft'
   | 'arrowDoubleLeft'
-  | 'hamburger';
+  | 'hamburger'
+  | 'loading';
 
 export interface IconProps {
   name: IconName;
+  isRotating?: boolean;
 }
 
 export const Icon: React.FC<IconProps> = (
   props: IconProps
 ): React.ReactElement => {
-  const { name } = props;
+  const { name, isRotating } = props;
 
   switch (name) {
     case 'arrowUp':
       return (
-        <StyledIcon>
+        <StyledIcon isRotating={isRotating}>
           <Icons.ArrowUp />
         </StyledIcon>
       );
     case 'arrowDoubleUp':
       return (
-        <StyledIcon>
+        <StyledIcon isRotating={isRotating}>
           <Icons.ArrowDoubleUp />
         </StyledIcon>
       );
     case 'arrowRight':
       return (
-        <StyledIcon>
+        <StyledIcon isRotating={isRotating}>
           <Icons.ArrowRight />
         </StyledIcon>
       );
     case 'arrowDoubleRight':
       return (
-        <StyledIcon>
+        <StyledIcon isRotating={isRotating}>
           <Icons.ArrowDoubleRight />
         </StyledIcon>
       );
     case 'arrowDown':
       return (
-        <StyledIcon>
+        <StyledIcon isRotating={isRotating}>
           <Icons.ArrowDown />
         </StyledIcon>
       );
     case 'arrowDoubleDown':
       return (
-        <StyledIcon>
+        <StyledIcon isRotating={isRotating}>
           <Icons.ArrowDoubleDown />
         </StyledIcon>
       );
     case 'arrowLeft':
       return (
-        <StyledIcon>
+        <StyledIcon isRotating={isRotating}>
           <Icons.ArrowLeft />
         </StyledIcon>
       );
     case 'arrowDoubleLeft':
       return (
-        <StyledIcon>
+        <StyledIcon isRotating={isRotating}>
           <Icons.ArrowDoubleLeft />
         </StyledIcon>
       );
     case 'hamburger':
       return (
-        <StyledIcon>
+        <StyledIcon isRotating={isRotating}>
           <Icons.Hamburger />
+        </StyledIcon>
+      );
+    case 'loading':
+      return (
+        <StyledIcon isRotating={isRotating}>
+          <Icons.Loading />
         </StyledIcon>
       );
   }
