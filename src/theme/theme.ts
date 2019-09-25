@@ -33,6 +33,13 @@ export const theme = {
     family: `-apple-system,BlinkMacSystemFont,‘Segoe UI’,‘PingFang SC’,‘Hiragino Sans GB’,‘Microsoft YaHei’,‘Helvetica Neue’,Helvetica,Arial,sans-serif,‘Apple Color Emoji’,‘Segoe UI Emoji’,‘Segoe UI Symbol’`
   },
   height: {
+    xs: `16px`,
+    sm: `26px`,
+    md: `34px`,
+    lg: `40px`
+  },
+  width: {
+    xs: `16px`,
     sm: `26px`,
     md: `34px`,
     lg: `40px`

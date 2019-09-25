@@ -33,6 +33,13 @@ export declare const theme: {
         family: string;
     };
     height: {
+        xs: string;
+        sm: string;
+        md: string;
+        lg: string;
+    };
+    width: {
+        xs: string;
         sm: string;
         md: string;
         lg: string;
