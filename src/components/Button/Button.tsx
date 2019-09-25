@@ -1,5 +1,7 @@
 import * as React from 'react';
-import { Size } from '../../types';
+import { HorizontalPosition, Size } from '../../types';
+import { Icon, IconName } from '../Icon';
+import { Typography } from '../Typography';
 import { StyledButton } from './Button.style';
 
 export type ButtonType =
@@ -21,11 +23,12 @@ export interface ButtonProps {
   htmlType?: 'submit' | 'button';
   /** small | medium | large */
   size?: Size;
+  icon?: IconName;
+  iconPosition?: HorizontalPosition;
+  children?: React.ReactText;
 }
 
-export const Button: React.FC<React.PropsWithChildren<ButtonProps>> = (
-  props: React.PropsWithChildren<ButtonProps>
-) => {
+export const Button: React.FC<ButtonProps> = (props: ButtonProps) => {
   const {
     children,
     type,
@@ -33,8 +36,11 @@ export const Button: React.FC<React.PropsWithChildren<ButtonProps>> = (
     isRound,
     size,
     isFullWidth,
-    htmlType
+    htmlType,
+    icon,
+    iconPosition
   } = props;
+  const { Text } = Typography;
   const [animation, setAnimation] = React.useState<boolean>(false);
 
   const onClick = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -58,7 +64,11 @@ export const Button: React.FC<React.PropsWithChildren<ButtonProps>> = (
       onAnimationEnd={() => setAnimation(false)}
       className={animation ? `animation` : ``}
     >
-      {children}
+      {icon && iconPosition === 'left' && <Icon name={icon} />}
+
+      {children && <Text>{children}</Text>}
+
+      {icon && iconPosition === 'right' && <Icon name={icon} />}
     </StyledButton>
   );
 };
@@ -68,7 +78,8 @@ Button.defaultProps = {
   isFullWidth: false,
   isDisabled: false,
   isRound: false,
-  type: 'default'
+  type: 'default',
+  iconPosition: 'left'
 };
 
 Button.displayName = `Button`;

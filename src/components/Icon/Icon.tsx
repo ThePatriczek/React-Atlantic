@@ -12,7 +12,9 @@ export type IconName =
   | 'arrowLeft'
   | 'arrowDoubleLeft'
   | 'hamburger'
-  | 'loading';
+  | 'loading'
+  | 'edit'
+  | 'copy';
 
 export interface IconProps {
   name: IconName;
@@ -83,6 +85,18 @@ export const Icon: React.FC<IconProps> = (
       return (
         <StyledIcon isRotating={isRotating}>
           <Icons.Loading />
+        </StyledIcon>
+      );
+    case 'edit':
+      return (
+        <StyledIcon isRotating={isRotating}>
+          <Icons.Edit />
+        </StyledIcon>
+      );
+    case 'copy':
+      return (
+        <StyledIcon isRotating={isRotating}>
+          <Icons.Copy />
         </StyledIcon>
       );
   }

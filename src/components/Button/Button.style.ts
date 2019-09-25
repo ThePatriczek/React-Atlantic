@@ -11,7 +11,7 @@ interface StyledButtonProps {
   isFullWidth: boolean;
 }
 
-const defaultButton = styled.button`
+const DefaultButton = styled.button`
   font-family: ${props => props.theme.font.family};
   padding: 0 ${props => props.theme.padding.md};
   height: ${props => props.theme.height.md};
@@ -26,7 +26,7 @@ const defaultButton = styled.button`
   border-radius: ${props => props.theme.radius};
   outline: 0;
   cursor: pointer;
-  font-size: ${props => props.theme.font.size.md};;
+  font-size: ${props => props.theme.font.size.md};
   user-select: none;
   touch-action: manipulation;
   transition: background-color 0.1s ease;
@@ -34,7 +34,7 @@ const defaultButton = styled.button`
   border: 1px solid ${props => darken(0.1, props.theme.color.default)};
 `;
 
-export const StyledButton = styled(defaultButton)<StyledButtonProps>`
+export const StyledButton = styled(DefaultButton)<StyledButtonProps>`
   @-webkit-keyframes focusAnimation {
     0%   { opacity: 0; }
     50% { opacity: 1; }
@@ -189,6 +189,21 @@ export const StyledButton = styled(defaultButton)<StyledButtonProps>`
   }
 `;
 
+export const StyledTypoButton = styled(DefaultButton)`
+  padding: 0 ${props => props.theme.padding.sm};
+  height: auto;
+  margin: 0;
+
+  background: transparent;
+  color: ${props => props.theme.color.primary};
+  border: 0;
+  box-shadow: none;
+`;
+
 StyledButton.defaultProps = {
+  theme
+};
+
+StyledTypoButton.defaultProps = {
   theme
 };
