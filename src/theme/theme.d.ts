@@ -24,5 +24,18 @@ export declare const theme: {
     };
     radius: string;
     rounded: string;
+    font: {
+        size: {
+            sm: string;
+            md: string;
+            lg: string;
+        };
+        family: string;
+    };
+    height: {
+        sm: string;
+        md: string;
+        lg: string;
+    };
 };
 export declare type Theme = typeof theme;

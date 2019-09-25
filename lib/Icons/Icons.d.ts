@@ -8,3 +8,4 @@ export declare const ArrowDoubleDown: () => JSX.Element;
 export declare const ArrowLeft: () => JSX.Element;
 export declare const ArrowDoubleLeft: () => JSX.Element;
 export declare const Hamburger: () => JSX.Element;
+export declare const Loading: () => JSX.Element;
