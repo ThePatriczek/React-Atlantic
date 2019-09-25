@@ -174,17 +174,6 @@ export const Loading = () => (
       r="35"
       stroke-dasharray="164.93361431346415 56.97787143782138"
       transform="rotate(326.944 50 50)"
-    >
-      <animateTransform
-        attributeName="transform"
-        type="rotate"
-        calcMode="linear"
-        values="0 50 50;360 50 50"
-        keyTimes="0;1"
-        dur="2s"
-        begin="0s"
-        repeatCount="indefinite"
-      ></animateTransform>
-    </circle>
+    />
   </svg>
 );

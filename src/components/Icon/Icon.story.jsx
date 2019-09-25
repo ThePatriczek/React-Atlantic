@@ -1,5 +1,4 @@
-import { action } from '@storybook/addon-actions';
-import { boolean, select, text, withKnobs } from '@storybook/addon-knobs';
+import { boolean, select, withKnobs } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/react';
 import * as React from 'react';
 import { describe, it, specs } from 'storybook-addon-specifications';
@@ -46,32 +45,35 @@ stories.add('Overview', () => (
 stories.add(
   'Playground',
   () => {
-    const icon = (
-      <Icon
-        name={select(
-          `Type:`,
-          [
-            'hamburger',
-            `arrowUp`,
-            'arrowRight',
-            'arrowDown',
-            'arrowLeft',
-            'arrowDoubleUp',
-            'arrowDoubleDown',
-            'arrowDoubleLeft',
-            'arrowDoubleRight'
-          ],
-          'hamburger'
-        )}
-      />
+    const name = select(
+      `Type:`,
+      [
+        'hamburger',
+        `arrowUp`,
+        'arrowRight',
+        'arrowDown',
+        'arrowLeft',
+        'arrowDoubleUp',
+        'arrowDoubleDown',
+        'arrowDoubleLeft',
+        'arrowDoubleRight',
+        'loading'
+      ],
+      'hamburger'
     );
+    const isRotating = boolean(`isRotating`, false);
+
+    const icon = <Icon name={name} isRotating={isRotating} />;
 
     specs(() =>
       describe('Icon', () => {
         const wrapper = mount(icon);
 
-        it(`Should have "name" prop defined`, () =>
-          expect(wrapper.find('name')).toBeDefined());
+        it(`Should have name: ${name}`, () =>
+          expect(wrapper.prop('name')).toEqual(name));
+
+        it(`Should have isRotating: ${isRotating}`, () =>
+          expect(wrapper.prop('isRotating')).toEqual(isRotating));
       })
     );
 

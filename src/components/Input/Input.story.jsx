@@ -67,11 +67,11 @@ stories.add(
     const isLoading = boolean(`isLoading:`, false);
     const isDisabled = boolean(`isDisabled:`, false);
     const isAlternative = boolean(`isAlternative:`, false);
-    const placeholder = text(`Placeholder:`, `Change me, please 🥺`);
-    const size = select(`Size:`, ['small', `medium`, 'large'], 'medium');
+    const autoFocus = boolean(`autoFocus:`, false);
     const iconRight = select(
       `iconRight:`,
       [
+        null,
         'hamburger',
         `arrowUp`,
         'arrowRight',
@@ -82,11 +82,12 @@ stories.add(
         'arrowDoubleLeft',
         'arrowDoubleRight'
       ],
-      'hamburger'
+      null
     );
     const iconLeft = select(
       `iconLeft:`,
       [
+        null,
         'hamburger',
         `arrowUp`,
         'arrowRight',
@@ -97,22 +98,33 @@ stories.add(
         'arrowDoubleLeft',
         'arrowDoubleRight'
       ],
-      'arrowUp'
+      null
     );
+    const size = select(`size:`, ['small', `medium`, 'large'], 'medium');
+    const placeholder = text(`placeholder:`, `Change me, please 🥺`);
+    const defaultValue = text(`defaultValue:`, `Change me, please 🥺`);
+    const value = text(`value:`, `Change me, please 🥺`);
 
     const input = (
       <Input
         isDisabled={isDisabled}
-        placeholder={placeholder}
-        iconRight={iconRight}
-        //iconLeft={iconLeft}
-        size={size}
         isLoading={isLoading}
         isAlternative={isAlternative}
+        placeholder={placeholder}
+        iconRight={iconRight}
+        iconLeft={iconLeft}
+        size={size}
+        autoFocus={autoFocus}
+        defaultValue={defaultValue}
+        value={value}
+        onChange={action(`onChange`)}
+        onEnterPress={action(`onEnterPress`)}
+        onFocus={action(`onFocus`)}
+        onBlur={action(`onBlur`)}
       />
     );
 
-    /*specs(() =>
+    specs(() =>
       describe('Input', () => {
         const wrapper = mount(input);
 
@@ -120,23 +132,31 @@ stories.add(
           expect(wrapper.prop('isDisabled')).toEqual(isDisabled);
         });
 
-        it(`Should have isDisabled: ${size}`, () => {
-          expect(wrapper.prop('size')).toEqual(size);
+        it(`Should have isLoading: ${isLoading}`, () => {
+          expect(wrapper.prop('isLoading')).toEqual(isLoading);
         });
 
         it(`Should have isAlternative: ${isAlternative}`, () => {
-          expect(wrapper.prop('size')).toEqual(isAlternative);
-        });
-
-        it(`Should have isLoading: ${isLoading}`, () => {
-          expect(wrapper.prop('size')).toEqual(isLoading);
+          expect(wrapper.prop('isAlternative')).toEqual(isAlternative);
         });
 
         it(`Should have iconRight: ${iconRight}`, () => {
-          expect(wrapper.prop('size')).toEqual(iconRight);
+          expect(wrapper.prop('iconRight')).toEqual(iconRight);
+        });
+
+        it(`Should have iconLeft: ${iconLeft}`, () => {
+          expect(wrapper.prop('iconLeft')).toEqual(iconLeft);
+        });
+
+        it(`Should have size: ${size}`, () => {
+          expect(wrapper.prop('size')).toEqual(size);
+        });
+
+        it(`Should have placeholder: ${placeholder}`, () => {
+          expect(wrapper.prop('placeholder')).toEqual(placeholder);
         });
       })
-    );*/
+    );
 
     return input;
   },

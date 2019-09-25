@@ -1,5 +1,6 @@
 import { darken, lighten } from 'polished';
 import styled, { css } from 'styled-components';
+import { theme } from '../../theme';
 import { Size } from '../../types';
 
 export interface StyledInputWrapperProps {
@@ -78,13 +79,6 @@ export const StyledInputWrapper = styled.span<StyledInputWrapperProps>`
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-
-    ${props =>
-      props.isLoading &&
-      css`
-        transform: none;
-        height: auto;
-      `}
   }
 
   ${props =>
@@ -321,3 +315,15 @@ export const StyledInput = styled.input<{
         width: 100%;
       `} 
 `;
+
+StyledInput.defaultProps = {
+  theme
+};
+
+StyledInputWrapper.defaultProps = {
+  theme
+};
+
+StyledInputWrapperAlt.defaultProps = {
+  theme
+};
