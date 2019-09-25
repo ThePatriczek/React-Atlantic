@@ -1,6 +1,10 @@
-import { withKnobs } from '@storybook/addon-knobs';
+import { action } from '@storybook/addon-actions';
+import { boolean, select, text, withKnobs } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/react';
 import * as React from 'react';
+import { describe, it, specs } from 'storybook-addon-specifications';
+import { mount } from 'enzyme';
+import expect from 'expect';
 import { Icon } from './Icon';
 
 const stories = storiesOf('Icon', module);
@@ -38,3 +42,42 @@ stories.add('Overview', () => (
     </div>
   </div>
 ));
+
+stories.add(
+  'Playground',
+  () => {
+    const icon = (
+      <Icon
+        name={select(
+          `Type:`,
+          [
+            'hamburger',
+            `arrowUp`,
+            'arrowRight',
+            'arrowDown',
+            'arrowLeft',
+            'arrowDoubleUp',
+            'arrowDoubleDown',
+            'arrowDoubleLeft',
+            'arrowDoubleRight'
+          ],
+          'hamburger'
+        )}
+      />
+    );
+
+    specs(() =>
+      describe('Icon', () => {
+        const wrapper = mount(icon);
+
+        it(`Should have "name" prop defined`, () =>
+          expect(wrapper.find('name')).toBeDefined());
+      })
+    );
+
+    return icon;
+  },
+  {
+    info: { inline: true }
+  }
+);

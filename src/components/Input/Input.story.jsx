@@ -1,6 +1,10 @@
-import { withKnobs } from '@storybook/addon-knobs';
+import { action } from '@storybook/addon-actions';
+import { boolean, select, text, withKnobs } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/react';
 import * as React from 'react';
+import { describe, it, specs } from 'storybook-addon-specifications';
+import { mount } from 'enzyme';
+import expect from 'expect';
 import { Input } from './Input';
 
 const stories = storiesOf('Input', module);
@@ -56,3 +60,87 @@ stories.add('Overview', () => (
     </div>
   </div>
 ));
+
+stories.add(
+  'Playground',
+  () => {
+    const isLoading = boolean(`isLoading:`, false);
+    const isDisabled = boolean(`isDisabled:`, false);
+    const isAlternative = boolean(`isAlternative:`, false);
+    const placeholder = text(`Placeholder:`, `Change me, please 🥺`);
+    const size = select(`Size:`, ['small', `medium`, 'large'], 'medium');
+    const iconRight = select(
+      `iconRight:`,
+      [
+        'hamburger',
+        `arrowUp`,
+        'arrowRight',
+        'arrowDown',
+        'arrowLeft',
+        'arrowDoubleUp',
+        'arrowDoubleDown',
+        'arrowDoubleLeft',
+        'arrowDoubleRight'
+      ],
+      'hamburger'
+    );
+    const iconLeft = select(
+      `iconLeft:`,
+      [
+        'hamburger',
+        `arrowUp`,
+        'arrowRight',
+        'arrowDown',
+        'arrowLeft',
+        'arrowDoubleUp',
+        'arrowDoubleDown',
+        'arrowDoubleLeft',
+        'arrowDoubleRight'
+      ],
+      'arrowUp'
+    );
+
+    const input = (
+      <Input
+        isDisabled={isDisabled}
+        placeholder={placeholder}
+        iconRight={iconRight}
+        //iconLeft={iconLeft}
+        size={size}
+        isLoading={isLoading}
+        isAlternative={isAlternative}
+      />
+    );
+
+    /*specs(() =>
+      describe('Input', () => {
+        const wrapper = mount(input);
+
+        it(`Should have isDisabled: ${isDisabled}`, () => {
+          expect(wrapper.prop('isDisabled')).toEqual(isDisabled);
+        });
+
+        it(`Should have isDisabled: ${size}`, () => {
+          expect(wrapper.prop('size')).toEqual(size);
+        });
+
+        it(`Should have isAlternative: ${isAlternative}`, () => {
+          expect(wrapper.prop('size')).toEqual(isAlternative);
+        });
+
+        it(`Should have isLoading: ${isLoading}`, () => {
+          expect(wrapper.prop('size')).toEqual(isLoading);
+        });
+
+        it(`Should have iconRight: ${iconRight}`, () => {
+          expect(wrapper.prop('size')).toEqual(iconRight);
+        });
+      })
+    );*/
+
+    return input;
+  },
+  {
+    info: { inline: true }
+  }
+);

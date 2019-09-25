@@ -1,7 +1,11 @@
 import * as React from 'react';
 import { Size } from '../../types';
 import { Icon, IconName } from '../Icon';
-import { StyledInput, StyledInputWrapper, StyledInputWrapperAlt } from './Input.style';
+import {
+  StyledInput,
+  StyledInputWrapper,
+  StyledInputWrapperAlt
+} from './Input.style';
 import { TextArea, TextAreaProps } from './TextArea';
 
 export interface InputProps {
