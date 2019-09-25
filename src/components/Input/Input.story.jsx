@@ -155,6 +155,14 @@ stories.add(
         it(`Should have placeholder: ${placeholder}`, () => {
           expect(wrapper.prop('placeholder')).toEqual(placeholder);
         });
+
+        it(`Should have defaultValue: ${defaultValue}`, () => {
+          expect(wrapper.prop('defaultValue')).toEqual(defaultValue);
+        });
+
+        it(`Should have value: ${value}`, () => {
+          expect(wrapper.prop('value')).toEqual(value);
+        });
       })
     );
 
