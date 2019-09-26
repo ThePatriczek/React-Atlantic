@@ -46,6 +46,7 @@ export const Text: React.FC<TextProps> = (
           setValue(children);
           setEditing(false);
         }}
+        autoFocus
       />
     );
   }

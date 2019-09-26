@@ -19,9 +19,12 @@ stories.add('Overview', () => {
         <Title level={5}>{`Title 5`}</Title>
       </div>
       <div>
-        <Paragraph>
+        <Paragraph isEditable>
           {`Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Maecenas libero. Phasellus enim erat, vestibulum vel, aliquam a, posuere eu, velit. Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur? Nulla non lectus sed nisl molestie malesuada. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Etiam sapien elit, consequat eget, tristique non, venenatis quis, ante.`}
           <Link href={`#`}>{`Custom link in paragraph`}</Link>
+          <Text>{`Text`}</Text>
+          <Text isStrong>{`Strong Text`}</Text>
+          <Text isCopyable>{`Copyable Text`}</Text>
         </Paragraph>
       </div>
       <div>

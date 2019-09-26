@@ -45,6 +45,7 @@ export const Paragraph: React.FC<ParagraphProps> = (
           setValue(children);
           setEditing(false);
         }}
+        autoFocus
       />
     );
   }
