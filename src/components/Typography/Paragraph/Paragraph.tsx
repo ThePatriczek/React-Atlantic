@@ -1,71 +1,14 @@
 import * as React from 'react';
-import { StyledTypoButton } from '../../Button/Button.style';
-import { Icon } from '../../Icon';
-import { Input } from '../../Input';
 import { StyledParagraph } from './Paragraph.style';
 
-export interface ParagraphProps {
-  children: React.ReactText;
-  isCopyable?: boolean;
-  isEditable?: boolean;
-  onEditConfirm?: (value: React.ReactText) => void;
-}
+export interface ParagraphProps {}
 
-export const Paragraph: React.FC<ParagraphProps> = (
-  props: ParagraphProps
+export const Paragraph: React.FC<React.PropsWithChildren<ParagraphProps>> = (
+  props: React.PropsWithChildren<ParagraphProps>
 ): React.ReactElement => {
-  const { children, isCopyable, isEditable, onEditConfirm } = props;
-  const [isEditing, setEditing] = React.useState<boolean>(false);
-  const [value, setValue] = React.useState<React.ReactText>(children);
+  const { children } = props;
 
-  const { TextArea } = Input;
-
-  const onCopy = async () => {
-    if (children) {
-      await navigator.clipboard.writeText(children.toString());
-    }
-  };
-
-  const onEdit = () => setEditing(true);
-
-  if (isEditable && isEditing) {
-    const onEnterPress = (val: React.ReactText) => {
-      setEditing(false);
-      if (onEditConfirm) {
-        onEditConfirm(val);
-      }
-    };
-
-    return (
-      <TextArea
-        onChange={val => setValue(val)}
-        value={value}
-        onEnterPress={onEnterPress}
-        onBlur={() => {
-          setValue(children);
-          setEditing(false);
-        }}
-        autoFocus
-      />
-    );
-  }
-
-  return (
-    <StyledParagraph>
-      {value}
-
-      {isEditable && (
-        <StyledTypoButton onClick={onEdit}>
-          <Icon name={'edit'} />
-        </StyledTypoButton>
-      )}
-      {isCopyable && (
-        <StyledTypoButton onClick={onCopy}>
-          <Icon name={'copy'} />
-        </StyledTypoButton>
-      )}
-    </StyledParagraph>
-  );
+  return <StyledParagraph>{children}</StyledParagraph>;
 };
 
 Paragraph.displayName = `Paragraph`;
