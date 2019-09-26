@@ -19,6 +19,8 @@ export interface InputProps {
     isAlternative?: boolean;
     size?: Size;
     isLoading?: boolean;
+    /** custom className */
+    className?: string;
 }
 export declare const Input: React.FC<InputProps> & {
     TextArea: React.FC<TextAreaProps>;

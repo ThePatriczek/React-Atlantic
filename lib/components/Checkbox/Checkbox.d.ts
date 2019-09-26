@@ -7,7 +7,8 @@ export interface CheckboxProps {
     isPartiallyChecked?: boolean;
     isDisabled?: boolean;
     onChange?: (isChecked: boolean) => void;
-    text?: string;
-    textPosition?: HorizontalPosition;
+    position?: HorizontalPosition;
+    /** custom className */
+    className?: string;
 }
-export declare const Checkbox: React.FC<CheckboxProps>;
+export declare const Checkbox: React.FC<React.PropsWithChildren<CheckboxProps>>;

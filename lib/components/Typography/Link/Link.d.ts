@@ -4,6 +4,7 @@ export interface LinkProps {
     href: string;
     target?: '_blank' | '_self' | '_parent' | '_top';
     onClick?: () => void;
-    children?: React.ReactText;
+    /** custom className */
+    className?: string;
 }
-export declare const Link: React.FC<LinkProps>;
+export declare const Link: React.FC<React.PropsWithChildren<LinkProps>>;

@@ -6,5 +6,7 @@ export interface TextProps {
     isCopyable?: boolean;
     isEditable?: boolean;
     onEditConfirm?: (value: React.ReactText) => void;
+    /** custom className */
+    className?: string;
 }
 export declare const Text: React.FC<TextProps>;

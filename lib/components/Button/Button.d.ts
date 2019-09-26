@@ -12,5 +12,7 @@ export interface ButtonProps {
     htmlType?: 'submit' | 'button';
     /** small | medium | large */
     size?: Size;
+    /** custom className */
+    className?: string;
 }
 export declare const Button: React.FC<React.PropsWithChildren<ButtonProps>>;
