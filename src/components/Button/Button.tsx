@@ -62,7 +62,7 @@ export const Button: React.FC<ButtonProps> = (props: ButtonProps) => {
       size={size as any}
       isFullWidth={!!isFullWidth}
       onAnimationEnd={() => setAnimation(false)}
-      className={animation ? `animation` : ``}
+      animationRunning={animation}
     >
       {icon && iconPosition === 'left' && <Icon name={icon} />}
 

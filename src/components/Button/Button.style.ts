@@ -9,6 +9,7 @@ interface StyledButtonProps {
   isRound: boolean;
   size: Size;
   isFullWidth: boolean;
+  animationRunning?: boolean;
 }
 
 const DefaultButton = styled.button`
@@ -45,8 +46,8 @@ const DefaultButton = styled.button`
     pointer-events: none;
     transition: margin-left 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
   }
-  
-  i{
+
+  i {
     vertical-align: 2px;
   }
 
@@ -78,21 +79,22 @@ export const StyledButton = styled(DefaultButton)<StyledButtonProps>`
   ${props =>
     !props.disabled &&
     props.styleType !== 'transparent' &&
+    props.animationRunning &&
     css`
-      &.animation {
-        &:after {
-          content: '';
-          position: absolute;
-          top: -3px;
-          left: -3px;
-          right: -3px;
-          bottom: -3px;
+      &:after {
+        content: '';
+        position: absolute;
+        top: -3px;
+        left: -3px;
+        right: -3px;
+        bottom: -3px;
 
-          z-index: -1;
-          border-radius: ${props.isRound ? props.theme.rounded :  props.theme.radius};
-          background: ${props.theme.color.default};
-          animation: focusAnimation 0.4s ease-in-out;
-        }
+        z-index: -1;
+        border-radius: ${props.isRound
+          ? props.theme.rounded
+          : props.theme.radius};
+        background: ${props.theme.color.default};
+        animation: focusAnimation 0.4s ease-in-out;
       }
     `}
 
