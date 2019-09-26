@@ -20,7 +20,7 @@ export const StyledCheckboxInputHidden = styled.input.attrs({
   margin: 0;
 `;
 
-export const StyledCheckboxInputShown = styled.div<StyledCheckboxProps>`
+export const StyledCheckboxInputShown = styled.div.attrs({className: `atlantic--checkbox`})<StyledCheckboxProps>`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -37,12 +37,20 @@ export const StyledCheckboxInputShown = styled.div<StyledCheckboxProps>`
     `}
 `;
 
-export const StyledCheckboxLabel = styled.label<StyledCheckboxProps>`
+export const StyledCheckboxLabel = styled.label<StyledCheckboxProps>
+  `
+  height: ${props => props.theme.height.sm};
   font-size: 14px;
   font-family: ${props => props.theme.font.family};
   display: inline-flex;
   align-items: center;
   cursor: pointer;
+  
+  :hover{
+    .atlantic--checkbox {
+      border: 1px solid ${props => props.theme.color.primary};
+    }
+  }
 
   ${props =>
     props.isDisabled &&
@@ -58,6 +66,10 @@ export const StyledCheckboxMark = styled.div<StyledCheckboxProps>`
   width: ${props => props.theme.width.xs};
   height: ${props => props.theme.width.xs};
   border-radius: ${props => parseInt(props.theme.radius, 0) - 2}px;
+  
+  i{
+    height: 14px;
+  }
 
   ${props =>
     (props.isChecked || props.isPartiallyChecked) &&
