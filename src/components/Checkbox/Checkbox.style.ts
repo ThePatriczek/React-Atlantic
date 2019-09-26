@@ -46,11 +46,15 @@ export const StyledCheckboxLabel = styled.label<StyledCheckboxProps>
   align-items: center;
   cursor: pointer;
   
-  :hover{
-    .atlantic--checkbox {
-      border: 1px solid ${props => props.theme.color.primary};
-    }
-  }
+  ${props =>
+    !props.isDisabled &&
+    css`
+      :hover{
+          .atlantic--checkbox {
+            border: 1px solid ${props.theme.color.primary};
+          }
+        }
+    `};
 
   ${props =>
     props.isDisabled &&
