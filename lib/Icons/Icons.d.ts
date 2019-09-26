@@ -11,3 +11,4 @@ export declare const Hamburger: () => JSX.Element;
 export declare const Loading: () => JSX.Element;
 export declare const Edit: () => JSX.Element;
 export declare const Copy: () => JSX.Element;
+export declare const Tick: () => JSX.Element;

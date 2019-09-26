@@ -36,6 +36,13 @@ export declare const getDefaultStyledText: (props: {
             family: string;
         };
         height: {
+            xs: string;
+            sm: string;
+            md: string;
+            lg: string;
+        };
+        width: {
+            xs: string;
             sm: string;
             md: string;
             lg: string;
