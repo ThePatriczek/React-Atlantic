@@ -16,37 +16,50 @@ stories.add(
   () => (
     <div>
       <div>
-        <Button>{`Default`}</Button>
-        <Button type={'dashed'}>{`Dashed`}</Button>
-        <Button isDisabled>{`Disabled`}</Button>
-        <Button>{`Upload`}</Button>
-        <Button type={'transparent'}>{`Transparent`}</Button>
+        <Button>{`Default`}</Button><br/>
+        <Button type={'dashed'}>{`Dashed`}</Button><br/>
+        <Button isDisabled>{`Disabled`}</Button><br/>
+        <Button>{`Upload`}</Button><br/>
+        <Button type={'transparent'}>{`Transparent`}</Button><br/>
       </div>
       <div>
-        <Button type={'primary'}>{`Primary`}</Button>
-        <Button type={'success'}>{`Success`}</Button>
-        <Button type={'warning'}>{`Warning`}</Button>
-        <Button type={'error'}>{`Error`}</Button>
+        <Button type={'primary'}>{`Primary`}</Button><br/>
+        <Button type={'success'}>{`Success`}</Button><br/>
+        <Button type={'warning'}>{`Warning`}</Button><br/>
+        <Button type={'error'}>{`Error`}</Button><br/>
       </div>
       <div>
-        <Button isRound>{`Rounded`}</Button>
+        <Button isRound>{`Rounded`}</Button><br/>
       </div>
       <div>
-        <Button size={'small'}>{`Small`}</Button>
-        <Button>{`Medium (default)`}</Button>
-        <Button size={'large'}>{`Large`}</Button>
+        <Button size={'small'}>{`Small`}</Button><br/>
+        <Button>{`Medium (default)`}</Button><br/>
+        <Button size={'large'}>{`Large`}</Button><br/>
       </div>
       <div>
-        <Button size={'small'}>{`Small`}</Button>
-        <Button>{`Medium (default)`}</Button>
-        <Button size={'large'}>{`Large`}</Button>
+        <Button size={'small'} icon={'arrowLeft'}>{`Small with icon left`}</Button><br/>
+        <Button icon={'arrowLeft'}>{`Medium with icon left`}</Button><br/>
+        <Button size={'large'} icon={'arrowLeft'}>{`Large with icon left`}</Button><br/>
       </div>
       <div>
-        <Button isFullWidth>{`Full Wide default`}</Button>
-        <Button isFullWidth type={'primary'}>{`Full Wide primary`}</Button>
-        <Button isFullWidth type={'success'}>{`Full Wide success`}</Button>
-        <Button isFullWidth type={'warning'}>{`Full Wide warning`}</Button>
-        <Button isFullWidth type={'error'}>{`Full Wide error`}</Button>
+        <Button size={'small'} icon={'arrowRight'} iconPosition={'right'}>{`Small with icon right`}</Button><br/>
+        <Button icon={'arrowRight'} iconPosition={'right'}>{`Medium with icon right`}</Button><br/>
+        <Button size={'large'} icon={'arrowRight'} iconPosition={'right'}>{`Large with icon right`}</Button><br/>
+      </div>
+      <div>
+        <Button isFullWidth>{`Full Width default`}</Button>
+        <Button isFullWidth type={'primary'}>{`Full Width primary`}</Button>
+        <Button isFullWidth type={'success'}>{`Full Width success`}</Button>
+        <Button isFullWidth type={'warning'}>{`Full Width warning`}</Button>
+        <Button isFullWidth type={'error'}>{`Full Width error`}</Button>
+        <Button isFullWidth icon={'arrowLeft'}>{`Full Width default`}</Button>
+        <Button isFullWidth icon={'arrowRight'} iconPosition={'right'}>{`Full Width default`}</Button>
+        <Button isFullWidth type={'dashed'}>{`Full Width default`}</Button>
+      </div>
+      <div>
+        <Button isFullWidth size={`small`} icon={'arrowLeft'}>{`Full Width small`}</Button>
+        <Button isFullWidth size={`large`} icon={'arrowRight'} iconPosition={'right'}>{`Full Width large`}</Button>
+        <Button isFullWidth type={`transparent`}>{`Full Width transparent`}</Button>
       </div>
     </div>
   ),

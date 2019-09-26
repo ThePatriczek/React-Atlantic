@@ -6,7 +6,9 @@ export const theme = {
     info: `#1990ea`,
     warning: `#ffa500`,
     error: `#d9121a`,
-    border: `#d9d9d9`
+    border: `#d9d9d9`,
+    black: `#000`,
+    white: `#fff`
   },
   padding: {
     xs: `2px`,
@@ -26,16 +28,19 @@ export const theme = {
   rounded: `20px`,
   font: {
     size: {
-      sm: `10px`,
+      sm: `12px`,
       md: `14px`,
       lg: `16px`
     },
-    family: `-apple-system,BlinkMacSystemFont,‘Segoe UI’,‘PingFang SC’,‘Hiragino Sans GB’,‘Microsoft YaHei’,‘Helvetica Neue’,Helvetica,Arial,sans-serif,‘Apple Color Emoji’,‘Segoe UI Emoji’,‘Segoe UI Symbol’`
+    family: `-apple-system,BlinkMacSystemFont,'Segoe UI'`
   },
   height: {
     sm: `26px`,
     md: `34px`,
     lg: `40px`
+  },
+  boxShadow: {
+    sm: `0 0px 4px rgba(0,0,0,0.05)`
   }
 };
 
