@@ -14,7 +14,10 @@ interface StyledCheckboxProps {
 export const StyledCheckboxInputHidden = styled.input.attrs({
   type: 'checkbox'
 })`
-  display: none;
+  opacity: 0;
+  width: 0;
+  height: 0;
+  margin: 0;
 `;
 
 export const StyledCheckboxInputShown = styled.div<StyledCheckboxProps>`
@@ -61,12 +64,20 @@ export const StyledCheckboxMark = styled.div<StyledCheckboxProps>`
     css`
       background-color: ${props.theme.color.primary};
     `}
+
   ${props =>
     props.isDisabled &&
+    (props.isChecked || props.isPartiallyChecked) &&
     css`
-      cursor: not-allowed;
-      color: transparent;
+      background-color: ${darken(0.2, props.theme.color.default)};
     `}
+  
+    ${props =>
+      props.isDisabled &&
+      css`
+        color: transparent;
+        cursor: not-allowed;
+      `}
 `;
 
 export const StyledCheckboxSpan = styled.span<StyledCheckboxProps>`
@@ -85,15 +96,15 @@ export const StyledCheckboxIcon = styled.i<StyledCheckboxProps>`
   transform: scale(0.8);
   color: white;
   ${props =>
-    props.isPartiallyChecked &&
+    (props.isPartiallyChecked || (!props.isChecked && props.isDisabled)) &&
     css`
       color: transparent;
     `}
+
   ${props =>
     props.isDisabled &&
     css`
       cursor: not-allowed;
-      color: transparent;
     `}
 `;
 

@@ -18,7 +18,6 @@ export interface CheckboxProps {
   onChange?: (isChecked: boolean) => void;
   text?: string;
   textPosition?: HorizontalPosition;
-  name?: string;
 }
 
 export const Checkbox: React.FC<CheckboxProps> = (
@@ -29,8 +28,7 @@ export const Checkbox: React.FC<CheckboxProps> = (
     isDefaultChecked,
     textPosition,
     text,
-    isDisabled,
-    name
+    isDisabled
   } = props;
   const [isChecked, setChecked] = React.useState<boolean>(!!isDefaultChecked);
 
@@ -52,23 +50,30 @@ export const Checkbox: React.FC<CheckboxProps> = (
   };
 
   return (
-    <StyledCheckboxLabel isChecked={props.isChecked || isChecked}>
+    <StyledCheckboxLabel
+      isChecked={props.isChecked || isChecked}
+      isDisabled={isDisabled}
+    >
+      {text && textPosition === 'left' && (
+        <StyledCheckboxSpan isDisabled={isDisabled} textPosition={textPosition}>
+          {text}
+        </StyledCheckboxSpan>
+      )}
+
       <StyledCheckboxInputShown isDisabled={isDisabled}>
         <StyledCheckboxMark
           isDisabled={isDisabled}
-          isChecked={isChecked}
+          isChecked={props.isChecked || isChecked}
           isPartiallyChecked={isPartiallyChecked}
         >
           <StyledCheckboxInputHidden
             onChange={onChange}
-            name={name}
-            id={name}
             checked={props.isChecked || isChecked}
             disabled={isDisabled}
           />
           <StyledCheckboxIcon
             isDisabled={isDisabled}
-            isChecked={isChecked}
+            isChecked={props.isChecked || isChecked}
             isPartiallyChecked={isPartiallyChecked}
           >
             <Tick />
@@ -76,13 +81,15 @@ export const Checkbox: React.FC<CheckboxProps> = (
         </StyledCheckboxMark>
       </StyledCheckboxInputShown>
 
-      <StyledCheckboxSpan isDisabled={isDisabled} textPosition={textPosition}>
-        {text && text}
-      </StyledCheckboxSpan>
+      {text && textPosition === 'right' && (
+        <StyledCheckboxSpan isDisabled={isDisabled} textPosition={textPosition}>
+          {text}
+        </StyledCheckboxSpan>
+      )}
     </StyledCheckboxLabel>
   );
 };
 
 Checkbox.defaultProps = {
-  isChecked: false
+  textPosition: 'right'
 };
