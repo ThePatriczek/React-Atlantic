@@ -18,8 +18,8 @@ stories.add(
     const isDefaultChecked = boolean(`isDefaultChecked:`, false);
     const isDisabled = boolean(`isDisabled:`, false);
     const isPartiallyChecked = boolean(`isPartiallyChecked:`, false);
-    const textPosition = select(`Text position:`, ['left', `right`], 'right');
-    const value = text(`Text:`, `Change me, please 🥺`);
+    const position = select(`Position:`, ['left', `right`], 'left');
+    const children = text(`children:`, `Change me, please 🥺`);
 
     const checkbox = (
       <Checkbox
@@ -27,10 +27,11 @@ stories.add(
         isDefaultChecked={isDefaultChecked}
         isDisabled={isDisabled}
         isPartiallyChecked={isPartiallyChecked}
-        text={value}
-        textPosition={textPosition}
+        position={position}
         onChange={action(`onChange`)}
-      />
+      >
+        {children}
+      </Checkbox>
     );
 
     specs(() =>
@@ -55,12 +56,12 @@ stories.add(
           );
         });
 
-        it(`Should have textPosition: ${textPosition}`, () => {
-          expect(wrapper.prop('textPosition')).toEqual(textPosition);
+        it(`Should have position: ${position}`, () => {
+          expect(wrapper.prop('position')).toEqual(position);
         });
 
-        it(`Should have text: ${value}`, () => {
-          expect(wrapper.prop('text')).toEqual(value);
+        it(`Should have children: ${children}`, () => {
+          expect(wrapper.prop('children')).toEqual(children);
         });
       })
     );

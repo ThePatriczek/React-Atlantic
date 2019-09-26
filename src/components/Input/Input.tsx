@@ -1,11 +1,7 @@
 import * as React from 'react';
 import { Size } from '../../types';
 import { Icon, IconName } from '../Icon';
-import {
-  StyledInput,
-  StyledInputWrapper,
-  StyledInputWrapperAlt
-} from './Input.style';
+import { StyledInput, StyledInputWrapper, StyledInputWrapperAlt } from './Input.style';
 import { TextArea, TextAreaProps } from './TextArea';
 
 export interface InputProps {
@@ -24,6 +20,8 @@ export interface InputProps {
   isAlternative?: boolean;
   size?: Size;
   isLoading?: boolean;
+  /** custom className */
+  className?: string;
 }
 
 export const Input: React.FC<InputProps> & {
@@ -40,7 +38,8 @@ export const Input: React.FC<InputProps> & {
     autoFocus,
     isAlternative,
     size,
-    isLoading
+    isLoading,
+    className
   } = props;
 
   const ref = React.createRef<HTMLInputElement>();
@@ -105,6 +104,7 @@ export const Input: React.FC<InputProps> & {
             ref.current.focus();
           }
         }}
+        className={className}
       >
         {iconLeft || iconRight ? (
           <StyledInputWrapper
@@ -170,6 +170,7 @@ export const Input: React.FC<InputProps> & {
           ref.current.focus();
         }
       }}
+      className={className}
     >
       {iconLeft && <Icon name={iconLeft} />}
 

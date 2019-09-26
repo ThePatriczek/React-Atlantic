@@ -19,89 +19,61 @@ export type IconName =
 export interface IconProps {
   name: IconName;
   isRotating?: boolean;
+  /** custom className */
+  className?: string;
 }
 
 export const Icon: React.FC<IconProps> = (
   props: IconProps
 ): React.ReactElement => {
-  const { name, isRotating } = props;
+  const { name, isRotating, className } = props;
+
+  let Component = <i className={className} />;
 
   switch (name) {
     case 'arrowUp':
-      return (
-        <StyledIcon isRotating={isRotating}>
-          <Icons.ArrowUp />
-        </StyledIcon>
-      );
+      Component = <Icons.ArrowUp />;
+      break;
     case 'arrowDoubleUp':
-      return (
-        <StyledIcon isRotating={isRotating}>
-          <Icons.ArrowDoubleUp />
-        </StyledIcon>
-      );
+      Component = <Icons.ArrowDoubleUp />;
+      break;
     case 'arrowRight':
-      return (
-        <StyledIcon isRotating={isRotating}>
-          <Icons.ArrowRight />
-        </StyledIcon>
-      );
+      Component = <Icons.ArrowRight />;
+      break;
     case 'arrowDoubleRight':
-      return (
-        <StyledIcon isRotating={isRotating}>
-          <Icons.ArrowDoubleRight />
-        </StyledIcon>
-      );
+      Component = <Icons.ArrowDoubleRight />;
+      break;
     case 'arrowDown':
-      return (
-        <StyledIcon isRotating={isRotating}>
-          <Icons.ArrowDown />
-        </StyledIcon>
-      );
+      Component = <Icons.ArrowDown />;
+      break;
     case 'arrowDoubleDown':
-      return (
-        <StyledIcon isRotating={isRotating}>
-          <Icons.ArrowDoubleDown />
-        </StyledIcon>
-      );
+      Component = <Icons.ArrowDoubleDown />;
+      break;
     case 'arrowLeft':
-      return (
-        <StyledIcon isRotating={isRotating}>
-          <Icons.ArrowLeft />
-        </StyledIcon>
-      );
+      Component = <Icons.ArrowLeft />;
+      break;
     case 'arrowDoubleLeft':
-      return (
-        <StyledIcon isRotating={isRotating}>
-          <Icons.ArrowDoubleLeft />
-        </StyledIcon>
-      );
+      Component = <Icons.ArrowDoubleLeft />;
+      break;
     case 'hamburger':
-      return (
-        <StyledIcon isRotating={isRotating}>
-          <Icons.Hamburger />
-        </StyledIcon>
-      );
+      Component = <Icons.Hamburger />;
+      break;
     case 'loading':
-      return (
-        <StyledIcon isRotating={isRotating}>
-          <Icons.Loading />
-        </StyledIcon>
-      );
+      Component = <Icons.Loading />;
+      break;
     case 'edit':
-      return (
-        <StyledIcon isRotating={isRotating}>
-          <Icons.Edit />
-        </StyledIcon>
-      );
+      Component = <Icons.Edit />;
+      break;
     case 'copy':
-      return (
-        <StyledIcon isRotating={isRotating}>
-          <Icons.Copy />
-        </StyledIcon>
-      );
+      Component = <Icons.Copy />;
+      break;
   }
 
-  return <i />;
+  return (
+    <StyledIcon isRotating={isRotating} className={className}>
+      {Component}
+    </StyledIcon>
+  );
 };
 
 export type Icon = typeof Icon;

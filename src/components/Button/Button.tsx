@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { Size } from '../../types';
-import { Typography } from '../Typography';
 import { StyledButton } from './Button.style';
 
 export type ButtonType =
@@ -22,6 +21,8 @@ export interface ButtonProps {
   htmlType?: 'submit' | 'button';
   /** small | medium | large */
   size?: Size;
+  /** custom className */
+  className?: string;
 }
 
 export const Button: React.FC<React.PropsWithChildren<ButtonProps>> = (
@@ -34,9 +35,9 @@ export const Button: React.FC<React.PropsWithChildren<ButtonProps>> = (
     isRound,
     size,
     isFullWidth,
-    htmlType
+    htmlType,
+    className
   } = props;
-  const { Text } = Typography;
   const [animation, setAnimation] = React.useState<boolean>(false);
 
   const onClick = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -59,6 +60,7 @@ export const Button: React.FC<React.PropsWithChildren<ButtonProps>> = (
       isFullWidth={!!isFullWidth}
       onAnimationEnd={() => setAnimation(false)}
       animationRunning={animation}
+      className={className}
     >
       {children}
     </StyledButton>
@@ -70,7 +72,8 @@ Button.defaultProps = {
   isFullWidth: false,
   isDisabled: false,
   isRound: false,
-  type: 'default'
+  type: 'default',
+  htmlType: 'button'
 };
 
 Button.displayName = `Button`;

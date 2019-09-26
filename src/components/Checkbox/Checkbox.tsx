@@ -16,19 +16,21 @@ export interface CheckboxProps {
   isPartiallyChecked?: boolean;
   isDisabled?: boolean;
   onChange?: (isChecked: boolean) => void;
-  text?: string;
-  textPosition?: HorizontalPosition;
+  position?: HorizontalPosition;
+  /** custom className */
+  className?: string;
 }
 
-export const Checkbox: React.FC<CheckboxProps> = (
-  props: CheckboxProps
+export const Checkbox: React.FC<React.PropsWithChildren<CheckboxProps>> = (
+  props: React.PropsWithChildren<CheckboxProps>
 ): React.ReactElement => {
   const {
     isPartiallyChecked,
     isDefaultChecked,
-    textPosition,
-    text,
-    isDisabled
+    position,
+    isDisabled,
+    className,
+    children
   } = props;
   const [isChecked, setChecked] = React.useState<boolean>(!!isDefaultChecked);
 
@@ -53,10 +55,11 @@ export const Checkbox: React.FC<CheckboxProps> = (
     <StyledCheckboxLabel
       isChecked={props.isChecked || isChecked}
       isDisabled={isDisabled}
+      className={className}
     >
-      {text && textPosition === 'left' && (
-        <StyledCheckboxSpan isDisabled={isDisabled} textPosition={textPosition}>
-          {text}
+      {position === 'right' && (
+        <StyledCheckboxSpan isDisabled={isDisabled}>
+          {children}
         </StyledCheckboxSpan>
       )}
 
@@ -81,9 +84,9 @@ export const Checkbox: React.FC<CheckboxProps> = (
         </StyledCheckboxMark>
       </StyledCheckboxInputShown>
 
-      {text && textPosition === 'right' && (
-        <StyledCheckboxSpan isDisabled={isDisabled} textPosition={textPosition}>
-          {text}
+      {position === 'left' && (
+        <StyledCheckboxSpan isDisabled={isDisabled}>
+          {children}
         </StyledCheckboxSpan>
       )}
     </StyledCheckboxLabel>
@@ -91,5 +94,5 @@ export const Checkbox: React.FC<CheckboxProps> = (
 };
 
 Checkbox.defaultProps = {
-  textPosition: 'right'
+  position: 'left'
 };

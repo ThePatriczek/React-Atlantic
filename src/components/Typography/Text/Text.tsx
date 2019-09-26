@@ -10,12 +10,21 @@ export interface TextProps {
   isCopyable?: boolean;
   isEditable?: boolean;
   onEditConfirm?: (value: React.ReactText) => void;
+  /** custom className */
+  className?: string;
 }
 
 export const Text: React.FC<TextProps> = (
   props: TextProps
 ): React.ReactElement => {
-  const { children, isStrong, isCopyable, isEditable, onEditConfirm } = props;
+  const {
+    children,
+    isStrong,
+    isCopyable,
+    isEditable,
+    onEditConfirm,
+    className
+  } = props;
   const [isEditing, setEditing] = React.useState<boolean>(false);
   const [value, setValue] = React.useState<React.ReactText>(children);
 
@@ -53,7 +62,7 @@ export const Text: React.FC<TextProps> = (
 
   if (isStrong) {
     return (
-      <StyledStrongText>
+      <StyledStrongText className={className}>
         {value}
 
         {isEditable && (
@@ -71,7 +80,7 @@ export const Text: React.FC<TextProps> = (
   }
 
   return (
-    <StyledText>
+    <StyledText className={className}>
       {value}
 
       {isEditable && (
