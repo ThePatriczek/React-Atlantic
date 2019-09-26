@@ -12,54 +12,86 @@ interface StyledButtonProps {
 }
 
 const DefaultButton = styled.button`
-  font-family: ${props => props.theme.font.family};
+  position: relative;
+  display: inline-block;
   padding: 0 ${props => props.theme.padding.md};
   height: ${props => props.theme.height.md};
   line-height: 1.5;
-  position: relative;
-  display: inline-block;
-  font-weight: 400;
-  white-space: nowrap;
-  text-align: center;
+
   background-image: none;
-  color: black;
-  border-radius: ${props => props.theme.radius};
+  color: ${props => props.theme.color.black};
+
   outline: 0;
   cursor: pointer;
   font-size: ${props => props.theme.font.size.md};
+  font-family: ${props => props.theme.font.family};
+  font-weight: 400;
+  white-space: nowrap;
+  text-align: center;
   user-select: none;
   touch-action: manipulation;
   transition: background-color 0.1s ease;
-  box-shadow: 0 0 4px rgba(0, 0, 0, 0.06);
+  box-shadow: ${props => props.theme.boxShadow.sm};
   border: 1px solid ${props => darken(0.1, props.theme.color.default)};
+  border-radius: ${props => props.theme.radius};
+
+  > span,
+  > i {
+    height: 18px;
+    line-height: 18px;
+
+    display: inline-block;
+    vertical-align: 1px;
+    pointer-events: none;
+    transition: margin-left 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+  }
+  
+  i{
+    vertical-align: 2px;
+  }
+
+  i + span,
+  span + i {
+    margin-left: ${props => props.theme.margin.md};
+  }
+
+  i {
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  span {
+    margin: 0;
+  }
 `;
 
 export const StyledButton = styled(DefaultButton)<StyledButtonProps>`
   @-webkit-keyframes focusAnimation {
     0%   { opacity: 0; }
+    25% { opacity: .5; }
     50% { opacity: 1; }
+    75% { opacity: .5; }
     100% { opacity: 0; }
   }
 
   ${props =>
     !props.disabled &&
     props.styleType !== 'transparent' &&
-    !props.isRound &&
     css`
       &.animation {
         &:after {
           content: '';
           position: absolute;
-          top: -4px;
-          left: -4px;
-          right: -4px;
-          bottom: -4px;
+          top: -3px;
+          left: -3px;
+          right: -3px;
+          bottom: -3px;
 
-          opacity: 0;
           z-index: -1;
-          border-radius: ${props.theme.radius};
-          background: ${lighten(0.4, props.theme.color.primary)};
-          animation: focusAnimation 0.3s linear;
+          border-radius: ${props.isRound ? props.theme.rounded :  props.theme.radius};
+          background: ${props.theme.color.default};
+          animation: focusAnimation 0.4s ease-in-out;
         }
       }
     `}
@@ -140,7 +172,7 @@ export const StyledButton = styled(DefaultButton)<StyledButtonProps>`
 
       > span,
       > i {
-        vertical-align: -3px;
+        font-size: ${props.theme.font.size.sm};
       }
 
       i + span,
@@ -156,6 +188,11 @@ export const StyledButton = styled(DefaultButton)<StyledButtonProps>`
       height: ${props.theme.height.lg};
       font-size: ${props.theme.font.size.lg};
 
+      > span,
+      > i {
+        font-size: ${props.theme.font.size.lg};
+      }
+
       i + span,
       span + i {
         margin-left: ${props.theme.margin.lg};
@@ -167,26 +204,6 @@ export const StyledButton = styled(DefaultButton)<StyledButtonProps>`
     css`
       width: 100%;
     `}
-  
-    > span, > i{
-    height: 18px;
-    line-height: 18px;
-
-    display: inline-block;
-    vertical-align: 1px;
-    pointer-events: none;
-    transition: margin-left .3s cubic-bezier(.645, .045, .355, 1);
-  }
-
-  i+span,span+i{
-    margin-left: ${props => props.theme.margin.md};
-  }
-
-  i{
-    text-rendering: optimizeLegibility;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
 `;
 
 export const StyledTypoButton = styled(DefaultButton)`
