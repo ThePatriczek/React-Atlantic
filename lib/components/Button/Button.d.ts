@@ -1,5 +1,7 @@
 import * as React from 'react';
-import { Size } from '../../types';
+import { HorizontalPosition, Size } from '../../types';
+import { IconName } from '../Icon';
+
 export declare type ButtonType = 'default' | 'primary' | 'success' | 'warning' | 'error' | 'dashed' | 'transparent';
 export interface ButtonProps {
     onClick?: () => void;
@@ -11,5 +13,8 @@ export interface ButtonProps {
     htmlType?: 'submit' | 'button';
     /** small | medium | large */
     size?: Size;
+    icon?: IconName;
+    iconPosition?: HorizontalPosition;
+    children?: React.ReactText;
 }
-export declare const Button: React.FC<React.PropsWithChildren<ButtonProps>>;
+export declare const Button: React.FC<ButtonProps>;

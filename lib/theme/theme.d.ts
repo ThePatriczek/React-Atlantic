@@ -7,6 +7,8 @@ export declare const theme: {
         warning: string;
         error: string;
         border: string;
+        black: string;
+        white: string;
     };
     padding: {
         xs: string;
@@ -36,6 +38,9 @@ export declare const theme: {
         sm: string;
         md: string;
         lg: string;
+    };
+    boxShadow: {
+        sm: string;
     };
 };
 export declare type Theme = typeof theme;
