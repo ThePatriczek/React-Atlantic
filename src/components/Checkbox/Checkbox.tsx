@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Tick } from '../../Icons';
+import { Check } from '../../Icons';
 import { HorizontalPosition } from '../../types';
 import {
   StyledCheckboxIcon,
@@ -79,7 +79,7 @@ export const Checkbox: React.FC<React.PropsWithChildren<CheckboxProps>> = (
             isChecked={props.isChecked || isChecked}
             isPartiallyChecked={isPartiallyChecked}
           >
-            <Tick />
+            <Check />
           </StyledCheckboxIcon>
         </StyledCheckboxMark>
       </StyledCheckboxInputShown>

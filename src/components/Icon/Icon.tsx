@@ -14,7 +14,24 @@ export type IconName =
   | 'hamburger'
   | 'loading'
   | 'edit'
-  | 'copy';
+  | 'copy'
+  | 'check'
+  | 'users'
+  | 'user'
+  | 'upload'
+  | 'trash'
+  | 'search'
+  | 'plus'
+  | 'logout'
+  | 'license'
+  | 'key'
+  | 'info'
+  | 'import'
+  | 'export'
+  | 'eye'
+  | 'eyeSlash'
+  | 'close'
+  | 'clear';
 
 export interface IconProps {
   name: IconName;
@@ -66,6 +83,57 @@ export const Icon: React.FC<IconProps> = (
       break;
     case 'copy':
       Component = <Icons.Copy />;
+      break;
+    case 'check':
+      Component = <Icons.Check />;
+      break;
+    case 'clear':
+      Component = <Icons.Clear />;
+      break;
+    case 'close':
+      Component = <Icons.Close />;
+      break;
+    case 'export':
+      Component = <Icons.Export />;
+      break;
+    case 'eye':
+      Component = <Icons.Eye />;
+      break;
+    case 'eyeSlash':
+      Component = <Icons.EyeSlash />;
+      break;
+    case 'import':
+      Component = <Icons.Import />;
+      break;
+    case 'info':
+      Component = <Icons.Info />;
+      break;
+    case 'key':
+      Component = <Icons.Key />;
+      break;
+    case 'license':
+      Component = <Icons.License />;
+      break;
+    case 'logout':
+      Component = <Icons.Logout />;
+      break;
+    case 'plus':
+      Component = <Icons.Plus />;
+      break;
+    case 'search':
+      Component = <Icons.Search />;
+      break;
+    case 'trash':
+      Component = <Icons.Trash />;
+      break;
+    case 'upload':
+      Component = <Icons.Upload />;
+      break;
+    case 'user':
+      Component = <Icons.User />;
+      break;
+    case 'users':
+      Component = <Icons.Users />;
       break;
   }
 
