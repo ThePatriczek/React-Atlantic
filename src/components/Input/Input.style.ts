@@ -72,6 +72,7 @@ export const StyledInputWrapper = styled.span<StyledInputWrapperProps>`
     ${props =>
       props.size === 'small' &&
       css`
+        font-size: 12px;
         height: ${props.theme.height.sm};
       `};
         
@@ -84,6 +85,7 @@ export const StyledInputWrapper = styled.span<StyledInputWrapperProps>`
     ${props =>
       props.size === 'large' &&
       css`
+        font-size: 16px;
         height: ${props.theme.height.lg};
       `};
     
@@ -128,8 +130,8 @@ export const StyledInput = styled.input<{
   -webkit-appearance: textfield;
   touch-action: manipulation;
 
-  background-color: white;
-  color: black;
+  background-color: ${props => props.theme.color.white};
+  color: ${props => props.theme.color.black};
   border-radius: ${props => props.theme.radius};
   outline: 0;
   list-style: none;
@@ -297,7 +299,7 @@ export const StyledInputWrapperAlt = styled.span<StyledInputWrapperProps>`
   }
 
   ${props =>
-    props.iconLeft &&
+    props.iconLeft && 
     css`
       input {
         padding-right: ${props.theme.padding.md};
