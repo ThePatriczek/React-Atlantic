@@ -40,8 +40,7 @@ export const Button: React.FC<React.PropsWithChildren<ButtonProps>> = (
   } = props;
   const [animation, setAnimation] = React.useState<boolean>(false);
 
-  const onClick = (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault();
+  const onClick = () => {
     setAnimation(true);
 
     if (props.onClick) {
