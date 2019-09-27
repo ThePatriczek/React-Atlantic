@@ -67,14 +67,32 @@ export const StyledInputWrapper = styled.span<StyledInputWrapperProps>`
           `};
     align-items: center;
     position: absolute;
-    width: 1em;
-    height: 1em;
-    top: 50%;
+    width: 14px;
+    
+    ${props =>
+      props.size === 'small' &&
+      css`
+        font-size: 12px;
+        height: ${props.theme.height.sm};
+      `};
+        
+    ${props =>
+      props.size === 'medium' &&
+      css`
+        height: ${props.theme.height.md};
+      `};    
+    
+    ${props =>
+      props.size === 'large' &&
+      css`
+        font-size: 16px;
+        height: ${props.theme.height.lg};
+      `};
+    
+    top: 0;
+    bottom: 0;
     z-index: 2;
     line-height: 0;
-    -webkit-transform: translateY(-50%);
-    -ms-transform: translateY(-50%);
-    transform: translateY(-50%);
 
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
@@ -86,122 +104,6 @@ export const StyledInputWrapper = styled.span<StyledInputWrapperProps>`
     css`
       i {
         color: ${props.theme.color.primary};
-      }
-    `}
-`;
-
-export const StyledInputWrapperAlt = styled.span<StyledInputWrapperProps>`
-  font-family: ${props => props.theme.font.family};
-  display: inline-block;
-  position: relative;
-  padding-top: ${props => props.theme.padding.md};
-
-  ${props =>
-    !props.isDisabled &&
-    css`
-      :hover {
-        i {
-          color: ${props.theme.color.primary};
-        }
-        input {
-          border-color: ${props.theme.color.primary};
-        }
-      }
-    `}
-
-  label { 
-    ${props =>
-      props.size === 'small' &&
-      css`
-        font-size: ${props.theme.font.size.sm};
-        height: ${parseInt(props.theme.height.sm, 0) - 2}px;
-        line-height: ${parseInt(props.theme.height.sm, 0) - 2}px;
-      `}
-    ${props =>
-      props.size === 'medium' &&
-      css`
-        font-size: ${props.theme.font.size.md};
-        height: ${parseInt(props.theme.height.md, 0) - 2}px;
-        line-height: ${parseInt(props.theme.height.md, 0) - 2}px;
-      `}
-    ${props =>
-      props.size === 'large' &&
-      css`
-        font-size: ${props.theme.font.size.lg};
-        height: ${parseInt(props.theme.height.lg, 0) - 2}px;
-        line-height: ${parseInt(props.theme.height.lg, 0) - 2}px;
-      `}
-    
-    
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    padding: 0 ${props => props.theme.padding.md};
-
-    color: ${() => lighten(0.6, `black`)};
-    cursor: text;
-
-    -webkit-transition: color 0.2s ease-out, -webkit-transform 0.2s ease-out;
-    transition: color 0.2s ease-out, -webkit-transform 0.2s ease-out;
-    transition: transform 0.2s ease-out, color 0.2s ease-out;
-    transition: transform 0.2s ease-out, color 0.2s ease-out,
-      -webkit-transform 0.2s ease-out;
-    -webkit-transform-origin: 0% 100%;
-    transform-origin: 0% 100%;
-    -webkit-transform: translateY(12px);
-    transform: translateY(12px);
-
-    ${props =>
-      (props.isFocused || props.hasValue || props.isDisabled) &&
-      css`
-        height: ${props.theme.height.sm};
-        line-height: ${props.theme.height.sm};
-        left: 5px;
-        right: auto;
-
-        background: white;
-        color: ${props.theme.color.primary};
-
-        -webkit-transform: translateY(-14px) scale(0.8);
-        transform: translateY(0px) scale(0.8);
-        -webkit-transform-origin: 0 0;
-        transform-origin: 0 0;
-      `}
-  }
-
-  ${props =>
-    props.iconLeft &&
-    css`
-      input {
-        padding-right: ${props.theme.padding.md};
-      }
-
-      label {
-        transform: translateY(-10px) scale(0.8);
-        ${!(props.isFocused || props.hasValue) &&
-          css`
-            padding-left: 30px;
-            transform: translateY(2px);
-          `}
-      }
-    `}
-
-  ${props =>
-    props.iconRight &&
-    css`
-      input {
-        padding-left: ${props.theme.padding.md};
-      }
-
-      label {
-        transform: translateY(-10px) scale(0.8);
-
-        ${!(props.isFocused || props.hasValue) &&
-          css`
-            padding-right: 30px;
-            transform: translateY(2px);
-          `}
       }
     `}
 `;
@@ -228,8 +130,8 @@ export const StyledInput = styled.input<{
   -webkit-appearance: textfield;
   touch-action: manipulation;
 
-  background-color: white;
-  color: black;
+  background-color: ${props => props.theme.color.white};
+  color: ${props => props.theme.color.black};
   border-radius: ${props => props.theme.radius};
   outline: 0;
   list-style: none;
@@ -314,6 +216,122 @@ export const StyledInput = styled.input<{
       css`
         width: 100%;
       `} 
+`;
+
+export const StyledInputWrapperAlt = styled.span<StyledInputWrapperProps>`
+  font-family: ${props => props.theme.font.family};
+  display: inline-block;
+  position: relative;
+  padding-top: ${props => props.theme.padding.md};
+
+  ${props =>
+    !props.isDisabled &&
+    css`
+      :hover {
+        i {
+          color: ${props.theme.color.primary};
+        }
+        input {
+          border-color: ${props.theme.color.primary};
+        }
+      }
+    `}
+
+  label { 
+    ${props =>
+      props.size === 'small' &&
+      css`
+        font-size: ${props.theme.font.size.sm};
+        height: ${parseInt(props.theme.height.sm, 0) - 2}px;
+        line-height: ${parseInt(props.theme.height.sm, 0) - 2}px;
+      `}
+    ${props =>
+      props.size === 'medium' &&
+      css`
+        font-size: ${props.theme.font.size.md};
+        height: ${parseInt(props.theme.height.md, 0) - 2}px;
+        line-height: ${parseInt(props.theme.height.md, 0) - 2}px;
+      `}
+    ${props =>
+      props.size === 'large' &&
+      css`
+        font-size: ${props.theme.font.size.lg};
+        height: ${parseInt(props.theme.height.lg, 0) - 2}px;
+        line-height: ${parseInt(props.theme.height.lg, 0) - 2}px;
+      `}
+    
+    
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    padding: 0 ${props => props.theme.padding.md};
+
+    color: ${() => lighten(0.6, `black`)};
+    cursor: text;
+
+    -webkit-transition: color 0.2s ease-out, -webkit-transform 0.2s ease-out;
+    transition: color 0.2s ease-out, -webkit-transform 0.2s ease-out;
+    transition: transform 0.2s ease-out, color 0.2s ease-out;
+    transition: transform 0.2s ease-out, color 0.2s ease-out,
+      -webkit-transform 0.2s ease-out;
+    -webkit-transform-origin: 0% 100%;
+    transform-origin: 0% 100%;
+    -webkit-transform: translateY(12px);
+    transform: translateY(12px);
+
+    ${props =>
+      (props.isFocused || props.hasValue || props.isDisabled) &&
+      css`
+        height: ${props.theme.height.sm};
+        line-height: ${props.theme.height.sm};
+        left: 5px;
+        right: auto;
+
+        background: white;
+        color: ${props.theme.color.primary};
+
+        -webkit-transform: translateY(-14px) scale(0.8);
+        transform: translateY(0px) scale(0.8);
+        -webkit-transform-origin: 0 0;
+        transform-origin: 0 0;
+      `}
+  }
+
+  ${props =>
+    props.iconLeft && 
+    css`
+      input {
+        padding-right: ${props.theme.padding.md};
+      }
+
+      label {
+        transform: translateY(-10px) scale(0.8);
+        ${!(props.isFocused || props.hasValue) &&
+          css`
+            padding-left: 30px;
+            transform: translateY(2px);
+          `}
+      }
+    `}
+
+  ${props =>
+    props.iconRight &&
+    css`
+      input {
+        padding-left: ${props.theme.padding.md};
+      }
+
+      label {
+        transform: translateY(-10px) scale(0.8);
+
+        ${!(props.isFocused || props.hasValue) &&
+          css`
+            padding-right: 30px;
+            transform: translateY(2px);
+          `}
+      }
+    `}
 `;
 
 StyledInput.defaultProps = {
