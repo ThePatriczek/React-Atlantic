@@ -7,6 +7,7 @@ export interface StyledInputWrapperProps {
     hasValue?: boolean;
     isDisabled?: boolean;
     size: Size;
+    isFullWidth?: boolean;
 }
 export declare const StyledInputWrapper: import("styled-components").StyledComponent<"span", any, StyledInputWrapperProps, never>;
 export declare const StyledInput: import("styled-components").StyledComponent<"input", any, {
