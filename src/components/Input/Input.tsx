@@ -4,6 +4,52 @@ import { Icon, IconName } from '../Icon';
 import { StyledInput, StyledInputWrapper, StyledInputWrapperAlt } from './Input.style';
 import { TextArea, TextAreaProps } from './TextArea';
 
+export type AutoComplete =
+  | 'name'
+  | 'honorific-prefix'
+  | 'given-name'
+  | 'additional-name'
+  | 'family-name'
+  | 'honorific-suffix'
+  | 'nickname'
+  | 'username'
+  | 'new-password'
+  | 'current-password'
+  | 'one-time-code'
+  | 'organization-title'
+  | 'organization'
+  | 'street-address'
+  | 'address-line1'
+  | 'address-line2'
+  | 'address-line3'
+  | 'address-level4'
+  | 'address-level3'
+  | 'address-level2'
+  | 'address-level1'
+  | 'country'
+  | 'country-name'
+  | 'postal-code'
+  | 'cc-name'
+  | 'cc-given-name'
+  | 'cc-additional-name'
+  | 'cc-family-name'
+  | 'cc-number'
+  | 'cc-exp'
+  | 'cc-exp-month'
+  | 'cc-exp-year'
+  | 'cc-csc'
+  | 'cc-type'
+  | 'transaction-currency'
+  | 'transaction-amount'
+  | 'language'
+  | 'bday'
+  | 'bday-day'
+  | 'bday-month'
+  | 'bday-year'
+  | 'sex'
+  | 'url'
+  | 'photo';
+
 export interface InputProps {
   value?: React.ReactText;
   defaultValue?: React.ReactText;
@@ -22,6 +68,8 @@ export interface InputProps {
   isLoading?: boolean;
   /** custom className */
   className?: string;
+  htmlType?: 'text' | 'email' | 'password';
+  autoComplete?: AutoComplete;
 }
 
 export const Input: React.FC<InputProps> & {
@@ -39,7 +87,9 @@ export const Input: React.FC<InputProps> & {
     isAlternative,
     size,
     isLoading,
-    className
+    className,
+    autoComplete,
+    htmlType
   } = props;
 
   const ref = React.createRef<HTMLInputElement>();
@@ -90,6 +140,24 @@ export const Input: React.FC<InputProps> & {
     }
   };
 
+  const Component = (
+    <StyledInput
+      id={id}
+      value={props.value !== undefined ? props.value : value}
+      onChange={onChange}
+      disabled={isDisabled}
+      placeholder={placeholder}
+      onKeyDown={onKeyDown}
+      autoFocus={autoFocus}
+      onBlur={onBlur}
+      onFocus={onFocus}
+      ref={ref}
+      size={size as never}
+      autoComplete={autoComplete}
+      type={htmlType}
+    />
+  );
+
   if (isAlternative && !isDisabled) {
     return (
       <StyledInputWrapperAlt
@@ -121,36 +189,15 @@ export const Input: React.FC<InputProps> & {
           >
             {iconLeft && <Icon name={iconLeft} />}
 
-            <StyledInput
-              id={id}
-              value={props.value !== undefined ? props.value : value}
-              onChange={onChange}
-              disabled={isDisabled}
-              onKeyDown={onKeyDown}
-              autoFocus={autoFocus}
-              onBlur={onBlur}
-              onFocus={onFocus}
-              ref={ref}
-              size={size as never}
-            />
+            {Component}
+
             <label>{placeholder}</label>
             {isLoading && <Icon name={'loading'} isRotating />}
             {iconRight && !isLoading && <Icon name={iconRight} />}
           </StyledInputWrapper>
         ) : (
           <>
-            <StyledInput
-              id={id}
-              value={props.value !== undefined ? props.value : value}
-              onChange={onChange}
-              disabled={isDisabled}
-              onKeyDown={onKeyDown}
-              autoFocus={autoFocus}
-              onBlur={onBlur}
-              onFocus={onFocus}
-              ref={ref}
-              size={size as never}
-            />
+            {Component}
             <label>{placeholder}</label>
           </>
         )}
@@ -174,19 +221,7 @@ export const Input: React.FC<InputProps> & {
     >
       {iconLeft && <Icon name={iconLeft} />}
 
-      <StyledInput
-        id={id}
-        value={props.value !== undefined ? props.value : value}
-        onChange={onChange}
-        disabled={isDisabled}
-        placeholder={placeholder}
-        onKeyDown={onKeyDown}
-        autoFocus={autoFocus}
-        onBlur={onBlur}
-        onFocus={onFocus}
-        ref={ref}
-        size={size as never}
-      />
+      {Component}
 
       {isLoading && <Icon name={'loading'} isRotating />}
       {iconRight && !isLoading && <Icon name={iconRight} />}
@@ -195,7 +230,8 @@ export const Input: React.FC<InputProps> & {
 };
 
 Input.defaultProps = {
-  size: 'medium'
+  size: 'medium',
+  htmlType: 'text'
 };
 
 Input.TextArea = TextArea;
