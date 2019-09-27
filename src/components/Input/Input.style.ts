@@ -68,7 +68,25 @@ export const StyledInputWrapper = styled.span<StyledInputWrapperProps>`
     align-items: center;
     position: absolute;
     width: 14px;
-    height: ${props => props.theme.height.md};
+    
+    ${props =>
+      props.size === 'small' &&
+      css`
+        height: ${props.theme.height.sm};
+      `};
+        
+    ${props =>
+      props.size === 'medium' &&
+      css`
+        height: ${props.theme.height.md};
+      `};    
+    
+    ${props =>
+      props.size === 'large' &&
+      css`
+        height: ${props.theme.height.lg};
+      `};
+    
     top: 0;
     bottom: 0;
     z-index: 2;
@@ -133,8 +151,8 @@ export const StyledInput = styled.input<{
   }
 
   ${props =>
-  props.disabled &&
-  css`
+    props.disabled &&
+    css`
       color: ${darken(0.2, props.theme.color.default)};
       ::placeholder {
         color: ${darken(0.2, props.theme.color.default)};
@@ -153,8 +171,8 @@ export const StyledInput = styled.input<{
     `}
 
   ${props =>
-  props.isRound &&
-  css`
+    props.isRound &&
+    css`
       border-radius: ${props.theme.rounded};
 
       &:not(.disabled):not(.transparent) {
@@ -167,8 +185,8 @@ export const StyledInput = styled.input<{
     `} 
 
   ${props =>
-  props.size === 'small' &&
-  css`
+    props.size === 'small' &&
+    css`
       height: ${props.theme.height.sm};
       font-size: 12px;
 
@@ -179,8 +197,8 @@ export const StyledInput = styled.input<{
     `} 
   
     ${props =>
-  props.size === 'large' &&
-  css`
+      props.size === 'large' &&
+      css`
         height: ${props.theme.height.lg};
         font-size: ${props.theme.font.size.lg};
 
@@ -192,8 +210,8 @@ export const StyledInput = styled.input<{
 
 
     ${props =>
-  props.isFullWidth &&
-  css`
+      props.isFullWidth &&
+      css`
         width: 100%;
       `} 
 `;
@@ -223,7 +241,7 @@ export const StyledInputWrapperAlt = styled.span<StyledInputWrapperProps>`
       css`
         font-size: ${props.theme.font.size.sm};
         height: ${parseInt(props.theme.height.sm, 0) - 2}px;
-        line-height: ${parseInt(props.theme.height.sm, 0) - 2}px; 
+        line-height: ${parseInt(props.theme.height.sm, 0) - 2}px;
       `}
     ${props =>
       props.size === 'medium' &&
