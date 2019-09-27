@@ -11,6 +11,7 @@ export interface StyledInputWrapperProps {
   hasValue?: boolean;
   isDisabled?: boolean;
   size: Size;
+  isFullWidth?: boolean;
 }
 
 export const StyledInputWrapper = styled.span<StyledInputWrapperProps>`
@@ -106,6 +107,12 @@ export const StyledInputWrapper = styled.span<StyledInputWrapperProps>`
         color: ${props.theme.color.primary};
       }
     `}
+  
+   ${props =>
+     props.isFullWidth &&
+     css`
+       width: 100%;
+     `} 
 `;
 
 export const StyledInput = styled.input<{
@@ -299,7 +306,7 @@ export const StyledInputWrapperAlt = styled.span<StyledInputWrapperProps>`
   }
 
   ${props =>
-    props.iconLeft && 
+    props.iconLeft &&
     css`
       input {
         padding-right: ${props.theme.padding.md};
@@ -332,6 +339,13 @@ export const StyledInputWrapperAlt = styled.span<StyledInputWrapperProps>`
           `}
       }
     `}
+  
+    
+   ${props =>
+     props.isFullWidth &&
+     css`
+       width: 100%;
+     `} 
 `;
 
 StyledInput.defaultProps = {

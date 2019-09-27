@@ -70,6 +70,7 @@ export interface InputProps {
   className?: string;
   htmlType?: 'text' | 'email' | 'password';
   autoComplete?: AutoComplete;
+  isFullWidth?: boolean;
 }
 
 export const Input: React.FC<InputProps> & {
@@ -89,7 +90,8 @@ export const Input: React.FC<InputProps> & {
     isLoading,
     className,
     autoComplete,
-    htmlType
+    htmlType,
+    isFullWidth
   } = props;
 
   const ref = React.createRef<HTMLInputElement>();
@@ -146,7 +148,7 @@ export const Input: React.FC<InputProps> & {
       value={props.value !== undefined ? props.value : value}
       onChange={onChange}
       disabled={isDisabled}
-      placeholder={placeholder}
+      placeholder={isAlternative ? `` : placeholder}
       onKeyDown={onKeyDown}
       autoFocus={autoFocus}
       onBlur={onBlur}
@@ -155,6 +157,7 @@ export const Input: React.FC<InputProps> & {
       size={size as never}
       autoComplete={autoComplete}
       type={htmlType}
+      isFullWidth={isFullWidth}
     />
   );
 
@@ -173,6 +176,7 @@ export const Input: React.FC<InputProps> & {
           }
         }}
         className={className}
+        isFullWidth={isFullWidth}
       >
         {iconLeft || iconRight ? (
           <StyledInputWrapper
@@ -186,6 +190,7 @@ export const Input: React.FC<InputProps> & {
                 ref.current.focus();
               }
             }}
+            isFullWidth={isFullWidth}
           >
             {iconLeft && <Icon name={iconLeft} />}
 
@@ -218,6 +223,7 @@ export const Input: React.FC<InputProps> & {
         }
       }}
       className={className}
+      isFullWidth={isFullWidth}
     >
       {iconLeft && <Icon name={iconLeft} />}
 
