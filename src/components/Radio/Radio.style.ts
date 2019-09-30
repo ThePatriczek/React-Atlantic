@@ -46,7 +46,7 @@ export const StyledRadioInputShown = styled.div<StyledRadioProps>`
   justify-content: center;
   padding: ${props => parseInt(props.theme.padding.xs, 0) - 1}px;
 
-  background: white;
+  background: ${props => props.theme.color.white};
   border-radius: ${props => props.theme.rounded};
   border: 1px solid ${props => darken(0.1, props.theme.color.default)};
   ${props =>
@@ -65,7 +65,7 @@ export const StyledRadioMark = styled.div<StyledRadioProps>`
   border-radius: ${props => props.theme.rounded};
   i {
     transform: scale(0.8);
-    color: white;
+    color: ${props => props.theme.color.white};
   }
 
   ${props =>

@@ -30,8 +30,8 @@ export const StyledRadioButtonLabel = styled.label<StyledRadioButtonProps>`
   text-align: center;
   background-image: none;
 
-  background-color: white;
-  color: black;
+  background-color: ${props => props.theme.color.white};
+  color: ${props => props.theme.color.black};;
 
   outline: 0;
   cursor: pointer;
@@ -50,7 +50,7 @@ export const StyledRadioButtonLabel = styled.label<StyledRadioButtonProps>`
     css`
       border: 1px solid ${props.theme.color.primary};
       background-color: ${props.theme.color.primary};
-      color: white;
+      color: ${props.theme.color.white};;
     `}
   &:hover {
      border: 1px solid ${props => props.theme.color.primary};
