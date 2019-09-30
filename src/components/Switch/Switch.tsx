@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Size } from '../../types';
+import { Size, Type } from '../../types';
 import {
   StyledSwitcherFalse,
   StyledSwitcherToggler,
@@ -9,48 +9,37 @@ import {
   StyledSwitchLabel
 } from './Switch.style';
 
-export type SwitchType =
-  | 'default'
-  | 'primary'
-  | 'success'
-  | 'warning'
-  | 'error';
-
 export interface SwitchProps {
   isChecked?: boolean;
   isDefaultChecked?: boolean;
   isDisabled?: boolean;
   onChange?: (isChecked: boolean) => void;
-  textLeft?: string;
-  textRight?: string;
+  textOn?: string;
+  textOff?: string;
   className?: string;
-  name?: string;
-  labelBefore?: string;
-  labelAfter?: string;
   size?: Size;
-  htmlType?: SwitchType;
+  type?: Type;
 }
 
 export const Switch: React.FC<SwitchProps> = (
   props: SwitchProps
 ): React.ReactElement => {
   const {
-    textLeft,
-    textRight,
+    textOn,
+    textOff,
     className,
-    name,
     isDefaultChecked,
     isDisabled,
     size,
-    htmlType
+    type
   } = props;
 
   const [isChecked, setChecked] = React.useState<boolean>(!!isDefaultChecked);
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setChecked(e.target.checked);
     if (!isDisabled) {
       if (props.isChecked === undefined) {
+        setChecked(e.target.checked);
         if (props.onChange) {
           props.onChange(!isChecked);
         }
@@ -63,55 +52,49 @@ export const Switch: React.FC<SwitchProps> = (
   };
 
   return (
-    <>
-      <StyledSwitchLabel
-        size={size}
+    <StyledSwitchLabel
+      size={size}
+      isChecked={props.isChecked || isChecked}
+      htmlType={type}
+      isDisabled={isDisabled}
+    >
+      <StyledSwitchInputHidden
+        onChange={onChange}
+        className={className}
+        checked={props.isChecked || isChecked}
+        disabled={isDisabled}
+      />
+      <StyledSwitcherWrap
+        htmlType={type}
         isChecked={props.isChecked || isChecked}
-        htmlType={htmlType}
-        isDisabled={isDisabled}
+        size={size}
       >
-        <StyledSwitchInputHidden
-          onChange={onChange}
-          className={className}
-          name={name}
-          id={name}
-          checked={props.isChecked || isChecked}
-          disabled={isDisabled}
-        />
-        <StyledSwitcherWrap
-          htmlType={htmlType}
-          isChecked={props.isChecked || isChecked}
+        <StyledSwitcherTrue
+          htmlType={type}
           size={size}
+          isChecked={props.isChecked || isChecked}
+          isDisabled={isDisabled}
         >
-          <StyledSwitcherTrue
-            htmlType={htmlType}
-            size={size}
-            isChecked={props.isChecked || isChecked}
-            isDisabled={isDisabled}
-          >
-            {textLeft}
-          </StyledSwitcherTrue>
-          <StyledSwitcherToggler
-            size={size}
-            isChecked={props.isChecked || isChecked}
-            htmlType={htmlType}
-          />
-          <StyledSwitcherFalse
-            htmlType={htmlType}
-            size={size}
-            isChecked={props.isChecked || isChecked}
-            isDisabled={isDisabled}
-          >
-            {textRight}
-          </StyledSwitcherFalse>
-        </StyledSwitcherWrap>
-      </StyledSwitchLabel>
-    </>
+          {textOn}
+        </StyledSwitcherTrue>
+        <StyledSwitcherToggler
+          size={size}
+          isChecked={props.isChecked || isChecked}
+          htmlType={type}
+        />
+        <StyledSwitcherFalse
+          htmlType={type}
+          size={size}
+          isChecked={props.isChecked || isChecked}
+          isDisabled={isDisabled}
+        >
+          {textOff}
+        </StyledSwitcherFalse>
+      </StyledSwitcherWrap>
+    </StyledSwitchLabel>
   );
 };
 
 Switch.defaultProps = {
-  htmlType: 'error',
-  textLeft: 'Yes',
-  textRight: 'No'
+  type: 'primary'
 };

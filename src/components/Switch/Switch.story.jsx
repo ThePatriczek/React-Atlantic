@@ -17,10 +17,9 @@ stories.add(
     const isChecked = boolean(`isChecked:`, false);
     const isDisabled = boolean(`isDisabled:`, false);
     const isDefaultChecked = boolean(`isDefaultChecked:`, false);
-    const textLeft = text('textLeft:', 'Yes');
-    const textRight = text('textRight:', 'No');
+    const textOn = text('textOn:', 'on');
+    const textOff = text('textOff:', 'off');
     const size = select(`size:`, ['small', `medium`, 'large'], 'medium');
-    const name = text('name:', 'Name');
     const type = select(
       `type:`,
       ['primary', 'success', 'warning', 'error'],
@@ -32,12 +31,11 @@ stories.add(
         isChecked={isChecked}
         isDisabled={isDisabled}
         size={size}
-        htmlType={type}
+        type={type}
         isDefaultChecked={isDefaultChecked}
         onChange={action(`onChange`)}
-        textLeft={textLeft}
-        textRight={textRight}
-        name={name}
+        textOn={textOn}
+        textOff={textOff}
       />
     );
     specs(() =>
@@ -45,19 +43,15 @@ stories.add(
         const wrapper = mount(switcher);
 
         it(`Should have type: ${type}`, () => {
-          expect(wrapper.prop('htmlType')).toEqual(type);
+          expect(wrapper.prop('type')).toEqual(type);
         });
 
-        it(`Should have name: ${name}`, () => {
-          expect(wrapper.prop('name')).toEqual(name);
+        it(`Should have textOn: ${textOn}`, () => {
+          expect(wrapper.prop('textOn')).toEqual(textOn);
         });
 
-        it(`Should have textLeft: ${textLeft}`, () => {
-          expect(wrapper.prop('textLeft')).toEqual(textLeft);
-        });
-
-        it(`Should have textRight: ${textRight}`, () => {
-          expect(wrapper.prop('textRight')).toEqual(textRight);
+        it(`Should have textOff: ${textOff}`, () => {
+          expect(wrapper.prop('textOff')).toEqual(textOff);
         });
 
         it(`Should have isDefaultChecked: ${isDefaultChecked}`, () => {

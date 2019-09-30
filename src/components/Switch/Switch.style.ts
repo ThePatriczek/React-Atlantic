@@ -1,15 +1,14 @@
 import { darken } from 'polished';
 import styled, { css } from 'styled-components';
 import { theme } from '../../theme';
-import { Size } from '../../types';
-import { SwitchType } from './Switch';
+import { Size, Type } from '../../types';
 
 interface StyledSwitchProps {
   isChecked?: boolean;
   isDisabled?: boolean;
   textPosition?: 'right' | 'left';
   size?: Size;
-  htmlType?: SwitchType;
+  htmlType?: Type;
 }
 
 const togglerSizeLarge = '28px';
