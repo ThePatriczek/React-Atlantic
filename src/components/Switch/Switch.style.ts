@@ -1,12 +1,12 @@
 import { darken } from 'polished';
 import styled, { css } from 'styled-components';
 import { theme } from '../../theme';
-import { Size, Type } from '../../types';
+import { HorizontalPosition, Size, Type } from '../../types';
 
 interface StyledSwitchProps {
   isChecked?: boolean;
   isDisabled?: boolean;
-  textPosition?: 'right' | 'left';
+  textPosition?: HorizontalPosition;
   size?: Size;
   htmlType?: Type;
 }
