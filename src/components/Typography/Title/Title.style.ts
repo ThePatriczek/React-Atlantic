@@ -1,9 +1,14 @@
+import { lighten } from 'polished';
 import styled, { css } from 'styled-components';
 import { theme } from '../../../theme';
 
 const titleStyle = css`
   font-weight: bold;
   font-family: ${props => props.theme.font.family};
+  ::selection,
+  ::-moz-selection {
+    background: ${props => lighten(0.4, props.theme.color.primary)};
+  }
 `;
 
 export const StyledTitle1 = styled.h1`

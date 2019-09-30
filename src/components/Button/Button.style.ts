@@ -1,5 +1,5 @@
 import { darken, lighten } from 'polished';
-import styled, { css } from 'styled-components';
+import styled, { css, keyframes } from 'styled-components';
 import { theme } from '../../theme';
 import { Size } from '../../types';
 import { ButtonType } from './Button';
@@ -11,6 +11,14 @@ interface StyledButtonProps {
   isFullWidth: boolean;
   animationRunning?: boolean;
 }
+
+export const focusAnimation = keyframes`
+    0%    { opacity: 0; }
+    25%   { opacity: .5; }
+    50%   { opacity: 1; }
+    75%   { opacity: .5; }
+    100%  { opacity: 0; }
+  `;
 
 const DefaultButton = styled.button`
   position: relative;
@@ -68,14 +76,6 @@ const DefaultButton = styled.button`
 `;
 
 export const StyledButton = styled(DefaultButton)<StyledButtonProps>`
-  @-webkit-keyframes focusAnimation {
-    0%   { opacity: 0; }
-    25% { opacity: .5; }
-    50% { opacity: 1; }
-    75% { opacity: .5; }
-    100% { opacity: 0; }
-  }
-
   ${props =>
     !props.disabled &&
     props.styleType !== 'transparent' &&
@@ -94,7 +94,7 @@ export const StyledButton = styled(DefaultButton)<StyledButtonProps>`
           ? props.theme.rounded
           : props.theme.radius};
         background: ${props.theme.color.default};
-        animation: focusAnimation 0.4s ease-in-out;
+        animation: ${focusAnimation} 0.4s ease-in-out;
       }
     `}
 
