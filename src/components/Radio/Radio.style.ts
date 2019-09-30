@@ -2,7 +2,7 @@ import { darken } from 'polished';
 import styled, { css } from 'styled-components';
 import { theme } from '../../theme';
 
-interface StyledCheckboxProps {
+interface StyledRadioProps {
   isChecked?: boolean;
   isDisabled?: boolean;
   name?: string;
@@ -17,7 +17,7 @@ export const StyledRadioInputHidden = styled.input.attrs({
   height: 0;
   margin: 0;
 `;
-export const StyledRadioLabel = styled.label<StyledCheckboxProps>`
+export const StyledRadioLabel = styled.label<StyledRadioProps>`
   display: inline-flex;
   align-items: center;
   cursor: pointer;
@@ -30,7 +30,7 @@ export const StyledRadioLabel = styled.label<StyledCheckboxProps>`
       cursor: not-allowed;
     `}
 `;
-export const StyledRadioSpan = styled.span<StyledCheckboxProps>`
+export const StyledRadioSpan = styled.span<StyledRadioProps>`
   padding: 0 ${props => props.theme.padding.md};
   line-height: 1;
   user-select: none;
@@ -40,7 +40,7 @@ export const StyledRadioSpan = styled.span<StyledCheckboxProps>`
       color: ${darken(0.2, props.theme.color.default)};
     `}
 `;
-export const StyledRadioInputShown = styled.div<StyledCheckboxProps>`
+export const StyledRadioInputShown = styled.div<StyledRadioProps>`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -55,7 +55,7 @@ export const StyledRadioInputShown = styled.div<StyledCheckboxProps>`
       background: ${props.theme.color.default};
     `}
 `;
-export const StyledRadioMark = styled.div<StyledCheckboxProps>`
+export const StyledRadioMark = styled.div<StyledRadioProps>`
   display: flex;
   align-items: center;
   justify-content: center;
