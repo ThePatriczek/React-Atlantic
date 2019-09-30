@@ -18,7 +18,7 @@ stories.add(
     const isChecked = boolean(`isChecked:`, false);
     const isDisabled = boolean(`isDisabled:`, false);
     const children = text(`children:`, `Change me, please 🥺`);
-    const size = select('Size:', ['small', 'medium', 'large'], 'medium');
+    const size = select('size:', ['small', 'medium', 'large'], 'medium');
 
     const radioButton = (
       <RadioButton
@@ -42,6 +42,10 @@ stories.add(
 
         it(`Should have isDisabled: ${isDisabled}`, () => {
           expect(wrapper.prop('isDisabled')).toEqual(isDisabled);
+        });
+
+        it(`Should have size: ${size}`, () => {
+          expect(wrapper.prop('size')).toEqual(size);
         });
 
         it(`Should have isDefaultChecked: ${isDefaultChecked}`, () => {
