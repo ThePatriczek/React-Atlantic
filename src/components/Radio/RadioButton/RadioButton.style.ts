@@ -48,10 +48,12 @@ export const StyledRadioButtonLabel = styled.label<StyledRadioButtonProps>`
   ${props =>
     props.isChecked &&
     css`
+      border: 1px solid ${props.theme.color.primary};
       background-color: ${props.theme.color.primary};
       color: white;
     `}
   &:hover {
+     border: 1px solid ${props => props.theme.color.primary};
     ${props =>
       !props.isChecked &&
       css`
