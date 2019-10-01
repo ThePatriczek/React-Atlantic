@@ -64,7 +64,6 @@ stories.add(
     );
     const style = {
       margin: '0 auto',
-      textAlign: 'center',
       display: 'table'
     };
 
