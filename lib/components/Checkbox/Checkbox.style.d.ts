@@ -6,7 +6,7 @@ interface StyledCheckboxProps {
     name?: string;
     textPosition?: 'right' | 'left';
 }
-export declare const StyledCheckboxInputHidden: import("styled-components").StyledComponent<"input", any, {
+export declare const HiddenCheckbox: import("styled-components").StyledComponent<"input", any, {
     type: "checkbox";
 }, "type">;
 export declare const StyledCheckboxInputShown: import("styled-components").StyledComponent<"div", any, {
