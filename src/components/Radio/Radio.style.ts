@@ -68,11 +68,20 @@ export const StyledRadioMark = styled.div<StyledRadioProps>`
     color: ${props => props.theme.color.white};
   }
 
-  ${props =>
-    props.isChecked &&
-    css`
-      background: ${props.theme.color.primary};
-    `}
+  ${props => {
+    if (props.isChecked) {
+      if (props.isDisabled) {
+        return css`
+          background: ${darken(0.2, props.theme.color.default)};
+        `;
+      }
+      return css`
+        background: ${props.theme.color.primary};
+      `;
+    }
+
+    return css``;
+  }}
 `;
 
 StyledRadioInputHidden.defaultProps = {
