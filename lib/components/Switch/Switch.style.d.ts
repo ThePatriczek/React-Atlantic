@@ -1,5 +1,4 @@
 import { HorizontalPosition, Size, Type } from '../../types';
-
 interface StyledSwitchProps {
     isChecked?: boolean;
     isDisabled?: boolean;

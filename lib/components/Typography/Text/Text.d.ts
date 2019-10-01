@@ -12,5 +12,11 @@ export interface TextProps {
     onEditConfirm?: (value: React.ReactText) => void;
     /** custom className */
     className?: string;
+    /** text in copy tooltip */
+    copyText?: string;
+    /** text after click on copy tooltip */
+    copiedText?: string;
+    /** text in edit tooltip */
+    editText?: string;
 }
 export declare const Text: React.FC<TextProps>;
