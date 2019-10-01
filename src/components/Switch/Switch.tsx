@@ -1,11 +1,11 @@
 import * as React from 'react';
 import { Size, Type } from '../../types';
+import { HiddenCheckbox } from '../Checkbox/Checkbox.style';
 import {
   StyledSwitcherFalse,
   StyledSwitcherToggler,
   StyledSwitcherTrue,
   StyledSwitcherWrap,
-  StyledSwitchInputHidden,
   StyledSwitchLabel
 } from './Switch.style';
 
@@ -57,10 +57,10 @@ export const Switch: React.FC<SwitchProps> = (
       isChecked={props.isChecked || isChecked}
       htmlType={type}
       isDisabled={isDisabled}
+      className={className}
     >
-      <StyledSwitchInputHidden
+      <HiddenCheckbox
         onChange={onChange}
-        className={className}
         checked={props.isChecked || isChecked}
         disabled={isDisabled}
       />

@@ -29,10 +29,6 @@ const marginSM = parseInt(theme.margin.sm, 0);
 const switchWidthNormalInt = parseInt(switchWidthNormal, 0);
 const togglerSizeNormalInt = parseInt(togglerSizeNormal, 0);
 
-export const StyledSwitchInputHidden = styled.input.attrs({ type: 'checkbox' })`
-  opacity: 0;
-`;
-
 export const StyledSwitchLabel = styled.label<StyledSwitchProps>`
   position: relative;
   display: inline-block;
@@ -303,9 +299,6 @@ export const StyledSwitcherFalse = styled.div<StyledSwitchProps>`
 `;
 
 StyledSwitchLabel.defaultProps = {
-  theme
-};
-StyledSwitchInputHidden.defaultProps = {
   theme
 };
 StyledSwitcherWrap.defaultProps = {
