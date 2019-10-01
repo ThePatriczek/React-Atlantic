@@ -74,13 +74,15 @@ export const Checkbox: React.FC<React.PropsWithChildren<CheckboxProps>> = (
             checked={props.isChecked || isChecked}
             disabled={isDisabled}
           />
-          <StyledCheckboxIcon
-            isDisabled={isDisabled}
-            isChecked={props.isChecked || isChecked}
-            isPartiallyChecked={isPartiallyChecked}
-          >
-            <Check />
-          </StyledCheckboxIcon>
+          {(props.isChecked || isChecked) && (
+            <StyledCheckboxIcon
+              isDisabled={isDisabled}
+              isChecked={props.isChecked || isChecked}
+              isPartiallyChecked={isPartiallyChecked}
+            >
+              <Check />
+            </StyledCheckboxIcon>
+          )}
         </StyledCheckboxMark>
       </StyledCheckboxInputShown>
 
