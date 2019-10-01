@@ -1,13 +1,9 @@
 import * as React from 'react';
-import { Size } from '../../types';
+import { Size, Type } from '../../types';
 import { StyledButton } from './Button.style';
 
 export type ButtonType =
-  | 'default'
-  | 'primary'
-  | 'success'
-  | 'warning'
-  | 'error'
+  | Type
   | 'dashed'
   | 'transparent';
 

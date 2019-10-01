@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { Size } from '../../types';
-export declare type ButtonType = 'default' | 'primary' | 'success' | 'warning' | 'error' | 'dashed' | 'transparent';
+import { Size, Type } from '../../types';
+export declare type ButtonType = Type | 'dashed' | 'transparent';
 export interface ButtonProps {
     onClick?: () => void;
     isDisabled?: boolean;

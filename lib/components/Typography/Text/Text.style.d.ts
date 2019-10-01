@@ -1,3 +1,4 @@
+import { Type } from '../../../types';
 export declare const getDefaultStyledText: (props: {
     theme: {
         color: {
@@ -52,5 +53,13 @@ export declare const getDefaultStyledText: (props: {
         };
     };
 }) => import("styled-components").FlattenSimpleInterpolation;
-export declare const StyledText: import("styled-components").StyledComponent<"span", any, {}, never>;
-export declare const StyledStrongText: import("styled-components").StyledComponent<"strong", any, {}, never>;
+export declare const StyledText: import("styled-components").StyledComponent<"span", any, {
+    type: Type;
+}, never>;
+export declare const StyledStrongText: import("styled-components").StyledComponent<"strong", any, {
+    type: Type;
+}, never>;
+export declare const StyledMarkText: import("styled-components").StyledComponent<"mark", any, {}, never>;
+export declare const StyledCodeText: import("styled-components").StyledComponent<"code", any, {}, never>;
+export declare const StyledInsText: import("styled-components").StyledComponent<"ins", any, {}, never>;
+export declare const StyledDelText: import("styled-components").StyledComponent<"del", any, {}, never>;

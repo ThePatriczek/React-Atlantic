@@ -1,15 +1,14 @@
 import { darken } from 'polished';
 import styled, { css } from 'styled-components';
 import { theme } from '../../theme';
-import { Size } from '../../types';
-import { SwitchType } from './Switch';
+import { HorizontalPosition, Size, Type } from '../../types';
 
 interface StyledSwitchProps {
   isChecked?: boolean;
   isDisabled?: boolean;
-  textPosition?: 'right' | 'left';
+  textPosition?: HorizontalPosition;
   size?: Size;
-  htmlType?: SwitchType;
+  htmlType?: Type;
 }
 
 const togglerSizeLarge = '28px';
@@ -29,10 +28,6 @@ const marginSM = parseInt(theme.margin.sm, 0);
 
 const switchWidthNormalInt = parseInt(switchWidthNormal, 0);
 const togglerSizeNormalInt = parseInt(togglerSizeNormal, 0);
-
-export const StyledSwitchInputHidden = styled.input.attrs({ type: 'checkbox' })`
-  opacity: 0;
-`;
 
 export const StyledSwitchLabel = styled.label<StyledSwitchProps>`
   position: relative;
@@ -304,9 +299,6 @@ export const StyledSwitcherFalse = styled.div<StyledSwitchProps>`
 `;
 
 StyledSwitchLabel.defaultProps = {
-  theme
-};
-StyledSwitchInputHidden.defaultProps = {
   theme
 };
 StyledSwitcherWrap.defaultProps = {

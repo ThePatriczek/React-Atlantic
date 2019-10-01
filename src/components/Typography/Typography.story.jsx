@@ -23,7 +23,7 @@ stories.add('Overview', () => {
           {`Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Maecenas libero. Phasellus enim erat, vestibulum vel, aliquam a, posuere eu, velit. Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur? Nulla non lectus sed nisl molestie malesuada. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Etiam sapien elit, consequat eget, tristique non, venenatis quis, ante.`}
           <Link href={`#`}>{`Custom link in paragraph`}</Link>
           <Text>{`Text`}</Text>
-          <Text isStrong>{`Strong Text`}</Text>
+          <Text element={'strong'}>{`Strong Text`}</Text>
           <Text isCopyable>{`Copyable Text`}</Text>
         </Paragraph>
       </div>
@@ -32,7 +32,19 @@ stories.add('Overview', () => {
           <Text>{`Text`}</Text>
         </div>
         <div>
-          <Text isStrong>{`Strong Text`}</Text>
+          <Text element={'strong'}>{`Strong Text`}</Text>
+        </div>
+        <div>
+          <Text element={'code'}>{`Code Text`}</Text>
+        </div>
+        <div>
+          <Text element={'del'}>{`Del Text`}</Text>
+        </div>
+        <div>
+          <Text element={'ins'}>{`Ins Text`}</Text>
+        </div>
+        <div>
+          <Text element={'mark'}>{`Mark Text`}</Text>
         </div>
         <div>
           <Link href={`#`}>{`Link`}</Link>

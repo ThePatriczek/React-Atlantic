@@ -1,6 +1,6 @@
 {
   "name": "react-atlantic",
-  "version": "0.1.9",
+  "version": "0.2.3",
   "description": "React Atlantic UI Library",
   "main": "index.js",
   "scripts": {
@@ -22,6 +22,7 @@
     "polished": "^3.4.1",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
+    "react-tooltip": "^3.11.1",
     "styled-components": "^4.3.2"
   },
   "devDependencies": {
@@ -39,6 +40,7 @@
     "@types/node": "^12.7.5",
     "@types/react": "^16.9.2",
     "@types/react-dom": "^16.9.0",
+    "@types/react-tooltip": "^3.9.3",
     "@types/storybook__addon-actions": "^3.4.3",
     "@types/storybook__addon-info": "^4.1.2",
     "@types/storybook__addon-knobs": "^5.0.4",

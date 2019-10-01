@@ -11,16 +11,20 @@ interface StyledCheckboxProps {
   textPosition?: 'right' | 'left';
 }
 
-export const StyledCheckboxInputHidden = styled.input.attrs({
+export const HiddenCheckbox = styled.input.attrs({
   type: 'checkbox'
 })`
   opacity: 0;
   width: 0;
   height: 0;
   margin: 0;
+  position: absolute;
+  z-index: -1;
 `;
 
-export const StyledCheckboxInputShown = styled.div.attrs({className: `atlantic--checkbox`})<StyledCheckboxProps>`
+export const StyledCheckboxInputShown = styled.div.attrs({
+  className: `atlantic--checkbox`
+})<StyledCheckboxProps>`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -37,23 +41,22 @@ export const StyledCheckboxInputShown = styled.div.attrs({className: `atlantic--
     `}
 `;
 
-export const StyledCheckboxLabel = styled.label<StyledCheckboxProps>
-  `
+export const StyledCheckboxLabel = styled.label<StyledCheckboxProps>`
   height: ${props => props.theme.height.sm};
   font-size: 14px;
   font-family: ${props => props.theme.font.family};
   display: inline-flex;
   align-items: center;
   cursor: pointer;
-  
+
   ${props =>
     !props.isDisabled &&
     css`
-      :hover{
-          .atlantic--checkbox {
-            border: 1px solid ${props.theme.color.primary};
-          }
+      :hover {
+        .atlantic--checkbox {
+          border: 1px solid ${props.theme.color.primary};
         }
+      }
     `};
 
   ${props =>
@@ -124,7 +127,7 @@ export const StyledCheckboxIcon = styled.i<StyledCheckboxProps>`
     `}
 `;
 
-StyledCheckboxInputHidden.defaultProps = {
+HiddenCheckbox.defaultProps = {
   theme
 };
 
