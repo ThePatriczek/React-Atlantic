@@ -3,6 +3,7 @@ import { Type } from '../../../types';
 import { StyledTypoButton } from '../../Button/Button.style';
 import { Icon } from '../../Icon';
 import { Input } from '../../Input';
+import { Tooltip } from '../../Tooltip';
 import {
   StyledCodeText,
   StyledDelText,
@@ -25,7 +26,15 @@ export interface TextProps {
   onEditConfirm?: (value: React.ReactText) => void;
   /** custom className */
   className?: string;
+  /** text in copy tooltip */
+  copyText?: string;
+  /** text after click on copy tooltip */
+  copiedText?: string;
+  /** text in edit tooltip */
+  editText?: string;
 }
+
+const { TextArea } = Input;
 
 export const Text: React.FC<TextProps> = (
   props: TextProps
@@ -37,20 +46,36 @@ export const Text: React.FC<TextProps> = (
     isEditable,
     onEditConfirm,
     className,
-    element
+    element,
+    editText
   } = props;
   const [isEditing, setEditing] = React.useState<boolean>(false);
   const [value, setValue] = React.useState<React.ReactText>(children);
-
-  const { TextArea } = Input;
+  const [copyText, setCopyText] = React.useState<string>(
+    props.copyText as string
+  );
+  const copyBtnRef = React.createRef<HTMLButtonElement>();
+  const editBtnRef = React.createRef<HTMLButtonElement>();
 
   const onCopy = async () => {
+    setCopyText(props.copiedText as string);
+
     if (children) {
       await navigator.clipboard.writeText(children.toString());
     }
+
+    if (copyBtnRef.current) {
+      Tooltip.show(copyBtnRef.current);
+    }
   };
 
-  const onEdit = () => setEditing(true);
+  const onEdit = () => {
+    setEditing(true);
+
+    if (editBtnRef.current) {
+      Tooltip.hide(editBtnRef.current);
+    }
+  };
 
   if (isEditable && isEditing) {
     const onEnterPress = (val: React.ReactText) => {
@@ -78,13 +103,45 @@ export const Text: React.FC<TextProps> = (
     <>
       {value}
       {isEditable && (
-        <StyledTypoButton onClick={onEdit}>
+        <StyledTypoButton
+          onClick={onEdit}
+          data-tip={editText}
+          onMouseEnter={() => {
+            if (editBtnRef.current) {
+              Tooltip.show(editBtnRef.current);
+            }
+          }}
+          onMouseLeave={() => {
+            if (editBtnRef.current) {
+              Tooltip.hide(editBtnRef.current);
+            }
+          }}
+          ref={editBtnRef}
+        >
           <Icon name={'edit'} />
+          <Tooltip />
         </StyledTypoButton>
       )}
       {isCopyable && (
-        <StyledTypoButton onClick={onCopy}>
+        <StyledTypoButton
+          onClick={onCopy}
+          data-tip={copyText}
+          ref={copyBtnRef}
+          key={copyText}
+          onMouseEnter={() => {
+            if (copyBtnRef.current) {
+              Tooltip.show(copyBtnRef.current);
+            }
+          }}
+          onMouseLeave={() => {
+            if (copyBtnRef.current) {
+              Tooltip.hide(copyBtnRef.current);
+              setCopyText(props.copyText as string);
+            }
+          }}
+        >
           <Icon name={'copy'} />
+          <Tooltip />
         </StyledTypoButton>
       )}
     </>
@@ -117,7 +174,10 @@ export const Text: React.FC<TextProps> = (
 
 Text.defaultProps = {
   element: 'span',
-  type: 'default'
+  type: 'default',
+  copyText: `Copy`,
+  copiedText: `Copied`,
+  editText: `Edit`
 };
 
 Text.displayName = `Text`;
