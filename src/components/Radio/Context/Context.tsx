@@ -1,15 +1,13 @@
 import * as React from 'react';
 
 export interface RadioGroupContextState {
-  value: React.ReactText;
+  value: React.ReactText | undefined;
   setValue: (value: React.ReactText) => void;
-  name: string;
 }
 
 const defaultValue: RadioGroupContextState = {
-  value: ``,
-  setValue: () => null,
-  name: ``
+  value: undefined,
+  setValue: () => null
 };
 
 export const RadioGroupContext = React.createContext<RadioGroupContextState>(
@@ -20,7 +18,6 @@ export const useRadioGroup = () =>
   React.useContext<RadioGroupContextState>(RadioGroupContext);
 
 interface RadioGroupContextProviderProps {
-  name: string;
   onChange?: (value: React.ReactText) => void;
 }
 
@@ -29,15 +26,13 @@ export const RadioGroupContextProvider: React.FC<
 > = (
   props: React.PropsWithChildren<RadioGroupContextProviderProps>
 ): React.ReactElement => {
-  const { children, name, onChange } = props;
-  const [values, setValues] = React.useState<{
-    [key: string]: React.ReactText;
-  }>({ [name]: defaultValue.value });
+  const { children, onChange } = props;
+  const [value, setVal] = React.useState<React.ReactText | undefined>(
+    defaultValue.value
+  );
 
-  const getValue = (name: string) => values[name];
-
-  const setValue = (name: string) => (value: React.ReactText) => {
-    setValues({ ...values, [name]: value });
+  const setValue = (value: React.ReactText) => {
+    setVal(value);
 
     if (onChange) {
       onChange(value);
@@ -45,9 +40,7 @@ export const RadioGroupContextProvider: React.FC<
   };
 
   return (
-    <RadioGroupContext.Provider
-      value={{ value: getValue(name), setValue: setValue(name), name }}
-    >
+    <RadioGroupContext.Provider value={{ value, setValue }}>
       {children}
     </RadioGroupContext.Provider>
   );

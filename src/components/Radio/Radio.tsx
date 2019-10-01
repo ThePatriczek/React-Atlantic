@@ -19,7 +19,7 @@ export interface RadioProps {
   position?: HorizontalPosition;
   /** custom className */
   className?: string;
-  value: React.ReactText;
+  value?: React.ReactText;
   name?: string;
 }
 
@@ -36,7 +36,7 @@ export const Radio: React.FC<React.PropsWithChildren<RadioProps>> & {
     value,
     name
   } = props;
-  const { value: ctxVal, setValue: setCtxVal, name: ctxName } = useRadioGroup();
+  const { value: ctxVal, setValue: setCtxVal } = useRadioGroup();
   const [isChecked, setChecked] = React.useState<boolean>(!!isDefaultChecked);
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -52,13 +52,15 @@ export const Radio: React.FC<React.PropsWithChildren<RadioProps>> & {
         }
       }
 
-      setCtxVal(value);
+      if (value) {
+        setCtxVal(value);
+      }
     }
   };
 
   let checked: boolean = props.isChecked || isChecked;
 
-  if (ctxName) {
+  if (ctxVal !== undefined) {
     checked = ctxVal === value;
   }
 

@@ -15,7 +15,7 @@ stories.add(
   'Radio.Group',
   () => {
     const group = (
-      <Group onChange={action(`onChange`)} name="myGroup">
+      <Group onChange={action(`onChange`)}>
         <div>
           <Radio value={1}>
             <Text>{`A`}</Text>
