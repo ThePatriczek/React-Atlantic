@@ -4,15 +4,17 @@ import * as React from 'react';
 import { describe, it, specs } from 'storybook-addon-specifications';
 import { mount } from 'enzyme';
 import expect from 'expect';
-import { RadioButton } from './RadioButton';
+import { Radio } from '../Radio';
 import { action } from '@storybook/addon-actions';
+
+const { Button } = Radio;
 
 const stories = storiesOf('Radio', module);
 
 stories.addDecorator(withKnobs);
 
 stories.add(
-  'Radio Button',
+  'Radio.Button',
   () => {
     const isDefaultChecked = boolean(`isDefaultChecked:`, false);
     const isChecked = boolean(`isChecked:`, false);
@@ -21,7 +23,7 @@ stories.add(
     const size = select('size:', ['small', 'medium', 'large'], 'medium');
 
     const radioButton = (
-      <RadioButton
+      <Button
         isChecked={isChecked}
         isDefaultChecked={isDefaultChecked}
         isDisabled={isDisabled}
@@ -29,7 +31,7 @@ stories.add(
         size={size}
       >
         {children}
-      </RadioButton>
+      </Button>
     );
 
     specs(() =>

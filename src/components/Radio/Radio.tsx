@@ -1,4 +1,8 @@
 import * as React from 'react';
+import { HorizontalPosition } from '../../types';
+import { Button, ButtonProps } from './Button';
+import { useRadioGroup } from './Context';
+import { Group, GroupProps } from './Group';
 import {
   StyledRadioInputHidden,
   StyledRadioInputShown,
@@ -6,12 +10,33 @@ import {
   StyledRadioMark,
   StyledRadioSpan
 } from './Radio.style';
-import { RadioProps } from './RadioPropsInterface';
 
-export const Radio: React.FC<React.PropsWithChildren<RadioProps>> = (
-  props: React.PropsWithChildren<RadioProps>
-): React.ReactElement => {
-  const { isDefaultChecked, position, isDisabled, className, children } = props;
+export interface RadioProps {
+  isChecked?: boolean;
+  isDefaultChecked?: boolean;
+  isDisabled?: boolean;
+  onChange?: (isChecked: boolean) => void;
+  position?: HorizontalPosition;
+  /** custom className */
+  className?: string;
+  value: React.ReactText;
+  name?: string;
+}
+
+export const Radio: React.FC<React.PropsWithChildren<RadioProps>> & {
+  Button: React.FC<ButtonProps>;
+  Group: React.FC<GroupProps>;
+} = (props: React.PropsWithChildren<RadioProps>): React.ReactElement => {
+  const {
+    isDefaultChecked,
+    position,
+    isDisabled,
+    className,
+    children,
+    value,
+    name
+  } = props;
+  const { value: ctxVal, setValue: setCtxVal, name: ctxName } = useRadioGroup();
   const [isChecked, setChecked] = React.useState<boolean>(!!isDefaultChecked);
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -26,12 +51,20 @@ export const Radio: React.FC<React.PropsWithChildren<RadioProps>> = (
           props.onChange(!props.isChecked);
         }
       }
+
+      setCtxVal(value);
     }
   };
 
+  let checked: boolean = props.isChecked || isChecked;
+
+  if (ctxName) {
+    checked = ctxVal === value;
+  }
+
   return (
     <StyledRadioLabel
-      isChecked={props.isChecked || isChecked}
+      isChecked={checked}
       isDisabled={isDisabled}
       className={className}
     >
@@ -40,14 +73,13 @@ export const Radio: React.FC<React.PropsWithChildren<RadioProps>> = (
       )}
 
       <StyledRadioInputShown isDisabled={isDisabled}>
-        <StyledRadioMark
-          isDisabled={isDisabled}
-          isChecked={props.isChecked || isChecked}
-        >
+        <StyledRadioMark isDisabled={isDisabled} isChecked={checked}>
           <StyledRadioInputHidden
             onChange={onChange}
-            checked={props.isChecked || isChecked}
+            checked={checked}
             disabled={isDisabled}
+            name={name}
+            value={value}
           />
         </StyledRadioMark>
       </StyledRadioInputShown>
@@ -62,3 +94,7 @@ export const Radio: React.FC<React.PropsWithChildren<RadioProps>> = (
 Radio.defaultProps = {
   position: 'left'
 };
+
+Radio.Button = Button;
+
+Radio.Group = Group;

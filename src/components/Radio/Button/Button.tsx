@@ -1,19 +1,16 @@
 import * as React from 'react';
 import { Size } from '../../../types';
-import { RadioProps } from '../RadioPropsInterface';
-import {
-  StyledRadioButtonInputHidden,
-  StyledRadioButtonLabel,
-  StyledRadioButtonSpan
-} from './RadioButton.style';
+import { RadioProps } from '../Radio';
 
-export default interface RadioButtonProps extends RadioProps {
+import { StyledRadioButtonInputHidden, StyledRadioButtonLabel, StyledRadioButtonSpan } from './Button.style';
+
+export interface ButtonProps extends RadioProps {
   size?: Size;
 }
 
-export const RadioButton: React.FC<
-  React.PropsWithChildren<RadioButtonProps>
-> = (props: React.PropsWithChildren<RadioButtonProps>): React.ReactElement => {
+export const Button: React.FC<React.PropsWithChildren<ButtonProps>> = (
+  props: React.PropsWithChildren<ButtonProps>
+): React.ReactElement => {
   const { isDefaultChecked, size, isDisabled, className, children } = props;
   const [isChecked, setChecked] = React.useState<boolean>(!!isDefaultChecked);
 
@@ -52,6 +49,6 @@ export const RadioButton: React.FC<
   );
 };
 
-RadioButton.defaultProps = {
+Button.defaultProps = {
   size: 'medium'
 };

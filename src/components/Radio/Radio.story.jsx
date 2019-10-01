@@ -22,6 +22,7 @@ stories.add(
 
     const radio = (
       <Radio
+        value={`radio`}
         isChecked={isChecked}
         isDefaultChecked={isDefaultChecked}
         isDisabled={isDisabled}
