@@ -1,4 +1,4 @@
-import { darken } from 'polished';
+import { darken, lighten } from 'polished';
 import styled, { css } from 'styled-components';
 import { theme } from '../../theme';
 import { HorizontalPosition, Size, Type } from '../../types';
@@ -39,6 +39,7 @@ export const StyledSwitchLabel = styled.label<StyledSwitchProps>`
   border-radius: ${props => props.theme.height.md};
   font-size: ${props => props.theme.font.size.md};
   font-family: ${props => props.theme.font.family};
+  
   ${props =>
     props.size === 'small' &&
     css`
@@ -61,6 +62,7 @@ export const StyledSwitchLabel = styled.label<StyledSwitchProps>`
       width: ${switchWidthNormal};
       font-size: 14px;
     `}
+  
    ${props =>
      props.isDisabled &&
      css`
@@ -178,27 +180,37 @@ export const StyledSwitcherTrue = styled.div<StyledSwitchProps>`
     css`
       padding-left: ${paddingMD}px;
     `}
-   
-   ${props =>
-     props.isDisabled &&
-     props.isChecked &&
-     css`
-       background-color: ${darken(0.1, switchBackgroundColorOff)};
-     `}
-   
-   ${props =>
-     props.isDisabled &&
-     props.htmlType &&
-     props.isChecked &&
-     css`
-       background-color: ${darken(0.1, switchBackgroundColorOff)};
-     `}
-   
-  ${props =>
-    props.isDisabled &&
-    css`
-      background-color: ${darken(0.1, switchBackgroundColorOff)};
-    `}
+  
+  ${props => {
+  if (props.isDisabled) {
+    if (props.isChecked) {
+      if (props.htmlType === 'primary'){
+      return css`
+          background-color: ${lighten(0.2, theme.color.primary)};
+        `;
+      }
+      
+      if (props.htmlType === 'success'){
+      return css`
+          background-color: ${lighten(0.05, theme.color.success)};
+        `;
+      }
+      
+      if (props.htmlType === 'warning'){
+      return css`
+          background-color: ${lighten(0.15, theme.color.warning)};
+        `;
+      }
+      
+      if (props.htmlType === 'error'){
+      return css`
+          background-color: ${lighten(0.15, theme.color.error)};
+        `;
+      }
+    }
+  }
+  return css``;
+  }}
 `;
 
 export const StyledSwitcherToggler = styled.div<StyledSwitchProps>`
@@ -285,7 +297,8 @@ export const StyledSwitcherFalse = styled.div<StyledSwitchProps>`
   ${props =>
     props.isDisabled &&
     css`
-      background-color: ${darken(0.1, switchBackgroundColorOff)};
+      background-color: ${lighten(0.2, switchBackgroundColorOff)};
+      color: ${theme.color.white};
     `}
    
    ${props =>
