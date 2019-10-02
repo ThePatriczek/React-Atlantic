@@ -27,11 +27,20 @@ stories.add(
             <Text>{`C`}</Text>
           </Radio>
         </Radio.Group>
-        <br/>
+        <br />
         <Radio.Group onChange={action(`onChange`)}>
+          <div>
+            <Radio.Button value={0}>
+              <Text>{`Button 0`}</Text>
+            </Radio.Button>
+          </div>
+
+          <br />
+
           <Radio.Button value={1}>
             <Text>{`Button 1`}</Text>
           </Radio.Button>
+
           <Radio.Button value={2}>
             <Text>{`Button 2`}</Text>
           </Radio.Button>

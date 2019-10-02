@@ -50,7 +50,7 @@ export const Radio: React.FC<React.PropsWithChildren<RadioProps>> & {
         }
       }
 
-      if (value) {
+      if (value !== undefined) {
         setCtxVal(value);
       }
     }

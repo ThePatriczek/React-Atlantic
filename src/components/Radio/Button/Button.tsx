@@ -38,7 +38,7 @@ export const Button: React.FC<
         }
       }
 
-      if (value) {
+      if (value !== undefined) {
         setCtxVal(value);
       }
     }
