@@ -19,8 +19,7 @@ export interface RadioProps {
   position?: HorizontalPosition;
   /** custom className */
   className?: string;
-  value?: React.ReactText;
-  name?: string;
+  value?: any;
 }
 
 export const Radio: React.FC<React.PropsWithChildren<RadioProps>> & {
@@ -33,8 +32,7 @@ export const Radio: React.FC<React.PropsWithChildren<RadioProps>> & {
     isDisabled,
     className,
     children,
-    value,
-    name
+    value
   } = props;
   const { value: ctxVal, setValue: setCtxVal } = useRadioGroup();
   const [isChecked, setChecked] = React.useState<boolean>(!!isDefaultChecked);
@@ -80,7 +78,6 @@ export const Radio: React.FC<React.PropsWithChildren<RadioProps>> & {
             onChange={onChange}
             checked={checked}
             disabled={isDisabled}
-            name={name}
             value={value}
           />
         </StyledRadioMark>

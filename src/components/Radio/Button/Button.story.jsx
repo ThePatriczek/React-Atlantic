@@ -7,8 +7,6 @@ import expect from 'expect';
 import { Radio } from '../Radio';
 import { action } from '@storybook/addon-actions';
 
-const { Button } = Radio;
-
 const stories = storiesOf('Radio', module);
 
 stories.addDecorator(withKnobs);
@@ -23,7 +21,7 @@ stories.add(
     const size = select('size:', ['small', 'medium', 'large'], 'medium');
 
     const radioButton = (
-      <Button
+      <Radio.Button
         isChecked={isChecked}
         isDefaultChecked={isDefaultChecked}
         isDisabled={isDisabled}
@@ -31,7 +29,7 @@ stories.add(
         size={size}
       >
         {children}
-      </Button>
+      </Radio.Button>
     );
 
     specs(() =>
