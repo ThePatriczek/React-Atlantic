@@ -20,8 +20,7 @@
   "homepage": "https://github.com/ThePatriczek/React-Atlantic#readme",
   "dependencies": {
     "polished": "^3.4.1",
-    "react": "^16.9.0",
-    "react-dom": "^16.9.0",
+    "react-select": "^3.0.8",
     "react-tooltip": "^3.11.1",
     "styled-components": "^4.3.2"
   },
@@ -40,6 +39,7 @@
     "@types/node": "^12.7.5",
     "@types/react": "^16.9.2",
     "@types/react-dom": "^16.9.0",
+    "@types/react-select": "^3.0.5",
     "@types/react-tooltip": "^3.9.3",
     "@types/storybook__addon-actions": "^3.4.3",
     "@types/storybook__addon-info": "^4.1.2",
@@ -54,7 +54,9 @@
     "expect": "^24.9.0",
     "jest-mock": "^24.9.0",
     "prettier": "^1.18.2",
+    "react": "^16.9.0",
     "react-docgen-typescript-loader": "^3.2.1",
+    "react-dom": "^16.9.0",
     "react-test-renderer": "latest",
     "storybook-addon-specifications": "^2.1.5",
     "tslint": "^5.20.0",
