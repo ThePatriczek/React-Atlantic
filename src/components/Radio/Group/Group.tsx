@@ -1,8 +1,9 @@
 import * as React from 'react';
 import { RadioGroupContextProvider } from '../Context';
+import { StyledRadioGroup } from './Group.style';
 
 export interface GroupProps {
-  onChange: (value: React.ReactText) => void;
+  onChange: (value: any) => void;
 }
 
 export const Group: React.FC<React.PropsWithChildren<GroupProps>> = (
@@ -11,8 +12,10 @@ export const Group: React.FC<React.PropsWithChildren<GroupProps>> = (
   const { children, onChange } = props;
 
   return (
-    <RadioGroupContextProvider onChange={onChange}>
-      {children}
-    </RadioGroupContextProvider>
+    <StyledRadioGroup>
+      <RadioGroupContextProvider onChange={onChange}>
+        {children}
+      </RadioGroupContextProvider>
+    </StyledRadioGroup>
   );
 };

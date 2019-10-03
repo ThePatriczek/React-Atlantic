@@ -1,17 +1,28 @@
 import * as React from 'react';
 import { Size } from '../../../types';
+import { useRadioGroup } from '../Context';
 import { RadioProps } from '../Radio';
 
 import { StyledRadioButtonInputHidden, StyledRadioButtonLabel, StyledRadioButtonSpan } from './Button.style';
 
-export interface ButtonProps extends RadioProps {
+export interface ButtonProps {
   size?: Size;
 }
 
-export const Button: React.FC<React.PropsWithChildren<ButtonProps>> = (
-  props: React.PropsWithChildren<ButtonProps>
+export const Button: React.FC<
+  React.PropsWithChildren<RadioProps & ButtonProps>
+> = (
+  props: React.PropsWithChildren<RadioProps & ButtonProps>
 ): React.ReactElement => {
-  const { isDefaultChecked, size, isDisabled, className, children } = props;
+  const {
+    isDefaultChecked,
+    isDisabled,
+    className,
+    children,
+    value,
+    size
+  } = props;
+  const { value: ctxVal, setValue: setCtxVal } = useRadioGroup();
   const [isChecked, setChecked] = React.useState<boolean>(!!isDefaultChecked);
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -26,20 +37,31 @@ export const Button: React.FC<React.PropsWithChildren<ButtonProps>> = (
           props.onChange(!props.isChecked);
         }
       }
+
+      if (value !== undefined) {
+        setCtxVal(value);
+      }
     }
   };
 
+  let checked: boolean = props.isChecked || isChecked;
+
+  if (ctxVal !== undefined) {
+    checked = ctxVal === value;
+  }
+
   return (
     <StyledRadioButtonLabel
-      isChecked={props.isChecked || isChecked}
+      isChecked={checked}
       isDisabled={isDisabled}
-      className={className}
+      className={`atlantic--radio_button ${className}`}
       size={size}
     >
       <StyledRadioButtonInputHidden
         onChange={onChange}
-        checked={props.isChecked || isChecked}
+        checked={checked}
         disabled={isDisabled}
+        value={value}
       />
 
       <StyledRadioButtonSpan isDisabled={isDisabled} size={size}>
