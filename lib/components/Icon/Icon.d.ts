@@ -1,5 +1,4 @@
 import * as React from 'react';
-
 export declare type IconName = 'arrowUp' | 'arrowDoubleUp' | 'arrowRight' | 'arrowDoubleRight' | 'arrowDown' | 'arrowDoubleDown' | 'arrowLeft' | 'arrowDoubleLeft' | 'hamburger' | 'loading' | 'edit' | 'copy' | 'check' | 'users' | 'user' | 'upload' | 'trash' | 'search' | 'plus' | 'logout' | 'license' | 'key' | 'info' | 'import' | 'export' | 'eye' | 'eyeSlash' | 'close' | 'clear' | 'enter';
 export interface IconProps {
     name: IconName;

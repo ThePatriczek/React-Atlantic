@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { IconName } from '../../Icon';
-
 export interface TextAreaProps {
     isDisabled?: boolean;
     placeholder?: string;

@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { Type } from '../../../types';
-
 export declare type TextElement = 'span' | 'strong' | 'code' | 'del' | 'ins' | 'mark';
 export interface TextProps {
     children: string;
