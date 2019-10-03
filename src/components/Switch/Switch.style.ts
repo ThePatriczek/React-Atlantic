@@ -78,7 +78,7 @@ export const StyledSwitcherWrap = styled.div<StyledSwitchProps>`
   display: flex;
   align-items: center;
   width: 200%;
-  transition: right 0.3s ease;
+  transition: right 0.3s;
   
   ${props =>
     props.isChecked &&
@@ -117,7 +117,7 @@ export const StyledSwitcherTrue = styled.div<StyledSwitchProps>`
   user-select: none;
   color: ${switchColorOff};
   background-color: ${darken(0.1, switchBackgroundColorOff)};
-  transition: background-color 0.3s ease, color 0.3s ease;
+  transition: background-color .3s ease, color .3s ease;
 
   ${props => css`
     padding-left: ${props.theme.padding.md};
@@ -224,6 +224,7 @@ export const StyledSwitcherToggler = styled.div<StyledSwitchProps>`
   background-color: white;
   border-radius: 50%;
   transition: right 0.3s ease;
+  
   ${props =>
     props.isChecked &&
     css`
