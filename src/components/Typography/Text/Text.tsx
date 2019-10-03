@@ -95,6 +95,7 @@ export const Text: React.FC<TextProps> = (
           setEditing(false);
         }}
         autoFocus
+        iconRight={'enter'}
       />
     );
   }
