@@ -142,10 +142,12 @@ export const Input: React.FC<InputProps> & {
     }
   };
 
+  const val = props.value !== undefined ? props.value : value;
+
   const Component = (
     <StyledInput
       id={id}
-      value={props.value !== undefined ? props.value : value}
+      value={val}
       onChange={onChange}
       disabled={isDisabled}
       placeholder={isAlternative ? `` : placeholder}
@@ -168,7 +170,7 @@ export const Input: React.FC<InputProps> & {
         isFocused={isFocused}
         iconLeft={!!iconLeft}
         iconRight={!!(iconRight || isLoading)}
-        hasValue={!!value}
+        hasValue={!!val}
         isDisabled={isDisabled}
         onClick={() => {
           if (ref.current) {
