@@ -51,14 +51,14 @@ export type AutoComplete =
   | 'photo';
 
 export interface InputProps {
-  value?: React.ReactText;
-  defaultValue?: React.ReactText;
+  value?: string;
+  defaultValue?: string;
   isDisabled?: boolean;
   autoFocus?: boolean;
   placeholder?: string;
   id?: string;
-  onEnterPress?: (value: React.ReactText) => void;
-  onChange?: (value: React.ReactText) => void;
+  onEnterPress?: (value: string) => void;
+  onChange?: (value: string) => void;
   onBlur?: () => void;
   onFocus?: () => void;
   iconLeft?: IconName;
@@ -96,7 +96,7 @@ export const Input: React.FC<InputProps> & {
 
   const ref = React.createRef<HTMLInputElement>();
 
-  const [value, setValue] = React.useState<React.ReactText>(defaultValue || ``);
+  const [value, setValue] = React.useState<string>(defaultValue || ``);
 
   const [isFocused, setFocused] = React.useState<boolean>(false);
 

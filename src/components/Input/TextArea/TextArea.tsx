@@ -1,15 +1,19 @@
 import * as React from 'react';
+import { Icon, IconName } from '../../Icon';
+import { StyledTextArea, StyledTextAreaIcon, StyledTextAreaWrapper } from './TextArea.style';
 
 export interface TextAreaProps {
   isDisabled?: boolean;
   placeholder?: string;
   autoFocus?: boolean;
-  value?: React.ReactText;
-  defaultValue?: React.ReactText;
-  onChange?: (value: React.ReactText) => void;
-  onEnterPress?: (value: React.ReactText) => void;
+  value?: string;
+  defaultValue?: string;
+  onChange?: (value: string) => void;
+  onEnterPress?: (value: string) => void;
   onBlur?: () => void;
   onFocus?: () => void;
+  iconLeft?: IconName;
+  iconRight?: IconName;
 }
 
 export const TextArea: React.FC<TextAreaProps> = (
@@ -20,10 +24,12 @@ export const TextArea: React.FC<TextAreaProps> = (
     placeholder,
     defaultValue,
     onEnterPress,
-    autoFocus
+    autoFocus,
+    iconLeft,
+    iconRight
   } = props;
 
-  const [value, setValue] = React.useState<React.ReactText>(defaultValue || ``);
+  const [value, setValue] = React.useState<string>(defaultValue || ``);
 
   const onChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     const val: string = e.target.value;
@@ -65,15 +71,33 @@ export const TextArea: React.FC<TextAreaProps> = (
   };
 
   return (
-    <textarea
-      placeholder={placeholder}
-      value={props.value !== undefined ? props.value : value}
-      onChange={onChange}
-      disabled={isDisabled}
-      onKeyDown={onKeyDown}
-      onBlur={onBlur}
-      onFocus={onFocus}
-      autoFocus={autoFocus}
-    />
+    <StyledTextAreaWrapper
+      iconLeft={!!iconLeft}
+      iconRight={!!iconRight}
+      isDisabled={!!isDisabled}
+    >
+      <StyledTextArea
+        placeholder={placeholder}
+        value={props.value !== undefined ? props.value : value}
+        onChange={onChange}
+        disabled={isDisabled}
+        onKeyDown={onKeyDown}
+        onBlur={onBlur}
+        onFocus={onFocus}
+        autoFocus={autoFocus}
+      />
+
+      {iconLeft && (
+        <StyledTextAreaIcon iconLeft={!!iconLeft} iconRight={false}>
+          <Icon name={iconLeft} />
+        </StyledTextAreaIcon>
+      )}
+
+      {iconRight && (
+        <StyledTextAreaIcon iconLeft={false} iconRight={!!iconRight}>
+          <Icon name={iconRight} />
+        </StyledTextAreaIcon>
+      )}
+    </StyledTextAreaWrapper>
   );
 };

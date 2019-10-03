@@ -491,3 +491,26 @@ export const Clear = () => (
     />
   </svg>
 );
+
+export const Enter = () => (
+  <svg viewBox="0 0 512 512" version="1.1">
+    <g
+      id="Icons"
+      stroke="none"
+      stroke-width="1"
+      fill="currentColor"
+      fill-rule="evenodd"
+    >
+      <g
+        id="turn-bottom-arrow"
+        transform="translate(256.500000, 256.500000) scale(-1, 1) rotate(-90.000000) translate(-256.500000, -256.500000) translate(73.000000, 44.000000)"
+        fill="currentColor"
+      >
+        <polygon
+          id="Path"
+          points="252.229375 276.895175 162.1825 276.895175 162.1825 73 366.729375 73 366.729375 0.609375 90.229375 0.609375 90.229375 276.895175 2.84217094e-14 276.895175 128.413723 425"
+        />
+      </g>
+    </g>
+  </svg>
+);

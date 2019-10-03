@@ -31,7 +31,8 @@ export type IconName =
   | 'eye'
   | 'eyeSlash'
   | 'close'
-  | 'clear';
+  | 'clear'
+  | 'enter';
 
 export interface IconProps {
   name: IconName;
@@ -134,6 +135,9 @@ export const Icon: React.FC<IconProps> = (
       break;
     case 'users':
       Component = <Icons.Users />;
+      break;
+    case 'enter':
+      Component = <Icons.Enter />;
       break;
   }
 

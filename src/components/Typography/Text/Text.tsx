@@ -16,14 +16,14 @@ import {
 export type TextElement = 'span' | 'strong' | 'code' | 'del' | 'ins' | 'mark';
 
 export interface TextProps {
-  children: React.ReactText;
+  children: string;
   /** default | primary | success | warning | error */
   type?: Type;
   /** span | strong | code | del | ins | mark */
   element?: TextElement;
   isCopyable?: boolean;
   isEditable?: boolean;
-  onEditConfirm?: (value: React.ReactText) => void;
+  onEditConfirm?: (value: string) => void;
   /** custom className */
   className?: string;
   /** text in copy tooltip */
@@ -50,7 +50,7 @@ export const Text: React.FC<TextProps> = (
     editText
   } = props;
   const [isEditing, setEditing] = React.useState<boolean>(false);
-  const [value, setValue] = React.useState<React.ReactText>(children);
+  const [value, setValue] = React.useState<string>(children);
   const [copyText, setCopyText] = React.useState<string>(
     props.copyText as string
   );
@@ -78,7 +78,7 @@ export const Text: React.FC<TextProps> = (
   };
 
   if (isEditable && isEditing) {
-    const onEnterPress = (val: React.ReactText) => {
+    const onEnterPress = (val: string) => {
       setEditing(false);
       if (onEditConfirm) {
         onEditConfirm(val);
