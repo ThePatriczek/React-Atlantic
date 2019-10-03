@@ -28,3 +28,4 @@ export declare const Eye: () => JSX.Element;
 export declare const EyeSlash: () => JSX.Element;
 export declare const Close: () => JSX.Element;
 export declare const Clear: () => JSX.Element;
+export declare const Enter: () => JSX.Element;
