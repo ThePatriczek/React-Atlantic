@@ -70,6 +70,7 @@ export const TextArea: React.FC<TextAreaProps> = (
     }
   };
 
+  const val = props.value !== undefined ? props.value : value;
   return (
     <StyledTextAreaWrapper
       iconLeft={!!iconLeft}
@@ -78,7 +79,7 @@ export const TextArea: React.FC<TextAreaProps> = (
     >
       <StyledTextArea
         placeholder={placeholder}
-        value={props.value !== undefined ? props.value : value}
+        value={val}
         onChange={onChange}
         disabled={isDisabled}
         onKeyDown={onKeyDown}

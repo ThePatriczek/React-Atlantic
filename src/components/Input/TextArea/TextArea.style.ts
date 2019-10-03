@@ -47,7 +47,7 @@ export const StyledTextAreaWrapper = styled.div<{
 export const StyledTextArea = styled.textarea`
   font-family: ${props => props.theme.font.family};
   padding: ${props => props.theme.padding.sm} ${props => props.theme.padding.md};
-  height: ${props => props.theme.height.md};
+  height: auto;
   min-height: ${props => props.theme.height.md};
   margin: 0;
   vertical-align: middle;
@@ -61,7 +61,6 @@ export const StyledTextArea = styled.textarea`
 
   font-size: ${props => props.theme.font.size.md};
   font-weight: 400;
-  white-space: nowrap;
   overflow: auto;
   user-select: none;
   -webkit-appearance: textfield;
