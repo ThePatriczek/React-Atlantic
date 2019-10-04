@@ -10,15 +10,7 @@ import Adapter from 'enzyme-adapter-react-16';
 import * as React from 'react';
 import { theme } from '../src/theme';
 import { ThemeProvider } from '../src/theme';
-import { beforeEach, describe, it } from 'storybook-addon-specifications';
-import expect from 'expect';
-import jest from 'jest-mock';
-
-window.jest = jest;
-window.beforeEach = beforeEach;
-window.describe = describe;
-window.expect = expect;
-window.it = it;
+import './tests';
 
 enzymeConfig({ adapter: new Adapter() });
 

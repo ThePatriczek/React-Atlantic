@@ -1,0 +1,47 @@
+173d42e1f8faaeb15a5fcf7cc2b3077e
+"use strict";
+
+var _interopRequireWildcard = require("/Users/patrikmeixner/WebstormProjects/ATLAS/React-Atlantic/node_modules/babel-preset-react-app/node_modules/@babel/runtime/helpers/interopRequireWildcard");
+
+var _addonKnobs = require("@storybook/addon-knobs");
+
+var _react = require("@storybook/react");
+
+var React = _interopRequireWildcard(require("react"));
+
+var _storybookAddonSpecifications = require("storybook-addon-specifications");
+
+var _Checkbox = require("./Checkbox");
+
+var _addonActions = require("@storybook/addon-actions");
+
+var _constants = require("../../constants");
+
+var _Checkbox2 = require("./Checkbox.test");
+
+var _jsxFileName = "/Users/patrikmeixner/WebstormProjects/ATLAS/React-Atlantic/src/components/Checkbox/Checkbox.story.jsx";
+const stories = (0, _react.storiesOf)('Checkbox', module);
+stories.addDecorator(_addonKnobs.withKnobs);
+stories.add('Playground', () => {
+  const isChecked = (0, _addonKnobs.boolean)(`isChecked:`, false);
+  const checkbox = React.createElement(_Checkbox.Checkbox, {
+    isChecked: isChecked,
+    isDefaultChecked: _constants.isDefaultChecked,
+    isDisabled: _constants.isDisabled,
+    isPartiallyChecked: _constants.isPartiallyChecked,
+    position: _constants.position,
+    onChange: (0, _addonActions.action)(`onChange`),
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 27
+    },
+    __self: void 0
+  }, _constants.children);
+  (0, _storybookAddonSpecifications.specs)(() => _Checkbox2.tests);
+  return checkbox;
+}, {
+  info: {
+    inline: true
+  }
+});
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIkNoZWNrYm94LnN0b3J5LmpzeCJdLCJuYW1lcyI6WyJzdG9yaWVzIiwibW9kdWxlIiwiYWRkRGVjb3JhdG9yIiwid2l0aEtub2JzIiwiYWRkIiwiaXNDaGVja2VkIiwiY2hlY2tib3giLCJpc0RlZmF1bHRDaGVja2VkIiwiaXNEaXNhYmxlZCIsImlzUGFydGlhbGx5Q2hlY2tlZCIsInBvc2l0aW9uIiwiY2hpbGRyZW4iLCJ0ZXN0cyIsImluZm8iLCJpbmxpbmUiXSwibWFwcGluZ3MiOiI7Ozs7QUFBQTs7QUFDQTs7QUFDQTs7QUFDQTs7QUFDQTs7QUFDQTs7QUFDQTs7QUFRQTs7O0FBRUEsTUFBTUEsT0FBTyxHQUFHLHNCQUFVLFVBQVYsRUFBc0JDLE1BQXRCLENBQWhCO0FBRUFELE9BQU8sQ0FBQ0UsWUFBUixDQUFxQkMscUJBQXJCO0FBR0FILE9BQU8sQ0FBQ0ksR0FBUixDQUNFLFlBREYsRUFFRSxNQUFNO0FBQ0osUUFBTUMsU0FBUyxHQUFHLHlCQUFTLFlBQVQsRUFBc0IsS0FBdEIsQ0FBbEI7QUFDQSxRQUFNQyxRQUFRLEdBQ1osb0JBQUMsa0JBQUQ7QUFDRSxJQUFBLFNBQVMsRUFBRUQsU0FEYjtBQUVFLElBQUEsZ0JBQWdCLEVBQUVFLDJCQUZwQjtBQUdFLElBQUEsVUFBVSxFQUFFQyxxQkFIZDtBQUlFLElBQUEsa0JBQWtCLEVBQUVDLDZCQUp0QjtBQUtFLElBQUEsUUFBUSxFQUFFQyxtQkFMWjtBQU1FLElBQUEsUUFBUSxFQUFFLDBCQUFRLFVBQVIsQ0FOWjtBQUFBO0FBQUE7QUFBQTtBQUFBO0FBQUE7QUFBQSxLQVFHQyxtQkFSSCxDQURGO0FBYUEsMkNBQU0sTUFBTUMsZ0JBQVo7QUFFQSxTQUFPTixRQUFQO0FBQ0QsQ0FwQkgsRUFxQkU7QUFDRU8sRUFBQUEsSUFBSSxFQUFFO0FBQUVDLElBQUFBLE1BQU0sRUFBRTtBQUFWO0FBRFIsQ0FyQkYiLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgeyBib29sZWFuLCB3aXRoS25vYnMgfSBmcm9tICdAc3Rvcnlib29rL2FkZG9uLWtub2JzJztcbmltcG9ydCB7IHN0b3JpZXNPZiB9IGZyb20gJ0BzdG9yeWJvb2svcmVhY3QnO1xuaW1wb3J0ICogYXMgUmVhY3QgZnJvbSAncmVhY3QnO1xuaW1wb3J0IHsgc3BlY3MgfSBmcm9tICdzdG9yeWJvb2stYWRkb24tc3BlY2lmaWNhdGlvbnMnO1xuaW1wb3J0IHsgQ2hlY2tib3ggfSBmcm9tICcuL0NoZWNrYm94JztcbmltcG9ydCB7IGFjdGlvbiB9IGZyb20gJ0BzdG9yeWJvb2svYWRkb24tYWN0aW9ucyc7XG5pbXBvcnQge1xuICBpc0RlZmF1bHRDaGVja2VkLFxuICBpc1BhcnRpYWxseUNoZWNrZWQsXG4gIGlzQ2hlY2tlZCxcbiAgaXNEaXNhYmxlZCxcbiAgcG9zaXRpb24sXG4gIGNoaWxkcmVuXG59IGZyb20gJy4uLy4uL2NvbnN0YW50cyc7XG5pbXBvcnQgeyB0ZXN0cyB9IGZyb20gJy4vQ2hlY2tib3gudGVzdCc7XG5cbmNvbnN0IHN0b3JpZXMgPSBzdG9yaWVzT2YoJ0NoZWNrYm94JywgbW9kdWxlKTtcblxuc3Rvcmllcy5hZGREZWNvcmF0b3Iod2l0aEtub2JzKTtcblxuXG5zdG9yaWVzLmFkZChcbiAgJ1BsYXlncm91bmQnLFxuICAoKSA9PiB7XG4gICAgY29uc3QgaXNDaGVja2VkID0gYm9vbGVhbihgaXNDaGVja2VkOmAsIGZhbHNlKTtcbiAgICBjb25zdCBjaGVja2JveCA9IChcbiAgICAgIDxDaGVja2JveFxuICAgICAgICBpc0NoZWNrZWQ9e2lzQ2hlY2tlZH1cbiAgICAgICAgaXNEZWZhdWx0Q2hlY2tlZD17aXNEZWZhdWx0Q2hlY2tlZH1cbiAgICAgICAgaXNEaXNhYmxlZD17aXNEaXNhYmxlZH1cbiAgICAgICAgaXNQYXJ0aWFsbHlDaGVja2VkPXtpc1BhcnRpYWxseUNoZWNrZWR9XG4gICAgICAgIHBvc2l0aW9uPXtwb3NpdGlvbn1cbiAgICAgICAgb25DaGFuZ2U9e2FjdGlvbihgb25DaGFuZ2VgKX1cbiAgICAgID5cbiAgICAgICAge2NoaWxkcmVufVxuICAgICAgPC9DaGVja2JveD5cbiAgICApO1xuXG4gICAgc3BlY3MoKCkgPT4gdGVzdHMpO1xuXG4gICAgcmV0dXJuIGNoZWNrYm94O1xuICB9LFxuICB7XG4gICAgaW5mbzogeyBpbmxpbmU6IHRydWUgfVxuICB9XG4pO1xuIl19

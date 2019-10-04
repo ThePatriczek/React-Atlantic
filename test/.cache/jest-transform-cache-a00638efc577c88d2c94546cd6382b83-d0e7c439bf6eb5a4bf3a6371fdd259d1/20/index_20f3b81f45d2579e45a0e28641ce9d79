@@ -1,0 +1,23 @@
+5a89be264223d7fd579519eeb20c5ff4
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.children = exports.position = exports.isPartiallyChecked = exports.isDisabled = exports.isDefaultChecked = exports.isChecked = void 0;
+
+var _addonKnobs = require("@storybook/addon-knobs");
+
+const isChecked = (0, _addonKnobs.boolean)(`isChecked:`, false);
+exports.isChecked = isChecked;
+const isDefaultChecked = (0, _addonKnobs.boolean)(`isDefaultChecked:`, false);
+exports.isDefaultChecked = isDefaultChecked;
+const isDisabled = (0, _addonKnobs.boolean)(`isDisabled:`, false);
+exports.isDisabled = isDisabled;
+const isPartiallyChecked = (0, _addonKnobs.boolean)(`isPartiallyChecked:`, false);
+exports.isPartiallyChecked = isPartiallyChecked;
+const position = (0, _addonKnobs.select)(`Position:`, ['left', `right`], 'left');
+exports.position = position;
+const children = (0, _addonKnobs.text)(`children:`, `Change me, please 🥺`);
+exports.children = children;
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImluZGV4LnRzeCJdLCJuYW1lcyI6WyJpc0NoZWNrZWQiLCJpc0RlZmF1bHRDaGVja2VkIiwiaXNEaXNhYmxlZCIsImlzUGFydGlhbGx5Q2hlY2tlZCIsInBvc2l0aW9uIiwiY2hpbGRyZW4iXSwibWFwcGluZ3MiOiI7Ozs7Ozs7QUFBQTs7QUFFTyxNQUFNQSxTQUFTLEdBQUcseUJBQVMsWUFBVCxFQUFzQixLQUF0QixDQUFsQjs7QUFDQSxNQUFNQyxnQkFBZ0IsR0FBRyx5QkFBUyxtQkFBVCxFQUE2QixLQUE3QixDQUF6Qjs7QUFDQSxNQUFNQyxVQUFVLEdBQUcseUJBQVMsYUFBVCxFQUF1QixLQUF2QixDQUFuQjs7QUFDQSxNQUFNQyxrQkFBa0IsR0FBRyx5QkFBUyxxQkFBVCxFQUErQixLQUEvQixDQUEzQjs7QUFDQSxNQUFNQyxRQUFRLEdBQUcsd0JBQVEsV0FBUixFQUFvQixDQUFDLE1BQUQsRUFBVSxPQUFWLENBQXBCLEVBQXVDLE1BQXZDLENBQWpCOztBQUNBLE1BQU1DLFFBQVEsR0FBRyxzQkFBTSxXQUFOLEVBQW1CLHNCQUFuQixDQUFqQiIsInNvdXJjZXNDb250ZW50IjpbImltcG9ydCB7IGJvb2xlYW4sIHNlbGVjdCwgdGV4dCB9IGZyb20gJ0BzdG9yeWJvb2svYWRkb24ta25vYnMnO1xuXG5leHBvcnQgY29uc3QgaXNDaGVja2VkID0gYm9vbGVhbihgaXNDaGVja2VkOmAsIGZhbHNlKTtcbmV4cG9ydCBjb25zdCBpc0RlZmF1bHRDaGVja2VkID0gYm9vbGVhbihgaXNEZWZhdWx0Q2hlY2tlZDpgLCBmYWxzZSk7XG5leHBvcnQgY29uc3QgaXNEaXNhYmxlZCA9IGJvb2xlYW4oYGlzRGlzYWJsZWQ6YCwgZmFsc2UpO1xuZXhwb3J0IGNvbnN0IGlzUGFydGlhbGx5Q2hlY2tlZCA9IGJvb2xlYW4oYGlzUGFydGlhbGx5Q2hlY2tlZDpgLCBmYWxzZSk7XG5leHBvcnQgY29uc3QgcG9zaXRpb24gPSBzZWxlY3QoYFBvc2l0aW9uOmAsIFsnbGVmdCcsIGByaWdodGBdLCAnbGVmdCcpO1xuZXhwb3J0IGNvbnN0IGNoaWxkcmVuID0gdGV4dChgY2hpbGRyZW46YCwgYENoYW5nZSBtZSwgcGxlYXNlIPCfpbpgKTtcbiJdfQ==

@@ -5,7 +5,47 @@
   "main": "index.js",
   "scripts": {
     "storybook": "start-storybook -p 6006",
-    "prepublishOnly": "tsc -p tsconfig.publish.json && build-storybook -o docs"
+    "prepublishOnly": "tsc -p tsconfig.publish.json && build-storybook -o docs",
+    "test": "node scripts/test.jsx --env=jsdom"
+  },
+  "babel": {
+    "plugins": [
+      "@babel/transform-flow-strip-types",
+      [
+        "import",
+        {
+          "libraryName": "antd",
+          "style": "css"
+        }
+      ]
+    ],
+    "presets": [
+      "react-app"
+    ]
+  },
+  "eslintConfig": {
+    "env": {
+      "browser": true,
+      "es6": true,
+      "jest": true
+    },
+    "extends": "react-app",
+    "globals": {
+      "resolveOwn": true
+    },
+    "parserOptions": {
+      "ecmaFeatures": {
+        "impliedStrict": true,
+        "jsx": true
+      }
+    },
+    "rules": {
+      "prefer-template": 0,
+      "semi": [
+        1,
+        "never"
+      ]
+    }
   },
   "repository": {
     "type": "git",
@@ -45,14 +85,22 @@
     "@types/storybook__addon-info": "^4.1.2",
     "@types/storybook__addon-knobs": "^5.0.4",
     "@types/storybook__addon-viewport": "^4.1.1",
+    "babel-core": "6.18.2",
+    "babel-eslint": "7.1.1",
+    "babel-jest": "17.0.2",
+    "babel-plugin-import": "^1.1.0",
+    "babel-plugin-transform-flow-strip-types": "^6.18.0",
     "@types/storybook__react": "^4.0.2",
     "@types/styled-components": "4.1.8",
     "awesome-typescript-loader": "^5.2.1",
     "babel-loader": "^8.0.6",
+    "dotenv": "latest",
     "enzyme": "^3.10.0",
     "enzyme-adapter-react-16": "^1.14.0",
     "expect": "^24.9.0",
+    "jest": "^24.9.0",
     "jest-mock": "^24.9.0",
+    "jest-styled-components": "^6.3.3",
     "prettier": "^1.18.2",
     "react-docgen-typescript-loader": "^3.2.1",
     "react-test-renderer": "latest",
@@ -60,5 +108,40 @@
     "tslint": "^5.20.0",
     "tslint-config-prettier": "^1.18.0",
     "typescript": "^3.6.3"
+  },
+  "jest": {
+    "moduleFileExtensions": [
+      "jsx",
+      "js",
+      "json",
+      "ts",
+      "tsx"
+    ],
+    "setupFiles": [
+      "<rootDir>/config/jest/storybook.js",
+      "<rootDir>/config/enzymeAdapter.js"
+    ],
+    "testPathIgnorePatterns": [
+      "<rootDir>/(build|docs|node_modules)/"
+    ],
+    "testEnvironment": "node",
+    "cacheDirectory": "test/.cache",
+    "collectCoverage": false,
+    "collectCoverageFrom": [
+      "**/*.js",
+      "!**/node_modules/**"
+    ],
+    "coverageDirectory": "test/.coverage",
+    "coverageThreshold": {
+      "global": {
+        "branches": 50,
+        "functions": 50,
+        "lines": 50,
+        "statements": 50
+      }
+    },
+    "globals": {},
+    "notify": false,
+    "resetMocks": false
   }
 }
