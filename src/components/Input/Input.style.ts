@@ -229,6 +229,7 @@ export const StyledInputWrapperAlt = styled.span<StyledInputWrapperProps>`
   font-family: ${props => props.theme.font.family};
   display: inline-block;
   position: relative;
+  margin-top: -${props => props.theme.padding.md};
   padding-top: ${props => props.theme.padding.md};
 
   ${props =>
