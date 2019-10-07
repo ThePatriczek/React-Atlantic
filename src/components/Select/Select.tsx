@@ -3,7 +3,7 @@ import { default as ReactSelect } from 'react-select';
 import { Icon } from '../Icon';
 import { Option, OptionProps } from './Option';
 import { StyledOption } from './Option/Option.style';
-import { Control, IndicatorsContainer, SelectContainer, ValueContainer, DropdownIndicator, IndicatorSeparator, Menu, MenuList } from './Select.style';
+import { Control, IndicatorsContainer, SelectContainer, ValueContainer, DropdownIndicator, IndicatorSeparator, Menu, MenuList, Placeholder } from './Select.style';
 
 export interface SelectProps {
   isSearchable?: boolean;
@@ -209,9 +209,9 @@ export const Select: React.FC<React.PropsWithChildren<SelectProps>> & {
           </div>
         ),
         Placeholder: ({ children, innerProps }) => (
-          <div className={`placeholder`} {...innerProps}>
+          <Placeholder {...innerProps}>
             {children}
-          </div>
+          </Placeholder>
         ),
         SelectContainer: ({ children, innerProps }) => (
           <SelectContainer {...innerProps}>

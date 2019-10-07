@@ -26,7 +26,7 @@ stories.add(
         </Option>
       </Select>
         <br/>
-        <Select isMulti isFullWidth>
+        <Select isMulti>
         <Option value={`val1`}>
           <Text>{`Option 1`}</Text>
         </Option>

@@ -25,16 +25,8 @@ export const Control = styled.div`
     border: 1px solid ${props => darken(0.1, props.theme.color.default)};
     border-radius: ${props => props.theme.radius};
     background: ${props => props.theme.color.white};
-    
-    ::placeholder {
-      color: ${props => lighten(0.6, props.theme.color.black)};
-    }
 
-    :focus {
-      border-color: ${props => props.theme.color.primary};
-      outline-offset: -2px;
-      box-shadow: 0 0 0 2px rgba(24, 144, 255, 0.3);
-    }
+    
 `;
 
 export const ValueContainer = styled.div`
@@ -42,6 +34,10 @@ export const ValueContainer = styled.div`
     flex-wrap: wrap;
     align-items: center;
     flex: 100% 1;
+`;
+
+export const Placeholder = styled.div`
+    color: ${props => lighten(0.6, props.theme.color.black)};
 `;
 
 export const IndicatorsContainer = styled.div`
