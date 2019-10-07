@@ -2,7 +2,8 @@ import { boolean, select, text, withKnobs } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/react';
 import * as React from 'react';
 import { specs } from 'storybook-addon-specifications';
-import { Component, defaultValues, tests } from './Checkbox.test';
+import { Component, tests } from './Checkbox.test';
+import { defaultValues } from './defaultValues';
 
 const stories = storiesOf('Checkbox', module);
 
@@ -39,7 +40,7 @@ stories.add(
 
     specs(() =>
       tests(
-        checkbox,
+        /*checkbox,*/
         isChecked,
         isDefaultChecked,
         isDisabled,

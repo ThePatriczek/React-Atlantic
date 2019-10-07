@@ -1,15 +1,7 @@
 import { shallow } from 'enzyme';
 import React from 'react';
 import { Checkbox } from './Checkbox';
-
-export const defaultValues = {
-  isChecked: false,
-  isDefaultChecked: false,
-  isDisabled: false,
-  isPartiallyChecked: false,
-  position: 'left',
-  children: 'Change me, please 🥺'
-};
+import { defaultValues } from './defaultValues';
 
 export const Component = (
   isChecked,
@@ -32,10 +24,8 @@ export const Component = (
   );
 };
 
-let output = shallow(Component());
-
+let output;
 export const tests = (
-  checkbox,
   isChecked,
   isDefaultChecked,
   isDisabled,
@@ -43,32 +33,90 @@ export const tests = (
   position,
   children
 ) => {
-  output = shallow(checkbox);
-  console.log('IDCH:', isDefaultChecked);
+  if (isDefaultChecked) {
+    output = shallow(
+      Component(
+        isChecked,
+        isDefaultChecked,
+        isDisabled,
+        isPartiallyChecked,
+        position,
+        children
+      )
+    );
+  } else
+    output = shallow(
+      Component(
+        defaultValues.isChecked,
+        defaultValues.isDefaultChecked,
+        defaultValues.isDisabled,
+        defaultValues.isPartiallyChecked,
+        defaultValues.position,
+        defaultValues.children
+      )
+    );
+
   return describe('Checkbox', () => {
-    it(`Should have isChecked: ${isChecked}`, () => {
-      expect(output.prop('isChecked')).toEqual(isChecked);
-    });
+    if (isDefaultChecked !== undefined) {
+      it(`Should have isDefaultChecked: ${isDefaultChecked}`, () => {
+        expect(output.props().isDefaultChecked).toEqual(isDefaultChecked);
+      });
+    } else {
+      it(`Should have isDefaultChecked: ${defaultValues.isDefaultChecked}`, () => {
+        console.log(output.props());
+        expect(output.props().isDefaultChecked).toEqual(
+          defaultValues.isDefaultChecked
+        );
+      });
+    }
+    /* if (checkbox.props.isChecked) {
+      it(`Should have isChecked: ${checkbox.props.isChecked}`, () => {
+        expect(output.prop('isChecked')).toEqual(checkbox.props.isChecked);
+      });
+    } else
+      it(`Should have isChecked: ${defaultValues.isChecked}`, () => {
+        expect(output.prop('isChecked')).toEqual(defaultValues.isChecked);
+      });
 
-    it(`Should have isDefaultChecked: ${isDefaultChecked}`, () => {
-      expect(output.prop('isDefaultChecked')).toEqual(isDefaultChecked);
-    });
+    if (checkbox.props.isDisabled) {
+      it(`Should have isDisabled: ${checkbox.props.isDisabled}`, () => {
+        expect(output.prop('isDisabled')).toEqual(checkbox.props.isDisabled);
+      });
+    } else
+      it(`Should have isDisabled: ${defaultValues.isDisabled}`, () => {
+        expect(output.prop('isDisabled')).toEqual(defaultValues.isDisabled);
+      });
 
-    it(`Should have isDisabled: ${isDisabled}`, () => {
-      expect(output.prop('isDisabled')).toEqual(isDisabled);
-    });
+    if (checkbox.props.isPartiallyChecked) {
+      it(`Should have isPartiallyChecked: ${checkbox.props.isPartiallyChecked}`, () => {
+        expect(output.prop('isPartiallyChecked')).toEqual(
+          checkbox.props.isPartiallyChecked
+        );
+      });
+    } else
+      it(`Should have isPartiallyChecked: ${defaultValues.isPartiallyChecked}`, () => {
+        expect(output.prop('isPartiallyChecked')).toEqual(
+          defaultValues.isPartiallyChecked
+        );
+      });
 
-    it(`Should have isPartiallyChecked: ${isPartiallyChecked}`, () => {
-      expect(output.prop('isPartiallyChecked')).toEqual(isPartiallyChecked);
-    });
+    if (checkbox.props.position) {
+      it(`Should have position: ${checkbox.props.position}`, () => {
+        expect(output.prop('position')).toEqual(checkbox.props.position);
+      });
+    } else
+      it(`Should have position: ${defaultValues.position}`, () => {
+        expect(output.prop('position')).toEqual(defaultValues.position);
+      });
 
-    it(`Should have position: ${position}`, () => {
-      expect(output.prop('position')).toEqual(position);
-    });
-
-    it(`Should have children: ${children}`, () => {
-      expect(output.prop('children')).toEqual(children);
-    });
+    if (checkbox.props.children) {
+      it(`Should have children: ${checkbox.props.children}`, () => {
+        expect(output.prop('children')).toEqual(checkbox.props.children);
+      });
+    } else
+      it(`Should have children: ${defaultValues.children}`, () => {
+        expect(output.prop('children')).toEqual(defaultValues.children);
+      });*/
   });
 };
 
