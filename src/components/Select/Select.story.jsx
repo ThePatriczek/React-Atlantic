@@ -13,8 +13,8 @@ const { Option } = Select;
 stories.add(
   'Playground',
   () => {
-    const select = (
-      <Select>
+    const select = (<>
+      <Select is>
         <Option value={`val1`}>
           <Text>{`Option 1`}</Text>
         </Option>
@@ -25,6 +25,18 @@ stories.add(
           <Text>{`Option 3`}</Text>
         </Option>
       </Select>
+        <br/>
+        <Select isMulti isFullWidth>
+        <Option value={`val1`}>
+          <Text>{`Option 1`}</Text>
+        </Option>
+        <Option value={`val2`}>
+          <Text>{`Option 2`}</Text>
+        </Option>
+        <Option value={`val3`}>
+          <Text>{`Option 3`}</Text>
+        </Option>
+      </Select></>
     );
 
     // specs(() =>

@@ -1,7 +1,9 @@
 import * as React from 'react';
 import { default as ReactSelect } from 'react-select';
+import { Icon } from '../Icon';
 import { Option, OptionProps } from './Option';
 import { StyledOption } from './Option/Option.style';
+import { Control, IndicatorsContainer, SelectContainer, ValueContainer, DropdownIndicator, IndicatorSeparator, Menu, MenuList } from './Select.style';
 
 export interface SelectProps {
   isSearchable?: boolean;
@@ -114,108 +116,117 @@ export const Select: React.FC<React.PropsWithChildren<SelectProps>> & {
           );
         },
         NoOptionsMessage: ({ children, innerProps }) => (
-          <div className={`0`} {...innerProps}>
+          <div className={`no-options`} {...innerProps}>
             {children}
+            {/*Nebyly nalezeny žádné výsledky*/}
           </div>
         ),
         ClearIndicator: ({ children, innerProps }) => (
-          <div className={`1`} {...innerProps}>
+          <div className={`clear`} {...innerProps}>
             {children}
+            {/*<Icon name={'clear'} />*/}
           </div>
         ),
         Control: ({ children, innerProps }) => (
-          <div className={`2`} {...innerProps}>
+          <Control {...innerProps}>
             {children}
-          </div>
+          </Control>
         ),
         CrossIcon: ({ children, innerProps }) => (
-          <div className={`3`} {...innerProps}>
+          <div className={`clear-all`} {...innerProps}>
             {children}
           </div>
         ),
         DownChevron: ({ children, innerProps }) => (
-          <div className={`4`} {...innerProps}>
+          <div className={`arrow`} {...innerProps}>
             {children}
+            <Icon name={'arrowDown'} />
           </div>
         ),
         DropdownIndicator: ({ children, innerProps }) => (
-          <div className={`5`} {...innerProps}>
-            {children}
-          </div>
+          <DropdownIndicator {...innerProps}>
+            <Icon name={'arrowDown'} />
+          </DropdownIndicator>
         ),
         Group: ({ children }) => <div className={`6`}>{children}</div>,
         GroupHeading: ({ children, innerProps }) => (
-          <div className={`7`} {...innerProps}>
+          <div className={`heading`} {...innerProps}>
             {children}
           </div>
         ),
         Menu: ({ children, innerProps }) => (
-          <div className={`8`} {...innerProps}>
+          <Menu {...innerProps}>
             {children}
-          </div>
+          </Menu>
         ),
         MenuList: ({ children, ...props }) => (
-          <div className={`9`}>{children}</div>
+          <MenuList>
+            {children}
+          </MenuList>
         ),
         IndicatorsContainer: ({ children, ...props }) => (
-          <div className={`10`}>{children}</div>
+          <IndicatorsContainer>{children}</IndicatorsContainer>
         ),
         IndicatorSeparator: ({ children, innerProps }) => (
-          <div className={`11`} {...innerProps}>
+          <IndicatorSeparator {...innerProps}>
             {children}
-          </div>
+          </IndicatorSeparator>
         ),
         Input: props => <input {...props} />,
         LoadingIndicator: ({ children, innerProps }) => (
-          <div className={`12`} {...innerProps}>
+          <div className={`loading`} {...innerProps}>
             {children}
           </div>
         ),
         LoadingMessage: ({ children, innerProps }) => (
-          <div className={`13`} {...innerProps}>
+          <div className={`loading-msg`} {...innerProps}>
             {children}
           </div>
         ),
         MenuPortal: ({ children, ...props }) => (
-          <div className={`14`}>{children}</div>
+          <div className={`menu`}>
+            {children}
+          </div>
         ),
         MultiValue: ({ children, innerProps }) => (
-          <div className={`15`} {...innerProps}>
+          <div className={`multi-value`} {...innerProps}>
             {children}
           </div>
         ),
         MultiValueContainer: ({ children, innerProps }) => (
-          <div className={`16`} {...innerProps}>
+          <div className={`multi-value-container`} {...innerProps}>
             {children}
           </div>
         ),
         MultiValueLabel: ({ children, innerProps }) => (
-          <div className={`17`} {...innerProps}>
+          <div className={`multi-value-label`} {...innerProps}>
             {children}
           </div>
         ),
         MultiValueRemove: ({ children, innerProps }) => (
-          <div className={`18`} {...innerProps}>
+          <div className={`multi-value-remove`} {...innerProps}>
             {children}
           </div>
         ),
         Placeholder: ({ children, innerProps }) => (
-          <div className={`19`} {...innerProps}>
+          <div className={`placeholder`} {...innerProps}>
             {children}
           </div>
         ),
         SelectContainer: ({ children, innerProps }) => (
-          <div className={`20`} {...innerProps}>
+          <SelectContainer {...innerProps}>
             {children}
-          </div>
+          </SelectContainer>
         ),
         SingleValue: ({ children, innerProps }) => (
-          <div className={`21`} {...innerProps}>
+          <div className={`single-value`} {...innerProps}>
             {children}
           </div>
         ),
-        ValueContainer: ({ children, ...props }) => (
-          <div className={`22`}>{children}</div>
+        ValueContainer: ({ children, ...innerProps}) => (
+          <ValueContainer>
+            {children}
+          </ValueContainer>
         )
       }}
     />
