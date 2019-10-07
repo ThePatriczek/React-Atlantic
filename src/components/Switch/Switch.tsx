@@ -81,6 +81,7 @@ export const Switch: React.FC<SwitchProps> = (
           size={size}
           isChecked={props.isChecked || isChecked}
           htmlType={type}
+          isDisabled={isDisabled}
         />
         <StyledSwitcherFalse
           htmlType={type}
