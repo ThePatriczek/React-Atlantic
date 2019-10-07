@@ -137,11 +137,17 @@ export const StyledButton = styled(DefaultButton)<StyledButtonProps>`
       background-color: ${bgColor};
       color: ${color};
       border: 1px ${borderType} ${borderColor};
+      
+      ${props.styleType === 'transparent' &&
+        css`  
+          box-shadow: none;  
+        `}
 
       &:hover {
         background-color: ${hoverBgColor};
         ${props.styleType === 'transparent' &&
           css`
+            box-shadow: none;
             border: 1px ${borderType} ${color};
           `}
       }
