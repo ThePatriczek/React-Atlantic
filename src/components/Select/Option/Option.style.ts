@@ -18,4 +18,10 @@ export const StyledOption = styled.div`
     &:hover{
       background-color: ${props => darken(0.05, props.theme.color.default)};
     }
+    
+    span{
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
+    }
 `;

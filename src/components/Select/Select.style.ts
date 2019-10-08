@@ -11,7 +11,7 @@ interface SelectProps {
   size: Size;
 }
 
-export const SelectContainer = styled.div`
+export const SelectContainer = styled.div<SelectProps>`
   position: relative;
   width: 220px;
   line-height: 1;
@@ -24,6 +24,12 @@ export const SelectContainer = styled.div`
     -moz-box-sizing: border-box;
     box-sizing: border-box;
   }
+ 
+  ${props =>
+    props.isFullWidth &&
+    css`
+      width: 100%;
+    `}
 `;
 
 export const Control = styled.div<SelectProps>`
@@ -65,13 +71,25 @@ export const Control = styled.div<SelectProps>`
     css`
       padding-left: 0;
     `}
+  
+  ${props =>
+  props.isFullWidth &&
+    css`
+      min-width: 100%;
+    `}
 `;
 
-export const ValueContainer = styled.div`
+export const ValueContainer = styled.div<SelectProps>`
     display: flex;
     flex-wrap: wrap;
     align-items: center;
     flex: 100% 1;
+    
+    ${props =>
+      props.isMulti &&
+        css`
+          max-width: calc(100% - 72px);
+        `}
 `;
 
 export const SingleValue = styled.div`
@@ -88,7 +106,7 @@ export const SingleValue = styled.div`
 `;
 
 export const MultiValue = styled.div`
-  padding: ${props => props.theme.padding.xs} ${props => props.theme.padding.sm};
+  padding: ${props => props.theme.padding.xs} 0;
   display: flex;
   margin: 2px;
   height: 28px;
@@ -96,9 +114,15 @@ export const MultiValue = styled.div`
   border-radius: ${props => props.theme.radius};
   background-color: #d1e9fb;
   color: ${props => props.theme.color.black};
+  max-width: calc(100% - 6px);
 
   span {
     margin: 0;
+    padding: 0 ${props => props.theme.padding.sm}
+    
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
   }
 `;
 
@@ -118,7 +142,21 @@ export const MultiValueLabel = styled.div`
   padding: 0 ${props => props.theme.padding.sm};
 `;
 
-export const MultiValueRemove = styled.div``;
+export const MultiValueRemove = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 26px;
+    border-left: 1px solid ${props => props.theme.color.primary};
+    
+    i{
+      font-size: 10px;
+      
+      &:hover{
+        color: ${props => props.theme.color.error};
+      }
+    }
+`;
 
 export const NoOptionsMessage = styled.div`
   display: block;
@@ -131,7 +169,9 @@ export const NoOptionsMessage = styled.div`
   cursor: pointer;
 `;
 
-export const CrossIcon = styled.div``;
+export const CrossIcon = styled.button`
+    
+`;
 
 export const Placeholder = styled.div`
   color: ${props => lighten(0.6, props.theme.color.black)};
@@ -187,4 +227,17 @@ export const MenuList = styled.div`
   overflow: hidden;
   outline-offset: -2px;
   box-shadow: 0 0 0 2px #c3defd;
+`;
+
+export const Input = styled.input`
+    position: absolute;
+    box-sizing: content-box;
+    width: 2px;
+    background: 0px center;
+    border: 0px;
+    font-size: inherit;
+    opacity: 1;
+    outline: 0px;
+    padding: 0px;
+    color: inherit;
 `;

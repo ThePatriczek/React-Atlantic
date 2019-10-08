@@ -20,7 +20,8 @@ import {
   Placeholder,
   SelectContainer,
   SingleValue,
-  ValueContainer
+  ValueContainer,
+  Input
 } from './Select.style';
 
 export interface SelectProps {
@@ -197,7 +198,10 @@ export const Select: React.FC<React.PropsWithChildren<SelectProps>> & {
             {children}
           </IndicatorsContainer>
         ),
-        Input: props => <input {...props} />,
+        Input: props =>
+          <Input
+          {...props}
+        />,
         LoadingIndicator: ({ children, innerProps }) => (
           <div className={`loading`} {...innerProps}>
             {children}
@@ -235,7 +239,7 @@ export const Select: React.FC<React.PropsWithChildren<SelectProps>> & {
         ),
         MultiValueRemove: ({ ...props }) => (
           <MultiValueRemove className={`multi-value-remove`} {...props}>
-            <Icon name={'clear'} />
+            <Icon name={'close'} />
           </MultiValueRemove>
         ),
         Placeholder: ({ children, innerProps }) => (
@@ -244,7 +248,10 @@ export const Select: React.FC<React.PropsWithChildren<SelectProps>> & {
           </Placeholder>
         ),
         SelectContainer: ({ children, innerProps }) => (
-          <SelectContainer className={`select-container`} {...innerProps}>
+          <SelectContainer className={`select-container`}
+             isFullWidth={isFullWidth}
+             size={size}
+             {...innerProps}>
             {children}
           </SelectContainer>
         ),
@@ -253,8 +260,12 @@ export const Select: React.FC<React.PropsWithChildren<SelectProps>> & {
             {children}
           </SingleValue>
         ),
-        ValueContainer: ({ children, ...innerProps }) => (
-          <ValueContainer className={`value-container`}>
+        ValueContainer: ({ children, isMulti}) => (
+          <ValueContainer
+            className={`value-container`}
+            isMulti={isMulti}
+            size={size}
+          >
             {children}
           </ValueContainer>
         )
