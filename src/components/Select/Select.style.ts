@@ -68,10 +68,10 @@ export const Control = styled.div<SelectProps>`
 `;
 
 export const ValueContainer = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  flex: 100% 1;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    flex: 100% 1;
 `;
 
 export const SingleValue = styled.div`
@@ -138,10 +138,11 @@ export const Placeholder = styled.div`
 `;
 
 export const IndicatorsContainer = styled.div`
-  display: flex;
+  -webkit-box-align: center;
   align-items: center;
-  transition: color 150ms ease 0s;
-  box-sizing: border-box;
+  align-self: stretch;
+  display: flex;
+  flex-shrink: 0;
   min-height: 32px;
 
   i {
