@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { default as ReactSelect } from 'react-select';
+import { Size } from '../../types';
 import { Icon } from '../Icon';
 import { Option, OptionProps } from './Option';
 import { StyledOption } from './Option/Option.style';
@@ -31,6 +32,8 @@ export interface SelectProps {
   className?: string;
   options?: OptionType[];
   isMulti?: boolean;
+  isFullWidth?: boolean;
+  size: Size;
 }
 
 export interface OptionType {
@@ -65,7 +68,9 @@ export const Select: React.FC<React.PropsWithChildren<SelectProps>> & {
     value,
     className,
     options,
-    isMulti
+    isMulti,
+    isFullWidth,
+    size
   } = props;
   let items: any[] = [];
 
@@ -107,10 +112,6 @@ export const Select: React.FC<React.PropsWithChildren<SelectProps>> & {
     }
   };
 
-  // @ts-ignore
-  // @ts-ignore
-  // @ts-ignore
-  // @ts-ignore
   return (
     <ReactSelect
       value={value}
@@ -156,6 +157,8 @@ export const Select: React.FC<React.PropsWithChildren<SelectProps>> & {
             isMulti={isMulti}
             hasValue={hasValue}
             className={`control`}
+            isFullWidth={isFullWidth}
+            size={size}
           >
             {children}
           </Control>
@@ -262,7 +265,9 @@ export const Select: React.FC<React.PropsWithChildren<SelectProps>> & {
 
 Select.defaultProps = {
   isSearchable: false,
-  isMulti: false
+  isMulti: false,
+  isFullWidth: false,
+  size: 'medium'
 };
 
 Select.displayName = `Select`;
