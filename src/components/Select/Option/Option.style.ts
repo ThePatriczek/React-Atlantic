@@ -12,10 +12,10 @@ export const StyledOption = styled.div`
     cursor: pointer;
     
     &:nth-child(odd){
-      background: #f2f2f2;
+      background-color: ${props => props.theme.color.default};
     }
     
     &:hover{
-      background: ${props => darken(0.1, props.theme.color.default)};
+      background-color: ${props => darken(0.05, props.theme.color.default)};
     }
 `;

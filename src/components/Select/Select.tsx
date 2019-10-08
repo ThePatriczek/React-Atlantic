@@ -3,16 +3,23 @@ import { default as ReactSelect } from 'react-select';
 import { Icon } from '../Icon';
 import { Option, OptionProps } from './Option';
 import { StyledOption } from './Option/Option.style';
+
 import {
   Control,
   DropdownIndicator,
   IndicatorsContainer,
   IndicatorSeparator,
   Menu,
-  MenuList,
+  MenuList, MultiValue,
   Placeholder,
   SelectContainer,
-  ValueContainer
+  SingleValue,
+  MultiValueLabel,
+  ValueContainer,
+  MultiValueRemove,
+  ClearIndicator,
+  CrossIcon,
+  NoOptionsMessage,
 } from './Select.style';
 
 export interface SelectProps {
@@ -58,7 +65,7 @@ export const Select: React.FC<React.PropsWithChildren<SelectProps>> & {
     value,
     className,
     options,
-    isMulti
+    isMulti,
   } = props;
   let items: any[] = [];
 
@@ -100,6 +107,10 @@ export const Select: React.FC<React.PropsWithChildren<SelectProps>> & {
     }
   };
 
+  // @ts-ignore
+  // @ts-ignore
+  // @ts-ignore
+  // @ts-ignore
   return (
     <ReactSelect
       value={value}
@@ -121,30 +132,31 @@ export const Select: React.FC<React.PropsWithChildren<SelectProps>> & {
           );
         },
         NoOptionsMessage: ({ children, innerProps }) => (
-          <div className={`no-options`} {...innerProps}>
+          <NoOptionsMessage className={`no-options`} {...innerProps}>
             {children}
-            {/*Nebyly nalezeny žádné výsledky*/}
-          </div>
+          </NoOptionsMessage>
         ),
         ClearIndicator: ({ children, innerProps }) => (
-          <div className={`clear`} {...innerProps}>
-            {children}
-            {/*<Icon name={'clear'} />*/}
-          </div>
+          <ClearIndicator className={`clear`} {...innerProps}>
+            <Icon name={'clear'} />
+          </ClearIndicator>
         ),
-        Control: ({ children, innerProps, menuIsOpen, isFocused }: any) => (
+        Control: ({ children, innerProps, menuIsOpen, isFocused, isMulti, hasValue }: any) => (
           <Control
             {...innerProps}
             isMenuOpened={menuIsOpen}
             isFocused={isFocused}
+            isMulti={isMulti}
+            hasValue={hasValue}
+            className={`control`}
           >
             {children}
           </Control>
         ),
         CrossIcon: ({ children, innerProps }) => (
-          <div className={`clear-all`} {...innerProps}>
-            {children}
-          </div>
+          <CrossIcon className={`clear-all`} {...innerProps}>
+            <div>{children}</div>
+          </CrossIcon>
         ),
         DownChevron: ({ children, innerProps }) => (
           <div className={`arrow`} {...innerProps}>
@@ -152,27 +164,24 @@ export const Select: React.FC<React.PropsWithChildren<SelectProps>> & {
             <Icon name={'arrowDown'} />
           </div>
         ),
-        DropdownIndicator: ({ children, innerProps, selectProps }) => (
-          <DropdownIndicator {...innerProps}>
+        DropdownIndicator: ({ innerProps, selectProps }) => (
+          <DropdownIndicator className={`arrow-container`}{...innerProps}>
             {selectProps.menuIsOpen && <Icon name={'arrowUp'} />}
             {!selectProps.menuIsOpen && <Icon name={'arrowDown'} />}
           </DropdownIndicator>
         ),
-        Group: ({ children }) => <div className={`6`}>{children}</div>,
+        Group: ({ children }) => <div className={`children`}>{children}</div>,
         GroupHeading: ({ children, innerProps }) => (
           <div className={`heading`} {...innerProps}>
             {children}
           </div>
         ),
         Menu: ({ children, innerProps }) => (
-          <Menu {...innerProps}>{children}</Menu>
+          <Menu className={`menu`}{...innerProps}>{children}</Menu>
         ),
         MenuList: ({ children, ...props }) => <MenuList>{children}</MenuList>,
         IndicatorsContainer: ({ children, ...props }) => (
-          <IndicatorsContainer>{children}</IndicatorsContainer>
-        ),
-        IndicatorSeparator: ({ children, innerProps }) => (
-          <IndicatorSeparator {...innerProps}>{children}</IndicatorSeparator>
+          <IndicatorsContainer className={`indicators-container`}>{children}</IndicatorsContainer>
         ),
         Input: props => <input {...props} />,
         LoadingIndicator: ({ children, innerProps }) => (
@@ -189,9 +198,9 @@ export const Select: React.FC<React.PropsWithChildren<SelectProps>> & {
           <div className={`menu`}>{children}</div>
         ),
         MultiValue: ({ children, innerProps }) => (
-          <div className={`multi-value`} {...innerProps}>
+          <MultiValue className={`multi-value`} {...innerProps}>
             {children}
-          </div>
+          </MultiValue>
         ),
         MultiValueContainer: ({ children, innerProps }) => (
           <div className={`multi-value-container`} {...innerProps}>
@@ -199,28 +208,28 @@ export const Select: React.FC<React.PropsWithChildren<SelectProps>> & {
           </div>
         ),
         MultiValueLabel: ({ children, innerProps }) => (
-          <div className={`multi-value-label`} {...innerProps}>
+          <MultiValueLabel className={`multi-value-label`} {...innerProps}>
             {children}
-          </div>
+          </MultiValueLabel>
         ),
         MultiValueRemove: ({ children, innerProps }) => (
-          <div className={`multi-value-remove`} {...innerProps}>
+          <MultiValueRemove className={`multi-value-remove`} {...innerProps}>
             {children}
-          </div>
+          </MultiValueRemove>
         ),
         Placeholder: ({ children, innerProps }) => (
-          <Placeholder {...innerProps}>{children}</Placeholder>
+          <Placeholder className={`placeholder`}{...innerProps}>{children}</Placeholder>
         ),
         SelectContainer: ({ children, innerProps }) => (
-          <SelectContainer {...innerProps}>{children}</SelectContainer>
+          <SelectContainer className={`select-container`}{...innerProps}>{children}</SelectContainer>
         ),
         SingleValue: ({ children, innerProps }) => (
-          <div className={`single-value`} {...innerProps}>
+          <SingleValue className={`single-value`} {...innerProps}>
             {children}
-          </div>
+          </SingleValue>
         ),
         ValueContainer: ({ children, ...innerProps }) => (
-          <ValueContainer>{children}</ValueContainer>
+          <ValueContainer className={`value-container`}>{children}</ValueContainer>
         )
       }}
     />
@@ -229,7 +238,7 @@ export const Select: React.FC<React.PropsWithChildren<SelectProps>> & {
 
 Select.defaultProps = {
   isSearchable: false,
-  isMulti: false
+  isMulti: false,
 };
 
 Select.displayName = `Select`;
