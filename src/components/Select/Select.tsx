@@ -211,10 +211,12 @@ export const Select: React.FC<React.PropsWithChildren<SelectProps>> & {
           </IndicatorsContainer>
         ),
         Input: props =>
-          <Input
-            placeholder={`Začněte psát`}
-          {...props}
-          />,
+          <div>
+            <Input
+              placeholder={`Začněte psát`}
+              {...props}
+            />
+          </div>,
         LoadingIndicator: ({ children, innerProps }) => (
           <div className={`loading`} {...innerProps}>
             {children}

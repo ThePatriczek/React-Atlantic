@@ -1,4 +1,4 @@
-import { darken, lighten } from 'polished';
+import { darken, lighten, transparentize } from 'polished';
 import styled, { css } from 'styled-components';
 import { Size } from '../../types';
 
@@ -17,7 +17,7 @@ export const SelectContainer = styled.div<SelectProps>`
   width: 220px;
   line-height: 1;
 
-  font-size: 14px;
+  font-size: ${props => props.theme.font.size.md};
   font-family: ${props => props.theme.font.family};
 
   * {
@@ -36,13 +36,13 @@ export const SelectContainer = styled.div<SelectProps>`
   ${props =>
     props.size === 'small' &&
     css`
-      font-size: 12px;
+      font-size: ${props => props.theme.font.size.sm};
     `}
   
   ${props =>
     props.size === 'large' &&
     css`
-      font-size: 16px;
+      font-size: ${props => props.theme.font.size.lg};
     `}
 `;
 
@@ -74,6 +74,7 @@ export const Control = styled.div<SelectProps>`
     props.isDisabled &&
     css`
       color: ${darken(0.2, props.theme.color.default)};
+      
       ::placeholder {
         color: ${darken(0.2, props.theme.color.default)};
       }
@@ -93,8 +94,7 @@ export const Control = styled.div<SelectProps>`
   ${props =>
     props.isMenuOpened &&
     css`
-      border-bottom: 1px solid
-        ${props => darken(0.1, props.theme.color.default)};
+      border-bottom: 1px solid ${props => darken(0.1, props.theme.color.default)};
       border-bottom-left-radius: 0;
       border-bottom-right-radius: 0;
     `}
@@ -135,15 +135,14 @@ export const ValueContainer = styled.div<SelectProps>`
 
 export const SingleValue = styled.div<SelectProps>`
   display: block;
-  align-items: center;
-  padding: ${props => props.theme.padding.sm} ${props => props.theme.padding.sm}
-    ${props => props.theme.padding.sm} 0;
-  border-radius: ${props => props.theme.radius};
   max-width: 165px;
+  height: 32px;
+  padding: ${props => props.theme.padding.sm} ${props => props.theme.padding.sm} ${props => props.theme.padding.sm} 0;
+  
+  border-radius: ${props => props.theme.radius};
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
-  height: 32px;
   
   ${props =>
     props.isFullWidth &&
@@ -175,15 +174,16 @@ export const SingleValue = styled.div<SelectProps>`
 `;
 
 export const MultiValue = styled.div<SelectProps>`
-  padding: 0;
   display: flex;
-  margin: 2px;
+  max-width: calc(100% - 6px);
   height: 28px;
+  margin: ${props => props.theme.margin.xs};
+  padding: 0;
+  
+  background-color: ${props => transparentize(.85, props.theme.color.primary)};
+  color: ${props => props.theme.color.black};
   border: 1px solid ${props => props.theme.color.primary};
   border-radius: ${props => props.theme.radius};
-  background-color: #d1e9fb;
-  color: ${props => props.theme.color.black};
-  max-width: calc(100% - 6px);
 
   span {
     margin: 0;
@@ -210,7 +210,7 @@ export const MultiValue = styled.div<SelectProps>`
   ${props =>
     props.size === 'large' &&
       css`
-        height: 34px;
+        height: ${props => props.theme.height.md};
         padding: 0;
         
         span{
@@ -224,8 +224,8 @@ export const ClearIndicator = styled.div<SelectProps>`
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 34px;
-  color: #777777;
+  width: ${props => props.theme.width.md};
+  color: ${props => lighten(0.6, props.theme.color.black)};
 
   i:hover {
     color: ${props => props.theme.color.error};
@@ -272,7 +272,7 @@ export const NoOptionsMessage = styled.div`
   display: block;
   padding: 0 ${props => props.theme.padding.md};
   height: ${props => props.theme.height.md};
-  line-height: 34px;
+  line-height: ${props => props.theme.height.md};
 
   overflow: hidden;
   text-overflow: ellipsis;
@@ -280,7 +280,7 @@ export const NoOptionsMessage = styled.div`
 `;
 
 export const CrossIcon = styled.button`
-    
+    //
 `;
 
 export const Placeholder = styled.div`
@@ -288,15 +288,15 @@ export const Placeholder = styled.div`
 `;
 
 export const IndicatorsContainer = styled.div<SelectProps>`
+  display: flex;
   -webkit-box-align: center;
   align-items: center;
   align-self: stretch;
-  display: flex;
   flex-shrink: 0;
   min-height: 32px;
 
   i {
-    font-size: 14px;
+    font-size: font-size: ${props => props.theme.font.size.md};;
   }
   
   ${props =>
@@ -305,7 +305,7 @@ export const IndicatorsContainer = styled.div<SelectProps>`
         min-height: 24px;
         
         i{
-          font-size: 12px;
+          font-size: ${props => props.theme.font.size.sm};
         }
     `}
   
@@ -316,7 +316,7 @@ export const IndicatorsContainer = styled.div<SelectProps>`
         min-height: 38px;
         
         i{
-          font-size: 16px;
+          font-size: ${props => props.theme.font.size.lg};
         }
     `}
 `;
@@ -359,8 +359,7 @@ export const Menu = styled.div`
 export const MenuList = styled.div`
   border: 1px solid ${props => props.theme.color.primary};
   border-top: 0;
-  border-radius: 0 0 ${props => props.theme.radius}
-    ${props => props.theme.radius};
+  border-radius: 0 0 ${props => props.theme.radius} ${props => props.theme.radius};
   background: ${props => props.theme.color.white};
   overflow: hidden;
   outline-offset: -2px;
@@ -368,17 +367,5 @@ export const MenuList = styled.div`
 `;
 
 export const Input = styled.input`
-    font-size: 14px;
-    color: rgb(51,51,51);
-    box-sizing: border-box;
-    position: absolute;
-    left: 0;
-    top: 2px;
-    bottom: 2px;
-    border: 0;
-    padding-left: 10px;
-    right: 0;
-    visibility: hidden;
-    
-    outline: none;
+    {/* todo */}
 `;

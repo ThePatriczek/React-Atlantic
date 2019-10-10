@@ -14,7 +14,7 @@ stories.add(
   'Playground',
   () => {
     const select = (<>
-      <Select isSearchable>
+      <Select>
         <Option value={`val1`}>
           <Text>{`Option 1`}</Text>
         </Option>

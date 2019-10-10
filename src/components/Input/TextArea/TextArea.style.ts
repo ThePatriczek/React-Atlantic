@@ -45,20 +45,19 @@ export const StyledTextAreaWrapper = styled.div<{
 `;
 
 export const StyledTextArea = styled.textarea`
-  font-family: ${props => props.theme.font.family};
-  padding: ${props => props.theme.padding.sm} ${props => props.theme.padding.md};
-  height: auto;
-  min-height: ${props => props.theme.height.md};
-  margin: 0;
-  vertical-align: middle;
+  position: relative;
+  display: inline-block;
   min-width: 150px;
   width: 100%;
   max-width: 100%;
-
-  position: relative;
-  display: inline-block;
+  height: auto;
+  min-height: ${props => props.theme.height.md};
+  padding: ${props => props.theme.padding.sm} ${props => props.theme.padding.md};
+  margin: 0;
+  
+  vertical-align: middle;
   line-height: 1.5;
-
+  font-family: ${props => props.theme.font.family};
   font-size: ${props => props.theme.font.size.md};
   font-weight: 400;
   overflow: auto;
@@ -68,6 +67,7 @@ export const StyledTextArea = styled.textarea`
 
   background-color: ${props => props.theme.color.white};
   color: ${props => props.theme.color.black};
+  border: 1px solid ${props => darken(0.1, props.theme.color.default)};
   border-radius: ${props => props.theme.radius};
   outline: 0;
   list-style: none;
@@ -75,8 +75,6 @@ export const StyledTextArea = styled.textarea`
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
-
-  border: 1px solid ${props => darken(0.1, props.theme.color.default)};
 
   ::placeholder {
     color: ${() => lighten(0.6, `black`)};
@@ -92,6 +90,7 @@ export const StyledTextArea = styled.textarea`
     props.disabled &&
     css`
       color: ${darken(0.2, props.theme.color.default)};
+      
       ::placeholder {
         color: ${darken(0.2, props.theme.color.default)};
       }
@@ -113,19 +112,19 @@ export const StyledTextAreaIcon = styled.span<{
   iconLeft: boolean;
   iconRight: boolean;
 }>`
-  bottom: 10px;
   display: flex;
-  line-height: inherit;
+  bottom: 10px;
   height: auto;
-  color: #777777;
+  line-height: inherit;
+  color: ${props => lighten(0.6, props.theme.color.black)};
 
   ${props =>
     props.iconLeft &&
     css`
       position: absolute;
+      align-items: flex-start;
       top: 9px;
       left: 10px;
-      align-items: flex-start;
     `}
 
   ${props =>
