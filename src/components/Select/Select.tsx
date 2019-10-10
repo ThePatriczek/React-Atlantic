@@ -41,6 +41,7 @@ export interface OptionType {
   value: any;
   label: string;
   className?: string;
+  size: Size;
 }
 
 const getChild = (
@@ -64,14 +65,14 @@ export const Select: React.FC<React.PropsWithChildren<SelectProps>> & {
   const {
     children,
     isSearchable,
-    placeholder,
     isDisabled,
+    placeholder,
     value,
     className,
     options,
     isMulti,
     isFullWidth,
-    size
+    size,
   } = props;
   let items: any[] = [];
 
@@ -128,7 +129,11 @@ export const Select: React.FC<React.PropsWithChildren<SelectProps>> & {
           const { className } = others.data;
 
           return (
-            <StyledOption ref={innerRef} {...innerProps} className={className}>
+            <StyledOption
+              ref={innerRef}
+              {...innerProps}
+              size={size}
+              className={className}>
               {label}
             </StyledOption>
           );
@@ -149,7 +154,8 @@ export const Select: React.FC<React.PropsWithChildren<SelectProps>> & {
           menuIsOpen,
           isFocused,
           isMulti,
-          hasValue
+          hasValue,
+          isDisabled
         }: any) => (
           <Control
             {...innerProps}
@@ -160,6 +166,7 @@ export const Select: React.FC<React.PropsWithChildren<SelectProps>> & {
             className={`control`}
             isFullWidth={isFullWidth}
             size={size}
+            isDisabled={isDisabled}
           >
             {children}
           </Control>
@@ -176,7 +183,10 @@ export const Select: React.FC<React.PropsWithChildren<SelectProps>> & {
           </div>
         ),
         DropdownIndicator: ({ innerProps, selectProps }) => (
-          <DropdownIndicator className={`arrow-container`} {...innerProps}>
+          <DropdownIndicator
+            isDisabled={isDisabled}
+            className={`arrow-container`}
+            {...innerProps}>
             {selectProps.menuIsOpen && <Icon name={'arrowUp'} />}
             {!selectProps.menuIsOpen && <Icon name={'arrowDown'} />}
           </DropdownIndicator>
@@ -194,14 +204,17 @@ export const Select: React.FC<React.PropsWithChildren<SelectProps>> & {
         ),
         MenuList: ({ children, ...props }) => <MenuList>{children}</MenuList>,
         IndicatorsContainer: ({ children, ...props }) => (
-          <IndicatorsContainer className={`indicators-container`}>
+          <IndicatorsContainer
+            size={size}
+            className={`indicators-container`}>
             {children}
           </IndicatorsContainer>
         ),
         Input: props =>
           <Input
+            placeholder={`Začněte psát`}
           {...props}
-        />,
+          />,
         LoadingIndicator: ({ children, innerProps }) => (
           <div className={`loading`} {...innerProps}>
             {children}
@@ -222,7 +235,10 @@ export const Select: React.FC<React.PropsWithChildren<SelectProps>> & {
           removeProps,
           ...props
         }) => (
-          <MultiValue className={`multi-value`} {...innerProps}>
+          <MultiValue
+            className={`multi-value`}
+            size={size}
+            {...innerProps}>
             {children}
             {components.Remove(removeProps)}
           </MultiValue>
@@ -256,7 +272,11 @@ export const Select: React.FC<React.PropsWithChildren<SelectProps>> & {
           </SelectContainer>
         ),
         SingleValue: ({ children, innerProps }) => (
-          <SingleValue className={`single-value`} {...innerProps}>
+          <SingleValue
+            className={`single-value`}
+            size={size}
+            isFullWidth={isFullWidth}
+            {...innerProps}>
             {children}
           </SingleValue>
         ),
@@ -265,6 +285,7 @@ export const Select: React.FC<React.PropsWithChildren<SelectProps>> & {
             className={`value-container`}
             isMulti={isMulti}
             size={size}
+            isFullWidth={isFullWidth}
           >
             {children}
           </ValueContainer>

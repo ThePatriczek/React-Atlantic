@@ -56,6 +56,7 @@ export const StyledInputWrapper = styled.span<StyledInputWrapperProps>`
 
   i {
     display: flex;
+    
     ${props =>
       props.isDisabled
         ? css`
