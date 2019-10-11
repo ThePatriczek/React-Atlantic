@@ -25,22 +25,21 @@ import {
 } from './Select.style';
 
 export interface SelectProps {
-  onChange?: (value?: OptionType | OptionType[] | string) => void;
-  value?: OptionType | OptionType[] | string;
-  defaultValue?: OptionType | OptionType[] | string;
+  onChange?: (value?: any) => void;
+  value?: any;
+  defaultValue?: any;
   options?: OptionType[];
   isMulti?: boolean;
   isFullWidth?: boolean;
   placeholder?: string;
   isDisabled?: boolean;
-  size: Size;
+  size?: Size;
   className?: string;
 }
 
 export interface OptionType {
-  value: unknown;
+  value: any;
   label: string;
-  className?: string;
 }
 
 const getChild = (
@@ -74,12 +73,12 @@ export const Select: React.FC<React.PropsWithChildren<SelectProps>> & {
   } = props;
   const [value, setValue] = React.useState<any>(defaultValue);
 
-  let items: any[] = [];
+  let items: OptionType[] = [];
   if (children) {
     if (Array.isArray(children)) {
-      items = children;
+      items = children as OptionType[];
     } else {
-      items.push(children);
+      items.push(children as OptionType);
     }
 
     items = items.map((item: unknown, key: number) => {
@@ -123,29 +122,35 @@ export const Select: React.FC<React.PropsWithChildren<SelectProps>> & {
     }
   };
 
-  if (typeof value === 'string') {
-    items.forEach(item => {
-      if (item.value === value) {
-        setValue(item);
-      }
-    });
-  }
+  const val: any[] = [];
 
-  if (props.value && ((value && value.value !== props.value) || !value)) {
-    if (typeof props.value === 'string') {
-      items.forEach(item => {
-        if (item.value === props.value) {
-          setValue(item);
-        }
+  const fillValue = (value: any) => {
+    if (typeof value === 'string' || typeof value === 'number') {
+      items.forEach(item => item.value === value && val.push(item));
+    } else {
+      items.forEach(item => item.value === value.value && val.push(value));
+    }
+  };
+
+  const fillValues = (value: unknown) => {
+    if (Array.isArray(value)) {
+      props.value.forEach((item: unknown) => {
+        fillValue(item);
       });
     } else {
-      setValue(props.value);
+      fillValue(value);
     }
+  };
+
+  if (props.value) {
+    fillValues(props.value);
+  } else if (value) {
+    fillValues(value);
   }
 
   return (
     <ReactSelect
-      value={value}
+      value={val}
       isDisabled={isDisabled}
       options={items}
       placeholder={placeholder || `Select an option`}
