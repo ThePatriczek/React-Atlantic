@@ -27,3 +27,4 @@ typings/
 .env
 .next
 src/**/*.d.ts
+test
