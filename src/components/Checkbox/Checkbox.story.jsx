@@ -3,7 +3,7 @@ import { storiesOf } from '@storybook/react';
 import * as React from 'react';
 import { specs } from 'storybook-addon-specifications';
 import { Component, tests } from './Checkbox.test';
-import { defaultValues } from './defaultValues';
+import { defaultValues } from '../../constants/defaultValues';
 
 const stories = storiesOf('Checkbox', module);
 
