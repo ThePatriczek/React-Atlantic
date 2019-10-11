@@ -1,0 +1,346 @@
+ef6ec59e0b19d7eb82ebb010ad501f3c
+"use strict";
+
+var _interopRequireWildcard = require("/Users/patrikmeixner/WebstormProjects/ATLAS/React-Atlantic/node_modules/babel-preset-react-app/node_modules/@babel/runtime/helpers/interopRequireWildcard");
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.Icon = void 0;
+
+var React = _interopRequireWildcard(require("react"));
+
+var Icons = _interopRequireWildcard(require("../../Icons"));
+
+var _Icon = require("./Icon.style");
+
+var _jsxFileName = "/Users/patrikmeixner/WebstormProjects/ATLAS/React-Atlantic/src/components/Icon/Icon.tsx";
+
+const Icon = props => {
+  const name = props.name,
+        isRotating = props.isRotating,
+        className = props.className;
+  let Component = React.createElement("i", {
+    className: className,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 49
+    },
+    __self: void 0
+  });
+
+  switch (name) {
+    case 'arrowUp':
+      Component = React.createElement(Icons.ArrowUp, {
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 53
+        },
+        __self: void 0
+      });
+      break;
+
+    case 'arrowDoubleUp':
+      Component = React.createElement(Icons.ArrowDoubleUp, {
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 56
+        },
+        __self: void 0
+      });
+      break;
+
+    case 'arrowRight':
+      Component = React.createElement(Icons.ArrowRight, {
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 59
+        },
+        __self: void 0
+      });
+      break;
+
+    case 'arrowDoubleRight':
+      Component = React.createElement(Icons.ArrowDoubleRight, {
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 62
+        },
+        __self: void 0
+      });
+      break;
+
+    case 'arrowDown':
+      Component = React.createElement(Icons.ArrowDown, {
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 65
+        },
+        __self: void 0
+      });
+      break;
+
+    case 'arrowDoubleDown':
+      Component = React.createElement(Icons.ArrowDoubleDown, {
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 68
+        },
+        __self: void 0
+      });
+      break;
+
+    case 'arrowLeft':
+      Component = React.createElement(Icons.ArrowLeft, {
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 71
+        },
+        __self: void 0
+      });
+      break;
+
+    case 'arrowDoubleLeft':
+      Component = React.createElement(Icons.ArrowDoubleLeft, {
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 74
+        },
+        __self: void 0
+      });
+      break;
+
+    case 'hamburger':
+      Component = React.createElement(Icons.Hamburger, {
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 77
+        },
+        __self: void 0
+      });
+      break;
+
+    case 'loading':
+      Component = React.createElement(Icons.Loading, {
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 80
+        },
+        __self: void 0
+      });
+      break;
+
+    case 'edit':
+      Component = React.createElement(Icons.Edit, {
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 83
+        },
+        __self: void 0
+      });
+      break;
+
+    case 'copy':
+      Component = React.createElement(Icons.Copy, {
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 86
+        },
+        __self: void 0
+      });
+      break;
+
+    case 'check':
+      Component = React.createElement(Icons.Check, {
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 89
+        },
+        __self: void 0
+      });
+      break;
+
+    case 'clear':
+      Component = React.createElement(Icons.Clear, {
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 92
+        },
+        __self: void 0
+      });
+      break;
+
+    case 'close':
+      Component = React.createElement(Icons.Close, {
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 95
+        },
+        __self: void 0
+      });
+      break;
+
+    case 'export':
+      Component = React.createElement(Icons.Export, {
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 98
+        },
+        __self: void 0
+      });
+      break;
+
+    case 'eye':
+      Component = React.createElement(Icons.Eye, {
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 101
+        },
+        __self: void 0
+      });
+      break;
+
+    case 'eyeSlash':
+      Component = React.createElement(Icons.EyeSlash, {
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 104
+        },
+        __self: void 0
+      });
+      break;
+
+    case 'import':
+      Component = React.createElement(Icons.Import, {
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 107
+        },
+        __self: void 0
+      });
+      break;
+
+    case 'info':
+      Component = React.createElement(Icons.Info, {
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 110
+        },
+        __self: void 0
+      });
+      break;
+
+    case 'key':
+      Component = React.createElement(Icons.Key, {
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 113
+        },
+        __self: void 0
+      });
+      break;
+
+    case 'license':
+      Component = React.createElement(Icons.License, {
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 116
+        },
+        __self: void 0
+      });
+      break;
+
+    case 'logout':
+      Component = React.createElement(Icons.Logout, {
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 119
+        },
+        __self: void 0
+      });
+      break;
+
+    case 'plus':
+      Component = React.createElement(Icons.Plus, {
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 122
+        },
+        __self: void 0
+      });
+      break;
+
+    case 'search':
+      Component = React.createElement(Icons.Search, {
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 125
+        },
+        __self: void 0
+      });
+      break;
+
+    case 'trash':
+      Component = React.createElement(Icons.Trash, {
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 128
+        },
+        __self: void 0
+      });
+      break;
+
+    case 'upload':
+      Component = React.createElement(Icons.Upload, {
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 131
+        },
+        __self: void 0
+      });
+      break;
+
+    case 'user':
+      Component = React.createElement(Icons.User, {
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 134
+        },
+        __self: void 0
+      });
+      break;
+
+    case 'users':
+      Component = React.createElement(Icons.Users, {
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 137
+        },
+        __self: void 0
+      });
+      break;
+
+    case 'enter':
+      Component = React.createElement(Icons.Enter, {
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 140
+        },
+        __self: void 0
+      });
+      break;
+  }
+
+  return React.createElement(_Icon.StyledIcon, {
+    isRotating: isRotating,
+    className: className,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 145
+    },
+    __self: void 0
+  }, Component);
+};
+
+exports.Icon = Icon;
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIkljb24udHN4Il0sIm5hbWVzIjpbIkljb24iLCJwcm9wcyIsIm5hbWUiLCJpc1JvdGF0aW5nIiwiY2xhc3NOYW1lIiwiQ29tcG9uZW50Il0sIm1hcHBpbmdzIjoiOzs7Ozs7Ozs7QUFBQTs7QUFDQTs7QUFDQTs7OztBQXlDTyxNQUFNQSxJQUF5QixHQUNwQ0MsS0FEdUMsSUFFaEI7QUFBQSxRQUNmQyxJQURlLEdBQ2lCRCxLQURqQixDQUNmQyxJQURlO0FBQUEsUUFDVEMsVUFEUyxHQUNpQkYsS0FEakIsQ0FDVEUsVUFEUztBQUFBLFFBQ0dDLFNBREgsR0FDaUJILEtBRGpCLENBQ0dHLFNBREg7QUFHdkIsTUFBSUMsU0FBUyxHQUFHO0FBQUcsSUFBQSxTQUFTLEVBQUVELFNBQWQ7QUFBQTtBQUFBO0FBQUE7QUFBQTtBQUFBO0FBQUEsSUFBaEI7O0FBRUEsVUFBUUYsSUFBUjtBQUNFLFNBQUssU0FBTDtBQUNFRyxNQUFBQSxTQUFTLEdBQUcsb0JBQUMsS0FBRCxDQUFPLE9BQVA7QUFBQTtBQUFBO0FBQUE7QUFBQTtBQUFBO0FBQUEsUUFBWjtBQUNBOztBQUNGLFNBQUssZUFBTDtBQUNFQSxNQUFBQSxTQUFTLEdBQUcsb0JBQUMsS0FBRCxDQUFPLGFBQVA7QUFBQTtBQUFBO0FBQUE7QUFBQTtBQUFBO0FBQUEsUUFBWjtBQUNBOztBQUNGLFNBQUssWUFBTDtBQUNFQSxNQUFBQSxTQUFTLEdBQUcsb0JBQUMsS0FBRCxDQUFPLFVBQVA7QUFBQTtBQUFBO0FBQUE7QUFBQTtBQUFBO0FBQUEsUUFBWjtBQUNBOztBQUNGLFNBQUssa0JBQUw7QUFDRUEsTUFBQUEsU0FBUyxHQUFHLG9CQUFDLEtBQUQsQ0FBTyxnQkFBUDtBQUFBO0FBQUE7QUFBQTtBQUFBO0FBQUE7QUFBQSxRQUFaO0FBQ0E7O0FBQ0YsU0FBSyxXQUFMO0FBQ0VBLE1BQUFBLFNBQVMsR0FBRyxvQkFBQyxLQUFELENBQU8sU0FBUDtBQUFBO0FBQUE7QUFBQTtBQUFBO0FBQUE7QUFBQSxRQUFaO0FBQ0E7O0FBQ0YsU0FBSyxpQkFBTDtBQUNFQSxNQUFBQSxTQUFTLEdBQUcsb0JBQUMsS0FBRCxDQUFPLGVBQVA7QUFBQTtBQUFBO0FBQUE7QUFBQTtBQUFBO0FBQUEsUUFBWjtBQUNBOztBQUNGLFNBQUssV0FBTDtBQUNFQSxNQUFBQSxTQUFTLEdBQUcsb0JBQUMsS0FBRCxDQUFPLFNBQVA7QUFBQTtBQUFBO0FBQUE7QUFBQTtBQUFBO0FBQUEsUUFBWjtBQUNBOztBQUNGLFNBQUssaUJBQUw7QUFDRUEsTUFBQUEsU0FBUyxHQUFHLG9CQUFDLEtBQUQsQ0FBTyxlQUFQO0FBQUE7QUFBQTtBQUFBO0FBQUE7QUFBQTtBQUFBLFFBQVo7QUFDQTs7QUFDRixTQUFLLFdBQUw7QUFDRUEsTUFBQUEsU0FBUyxHQUFHLG9CQUFDLEtBQUQsQ0FBTyxTQUFQO0FBQUE7QUFBQTtBQUFBO0FBQUE7QUFBQTtBQUFBLFFBQVo7QUFDQTs7QUFDRixTQUFLLFNBQUw7QUFDRUEsTUFBQUEsU0FBUyxHQUFHLG9CQUFDLEtBQUQsQ0FBTyxPQUFQO0FBQUE7QUFBQTtBQUFBO0FBQUE7QUFBQTtBQUFBLFFBQVo7QUFDQTs7QUFDRixTQUFLLE1BQUw7QUFDRUEsTUFBQUEsU0FBUyxHQUFHLG9CQUFDLEtBQUQsQ0FBTyxJQUFQO0FBQUE7QUFBQTtBQUFBO0FBQUE7QUFBQTtBQUFBLFFBQVo7QUFDQTs7QUFDRixTQUFLLE1BQUw7QUFDRUEsTUFBQUEsU0FBUyxHQUFHLG9CQUFDLEtBQUQsQ0FBTyxJQUFQO0FBQUE7QUFBQTtBQUFBO0FBQUE7QUFBQTtBQUFBLFFBQVo7QUFDQTs7QUFDRixTQUFLLE9BQUw7QUFDRUEsTUFBQUEsU0FBUyxHQUFHLG9CQUFDLEtBQUQsQ0FBTyxLQUFQO0FBQUE7QUFBQTtBQUFBO0FBQUE7QUFBQTtBQUFBLFFBQVo7QUFDQTs7QUFDRixTQUFLLE9BQUw7QUFDRUEsTUFBQUEsU0FBUyxHQUFHLG9CQUFDLEtBQUQsQ0FBTyxLQUFQO0FBQUE7QUFBQTtBQUFBO0FBQUE7QUFBQTtBQUFBLFFBQVo7QUFDQTs7QUFDRixTQUFLLE9BQUw7QUFDRUEsTUFBQUEsU0FBUyxHQUFHLG9CQUFDLEtBQUQsQ0FBTyxLQUFQO0FBQUE7QUFBQTtBQUFBO0FBQUE7QUFBQTtBQUFBLFFBQVo7QUFDQTs7QUFDRixTQUFLLFFBQUw7QUFDRUEsTUFBQUEsU0FBUyxHQUFHLG9CQUFDLEtBQUQsQ0FBTyxNQUFQO0FBQUE7QUFBQTtBQUFBO0FBQUE7QUFBQTtBQUFBLFFBQVo7QUFDQTs7QUFDRixTQUFLLEtBQUw7QUFDRUEsTUFBQUEsU0FBUyxHQUFHLG9CQUFDLEtBQUQsQ0FBTyxHQUFQO0FBQUE7QUFBQTtBQUFBO0FBQUE7QUFBQTtBQUFBLFFBQVo7QUFDQTs7QUFDRixTQUFLLFVBQUw7QUFDRUEsTUFBQUEsU0FBUyxHQUFHLG9CQUFDLEtBQUQsQ0FBTyxRQUFQO0FBQUE7QUFBQTtBQUFBO0FBQUE7QUFBQTtBQUFBLFFBQVo7QUFDQTs7QUFDRixTQUFLLFFBQUw7QUFDRUEsTUFBQUEsU0FBUyxHQUFHLG9CQUFDLEtBQUQsQ0FBTyxNQUFQO0FBQUE7QUFBQTtBQUFBO0FBQUE7QUFBQTtBQUFBLFFBQVo7QUFDQTs7QUFDRixTQUFLLE1BQUw7QUFDRUEsTUFBQUEsU0FBUyxHQUFHLG9CQUFDLEtBQUQsQ0FBTyxJQUFQO0FBQUE7QUFBQTtBQUFBO0FBQUE7QUFBQTtBQUFBLFFBQVo7QUFDQTs7QUFDRixTQUFLLEtBQUw7QUFDRUEsTUFBQUEsU0FBUyxHQUFHLG9CQUFDLEtBQUQsQ0FBTyxHQUFQO0FBQUE7QUFBQTtBQUFBO0FBQUE7QUFBQTtBQUFBLFFBQVo7QUFDQTs7QUFDRixTQUFLLFNBQUw7QUFDRUEsTUFBQUEsU0FBUyxHQUFHLG9CQUFDLEtBQUQsQ0FBTyxPQUFQO0FBQUE7QUFBQTtBQUFBO0FBQUE7QUFBQTtBQUFBLFFBQVo7QUFDQTs7QUFDRixTQUFLLFFBQUw7QUFDRUEsTUFBQUEsU0FBUyxHQUFHLG9CQUFDLEtBQUQsQ0FBTyxNQUFQO0FBQUE7QUFBQTtBQUFBO0FBQUE7QUFBQTtBQUFBLFFBQVo7QUFDQTs7QUFDRixTQUFLLE1BQUw7QUFDRUEsTUFBQUEsU0FBUyxHQUFHLG9CQUFDLEtBQUQsQ0FBTyxJQUFQO0FBQUE7QUFBQTtBQUFBO0FBQUE7QUFBQTtBQUFBLFFBQVo7QUFDQTs7QUFDRixTQUFLLFFBQUw7QUFDRUEsTUFBQUEsU0FBUyxHQUFHLG9CQUFDLEtBQUQsQ0FBTyxNQUFQO0FBQUE7QUFBQTtBQUFBO0FBQUE7QUFBQTtBQUFBLFFBQVo7QUFDQTs7QUFDRixTQUFLLE9BQUw7QUFDRUEsTUFBQUEsU0FBUyxHQUFHLG9CQUFDLEtBQUQsQ0FBTyxLQUFQO0FBQUE7QUFBQTtBQUFBO0FBQUE7QUFBQTtBQUFBLFFBQVo7QUFDQTs7QUFDRixTQUFLLFFBQUw7QUFDRUEsTUFBQUEsU0FBUyxHQUFHLG9CQUFDLEtBQUQsQ0FBTyxNQUFQO0FBQUE7QUFBQTtBQUFBO0FBQUE7QUFBQTtBQUFBLFFBQVo7QUFDQTs7QUFDRixTQUFLLE1BQUw7QUFDRUEsTUFBQUEsU0FBUyxHQUFHLG9CQUFDLEtBQUQsQ0FBTyxJQUFQO0FBQUE7QUFBQTtBQUFBO0FBQUE7QUFBQTtBQUFBLFFBQVo7QUFDQTs7QUFDRixTQUFLLE9BQUw7QUFDRUEsTUFBQUEsU0FBUyxHQUFHLG9CQUFDLEtBQUQsQ0FBTyxLQUFQO0FBQUE7QUFBQTtBQUFBO0FBQUE7QUFBQTtBQUFBLFFBQVo7QUFDQTs7QUFDRixTQUFLLE9BQUw7QUFDRUEsTUFBQUEsU0FBUyxHQUFHLG9CQUFDLEtBQUQsQ0FBTyxLQUFQO0FBQUE7QUFBQTtBQUFBO0FBQUE7QUFBQTtBQUFBLFFBQVo7QUFDQTtBQTFGSjs7QUE2RkEsU0FDRSxvQkFBQyxnQkFBRDtBQUFZLElBQUEsVUFBVSxFQUFFRixVQUF4QjtBQUFvQyxJQUFBLFNBQVMsRUFBRUMsU0FBL0M7QUFBQTtBQUFBO0FBQUE7QUFBQTtBQUFBO0FBQUEsS0FDR0MsU0FESCxDQURGO0FBS0QsQ0F6R00iLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgKiBhcyBSZWFjdCBmcm9tICdyZWFjdCc7XG5pbXBvcnQgKiBhcyBJY29ucyBmcm9tICcuLi8uLi9JY29ucyc7XG5pbXBvcnQgeyBTdHlsZWRJY29uIH0gZnJvbSAnLi9JY29uLnN0eWxlJztcblxuZXhwb3J0IHR5cGUgSWNvbk5hbWUgPVxuICB8ICdhcnJvd1VwJ1xuICB8ICdhcnJvd0RvdWJsZVVwJ1xuICB8ICdhcnJvd1JpZ2h0J1xuICB8ICdhcnJvd0RvdWJsZVJpZ2h0J1xuICB8ICdhcnJvd0Rvd24nXG4gIHwgJ2Fycm93RG91YmxlRG93bidcbiAgfCAnYXJyb3dMZWZ0J1xuICB8ICdhcnJvd0RvdWJsZUxlZnQnXG4gIHwgJ2hhbWJ1cmdlcidcbiAgfCAnbG9hZGluZydcbiAgfCAnZWRpdCdcbiAgfCAnY29weSdcbiAgfCAnY2hlY2snXG4gIHwgJ3VzZXJzJ1xuICB8ICd1c2VyJ1xuICB8ICd1cGxvYWQnXG4gIHwgJ3RyYXNoJ1xuICB8ICdzZWFyY2gnXG4gIHwgJ3BsdXMnXG4gIHwgJ2xvZ291dCdcbiAgfCAnbGljZW5zZSdcbiAgfCAna2V5J1xuICB8ICdpbmZvJ1xuICB8ICdpbXBvcnQnXG4gIHwgJ2V4cG9ydCdcbiAgfCAnZXllJ1xuICB8ICdleWVTbGFzaCdcbiAgfCAnY2xvc2UnXG4gIHwgJ2NsZWFyJ1xuICB8ICdlbnRlcic7XG5cbmV4cG9ydCBpbnRlcmZhY2UgSWNvblByb3BzIHtcbiAgbmFtZTogSWNvbk5hbWU7XG4gIGlzUm90YXRpbmc/OiBib29sZWFuO1xuICAvKiogY3VzdG9tIGNsYXNzTmFtZSAqL1xuICBjbGFzc05hbWU/OiBzdHJpbmc7XG59XG5cbmV4cG9ydCBjb25zdCBJY29uOiBSZWFjdC5GQzxJY29uUHJvcHM+ID0gKFxuICBwcm9wczogSWNvblByb3BzXG4pOiBSZWFjdC5SZWFjdEVsZW1lbnQgPT4ge1xuICBjb25zdCB7IG5hbWUsIGlzUm90YXRpbmcsIGNsYXNzTmFtZSB9ID0gcHJvcHM7XG5cbiAgbGV0IENvbXBvbmVudCA9IDxpIGNsYXNzTmFtZT17Y2xhc3NOYW1lfSAvPjtcblxuICBzd2l0Y2ggKG5hbWUpIHtcbiAgICBjYXNlICdhcnJvd1VwJzpcbiAgICAgIENvbXBvbmVudCA9IDxJY29ucy5BcnJvd1VwIC8+O1xuICAgICAgYnJlYWs7XG4gICAgY2FzZSAnYXJyb3dEb3VibGVVcCc6XG4gICAgICBDb21wb25lbnQgPSA8SWNvbnMuQXJyb3dEb3VibGVVcCAvPjtcbiAgICAgIGJyZWFrO1xuICAgIGNhc2UgJ2Fycm93UmlnaHQnOlxuICAgICAgQ29tcG9uZW50ID0gPEljb25zLkFycm93UmlnaHQgLz47XG4gICAgICBicmVhaztcbiAgICBjYXNlICdhcnJvd0RvdWJsZVJpZ2h0JzpcbiAgICAgIENvbXBvbmVudCA9IDxJY29ucy5BcnJvd0RvdWJsZVJpZ2h0IC8+O1xuICAgICAgYnJlYWs7XG4gICAgY2FzZSAnYXJyb3dEb3duJzpcbiAgICAgIENvbXBvbmVudCA9IDxJY29ucy5BcnJvd0Rvd24gLz47XG4gICAgICBicmVhaztcbiAgICBjYXNlICdhcnJvd0RvdWJsZURvd24nOlxuICAgICAgQ29tcG9uZW50ID0gPEljb25zLkFycm93RG91YmxlRG93biAvPjtcbiAgICAgIGJyZWFrO1xuICAgIGNhc2UgJ2Fycm93TGVmdCc6XG4gICAgICBDb21wb25lbnQgPSA8SWNvbnMuQXJyb3dMZWZ0IC8+O1xuICAgICAgYnJlYWs7XG4gICAgY2FzZSAnYXJyb3dEb3VibGVMZWZ0JzpcbiAgICAgIENvbXBvbmVudCA9IDxJY29ucy5BcnJvd0RvdWJsZUxlZnQgLz47XG4gICAgICBicmVhaztcbiAgICBjYXNlICdoYW1idXJnZXInOlxuICAgICAgQ29tcG9uZW50ID0gPEljb25zLkhhbWJ1cmdlciAvPjtcbiAgICAgIGJyZWFrO1xuICAgIGNhc2UgJ2xvYWRpbmcnOlxuICAgICAgQ29tcG9uZW50ID0gPEljb25zLkxvYWRpbmcgLz47XG4gICAgICBicmVhaztcbiAgICBjYXNlICdlZGl0JzpcbiAgICAgIENvbXBvbmVudCA9IDxJY29ucy5FZGl0IC8+O1xuICAgICAgYnJlYWs7XG4gICAgY2FzZSAnY29weSc6XG4gICAgICBDb21wb25lbnQgPSA8SWNvbnMuQ29weSAvPjtcbiAgICAgIGJyZWFrO1xuICAgIGNhc2UgJ2NoZWNrJzpcbiAgICAgIENvbXBvbmVudCA9IDxJY29ucy5DaGVjayAvPjtcbiAgICAgIGJyZWFrO1xuICAgIGNhc2UgJ2NsZWFyJzpcbiAgICAgIENvbXBvbmVudCA9IDxJY29ucy5DbGVhciAvPjtcbiAgICAgIGJyZWFrO1xuICAgIGNhc2UgJ2Nsb3NlJzpcbiAgICAgIENvbXBvbmVudCA9IDxJY29ucy5DbG9zZSAvPjtcbiAgICAgIGJyZWFrO1xuICAgIGNhc2UgJ2V4cG9ydCc6XG4gICAgICBDb21wb25lbnQgPSA8SWNvbnMuRXhwb3J0IC8+O1xuICAgICAgYnJlYWs7XG4gICAgY2FzZSAnZXllJzpcbiAgICAgIENvbXBvbmVudCA9IDxJY29ucy5FeWUgLz47XG4gICAgICBicmVhaztcbiAgICBjYXNlICdleWVTbGFzaCc6XG4gICAgICBDb21wb25lbnQgPSA8SWNvbnMuRXllU2xhc2ggLz47XG4gICAgICBicmVhaztcbiAgICBjYXNlICdpbXBvcnQnOlxuICAgICAgQ29tcG9uZW50ID0gPEljb25zLkltcG9ydCAvPjtcbiAgICAgIGJyZWFrO1xuICAgIGNhc2UgJ2luZm8nOlxuICAgICAgQ29tcG9uZW50ID0gPEljb25zLkluZm8gLz47XG4gICAgICBicmVhaztcbiAgICBjYXNlICdrZXknOlxuICAgICAgQ29tcG9uZW50ID0gPEljb25zLktleSAvPjtcbiAgICAgIGJyZWFrO1xuICAgIGNhc2UgJ2xpY2Vuc2UnOlxuICAgICAgQ29tcG9uZW50ID0gPEljb25zLkxpY2Vuc2UgLz47XG4gICAgICBicmVhaztcbiAgICBjYXNlICdsb2dvdXQnOlxuICAgICAgQ29tcG9uZW50ID0gPEljb25zLkxvZ291dCAvPjtcbiAgICAgIGJyZWFrO1xuICAgIGNhc2UgJ3BsdXMnOlxuICAgICAgQ29tcG9uZW50ID0gPEljb25zLlBsdXMgLz47XG4gICAgICBicmVhaztcbiAgICBjYXNlICdzZWFyY2gnOlxuICAgICAgQ29tcG9uZW50ID0gPEljb25zLlNlYXJjaCAvPjtcbiAgICAgIGJyZWFrO1xuICAgIGNhc2UgJ3RyYXNoJzpcbiAgICAgIENvbXBvbmVudCA9IDxJY29ucy5UcmFzaCAvPjtcbiAgICAgIGJyZWFrO1xuICAgIGNhc2UgJ3VwbG9hZCc6XG4gICAgICBDb21wb25lbnQgPSA8SWNvbnMuVXBsb2FkIC8+O1xuICAgICAgYnJlYWs7XG4gICAgY2FzZSAndXNlcic6XG4gICAgICBDb21wb25lbnQgPSA8SWNvbnMuVXNlciAvPjtcbiAgICAgIGJyZWFrO1xuICAgIGNhc2UgJ3VzZXJzJzpcbiAgICAgIENvbXBvbmVudCA9IDxJY29ucy5Vc2VycyAvPjtcbiAgICAgIGJyZWFrO1xuICAgIGNhc2UgJ2VudGVyJzpcbiAgICAgIENvbXBvbmVudCA9IDxJY29ucy5FbnRlciAvPjtcbiAgICAgIGJyZWFrO1xuICB9XG5cbiAgcmV0dXJuIChcbiAgICA8U3R5bGVkSWNvbiBpc1JvdGF0aW5nPXtpc1JvdGF0aW5nfSBjbGFzc05hbWU9e2NsYXNzTmFtZX0+XG4gICAgICB7Q29tcG9uZW50fVxuICAgIDwvU3R5bGVkSWNvbj5cbiAgKTtcbn07XG5cbmV4cG9ydCB0eXBlIEljb24gPSB0eXBlb2YgSWNvbjtcbiJdfQ==

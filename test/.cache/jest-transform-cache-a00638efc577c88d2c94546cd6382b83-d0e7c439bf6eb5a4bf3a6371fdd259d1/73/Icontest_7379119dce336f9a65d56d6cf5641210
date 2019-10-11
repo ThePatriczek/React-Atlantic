@@ -1,0 +1,50 @@
+355a818c5e01220af4aa6b4492ba98ab
+"use strict";
+
+var _interopRequireDefault = require("/Users/patrikmeixner/WebstormProjects/ATLAS/React-Atlantic/node_modules/babel-preset-react-app/node_modules/@babel/runtime/helpers/interopRequireDefault");
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.tests = exports.Component = void 0;
+
+var _enzyme = require("enzyme");
+
+var _react = _interopRequireDefault(require("react"));
+
+var _Icon = require("./Icon");
+
+var _defaultValues = require("../../constants/defaultValues");
+
+var _jsxFileName = "/Users/patrikmeixner/WebstormProjects/ATLAS/React-Atlantic/src/components/Icon/Icon.test.jsx";
+
+const Component = (name, isRotating) => {
+  return _react.default.createElement(_Icon.Icon, {
+    name: name,
+    isRotating: isRotating,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 7
+    },
+    __self: void 0
+  });
+};
+
+exports.Component = Component;
+let output;
+
+const tests = (icon = Component(_defaultValues.defaultValues.iconName, _defaultValues.defaultValues.isRotating)) => {
+  output = (0, _enzyme.mount)(icon);
+  return describe('Icon', () => {
+    it(`Should have name: ${icon.props.name}`, () => {
+      expect(output.props().name).toEqual(icon.props.name);
+    });
+    it(`Should have isRotating: ${icon.props.name}`, () => {
+      expect(output.props().name).toEqual(icon.props.name);
+    });
+  });
+};
+
+exports.tests = tests;
+tests();
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIkljb24udGVzdC5qc3giXSwibmFtZXMiOlsiQ29tcG9uZW50IiwibmFtZSIsImlzUm90YXRpbmciLCJvdXRwdXQiLCJ0ZXN0cyIsImljb24iLCJkZWZhdWx0VmFsdWVzIiwiaWNvbk5hbWUiLCJkZXNjcmliZSIsIml0IiwicHJvcHMiLCJleHBlY3QiLCJ0b0VxdWFsIl0sIm1hcHBpbmdzIjoiOzs7Ozs7Ozs7QUFBQTs7QUFDQTs7QUFDQTs7QUFDQTs7OztBQUVPLE1BQU1BLFNBQVMsR0FBRyxDQUFDQyxJQUFELEVBQU9DLFVBQVAsS0FBc0I7QUFDN0MsU0FBTyw2QkFBQyxVQUFEO0FBQU0sSUFBQSxJQUFJLEVBQUVELElBQVo7QUFBa0IsSUFBQSxVQUFVLEVBQUVDLFVBQTlCO0FBQUE7QUFBQTtBQUFBO0FBQUE7QUFBQTtBQUFBLElBQVA7QUFDRCxDQUZNOzs7QUFJUCxJQUFJQyxNQUFKOztBQUVPLE1BQU1DLEtBQUssR0FBRyxDQUNuQkMsSUFBSSxHQUFHTCxTQUFTLENBQUNNLDZCQUFjQyxRQUFmLEVBQXlCRCw2QkFBY0osVUFBdkMsQ0FERyxLQUVoQjtBQUNIQyxFQUFBQSxNQUFNLEdBQUcsbUJBQU1FLElBQU4sQ0FBVDtBQUVBLFNBQU9HLFFBQVEsQ0FBQyxNQUFELEVBQVMsTUFBTTtBQUM1QkMsSUFBQUEsRUFBRSxDQUFFLHFCQUFvQkosSUFBSSxDQUFDSyxLQUFMLENBQVdULElBQUssRUFBdEMsRUFBeUMsTUFBTTtBQUMvQ1UsTUFBQUEsTUFBTSxDQUFDUixNQUFNLENBQUNPLEtBQVAsR0FBZVQsSUFBaEIsQ0FBTixDQUE0QlcsT0FBNUIsQ0FBb0NQLElBQUksQ0FBQ0ssS0FBTCxDQUFXVCxJQUEvQztBQUNELEtBRkMsQ0FBRjtBQUdBUSxJQUFBQSxFQUFFLENBQUUsMkJBQTBCSixJQUFJLENBQUNLLEtBQUwsQ0FBV1QsSUFBSyxFQUE1QyxFQUErQyxNQUFNO0FBQ3JEVSxNQUFBQSxNQUFNLENBQUNSLE1BQU0sQ0FBQ08sS0FBUCxHQUFlVCxJQUFoQixDQUFOLENBQTRCVyxPQUE1QixDQUFvQ1AsSUFBSSxDQUFDSyxLQUFMLENBQVdULElBQS9DO0FBQ0QsS0FGQyxDQUFGO0FBR0QsR0FQYyxDQUFmO0FBUUQsQ0FiTTs7O0FBZVBHLEtBQUsiLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgeyBtb3VudCB9IGZyb20gJ2VuenltZSc7XG5pbXBvcnQgUmVhY3QgZnJvbSAncmVhY3QnO1xuaW1wb3J0IHsgSWNvbiB9IGZyb20gJy4vSWNvbic7XG5pbXBvcnQgeyBkZWZhdWx0VmFsdWVzIH0gZnJvbSAnLi4vLi4vY29uc3RhbnRzL2RlZmF1bHRWYWx1ZXMnO1xuXG5leHBvcnQgY29uc3QgQ29tcG9uZW50ID0gKG5hbWUsIGlzUm90YXRpbmcpID0+IHtcbiAgcmV0dXJuIDxJY29uIG5hbWU9e25hbWV9IGlzUm90YXRpbmc9e2lzUm90YXRpbmd9IC8+O1xufTtcblxubGV0IG91dHB1dDtcblxuZXhwb3J0IGNvbnN0IHRlc3RzID0gKFxuICBpY29uID0gQ29tcG9uZW50KGRlZmF1bHRWYWx1ZXMuaWNvbk5hbWUsIGRlZmF1bHRWYWx1ZXMuaXNSb3RhdGluZylcbikgPT4ge1xuICBvdXRwdXQgPSBtb3VudChpY29uKTtcblxuICByZXR1cm4gZGVzY3JpYmUoJ0ljb24nLCAoKSA9PiB7XG4gICAgaXQoYFNob3VsZCBoYXZlIG5hbWU6ICR7aWNvbi5wcm9wcy5uYW1lfWAsICgpID0+IHtcbiAgICAgIGV4cGVjdChvdXRwdXQucHJvcHMoKS5uYW1lKS50b0VxdWFsKGljb24ucHJvcHMubmFtZSk7XG4gICAgfSk7XG4gICAgaXQoYFNob3VsZCBoYXZlIGlzUm90YXRpbmc6ICR7aWNvbi5wcm9wcy5uYW1lfWAsICgpID0+IHtcbiAgICAgIGV4cGVjdChvdXRwdXQucHJvcHMoKS5uYW1lKS50b0VxdWFsKGljb24ucHJvcHMubmFtZSk7XG4gICAgfSk7XG4gIH0pO1xufTtcblxudGVzdHMoKTtcbiJdfQ==

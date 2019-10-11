@@ -8,6 +8,8 @@ import expect from 'expect';
 import { Button } from './Button';
 import { Icon } from '../Icon';
 import { Typography } from '../Typography';
+import { defaultValues } from '../../constants/defaultValues';
+import { tests, Component } from './Button.test';
 
 const stories = storiesOf('Button', module);
 
@@ -131,10 +133,14 @@ stories.add(
 stories.add(
   'Playground',
   () => {
-    const isDisabled = boolean(`isDisabled:`, false);
-    const isFullWidth = boolean(`isFullWidth:`, false);
-    const isRound = boolean(`isRound:`, false);
-    const size = select(`size:`, ['small', `medium`, 'large'], 'medium');
+    const isDisabled = boolean(`isDisabled:`, defaultValues.isDisabled);
+    const isFullWidth = boolean(`isFullWidth:`, defaultValues.isFullWidth);
+    const isRound = boolean(`isRound:`, defaultValues.isRound);
+    const size = select(
+      `size:`,
+      ['small', `medium`, 'large'],
+      defaultValues.size
+    );
     const type = select(
       `type:`,
       [
@@ -146,66 +152,21 @@ stories.add(
         'dashed',
         'transparent'
       ],
-      'default'
+      defaultValues.type
     );
-    const value = text(`text:`, `Change me, please 🥺`);
-    const button = (
-      <Button
-        isDisabled={isDisabled}
-        isFullWidth={isFullWidth}
-        isRound={isRound}
-        size={size}
-        type={type}
-        onClick={action(`onClick`)}
-      >
-        {value}
-      </Button>
+    const children = text(`text:`, defaultValues.value);
+    const onClick = action(`onClick`);
+    const button = Component(
+      isDisabled,
+      isFullWidth,
+      isRound,
+      size,
+      type,
+      children,
+      onClick
     );
 
-    specs(() =>
-      describe('Button', () => {
-        const wrapper = mount(button);
-
-        it(`Should have the right text: ${value}`, () =>
-          expect(wrapper.text()).toEqual(value));
-
-        it(`onClick should have been called if Button is not disabled`, () => {
-          const mockClick = jest.fn();
-
-          wrapper.setProps({
-            onClick: mockClick
-          });
-
-          wrapper.simulate('click');
-
-          if (!isDisabled) {
-            expect(mockClick).toHaveBeenCalled();
-          } else {
-            expect(mockClick).not.toHaveBeenCalled();
-          }
-        });
-
-        it(`Should have isDisabled: ${isDisabled}`, () => {
-          expect(wrapper.prop('isDisabled')).toEqual(isDisabled);
-        });
-
-        it(`Should have isRound: ${isRound}`, () => {
-          expect(wrapper.prop('isRound')).toEqual(isRound);
-        });
-
-        it(`Should have isFullWidth: ${isFullWidth}`, () => {
-          expect(wrapper.prop('isFullWidth')).toEqual(isFullWidth);
-        });
-
-        it(`Should have type: ${type}`, () => {
-          expect(wrapper.prop('type')).toEqual(type);
-        });
-
-        it(`Should have size: ${size}`, () => {
-          expect(wrapper.prop('size')).toEqual(size);
-        });
-      })
-    );
+    specs(() => tests(button));
 
     return button;
   },

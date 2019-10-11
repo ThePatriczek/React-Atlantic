@@ -1,0 +1,51 @@
+a0ec978a8d4e1a51f6cda19ed4a26ff9
+"use strict";
+
+var _interopRequireDefault = require("/Users/patrikmeixner/WebstormProjects/ATLAS/React-Atlantic/node_modules/babel-preset-react-app/node_modules/@babel/runtime/helpers/interopRequireDefault");
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.tests = exports.Component = void 0;
+
+var _enzyme = require("enzyme");
+
+var _react = _interopRequireDefault(require("react"));
+
+var _Icon = require("./Icon");
+
+var _defaultValues = require("../../constants/defaultValues");
+
+var _storybookAddonSpecifications = require("storybook-addon-specifications");
+
+var _expect = _interopRequireDefault(require("expect"));
+
+var _jsxFileName = "/Users/patrikmeixner/WebstormProjects/ATLAS/React-Atlantic/src/components/Icon/Icon.test.jsx";
+
+const Component = (name, isRotating) => {
+  return _react.default.createElement(_Icon.Icon, {
+    name: name,
+    isRotating: isRotating,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 9
+    },
+    __self: void 0
+  });
+};
+
+exports.Component = Component;
+let output;
+
+const tests = (icon = Component(_defaultValues.defaultValues.iconName, _defaultValues.defaultValues.isRotating)) => {
+  output = (0, _enzyme.mount)(icon);
+  return (0, _storybookAddonSpecifications.describe)('Icon', () => {
+    const output = (0, _enzyme.mount)(icon);
+    (0, _storybookAddonSpecifications.it)(`Should have name: ${icon.props.name}`, () => (0, _expect.default)(output.props().name).toEqual(icon.props.name));
+    (0, _storybookAddonSpecifications.it)(`Should have isRotating: ${icon.props.isRotating}`, () => (0, _expect.default)(output.props().isRotating).toEqual(icon.props.isRotating));
+  });
+};
+
+exports.tests = tests;
+tests();
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIkljb24udGVzdC5qc3giXSwibmFtZXMiOlsiQ29tcG9uZW50IiwibmFtZSIsImlzUm90YXRpbmciLCJvdXRwdXQiLCJ0ZXN0cyIsImljb24iLCJkZWZhdWx0VmFsdWVzIiwiaWNvbk5hbWUiLCJwcm9wcyIsInRvRXF1YWwiXSwibWFwcGluZ3MiOiI7Ozs7Ozs7OztBQUFBOztBQUNBOztBQUNBOztBQUNBOztBQUNBOztBQUNBOzs7O0FBRU8sTUFBTUEsU0FBUyxHQUFHLENBQUNDLElBQUQsRUFBT0MsVUFBUCxLQUFzQjtBQUM3QyxTQUFPLDZCQUFDLFVBQUQ7QUFBTSxJQUFBLElBQUksRUFBRUQsSUFBWjtBQUFrQixJQUFBLFVBQVUsRUFBRUMsVUFBOUI7QUFBQTtBQUFBO0FBQUE7QUFBQTtBQUFBO0FBQUEsSUFBUDtBQUNELENBRk07OztBQUlQLElBQUlDLE1BQUo7O0FBRU8sTUFBTUMsS0FBSyxHQUFHLENBQ25CQyxJQUFJLEdBQUdMLFNBQVMsQ0FBQ00sNkJBQWNDLFFBQWYsRUFBeUJELDZCQUFjSixVQUF2QyxDQURHLEtBRWhCO0FBQ0hDLEVBQUFBLE1BQU0sR0FBRyxtQkFBTUUsSUFBTixDQUFUO0FBRUEsU0FBTyw0Q0FBUyxNQUFULEVBQWlCLE1BQU07QUFDNUIsVUFBTUYsTUFBTSxHQUFHLG1CQUFNRSxJQUFOLENBQWY7QUFFQSwwQ0FBSSxxQkFBb0JBLElBQUksQ0FBQ0csS0FBTCxDQUFXUCxJQUFLLEVBQXhDLEVBQTJDLE1BQ3pDLHFCQUFPRSxNQUFNLENBQUNLLEtBQVAsR0FBZVAsSUFBdEIsRUFBNEJRLE9BQTVCLENBQW9DSixJQUFJLENBQUNHLEtBQUwsQ0FBV1AsSUFBL0MsQ0FERjtBQUdBLDBDQUFJLDJCQUEwQkksSUFBSSxDQUFDRyxLQUFMLENBQVdOLFVBQVcsRUFBcEQsRUFBdUQsTUFDckQscUJBQU9DLE1BQU0sQ0FBQ0ssS0FBUCxHQUFlTixVQUF0QixFQUFrQ08sT0FBbEMsQ0FBMENKLElBQUksQ0FBQ0csS0FBTCxDQUFXTixVQUFyRCxDQURGO0FBRUQsR0FSTSxDQUFQO0FBU0QsQ0FkTTs7O0FBZ0JQRSxLQUFLIiwic291cmNlc0NvbnRlbnQiOlsiaW1wb3J0IHsgbW91bnQgfSBmcm9tICdlbnp5bWUnO1xuaW1wb3J0IFJlYWN0IGZyb20gJ3JlYWN0JztcbmltcG9ydCB7IEljb24gfSBmcm9tICcuL0ljb24nO1xuaW1wb3J0IHsgZGVmYXVsdFZhbHVlcyB9IGZyb20gJy4uLy4uL2NvbnN0YW50cy9kZWZhdWx0VmFsdWVzJztcbmltcG9ydCB7IGRlc2NyaWJlLCBpdCB9IGZyb20gJ3N0b3J5Ym9vay1hZGRvbi1zcGVjaWZpY2F0aW9ucyc7XG5pbXBvcnQgZXhwZWN0IGZyb20gJ2V4cGVjdCc7XG5cbmV4cG9ydCBjb25zdCBDb21wb25lbnQgPSAobmFtZSwgaXNSb3RhdGluZykgPT4ge1xuICByZXR1cm4gPEljb24gbmFtZT17bmFtZX0gaXNSb3RhdGluZz17aXNSb3RhdGluZ30gLz47XG59O1xuXG5sZXQgb3V0cHV0O1xuXG5leHBvcnQgY29uc3QgdGVzdHMgPSAoXG4gIGljb24gPSBDb21wb25lbnQoZGVmYXVsdFZhbHVlcy5pY29uTmFtZSwgZGVmYXVsdFZhbHVlcy5pc1JvdGF0aW5nKVxuKSA9PiB7XG4gIG91dHB1dCA9IG1vdW50KGljb24pO1xuXG4gIHJldHVybiBkZXNjcmliZSgnSWNvbicsICgpID0+IHtcbiAgICBjb25zdCBvdXRwdXQgPSBtb3VudChpY29uKTtcblxuICAgIGl0KGBTaG91bGQgaGF2ZSBuYW1lOiAke2ljb24ucHJvcHMubmFtZX1gLCAoKSA9PlxuICAgICAgZXhwZWN0KG91dHB1dC5wcm9wcygpLm5hbWUpLnRvRXF1YWwoaWNvbi5wcm9wcy5uYW1lKSk7XG5cbiAgICBpdChgU2hvdWxkIGhhdmUgaXNSb3RhdGluZzogJHtpY29uLnByb3BzLmlzUm90YXRpbmd9YCwgKCkgPT5cbiAgICAgIGV4cGVjdChvdXRwdXQucHJvcHMoKS5pc1JvdGF0aW5nKS50b0VxdWFsKGljb24ucHJvcHMuaXNSb3RhdGluZykpO1xuICB9KTtcbn07XG5cbnRlc3RzKCk7XG4iXX0=
