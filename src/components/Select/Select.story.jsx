@@ -1,4 +1,5 @@
-import { withKnobs } from '@storybook/addon-knobs';
+import { action } from '@storybook/addon-actions';
+import { boolean, select, text, withKnobs } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/react';
 import * as React from 'react';
 import { Select } from './Select';
@@ -13,207 +14,43 @@ const { Option } = Select;
 stories.add(
   'Playground',
   () => {
-    const select = (<>
-      <Select>
-        <Option value={`val1`}>
+    const isMulti = boolean(`isMulti:`, false);
+    const isDisabled = boolean(`isDisabled:`, false);
+    const isFullWidth = boolean(`isFullWidth:`, false);
+    const size = select(`size:`, ['small', `medium`, 'large'], 'medium');
+    const placeholder = text(`placeholder:`, `Change me, please 🥺`);
+    const defaultValue = select(
+      `defaultValue:`,
+      ['value 1', `value 2`, 'value 3'],
+      'value 1'
+    );
+    const value = select(
+      `value:`,
+      ['value 1', `value 2`, 'value 3'],
+      'value 2'
+    );
+
+    const component = (
+      <Select
+        size={size}
+        isMulti={isMulti}
+        placeholder={placeholder}
+        value={value}
+        defaultValue={defaultValue}
+        isDisabled={isDisabled}
+        isFullWidth={isFullWidth}
+        onChange={action(`onChange`)}
+      >
+        <Option value={`value 1`}>
           <Text>{`Option 1`}</Text>
         </Option>
-        <Option value={`val2`}>
+        <Option value={`value 2`}>
           <Text>{`Option 2`}</Text>
         </Option>
-        <Option value={`val3`}>
+        <Option value={`value 3`}>
           <Text>{`Option 3`}</Text>
         </Option>
       </Select>
-        <br/>
-      <Select isDisabled>
-        <Option value={`val1`}>
-          <Text>{`Option 1`}</Text>
-        </Option>
-        <Option value={`val2`}>
-          <Text>{`Option 2`}</Text>
-        </Option>
-        <Option value={`val3`}>
-          <Text>{`Option 3`}</Text>
-        </Option>
-      </Select>
-        <br/>
-      <Select isFullWidth>
-        <Option value={`val1`}>
-          <Text>{`Option 1`}</Text>
-        </Option>
-        <Option value={`val2`}>
-          <Text>{`Option 2`}</Text>
-        </Option>
-        <Option value={`val3`}>
-          <Text>{`Option 3`}</Text>
-        </Option>
-      </Select>
-        <br/>
-        <Select size={`small`}>
-          <Option value={`val1`}>
-            <Text>{`Option 1`}</Text>
-          </Option>
-          <Option value={`val2`}>
-            <Text>{`Option 2`}</Text>
-          </Option>
-          <Option value={`val3`}>
-            <Text>{`Option 3`}</Text>
-          </Option>
-        </Select>
-        <br/>
-        <Select size={`large`}>
-          <Option value={`val1`}>
-            <Text>{`Option 1`}</Text>
-          </Option>
-          <Option value={`val2`}>
-            <Text>{`Option 2`}</Text>
-          </Option>
-          <Option value={`val3`}>
-            <Text>{`Option 3`}</Text>
-          </Option>
-        </Select>
-        <br/>
-        <Select size={`small`} isFullWidth>
-          <Option value={`val1`}>
-            <Text>{`Option 1`}</Text>
-          </Option>
-          <Option value={`val2`}>
-            <Text>{`Option 2`}</Text>
-          </Option>
-          <Option value={`val3`}>
-            <Text>{`Option 3`}</Text>
-          </Option>
-        </Select>
-        <br/>
-        <Select size={`large`} isFullWidth>
-          <Option value={`val1`}>
-            <Text>{`Option 1`}</Text>
-          </Option>
-          <Option value={`val2`}>
-            <Text>{`Option 2`}</Text>
-          </Option>
-          <Option value={`val3`}>
-            <Text>{`Option 3`}</Text>
-          </Option>
-        </Select>
-        <br/>
-        <Select isMulti>
-        <Option value={`val1`}>
-          <Text>{`Option 1`}</Text>
-        </Option>
-        <Option value={`val2`}>
-          <Text>{`Option 2`}</Text>
-        </Option>
-        <Option value={`val3`}>
-          <Text>{`Option 3`}</Text>
-        </Option>
-      </Select>
-        <br/>
-        <Select isMulti size={`small`}>
-        <Option value={`val1`}>
-          <Text>{`Option 1`}</Text>
-        </Option>
-        <Option value={`val2`}>
-          <Text>{`Option 2`}</Text>
-        </Option>
-        <Option value={`val3`}>
-          <Text>{`Option 3`}</Text>
-        </Option>
-      </Select>
-        <br/>
-        <Select isMulti size={`large`}>
-        <Option value={`val1`}>
-          <Text>{`Option 1`}</Text>
-        </Option>
-        <Option value={`val2`}>
-          <Text>{`Option 2`}</Text>
-        </Option>
-        <Option value={`val3`}>
-          <Text>{`Option 3`}</Text>
-        </Option>
-      </Select>
-        <br/>
-        <Select isMulti isFullWidth>
-        <Option value={`val1`}>
-          <Text>{`Lorem ipsum dolor sit amet, consectetuer adipiscing elit. In enim a arcu imperdiet malesuada. Integer in sapien. Cras pede libero, dapibus nec, pretium sit amet, tempor quis.`}</Text>
-        </Option>
-        <Option value={`val2`}>
-          <Text>{`Lorem ipsum dolor sit amet, consectetuer adipiscing elit. In enim a arcu imperdiet malesuada. Integer in sapien. Cras pede libero, dapibus nec, pretium sit amet, tempor quis.`}</Text>
-        </Option>
-        <Option value={`val3`}>
-          <Text>{`Lorem ipsum dolor sit amet, consectetuer adipiscing elit. In enim a arcu imperdiet malesuada. Integer in sapien. Cras pede libero, dapibus nec, pretium sit amet, tempor quis.`}</Text>
-        </Option>
-        <Option value={`val4`}>
-          <Text>{`Option 2`}</Text>
-        </Option>
-        <Option value={`val5`}>
-          <Text>{`Option 3`}</Text>
-        </Option>
-        <Option value={`val6`}>
-          <Text>{`Option 4`}</Text>
-        </Option>
-        <Option value={`val7`}>
-          <Text>{`Option 5`}</Text>
-        </Option>
-        <Option value={`val8`}>
-          <Text>{`Option 6`}</Text>
-        </Option>
-      </Select>
-        <br/>
-        <Select isMulti isFullWidth size={`small`}>
-        <Option value={`val1`}>
-          <Text>{`Lorem ipsum dolor sit amet, consectetuer adipiscing elit. In enim a arcu imperdiet malesuada. Integer in sapien. Cras pede libero, dapibus nec, pretium sit amet, tempor quis.`}</Text>
-        </Option>
-        <Option value={`val2`}>
-          <Text>{`Lorem ipsum dolor sit amet, consectetuer adipiscing elit. In enim a arcu imperdiet malesuada. Integer in sapien. Cras pede libero, dapibus nec, pretium sit amet, tempor quis.`}</Text>
-        </Option>
-        <Option value={`val3`}>
-          <Text>{`Lorem ipsum dolor sit amet, consectetuer adipiscing elit. In enim a arcu imperdiet malesuada. Integer in sapien. Cras pede libero, dapibus nec, pretium sit amet, tempor quis.`}</Text>
-        </Option>
-        <Option value={`val4`}>
-          <Text>{`Option 2`}</Text>
-        </Option>
-        <Option value={`val5`}>
-          <Text>{`Option 3`}</Text>
-        </Option>
-        <Option value={`val6`}>
-          <Text>{`Option 4`}</Text>
-        </Option>
-        <Option value={`val7`}>
-          <Text>{`Option 5`}</Text>
-        </Option>
-        <Option value={`val8`}>
-          <Text>{`Option 6`}</Text>
-        </Option>
-      </Select>
-        <br/>
-        <Select isMulti isFullWidth size={`large`}>
-        <Option value={`val1`}>
-          <Text>{`Lorem ipsum dolor sit amet, consectetuer adipiscing elit. In enim a arcu imperdiet malesuada. Integer in sapien. Cras pede libero, dapibus nec, pretium sit amet, tempor quis.`}</Text>
-        </Option>
-        <Option value={`val2`}>
-          <Text>{`Lorem ipsum dolor sit amet, consectetuer adipiscing elit. In enim a arcu imperdiet malesuada. Integer in sapien. Cras pede libero, dapibus nec, pretium sit amet, tempor quis.`}</Text>
-        </Option>
-        <Option value={`val3`}>
-          <Text>{`Lorem ipsum dolor sit amet, consectetuer adipiscing elit. In enim a arcu imperdiet malesuada. Integer in sapien. Cras pede libero, dapibus nec, pretium sit amet, tempor quis.`}</Text>
-        </Option>
-        <Option value={`val4`}>
-          <Text>{`Option 2`}</Text>
-        </Option>
-        <Option value={`val5`}>
-          <Text>{`Option 3`}</Text>
-        </Option>
-        <Option value={`val6`}>
-          <Text>{`Option 4`}</Text>
-        </Option>
-        <Option value={`val7`}>
-          <Text>{`Option 5`}</Text>
-        </Option>
-        <Option value={`val8`}>
-          <Text>{`Option 6`}</Text>
-        </Option>
-      </Select></>
     );
 
     // specs(() =>
@@ -250,7 +87,7 @@ stories.add(
     //   })
     // );
 
-    return select;
+    return component;
   },
   {
     info: { inline: true }
