@@ -156,12 +156,10 @@ export const Select: React.FC<React.PropsWithChildren<SelectProps>> & {
       components={{
         Option: props => <OptionComponent {...props} size={size} />,
         NoOptionsMessage: ({ children, innerProps }) => (
-          <NoOptionsMessage className={`no-options`} {...innerProps}>
-            {children}
-          </NoOptionsMessage>
+          <NoOptionsMessage {...innerProps}>{children}</NoOptionsMessage>
         ),
         ClearIndicator: ({ children, innerProps }) => (
-          <ClearIndicator className={`clear`} {...innerProps}>
+          <ClearIndicator {...innerProps}>
             <Icon name={'clear'} />
           </ClearIndicator>
         ),
@@ -180,7 +178,6 @@ export const Select: React.FC<React.PropsWithChildren<SelectProps>> & {
             isFocused={isFocused}
             isMulti={isMulti}
             hasValue={hasValue}
-            className={`control`}
             isFullWidth={isFullWidth}
             size={size}
             isDisabled={isDisabled}
@@ -189,42 +186,32 @@ export const Select: React.FC<React.PropsWithChildren<SelectProps>> & {
           </Control>
         ),
         CrossIcon: ({ children, innerProps }) => (
-          <CrossIcon className={`clear-all`} {...innerProps}>
+          <CrossIcon {...innerProps}>
             <div>{children}</div>
           </CrossIcon>
         ),
         DownChevron: ({ children, innerProps }) => (
-          <div className={`arrow`} {...innerProps}>
+          <div {...innerProps}>
             {children}
             <Icon name={'arrowDown'} />
           </div>
         ),
         DropdownIndicator: ({ innerProps, selectProps }) => (
-          <DropdownIndicator
-            isDisabled={isDisabled}
-            className={`arrow-container`}
-            {...innerProps}
-          >
+          <DropdownIndicator isDisabled={isDisabled} {...innerProps}>
             {selectProps.menuIsOpen && <Icon name={'arrowUp'} />}
             {!selectProps.menuIsOpen && <Icon name={'arrowDown'} />}
           </DropdownIndicator>
         ),
-        Group: ({ children }) => <div className={`children`}>{children}</div>,
+        Group: ({ children }) => <div>{children}</div>,
         GroupHeading: ({ children, innerProps }) => (
-          <div className={`heading`} {...innerProps}>
-            {children}
-          </div>
+          <div {...innerProps}>{children}</div>
         ),
         Menu: ({ children, innerProps }) => (
-          <Menu className={`menu`} {...innerProps}>
-            {children}
-          </Menu>
+          <Menu {...innerProps}>{children}</Menu>
         ),
         MenuList: ({ children, ...props }) => <MenuList>{children}</MenuList>,
         IndicatorsContainer: ({ children, ...props }) => (
-          <IndicatorsContainer size={size} className={`indicators-container`}>
-            {children}
-          </IndicatorsContainer>
+          <IndicatorsContainer size={size}>{children}</IndicatorsContainer>
         ),
         Input: props => (
           <div>
@@ -232,18 +219,12 @@ export const Select: React.FC<React.PropsWithChildren<SelectProps>> & {
           </div>
         ),
         LoadingIndicator: ({ children, innerProps }) => (
-          <div className={`loading`} {...innerProps}>
-            {children}
-          </div>
+          <div {...innerProps}>{children}</div>
         ),
         LoadingMessage: ({ children, innerProps }) => (
-          <div className={`loading-msg`} {...innerProps}>
-            {children}
-          </div>
+          <div {...innerProps}>{children}</div>
         ),
-        MenuPortal: ({ children, ...props }) => (
-          <div className={`menu`}>{children}</div>
-        ),
+        MenuPortal: ({ children, ...props }) => <div>{children}</div>,
         MultiValue: ({
           children,
           innerProps,
@@ -251,34 +232,27 @@ export const Select: React.FC<React.PropsWithChildren<SelectProps>> & {
           removeProps,
           ...props
         }) => (
-          <MultiValue className={`multi-value`} size={size} {...innerProps}>
+          <MultiValue size={size} {...innerProps}>
             {children}
             {components.Remove(removeProps)}
           </MultiValue>
         ),
         MultiValueContainer: ({ children, innerProps }) => (
-          <div className={`multi-value-container`} {...innerProps}>
-            {children}
-          </div>
+          <div {...innerProps}>{children}</div>
         ),
         MultiValueLabel: ({ children, innerProps }) => (
-          <MultiValueLabel className={`multi-value-label`} {...innerProps}>
-            {children}
-          </MultiValueLabel>
+          <MultiValueLabel {...innerProps}>{children}</MultiValueLabel>
         ),
         MultiValueRemove: ({ ...props }) => (
-          <MultiValueRemove className={`multi-value-remove`} {...props}>
+          <MultiValueRemove {...props}>
             <Icon name={'close'} />
           </MultiValueRemove>
         ),
         Placeholder: ({ children, innerProps }) => (
-          <Placeholder className={`placeholder`} {...innerProps}>
-            {children}
-          </Placeholder>
+          <Placeholder {...innerProps}>{children}</Placeholder>
         ),
         SelectContainer: ({ children, innerProps }) => (
           <SelectContainer
-            className={`select-container`}
             isFullWidth={isFullWidth}
             size={size}
             {...innerProps}
@@ -287,18 +261,12 @@ export const Select: React.FC<React.PropsWithChildren<SelectProps>> & {
           </SelectContainer>
         ),
         SingleValue: ({ children, innerProps }) => (
-          <SingleValue
-            className={`single-value`}
-            size={size}
-            isFullWidth={isFullWidth}
-            {...innerProps}
-          >
+          <SingleValue size={size} isFullWidth={isFullWidth} {...innerProps}>
             {children}
           </SingleValue>
         ),
         ValueContainer: ({ children, isMulti }) => (
           <ValueContainer
-            className={`value-container`}
             isMulti={isMulti}
             size={size}
             isFullWidth={isFullWidth}
