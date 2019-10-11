@@ -11,6 +11,8 @@ export const defaultValues = {
   autoFocus: false,
   iconRight: null,
   iconLeft: null,
+  textOn: 'on',
+  textOff: 'off',
   iconName: 'hamburger',
   type: 'default',
   size: 'medium',
