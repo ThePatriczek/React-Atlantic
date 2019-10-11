@@ -134,7 +134,7 @@ export const Select: React.FC<React.PropsWithChildren<SelectProps>> & {
 
   const fillValues = (value: unknown) => {
     if (Array.isArray(value)) {
-      props.value.forEach((item: unknown) => {
+      value.forEach((item: unknown) => {
         fillValue(item);
       });
     } else {

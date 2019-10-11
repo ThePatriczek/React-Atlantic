@@ -2,7 +2,6 @@ import { boolean, select, text, withKnobs } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/react';
 import * as React from 'react';
 import { specs } from 'storybook-addon-specifications';
-import { Radio } from './Radio';
 import { action } from '@storybook/addon-actions';
 import { defaultValues } from '../../constants/defaultValues';
 import { Component, tests } from './Radio.test';
