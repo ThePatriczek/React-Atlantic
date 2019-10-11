@@ -124,38 +124,28 @@ export const Select: React.FC<React.PropsWithChildren<SelectProps>> & {
 
   const val: any[] = [];
 
-  if (props.value) {
-    if (Array.isArray(props.value)) {
-      props.value.forEach(value => {
-        if (typeof value === 'string' || typeof value === 'number') {
-          items.forEach(item => item.value === value && val.push(item));
-        } else {
-          val.push(value);
-        }
-      });
+  const fillValue = (value: any) => {
+    if (typeof value === 'string' || typeof value === 'number') {
+      items.forEach(item => item.value === value && val.push(item));
     } else {
-      if (typeof props.value === 'string' || typeof props.value === 'number') {
-        items.forEach(item => item.value === props.value && val.push(item));
-      } else {
-        val.push(props.value);
-      }
+      items.forEach(item => item.value === value.value && val.push(value));
     }
-  } else if (value) {
+  };
+
+  const fillValues = (value: unknown) => {
     if (Array.isArray(value)) {
-      value.forEach(valItem => {
-        if (typeof valItem === 'string' || typeof props.value === 'number') {
-          items.forEach(item => item.value === valItem && val.push(item));
-        } else {
-          val.push(valItem);
-        }
+      props.value.forEach((item: unknown) => {
+        fillValue(item);
       });
     } else {
-      if (typeof value === 'string' || typeof props.value === 'number') {
-        items.forEach(item => item.value === value && val.push(item));
-      } else {
-        val.push(value);
-      }
+      fillValue(value);
     }
+  };
+
+  if (props.value) {
+    fillValues(props.value);
+  } else if (value) {
+    fillValues(value);
   }
 
   return (
