@@ -100,10 +100,19 @@ const ThemeStory = props => {
           />
           <br />
           <br />
-          <Checkbox isDefaultChecked />
+          <Checkbox isDefaultChecked>
+            <Text>{`Checkbox`}</Text>
+          </Checkbox>
           <br />
           <br />
-          <Radio isDefaultChecked />
+          <Radio.Group>
+            <Radio value={0} isDefaultChecked>
+              <Text>{`Radio 1`}</Text>
+            </Radio>
+            <Radio value={1}>
+              <Text>{`Radio 2`}</Text>
+            </Radio>
+          </Radio.Group>
           <br />
           <br />
           <Radio.Button isDefaultChecked size={size}>
