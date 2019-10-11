@@ -2,10 +2,10 @@ import { action } from '@storybook/addon-actions';
 import { boolean, select, text, withKnobs } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/react';
 import * as React from 'react';
-import { describe, it, specs } from 'storybook-addon-specifications';
-import { mount } from 'enzyme';
-import expect from 'expect';
+import { specs } from 'storybook-addon-specifications';
 import { Input } from './Input';
+import { Component, tests } from './Input.test';
+import { defaultValues } from '../../constants/defaultValues';
 
 const stories = storiesOf('Input', module);
 
@@ -66,10 +66,13 @@ stories.add('Overview', () => (
 stories.add(
   'Playground',
   () => {
-    const isLoading = boolean(`isLoading:`, false);
-    const isDisabled = boolean(`isDisabled:`, false);
-    const isAlternative = boolean(`isAlternative:`, false);
-    const autoFocus = boolean(`autoFocus:`, false);
+    const isLoading = boolean(`isLoading:`, defaultValues.isLoading);
+    const isDisabled = boolean(`isDisabled:`, defaultValues.isDisabled);
+    const isAlternative = boolean(
+      `isAlternative:`,
+      defaultValues.isAlternative
+    );
+    const autoFocus = boolean(`autoFocus:`, defaultValues.autoFocus);
     const iconRight = select(
       `iconRight:`,
       [
@@ -84,7 +87,7 @@ stories.add(
         'arrowDoubleLeft',
         'arrowDoubleRight'
       ],
-      null
+      defaultValues.iconRight
     );
     const iconLeft = select(
       `iconLeft:`,
@@ -100,73 +103,38 @@ stories.add(
         'arrowDoubleLeft',
         'arrowDoubleRight'
       ],
-      null
+      defaultValues.iconLeft
     );
-    const size = select(`size:`, ['small', `medium`, 'large'], 'medium');
-    const placeholder = text(`placeholder:`, `Change me, please 🥺`);
-    const defaultValue = text(`defaultValue:`, `Change me, please 🥺`);
-    const value = text(`value:`, `Change me, please 🥺`);
-
-    const input = (
-      <Input
-        isDisabled={isDisabled}
-        isLoading={isLoading}
-        isAlternative={isAlternative}
-        placeholder={placeholder}
-        iconRight={iconRight}
-        iconLeft={iconLeft}
-        size={size}
-        autoFocus={autoFocus}
-        defaultValue={defaultValue}
-        value={value}
-        onChange={action(`onChange`)}
-        onEnterPress={action(`onEnterPress`)}
-        onFocus={action(`onFocus`)}
-        onBlur={action(`onBlur`)}
-      />
+    const size = select(
+      `size:`,
+      ['small', `medium`, 'large'],
+      defaultValues.size
+    );
+    const placeholder = text(`placeholder:`, defaultValues.placeholder);
+    const defaultValue = text(`defaultValue:`, defaultValues.defaultValue);
+    const value = text(`value:`, defaultValues.value);
+    const onChange = action(`onChange`);
+    const onEnterPress = action(`onEnterPress`);
+    const onFocus = action(`onFocus`);
+    const onBlur = action(`onBlur`);
+    const input = Component(
+      isDisabled,
+      isLoading,
+      isAlternative,
+      placeholder,
+      iconRight,
+      iconLeft,
+      size,
+      autoFocus,
+      defaultValue,
+      value,
+      onChange,
+      onEnterPress,
+      onFocus,
+      onBlur
     );
 
-    specs(() =>
-      describe('Input', () => {
-        const wrapper = mount(input);
-
-        it(`Should have isDisabled: ${isDisabled}`, () => {
-          expect(wrapper.prop('isDisabled')).toEqual(isDisabled);
-        });
-
-        it(`Should have isLoading: ${isLoading}`, () => {
-          expect(wrapper.prop('isLoading')).toEqual(isLoading);
-        });
-
-        it(`Should have isAlternative: ${isAlternative}`, () => {
-          expect(wrapper.prop('isAlternative')).toEqual(isAlternative);
-        });
-
-        it(`Should have iconRight: ${iconRight}`, () => {
-          expect(wrapper.prop('iconRight')).toEqual(iconRight);
-        });
-
-        it(`Should have iconLeft: ${iconLeft}`, () => {
-          expect(wrapper.prop('iconLeft')).toEqual(iconLeft);
-        });
-
-        it(`Should have size: ${size}`, () => {
-          expect(wrapper.prop('size')).toEqual(size);
-        });
-
-        it(`Should have placeholder: ${placeholder}`, () => {
-          expect(wrapper.prop('placeholder')).toEqual(placeholder);
-        });
-
-        it(`Should have defaultValue: ${defaultValue}`, () => {
-          expect(wrapper.prop('defaultValue')).toEqual(defaultValue);
-        });
-
-        it(`Should have value: ${value}`, () => {
-          expect(wrapper.prop('value')).toEqual(value);
-        });
-      })
-    );
+    specs(() => tests(input));
 
     return input;
   },

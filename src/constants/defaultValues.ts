@@ -6,10 +6,17 @@ export const defaultValues = {
   isFullWidth: false,
   isRound: false,
   isRotating: false,
+  isLoading: false,
+  isAlternative: false,
+  autoFocus: false,
+  iconRight: null,
+  iconLeft: null,
   iconName: 'hamburger',
   type: 'default',
   size: 'medium',
   position: 'left',
   children: 'Change me, please 🥺',
-  value: 'Change me, please 🥺'
+  value: 'Change me, please 🥺',
+  placeholder: 'Change me, please 🥺',
+  defaultValue: 'Change me, please 🥺'
 };
