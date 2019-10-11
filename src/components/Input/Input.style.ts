@@ -56,6 +56,7 @@ export const StyledInputWrapper = styled.span<StyledInputWrapperProps>`
 
   i {
     display: flex;
+    
     ${props =>
       props.isDisabled
         ? css`
@@ -63,7 +64,7 @@ export const StyledInputWrapper = styled.span<StyledInputWrapperProps>`
             cursor: not-allowed;
           `
         : css`
-            color: #777777;
+            color: ${props => lighten(0.6, props.theme.color.black)};
             cursor: text;
           `};
     align-items: center;
