@@ -41,7 +41,7 @@ export const tests = (
   return describe('Checkbox', () => {
     it(`Should have isDefaultChecked: ${checkbox.props.isDefaultChecked}`, () => {
       expect(output.props().isDefaultChecked).toEqual(
-        checkbox.props.isDefaultChecked
+        `checkbox.props.isDefaultChecked`
       );
     });
     it(`Should have isChecked: ${checkbox.props.isChecked}`, () => {
