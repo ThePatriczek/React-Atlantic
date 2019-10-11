@@ -1,10 +1,10 @@
 import { boolean, select, withKnobs } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/react';
 import * as React from 'react';
-import { describe, it, specs } from 'storybook-addon-specifications';
-import { mount } from 'enzyme';
-import expect from 'expect';
+import { specs } from 'storybook-addon-specifications';
 import { Icon } from './Icon';
+import { defaultValues } from '../..';
+import { Component, tests } from './Icon.test';
 
 const stories = storiesOf('Icon', module);
 
@@ -59,23 +59,13 @@ stories.add(
         'arrowDoubleRight',
         'loading'
       ],
-      'hamburger'
+      defaultValues.iconName
     );
-    const isRotating = boolean(`isRotating`, false);
+    const isRotating = boolean(`isRotating`, defaultValues.isRotating);
 
-    const icon = <Icon name={name} isRotating={isRotating} />;
+    const icon = Component(name, isRotating);
 
-    specs(() =>
-      describe('Icon', () => {
-        const wrapper = mount(icon);
-
-        it(`Should have name: ${name}`, () =>
-          expect(wrapper.prop('name')).toEqual(name));
-
-        it(`Should have isRotating: ${isRotating}`, () =>
-          expect(wrapper.prop('isRotating')).toEqual(isRotating));
-      })
-    );
+    specs(() => tests(icon));
 
     return icon;
   },
