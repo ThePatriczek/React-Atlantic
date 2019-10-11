@@ -2,8 +2,8 @@ import * as React from 'react';
 import { default as ReactSelect } from 'react-select';
 import { Size } from '../../types';
 import { Icon } from '../Icon';
+import { Option as OptionComponent } from './components';
 import { Option, OptionProps } from './Option';
-import { StyledOption } from './Option/Option.style';
 
 import {
   ClearIndicator,
@@ -11,6 +11,7 @@ import {
   CrossIcon,
   DropdownIndicator,
   IndicatorsContainer,
+  Input,
   Menu,
   MenuList,
   MultiValue,
@@ -20,28 +21,26 @@ import {
   Placeholder,
   SelectContainer,
   SingleValue,
-  ValueContainer,
-  Input
+  ValueContainer
 } from './Select.style';
 
 export interface SelectProps {
-  isSearchable?: boolean;
-  onChange?: (value?: any | any[]) => void;
-  placeholder?: string;
-  isDisabled?: boolean;
-  value?: OptionType | OptionType[];
-  className?: string;
+  onChange?: (value?: OptionType | OptionType[] | string) => void;
+  value?: OptionType | OptionType[] | string;
+  defaultValue?: OptionType | OptionType[] | string;
   options?: OptionType[];
   isMulti?: boolean;
   isFullWidth?: boolean;
+  placeholder?: string;
+  isDisabled?: boolean;
   size: Size;
+  className?: string;
 }
 
 export interface OptionType {
-  value: any;
+  value: unknown;
   label: string;
   className?: string;
-  size: Size;
 }
 
 const getChild = (
@@ -64,18 +63,18 @@ export const Select: React.FC<React.PropsWithChildren<SelectProps>> & {
 } = (props: React.PropsWithChildren<SelectProps>) => {
   const {
     children,
-    isSearchable,
     isDisabled,
     placeholder,
-    value,
     className,
     options,
     isMulti,
     isFullWidth,
     size,
+    defaultValue
   } = props;
-  let items: any[] = [];
+  const [value, setValue] = React.useState<any>(defaultValue);
 
+  let items: any[] = [];
   if (children) {
     if (Array.isArray(children)) {
       items = children;
@@ -109,10 +108,40 @@ export const Select: React.FC<React.PropsWithChildren<SelectProps>> & {
   }
 
   const onChange = (value?: OptionType | OptionType[]) => {
-    if (props.onChange) {
-      props.onChange(value);
+    if (!isDisabled) {
+      if (props.value === undefined) {
+        setValue(value);
+
+        if (props.onChange) {
+          props.onChange(value);
+        }
+      } else {
+        if (props.onChange) {
+          props.onChange(props.value);
+        }
+      }
     }
   };
+
+  if (typeof value === 'string') {
+    items.forEach(item => {
+      if (item.value === value) {
+        setValue(item);
+      }
+    });
+  }
+
+  if (props.value && ((value && value.value !== props.value) || !value)) {
+    if (typeof props.value === 'string') {
+      items.forEach(item => {
+        if (item.value === props.value) {
+          setValue(item);
+        }
+      });
+    } else {
+      setValue(props.value);
+    }
+  }
 
   return (
     <ReactSelect
@@ -120,31 +149,17 @@ export const Select: React.FC<React.PropsWithChildren<SelectProps>> & {
       isDisabled={isDisabled}
       options={items}
       placeholder={placeholder || `Select an option`}
-      isSearchable={isSearchable}
+      isSearchable={false}
       className={`${className || ``}`}
       onChange={onChange}
       isMulti={isMulti}
       components={{
-        Option: ({ innerRef, innerProps, label, ...others }) => {
-          const { className } = others.data;
-
-          return (
-            <StyledOption
-              ref={innerRef}
-              {...innerProps}
-              size={size}
-              className={className}>
-              {label}
-            </StyledOption>
-          );
-        },
+        Option: props => <OptionComponent {...props} size={size} />,
         NoOptionsMessage: ({ children, innerProps }) => (
-          <NoOptionsMessage className={`no-options`} {...innerProps}>
-            {children}
-          </NoOptionsMessage>
+          <NoOptionsMessage {...innerProps}>{children}</NoOptionsMessage>
         ),
         ClearIndicator: ({ children, innerProps }) => (
-          <ClearIndicator className={`clear`} {...innerProps}>
+          <ClearIndicator {...innerProps}>
             <Icon name={'clear'} />
           </ClearIndicator>
         ),
@@ -163,7 +178,6 @@ export const Select: React.FC<React.PropsWithChildren<SelectProps>> & {
             isFocused={isFocused}
             isMulti={isMulti}
             hasValue={hasValue}
-            className={`control`}
             isFullWidth={isFullWidth}
             size={size}
             isDisabled={isDisabled}
@@ -172,64 +186,45 @@ export const Select: React.FC<React.PropsWithChildren<SelectProps>> & {
           </Control>
         ),
         CrossIcon: ({ children, innerProps }) => (
-          <CrossIcon className={`clear-all`} {...innerProps}>
+          <CrossIcon {...innerProps}>
             <div>{children}</div>
           </CrossIcon>
         ),
         DownChevron: ({ children, innerProps }) => (
-          <div className={`arrow`} {...innerProps}>
+          <div {...innerProps}>
             {children}
             <Icon name={'arrowDown'} />
           </div>
         ),
         DropdownIndicator: ({ innerProps, selectProps }) => (
-          <DropdownIndicator
-            isDisabled={isDisabled}
-            className={`arrow-container`}
-            {...innerProps}>
+          <DropdownIndicator isDisabled={isDisabled} {...innerProps}>
             {selectProps.menuIsOpen && <Icon name={'arrowUp'} />}
             {!selectProps.menuIsOpen && <Icon name={'arrowDown'} />}
           </DropdownIndicator>
         ),
-        Group: ({ children }) => <div className={`children`}>{children}</div>,
+        Group: ({ children }) => <div>{children}</div>,
         GroupHeading: ({ children, innerProps }) => (
-          <div className={`heading`} {...innerProps}>
-            {children}
-          </div>
+          <div {...innerProps}>{children}</div>
         ),
         Menu: ({ children, innerProps }) => (
-          <Menu className={`menu`} {...innerProps}>
-            {children}
-          </Menu>
+          <Menu {...innerProps}>{children}</Menu>
         ),
         MenuList: ({ children, ...props }) => <MenuList>{children}</MenuList>,
         IndicatorsContainer: ({ children, ...props }) => (
-          <IndicatorsContainer
-            size={size}
-            className={`indicators-container`}>
-            {children}
-          </IndicatorsContainer>
+          <IndicatorsContainer size={size}>{children}</IndicatorsContainer>
         ),
-        Input: props =>
+        Input: props => (
           <div>
-            <Input
-              placeholder={`Začněte psát`}
-              {...props}
-            />
-          </div>,
-        LoadingIndicator: ({ children, innerProps }) => (
-          <div className={`loading`} {...innerProps}>
-            {children}
+            <Input placeholder={`Začněte psát`} {...props} />
           </div>
+        ),
+        LoadingIndicator: ({ children, innerProps }) => (
+          <div {...innerProps}>{children}</div>
         ),
         LoadingMessage: ({ children, innerProps }) => (
-          <div className={`loading-msg`} {...innerProps}>
-            {children}
-          </div>
+          <div {...innerProps}>{children}</div>
         ),
-        MenuPortal: ({ children, ...props }) => (
-          <div className={`menu`}>{children}</div>
-        ),
+        MenuPortal: ({ children, ...props }) => <div>{children}</div>,
         MultiValue: ({
           children,
           innerProps,
@@ -237,54 +232,41 @@ export const Select: React.FC<React.PropsWithChildren<SelectProps>> & {
           removeProps,
           ...props
         }) => (
-          <MultiValue
-            className={`multi-value`}
-            size={size}
-            {...innerProps}>
+          <MultiValue size={size} {...innerProps}>
             {children}
             {components.Remove(removeProps)}
           </MultiValue>
         ),
         MultiValueContainer: ({ children, innerProps }) => (
-          <div className={`multi-value-container`} {...innerProps}>
-            {children}
-          </div>
+          <div {...innerProps}>{children}</div>
         ),
         MultiValueLabel: ({ children, innerProps }) => (
-          <MultiValueLabel className={`multi-value-label`} {...innerProps}>
-            {children}
-          </MultiValueLabel>
+          <MultiValueLabel {...innerProps}>{children}</MultiValueLabel>
         ),
         MultiValueRemove: ({ ...props }) => (
-          <MultiValueRemove className={`multi-value-remove`} {...props}>
+          <MultiValueRemove {...props}>
             <Icon name={'close'} />
           </MultiValueRemove>
         ),
         Placeholder: ({ children, innerProps }) => (
-          <Placeholder className={`placeholder`} {...innerProps}>
-            {children}
-          </Placeholder>
+          <Placeholder {...innerProps}>{children}</Placeholder>
         ),
         SelectContainer: ({ children, innerProps }) => (
-          <SelectContainer className={`select-container`}
-             isFullWidth={isFullWidth}
-             size={size}
-             {...innerProps}>
+          <SelectContainer
+            isFullWidth={isFullWidth}
+            size={size}
+            {...innerProps}
+          >
             {children}
           </SelectContainer>
         ),
         SingleValue: ({ children, innerProps }) => (
-          <SingleValue
-            className={`single-value`}
-            size={size}
-            isFullWidth={isFullWidth}
-            {...innerProps}>
+          <SingleValue size={size} isFullWidth={isFullWidth} {...innerProps}>
             {children}
           </SingleValue>
         ),
-        ValueContainer: ({ children, isMulti}) => (
+        ValueContainer: ({ children, isMulti }) => (
           <ValueContainer
-            className={`value-container`}
             isMulti={isMulti}
             size={size}
             isFullWidth={isFullWidth}
@@ -298,7 +280,6 @@ export const Select: React.FC<React.PropsWithChildren<SelectProps>> & {
 };
 
 Select.defaultProps = {
-  isSearchable: false,
   isMulti: false,
   isFullWidth: false,
   size: 'medium'
