@@ -9,6 +9,9 @@
     "test": "CI=true node scripts/tests.jsx --env=jsdom",
     "test:watch": "node scripts/tests.jsx --env=jsdom"
   },
+  "pre-commit": [
+    "test"
+  ],
   "babel": {
     "plugins": [
       "@babel/transform-flow-strip-types",
@@ -86,15 +89,15 @@
     "@types/storybook__addon-info": "^4.1.2",
     "@types/storybook__addon-knobs": "^5.0.4",
     "@types/storybook__addon-viewport": "^4.1.1",
-    "babel-core": "6.18.2",
-    "babel-eslint": "7.1.1",
-    "babel-jest": "17.0.2",
-    "babel-plugin-import": "^1.1.0",
-    "babel-plugin-transform-flow-strip-types": "^6.18.0",
     "@types/storybook__react": "^4.0.2",
     "@types/styled-components": "4.1.8",
     "awesome-typescript-loader": "^5.2.1",
+    "babel-core": "6.18.2",
+    "babel-eslint": "7.1.1",
+    "babel-jest": "17.0.2",
     "babel-loader": "^8.0.6",
+    "babel-plugin-import": "^1.1.0",
+    "babel-plugin-transform-flow-strip-types": "^6.18.0",
     "dotenv": "latest",
     "enzyme": "^3.10.0",
     "enzyme-adapter-react-16": "^1.14.0",
@@ -102,6 +105,7 @@
     "jest": "^24.9.0",
     "jest-mock": "^24.9.0",
     "jest-styled-components": "^6.3.3",
+    "pre-commit": "^1.2.2",
     "prettier": "^1.18.2",
     "react": "^16.9.0",
     "react-docgen-typescript-loader": "^3.2.1",
