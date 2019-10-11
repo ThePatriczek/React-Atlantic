@@ -1,4 +1,5 @@
 import { Size } from '../../types';
+
 interface SelectProps {
     isMenuOpened?: boolean;
     isFocused?: boolean;
@@ -6,7 +7,7 @@ interface SelectProps {
     hasValue?: boolean;
     isFullWidth?: boolean;
     isDisabled?: boolean;
-    size: Size;
+    size?: Size;
 }
 export declare const SelectContainer: import("styled-components").StyledComponent<"div", any, SelectProps, never>;
 export declare const Control: import("styled-components").StyledComponent<"div", any, SelectProps, never>;
