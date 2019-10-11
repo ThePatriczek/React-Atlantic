@@ -122,19 +122,19 @@ export const Select: React.FC<React.PropsWithChildren<SelectProps>> & {
     }
   };
 
-  let val: any[] = [];
+  const val: any[] = [];
 
   if (props.value) {
     if (Array.isArray(props.value)) {
       props.value.forEach(value => {
-        if (typeof value === 'string') {
+        if (typeof value === 'string' || typeof value === 'number') {
           items.forEach(item => item.value === value && val.push(item));
         } else {
           val.push(value);
         }
       });
     } else {
-      if (typeof props.value === 'string') {
+      if (typeof props.value === 'string' || typeof props.value === 'number') {
         items.forEach(item => item.value === props.value && val.push(item));
       } else {
         val.push(props.value);
@@ -143,21 +143,21 @@ export const Select: React.FC<React.PropsWithChildren<SelectProps>> & {
   } else if (value) {
     if (Array.isArray(value)) {
       value.forEach(valItem => {
-        if (typeof valItem === 'string') {
+        if (typeof valItem === 'string' || typeof props.value === 'number') {
           items.forEach(item => item.value === valItem && val.push(item));
         } else {
           val.push(valItem);
         }
       });
     } else {
-      if (typeof value === 'string') {
+      if (typeof value === 'string' || typeof props.value === 'number') {
         items.forEach(item => item.value === value && val.push(item));
       } else {
         val.push(value);
       }
     }
   }
-  console.log(val);
+
   return (
     <ReactSelect
       value={val}
