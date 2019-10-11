@@ -38,17 +38,7 @@ stories.add(
       children
     );
 
-    specs(() =>
-      tests(
-        /*checkbox,*/
-        isChecked,
-        isDefaultChecked,
-        isDisabled,
-        isPartiallyChecked,
-        position,
-        children
-      )
-    );
+    specs(() => tests(checkbox));
 
     return checkbox;
   },
