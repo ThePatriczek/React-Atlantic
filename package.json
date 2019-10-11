@@ -6,7 +6,7 @@
   "scripts": {
     "storybook": "start-storybook -p 6006",
     "prepublishOnly": "tsc -p tsconfig.publish.json && build-storybook -o docs",
-    "test": "node scripts/test.jsx --env=jsdom"
+    "test": "node scripts/tests.jsx --env=jsdom"
   },
   "babel": {
     "plugins": [
