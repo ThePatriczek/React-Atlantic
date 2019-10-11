@@ -1,11 +1,11 @@
 import { boolean, select, text, withKnobs } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/react';
 import * as React from 'react';
-import { describe, it, specs } from 'storybook-addon-specifications';
-import { mount } from 'enzyme';
-import expect from 'expect';
+import { specs } from 'storybook-addon-specifications';
 import { Radio } from './Radio';
 import { action } from '@storybook/addon-actions';
+import { defaultValues } from '../../constants/defaultValues';
+import { Component, tests } from './Radio.test';
 
 const stories = storiesOf('Radio', module);
 
@@ -14,50 +14,30 @@ stories.addDecorator(withKnobs);
 stories.add(
   'Playground',
   () => {
-    const isDefaultChecked = boolean(`isDefaultChecked:`, false);
-    const isChecked = boolean(`isChecked:`, false);
-    const isDisabled = boolean(`isDisabled:`, false);
-    const children = text(`children:`, `Change me, please 🥺`);
-    const position = select(`Position:`, ['left', `right`], 'left');
+    const isDefaultChecked = boolean(
+      `isDefaultChecked:`,
+      defaultValues.isDefaultChecked
+    );
+    const isChecked = boolean(`isChecked:`, defaultValues.isChecked);
+    const isDisabled = boolean(`isDisabled:`, defaultValues.isDisabled);
+    const children = text(`children:`, defaultValues.children);
+    const position = select(
+      `Position:`,
+      ['left', `right`],
+      defaultValues.position
+    );
+    const onChange = action(`onChange`);
 
-    const radio = (
-      <Radio
-        value={`radio`}
-        isChecked={isChecked}
-        isDefaultChecked={isDefaultChecked}
-        isDisabled={isDisabled}
-        position={position}
-        onChange={action(`onChange`)}
-      >
-        {children}
-      </Radio>
+    const radio = Component(
+      isDefaultChecked,
+      isChecked,
+      isDisabled,
+      children,
+      position,
+      onChange
     );
 
-    specs(() =>
-      describe('Checkbox', () => {
-        const wrapper = mount(radio);
-
-        it(`Should have isChecked: ${isChecked}`, () => {
-          expect(wrapper.prop('isChecked')).toEqual(isChecked);
-        });
-
-        it(`Should have isDisabled: ${isDisabled}`, () => {
-          expect(wrapper.prop('isDisabled')).toEqual(isDisabled);
-        });
-
-        it(`Should have isDefaultChecked: ${isDefaultChecked}`, () => {
-          expect(wrapper.prop('isDefaultChecked')).toEqual(isDefaultChecked);
-        });
-
-        it(`Should have position: ${position}`, () => {
-          expect(wrapper.prop('position')).toEqual(position);
-        });
-
-        it(`Should have children: ${children}`, () => {
-          expect(wrapper.prop('children')).toEqual(children);
-        });
-      })
-    );
+    specs(() => tests(radio));
 
     return radio;
   },
