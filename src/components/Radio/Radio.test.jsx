@@ -3,7 +3,6 @@ import React from 'react';
 import { Radio } from '../Radio';
 import expect from 'expect';
 import { defaultValues } from '../../constants/defaultValues';
-import { describe, it } from 'storybook-addon-specifications';
 
 export const Component = (
   isDefaultChecked,
