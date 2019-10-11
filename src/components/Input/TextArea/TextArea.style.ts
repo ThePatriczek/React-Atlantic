@@ -123,7 +123,7 @@ export const StyledTextAreaIcon = styled.span<{
     props.iconLeft &&
     css`
       position: absolute;
-      top: 5px;
+      top: 9px;
       left: 10px;
       align-items: flex-start;
     `}
