@@ -4,7 +4,7 @@ import * as React from 'react';
 import { ThemeProvider } from './ThemeProvider';
 import { theme as defaultTheme } from './theme';
 import { Button, Checkbox, Input, Radio, Select, Switch, Typography } from '../components';
-import { HuePicker } from 'react-color';
+import { SketchPicker } from 'react-color';
 
 const { Title, Text } = Typography;
 
@@ -18,70 +18,21 @@ const ThemeStory = props => {
   const [key, setKey] = React.useState();
 
   return (
-    <ThemeProvider theme={theme} key={key}>
-      <>
+    <>
+      <div>
         <Title level={2}>{`Color`}</Title>
-        <div>
-          <Text>{`default`}</Text>
-          <HuePicker
-            color={theme.color.default}
-            onChangeComplete={color => {
-              theme.color.default = color.hex;
-              setKey(color.hex);
-            }}
-          />
-          <Text>{`primary`}</Text>
-          <HuePicker
-            color={theme.color.primary}
-            onChangeComplete={color => {
-              theme.color.primary = color.hex;
-              setKey(color.hex);
-            }}
-          />
-          <Text>{`success`}</Text>
-          <HuePicker
-            color={theme.color.success}
-            onChangeComplete={color => {
-              theme.color.success = color.hex;
-              setKey(color.hex);
-            }}
-          />
-          <Text>{`info`}</Text>
-          <HuePicker
-            color={theme.color.info}
-            onChangeComplete={color => {
-              theme.color.info = color.hex;
-              setKey(color.hex);
-            }}
-          />
-          <Text>{`warning`}</Text>
-          <HuePicker
-            color={theme.color.warning}
-            onChangeComplete={color => {
-              theme.color.warning = color.hex;
-              setKey(color.hex);
-            }}
-          />
-          <Text>{`error`}</Text>
-          <HuePicker
-            color={theme.color.error}
-            onChangeComplete={color => {
-              theme.color.error = color.hex;
-              setKey(color.hex);
-            }}
-          />
-          <Text>{`border`}</Text>
-          <HuePicker
-            color={theme.color.border}
-            onChangeComplete={color => {
-              theme.color.border = color.hex;
-              setKey(color.hex);
-            }}
-          />
-        </div>
-        <br />
-        <br />
-
+        <Text>{`Primary`}</Text>
+        <SketchPicker
+          color={theme.color.primary}
+          onChangeComplete={color => {
+            theme.color.primary = color.hex;
+            setKey(color.hex);
+          }}
+        />
+      </div>
+      <br />
+      <br />
+      <ThemeProvider theme={theme} key={key}>
         <div>
           <Text type={type}>{`Text of type`}</Text>
           <br />
@@ -144,8 +95,8 @@ const ThemeStory = props => {
             size={size}
           />
         </div>
-      </>
-    </ThemeProvider>
+      </ThemeProvider>
+    </>
   );
 };
 
