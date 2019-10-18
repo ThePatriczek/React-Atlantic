@@ -30,7 +30,6 @@ export const SelectContainer = styled.div<SelectProps>`
   ${props =>
     props.isFullWidth &&
     css`
-      min-width: 220px;
       width: 100%;
     `}
   
@@ -52,7 +51,6 @@ export const Control = styled.div<SelectProps>`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  min-width: 170px;
   z-index: 1;
   cursor: pointer;
   padding-left: ${props => props.theme.padding.md};
@@ -111,7 +109,7 @@ export const Control = styled.div<SelectProps>`
   ${props =>
     props.isFullWidth &&
     css`
-      min-width: 100%;
+      width: 100%;
     `}
 `;
 
@@ -251,7 +249,7 @@ export const MultiValueRemove = styled.div<SelectProps>`
   display: flex;
   justify-content: center;
   align-items: center;
-  min-width: 26px;
+  width: 26px;
   border-left: 1px solid ${props => props.theme.color.primary};
 
   i {
