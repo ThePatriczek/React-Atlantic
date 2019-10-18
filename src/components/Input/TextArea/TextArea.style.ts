@@ -48,20 +48,20 @@ export const StyledTextArea = styled.textarea`
   position: relative;
   display: inline-block;
   min-width: 150px;
+  user-select: text;
   width: 100%;
   max-width: 100%;
   height: auto;
   min-height: ${props => props.theme.height.md};
   padding: ${props => props.theme.padding.sm} ${props => props.theme.padding.md};
   margin: 0;
-  
+
   vertical-align: middle;
   line-height: 1.5;
   font-family: ${props => props.theme.font.family};
   font-size: ${props => props.theme.font.size.md};
   font-weight: 400;
   overflow: auto;
-  user-select: none;
   -webkit-appearance: textfield;
   touch-action: manipulation;
 
@@ -90,7 +90,7 @@ export const StyledTextArea = styled.textarea`
     props.disabled &&
     css`
       color: ${darken(0.2, props.theme.color.default)};
-      
+
       ::placeholder {
         color: ${darken(0.2, props.theme.color.default)};
       }

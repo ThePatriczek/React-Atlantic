@@ -134,7 +134,7 @@ export const StyledInput = styled.input<{
   font-weight: 400;
   white-space: nowrap;
   text-overflow: ellipsis;
-  user-select: none;
+  user-select: text;
   -webkit-appearance: textfield;
   touch-action: manipulation;
 
