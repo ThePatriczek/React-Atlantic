@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { Size } from '../../types';
 import { OptionProps } from './Option';
-
 export interface SelectProps {
     onChange?: (value?: any) => void;
     value?: any;

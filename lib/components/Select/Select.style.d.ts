@@ -1,5 +1,4 @@
 import { Size } from '../../types';
-
 interface SelectProps {
     isMenuOpened?: boolean;
     isFocused?: boolean;
