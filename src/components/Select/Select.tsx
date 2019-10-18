@@ -39,7 +39,7 @@ export interface SelectProps {
 
 export interface OptionType {
   value: any;
-  label: string;
+  label: React.ReactElement;
 }
 
 const getChild = (
