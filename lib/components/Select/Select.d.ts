@@ -15,7 +15,7 @@ export interface SelectProps {
 }
 export interface OptionType {
     value: any;
-    label: string;
+    label: React.ReactElement;
 }
 export declare const Select: React.FC<React.PropsWithChildren<SelectProps>> & {
     Option: React.FC<OptionProps>;
