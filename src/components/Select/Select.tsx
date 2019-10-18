@@ -110,14 +110,10 @@ export const Select: React.FC<React.PropsWithChildren<SelectProps>> & {
     if (!isDisabled) {
       if (props.value === undefined) {
         setValue(value);
+      }
 
-        if (props.onChange) {
-          props.onChange(value);
-        }
-      } else {
-        if (props.onChange) {
-          props.onChange(props.value);
-        }
+      if (props.onChange) {
+        props.onChange(value);
       }
     }
   };
