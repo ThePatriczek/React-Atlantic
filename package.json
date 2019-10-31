@@ -66,29 +66,26 @@
     "polished": "^3.4.1",
     "react-select": "^3.0.8",
     "react-tooltip": "^3.11.1",
-    "styled-components": "^4.3.2"
+    "styled-components": "^5.0.0-rc.0"
   },
   "devDependencies": {
     "@babel/core": "^7.6.0",
-    "@storybook/addon-actions": "5.0.0",
-    "@storybook/addon-info": "5.0.0",
-    "@storybook/addon-knobs": "5.0.0",
-    "@storybook/addon-links": "5.0.0",
-    "@storybook/addon-notes": "5.0.0",
-    "@storybook/addon-viewport": "5.0.0",
-    "@storybook/addons": "5.0.0",
-    "@storybook/react": "5.0.0",
+    "@storybook/addon-actions": "5.2.0",
+    "@storybook/addon-info": "5.2.0",
+    "@storybook/addon-knobs": "5.2.0",
+    "@storybook/addon-links": "5.2.0",
+    "@storybook/addon-notes": "5.2.0",
+    "@storybook/addon-viewport": "5.2.0",
+    "@storybook/addons": "5.2.0",
+    "@storybook/react": "5.2.0",
     "@types/enzyme": "^3.10.3",
     "@types/enzyme-adapter-react-16": "^1.0.5",
     "@types/node": "^12.7.5",
     "@types/react": "^16.9.2",
+    "@types/react-color": "^3.0.1",
     "@types/react-dom": "^16.9.0",
     "@types/react-select": "^3.0.5",
     "@types/react-tooltip": "^3.9.3",
-    "@types/storybook__addon-actions": "^3.4.3",
-    "@types/storybook__addon-info": "^4.1.2",
-    "@types/storybook__addon-knobs": "^5.0.4",
-    "@types/storybook__addon-viewport": "^4.1.1",
     "@types/storybook__react": "^4.0.2",
     "@types/styled-components": "4.1.8",
     "awesome-typescript-loader": "^5.2.1",
@@ -104,7 +101,7 @@
     "expect": "^24.9.0",
     "jest": "^24.9.0",
     "jest-mock": "^24.9.0",
-    "jest-styled-components": "^6.3.3",
+    "jest-styled-components": "^7.0.0-beta.1",
     "pre-commit": "^1.2.2",
     "prettier": "^1.18.2",
     "react": "^16.9.0",
@@ -124,12 +121,16 @@
       "ts",
       "tsx"
     ],
+    "browser": false,
+    "moduleNameMapper": {
+      "^styled-components": "<rootDir>/node_modules/styled-components"
+    },
     "setupFiles": [
       "<rootDir>/config/jest/storybook.js",
       "<rootDir>/config/enzymeAdapter.js"
     ],
-    "testPathIgnorePatterns": [
-      "<rootDir>/(build|docs|node_modules)/"
+    "setupFilesAfterEnv": [
+      "./setupTest.js"
     ],
     "testEnvironment": "node",
     "cacheDirectory": "test/.cache",
