@@ -8,7 +8,7 @@ interface StyledCheckboxProps {
   isDisabled?: boolean;
   isTextDotted?: boolean;
   name?: string;
-  textPosition?: 'right' | 'left';
+  position?: 'right' | 'left';
 }
 
 export const HiddenCheckbox = styled.input.attrs({
@@ -142,9 +142,23 @@ StyledCheckboxLabel.defaultProps = {
 StyledCheckboxMark.defaultProps = {
   theme
 };
+
 StyledCheckboxSpan.defaultProps = {
   theme
 };
+
 StyledCheckboxIcon.defaultProps = {
   theme
 };
+
+HiddenCheckbox.displayName = 'HiddenCheckbox';
+
+StyledCheckboxInputShown.displayName = 'StyledCheckboxInputShown';
+
+StyledCheckboxLabel.displayName = 'StyledCheckboxLabel';
+
+StyledCheckboxMark.displayName = 'StyledCheckboxMark';
+
+StyledCheckboxSpan.displayName = 'StyledCheckboxSpan';
+
+StyledCheckboxIcon.displayName = 'StyledCheckboxIcon';

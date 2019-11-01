@@ -32,9 +32,9 @@ stories.add(
       isChecked,
       isDefaultChecked,
       isDisabled,
-      onChange,
       size,
-      children
+      children,
+      onChange
     );
 
     specs(() => tests(radioButton));

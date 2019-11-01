@@ -1,4 +1,4 @@
-import { mount } from 'enzyme';
+import { shallow } from 'enzyme';
 import React from 'react';
 import { Radio } from '../Radio';
 import expect from 'expect';
@@ -8,9 +8,9 @@ export const Component = (
   isChecked,
   isDefaultChecked,
   isDisabled,
-  onChange,
   size,
-  children
+  children,
+  onChange
 ) => {
   return (
     <Radio.Button
@@ -32,36 +32,43 @@ export const tests = (
     defaultValues.isChecked,
     defaultValues.isDefaultChecked,
     defaultValues.isDisabled,
-    defaultValues.isPartiallyChecked,
-    defaultValues.position,
+    defaultValues.size,
     defaultValues.children
   )
 ) => {
-  output = mount(radioButton);
+  output = shallow(radioButton);
 
   return describe('Radio.Button', () => {
-    const wrapper = mount(radioButton);
-
-    it(`Should have isChecked: ${radioButton.props.isChecked}`, () => {
-      expect(wrapper.prop('isChecked')).toEqual(radioButton.props.isChecked);
-    });
-
     it(`Should have isDisabled: ${radioButton.props.isDisabled}`, () => {
-      expect(wrapper.prop('isDisabled')).toEqual(radioButton.props.isDisabled);
+      expect(output.prop('isDisabled')).toEqual(radioButton.props.isDisabled);
     });
 
     it(`Should have size: ${radioButton.props.size}`, () => {
-      expect(wrapper.prop('size')).toEqual(radioButton.props.size);
+      expect(output.prop('size')).toEqual(radioButton.props.size);
     });
 
-    it(`Should have isDefaultChecked: ${radioButton.props.isDefaultChecked}`, () => {
-      expect(wrapper.prop('isDefaultChecked')).toEqual(
-        radioButton.props.isDefaultChecked
-      );
-    });
+    if (radioButton.props.isDefaultChecked) {
+      it(`Should have isChecked: ${radioButton.props.isDefaultChecked}`, () => {
+        expect(output.props().isChecked).toEqual(
+          radioButton.props.isDefaultChecked
+        );
+      });
+      it(`Should have isDefaultChecked: ${true}`, () => {
+        expect(output.props().isChecked).toEqual(true);
+      });
+    } else {
+      it(`Should have isChecked: ${radioButton.props.isChecked}`, () => {
+        expect(output.props().isChecked).toEqual(radioButton.props.isChecked);
+      });
+      it(`Should have isDefaultChecked: ${false}`, () => {
+        expect(output.props().isChecked).toEqual(false);
+      });
+    }
 
     it(`Should have children: ${radioButton.props.children}`, () => {
-      expect(wrapper.prop('children')).toEqual(radioButton.props.children);
+      expect(output.find('StyledRadioButtonSpan').props().children).toEqual(
+        radioButton.props.children
+      );
     });
   });
 };

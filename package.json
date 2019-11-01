@@ -14,14 +14,7 @@
   ],
   "babel": {
     "plugins": [
-      "@babel/transform-flow-strip-types",
-      [
-        "import",
-        {
-          "libraryName": "antd",
-          "style": "css"
-        }
-      ]
+      "@babel/transform-flow-strip-types"
     ],
     "presets": [
       "react-app"
@@ -98,6 +91,7 @@
     "dotenv": "latest",
     "enzyme": "^3.10.0",
     "enzyme-adapter-react-16": "^1.14.0",
+    "eslint": "^6.6.0",
     "expect": "^24.9.0",
     "jest": "^24.9.0",
     "jest-mock": "^24.9.0",

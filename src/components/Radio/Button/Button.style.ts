@@ -121,3 +121,9 @@ StyledRadioButtonLabel.defaultProps = {
 StyledRadioButtonSpan.defaultProps = {
   theme
 };
+
+StyledRadioButtonInputHidden.displayName = 'StyledRadioButtonInputHidden';
+
+StyledRadioButtonLabel.displayName = 'StyledRadioButtonLabel';
+
+StyledRadioButtonSpan.displayName = 'StyledRadioButtonSpan';

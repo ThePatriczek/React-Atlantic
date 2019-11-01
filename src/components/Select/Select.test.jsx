@@ -1,4 +1,4 @@
-import { mount } from 'enzyme';
+import { shallow } from 'enzyme';
 import React from 'react';
 import expect from 'expect';
 import { defaultValues } from '../../constants/defaultValues';
@@ -40,51 +40,42 @@ export const Component = (
     </Select>
   );
 };
-
-let output;
-
 export const tests = (
   select = Component(
     defaultValues.size,
     defaultValues.isMulti,
     defaultValues.placeholder,
-    defaultValues.value,
+    defaultValues.selectValue,
     defaultValues.defaultValue,
     defaultValues.isDisabled,
     defaultValues.isFullWidth
   )
 ) => {
-  output = mount(select);
+  let output = shallow(select);
 
   return describe('Select', () => {
-    const wrapper = mount(select);
-
     it(`Should have size: ${select.props.size}`, () => {
-      expect(wrapper.props().size).toEqual(select.props.size);
+      expect(output.props().size).toEqual(select.props.size);
     });
 
     it(`Should have isMulti: ${select.props.isMulti}`, () => {
-      expect(wrapper.props().isMulti).toEqual(select.props.isMulti);
+      expect(output.props().isMulti).toEqual(select.props.isMulti);
     });
 
     it(`Should have placeholder: ${select.props.placeholder}`, () => {
-      expect(wrapper.props().placeholder).toEqual(select.props.placeholder);
+      expect(output.props().placeholder).toEqual(select.props.placeholder);
     });
 
     it(`Should have defaultValue: ${select.props.defaultValue}`, () => {
-      expect(wrapper.props().defaultValue).toEqual(select.props.defaultValue);
-    });
-
-    it(`Should have value: ${select.props.value}`, () => {
-      expect(wrapper.props().value).toEqual(select.props.value);
+      expect(output.props().defaultValue).toEqual(select.props.defaultValue);
     });
 
     it(`Should have isDisabled: ${select.props.isDisabled}`, () => {
-      expect(wrapper.props().isDisabled).toEqual(select.props.isDisabled);
+      expect(output.props().isDisabled).toEqual(select.props.isDisabled);
     });
 
     it(`Should have isFullWidth: ${select.props.isFullWidth}`, () => {
-      expect(wrapper.props().isFullWidth).toEqual(select.props.isFullWidth);
+      expect(output.props().isFullWidth).toEqual(select.props.isFullWidth);
     });
   });
 };

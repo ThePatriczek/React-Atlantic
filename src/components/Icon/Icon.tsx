@@ -142,7 +142,7 @@ export const Icon: React.FC<IconProps> = (
   }
 
   return (
-    <StyledIcon isRotating={isRotating} className={className}>
+    <StyledIcon isRotating={isRotating} className={className} name={name}>
       {Component}
     </StyledIcon>
   );

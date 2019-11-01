@@ -1,4 +1,4 @@
-import { mount } from 'enzyme';
+import { shallow } from 'enzyme';
 import React from 'react';
 import expect from 'expect';
 import { defaultValues } from '../../constants/defaultValues';
@@ -28,8 +28,6 @@ export const Component = (
   );
 };
 
-let output;
-
 export const tests = (
   switcher = Component(
     defaultValues.isChecked,
@@ -41,32 +39,44 @@ export const tests = (
     defaultValues.textOff
   )
 ) => {
-  output = mount(switcher);
+  let output = shallow(switcher);
 
   return describe('Switch', () => {
-    const output = mount(switcher);
-
     it(`Should have type: ${switcher.props.type}`, () => {
-      expect(output.props().type).toEqual(switcher.props.type);
+      expect(output.props().htmlType).toEqual(switcher.props.type);
     });
 
     it(`Should have textOn: ${switcher.props.textOn}`, () => {
-      expect(output.props().textOn).toEqual(switcher.props.textOn);
-    });
-
-    it(`Should have textOff: ${switcher.props.textOff}`, () => {
-      expect(output.props().textOff).toEqual(switcher.props.textOff);
-    });
-
-    it(`Should have isDefaultChecked: ${switcher.props.isDefaultChecked}`, () => {
-      expect(output.props().isDefaultChecked).toEqual(
-        switcher.props.isDefaultChecked
+      expect(output.find('StyledSwitcherTrue').props().children).toEqual(
+        switcher.props.textOn
       );
     });
 
-    it(`Should have isChecked: ${switcher.props.isChecked}`, () => {
-      expect(output.props().isChecked).toEqual(switcher.props.isChecked);
+    it(`Should have textOff: ${switcher.props.textOff}`, () => {
+      expect(output.find('StyledSwitcherFalse').props().children).toEqual(
+        switcher.props.textOff
+      );
     });
+
+    if (switcher.props.isDefaultChecked) {
+      it(`Should have isChecked: ${switcher.props.isDefaultChecked}`, () => {
+        expect(output.props().isChecked).toEqual(
+          switcher.props.isDefaultChecked
+        );
+      });
+      it(`Should have isDefaultChecked: ${switcher.props.isDefaultChecked}`, () => {
+        expect(output.props().isChecked).toEqual(
+          switcher.props.isDefaultChecked
+        );
+      });
+    } else {
+      it(`Should have isChecked: ${switcher.props.isChecked}`, () => {
+        expect(output.props().isChecked).toEqual(switcher.props.isChecked);
+      });
+      it(`Should have isDefaultChecked: ${false}`, () => {
+        expect(output.props().isChecked).toEqual(switcher.props.isChecked);
+      });
+    }
 
     it(`Should have isDisabled: ${switcher.props.isDisabled}`, () => {
       expect(output.props().isDisabled).toEqual(switcher.props.isDisabled);

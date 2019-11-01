@@ -1,9 +1,7 @@
-import { darken, lighten, transparentize } from 'polished';
+import { darken, transparentize } from 'polished';
 import styled, { css } from 'styled-components';
 import { theme } from '../../theme';
 import { HorizontalPosition, Size, Type } from '../../types';
-import curriedOpacify from 'polished/lib/color/opacify';
-import curriedSetLightness from 'polished/lib/color/setLightness';
 
 interface StyledSwitchProps {
   isChecked?: boolean;
@@ -184,34 +182,34 @@ export const StyledSwitcherTrue = styled.div<StyledSwitchProps>`
     `}
   
   ${props => {
-  if (props.isDisabled) {
-    if (props.isChecked) {
-      if (props.htmlType === 'primary'){
-      return css`
-          background-color: ${transparentize(.6, theme.color.primary)};
-        `;
-      }
-      
-      if (props.htmlType === 'success'){
-        return css`
-          background-color: ${transparentize(.6, theme.color.success)};
-        `;
-      }
-      
-      if (props.htmlType === 'warning'){
-      return css`
-          background-color: ${transparentize(.6, theme.color.warning)};
-        `;
-      }
-      
-      if (props.htmlType === 'error'){
-      return css`
-          background-color: ${transparentize(.6, theme.color.error)};
-        `;
+    if (props.isDisabled) {
+      if (props.isChecked) {
+        if (props.htmlType === 'primary') {
+          return css`
+            background-color: ${transparentize(0.6, theme.color.primary)};
+          `;
+        }
+
+        if (props.htmlType === 'success') {
+          return css`
+            background-color: ${transparentize(0.6, theme.color.success)};
+          `;
+        }
+
+        if (props.htmlType === 'warning') {
+          return css`
+            background-color: ${transparentize(0.6, theme.color.warning)};
+          `;
+        }
+
+        if (props.htmlType === 'error') {
+          return css`
+            background-color: ${transparentize(0.6, theme.color.error)};
+          `;
+        }
       }
     }
-  }
-  return css``;
+    return css``;
   }}
 `;
 
@@ -235,7 +233,7 @@ export const StyledSwitcherToggler = styled.div<StyledSwitchProps>`
   
   ${props =>
     props.isDisabled &&
-      css`
+    css`
       background-color: ${props.theme.color.default};
     `}
  
@@ -288,10 +286,10 @@ export const StyledSwitcherToggler = styled.div<StyledSwitchProps>`
      `}
    
    ${props =>
-    props.isDisabled &&
-    css`
-      background-color: ${props.theme.color.default};
-    `}
+     props.isDisabled &&
+     css`
+       background-color: ${props.theme.color.default};
+     `}
    
     `;
 
@@ -347,3 +345,10 @@ StyledSwitcherToggler.defaultProps = {
 StyledSwitcherFalse.defaultProps = {
   theme
 };
+
+StyledSwitchLabel.displayName = 'StyledSwitchLabel';
+StyledSwitcherWrap.displayName = 'StyledSwitcherWrap';
+StyledSwitcherTrue.displayName = 'StyledSwitcherTrue';
+StyledSwitchLabel.displayName = 'StyledSwitchLabel';
+StyledSwitcherToggler.displayName = 'StyledSwitcherToggler';
+StyledSwitcherFalse.displayName = 'StyledSwitcherFalse';

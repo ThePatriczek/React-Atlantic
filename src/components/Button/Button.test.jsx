@@ -1,9 +1,9 @@
 import { shallow } from 'enzyme';
-import React from 'react';
-import { Button } from './Button';
-import { defaultValues } from '../../constants/defaultValues';
-import { darken, lighten } from 'polished';
 import 'jest-styled-components';
+import { darken } from 'polished';
+import React from 'react';
+import { defaultValues } from '../..';
+import { Button } from './Button';
 
 export const Component = (
   isDisabled,
@@ -28,8 +28,6 @@ export const Component = (
   );
 };
 
-let output;
-
 export const tests = (
   button = Component(
     defaultValues.isDisabled,
@@ -40,7 +38,7 @@ export const tests = (
     defaultValues.children
   )
 ) => {
-  output = shallow(button);
+  let output = shallow(button);
 
   return describe('Button', () => {
     it(`Should have isDisabled: ${button.props.isDisabled}`, () => {
@@ -50,12 +48,14 @@ export const tests = (
         expect(output).toHaveStyleRule('color', darken(0.2, '#b7b7b7'));
       }
     });
+
     it(`Should have isFullWidth: ${button.props.isFullWidth}`, () => {
       expect(output.props().isFullWidth).toEqual(button.props.isFullWidth);
       if (button.props.isFullWidth === true) {
         expect(output).toHaveStyleRule('width', '100%');
       }
     });
+
     it(`Should have isRound: ${button.props.isRound}`, () => {
       expect(output.props().isRound).toEqual(button.props.isRound);
       if (button.props.isRound === true) {
@@ -63,12 +63,14 @@ export const tests = (
           'border-radius',
           output.props().theme.rounded
         );
-      } else
+      } else {
         expect(output).toHaveStyleRule(
           'border-radius',
           output.props().theme.radius
         );
+      }
     });
+
     it(`Should have size: ${button.props.size}`, () => {
       expect(output.props().size).toEqual(button.props.size);
       if (button.props.size === 'small') {
@@ -112,6 +114,7 @@ export const tests = (
         );
       }
     });
+
     it(`Should have type: ${button.props.type}`, () => {
       expect(output.props().styleType).toEqual(button.props.type);
       let color = `black`;
@@ -142,7 +145,7 @@ export const tests = (
         );
         expect(output).toHaveStyleRule('color', color);
       } else if (button.props.type === 'warning') {
-        bgColor = output.props().theme.color.warning;
+        bgColor = output.props().theme.color[button.props.type];
         color = `white`;
         borderColor = bgColor;
 
@@ -185,21 +188,29 @@ export const tests = (
         expect(output).toHaveStyleRule('color', color);
       }
     });
+
     it(`onClick should have been called if Button is not disabled`, () => {
-      const mockClick = jest.fn();
+      const mockCallBack = jest.fn();
+      output.setProps({
+        onClick: mockCallBack
+      });
+      output.simulate('click');
+
+      expect(mockCallBack).toHaveBeenCalled();
+    });
+    /*const mockClick = jest.fn();
 
       output.setProps({
         onClick: mockClick
       });
 
-      output.simulate('click');
-
-      if (!button.props.isDisabled) {
-        expect(mockClick).toHaveBeenCalled();
+      if (output.props().disabled === true) {
+            output.simulate('click');
+        expect(mockClick.mock.calls.length).toEqual(0);
       } else {
-        expect(mockClick).not.toHaveBeenCalled();
-      }
-    });
+            output.simulate('click');
+        expect(mockClick.mock.calls.length).toEqual(1);
+      }*/
     it(`Should have children: ${button.props.children}`, () => {
       expect(output.text()).toEqual(button.props.children);
     });

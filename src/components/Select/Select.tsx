@@ -149,6 +149,7 @@ export const Select: React.FC<React.PropsWithChildren<SelectProps>> & {
   return (
     <ReactSelect
       value={val}
+      size={size}
       isDisabled={isDisabled}
       options={items}
       placeholder={placeholder || `Select an option`}
@@ -156,6 +157,8 @@ export const Select: React.FC<React.PropsWithChildren<SelectProps>> & {
       className={className || ``}
       onChange={onChange}
       isMulti={isMulti}
+      isFullWidth={isFullWidth}
+      defaultValue={defaultValue}
       blurInputOnSelect={true}
       autoFocus={autoFocus}
       components={{
