@@ -354,10 +354,16 @@ StyledInput.defaultProps = {
   theme
 };
 
+StyledInput.displayName = 'StyledInput';
+
 StyledInputWrapper.defaultProps = {
   theme
 };
 
+StyledInputWrapper.displayName = 'StyledInputWrapper';
+
 StyledInputWrapperAlt.defaultProps = {
   theme
 };
+
+StyledInputWrapperAlt.displayName = 'StyledInputWrapper.Alt';

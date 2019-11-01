@@ -58,7 +58,7 @@ export const Checkbox: React.FC<React.PropsWithChildren<CheckboxProps>> = (
       className={className}
     >
       {position === 'right' && (
-        <StyledCheckboxSpan isDisabled={isDisabled}>
+        <StyledCheckboxSpan position={position} isDisabled={isDisabled}>
           {children}
         </StyledCheckboxSpan>
       )}
@@ -87,7 +87,7 @@ export const Checkbox: React.FC<React.PropsWithChildren<CheckboxProps>> = (
       </StyledCheckboxInputShown>
 
       {position === 'left' && (
-        <StyledCheckboxSpan isDisabled={isDisabled}>
+        <StyledCheckboxSpan position={position} isDisabled={isDisabled}>
           {children}
         </StyledCheckboxSpan>
       )}

@@ -299,7 +299,7 @@ export const IndicatorsContainer = styled.div<SelectProps>`
   i {
     font-size: ${props => props.theme.font.size.md};
   }
-  
+
   ${props =>
     props.size === 'small' &&
     css`
@@ -309,7 +309,7 @@ export const IndicatorsContainer = styled.div<SelectProps>`
         font-size: ${props => props.theme.font.size.sm};
       }
     `}
-  
+
   ${props =>
     props.size === 'large' &&
     css`
@@ -380,6 +380,8 @@ SelectContainer.defaultProps = {
 Control.defaultProps = {
   theme
 };
+
+Control.displayName = 'Control';
 
 ValueContainer.defaultProps = {
   theme

@@ -10,8 +10,8 @@ export const defaultValues = {
   isAlternative: false,
   autoFocus: false,
   isMulti: false,
-  iconRight: null,
-  iconLeft: null,
+  iconRight: false,
+  iconLeft: false,
   selectDefaultValueOne: 'value 1',
   selectDefaultValueTwo: 'value 2',
   place: 'top',
@@ -26,6 +26,7 @@ export const defaultValues = {
   position: 'left',
   children: 'Change me, please 🥺',
   value: 'Change me, please 🥺',
+  selectValue: [{ value: 'Change me, please 🥺' }],
   placeholder: 'Change me, please 🥺',
   defaultValue: 'Change me, please 🥺'
 };

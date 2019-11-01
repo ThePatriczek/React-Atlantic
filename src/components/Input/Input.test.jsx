@@ -1,4 +1,4 @@
-import { mount } from 'enzyme';
+import { shallow } from 'enzyme';
 import React from 'react';
 import { Input } from './Input';
 import { defaultValues } from '../../constants/defaultValues';
@@ -40,27 +40,54 @@ export const Component = (
   );
 };
 
-let output;
-
-export const tests = (input = Component(defaultValues.isDisabled)) => {
-  output = mount(input);
+export const tests = (
+  input = Component(
+    defaultValues.isDisabled,
+    defaultValues.isLoading,
+    defaultValues.isAlternative,
+    defaultValues.placeholder,
+    defaultValues.iconRight,
+    defaultValues.iconLeft,
+    defaultValues.size,
+    defaultValues.autoFocus,
+    defaultValues.defaultValue,
+    defaultValues.value
+  )
+) => {
+  let output = shallow(input);
 
   return describe('Input', () => {
     it(`Should have isDisabled: ${input.props.isDisabled}`, () => {
       expect(output.props().isDisabled).toEqual(input.props.isDisabled);
     });
 
-    it(`Should have isLoading: ${input.props.isLoading}`, () => {
-      expect(output.props().isLoading).toEqual(input.props.isLoading);
-    });
+    if (input.props.isAlternative) {
+      it(`Should have isAlternative: ${input.props.isAlternative}`, () => {
+        expect(output.find('StyledInput').props().placeholder).toEqual('');
+      });
+      it(`Should have placeholder: ''`, () => {
+        expect(output.find('StyledInput').props().placeholder).toEqual('');
+      });
+    }
 
-    it(`Should have isAlternative: ${input.props.isAlternative}`, () => {
-      expect(output.props().isAlternative).toEqual(input.props.isAlternative);
-    });
-
-    it(`Should have iconRight: ${input.props.iconRight}`, () => {
-      expect(output.props().iconRight).toEqual(input.props.iconRight);
-    });
+    if (input.props.isLoading) {
+      it(`Should have iconRight: ${input.props.isLoading}`, () => {
+        expect(output.props().iconRight).toEqual(input.props.isLoading);
+      });
+      it(`Should have isLoading:  ${input.props.isLoading}`, () => {
+        expect(output.props().iconRight).toEqual(input.props.isLoading);
+      });
+    }
+    if (input.props.iconRight === false && !input.props.isLoading) {
+      it(`Should have iconRight: ${false}`, () => {
+        expect(output.props().iconRight).toEqual(false);
+      });
+    }
+    if (input.props.iconRight === true) {
+      it(`Should have iconRight: ${true}`, () => {
+        expect(output.props().iconRight).toEqual(true);
+      });
+    }
 
     it(`Should have iconLeft: ${input.props.iconLeft}`, () => {
       expect(output.props().iconLeft).toEqual(input.props.iconLeft);
@@ -70,16 +97,31 @@ export const tests = (input = Component(defaultValues.isDisabled)) => {
       expect(output.props().size).toEqual(input.props.size);
     });
 
-    it(`Should have placeholder: ${input.props.placeholder}`, () => {
-      expect(output.props().placeholder).toEqual(input.props.placeholder);
-    });
+    if (!input.props.isAlternative) {
+      it(`Should have placeholder: ${input.props.placeholder}`, () => {
+        expect(output.find('StyledInput').props().placeholder).toEqual(
+          input.props.placeholder
+        );
+      });
+    }
 
-    it(`Should have defaultValue: ${input.props.defaultValue}`, () => {
-      expect(output.props().defaultValue).toEqual(input.props.defaultValue);
-    });
+    if (input.props.value === input.props.defaultValue) {
+      it(`Should have defaultValue: ${input.props.defaultValue}`, () => {
+        expect(output.find('StyledInput').props().value).toEqual(
+          input.props.defaultValue
+        );
+      });
+    } else
+      it(`Should have defaultValue: ${input.props.defaultValue}`, () => {
+        expect(output.find('StyledInput').props().value).toEqual(
+          input.props.value
+        );
+      });
 
     it(`Should have value: ${input.props.value}`, () => {
-      expect(output.props().value).toEqual(input.props.value);
+      expect(output.find('StyledInput').props().value).toEqual(
+        input.props.value
+      );
     });
   });
 };

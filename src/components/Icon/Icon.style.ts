@@ -1,29 +1,20 @@
-import styled, { css } from 'styled-components';
+import styled, { css, keyframes } from 'styled-components';
+import { IconName } from './Icon';
 
 export interface StyledIconProps {
   isRotating?: boolean;
+  name?: IconName;
 }
 
-export const StyledIcon = styled.i<StyledIconProps>`
-  @-moz-keyframes spin {
-    100% {
-      -moz-transform: rotate(360deg);
-    }
-  }
-
-  @-webkit-keyframes spin {
-    100% {
-      -webkit-transform: rotate(360deg);
-    }
-  }
-
-  @keyframes spin {
-    100% {
+export const spin = () => {
+  return keyframes`
+  100% {
       -webkit-transform: rotate(360deg);
       transform: rotate(360deg);
-    }
-  }
+  }`;
+};
 
+export const StyledIcon = styled.i<StyledIconProps>`
   display: inline-block;
   line-height: 0;
   height: 1em;
@@ -35,9 +26,9 @@ export const StyledIcon = styled.i<StyledIconProps>`
   ${props =>
     props.isRotating &&
     css`
-      -webkit-animation: spin 4s linear infinite;
-      -moz-animation: spin 4s linear infinite;
-      animation: spin 4s linear infinite;
+      -webkit-animation: ${spin} 4s linear infinite;
+      -moz-animation: ${spin} 4s linear infinite;
+      animation: ${spin} 4s linear infinite;
     `}
 
   svg {
@@ -45,3 +36,5 @@ export const StyledIcon = styled.i<StyledIconProps>`
     vertical-align: middle;
   }
 `;
+
+StyledIcon.displayName = 'StyledIcon';

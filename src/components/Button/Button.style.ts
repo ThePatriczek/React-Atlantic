@@ -12,13 +12,25 @@ interface StyledButtonProps {
   animationRunning?: boolean;
 }
 
-export const focusAnimation = keyframes`
-    0%    { opacity: 0; }
-    25%   { opacity: .5; }
-    50%   { opacity: 1; }
-    75%   { opacity: .5; }
-    100%  { opacity: 0; }
-  `;
+export const focusAnimation = () => {
+  return keyframes`
+    0%    {
+    opacity: 0; 
+    }
+    25%   { 
+    opacity: 0.5; 
+    }
+    50%   { 
+    opacity: 1; 
+    }
+    75%   { 
+    opacity: 0.5; 
+    }
+    100%  { 
+    opacity: 0; 
+    }
+    `;
+};
 
 const DefaultButton = styled.button`
   position: relative;
@@ -76,27 +88,27 @@ const DefaultButton = styled.button`
 `;
 
 export const StyledButton = styled(DefaultButton)<StyledButtonProps>`
-  ${props =>
-    !props.disabled &&
-    props.styleType !== 'transparent' &&
-    props.animationRunning &&
-    css`
-      &:after {
-        content: '';
-        position: absolute;
-        top: -3px;
-        left: -3px;
-        right: -3px;
-        bottom: -3px;
+${props =>
+  !props.disabled &&
+  props.styleType !== 'transparent' &&
+  props.animationRunning &&
+  css`
+    &:after {
+      content: '';
+      position: absolute;
+      top: -3px;
+      left: -3px;
+      right: -3px;
+      bottom: -3px;
 
-        z-index: -1;
-        border-radius: ${props.isRound
-          ? props.theme.rounded
-          : props.theme.radius};
-        background: ${props.theme.color.default};
-        animation: ${focusAnimation} 0.4s ease-in-out;
-      }
-    `}
+      z-index: -1;
+      border-radius: ${props.isRound
+        ? props.theme.rounded
+        : props.theme.radius};
+      background: ${props.theme.color.default};
+      animation: ${focusAnimation} 0.4s ease-in-out;
+    }
+  `}
 
   ${props => {
     let color = `black`;
@@ -137,10 +149,10 @@ export const StyledButton = styled(DefaultButton)<StyledButtonProps>`
       background-color: ${bgColor};
       color: ${color};
       border: 1px ${borderType} ${borderColor};
-      
+
       ${props.styleType === 'transparent' &&
-        css`  
-          box-shadow: none;  
+        css`
+          box-shadow: none;
         `}
 
       &:hover {
@@ -228,6 +240,8 @@ export const StyledTypoButton = styled(DefaultButton)`
 StyledButton.defaultProps = {
   theme
 };
+
+StyledButton.displayName = 'StyledButton';
 
 StyledTypoButton.defaultProps = {
   theme
