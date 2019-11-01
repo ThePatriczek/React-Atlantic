@@ -4,7 +4,7 @@ interface StyledCheckboxProps {
     isDisabled?: boolean;
     isTextDotted?: boolean;
     name?: string;
-    textPosition?: 'right' | 'left';
+    position?: 'right' | 'left';
 }
 export declare const HiddenCheckbox: import("styled-components").StyledComponent<"input", any, {
     type: "checkbox";

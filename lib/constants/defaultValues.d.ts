@@ -10,8 +10,8 @@ export declare const defaultValues: {
     isAlternative: boolean;
     autoFocus: boolean;
     isMulti: boolean;
-    iconRight: null;
-    iconLeft: null;
+    iconRight: boolean;
+    iconLeft: boolean;
     selectDefaultValueOne: string;
     selectDefaultValueTwo: string;
     place: string;
@@ -26,6 +26,9 @@ export declare const defaultValues: {
     position: string;
     children: string;
     value: string;
+    selectValue: {
+        value: string;
+    }[];
     placeholder: string;
     defaultValue: string;
 };
