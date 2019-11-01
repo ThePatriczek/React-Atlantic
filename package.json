@@ -1,6 +1,6 @@
 {
   "name": "react-atlantic",
-  "version": "0.3.3",
+  "version": "0.3.4",
   "description": "React Atlantic UI Library",
   "main": "index.js",
   "scripts": {
@@ -105,6 +105,7 @@
     "pre-commit": "^1.2.2",
     "prettier": "^1.18.2",
     "react": "^16.9.0",
+    "react-color": "^2.17.3",
     "react-docgen-typescript-loader": "^3.2.1",
     "react-dom": "^16.9.0",
     "react-test-renderer": "latest",
