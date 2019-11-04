@@ -32,7 +32,10 @@ export type IconName =
   | 'eyeSlash'
   | 'close'
   | 'clear'
-  | 'enter';
+  | 'enter'
+  | 'error'
+  | 'warning'
+  | 'checkCircle';
 
 export interface IconProps {
   name: IconName;
@@ -138,6 +141,15 @@ export const Icon: React.FC<IconProps> = (
       break;
     case 'enter':
       Component = <Icons.Enter />;
+      break;
+    case 'error':
+      Component = <Icons.Error />;
+      break;
+    case 'warning':
+      Component = <Icons.Warning />;
+      break;
+    case 'checkCircle':
+      Component = <Icons.CheckCircle />;
       break;
   }
 

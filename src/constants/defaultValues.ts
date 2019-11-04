@@ -17,6 +17,8 @@ export const defaultValues = {
   place: 'top',
   textOn: 'on',
   textOff: 'off',
+  primaryButtonContent: 'Potvrdit',
+  secondaryButtonContent: 'Zavřít',
   iconName: 'hamburger',
   tooltipType: 'dark',
   event: 'mouseenter',
@@ -28,5 +30,8 @@ export const defaultValues = {
   value: 'Change me, please 🥺',
   selectValue: [{ value: 'Change me, please 🥺' }],
   placeholder: 'Change me, please 🥺',
-  defaultValue: 'Change me, please 🥺'
+  defaultValue: 'Change me, please 🥺',
+  notificationContent: 'Change me, please 🥺',
+  notificationTitle: 'Notification',
+  notificationButonIcon: null
 };
