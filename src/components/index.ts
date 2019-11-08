@@ -7,4 +7,6 @@ export * from './Radio';
 export * from './Switch';
 export * from './Tooltip';
 export * from './Typography';
+export * from './ResponseMessage';
+export * from './Notification';
 export * from '../constants/defaultValues';
