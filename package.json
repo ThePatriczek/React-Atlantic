@@ -120,7 +120,8 @@
     ],
     "browser": false,
     "moduleNameMapper": {
-      "^styled-components": "<rootDir>/node_modules/styled-components"
+      "^styled-components": "<rootDir>/node_modules/styled-components",
+      "\\.(css|less)$": "<rootDir>/src"
     },
     "setupFiles": [
       "<rootDir>/config/jest/storybook.js",

@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Icon } from '../../Icon';
 import {
   StyledReactDatePickerButtonMoveMonth,
+  StyledReactDatePickerButtonMoveYear,
   StyledReactDatePickerHeaderContainer,
   StyledReactDatePickerMonthAndDate,
   StyledReactDatePickerTriangle
@@ -13,14 +14,12 @@ export interface DatePickerHeaderProps {
   increaseMonth: () => void;
   prevMonthButtonDisabled: boolean;
   nextMonthButtonDisabled: boolean;
+  changeYear: (year: number) => void;
 }
 
 export const DatePickerHeader: React.FC<DatePickerHeaderProps> = (
   props
 ): React.ReactElement => {
-
-  const [year, setYear] = useState<any>();
-
   const months = [
     'Leden',
     'Únor',
@@ -41,13 +40,20 @@ export const DatePickerHeader: React.FC<DatePickerHeaderProps> = (
     decreaseMonth,
     increaseMonth,
     prevMonthButtonDisabled,
-    nextMonthButtonDisabled
+    nextMonthButtonDisabled,
+    changeYear
   } = props;
 
   return (
     <>
       <StyledReactDatePickerTriangle />
       <StyledReactDatePickerHeaderContainer>
+        <StyledReactDatePickerButtonMoveYear
+          onClick={() => changeYear(date.getFullYear() - 1)}
+          type={'primary'}
+        >
+          <Icon name={'arrowDoubleLeft'} />
+        </StyledReactDatePickerButtonMoveYear>
         <StyledReactDatePickerButtonMoveMonth
           onClick={decreaseMonth}
           isDisabled={prevMonthButtonDisabled}
@@ -65,6 +71,12 @@ export const DatePickerHeader: React.FC<DatePickerHeaderProps> = (
         >
           <Icon name={'arrowRight'} />
         </StyledReactDatePickerButtonMoveMonth>
+        <StyledReactDatePickerButtonMoveYear
+          onClick={() => changeYear(date.getFullYear() + 1)}
+          type={'primary'}
+        >
+          <Icon name={'arrowDoubleRight'} />
+        </StyledReactDatePickerButtonMoveYear>
       </StyledReactDatePickerHeaderContainer>
     </>
   );
