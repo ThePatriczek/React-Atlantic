@@ -58,15 +58,14 @@ export const StyledInputWrapper = styled.span<StyledInputWrapperProps>`
     display: flex;
     
     ${props =>
-      props.isDisabled
-        ? css`
+      props.isDisabled ? css`
             color: ${darken(0.2, props.theme.color.default)};
             cursor: not-allowed;
-          `
-        : css`
-            color: ${props => lighten(0.6, props.theme.color.black)};
+          ` : css`
+            color: ${lighten(0.6, props.theme.color.black)};
             cursor: text;
           `};
+    
     align-items: center;
     position: absolute;
     width: 14px;

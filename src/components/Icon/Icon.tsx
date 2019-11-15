@@ -35,7 +35,8 @@ export type IconName =
   | 'enter'
   | 'error'
   | 'warning'
-  | 'checkCircle';
+  | 'checkCircle'
+  | 'calendar';
 
 export interface IconProps {
   name: IconName;
@@ -150,6 +151,9 @@ export const Icon: React.FC<IconProps> = (
       break;
     case 'checkCircle':
       Component = <Icons.CheckCircle />;
+      break;
+    case 'calendar':
+      Component = <Icons.Calendar />;
       break;
   }
 

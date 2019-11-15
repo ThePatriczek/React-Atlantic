@@ -2,10 +2,7 @@ import * as React from 'react';
 import { Size, Type } from '../../types';
 import { StyledButton } from './Button.style';
 
-export type ButtonType =
-  | Type
-  | 'dashed'
-  | 'transparent';
+export type ButtonType = Type | 'dashed' | 'transparent';
 
 export interface ButtonProps {
   onClick?: () => void;

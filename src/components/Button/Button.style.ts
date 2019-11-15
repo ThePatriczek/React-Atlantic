@@ -12,8 +12,27 @@ interface StyledButtonProps {
   animationRunning?: boolean;
 }
 
-export const focusAnimation = () => {
-  return keyframes`
+// export const focusAnimation = () => {
+//   return keyframes`
+//     0%    {
+//     opacity: 0;
+//     }
+//     25%   {
+//     opacity: 0.5;
+//     }
+//     50%   {
+//     opacity: 1;
+//     }
+//     75%   {
+//     opacity: 0.5;
+//     }
+//     100%  {
+//     opacity: 0;
+//     }
+//     `;
+// };
+
+const focusAnimation = keyframes`
     0%    {
     opacity: 0; 
     }
@@ -29,8 +48,7 @@ export const focusAnimation = () => {
     100%  { 
     opacity: 0; 
     }
-    `;
-};
+`;
 
 const DefaultButton = styled.button`
   position: relative;
