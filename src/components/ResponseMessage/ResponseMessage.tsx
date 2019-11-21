@@ -58,7 +58,7 @@ export const ResponseMessage: React.FC<ResponseMessageProps> = (
             isRotating
           />
         )}
-        {type && icon()}
+        {type && !isLoading && icon()}
       </StyledResponseMessageIconSpan>
       <StyledReponseMessageContentSpan isAlternative={isAlternative}>
         {content}
@@ -68,7 +68,5 @@ export const ResponseMessage: React.FC<ResponseMessageProps> = (
 };
 
 ResponseMessage.defaultProps = {
-  type: 'success',
-  isAlternative: true,
   content: 'Change me please 🥺'
 };

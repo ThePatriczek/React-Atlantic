@@ -103,7 +103,6 @@ export const StyledResponseMessageIcon = styled(Icon)<
       width: 14px;
       height: 14px;
       margin: 0;
-      
     `}
 
   ${props =>
