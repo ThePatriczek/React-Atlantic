@@ -8,3 +8,4 @@ export * from './Switch';
 export * from './Tooltip';
 export * from './Typography';
 export * from '../constants/defaultValues';
+export * from './Badge';
