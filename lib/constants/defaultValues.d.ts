@@ -17,6 +17,8 @@ export declare const defaultValues: {
     place: string;
     textOn: string;
     textOff: string;
+    primaryButtonContent: string;
+    secondaryButtonContent: string;
     iconName: string;
     tooltipType: string;
     event: string;
@@ -31,4 +33,9 @@ export declare const defaultValues: {
     }[];
     placeholder: string;
     defaultValue: string;
+    notificationContent: string;
+    notificationTitle: string;
+    notificationButonIcon: null;
+    content: string;
+    messageType: string;
 };

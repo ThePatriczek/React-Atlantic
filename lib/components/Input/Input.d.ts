@@ -11,8 +11,9 @@ export interface InputProps {
     placeholder?: string;
     id?: string;
     onEnterPress?: (value: string) => void;
-    onChange?: (value: string) => void;
+    onChange?: (value: React.ChangeEvent<HTMLInputElement> | string) => void;
     onBlur?: () => void;
+    onKeyDown?: (value: React.KeyboardEvent<HTMLInputElement>) => void;
     onFocus?: () => void;
     iconLeft?: IconName;
     iconRight?: IconName;
@@ -24,6 +25,7 @@ export interface InputProps {
     htmlType?: 'text' | 'email' | 'password';
     autoComplete?: AutoComplete;
     isFullWidth?: boolean;
+    handlersWithEvent?: boolean;
 }
 export declare const Input: React.FC<InputProps> & {
     TextArea: React.FC<TextAreaProps>;

@@ -1,5 +1,4 @@
 import { IconName } from './Icon';
-
 export interface StyledIconProps {
     isRotating?: boolean;
     name?: IconName;
