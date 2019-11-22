@@ -11,3 +11,4 @@ export * from './ResponseMessage';
 export * from './Notification';
 export * from './DatePicker';
 export * from '../constants/defaultValues';
+export * from './Badge';
