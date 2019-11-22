@@ -5,7 +5,7 @@ import { defaultValues } from '../../constants/defaultValues';
 import { Notification } from './Notification';
 
 export const Component = (
-  content,
+  children,
   title,
   size,
   type,
@@ -16,7 +16,6 @@ export const Component = (
 ) => {
   return (
     <Notification
-      content={content}
       title={title}
       size={size}
       type={type}
@@ -24,7 +23,9 @@ export const Component = (
       primaryButtonIcon={primaryButtonIcon}
       primaryButton={primaryButtonContent}
       secondaryButton={secondaryButtonContent}
-    />
+    >
+      {children}
+    </Notification>
   );
 };
 

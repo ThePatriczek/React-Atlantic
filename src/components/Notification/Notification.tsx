@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { FC, PropsWithChildren } from 'react';
 import { Size, Type } from '../../types';
 import { IconName } from '../Icon';
 import { Paragraph } from '../Typography/Paragraph';
@@ -15,7 +15,6 @@ import {
 } from './Notification.style';
 
 export interface NotificationProps {
-  content?: string;
   title?: string;
   className?: string;
   size?: Size;
@@ -26,12 +25,12 @@ export interface NotificationProps {
   secondaryButton?: string;
 }
 
-export const Notification: React.FC<NotificationProps> = (
-  props: NotificationProps
+export const Notification: FC<PropsWithChildren<NotificationProps>> = (
+  props
 ): React.ReactElement => {
   const {
     isPrimaryButtonFullWidth,
-    content,
+    children,
     title,
     className,
     size,
@@ -82,7 +81,7 @@ export const Notification: React.FC<NotificationProps> = (
         size={size}
         className={className}
       >
-        <Paragraph>{content}</Paragraph>
+        <Paragraph>{children}</Paragraph>
       </StyledNotificationContentContainer>
       <StyledNotificationFooter type={type} size={size} className={className}>
         {secondaryButton && !isPrimaryButtonFullWidth && (
@@ -112,6 +111,5 @@ export const Notification: React.FC<NotificationProps> = (
 
 Notification.defaultProps = {
   title: 'Notification',
-  type: 'default',
-  primaryButton: 'Primary button'
+  type: 'default'
 };

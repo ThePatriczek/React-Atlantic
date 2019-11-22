@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { FC, MouseEvent, PropsWithChildren, ReactElement } from 'react';
 import { Type } from '../../types';
 import { IconName } from '../Icon';
 import {
@@ -9,16 +9,21 @@ import {
 } from './Message.style';
 
 export interface MessageProps {
-  content?: string;
   type?: Type;
   isLoading?: boolean;
   isAlternative?: boolean;
+  onClick?: () => void;
 }
 
-export const Message: React.FC<MessageProps> = (
-  props: MessageProps
-): React.ReactElement => {
-  const { content, type, isLoading, isAlternative } = props;
+export const Message: FC<PropsWithChildren<MessageProps>> = (
+  props
+): ReactElement => {
+  const { children, isLoading, isAlternative } = props;
+  let type = props.type;
+
+  if (type === 'default') {
+    type = 'primary';
+  }
 
   let iconName: IconName;
 
@@ -31,6 +36,7 @@ export const Message: React.FC<MessageProps> = (
         iconName = 'error';
         break;
       case 'primary':
+      case 'default':
         iconName = 'info';
         break;
       case 'warning':
@@ -39,6 +45,7 @@ export const Message: React.FC<MessageProps> = (
       default:
         return null;
     }
+
     return (
       <StyledMessageIcon
         name={iconName}
@@ -48,8 +55,20 @@ export const Message: React.FC<MessageProps> = (
     );
   };
 
+  const onClick = (e: MouseEvent<HTMLDivElement>) => {
+    e.preventDefault();
+
+    if (props.onClick) {
+      props.onClick();
+    }
+  };
+
   return (
-    <StyledMessageContainer isAlternative={isAlternative} type={type}>
+    <StyledMessageContainer
+      isAlternative={isAlternative}
+      type={type}
+      onClick={onClick}
+    >
       <StyledMessageIconSpan isAlternative={isAlternative}>
         {isLoading && (
           <StyledMessageIcon
@@ -58,15 +77,16 @@ export const Message: React.FC<MessageProps> = (
             isRotating
           />
         )}
+
         {type && !isLoading && icon()}
       </StyledMessageIconSpan>
       <StyledMessageContentSpan isAlternative={isAlternative}>
-        {content}
+        {children}
       </StyledMessageContentSpan>
     </StyledMessageContainer>
   );
 };
 
 Message.defaultProps = {
-  content: 'Change me please 🥺'
+  type: 'default'
 };

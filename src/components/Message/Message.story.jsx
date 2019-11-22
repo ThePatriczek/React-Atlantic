@@ -1,3 +1,4 @@
+import { action } from '@storybook/addon-actions';
 import { boolean, select, text, withKnobs } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/react';
 import * as React from 'react';
@@ -12,7 +13,8 @@ stories.addDecorator(withKnobs);
 stories.add(
   'Playground',
   () => {
-    const content = text('Content: ', defaultValues.content);
+    const children = text('Children: ', defaultValues.content);
+    const onClick = action(`onClick`);
     const type = select(
       'Type: ',
       ['default', 'primary', 'warning', 'success', 'error'],
@@ -24,7 +26,13 @@ stories.add(
       defaultValues.isAlternative
     );
 
-    const message = Component(content, type, isLoading, isAlternative);
+    const message = Component(
+      children,
+      type,
+      isLoading,
+      isAlternative,
+      onClick
+    );
     specs(() => tests(message));
 
     return message;
