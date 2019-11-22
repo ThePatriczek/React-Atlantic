@@ -95,7 +95,7 @@ export const StyledMessageIcon = styled(Icon)<
 >`
   cursor: default;
   position: absolute;
-  top: 14px;
+  top: 13px;
   left: 10px;
   ${props =>
     props.name === 'loading' &&
