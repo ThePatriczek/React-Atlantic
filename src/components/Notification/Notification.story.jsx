@@ -13,7 +13,7 @@ stories.addDecorator(withKnobs);
 stories.add(
   'Playground',
   () => {
-    const content = text('Content: ', defaultValues.notificationContent);
+    const children = text('Children: ', defaultValues.notificationContent);
     const title = text('Title: ', defaultValues.notificationTitle);
     const size = select(
       'Size: ',
@@ -80,7 +80,7 @@ stories.add(
     );
 
     const notification = Component(
-      content,
+      children,
       title,
       size,
       type,
