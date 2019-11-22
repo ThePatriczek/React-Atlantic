@@ -62,8 +62,9 @@ export interface InputProps {
   placeholder?: string;
   id?: string;
   onEnterPress?: (value: string) => void;
-  onChange?: (value: string) => void;
+  onChange?: (value: React.ChangeEvent<HTMLInputElement> | string) => void;
   onBlur?: () => void;
+  onKeyDown?: (value: React.KeyboardEvent<HTMLInputElement>) => void;
   onFocus?: () => void;
   iconLeft?: IconName;
   iconRight?: IconName;
@@ -75,6 +76,7 @@ export interface InputProps {
   htmlType?: 'text' | 'email' | 'password';
   autoComplete?: AutoComplete;
   isFullWidth?: boolean;
+  handlersWithEvent?: boolean;
 }
 
 export const Input: React.FC<InputProps> & {
@@ -95,7 +97,8 @@ export const Input: React.FC<InputProps> & {
     className,
     autoComplete,
     htmlType,
-    isFullWidth
+    isFullWidth,
+    handlersWithEvent
   } = props;
 
   const ref = React.createRef<HTMLInputElement>();
@@ -112,11 +115,11 @@ export const Input: React.FC<InputProps> & {
         setValue(val);
 
         if (props.onChange) {
-          props.onChange(val);
+          props.onChange(handlersWithEvent ? e : val);
         }
       } else {
         if (props.onChange) {
-          props.onChange(val);
+          props.onChange(handlersWithEvent ? e : val);
         }
       }
     }
@@ -129,6 +132,9 @@ export const Input: React.FC<InputProps> & {
           onEnterPress(value);
         }
       }
+    }
+    if (handlersWithEvent && props.onKeyDown) {
+      props.onKeyDown(e);
     }
   };
 

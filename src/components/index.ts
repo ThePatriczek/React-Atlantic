@@ -9,4 +9,5 @@ export * from './Tooltip';
 export * from './Typography';
 export * from './ResponseMessage';
 export * from './Notification';
+export * from './DatePicker';
 export * from '../constants/defaultValues';
