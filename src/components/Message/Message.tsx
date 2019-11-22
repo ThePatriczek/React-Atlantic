@@ -2,21 +2,21 @@ import * as React from 'react';
 import { Type } from '../../types';
 import { IconName } from '../Icon';
 import {
-  StyledReponseMessageContentSpan,
-  StyledResponseMessageContainer,
-  StyledResponseMessageIcon,
-  StyledResponseMessageIconSpan
-} from './ResponseMessage.style';
+  StyledMessageContainer,
+  StyledMessageContentSpan,
+  StyledMessageIcon,
+  StyledMessageIconSpan
+} from './Message.style';
 
-export interface ResponseMessageProps {
+export interface MessageProps {
   content?: string;
   type?: Type;
   isLoading?: boolean;
   isAlternative?: boolean;
 }
 
-export const ResponseMessage: React.FC<ResponseMessageProps> = (
-  props: ResponseMessageProps
+export const Message: React.FC<MessageProps> = (
+  props: MessageProps
 ): React.ReactElement => {
   const { content, type, isLoading, isAlternative } = props;
 
@@ -40,7 +40,7 @@ export const ResponseMessage: React.FC<ResponseMessageProps> = (
         return null;
     }
     return (
-      <StyledResponseMessageIcon
+      <StyledMessageIcon
         name={iconName}
         isAlternative={isAlternative}
         type={type}
@@ -49,24 +49,24 @@ export const ResponseMessage: React.FC<ResponseMessageProps> = (
   };
 
   return (
-    <StyledResponseMessageContainer isAlternative={isAlternative} type={type}>
-      <StyledResponseMessageIconSpan isAlternative={isAlternative}>
+    <StyledMessageContainer isAlternative={isAlternative} type={type}>
+      <StyledMessageIconSpan isAlternative={isAlternative}>
         {isLoading && (
-          <StyledResponseMessageIcon
+          <StyledMessageIcon
             isAlternative={isAlternative}
             name={'loading'}
             isRotating
           />
         )}
         {type && !isLoading && icon()}
-      </StyledResponseMessageIconSpan>
-      <StyledReponseMessageContentSpan isAlternative={isAlternative}>
+      </StyledMessageIconSpan>
+      <StyledMessageContentSpan isAlternative={isAlternative}>
         {content}
-      </StyledReponseMessageContentSpan>
-    </StyledResponseMessageContainer>
+      </StyledMessageContentSpan>
+    </StyledMessageContainer>
   );
 };
 
-ResponseMessage.defaultProps = {
+Message.defaultProps = {
   content: 'Change me please 🥺'
 };

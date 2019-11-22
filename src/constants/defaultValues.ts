@@ -35,5 +35,5 @@ export const defaultValues = {
   notificationTitle: 'Notification',
   notificationButonIcon: null,
   content: 'Change me, please 🥺',
-  responseMessageType: 'primary'
+  messageType: 'primary'
 };

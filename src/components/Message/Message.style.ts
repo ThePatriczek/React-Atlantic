@@ -3,13 +3,13 @@ import { theme } from '../../theme';
 import { Type } from '../../types';
 import { Icon } from '../Icon';
 
-interface ResponseMessageStyleProps {
+interface MessageStyleProps {
   isAlternative?: boolean;
   type?: Type;
 }
 
-export const StyledResponseMessageContainer = styled.div<
-  ResponseMessageStyleProps
+export const StyledMessageContainer = styled.div<
+  MessageStyleProps
 >`
   margin: 0 auto ${props => props.theme.margin.md} auto;
   position: relative;
@@ -87,11 +87,11 @@ export const StyledResponseMessageContainer = styled.div<
       color: ${props.theme.color.white};
     `}
 `;
-export const StyledResponseMessageIconSpan = styled.span<
-  ResponseMessageStyleProps
+export const StyledMessageIconSpan = styled.span<
+  MessageStyleProps
 >``;
-export const StyledResponseMessageIcon = styled(Icon)<
-  ResponseMessageStyleProps
+export const StyledMessageIcon = styled(Icon)<
+  MessageStyleProps
 >`
   cursor: default;
   position: absolute;
@@ -153,27 +153,27 @@ export const StyledResponseMessageIcon = styled(Icon)<
       color: ${props.theme.color.white};
     `}
 `;
-export const StyledReponseMessageContentSpan = styled.span<
-  ResponseMessageStyleProps
+export const StyledMessageContentSpan = styled.span<
+  MessageStyleProps
 >``;
 
-StyledResponseMessageContainer.defaultProps = {
+StyledMessageContainer.defaultProps = {
   theme
 };
 
-StyledResponseMessageIconSpan.defaultProps = {
+StyledMessageIconSpan.defaultProps = {
   theme
 };
 
-StyledResponseMessageIcon.defaultProps = {
+StyledMessageIcon.defaultProps = {
   theme
 };
 
-StyledReponseMessageContentSpan.defaultProps = {
+StyledMessageContentSpan.defaultProps = {
   theme
 };
 
-StyledResponseMessageContainer.displayName = 'StyledResponseMessageContainer';
-StyledResponseMessageIconSpan.displayName = 'StyledResponseMessageIconSpan';
-StyledResponseMessageIcon.displayName = 'StyledResponseMessageIcon';
-StyledReponseMessageContentSpan.displayName = 'StyledReponseMessageContentSpan';
+StyledMessageContainer.displayName = 'StyledMessageContainer';
+StyledMessageIconSpan.displayName = 'StyledMessageIconSpan';
+StyledMessageIcon.displayName = 'StyledMessageIcon';
+StyledMessageContentSpan.displayName = 'StyledMessageContentSpan';
