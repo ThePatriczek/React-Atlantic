@@ -5,6 +5,7 @@ import {
   StyledMessageContainer,
   StyledMessageContentSpan,
   StyledMessageIcon,
+  StyledMessageIconLoading,
   StyledMessageIconSpan
 } from './Message.style';
 
@@ -56,8 +57,6 @@ export const Message: FC<PropsWithChildren<MessageProps>> = (
   };
 
   const onClick = (e: MouseEvent<HTMLDivElement>) => {
-    e.preventDefault();
-
     if (props.onClick) {
       props.onClick();
     }
@@ -71,7 +70,7 @@ export const Message: FC<PropsWithChildren<MessageProps>> = (
     >
       <StyledMessageIconSpan isAlternative={isAlternative}>
         {isLoading && (
-          <StyledMessageIcon
+          <StyledMessageIconLoading
             isAlternative={isAlternative}
             name={'loading'}
             isRotating

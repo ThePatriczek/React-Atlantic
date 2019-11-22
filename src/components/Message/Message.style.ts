@@ -8,9 +8,7 @@ interface MessageStyleProps {
   type?: Type;
 }
 
-export const StyledMessageContainer = styled.div<
-  MessageStyleProps
->`
+export const StyledMessageContainer = styled.div<MessageStyleProps>`
   margin: 0 auto ${props => props.theme.margin.md} auto;
   position: relative;
   display: table;
@@ -87,12 +85,8 @@ export const StyledMessageContainer = styled.div<
       color: ${props.theme.color.white};
     `}
 `;
-export const StyledMessageIconSpan = styled.span<
-  MessageStyleProps
->``;
-export const StyledMessageIcon = styled(Icon)<
-  MessageStyleProps
->`
+export const StyledMessageIconSpan = styled.span<MessageStyleProps>``;
+export const StyledMessageIcon = styled(Icon)<MessageStyleProps>`
   cursor: default;
   position: absolute;
   top: 13px;
@@ -153,9 +147,69 @@ export const StyledMessageIcon = styled(Icon)<
       color: ${props.theme.color.white};
     `}
 `;
-export const StyledMessageContentSpan = styled.span<
-  MessageStyleProps
->``;
+
+export const StyledMessageIconLoading = styled(Icon)<MessageStyleProps>`
+  cursor: default;
+  position: absolute;
+  top: 13px;
+  left: 10px;
+  ${props =>
+    props.name === 'loading' &&
+    css`
+      width: 14px;
+      height: 14px;
+      margin: 0;
+    `}
+
+  ${props =>
+    props.type === 'primary' &&
+    css`
+      color: ${props.theme.color.primary};
+    `}
+  ${props =>
+    props.type === 'primary' &&
+    props.isAlternative &&
+    css`
+      color: ${props.theme.color.white};
+    `}
+  
+  ${props =>
+    props.type === 'success' &&
+    css`
+      color: ${props.theme.color.success};
+    `}
+  ${props =>
+    props.type === 'success' &&
+    props.isAlternative &&
+    css`
+      color: ${props.theme.color.white};
+    `}
+  
+  ${props =>
+    props.type === 'warning' &&
+    css`
+      color: ${props.theme.color.warning};
+    `}
+  ${props =>
+    props.type === 'warning' &&
+    props.isAlternative &&
+    css`
+      color: ${props.theme.color.white};
+    `}
+  
+  ${props =>
+    props.type === 'error' &&
+    css`
+      color: ${props.theme.color.error};
+    `}
+  ${props =>
+    props.type === 'error' &&
+    props.isAlternative &&
+    css`
+      color: ${props.theme.color.white};
+    `}
+`;
+export const StyledMessageContentSpan = styled.span<MessageStyleProps>``;
 
 StyledMessageContainer.defaultProps = {
   theme
@@ -169,6 +223,10 @@ StyledMessageIcon.defaultProps = {
   theme
 };
 
+StyledMessageIconLoading.defaultProps = {
+  theme
+};
+
 StyledMessageContentSpan.defaultProps = {
   theme
 };
@@ -176,4 +234,5 @@ StyledMessageContentSpan.defaultProps = {
 StyledMessageContainer.displayName = 'StyledMessageContainer';
 StyledMessageIconSpan.displayName = 'StyledMessageIconSpan';
 StyledMessageIcon.displayName = 'StyledMessageIcon';
+StyledMessageIconLoading.displayName = 'StyledMessageIconLoading';
 StyledMessageContentSpan.displayName = 'StyledMessageContentSpan';
