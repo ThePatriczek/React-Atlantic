@@ -2,11 +2,10 @@ import { boolean, select, text, withKnobs } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/react';
 import * as React from 'react';
 import { specs } from 'storybook-addon-specifications';
-import { action } from '@storybook/addon-actions';
 import { defaultValues } from '../..';
-import { Component, tests } from './ResponseMessage.test';
+import { Component, tests } from './Message.test';
 
-const stories = storiesOf('Response Message', module);
+const stories = storiesOf('Message', module);
 
 stories.addDecorator(withKnobs);
 
@@ -25,10 +24,10 @@ stories.add(
       defaultValues.isAlternative
     );
 
-    const reponseMessage = Component(content, type, isLoading, isAlternative);
-    specs(() => tests(reponseMessage));
+    const message = Component(content, type, isLoading, isAlternative);
+    specs(() => tests(message));
 
-    return reponseMessage;
+    return message;
   },
   {
     info: { inline: true }

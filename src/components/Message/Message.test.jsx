@@ -2,11 +2,11 @@ import { shallow } from 'enzyme';
 import React from 'react';
 import expect from 'expect';
 import { defaultValues } from '../../constants/defaultValues';
-import { ResponseMessage } from './ResponseMessage';
+import { Message } from './Message';
 
 export const Component = (content, type, isLoading, isAlternative) => {
   return (
-    <ResponseMessage
+    <Message
       content={content}
       type={type}
       isLoading={isLoading}
@@ -16,19 +16,19 @@ export const Component = (content, type, isLoading, isAlternative) => {
 };
 
 export const tests = (
-  notification = Component(
+  message = Component(
     defaultValues.content,
-    defaultValues.responseMessageType,
+    defaultValues.messageType,
     defaultValues.isLoading,
     defaultValues.isAlternative
   )
 ) => {
-  let output = shallow(notification);
+  let output = shallow(message);
   return describe('Notification', () => {
-    it(`Should have content: ${notification.props.content}`, () => {
+    it(`Should have content: ${message.props.content}`, () => {
       expect(
-        output.find('StyledReponseMessageContentSpan').props().children
-      ).toEqual(notification.props.content);
+        output.find('StyledMessageContentSpan').props().children
+      ).toEqual(message.props.content);
     });
   });
 };
