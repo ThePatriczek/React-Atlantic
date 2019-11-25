@@ -3,7 +3,6 @@ import * as React from 'react';
 import { useRef, useState } from 'react';
 import ReactDatePicker, { registerLocale } from 'react-datepicker';
 import { Input } from '../Input';
-import './datepicker-style.css';
 import {
   StyledReactDatePicker,
   StyledReactDatePickerButton,
