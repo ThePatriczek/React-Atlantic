@@ -1,5 +1,5 @@
 import * as React from 'react';
-import './datepicker-style.css';
+
 export interface DatePickerProps {
     id?: string;
     selected?: Date | null;
