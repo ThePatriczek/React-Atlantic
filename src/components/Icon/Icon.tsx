@@ -36,7 +36,27 @@ export type IconName =
   | 'error'
   | 'warning'
   | 'checkCircle'
-  | 'calendar';
+  | 'calendar'
+  | 'calendarAlt'
+  | 'question'
+  | 'profile'
+  | 'zoom'
+  | 'home'
+  | 'bookmarks'
+  | 'tags'
+  | 'star'
+  | 'note'
+  | 'monitor'
+  | 'list'
+  | 'listAlt'
+  | 'history'
+  | 'folder'
+  | 'file'
+  | 'fileAlt'
+  | 'comment'
+  | 'calculator'
+  | 'book'
+  | 'bookOpened';
 
 export interface IconProps {
   name: IconName;
@@ -154,6 +174,66 @@ export const Icon: React.FC<IconProps> = (
       break;
     case 'calendar':
       Component = <Icons.Calendar />;
+      break;
+    case 'calendarAlt':
+      Component = <Icons.CalendarAlt />;
+      break;
+    case 'question':
+      Component = <Icons.Question />;
+      break;
+    case 'profile':
+      Component = <Icons.Profile />;
+      break;
+    case 'zoom':
+      Component = <Icons.Zoom />;
+      break;
+    case 'home':
+      Component = <Icons.Home />;
+      break;
+    case 'bookmarks':
+      Component = <Icons.Bookmarks />;
+      break;
+    case 'tags':
+      Component = <Icons.Tags />;
+      break;
+    case 'star':
+      Component = <Icons.Star />;
+      break;
+    case 'note':
+      Component = <Icons.Note />;
+      break;
+    case 'monitor':
+      Component = <Icons.Monitor />;
+      break;
+    case 'list':
+      Component = <Icons.List />;
+      break;
+    case 'listAlt':
+      Component = <Icons.ListAlt />;
+      break;
+    case 'history':
+      Component = <Icons.History />;
+      break;
+    case 'folder':
+      Component = <Icons.Folder />;
+      break;
+    case 'file':
+      Component = <Icons.File />;
+      break;
+    case 'fileAlt':
+      Component = <Icons.FileAlt />;
+      break;
+    case 'comment':
+      Component = <Icons.Comment />;
+      break;
+    case 'calculator':
+      Component = <Icons.Calculator />;
+      break;
+    case 'book':
+      Component = <Icons.Book />;
+      break;
+    case 'bookOpened':
+      Component = <Icons.BookOpened />;
       break;
   }
 
