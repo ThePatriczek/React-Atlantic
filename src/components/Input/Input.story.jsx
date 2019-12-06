@@ -28,7 +28,10 @@ stories.add('Overview', () => (
       <Input placeholder={`Icon right`} iconRight={'hamburger'} />
     </div>
     <div>
-      <Input placeholder={`Alertnative input`} isAlternative />
+      <Input
+          placeholder={`Alertnative input`}
+          isAlternative
+      />
       <Input
         placeholder={`Alertnative Icon left`}
         isAlternative

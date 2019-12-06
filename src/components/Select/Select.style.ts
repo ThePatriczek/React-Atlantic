@@ -253,7 +253,7 @@ export const MultiValueRemove = styled.div<SelectProps>`
   border-left: 1px solid ${props => props.theme.color.primary};
 
   i {
-    font-size: 10px;
+    width: 10px;
 
     &:hover {
       color: ${props => props.theme.color.error};

@@ -53,12 +53,9 @@ export const StyledInputWrapper = styled.span<StyledInputWrapperProps>`
         padding-right: 30px;
       }
     `}
-
-  i {
-    display: flex;
     
     ${props =>
-      props.isDisabled ? css`
+    props.isDisabled ? css`
             color: ${darken(0.2, props.theme.color.default)};
             cursor: not-allowed;
           ` : css`
@@ -66,32 +63,40 @@ export const StyledInputWrapper = styled.span<StyledInputWrapperProps>`
             cursor: text;
           `};
     
-    align-items: center;
-    position: absolute;
-    width: 14px;
-    
     ${props =>
       props.size === 'small' &&
-      css`
-        font-size: 12px;
-        height: ${props.theme.height.sm};
-      `};
+        css`
+          i{
+            top: 7px;
+            height: ${props.theme.font.size.sm};
+            width: ${props.theme.font.size.sm};
+          }
+        `};
         
     ${props =>
       props.size === 'medium' &&
-      css`
-        height: ${props.theme.height.md};
-      `};    
+        css`
+          i{
+            top: 10px;
+            height: ${props.theme.font.size.md};
+            width: ${props.theme.font.size.md};
+          }
+        `};    
     
     ${props =>
       props.size === 'large' &&
-      css`
-        font-size: 16px;
-        height: ${props.theme.height.lg};
-      `};
-    
-    top: 0;
-    bottom: 0;
+        css`
+          i{
+            top: 12px;
+            height: ${props.theme.font.size.lg};
+            width: ${props.theme.font.size.lg};
+          }
+        `};
+
+  i {
+    display: flex;
+    align-items: center;
+    position: absolute;
     z-index: 2;
     line-height: 0;
 
@@ -245,7 +250,25 @@ export const StyledInputWrapperAlt = styled.span<StyledInputWrapperProps>`
       }
     `}
 
-  label { 
+    label { 
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    padding: 0 ${props => props.theme.padding.md};
+    border-radius: ${props => props.theme.radius};
+
+    color: ${() => lighten(0.6, `black`)};
+    cursor: text;
+    border: ${props => props.theme.radius};
+
+    -webkit-transition: color 0.2s ease-out, transform 0.2s ease-out;
+    transition: color 0.2s ease-out, transform 0.2s ease-out;
+    -webkit-transform-origin: 0% 100%;
+    transform-origin: 0% 100%;
+    -webkit-transform: translateY(12px);
+    transform: translateY(12px);
+    
     ${props =>
       props.size === 'small' &&
       css`
@@ -267,26 +290,6 @@ export const StyledInputWrapperAlt = styled.span<StyledInputWrapperProps>`
         height: ${parseInt(props.theme.height.lg, 0) - 2}px;
         line-height: ${parseInt(props.theme.height.lg, 0) - 2}px;
       `}
-    
-    
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    padding: 0 ${props => props.theme.padding.md};
-
-    color: ${() => lighten(0.6, `black`)};
-    cursor: text;
-
-    -webkit-transition: color 0.2s ease-out, -webkit-transform 0.2s ease-out;
-    transition: color 0.2s ease-out, -webkit-transform 0.2s ease-out;
-    transition: transform 0.2s ease-out, color 0.2s ease-out;
-    transition: transform 0.2s ease-out, color 0.2s ease-out,
-      -webkit-transform 0.2s ease-out;
-    -webkit-transform-origin: 0% 100%;
-    transform-origin: 0% 100%;
-    -webkit-transform: translateY(12px);
-    transform: translateY(12px);
 
     ${props =>
       (props.isFocused || props.hasValue || props.isDisabled) &&
@@ -303,6 +306,12 @@ export const StyledInputWrapperAlt = styled.span<StyledInputWrapperProps>`
         transform: translateY(0px) scale(0.8);
         -webkit-transform-origin: 0 0;
         transform-origin: 0 0;
+        
+        ${props.size === 'small' &&
+          css`
+            height: 16px;
+            line-height: 16px;
+          `}
       `}
   }
 

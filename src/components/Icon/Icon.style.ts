@@ -17,11 +17,18 @@ export const spin = () => {
 export const StyledIcon = styled.i<StyledIconProps>`
   display: inline-block;
   line-height: 0;
-  height: 1em;
+  height: 1rem;
   color: inherit;
   font-style: normal;
   text-align: center;
   text-transform: none;
+  
+  svg{
+    vertical-align: top;
+    width: 100%;
+    height: 100%;
+    font-size: inherit;
+  }
 
   ${props =>
     props.isRotating &&
@@ -30,11 +37,6 @@ export const StyledIcon = styled.i<StyledIconProps>`
       -moz-animation: ${spin} 4s linear infinite;
       animation: ${spin} 4s linear infinite;
     `}
-
-  svg {
-    height: 1em;
-    vertical-align: middle;
-  }
 `;
 
 StyledIcon.displayName = 'StyledIcon';
