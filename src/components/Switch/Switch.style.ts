@@ -126,7 +126,6 @@ export const StyledSwitcherTrue = styled.div<StyledSwitchProps>`
   
   ${props =>
     props.isChecked &&
-    !props.htmlType &&
     css`
       color: ${switchColorOn};
       background-color: ${props.theme.color.primary.alpha};
