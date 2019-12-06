@@ -38,7 +38,8 @@ export const theme = {
     background: {
       alpha: `#FFF`,
       beta: `#F2F2F2`,
-      gamma: `#FFF`
+      gamma: `#F6F6F6`,
+      delta: `#FFF`
     }
   },
   padding: {

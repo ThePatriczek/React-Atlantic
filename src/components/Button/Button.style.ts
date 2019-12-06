@@ -12,26 +12,6 @@ interface StyledButtonProps {
   animationRunning?: boolean;
 }
 
-// export const focusAnimation = () => {
-//   return keyframes`
-//     0%    {
-//     opacity: 0;
-//     }
-//     25%   {
-//     opacity: 0.5;
-//     }
-//     50%   {
-//     opacity: 1;
-//     }
-//     75%   {
-//     opacity: 0.5;
-//     }
-//     100%  {
-//     opacity: 0;
-//     }
-//     `;
-// };
-
 const focusAnimation = keyframes`
     0%    {
     opacity: 0; 
@@ -58,7 +38,7 @@ const DefaultButton = styled.button`
   line-height: 1.5;
 
   background-image: none;
-  color: ${props => props.theme.color.black};
+  color: ${props => props.theme.color.text.alpha};
 
   outline: 0;
   cursor: pointer;
@@ -71,7 +51,7 @@ const DefaultButton = styled.button`
   touch-action: manipulation;
   transition: background-color 0.1s ease;
   box-shadow: ${props => props.theme.boxShadow.sm};
-  border: 1px solid ${props => darken(0.1, props.theme.color.default)};
+  border: 1px solid ${props => props.theme.color.border};
   border-radius: ${props => props.theme.radius};
 
   > span,
@@ -129,37 +109,37 @@ ${props =>
   `}
 
   ${props => {
-    let color = `black`;
+    let color = props.theme.color.text.alpha;
+    let hoverBgColor = props.theme.color.background.alpha;
     let bgColor = props.theme.color.default;
-    let hoverBgColor = lighten(0.1, bgColor);
-    let borderColor = darken(0.1, bgColor);
+    let borderColor = props.theme.color.border;
     let borderType = `solid`;
 
     if (props.styleType === 'primary') {
-      bgColor = props.theme.color.primary;
-      hoverBgColor = lighten(0.1, bgColor);
-      color = `white`;
+      bgColor = props.theme.color.primary.alpha;
+      hoverBgColor = props.theme.color.primary.beta;
+      color = props.theme.color.text.gamma;
       borderColor = bgColor;
     } else if (props.styleType === 'success') {
-      bgColor = props.theme.color.success;
-      hoverBgColor = lighten(0.05, bgColor);
-      color = `white`;
+      bgColor = props.theme.color.success.alpha;
+      hoverBgColor = props.theme.color.success.beta;
+      color = props.theme.color.text.gamma;
       borderColor = bgColor;
     } else if (props.styleType === 'warning') {
-      bgColor = props.theme.color.warning;
-      hoverBgColor = lighten(0.15, bgColor);
-      color = `white`;
+      bgColor = props.theme.color.warning.alpha;
+      hoverBgColor = props.theme.color.warning.beta;
+      color = props.theme.color.text.gamma;
       borderColor = bgColor;
     } else if (props.styleType === 'error') {
-      bgColor = props.theme.color.error;
-      hoverBgColor = lighten(0.15, bgColor);
-      color = `white`;
+      bgColor = props.theme.color.error.alpha;
+      hoverBgColor = props.theme.color.error.beta;
+      color = props.theme.color.text.gamma;
       borderColor = bgColor;
     } else if (props.styleType === 'dashed') {
       borderType = `dashed`;
     } else if (props.styleType === 'transparent') {
       bgColor = `transparent`;
-      color = props.theme.color.primary;
+      color = props.theme.color.primary.alpha;
       borderColor = bgColor;
     }
 
@@ -187,7 +167,8 @@ ${props =>
   ${props =>
     props.disabled &&
     css`
-      color: ${darken(0.2, `#b7b7b7`)};
+      background-color: ${props.theme.color.default};
+      color: ${props.theme.color.text.beta};
       cursor: not-allowed;
 
       &:hover {
@@ -250,7 +231,7 @@ export const StyledTypoButton = styled(DefaultButton)`
   margin: 0;
 
   background: transparent;
-  color: ${props => props.theme.color.primary};
+  color: ${props => props.theme.color.primary.alpha};
   border: 0;
   box-shadow: none;
 `;

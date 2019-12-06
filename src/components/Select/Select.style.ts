@@ -54,28 +54,28 @@ export const Control = styled.div<SelectProps>`
   z-index: 1;
   cursor: pointer;
   padding-left: ${props => props.theme.padding.md};
-  border: 1px solid ${props => darken(0.1, props.theme.color.default)};
+  border: 1px solid ${props => props.theme.color.border};
   border-radius: ${props => props.theme.radius};
-  background: ${props => props.theme.color.white};
+  background-color: ${props => props.theme.color.background.alpha};
   
   &:hover{
-    border: 1px solid ${props => props.theme.color.primary};
+    border: 1px solid ${props => props.theme.color.primary.alpha};
   }
   
   ${props =>
     props.isFocused &&
     css`
-      border-color: ${props => props.theme.color.primary};
+      border-color: ${props => props.theme.color.primary.alpha};
       box-shadow: 0 0 0 2px #c3defd;
     `}
   
   ${props =>
     props.isDisabled &&
     css`
-      color: ${darken(0.2, props.theme.color.default)};
+      color: ${props.theme.color.text.beta};
 
       ::placeholder {
-        color: ${darken(0.2, props.theme.color.default)};
+        color: ${props.theme.color.text.beta};
       }
 
       background-color: ${props.theme.color.default};
@@ -86,7 +86,7 @@ export const Control = styled.div<SelectProps>`
       &:focus {
         outline: 0;
         box-shadow: none;
-        border: 1px solid ${darken(0.1, props.theme.color.default)};
+        border: 1px solid ${props.theme.color.border};
       }
     `}
   
@@ -94,7 +94,7 @@ export const Control = styled.div<SelectProps>`
     props.isMenuOpened &&
     css`
       border-bottom: 1px solid
-        ${props => darken(0.1, props.theme.color.default)};
+        ${props => props.theme.color.border};
       border-bottom-left-radius: 0;
       border-bottom-right-radius: 0;
     `}
@@ -181,9 +181,9 @@ export const MultiValue = styled.div<SelectProps>`
   margin: ${props => props.theme.margin.xs};
   padding: 0;
 
-  background-color: ${props => transparentize(0.85, props.theme.color.primary)};
-  color: ${props => props.theme.color.black};
-  border: 1px solid ${props => props.theme.color.primary};
+  background-color: ${props => props.theme.color.primary.delta};
+  color: ${props => props.theme.color.text.alpha};
+  border: 1px solid ${props => props.theme.color.primary.alpha};
   border-radius: ${props => props.theme.radius};
 
   span {
@@ -226,17 +226,17 @@ export const ClearIndicator = styled.div<SelectProps>`
   align-items: center;
   justify-content: center;
   width: ${props => props.theme.width.md};
-  color: ${props => lighten(0.6, props.theme.color.black)};
+  color: ${props => props.theme.color.text.beta};
 
   i:hover {
-    color: ${props => props.theme.color.error};
+    color: ${props => props.theme.color.error.alpha};
   }
 
   ${props =>
     props.isDisabled &&
     css`
       i:hover {
-        color: ${darken(0.2, props.theme.color.default)};
+        color: ${props.theme.color.text.beta};
       }
     `}
 `;
@@ -249,14 +249,14 @@ export const MultiValueRemove = styled.div<SelectProps>`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 26px;
-  border-left: 1px solid ${props => props.theme.color.primary};
+  min-width: 26px;
+  border-left: 1px solid ${props => props.theme.color.primary.alpha};
 
   i {
     font-size: 10px;
 
     &:hover {
-      color: ${props => props.theme.color.error};
+      color: ${props => props.theme.color.error.alpha};
     }
   }
 
@@ -264,7 +264,7 @@ export const MultiValueRemove = styled.div<SelectProps>`
     props.isDisabled &&
     css`
       i:hover {
-        color: ${darken(0.2, props.theme.color.default)};
+        color: ${props.theme.color.text.beta};
       }
     `}
 `;
@@ -285,7 +285,7 @@ export const CrossIcon = styled.button`
 `;
 
 export const Placeholder = styled.div`
-  color: ${props => lighten(0.6, props.theme.color.black)};
+  color: ${props => props.theme.color.text.beta};
 `;
 
 export const IndicatorsContainer = styled.div<SelectProps>`
@@ -326,23 +326,24 @@ export const DropdownIndicator = styled.div<SelectProps>`
   align-items: center;
   justify-content: center;
   width: ${props => props.theme.width.md};
+  color: ${props => props.theme.color.text.beta};
 
   i:hover {
-    color: ${props => props.theme.color.primary};
+    color: ${props => props.theme.color.primary.alpha};
   }
 
   ${props =>
     props.isDisabled &&
     css`
       i:hover {
-        color: ${darken(0.2, props.theme.color.default)};
+        color: ${props.theme.color.text.beta};
       }
     `}
 `;
 
 export const IndicatorSeparator = styled.div`
   align-self: stretch;
-  background-color: ${props => darken(0.1, props.theme.color.default)};
+  background-color: ${props => props.theme.color.border};
   margin: ${props => props.theme.margin.sm} 0;
   width: 1px;
   box-sizing: border-box;
@@ -357,11 +358,11 @@ export const Menu = styled.div`
 `;
 
 export const MenuList = styled.div`
-  border: 1px solid ${props => props.theme.color.primary};
+  border: 1px solid ${props => props.theme.color.primary.alpha};
   border-top: 0;
   border-radius: 0 0 ${props => props.theme.radius}
     ${props => props.theme.radius};
-  background: ${props => props.theme.color.white};
+  background: ${props => props.theme.color.alpha};
   overflow: hidden;
   outline-offset: -2px;
   box-shadow: 0 0 0 2px #c3defd;

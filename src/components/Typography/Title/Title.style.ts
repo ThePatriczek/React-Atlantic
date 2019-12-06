@@ -7,7 +7,7 @@ const titleStyle = css`
   font-family: ${props => props.theme.font.family};
   ::selection,
   ::-moz-selection {
-    background: ${props => lighten(0.4, props.theme.color.primary)};
+    background: ${props => props.theme.color.primary.delta};
   }
 `;
 

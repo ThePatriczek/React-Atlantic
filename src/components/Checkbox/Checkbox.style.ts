@@ -29,9 +29,9 @@ export const StyledCheckboxInputShown = styled.div.attrs({
   align-items: center;
   justify-content: center;
   padding: ${props => parseInt(props.theme.padding.xs, 0) - 1}px;
-  background: white;
+  background: ${props => props.theme.color.background.alpha};
   border-radius: ${props => parseInt(props.theme.radius, 0) - 1}px;
-  border: 1px solid ${props => darken(0.1, props.theme.color.default)};
+  border: 1px solid ${props => props.theme.color.border};
 
   ${props =>
     props.isDisabled &&
@@ -54,7 +54,7 @@ export const StyledCheckboxLabel = styled.label<StyledCheckboxProps>`
     css`
       :hover {
         .atlantic--checkbox {
-          border: 1px solid ${props.theme.color.primary};
+          border: 1px solid ${props.theme.color.primary.alpha};
         }
       }
     `};
@@ -81,14 +81,14 @@ export const StyledCheckboxMark = styled.div<StyledCheckboxProps>`
   ${props =>
     (props.isChecked || props.isPartiallyChecked) &&
     css`
-      background-color: ${props.theme.color.primary};
+      background-color: ${props.theme.color.primary.alpha};
     `}
 
   ${props =>
     props.isDisabled &&
     (props.isChecked || props.isPartiallyChecked) &&
     css`
-      background-color: ${darken(0.2, props.theme.color.default)};
+      background-color: ${props.theme.color.default};
     `}
   
     ${props =>
@@ -113,7 +113,8 @@ export const StyledCheckboxSpan = styled.span<StyledCheckboxProps>`
 
 export const StyledCheckboxIcon = styled.i<StyledCheckboxProps>`
   transform: scale(0.8);
-  color: white;
+  color: ${props => props.theme.color.text.gamma};
+  
   ${props =>
     (props.isPartiallyChecked || (!props.isChecked && props.isDisabled)) &&
     css`
@@ -123,6 +124,7 @@ export const StyledCheckboxIcon = styled.i<StyledCheckboxProps>`
   ${props =>
     props.isDisabled &&
     css`
+      color: ${props.theme.color.text.beta};
       cursor: not-allowed;
     `}
 `;

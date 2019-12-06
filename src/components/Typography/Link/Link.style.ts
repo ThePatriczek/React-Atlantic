@@ -5,7 +5,7 @@ import { theme } from '../../../theme';
 export const StyledLink = styled.a`
   font-size: ${props => props.theme.font.size.md};
   font-family: ${props => props.theme.font.family};
-  color: ${props => props.theme.color.primary};
+  color: ${props => props.theme.color.primary.alpha};
   text-decoration: none;
   cursor: pointer;
   margin: 0;
@@ -21,7 +21,7 @@ export const StyledLink = styled.a`
 
   ::selection,
   ::-moz-selection {
-    background: ${props => lighten(0.4, props.theme.color.primary)};
+    background: ${props => lighten(0.4, props.theme.color.primary.alpha)};
   }
 `;
 

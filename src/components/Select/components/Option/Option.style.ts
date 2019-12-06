@@ -14,11 +14,11 @@ export const StyledOption = styled.div<SelectProps>`
   cursor: pointer;
 
   &:nth-child(odd) {
-    background-color: ${props => props.theme.color.default};
+    background-color: ${props => props.theme.color.background.gamma};
   }
 
   &:hover {
-    background-color: ${props => darken(0.05, props.theme.color.default)};
+    background-color: ${props => props.theme.color.background.beta};
   }
 
   span {

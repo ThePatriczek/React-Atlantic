@@ -31,8 +31,8 @@ export const StyledRadioButtonLabel = styled.label<StyledRadioButtonProps>`
   text-align: center;
   background-image: none;
 
-  background-color: ${props => props.theme.color.white};
-  color: ${props => props.theme.color.black};
+  background-color: ${props => props.theme.color.background.alpha};
+  color: ${props => props.theme.color.text.alpha};
 
   outline: 0;
   cursor: pointer;
@@ -41,7 +41,7 @@ export const StyledRadioButtonLabel = styled.label<StyledRadioButtonProps>`
   transition: background-color 0.1s ease;
   box-shadow: 0 0 4px rgba(0, 0, 0, 0.06);
 
-  border: 1px solid ${props => darken(0.1, props.theme.color.default)};
+  border: 1px solid ${props => props.theme.color.border};
   border-radius: ${props => props.theme.radius}
 
   font-size: ${props => props.theme.font.size.md};
@@ -50,25 +50,25 @@ export const StyledRadioButtonLabel = styled.label<StyledRadioButtonProps>`
   ${props =>
     props.isChecked &&
     css`
-      border: 1px solid ${props.theme.color.primary};
-      background-color: ${props.theme.color.primary};
-      color: ${props.theme.color.white};
+      border: 1px solid ${props.theme.color.primary.alpha};
+      background-color: ${props.theme.color.primary.alpha};
+      color: ${props.theme.color.text.gamma};
     `}
 
   :hover {
-    border: 1px solid ${props => props.theme.color.primary};
+    border: 1px solid ${props => props.theme.color.primary.alpha};
     ${props =>
       !props.isChecked &&
       css`
-        color: ${props.theme.color.primary};
+        color: ${props.theme.color.primary.alpha};
       `}
     
     ${props =>
       props.isDisabled &&
       css`
-        color: ${darken(0.2, props.theme.color.default)};
+        color: ${props.theme.color.text.beta};
         border: inherit;
-        border: 1px solid ${darken(0.1, props.theme.color.default)};
+        border: 1px solid ${props.theme.color.border};
       `}
   }
   
@@ -77,7 +77,7 @@ export const StyledRadioButtonLabel = styled.label<StyledRadioButtonProps>`
     css`
       background-color: ${props.theme.color.default};
       cursor: not-allowed;
-      color: ${darken(0.2, props.theme.color.default)};
+      color: ${props.theme.color.text.beta};
     `}
 
   ${props =>

@@ -19,9 +19,9 @@ const switchWidthLarge = '80px';
 const switchWidthNormal = '70px';
 const switchWidthSmall = '50px';
 
-const switchColorOff = 'black';
+const switchColorOff = theme.color.text.alpha;
 const switchBackgroundColorOff = theme.color.default;
-const switchColorOn = 'white';
+const switchColorOn = theme.color.text.gamma;
 
 const paddingMD = parseInt(theme.padding.md, 0);
 const marginSM = parseInt(theme.margin.sm, 0);
@@ -116,7 +116,7 @@ export const StyledSwitcherTrue = styled.div<StyledSwitchProps>`
   line-height: 1;
   user-select: none;
   color: ${switchColorOff};
-  background-color: ${darken(0.1, switchBackgroundColorOff)};
+  background-color: ${switchBackgroundColorOff};
   transition: background-color .3s ease, color .3s ease;
 
   ${props => css`
@@ -129,7 +129,7 @@ export const StyledSwitcherTrue = styled.div<StyledSwitchProps>`
     !props.htmlType &&
     css`
       color: ${switchColorOn};
-      background-color: ${props.theme.color.primary};
+      background-color: ${props.theme.color.primary.alpha};
     `}
   
   ${props =>
@@ -137,7 +137,7 @@ export const StyledSwitcherTrue = styled.div<StyledSwitchProps>`
     props.isChecked &&
     css`
       color: ${switchColorOn};
-      background-color: ${props.theme.color.success};
+      background-color: ${props.theme.color.success.alpha};
     `}
   
   ${props =>
@@ -145,7 +145,7 @@ export const StyledSwitcherTrue = styled.div<StyledSwitchProps>`
     props.isChecked &&
     css`
       color: ${switchColorOn};
-      background-color: ${props.theme.color.warning};
+      background-color: ${props.theme.color.warning.alpha};
     `}
  
   ${props =>
@@ -153,14 +153,14 @@ export const StyledSwitcherTrue = styled.div<StyledSwitchProps>`
     props.isChecked &&
     css`
       color: ${switchColorOn};
-      background-color: ${props.theme.color.error};
+      background-color: ${props.theme.color.error.alpha};
     `}  
   ${props =>
     props.htmlType === 'primary' &&
     props.isChecked &&
     css`
       color: ${switchColorOn};
-      background-color: ${props.theme.color.primary};
+      background-color: ${props.theme.color.primary.alpha};
     `} 
   
   ${props =>
@@ -186,25 +186,25 @@ export const StyledSwitcherTrue = styled.div<StyledSwitchProps>`
       if (props.isChecked) {
         if (props.htmlType === 'primary') {
           return css`
-            background-color: ${transparentize(0.6, theme.color.primary)};
+            background-color: ${theme.color.primary.delta};
           `;
         }
 
         if (props.htmlType === 'success') {
           return css`
-            background-color: ${transparentize(0.6, theme.color.success)};
+            background-color: ${theme.color.success.delta};
           `;
         }
 
         if (props.htmlType === 'warning') {
           return css`
-            background-color: ${transparentize(0.6, theme.color.warning)};
+            background-color: ${theme.color.warning.delta};
           `;
         }
 
         if (props.htmlType === 'error') {
           return css`
-            background-color: ${transparentize(0.6, theme.color.error)};
+            background-color: ${theme.color.error.delta};
           `;
         }
       }
@@ -221,7 +221,7 @@ export const StyledSwitcherToggler = styled.div<StyledSwitchProps>`
   width: ${togglerSizeNormalInt}px;
   margin: ${props => props.theme.margin.sm};
 
-  background-color: white;
+  background-color: ${props => props.theme.color.background.delta};
   border-radius: 50%;
   transition: right 0.3s ease;
   
@@ -284,13 +284,6 @@ export const StyledSwitcherToggler = styled.div<StyledSwitchProps>`
      css`
        right: ${switchWidthNormal};
      `}
-   
-   ${props =>
-     props.isDisabled &&
-     css`
-       background-color: ${props.theme.color.default};
-     `}
-   
     `;
 
 export const StyledSwitcherFalse = styled.div<StyledSwitchProps>`
@@ -303,7 +296,7 @@ export const StyledSwitcherFalse = styled.div<StyledSwitchProps>`
 
   user-select: none;
   color: ${switchColorOff};
-  background-color: ${darken(0.1, switchBackgroundColorOff)};
+  background-color: ${switchBackgroundColorOff};
   transition: background-color 0.3s ease, color 0.3s ease;
   ${props =>
     props.isChecked &&
@@ -314,14 +307,14 @@ export const StyledSwitcherFalse = styled.div<StyledSwitchProps>`
   ${props =>
     props.isDisabled &&
     css`
-      color: ${theme.color.white};
+      color: ${theme.color.text.gamma};
     `}
    
    ${props =>
      props.isDisabled &&
      props.htmlType &&
      css`
-       color: ${theme.color.white};
+       color: ${theme.color.text.gamma};
      `}
    
  

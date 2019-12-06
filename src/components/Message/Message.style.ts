@@ -36,53 +36,53 @@ export const StyledMessageContainer = styled.div<MessageStyleProps>`
   ${props =>
     props.type === 'primary' &&
     css`
-      background-color: ${props.theme.color.white};
+      background-color: ${props.theme.color.background.alpha};
     `}
   ${props =>
     props.type === 'primary' &&
     props.isAlternative &&
     css`
-      background-color: ${props.theme.color.primary};
-      color: ${props.theme.color.white};
+      background-color: ${props.theme.color.primary.alpha};
+      color: ${props.theme.color.text.gamma};
     `}
   
   ${props =>
     props.type === 'success' &&
     css`
-      background-color: ${props.theme.color.white};
+      background-color: ${props.theme.color.background.alpha};
     `}
   ${props =>
     props.type === 'success' &&
     props.isAlternative &&
     css`
-      background-color: ${props.theme.color.success};
-      color: ${props.theme.color.white};
+      background-color: ${props.theme.color.success.alpha};
+      color: ${props.theme.color.text.gamma};
     `}
   
   ${props =>
     props.type === 'warning' &&
     css`
-      background-color: ${props.theme.color.white};
+      background-color: ${props.theme.color.background.alpha};
     `}
   ${props =>
     props.type === 'warning' &&
     props.isAlternative &&
     css`
-      background-color: ${props.theme.color.warning};
-      color: ${props.theme.color.white};
+      background-color: ${props.theme.color.warning.alpha};
+      color: ${props.theme.color.text.gamma};
     `}
   
   ${props =>
     props.type === 'error' &&
     css`
-      background-color: ${props.theme.color.white};
+      background-color: ${props.theme.color.background.alpha};
     `}
   ${props =>
     props.type === 'error' &&
     props.isAlternative &&
     css`
-      background-color: ${props.theme.color.error};
-      color: ${props.theme.color.white};
+      background-color: ${props.theme.color.error.alpha};
+      color: ${props.theme.color.text.gamma};
     `}
 `;
 export const StyledMessageIconSpan = styled.span<MessageStyleProps>``;
@@ -91,6 +91,7 @@ export const StyledMessageIcon = styled(Icon)<MessageStyleProps>`
   position: absolute;
   top: 13px;
   left: 10px;
+  
   ${props =>
     props.name === 'loading' &&
     css`
@@ -102,49 +103,49 @@ export const StyledMessageIcon = styled(Icon)<MessageStyleProps>`
   ${props =>
     props.type === 'primary' &&
     css`
-      color: ${props.theme.color.primary};
+      color: ${props.theme.color.primary.alpha};
     `}
   ${props =>
     props.type === 'primary' &&
     props.isAlternative &&
     css`
-      color: ${props.theme.color.white};
+      color: ${props.theme.color.text.gamma};
     `}
   
   ${props =>
     props.type === 'success' &&
     css`
-      color: ${props.theme.color.success};
+      color: ${props.theme.color.success.alpha};
     `}
   ${props =>
     props.type === 'success' &&
     props.isAlternative &&
     css`
-      color: ${props.theme.color.white};
+      color: ${props.theme.color.text.gamma};
     `}
   
   ${props =>
     props.type === 'warning' &&
     css`
-      color: ${props.theme.color.warning};
+      color: ${props.theme.color.warning.alpha};
     `}
   ${props =>
     props.type === 'warning' &&
     props.isAlternative &&
     css`
-      color: ${props.theme.color.white};
+      color: ${props.theme.color.text.gamma};
     `}
   
   ${props =>
     props.type === 'error' &&
     css`
-      color: ${props.theme.color.error};
+      color: ${props.theme.color.error.alpha};
     `}
   ${props =>
     props.type === 'error' &&
     props.isAlternative &&
     css`
-      color: ${props.theme.color.white};
+      color: ${props.theme.color.text.gamma};
     `}
 `;
 
@@ -153,6 +154,7 @@ export const StyledMessageIconLoading = styled(Icon)<MessageStyleProps>`
   position: absolute;
   top: 13px;
   left: 10px;
+  
   ${props =>
     props.name === 'loading' &&
     css`
@@ -164,49 +166,49 @@ export const StyledMessageIconLoading = styled(Icon)<MessageStyleProps>`
   ${props =>
     props.type === 'primary' &&
     css`
-      color: ${props.theme.color.primary};
+      color: ${props.theme.color.primary.alpha};
     `}
   ${props =>
     props.type === 'primary' &&
     props.isAlternative &&
     css`
-      color: ${props.theme.color.white};
+      color: ${props.theme.color.text.gamma};
     `}
   
   ${props =>
     props.type === 'success' &&
     css`
-      color: ${props.theme.color.success};
+      color: ${props.theme.color.success.alpha};
     `}
   ${props =>
     props.type === 'success' &&
     props.isAlternative &&
     css`
-      color: ${props.theme.color.white};
+      color: ${props.theme.color.text.gamma};
     `}
   
   ${props =>
     props.type === 'warning' &&
     css`
-      color: ${props.theme.color.warning};
+      color: ${props.theme.color.warning.alpha};
     `}
   ${props =>
     props.type === 'warning' &&
     props.isAlternative &&
     css`
-      color: ${props.theme.color.white};
+      color: ${props.theme.color.text.gamma};
     `}
   
   ${props =>
     props.type === 'error' &&
     css`
-      color: ${props.theme.color.error};
+      color: ${props.theme.color.error.alpha};
     `}
   ${props =>
     props.type === 'error' &&
     props.isAlternative &&
     css`
-      color: ${props.theme.color.white};
+      color: ${props.theme.color.text.gamma};
     `}
 `;
 export const StyledMessageContentSpan = styled.span<MessageStyleProps>``;

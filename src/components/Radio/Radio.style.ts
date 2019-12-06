@@ -37,7 +37,7 @@ export const StyledRadioSpan = styled.span<StyledRadioProps>`
   ${props =>
     props.isDisabled &&
     css`
-      color: ${darken(0.2, props.theme.color.default)};
+      color: ${props.theme.color.text.beta};
     `}
 `;
 export const StyledRadioInputShown = styled.div<StyledRadioProps>`
@@ -46,9 +46,9 @@ export const StyledRadioInputShown = styled.div<StyledRadioProps>`
   justify-content: center;
   padding: ${props => parseInt(props.theme.padding.xs, 0) - 1}px;
 
-  background: ${props => props.theme.color.white};
+  background: ${props => props.theme.color.background.alpha};
   border-radius: ${props => props.theme.rounded};
-  border: 1px solid ${props => darken(0.1, props.theme.color.default)};
+  border: 1px solid ${props => props.theme.color.border};
   ${props =>
     props.isDisabled &&
     css`
@@ -65,18 +65,18 @@ export const StyledRadioMark = styled.div<StyledRadioProps>`
   border-radius: ${props => props.theme.rounded};
   i {
     transform: scale(0.8);
-    color: ${props => props.theme.color.white};
+    color: ${props => props.theme.color.text.gamma};
   }
 
   ${props => {
     if (props.isChecked) {
       if (props.isDisabled) {
         return css`
-          background: ${darken(0.2, props.theme.color.default)};
+          background: ${props.theme.color.text.beta};
         `;
       }
       return css`
-        background: ${props.theme.color.primary};
+        background: ${props.theme.color.primary.alpha};
       `;
     }
 

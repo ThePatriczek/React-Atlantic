@@ -61,7 +61,7 @@ export const StyledReactDatePickerContainer = styled.div<StyledDatePickerProps>`
     z-index: -1;
     border-width: 8px;
     left: -8px;
-    border-bottom-color: #aeaeae;
+    border-bottom-color: ${props => props.theme.color.border};
   }
 
   .react-datepicker-popper[data-placement^='bottom']
@@ -75,13 +75,13 @@ export const StyledReactDatePickerContainer = styled.div<StyledDatePickerProps>`
   .react-datepicker-popper[data-placement^='bottom']
     .react-datepicker__triangle::before {
     border-top: none;
-    border-bottom-color: #f0f0f0;
+    border-bottom-color: ${props => props.theme.color.border};
   }
 
   .react-datepicker-popper[data-placement^='bottom']
     .react-datepicker__triangle::before {
     top: -1px;
-    border-bottom-color: #aeaeae;
+    border-bottom-color: ${props => props.theme.color.border};
   }
 
   .react-datepicker-popper[data-placement^='top'] .react-datepicker__triangle,
@@ -102,7 +102,7 @@ export const StyledReactDatePickerContainer = styled.div<StyledDatePickerProps>`
   .react-datepicker__month-read-view--down-arrow::before,
   .react-datepicker__month-year-read-view--down-arrow::before {
     border-bottom: none;
-    border-top-color: #fff;
+    border-top-color: ${props => props.theme.color.border};
   }
 
   .react-datepicker-popper[data-placement^='top']
@@ -111,7 +111,7 @@ export const StyledReactDatePickerContainer = styled.div<StyledDatePickerProps>`
   .react-datepicker__month-read-view--down-arrow::before,
   .react-datepicker__month-year-read-view--down-arrow::before {
     bottom: -1px;
-    border-top-color: #aeaeae;
+    border-top-color: ${props => props.theme.color.border};
   }
 
   .react-datepicker-wrapper {
@@ -123,10 +123,10 @@ export const StyledReactDatePickerContainer = styled.div<StyledDatePickerProps>`
   .react-datepicker {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
     font-size: 0.8rem;
-    background-color: #fff;
-    color: #000;
-    border: 1px solid #aeaeae;
-    border-radius: 0.3rem;
+    background-color: ${props => props.theme.color.background.alpha};
+    color: ${props => props.theme.color.text.alpha};
+    border: 1px solid ${props => props.theme.color.border};
+    border-radius: ${props => props.theme.radius};
     display: inline-block;
     position: relative;
   }
@@ -193,8 +193,8 @@ export const StyledReactDatePickerContainer = styled.div<StyledDatePickerProps>`
 
   .react-datepicker__header {
     text-align: center;
-    background-color: #f0f0f0;
-    border-bottom: 1px solid #aeaeae;
+    background-color: ${props => props.theme.color.background.alpha};
+    border-bottom: 1px solid ${props => props.theme.color.border};
     border-top-left-radius: 0.3rem;
     border-top-right-radius: 0.3rem;
     padding-top: 8px;
@@ -221,7 +221,7 @@ export const StyledReactDatePickerContainer = styled.div<StyledDatePickerProps>`
   .react-datepicker-time__header,
   .react-datepicker-year-header {
     margin-top: 0;
-    color: #000;
+    color: ${props => props.theme.color.text.alpha};
     font-weight: bold;
     font-size: 0.944rem;
   }
@@ -251,16 +251,16 @@ export const StyledReactDatePickerContainer = styled.div<StyledDatePickerProps>`
 
   .react-datepicker__navigation--previous {
     left: 10px;
-    border-right-color: #ccc;
+    border-right-color: ${props => props.theme.color.text.beta};
   }
 
   .react-datepicker__navigation--previous:hover {
-    border-right-color: #b3b3b3;
+    border-right-color: ${props => props.theme.color.text.alpha};
   }
 
   .react-datepicker__navigation--previous--disabled,
   .react-datepicker__navigation--previous--disabled:hover {
-    border-right-color: #e6e6e6;
+    border-right-color: ${props => props.theme.color.default};
     cursor: default;
   }
 

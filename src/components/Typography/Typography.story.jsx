@@ -12,7 +12,7 @@ stories.add('Overview', () => {
   return (
     <div>
       <div>
-        <Title>{`Title 1`}</Title>
+        <Title level={1}>{`Title 1`}</Title>
         <Title level={2}>{`Title 2`}</Title>
         <Title level={3}>{`Title 3`}</Title>
         <Title level={4}>{`Title 4`}</Title>

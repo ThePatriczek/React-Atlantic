@@ -24,10 +24,10 @@ export const StyledInputWrapper = styled.span<StyledInputWrapperProps>`
     css`
       :hover {
         i {
-          color: ${props.theme.color.primary};
+          color: ${props.theme.color.primary.alpha};
         }
         input {
-          border-color: ${props.theme.color.primary};
+          border-color: ${props.theme.color.primary.alpha};
         }
       }
     `}
@@ -59,10 +59,10 @@ export const StyledInputWrapper = styled.span<StyledInputWrapperProps>`
     
     ${props =>
       props.isDisabled ? css`
-            color: ${darken(0.2, props.theme.color.default)};
+            color: ${props.theme.color.text.beta};
             cursor: not-allowed;
           ` : css`
-            color: ${lighten(0.6, props.theme.color.black)};
+            color: ${props.theme.color.text.beta};
             cursor: text;
           `};
     
@@ -104,7 +104,7 @@ export const StyledInputWrapper = styled.span<StyledInputWrapperProps>`
     props.isFocused &&
     css`
       i {
-        color: ${props.theme.color.primary};
+        color: ${props.theme.color.primary.alpha};
       }
     `}
   
@@ -137,8 +137,8 @@ export const StyledInput = styled.input<{
   -webkit-appearance: textfield;
   touch-action: manipulation;
 
-  background-color: ${props => props.theme.color.white};
-  color: ${props => props.theme.color.black};
+  background-color: ${props => props.theme.color.background.alpha};
+  color: ${props => props.theme.color.text.alpha};
   border-radius: ${props => props.theme.radius};
   outline: 0;
   list-style: none;
@@ -147,14 +147,14 @@ export const StyledInput = styled.input<{
   -moz-box-sizing: border-box;
   box-sizing: border-box;
 
-  border: 1px solid ${props => darken(0.1, props.theme.color.default)};
+  border: 1px solid ${props => props.theme.color.border};
 
   ::placeholder {
-    color: ${() => lighten(0.6, `black`)};
+    color: ${props => props.theme.color.text.beta};
   }
 
   :focus {
-    border-color: ${props => props.theme.color.primary};
+    border-color: ${props => props.theme.color.primary.alpha};
     outline-offset: -2px;
     box-shadow: 0 0 0 2px rgba(24, 144, 255, 0.3);
   }
@@ -162,9 +162,9 @@ export const StyledInput = styled.input<{
   ${props =>
     props.disabled &&
     css`
-      color: ${darken(0.2, props.theme.color.default)};
+      color: ${props.theme.color.text.beta};
       ::placeholder {
-        color: ${darken(0.2, props.theme.color.default)};
+        color: ${props.theme.color.text.beta};
       }
 
       background-color: ${props.theme.color.default};
@@ -175,7 +175,7 @@ export const StyledInput = styled.input<{
       &:focus {
         outline: 0;
         box-shadow: none;
-        border: 1px solid ${darken(0.1, props.theme.color.default)};
+        border: 1px solid ${props.theme.color.border};
       }
     `}
 
@@ -237,10 +237,10 @@ export const StyledInputWrapperAlt = styled.span<StyledInputWrapperProps>`
     css`
       :hover {
         i {
-          color: ${props.theme.color.primary};
+          color: ${props.theme.color.primary.alpha};
         }
         input {
-          border-color: ${props.theme.color.primary};
+          border-color: ${props.theme.color.primary.alpha};
         }
       }
     `}
@@ -275,7 +275,7 @@ export const StyledInputWrapperAlt = styled.span<StyledInputWrapperProps>`
     right: 0;
     padding: 0 ${props => props.theme.padding.md};
 
-    color: ${() => lighten(0.6, `black`)};
+    color: ${props => props.theme.color.text.beta};
     cursor: text;
 
     -webkit-transition: color 0.2s ease-out, -webkit-transform 0.2s ease-out;
@@ -296,8 +296,8 @@ export const StyledInputWrapperAlt = styled.span<StyledInputWrapperProps>`
         left: 5px;
         right: auto;
 
-        background: white;
-        color: ${props.theme.color.primary};
+        background: ${props.theme.color.background.alpha};
+        color: ${props.theme.color.primary.alpha};
 
         -webkit-transform: translateY(-14px) scale(0.8);
         transform: translateY(0px) scale(0.8);

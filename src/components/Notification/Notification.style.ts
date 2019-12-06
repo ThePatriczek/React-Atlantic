@@ -21,9 +21,9 @@ export const StyledNotificationTitleIcon = styled(Icon)<NotificationStyleProps>`
   cursor: default;
   &:last-of-type {
     cursor: pointer;
-    color: ${props => props.theme.color.gray};
+    color: ${props => props.theme.color.text.beta};
     &:hover {
-      color: ${props => props.theme.color.error};
+      color: ${props => props.theme.color.error.alpha};
     }
   }
 `;
@@ -31,7 +31,7 @@ export const StyledNotificationTitleIcon = styled(Icon)<NotificationStyleProps>`
 export const StyledNotificationButtonIcon = styled(Icon)<
   NotificationStyleProps
 >`
-  color: white;
+  color: ${props => props.theme.color.text.gamma};
 `;
 
 Title.defaultProps = {
@@ -71,7 +71,7 @@ export const StyledNotificationTitleContainer = styled.div<
   border-bottom: 1px solid ${props => props.theme.color.border};
   padding-bottom: ${props => parseInt(props.theme.padding.xs, 0) + 3}px;
   margin-left: ${props => props.theme.margin.sm};
-  color: black;
+  color: ${props => props.theme.color.text.alpha};
 
   ${props =>
     props.type &&
@@ -90,22 +90,22 @@ export const StyledNotificationTitleContainer = styled.div<
   ${props =>
     props.type === 'primary' &&
     css`
-      color: ${props.theme.color.primary};
+      color: ${props.theme.color.primary.alpha};
     `}
     ${props =>
       props.type === 'success' &&
       css`
-        color: ${props.theme.color.success};
+        color: ${props.theme.color.success.alpha};
       `}
     ${props =>
       props.type === 'error' &&
       css`
-        color: ${props.theme.color.error};
+        color: ${props.theme.color.error.alpha};
       `}
     ${props =>
       props.type === 'warning' &&
       css`
-        color: ${props.theme.color.warning};
+        color: ${props.theme.color.warning.alpha};
       `}
 `;
 
@@ -128,8 +128,8 @@ export const StyledNotificationButton = styled(Button)<NotificationStyleProps>`
   ${props =>
     css`
       &:last-of-type {
-        background-color: ${props.theme.color.primary};
-        color: white;
+        background-color: ${props.theme.color.primary.alpha};
+        color: ${props.theme.color.text.gamma};
       }
     `}
 
@@ -141,11 +141,12 @@ export const StyledNotificationButton = styled(Button)<NotificationStyleProps>`
       }
     `}
 `;
+
 export const StyledNotificationContainer = styled.div<NotificationStyleProps>`
   display: block;
   max-width: 500px;
-  color: ${props => props.theme.color.black};
-  background-color: ${props => props.theme.color.white};
+  color: ${props => props.theme.color.text.alpha};
+  background-color: ${props => props.theme.color.background.alpha};
   padding: ${props => props.theme.padding.md};
   margin-bottom: ${props => props.theme.margin.md};
   margin-left: auto;
