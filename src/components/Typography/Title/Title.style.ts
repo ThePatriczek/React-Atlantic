@@ -3,6 +3,7 @@ import styled, { css } from 'styled-components';
 import { theme } from '../../../theme';
 
 const titleStyle = css`
+  color: ${props => props.theme.color.text.alpha};
   font-weight: bold;
   font-family: ${props => props.theme.font.family};
   ::selection,

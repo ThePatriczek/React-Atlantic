@@ -18,7 +18,7 @@ export const StyledIcon = styled.i<StyledIconProps>`
   display: inline-block;
   line-height: 0;
   height: 1em;
-  color: inherit;
+  color: ${props => props.theme.color.text.alpha};
   font-style: normal;
   text-align: center;
   text-transform: none;

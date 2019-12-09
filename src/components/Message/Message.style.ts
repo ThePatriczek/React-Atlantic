@@ -17,7 +17,8 @@ export const StyledMessageContainer = styled.div<MessageStyleProps>`
     ${props => props.theme.padding.md} 34px;
   margin-bottom: ${props => props.theme.padding.sm};
 
-  color: ${props => props.theme.color.black};
+  color: ${props => props.theme.color.text.alpha};
+  background-color: ${props => props.theme.color.background.alpha};
   font-variant: tabular-nums;
   line-height: 1.5;
   -webkit-font-feature-settings: 'tnum';

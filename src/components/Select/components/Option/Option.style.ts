@@ -8,6 +8,8 @@ export const StyledOption = styled.div<SelectProps>`
   padding: 0 ${props => props.theme.padding.md};
   height: ${props => props.theme.height.md};
   line-height: ${props => props.theme.height.md};
+  background-color: ${props => props.theme.color.background.alpha};
+  color: ${props => props.theme.color.text.alpha};
 
   overflow: hidden;
   text-overflow: ellipsis;

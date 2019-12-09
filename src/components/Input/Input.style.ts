@@ -156,7 +156,6 @@ export const StyledInput = styled.input<{
   :focus {
     border-color: ${props => props.theme.color.primary.alpha};
     outline-offset: -2px;
-    box-shadow: 0 0 0 2px rgba(24, 144, 255, 0.3);
   }
 
   ${props =>
@@ -277,6 +276,7 @@ export const StyledInputWrapperAlt = styled.span<StyledInputWrapperProps>`
 
     color: ${props => props.theme.color.text.beta};
     cursor: text;
+    border-radius: ${props => props.theme.radius};
 
     -webkit-transition: color 0.2s ease-out, -webkit-transform 0.2s ease-out;
     transition: color 0.2s ease-out, -webkit-transform 0.2s ease-out;

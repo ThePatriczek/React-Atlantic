@@ -53,6 +53,10 @@ export const StyledRadioButtonLabel = styled.label<StyledRadioButtonProps>`
       border: 1px solid ${props.theme.color.primary.alpha};
       background-color: ${props.theme.color.primary.alpha};
       color: ${props.theme.color.text.gamma};
+      
+      span{
+        color: ${props.theme.color.text.gamma};
+      }
     `}
 
   :hover {

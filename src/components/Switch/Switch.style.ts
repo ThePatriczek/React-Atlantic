@@ -233,7 +233,7 @@ export const StyledSwitcherToggler = styled.div<StyledSwitchProps>`
   ${props =>
     props.isDisabled &&
     css`
-      background-color: ${props.theme.color.default};
+      background-color: ${props.theme.color.background.delta};
     `}
  
   ${props =>

@@ -29,6 +29,12 @@ export const StyledRadioLabel = styled.label<StyledRadioProps>`
     css`
       cursor: not-allowed;
     `}
+    
+    &:hover{
+      > div{
+        border: 1px solid ${props => props.theme.color.primary.alpha};
+      }
+    }
 `;
 export const StyledRadioSpan = styled.span<StyledRadioProps>`
   padding: 0 ${props => props.theme.padding.md};
@@ -40,6 +46,7 @@ export const StyledRadioSpan = styled.span<StyledRadioProps>`
       color: ${props.theme.color.text.beta};
     `}
 `;
+
 export const StyledRadioInputShown = styled.div<StyledRadioProps>`
   display: flex;
   align-items: center;

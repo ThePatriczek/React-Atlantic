@@ -66,7 +66,6 @@ export const Control = styled.div<SelectProps>`
     props.isFocused &&
     css`
       border-color: ${props => props.theme.color.primary.alpha};
-      box-shadow: 0 0 0 2px #c3defd;
     `}
   
   ${props =>
@@ -145,6 +144,10 @@ export const SingleValue = styled.div<SelectProps>`
   white-space: nowrap;
   overflow: hidden;
   
+  span{
+    color: ${props => props.theme.color.text.alpha};
+  }
+  
   ${props =>
     props.isFullWidth &&
     css`
@@ -181,7 +184,7 @@ export const MultiValue = styled.div<SelectProps>`
   margin: ${props => props.theme.margin.xs};
   padding: 0;
 
-  background-color: ${props => props.theme.color.primary.delta};
+  background-color: ${props => props.theme.color.primary.beta};
   color: ${props => props.theme.color.text.alpha};
   border: 1px solid ${props => props.theme.color.primary.alpha};
   border-radius: ${props => props.theme.radius};
@@ -194,6 +197,10 @@ export const MultiValue = styled.div<SelectProps>`
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
+  }
+  
+  span,i{
+    color: ${props => props.theme.color.text.gamma};
   }
 
   ${props =>
@@ -227,6 +234,10 @@ export const ClearIndicator = styled.div<SelectProps>`
   justify-content: center;
   width: ${props => props.theme.width.md};
   color: ${props => props.theme.color.text.beta};
+  
+  i,span{
+    color: ${props => props.theme.color.text.beta};
+  }
 
   i:hover {
     color: ${props => props.theme.color.error.alpha};
@@ -251,6 +262,10 @@ export const MultiValueRemove = styled.div<SelectProps>`
   align-items: center;
   min-width: 26px;
   border-left: 1px solid ${props => props.theme.color.primary.alpha};
+  
+  span,i{
+    color: ${props => props.theme.color.text.gamma};
+  }
 
   i {
     font-size: 10px;
@@ -274,6 +289,7 @@ export const NoOptionsMessage = styled.div`
   padding: 0 ${props => props.theme.padding.md};
   height: ${props => props.theme.height.md};
   line-height: ${props => props.theme.height.md};
+  color: ${props => props.theme.color.text.beta};
 
   overflow: hidden;
   text-overflow: ellipsis;
@@ -327,6 +343,10 @@ export const DropdownIndicator = styled.div<SelectProps>`
   justify-content: center;
   width: ${props => props.theme.width.md};
   color: ${props => props.theme.color.text.beta};
+  
+  i{
+    color: ${props => props.theme.color.text.beta};
+  }
 
   i:hover {
     color: ${props => props.theme.color.primary.alpha};
@@ -362,10 +382,9 @@ export const MenuList = styled.div`
   border-top: 0;
   border-radius: 0 0 ${props => props.theme.radius}
     ${props => props.theme.radius};
-  background: ${props => props.theme.color.alpha};
+  background: ${props => props.theme.color.background.alpha};
   overflow: hidden;
   outline-offset: -2px;
-  box-shadow: 0 0 0 2px #c3defd;
 `;
 
 export const Input = styled.input`

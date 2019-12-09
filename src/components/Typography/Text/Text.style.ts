@@ -4,6 +4,7 @@ import { theme, Theme } from '../../../theme';
 import { Type } from '../../../types';
 
 export const getDefaultStyledText = (props: { theme: Theme }) => css`
+  color: ${props.theme.color.text.alpha};
   font-size: ${props.theme.font.size.md};
   font-family: ${props.theme.font.family};
   line-height: 1.5;
@@ -83,7 +84,7 @@ export const StyledStrongText = styled.strong<{ type: Type }>`
 export const StyledMarkText = styled.mark`
   ${props => getDefaultStyledText(props)};
   padding: 0 ${props => props.theme.padding.xs};
-  background-color: ${props => props.theme.color.warning.epsilon};
+  background-color: ${props => props.theme.color.warning.gamma};
 `;
 
 export const StyledCodeText = styled.code`
@@ -101,13 +102,13 @@ export const StyledCodeText = styled.code`
 export const StyledInsText = styled.ins`
   ${props => getDefaultStyledText(props)};
   padding: 0 ${props => props.theme.padding.xs};
-  background-color: ${props => props.theme.color.success.delta};
+  background-color: ${props => props.theme.color.success.gamma};
 `;
 
 export const StyledDelText = styled.del`
   ${props => getDefaultStyledText(props)};
   padding: 0 ${props => props.theme.padding.xs};
-  background-color: ${props => props.theme.color.error.delta};
+  background-color: ${props => props.theme.color.error.gamma};
 `;
 
 StyledText.defaultProps = {

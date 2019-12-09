@@ -48,6 +48,7 @@ export const StyledCheckboxLabel = styled.label<StyledCheckboxProps>`
   display: inline-flex;
   align-items: center;
   cursor: pointer;
+  color: ${props => props.theme.color.text.alpha};
 
   ${props =>
     !props.isDisabled &&
@@ -88,14 +89,14 @@ export const StyledCheckboxMark = styled.div<StyledCheckboxProps>`
     props.isDisabled &&
     (props.isChecked || props.isPartiallyChecked) &&
     css`
-      background-color: ${props.theme.color.default};
+      background-color: ${props.theme.color.background.beta};
     `}
   
     ${props =>
       props.isDisabled &&
       css`
-        color: transparent;
-        cursor: not-allowed;
+          color: transparent;
+          cursor: not-allowed;
       `}
 `;
 

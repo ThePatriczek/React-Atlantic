@@ -91,21 +91,37 @@ export const StyledNotificationTitleContainer = styled.div<
     props.type === 'primary' &&
     css`
       color: ${props.theme.color.primary.alpha};
+      
+      i{
+        color: ${props.theme.color.primary.alpha};
+      }
     `}
     ${props =>
       props.type === 'success' &&
       css`
         color: ${props.theme.color.success.alpha};
+        
+        i{
+          color: ${props.theme.color.success.alpha};
+        }
       `}
     ${props =>
       props.type === 'error' &&
       css`
         color: ${props.theme.color.error.alpha};
+        
+        i{
+          color: ${props.theme.color.error.alpha};
+        }
       `}
     ${props =>
       props.type === 'warning' &&
       css`
         color: ${props.theme.color.warning.alpha};
+        
+        i{
+          color: ${props.theme.color.warning.alpha};
+        }
       `}
 `;
 

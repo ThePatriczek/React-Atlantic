@@ -103,7 +103,7 @@ ${props =>
       border-radius: ${props.isRound
         ? props.theme.rounded
         : props.theme.radius};
-      background: ${props.theme.color.default};
+      background: ${props.theme.color.background.gamma};
       animation: ${focusAnimation} 0.4s ease-in-out;
     }
   `}
@@ -147,6 +147,10 @@ ${props =>
       background-color: ${bgColor};
       color: ${color};
       border: 1px ${borderType} ${borderColor};
+      
+      span{
+        color: ${color};
+      }
 
       ${props.styleType === 'transparent' &&
         css`
@@ -157,6 +161,7 @@ ${props =>
         background-color: ${hoverBgColor};
         ${props.styleType === 'transparent' &&
           css`
+            background-color: transparent;
             box-shadow: none;
             border: 1px ${borderType} ${color};
           `}
