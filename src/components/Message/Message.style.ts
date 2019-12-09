@@ -13,7 +13,7 @@ export const StyledMessageContainer = styled.div<MessageStyleProps>`
   position: relative;
   display: table;
   max-width: 100%;
-  padding: ${props => props.theme.padding.md} ${props => props.theme.padding.lg}
+  padding: ${props => props.theme.padding.md} ${props => props.theme.padding.md}
     ${props => props.theme.padding.md} 34px;
   margin-bottom: ${props => props.theme.padding.sm};
 
@@ -92,6 +92,7 @@ export const StyledMessageIcon = styled(Icon)<MessageStyleProps>`
   position: absolute;
   top: 13px;
   left: 10px;
+  width: 14px;
   
   ${props =>
     props.name === 'loading' &&

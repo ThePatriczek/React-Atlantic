@@ -36,7 +36,7 @@ const DefaultButton = styled.button`
   display: inline-block;
   padding: 0 ${props => props.theme.padding.md};
   height: ${props => props.theme.height.md};
-  line-height: 1.5;
+  line-height: 1;
 
   background-image: none;
   color: ${props => props.theme.color.text.alpha};
@@ -46,6 +46,7 @@ const DefaultButton = styled.button`
   font-size: ${props => props.theme.font.size.md};
   font-family: ${props => props.theme.font.family};
   font-weight: 400;
+  vertical-align: middle;
   white-space: nowrap;
   text-align: center;
   user-select: none;
@@ -55,24 +56,26 @@ const DefaultButton = styled.button`
   border: 1px solid ${props => props.theme.color.border};
   border-radius: ${props => props.theme.radius};
 
-  > span,
-  > i {
-    height: 18px;
-    line-height: 18px;
-
+  > span{
     display: inline-block;
-    vertical-align: 1px;
+    vertical-align: top;
+    height: 14px;
+    line-height: 1;
     pointer-events: none;
     transition: margin-left 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
   }
 
   i {
-    vertical-align: 2px;
+    height: 14px;
+    margin: 0;
+    vertical-align: top;
+    line-height: 1;
+    width: 14px;
   }
 
   i + span,
   span + i {
-    margin-left: ${props => props.theme.margin.md};
+    margin-left: ${props => props.theme.margin.sm};
   }
 
   i {
@@ -196,6 +199,11 @@ ${props =>
       > span,
       > i {
         font-size: ${props.theme.font.size.sm};
+        height: ${props.theme.font.size.sm};
+      }
+      
+      > i{
+        width: ${props.theme.font.size.sm};
       }
 
       i + span,
@@ -214,11 +222,16 @@ ${props =>
       > span,
       > i {
         font-size: ${props.theme.font.size.lg};
+        height: ${props.theme.font.size.lg};
+      }
+      
+      > i{
+        width: ${props.theme.font.size.lg};
       }
 
       i + span,
       span + i {
-        margin-left: ${props.theme.margin.lg};
+        margin-left: ${props.theme.margin.md};
       }
     `}
     

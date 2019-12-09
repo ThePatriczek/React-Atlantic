@@ -22,6 +22,13 @@ export const StyledIcon = styled.i<StyledIconProps>`
   font-style: normal;
   text-align: center;
   text-transform: none;
+  
+  svg{
+    vertical-align: top;
+    width: 100%;
+    height: 100%;
+    font-size: inherit;
+  }
 
   ${props =>
     props.isRotating &&
@@ -30,11 +37,6 @@ export const StyledIcon = styled.i<StyledIconProps>`
       -moz-animation: ${spin} 4s linear infinite;
       animation: ${spin} 4s linear infinite;
     `}
-
-  svg {
-    height: 1em;
-    vertical-align: middle;
-  }
 `;
 
 StyledIcon.displayName = 'StyledIcon';

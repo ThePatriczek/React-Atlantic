@@ -14,12 +14,14 @@ interface NotificationStyleProps {
 }
 
 export const StyledNotificationTitleIcon = styled(Icon)<NotificationStyleProps>`
-  display: inline-block;
-  flex: ${props => props.theme.height.md};
-  height: ${props => props.theme.height.md};
-  line-height: ${props => parseInt(props.theme.height.md, 0) - 1}px;
-  cursor: default;
-  &:last-of-type {
+    height: 14px;
+    flex: ${props => props.theme.height.md};
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: default;
+    
+    &:last-of-type {
     cursor: pointer;
     color: ${props => props.theme.color.text.beta};
     &:hover {
@@ -38,7 +40,6 @@ Title.defaultProps = {
   level: 5
 };
 export const StyledNotificationTitle = styled(Title)<NotificationStyleProps>`
-  display: inline-block;
   padding: 0 ${props => props.theme.padding.md} 0 0;
   margin: 0;
   height: ${props => props.theme.height.md};
