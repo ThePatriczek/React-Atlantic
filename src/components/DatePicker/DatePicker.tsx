@@ -78,7 +78,7 @@ export const DatePicker: React.FC<DatePickerProps> = (
         }
         customInput={
           <Input
-            iconLeft={'calendar'}
+            iconLeft={'calendarAlt'}
             handlersWithEvent
             isFullWidth={isFullWidth}
           />
