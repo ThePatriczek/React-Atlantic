@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { createRef, FC, Fragment, ReactElement, useState } from 'react';
 import { Type } from '../../../types';
 import { StyledTypoButton } from '../../Button/Button.style';
 import { Icon } from '../../Icon';
@@ -36,9 +36,7 @@ export interface TextProps {
 
 const { TextArea } = Input;
 
-export const Text: React.FC<TextProps> = (
-  props: TextProps
-): React.ReactElement => {
+export const Text: FC<TextProps> = (props: TextProps): ReactElement => {
   const {
     children,
     type,
@@ -49,13 +47,11 @@ export const Text: React.FC<TextProps> = (
     element,
     editText
   } = props;
-  const [isEditing, setEditing] = React.useState<boolean>(false);
-  const [value, setValue] = React.useState<string>(children);
-  const [copyText, setCopyText] = React.useState<string>(
-    props.copyText as string
-  );
-  const copyBtnRef = React.createRef<HTMLButtonElement>();
-  const editBtnRef = React.createRef<HTMLButtonElement>();
+  const [isEditing, setEditing] = useState<boolean>(false);
+  const [value, setValue] = useState<string>(children);
+  const [copyText, setCopyText] = useState<string>(props.copyText as string);
+  const copyBtnRef = createRef<HTMLButtonElement>();
+  const editBtnRef = createRef<HTMLButtonElement>();
 
   const onCopy = async () => {
     setCopyText(props.copiedText as string);
@@ -101,7 +97,7 @@ export const Text: React.FC<TextProps> = (
   }
 
   const Content = (
-    <>
+    <Fragment key={value}>
       {value}
       {isEditable && (
         <StyledTypoButton
@@ -145,7 +141,7 @@ export const Text: React.FC<TextProps> = (
           <Tooltip />
         </StyledTypoButton>
       )}
-    </>
+    </Fragment>
   );
 
   switch (element) {
