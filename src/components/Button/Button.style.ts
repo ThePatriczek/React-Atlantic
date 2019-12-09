@@ -1,4 +1,3 @@
-import { darken, lighten } from 'polished';
 import styled, { css, keyframes } from 'styled-components';
 import { theme } from '../../theme';
 import { Size } from '../../types';

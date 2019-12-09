@@ -1,4 +1,3 @@
-import { darken, transparentize } from 'polished';
 import styled, { css } from 'styled-components';
 import { theme } from '../../theme';
 import { HorizontalPosition, Size, Type } from '../../types';

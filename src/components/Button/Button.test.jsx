@@ -1,6 +1,5 @@
 import { shallow } from 'enzyme';
 import 'jest-styled-components';
-import { darken } from 'polished';
 import React from 'react';
 import { defaultValues } from '../..';
 import { Button } from './Button';
