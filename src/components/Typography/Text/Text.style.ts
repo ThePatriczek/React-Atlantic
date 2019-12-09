@@ -15,6 +15,10 @@ export const getDefaultStyledText = (props: { theme: Theme }) => css`
   input[type='email'] {
     margin: 0 ${props.theme.margin.sm};
   }
+  
+  i{
+    color: ${props.theme.color.primary.alpha};
+  }
 
   ::selection,
   ::-moz-selection {

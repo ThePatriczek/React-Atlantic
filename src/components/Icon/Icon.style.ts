@@ -17,7 +17,8 @@ export const spin = () => {
 export const StyledIcon = styled.i<StyledIconProps>`
   display: inline-block;
   line-height: 0;
-  height: 1em;
+  height: ${props => props.theme.font.size.md};
+  width: ${props => props.theme.font.size.md};
   color: ${props => props.theme.color.text.alpha};
   font-style: normal;
   text-align: center;

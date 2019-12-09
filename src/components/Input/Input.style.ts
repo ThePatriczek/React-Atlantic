@@ -52,9 +52,6 @@ export const StyledInputWrapper = styled.span<StyledInputWrapperProps>`
         padding-right: 30px;
       }
     `}
-
-  i {
-    display: flex;
     
     ${props =>
       props.isDisabled ? css`
@@ -101,6 +98,7 @@ export const StyledInputWrapper = styled.span<StyledInputWrapperProps>`
     position: absolute;
     z-index: 2;
     line-height: 0;
+    color: ${props => props.theme.color.text.beta};
 
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;

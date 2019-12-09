@@ -30,9 +30,10 @@ stories.add(
         <br />
         <Button>{`Upload`}</Button>
         <br />
-        <Button isTransparent type={'error'}>{`Delete`}</Button>
-        <Button isTransparent type={'primary'}>{`OK`}</Button>
-        <Button isTransparent type={'success'}>{`Confirm`}</Button>
+        <Button isTransparent type={'primary'}>{`Primary`}</Button>
+        <Button isTransparent type={'success'}>{`Success`}</Button>
+        <Button isTransparent type={'warning'}>{`Warning`}</Button>
+        <Button isTransparent type={'error'}>{`Error`}</Button>
         <br />
       </div>
       <div>
@@ -123,7 +124,16 @@ stories.add(
           <Text>{`Full Width large`}</Text>
           <Icon name={'arrowRight'} />
         </Button>
-        <Button isFullWidth isTransparent>
+        <Button isFullWidth isTransparent type={'primary'}>
+          <Text>{`Full Width transparent`}</Text>
+        </Button>
+        <Button isFullWidth isTransparent type={'success'}>
+          <Text>{`Full Width transparent`}</Text>
+        </Button>
+        <Button isFullWidth isTransparent type={'warning'}>
+          <Text>{`Full Width transparent`}</Text>
+        </Button>
+        <Button isFullWidth isTransparent type={'error'}>
           <Text>{`Full Width transparent`}</Text>
         </Button>
       </div>
