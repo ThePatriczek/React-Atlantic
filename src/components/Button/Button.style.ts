@@ -10,6 +10,7 @@ interface StyledButtonProps {
   size: Size;
   isFullWidth: boolean;
   animationRunning?: boolean;
+  isTransparent?: boolean;
 }
 
 const focusAnimation = keyframes`
@@ -88,7 +89,7 @@ const DefaultButton = styled.button`
 export const StyledButton = styled(DefaultButton)<StyledButtonProps>`
 ${props =>
   !props.disabled &&
-  props.styleType !== 'transparent' &&
+  props.isTransparent &&
   props.animationRunning &&
   css`
     &:after {
@@ -137,10 +138,13 @@ ${props =>
       borderColor = bgColor;
     } else if (props.styleType === 'dashed') {
       borderType = `dashed`;
-    } else if (props.styleType === 'transparent') {
+    }
+
+    if (props.isTransparent) {
+      color = bgColor;
       bgColor = `transparent`;
-      color = props.theme.color.primary.alpha;
       borderColor = bgColor;
+      hoverBgColor = bgColor;
     }
 
     return css`
@@ -148,18 +152,14 @@ ${props =>
       color: ${color};
       border: 1px ${borderType} ${borderColor};
 
-      ${props.styleType === 'transparent' &&
+      ${props.isTransparent &&
         css`
           box-shadow: none;
+          border: 1px ${borderType} ${color};
         `}
 
       &:hover {
         background-color: ${hoverBgColor};
-        ${props.styleType === 'transparent' &&
-          css`
-            box-shadow: none;
-            border: 1px ${borderType} ${color};
-          `}
       }
     `;
   }}

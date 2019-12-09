@@ -30,7 +30,9 @@ stories.add(
         <br />
         <Button>{`Upload`}</Button>
         <br />
-        <Button type={'transparent'}>{`Transparent`}</Button>
+        <Button isTransparent type={'error'}>{`Delete`}</Button>
+        <Button isTransparent type={'primary'}>{`OK`}</Button>
+        <Button isTransparent type={'success'}>{`Confirm`}</Button>
         <br />
       </div>
       <div>
@@ -121,7 +123,7 @@ stories.add(
           <Text>{`Full Width large`}</Text>
           <Icon name={'arrowRight'} />
         </Button>
-        <Button isFullWidth type={`transparent`}>
+        <Button isFullWidth isTransparent>
           <Text>{`Full Width transparent`}</Text>
         </Button>
       </div>
@@ -143,15 +145,7 @@ stories.add(
     );
     const type = select(
       `type:`,
-      [
-        'default',
-        'primary',
-        'success',
-        'warning',
-        'error',
-        'dashed',
-        'transparent'
-      ],
+      ['default', 'primary', 'success', 'warning', 'error', 'dashed'],
       defaultValues.type
     );
     const children = text(`text:`, defaultValues.value);
