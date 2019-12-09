@@ -56,7 +56,16 @@ export type IconName =
   | 'comment'
   | 'calculator'
   | 'book'
-  | 'bookOpened';
+  | 'bookOpened'
+  | 'citex'
+  | 'flagParagraph'
+  | 'flagCzech'
+  | 'flagComments'
+  | 'flagEU'
+  | 'flagLawCzech'
+  | 'flagLawEU'
+  | 'flagLiterature'
+  | 'flagSlovakia';
 
 export interface IconProps {
   name: IconName;
@@ -234,6 +243,33 @@ export const Icon: React.FC<IconProps> = (
       break;
     case 'bookOpened':
       Component = <Icons.BookOpened />;
+      break;
+    case 'citex':
+      Component = <Icons.Citex />;
+      break;
+    case 'flagParagraph':
+      Component = <Icons.FlagParagraph />;
+      break;
+    case 'flagCzech':
+      Component = <Icons.FlagCzech />;
+      break;
+    case 'flagComments':
+      Component = <Icons.FlagComments />;
+      break;
+    case 'flagEU':
+      Component = <Icons.FlagEU />;
+      break;
+    case 'flagLawCzech':
+      Component = <Icons.FlagLawCzech />;
+      break;
+    case 'flagLawEU':
+      Component = <Icons.FlagLawEU />;
+      break;
+    case 'flagLiterature':
+      Component = <Icons.FlagLiterature />;
+      break;
+    case 'flagSlovakia':
+      Component = <Icons.FlagSlovakia />;
       break;
   }
 
