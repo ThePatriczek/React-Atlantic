@@ -25,7 +25,7 @@ const ThemeStory = props => {
         <SketchPicker
           color={theme.color.primary}
           onChangeComplete={color => {
-            theme.color.primary = color.hex;
+            theme.color.primary.alpha = color.hex;
             setKey(color.hex);
           }}
         />
