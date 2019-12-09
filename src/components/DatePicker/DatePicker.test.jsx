@@ -4,7 +4,7 @@ import expect from 'expect';
 import { DatePicker } from './DatePicker';
 
 export const Component = () => {
-  return <DatePicker />;
+  return <DatePicker isFullWidth />;
 };
 
 export const tests = (datePicker = Component()) => {

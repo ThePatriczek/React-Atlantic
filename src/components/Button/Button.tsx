@@ -2,14 +2,15 @@ import * as React from 'react';
 import { Size, Type } from '../../types';
 import { StyledButton } from './Button.style';
 
-export type ButtonType = Type | 'dashed' | 'transparent';
+export type ButtonType = Type | 'dashed';
 
 export interface ButtonProps {
   onClick?: () => void;
   isDisabled?: boolean;
   isRound?: boolean;
   isFullWidth?: boolean;
-  /** primary | success | warning | error | dashed | transparent */
+  isTransparent?: boolean;
+  /** primary | success | warning | error | dashed */
   type?: ButtonType;
   htmlType?: 'submit' | 'button';
   /** small | medium | large */
@@ -28,6 +29,7 @@ export const Button: React.FC<React.PropsWithChildren<ButtonProps>> = (
     isRound,
     size,
     isFullWidth,
+    isTransparent,
     htmlType,
     className
   } = props;
@@ -48,6 +50,7 @@ export const Button: React.FC<React.PropsWithChildren<ButtonProps>> = (
       disabled={isDisabled}
       onClick={onClick}
       isRound={!!isRound}
+      isTransparent={isTransparent}
       size={size as any}
       isFullWidth={!!isFullWidth}
       onAnimationEnd={() => setAnimation(false)}

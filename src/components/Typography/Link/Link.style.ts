@@ -1,4 +1,3 @@
-import { lighten } from 'polished';
 import styled from 'styled-components';
 import { theme } from '../../../theme';
 
@@ -21,7 +20,7 @@ export const StyledLink = styled.a`
 
   ::selection,
   ::-moz-selection {
-    background: ${props => lighten(0.4, props.theme.color.primary.alpha)};
+    background: ${props => props.theme.color.primary.delta};
   }
 `;
 

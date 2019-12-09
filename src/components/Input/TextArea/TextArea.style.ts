@@ -1,4 +1,3 @@
-import { darken, lighten } from 'polished';
 import styled, { css } from 'styled-components';
 import { theme } from '../../../theme';
 
@@ -35,10 +34,10 @@ export const StyledTextAreaWrapper = styled.div<{
     css`
       :hover {
         i {
-          color: ${props.theme.color.primary};
+          color: ${props.theme.color.primary.alpha};
         }
         textarea {
-          border-color: ${props.theme.color.primary};
+          border-color: ${props.theme.color.primary.alpha};
         }
       }
     `}
@@ -65,9 +64,9 @@ export const StyledTextArea = styled.textarea`
   -webkit-appearance: textfield;
   touch-action: manipulation;
 
-  background-color: ${props => props.theme.color.white};
+  background-color: ${props => props.theme.color.background.alpha};
   color: ${props => props.theme.color.black};
-  border: 1px solid ${props => darken(0.1, props.theme.color.default)};
+  border: 1px solid ${props => props.theme.color.border};
   border-radius: ${props => props.theme.radius};
   outline: 0;
   list-style: none;
@@ -77,11 +76,11 @@ export const StyledTextArea = styled.textarea`
   box-sizing: border-box;
 
   ::placeholder {
-    color: ${() => lighten(0.6, `black`)};
+    color: ${props => props.theme.color.text.beta};
   }
 
   :focus {
-    border-color: ${props => props.theme.color.primary};
+    border-color: ${props => props.theme.color.primary.alpha};
     outline-offset: -2px;
     box-shadow: 0 0 0 2px rgba(24, 144, 255, 0.3);
   }
@@ -89,10 +88,10 @@ export const StyledTextArea = styled.textarea`
   ${props =>
     props.disabled &&
     css`
-      color: ${darken(0.2, props.theme.color.default)};
+      color: ${props.theme.color.text.beta};
 
       ::placeholder {
-        color: ${darken(0.2, props.theme.color.default)};
+        color: ${props.theme.color.text.beta};
       }
 
       background-color: ${props.theme.color.default};
@@ -103,7 +102,7 @@ export const StyledTextArea = styled.textarea`
       &:focus {
         outline: 0;
         box-shadow: none;
-        border: 1px solid ${darken(0.1, props.theme.color.default)};
+        border: 1px solid ${props.theme.color.border};
       }
     `}
 `;
@@ -116,7 +115,11 @@ export const StyledTextAreaIcon = styled.span<{
   bottom: 10px;
   height: auto;
   line-height: inherit;
-  color: ${props => lighten(0.6, props.theme.color.black)};
+  color: ${props => props.theme.color.text.beta};
+  
+  i{
+    color: ${props => props.theme.color.text.beta};
+  }
 
   ${props =>
     props.iconLeft &&
