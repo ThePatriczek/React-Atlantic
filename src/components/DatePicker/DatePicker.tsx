@@ -22,6 +22,7 @@ export interface DatePickerProps {
   placeholder?: string;
   maxDate?: Date;
   minDate?: Date;
+  isFullWidth?: boolean;
 }
 
 export const DatePicker: React.FC<DatePickerProps> = (
@@ -35,7 +36,8 @@ export const DatePicker: React.FC<DatePickerProps> = (
     onChange,
     onKeyDown,
     maxDate,
-    minDate
+    minDate,
+    isFullWidth
   } = props;
 
   const [date, setDate] = useState<Date | undefined | null>(selected);
@@ -74,7 +76,13 @@ export const DatePicker: React.FC<DatePickerProps> = (
             changeYear
           })
         }
-        customInput={<Input iconLeft={'calendar'} handlersWithEvent />}
+        customInput={
+          <Input
+            iconLeft={'calendar'}
+            handlersWithEvent
+            isFullWidth={isFullWidth}
+          />
+        }
         selected={date}
         onChange={handleChange}
         id={id}
