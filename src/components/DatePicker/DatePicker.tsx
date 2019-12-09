@@ -57,7 +57,7 @@ export const DatePicker: React.FC<DatePickerProps> = (
   };
 
   return (
-    <StyledReactDatePickerContainer>
+    <StyledReactDatePickerContainer isFullWidth={isFullWidth}>
       <StyledReactDatePicker
         renderCustomHeader={({
           date,

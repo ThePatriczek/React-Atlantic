@@ -1,4 +1,3 @@
-import { lighten } from 'polished';
 import ReactDatePicker from 'react-datepicker';
 import styled, { css } from 'styled-components';
 import { theme } from '../../theme';
@@ -13,6 +12,7 @@ interface StyledDatePickerProps {
   onSelect?: (date: Date | null) => void;
   placeholder?: string;
   ref?: any;
+  isFullWidth?: boolean;
 }
 
 export const StyledReactDatePicker = styled(ReactDatePicker)<
@@ -20,6 +20,12 @@ export const StyledReactDatePicker = styled(ReactDatePicker)<
 >``;
 
 export const StyledReactDatePickerContainer = styled.div<StyledDatePickerProps>`
+  ${props =>
+    props.isFullWidth &&
+    css`
+      width: 100%;
+    `};
+
   .react-datepicker-popper[data-placement^='bottom']
     .react-datepicker__triangle,
   .react-datepicker-popper[data-placement^='top'] .react-datepicker__triangle,
@@ -118,6 +124,12 @@ export const StyledReactDatePickerContainer = styled.div<StyledDatePickerProps>`
     display: inline-block;
     padding: 0;
     border: 0;
+    
+    ${props =>
+      props.isFullWidth &&
+      css`
+        width: 100%;
+      `};
   }
 
   .react-datepicker {
@@ -193,7 +205,7 @@ export const StyledReactDatePickerContainer = styled.div<StyledDatePickerProps>`
 
   .react-datepicker__header {
     text-align: center;
-    background-color: ${props => props.theme.color.background.alpha};
+    background-color: ${props => props.theme.color.background.beta};
     border-bottom: 1px solid ${props => props.theme.color.border};
     border-top-left-radius: 0.3rem;
     border-top-right-radius: 0.3rem;
@@ -915,12 +927,12 @@ export const StyledReactDatePickerContainer = styled.div<StyledDatePickerProps>`
 
   ${props => css`
     .react-datepicker__day--selected {
-      background-color: ${props.theme.color.success};
-      color: ${props.theme.color.white};
-      border: 1px solid ${props.theme.color.success};
+      background-color: ${props.theme.color.success.alpha};
+      color: ${props.theme.color.text.alpha};
+      border: 1px solid ${props.theme.color.success.alpha};
 
       &:hover {
-        background-color: ${lighten(0.05, props.theme.color.success)};
+        background-color: ${props.theme.color.success.beta};
       }
     }
   `}
