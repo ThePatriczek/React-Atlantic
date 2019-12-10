@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 import { theme } from '../../../theme';
+import {StyledText} from "../Text/Text.style";
+import {StyledTitle1, StyledTitle2, StyledTitle3, StyledTitle4, StyledTitle5} from "../Title/Title.style";
 
 export const StyledLink = styled.a`
   font-size: ${props => props.theme.font.size.md};
@@ -21,6 +23,10 @@ export const StyledLink = styled.a`
   ::selection,
   ::-moz-selection {
     background: ${props => props.theme.color.primary.delta};
+  }
+  
+  ${StyledText},${StyledTitle1},${StyledTitle2},${StyledTitle3},${StyledTitle4},${StyledTitle5}{
+    color: ${props => props.theme.color.primary.alpha};
   }
 `;
 
