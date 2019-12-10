@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { FC } from 'react';
 import { Type } from '../../../types';
 export declare type TextElement = 'span' | 'strong' | 'code' | 'del' | 'ins' | 'mark';
 export interface TextProps {
@@ -19,4 +19,4 @@ export interface TextProps {
     /** text in edit tooltip */
     editText?: string;
 }
-export declare const Text: React.FC<TextProps>;
+export declare const Text: FC<TextProps>;

@@ -9,6 +9,7 @@ interface StyledDatePickerProps {
     onSelect?: (date: Date | null) => void;
     placeholder?: string;
     ref?: any;
+    isFullWidth?: boolean;
 }
 export declare const StyledReactDatePicker: import("styled-components").StyledComponent<typeof ReactDatePicker, any, StyledDatePickerProps, never>;
 export declare const StyledReactDatePickerContainer: import("styled-components").StyledComponent<"div", any, StyledDatePickerProps, never>;

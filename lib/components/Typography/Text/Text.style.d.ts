@@ -3,14 +3,46 @@ export declare const getDefaultStyledText: (props: {
     theme: {
         color: {
             default: string;
-            primary: string;
-            success: string;
-            info: string;
-            warning: string;
-            error: string;
             border: string;
-            black: string;
-            white: string;
+            primary: {
+                alpha: string;
+                beta: string;
+                gamma: string;
+                delta: string;
+                epsilon: string;
+            };
+            success: {
+                alpha: string;
+                beta: string;
+                gamma: string;
+                delta: string;
+                epsilon: string;
+            };
+            warning: {
+                alpha: string;
+                beta: string;
+                gamma: string;
+                delta: string;
+                epsilon: string;
+            };
+            error: {
+                alpha: string;
+                beta: string;
+                gamma: string;
+                delta: string;
+                epsilon: string;
+            };
+            text: {
+                alpha: string;
+                beta: string;
+                gamma: string;
+            };
+            background: {
+                alpha: string;
+                beta: string;
+                gamma: string;
+                delta: string;
+            };
         };
         padding: {
             xs: string;
@@ -50,6 +82,7 @@ export declare const getDefaultStyledText: (props: {
         };
         boxShadow: {
             sm: string;
+            md: string;
         };
     };
 }) => import("styled-components").FlattenSimpleInterpolation;

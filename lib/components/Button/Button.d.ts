@@ -1,12 +1,13 @@
 import * as React from 'react';
 import { Size, Type } from '../../types';
-export declare type ButtonType = Type | 'dashed' | 'transparent';
+export declare type ButtonType = Type | 'dashed';
 export interface ButtonProps {
     onClick?: () => void;
     isDisabled?: boolean;
     isRound?: boolean;
     isFullWidth?: boolean;
-    /** primary | success | warning | error | dashed | transparent */
+    isTransparent?: boolean;
+    /** primary | success | warning | error | dashed */
     type?: ButtonType;
     htmlType?: 'submit' | 'button';
     /** small | medium | large */
