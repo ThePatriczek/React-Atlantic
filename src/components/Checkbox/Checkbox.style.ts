@@ -73,10 +73,6 @@ export const StyledCheckboxMark = styled.div<StyledCheckboxProps>`
   width: ${props => props.theme.width.xs};
   height: ${props => props.theme.width.xs};
   border-radius: ${props => parseInt(props.theme.radius, 0) - 2}px;
-  
-  i{
-    height: 14px;
-  }
 
   ${props =>
     (props.isChecked || props.isPartiallyChecked) &&
@@ -112,7 +108,6 @@ export const StyledCheckboxSpan = styled.span<StyledCheckboxProps>`
 `;
 
 export const StyledCheckboxIcon = styled.i<StyledCheckboxProps>`
-  transform: scale(0.8);
   color: ${props => props.theme.color.text.gamma};
   
   ${props =>

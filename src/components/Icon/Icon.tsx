@@ -58,6 +58,7 @@ export type IconName =
   | 'book'
   | 'bookOpened'
   | 'citex'
+  | 'zoomIn'
   | 'flagParagraph'
   | 'flagCzech'
   | 'flagComments'

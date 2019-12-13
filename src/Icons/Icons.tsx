@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { animated } from 'react-spring';
 
 export const ArrowUp = () => (
   <svg
@@ -211,19 +212,24 @@ export const Copy = () => (
   </svg>
 );
 
-export const Check = () => (
-  <svg
+export const Check = (props: { [key: string]: number | string }) => (
+  <animated.svg
     width="14px"
     height="14px"
     xmlns="http://www.w3.org/2000/svg"
-    viewBox="0 0 512 512"
     preserveAspectRatio="xMidYMid"
+    viewBox="0 0 128 128"
+    fill="none"
+    stroke="currentColor"
   >
-    <path
-      fill="currentColor"
-      d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"
+    <animated.path
+      strokeDasharray={100}
+      strokeDashoffset={props.x}
+      pathLength="100"
+      strokeWidth="10"
+      d="M24.75 62l27.5 27.5 51-51"
     />
-  </svg>
+  </animated.svg>
 );
 
 export const Users = () => (
@@ -897,6 +903,21 @@ export const Citex = () => (
     </g>
   </svg>
 );
+
+export const ZoomIn = () => {
+  <svg
+    aria-hidden="true"
+    focusable="false"
+    role="img"
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 512 512"
+  >
+    <path
+      fill="currentColor"
+      d="M304 192v32c0 6.6-5.4 12-12 12h-56v56c0 6.6-5.4 12-12 12h-32c-6.6 0-12-5.4-12-12v-56h-56c-6.6 0-12-5.4-12-12v-32c0-6.6 5.4-12 12-12h56v-56c0-6.6 5.4-12 12-12h32c6.6 0 12 5.4 12 12v56h56c6.6 0 12 5.4 12 12zm201 284.7L476.7 505c-9.4 9.4-24.6 9.4-33.9 0L343 405.3c-4.5-4.5-7-10.6-7-17V372c-35.3 27.6-79.7 44-128 44C93.1 416 0 322.9 0 208S93.1 0 208 0s208 93.1 208 208c0 48.3-16.4 92.7-44 128h16.3c6.4 0 12.5 2.5 17 7l99.7 99.7c9.3 9.4 9.3 24.6 0 34zM344 208c0-75.2-60.8-136-136-136S72 132.8 72 208s60.8 136 136 136 136-60.8 136-136z"
+    />
+  </svg>;
+};
 
 export const FlagParagraph = () => (
   <svg viewBox="0 0 21 14" version="1.1" xmlns="http://www.w3.org/2000/svg">

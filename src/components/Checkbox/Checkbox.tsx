@@ -1,4 +1,6 @@
+import * as easings from 'd3-ease';
 import * as React from 'react';
+import { animated, config, useSpring, useTransition } from 'react-spring';
 import { Check } from '../../Icons';
 import { HorizontalPosition } from '../../types';
 import {
@@ -51,6 +53,12 @@ export const Checkbox: React.FC<React.PropsWithChildren<CheckboxProps>> = (
     }
   };
 
+  const springProps = useSpring({
+    x: isChecked ? 0 : 100,
+    config: { easing: t => easings.easeCubicIn(t), duration: 250 }
+  });
+
+
   return (
     <StyledCheckboxLabel
       isChecked={props.isChecked || isChecked}
@@ -64,26 +72,25 @@ export const Checkbox: React.FC<React.PropsWithChildren<CheckboxProps>> = (
       )}
 
       <StyledCheckboxInputShown isDisabled={isDisabled}>
-        <StyledCheckboxMark
-          isDisabled={isDisabled}
-          isChecked={props.isChecked || isChecked}
-          isPartiallyChecked={isPartiallyChecked}
-        >
-          <HiddenCheckbox
-            onChange={onChange}
-            checked={props.isChecked || isChecked}
-            disabled={isDisabled}
-          />
-          {(props.isChecked || isChecked) && (
-            <StyledCheckboxIcon
-              isDisabled={isDisabled}
-              isChecked={props.isChecked || isChecked}
-              isPartiallyChecked={isPartiallyChecked}
-            >
-              <Check />
-            </StyledCheckboxIcon>
-          )}
-        </StyledCheckboxMark>
+
+              <StyledCheckboxMark
+                isDisabled={isDisabled}
+                isChecked={props.isChecked || isChecked}
+                isPartiallyChecked={isPartiallyChecked}
+              >
+                <HiddenCheckbox
+                  onChange={onChange}
+                  checked={props.isChecked || isChecked}
+                  disabled={isDisabled}
+                />
+                <StyledCheckboxIcon
+                  isDisabled={isDisabled}
+                  isChecked={props.isChecked || isChecked}
+                  isPartiallyChecked={isPartiallyChecked}
+                >
+                  <Check x={springProps.x.interpolate((x: any) => x)} />
+                </StyledCheckboxIcon>
+              </StyledCheckboxMark>
       </StyledCheckboxInputShown>
 
       {position === 'left' && (
