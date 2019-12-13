@@ -33,7 +33,8 @@ export const theme = {
     text: {
       alpha: `#000`,
       beta: `#777`,
-      gamma: `#FFF`
+      gamma: `#FFF`,
+      delta: `#000`
     },
     background: {
       alpha: `#FFF`,
