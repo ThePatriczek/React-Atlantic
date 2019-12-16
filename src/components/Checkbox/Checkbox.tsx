@@ -1,6 +1,14 @@
 import * as easings from 'd3-ease';
 import * as React from 'react';
-import { animated, config, useSpring, useTransition } from 'react-spring';
+import { useRef } from 'react';
+import {
+  config,
+  ReactSpringHook,
+  useChain,
+  useSpring,
+  useTrail
+} from 'react-spring';
+
 import { Check } from '../../Icons';
 import { HorizontalPosition } from '../../types';
 import {
@@ -36,11 +44,12 @@ export const Checkbox: React.FC<React.PropsWithChildren<CheckboxProps>> = (
   } = props;
   const [isChecked, setChecked] = React.useState<boolean>(!!isDefaultChecked);
 
-  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const onClick = (e: React.MouseEvent<HTMLLabelElement>) => {
+    e.preventDefault();
     if (!isDisabled) {
       if (props.isChecked === undefined) {
         if (!isPartiallyChecked) {
-          setChecked(e.target.checked);
+          setChecked(!isChecked);
         }
         if (props.onChange) {
           props.onChange(!isChecked);
@@ -53,14 +62,30 @@ export const Checkbox: React.FC<React.PropsWithChildren<CheckboxProps>> = (
     }
   };
 
+  const springRef = useRef<ReactSpringHook>(null);
   const springProps = useSpring({
-    x: isChecked ? 0 : 100,
-    config: { easing: t => easings.easeCubicIn(t), duration: 250 }
+    ref: springRef,
+    x: props.isChecked || isChecked ? 0 : 100,
+    config: { easing: t => easings.easeCubicIn(t), duration: 200 }
   });
 
+  const trailRef = useRef<ReactSpringHook>(null);
+  const trail = useTrail(1, {
+    ref: trailRef,
+    opacity: isPartiallyChecked || props.isChecked || isChecked ? 1 : 0,
+    config: { duration: 200 }
+  });
+
+  useChain(
+    props.isChecked || isChecked
+      ? [trailRef, springRef]
+      : [springRef, trailRef],
+    [0, props.isChecked || isChecked ? 0.1 : 0.1]
+  );
 
   return (
     <StyledCheckboxLabel
+      onClick={onClick}
       isChecked={props.isChecked || isChecked}
       isDisabled={isDisabled}
       className={className}
@@ -70,27 +95,28 @@ export const Checkbox: React.FC<React.PropsWithChildren<CheckboxProps>> = (
           {children}
         </StyledCheckboxSpan>
       )}
-
+      <HiddenCheckbox
+        checked={props.isChecked || isChecked}
+        disabled={isDisabled}
+      />
       <StyledCheckboxInputShown isDisabled={isDisabled}>
-
-              <StyledCheckboxMark
-                isDisabled={isDisabled}
-                isChecked={props.isChecked || isChecked}
-                isPartiallyChecked={isPartiallyChecked}
-              >
-                <HiddenCheckbox
-                  onChange={onChange}
-                  checked={props.isChecked || isChecked}
-                  disabled={isDisabled}
-                />
-                <StyledCheckboxIcon
-                  isDisabled={isDisabled}
-                  isChecked={props.isChecked || isChecked}
-                  isPartiallyChecked={isPartiallyChecked}
-                >
-                  <Check x={springProps.x.interpolate((x: any) => x)} />
-                </StyledCheckboxIcon>
-              </StyledCheckboxMark>
+        {trail.map((style, index) => (
+          <StyledCheckboxMark
+            key={index}
+            style={style}
+            isDisabled={isDisabled}
+            isChecked={props.isChecked || isChecked}
+            isPartiallyChecked={isPartiallyChecked}
+          >
+            <StyledCheckboxIcon
+              isDisabled={isDisabled}
+              isChecked={props.isChecked || isChecked}
+              isPartiallyChecked={isPartiallyChecked}
+            >
+              <Check x={springProps?.x?.interpolate((x: any) => x)} />
+            </StyledCheckboxIcon>
+          </StyledCheckboxMark>
+        ))}
       </StyledCheckboxInputShown>
 
       {position === 'left' && (

@@ -10,8 +10,7 @@ export const Component = (
   isDisabled,
   isPartiallyChecked,
   position,
-  children,
-  onChange
+  children
 ) => {
   return (
     <Checkbox
@@ -20,7 +19,6 @@ export const Component = (
       isDefaultChecked={isDefaultChecked}
       isDisabled={isDisabled}
       position={position}
-      onChange={onChange}
     >
       {children}
     </Checkbox>

@@ -4,7 +4,6 @@ import * as React from 'react';
 import { specs } from 'storybook-addon-specifications';
 import { Component, tests } from './Checkbox.test';
 import { defaultValues } from '../../constants/defaultValues';
-import { useState } from 'react';
 import { Checkbox } from './Checkbox';
 
 const stories = storiesOf('Checkbox', module);
@@ -42,7 +41,7 @@ stories.add(
 
     specs(() => tests(checkbox));
 
-    return <Checkbox />;
+    return checkbox;
   },
   {
     info: { inline: true }

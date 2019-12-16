@@ -1,3 +1,4 @@
+import { animated } from 'react-spring';
 import styled, { css } from 'styled-components';
 import { theme } from '../../theme';
 
@@ -21,13 +22,14 @@ export const HiddenCheckbox = styled.input.attrs({
   z-index: -1;
 `;
 
-export const StyledCheckboxInputShown = styled.div.attrs({
+export const StyledCheckboxInputShown = styled(animated.div).attrs({
   className: `atlantic--checkbox`
 })<StyledCheckboxProps>`
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: ${props => parseInt(props.theme.padding.xs, 0) - 1}px;
+  padding: ${props => parseInt(props.theme.padding.xs, 0)}px;
+  padding-left: ${props => parseInt(props.theme.padding.xs, 0) - 1}px;
   background: ${props => props.theme.color.background.alpha};
   border-radius: ${props => parseInt(props.theme.radius, 0) - 1}px;
   border: 1px solid ${props => props.theme.color.border};
@@ -66,13 +68,15 @@ export const StyledCheckboxLabel = styled.label<StyledCheckboxProps>`
     `};
 `;
 
-export const StyledCheckboxMark = styled.div<StyledCheckboxProps>`
+export const StyledCheckboxMark = styled(animated.div)<StyledCheckboxProps>`
   display: flex;
   align-items: center;
   justify-content: center;
   width: ${props => props.theme.width.xs};
   height: ${props => props.theme.width.xs};
   border-radius: ${props => parseInt(props.theme.radius, 0) - 2}px;
+  background-color: ${props => props.theme.color.primary.alpha};
+  opacity: 0;
 
   ${props =>
     (props.isChecked || props.isPartiallyChecked) &&
@@ -86,12 +90,12 @@ export const StyledCheckboxMark = styled.div<StyledCheckboxProps>`
     css`
       background-color: ${props.theme.color.background.beta};
     `}
-  
+
     ${props =>
       props.isDisabled &&
       css`
-          color: transparent;
-          cursor: not-allowed;
+        color: transparent;
+        cursor: not-allowed;
       `}
 `;
 
@@ -109,7 +113,7 @@ export const StyledCheckboxSpan = styled.span<StyledCheckboxProps>`
 
 export const StyledCheckboxIcon = styled.i<StyledCheckboxProps>`
   color: ${props => props.theme.color.text.gamma};
-  
+
   ${props =>
     (props.isPartiallyChecked || (!props.isChecked && props.isDisabled)) &&
     css`
