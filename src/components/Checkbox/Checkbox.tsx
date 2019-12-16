@@ -9,7 +9,7 @@ import {
   useTrail
 } from 'react-spring';
 
-import { Check } from '../../Icons';
+import { Check, CheckSimple } from '../../Icons';
 import { HorizontalPosition } from '../../types';
 import {
   HiddenCheckbox,
@@ -80,7 +80,7 @@ export const Checkbox: React.FC<React.PropsWithChildren<CheckboxProps>> = (
     props.isChecked || isChecked
       ? [trailRef, springRef]
       : [springRef, trailRef],
-    [0, props.isChecked || isChecked ? 0.1 : 0.1]
+    [0, props.isChecked || isChecked ? 0.1 : 0.3]
   );
 
   return (
@@ -113,7 +113,7 @@ export const Checkbox: React.FC<React.PropsWithChildren<CheckboxProps>> = (
               isChecked={props.isChecked || isChecked}
               isPartiallyChecked={isPartiallyChecked}
             >
-              <Check x={springProps?.x?.interpolate((x: any) => x)} />
+              <CheckSimple x={springProps?.x?.interpolate((x: any) => x)} />
             </StyledCheckboxIcon>
           </StyledCheckboxMark>
         ))}

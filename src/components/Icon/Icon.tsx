@@ -16,6 +16,7 @@ export type IconName =
   | 'edit'
   | 'copy'
   | 'check'
+  | 'checkSimple'
   | 'users'
   | 'user'
   | 'upload'
@@ -121,6 +122,9 @@ export const Icon: React.FC<IconProps> = (
       break;
     case 'check':
       Component = <Icons.Check />;
+      break;
+    case 'checkSimple':
+      Component = <Icons.CheckSimple />;
       break;
     case 'clear':
       Component = <Icons.Clear />;
