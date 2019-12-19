@@ -74,7 +74,7 @@ export const Checkbox: React.FC<React.PropsWithChildren<CheckboxProps>> = (
     props.isChecked || isChecked
       ? [trailRef, springRef]
       : [springRef, trailRef],
-    [0, props.isChecked || isChecked ? 0.1 : 0.3]
+    [0, props.isChecked || isChecked ? 0.075 : 0.225]
   );
 
   return (

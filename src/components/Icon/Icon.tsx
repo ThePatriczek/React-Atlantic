@@ -60,6 +60,7 @@ export type IconName =
   | 'bookOpened'
   | 'citex'
   | 'zoomIn'
+  | 'play'
   | 'flagParagraph'
   | 'flagCzech'
   | 'flagComments'
@@ -251,6 +252,12 @@ export const Icon: React.FC<IconProps> = (
       break;
     case 'citex':
       Component = <Icons.Citex />;
+      break;
+    case 'play':
+      Component = <Icons.Play />;
+      break;
+    case 'zoomIn':
+      Component = <Icons.ZoomIn />;
       break;
     case 'flagParagraph':
       Component = <Icons.FlagParagraph />;
