@@ -1,3 +1,4 @@
+import { animated } from 'react-spring';
 import styled, { css, keyframes } from 'styled-components';
 import { IconName } from './Icon';
 
@@ -23,8 +24,8 @@ export const StyledIcon = styled.i<StyledIconProps>`
   font-style: normal;
   text-align: center;
   text-transform: none;
-  
-  svg{
+
+  svg {
     vertical-align: top;
     width: 100%;
     height: 100%;
@@ -38,6 +39,10 @@ export const StyledIcon = styled.i<StyledIconProps>`
       -moz-animation: ${spin} 4s linear infinite;
       animation: ${spin} 4s linear infinite;
     `}
+`;
+
+export const StyledSVG = styled(animated.svg)`
+  padding-top: 1px;
 `;
 
 StyledIcon.displayName = 'StyledIcon';

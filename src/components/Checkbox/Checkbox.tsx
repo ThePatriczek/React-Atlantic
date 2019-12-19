@@ -1,13 +1,7 @@
 import * as easings from 'd3-ease';
 import * as React from 'react';
 import { useRef } from 'react';
-import {
-  config,
-  ReactSpringHook,
-  useChain,
-  useSpring,
-  useTrail
-} from 'react-spring';
+import { ReactSpringHook, useChain, useSpring, useTrail } from 'react-spring';
 
 import { Check, CheckSimple } from '../../Icons';
 import { HorizontalPosition } from '../../types';
@@ -66,14 +60,14 @@ export const Checkbox: React.FC<React.PropsWithChildren<CheckboxProps>> = (
   const springProps = useSpring({
     ref: springRef,
     x: props.isChecked || isChecked ? 0 : 100,
-    config: { easing: t => easings.easeCubicIn(t), duration: 200 }
+    config: { easing: t => easings.easeCubicIn(t), duration: 125 }
   });
 
   const trailRef = useRef<ReactSpringHook>(null);
   const trail = useTrail(1, {
     ref: trailRef,
     opacity: isPartiallyChecked || props.isChecked || isChecked ? 1 : 0,
-    config: { duration: 200 }
+    config: { duration: 125 }
   });
 
   useChain(
