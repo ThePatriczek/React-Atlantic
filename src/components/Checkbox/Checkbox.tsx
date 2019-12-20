@@ -1,9 +1,13 @@
 import * as easings from 'd3-ease';
 import * as React from 'react';
 import { useRef } from 'react';
-import { ReactSpringHook, useChain, useSpring, useTrail } from 'react-spring';
-
-import { Check, CheckSimple } from '../../Icons';
+import {
+  ReactSpringHook,
+  useChain,
+  useSpring,
+  useTrail
+} from 'react-spring/web.cjs';
+import { CheckSimple } from '../../Icons';
 import { HorizontalPosition } from '../../types';
 import {
   HiddenCheckbox,

@@ -1,4 +1,4 @@
-import { animated } from 'react-spring';
+import { animated } from 'react-spring/web.cjs';
 import styled, { css } from 'styled-components';
 import { theme } from '../../theme';
 

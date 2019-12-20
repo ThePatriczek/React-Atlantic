@@ -1,4 +1,4 @@
-import { animated } from 'react-spring';
+import { animated } from 'react-spring/web.cjs';
 import styled, { css, keyframes } from 'styled-components';
 import { IconName } from './Icon';
 
