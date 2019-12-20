@@ -29,6 +29,8 @@ export const Skeleton: FC<SkeletonProps> = props => {
   );
 };
 
-Skeleton.defaultProps = {};
+Skeleton.defaultProps = {
+  shape: 'rectangle'
+};
 
 Skeleton.displayName = `Skeleton`;
