@@ -13,17 +13,14 @@ const sizeFactory = (size: Size, theme: Theme): FlattenSimpleInterpolation => {
   switch (size) {
     case 'small':
       return css`
-        width: ${theme.width.sm};
         height: ${theme.height.sm};
       `;
     case 'medium':
       return css`
-        width: ${theme.width.md};
         height: ${theme.height.md};
       `;
     case 'large':
       return css`
-        width: ${theme.width.lg};
         height: ${theme.width.lg};
       `;
   }
