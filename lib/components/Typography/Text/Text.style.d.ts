@@ -36,6 +36,7 @@ export declare const getDefaultStyledText: (props: {
                 alpha: string;
                 beta: string;
                 gamma: string;
+                delta: string;
             };
             background: {
                 alpha: string;

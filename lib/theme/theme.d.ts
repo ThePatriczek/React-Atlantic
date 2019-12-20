@@ -34,6 +34,7 @@ export declare const theme: {
             alpha: string;
             beta: string;
             gamma: string;
+            delta: string;
         };
         background: {
             alpha: string;

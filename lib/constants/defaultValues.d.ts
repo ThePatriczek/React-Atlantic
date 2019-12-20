@@ -38,4 +38,7 @@ export declare const defaultValues: {
     notificationButonIcon: null;
     content: string;
     messageType: string;
+    shape: string;
+    width: number;
+    height: number;
 };
