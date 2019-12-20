@@ -5,7 +5,7 @@ import { StyledSkeleton } from './Skeleton.style';
 export interface SkeletonProps {
   /** small | medium | large */
   size?: Size;
-  /** circle |  square */
+  /** circle |  rectangle */
   shape?: Shape;
   /** custom className */
   className?: string;
