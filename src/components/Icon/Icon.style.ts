@@ -41,8 +41,6 @@ export const StyledIcon = styled.i<StyledIconProps>`
     `}
 `;
 
-export const StyledSVG = styled(animated.svg)`
-  padding-top: 1px;
-`;
+export const StyledSVG = styled(animated.svg)``;
 
 StyledIcon.displayName = 'StyledIcon';

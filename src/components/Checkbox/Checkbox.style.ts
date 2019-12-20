@@ -28,8 +28,7 @@ export const StyledCheckboxInputShown = styled(animated.div).attrs({
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: ${props => parseInt(props.theme.padding.xs, 0)}px;
-  padding-left: ${props => parseInt(props.theme.padding.xs, 0) - 1}px;
+  padding: ${props => parseInt(props.theme.padding.xs, 0) - 1}px;
   background: ${props => props.theme.color.background.alpha};
   border-radius: ${props => parseInt(props.theme.radius, 0) - 1}px;
   border: 1px solid ${props => props.theme.color.border};
@@ -112,6 +111,7 @@ export const StyledCheckboxSpan = styled.span<StyledCheckboxProps>`
 `;
 
 export const StyledCheckboxIcon = styled.i<StyledCheckboxProps>`
+  line-height: 0;
   color: ${props => props.theme.color.text.gamma};
 
   ${props =>
