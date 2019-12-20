@@ -35,5 +35,8 @@ export const defaultValues = {
   notificationTitle: 'Notification',
   notificationButonIcon: null,
   content: 'Change me, please 🥺',
-  messageType: 'primary'
+  messageType: 'primary',
+  shape: 'circle',
+  width: 20,
+  height: 50
 };
