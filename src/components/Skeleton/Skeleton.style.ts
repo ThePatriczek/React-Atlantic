@@ -4,7 +4,7 @@ import { Shape, Size } from '../../types';
 
 interface StyledSkeletonProps {
   size?: Size;
-  width?: number;
+  width?: number | string;
   height?: number;
   shape?: Shape;
 }
@@ -24,6 +24,16 @@ const sizeFactory = (size: Size, theme: Theme): FlattenSimpleInterpolation => {
         height: ${theme.width.lg};
       `;
   }
+};
+
+const parseWidth = (width: number | string): FlattenSimpleInterpolation => {
+  return typeof width === 'string'
+    ? css`
+        width: ${width};
+      `
+    : css`
+        width: ${width}px;
+      `;
 };
 
 export const StyledSkeleton = styled.div<StyledSkeletonProps>`
@@ -58,20 +68,13 @@ export const StyledSkeleton = styled.div<StyledSkeletonProps>`
       background-position: 0 50%;
     }
   }
-
-  ${props =>
-    props.size
-      ? sizeFactory(props.size, props.theme)
-      : css`
-          width: 100%;
-          height: 100%;
-        `}
   
-  ${props =>
-    props.width &&
-    css`
-      width: ${props.width}px;
-    `}
+  width: 100%;
+  height: 100%;
+  
+  ${props => props.size && sizeFactory(props.size, props.theme)}
+  
+  ${props => props.width && parseWidth(props.width)}
   
   ${props =>
     props.height &&
