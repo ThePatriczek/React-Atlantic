@@ -25,7 +25,7 @@ export interface NotificationProps {
 export const Notification: FC<PropsWithChildren<NotificationProps>> = (
   props
 ): React.ReactElement => {
-  const { children, title, className, size, type, footer } = props;
+  const { children, title, className, size, type, footer, onClose } = props;
 
   let titleIcon: IconName;
 
@@ -57,9 +57,11 @@ export const Notification: FC<PropsWithChildren<NotificationProps>> = (
           <StyledNotificationTitle type={type}>{title}</StyledNotificationTitle>
         )}
 
-        <StyledNotificationCloseButton>
-          <StyledNotificationTitleIcon name={'close'} type={type} />
-        </StyledNotificationCloseButton>
+        {onClose && (
+          <StyledNotificationCloseButton onClick={onClose}>
+            <StyledNotificationTitleIcon name={'close'} type={type} />
+          </StyledNotificationCloseButton>
+        )}
       </StyledNotificationTitleContainer>
 
       <StyledNotificationContentContainer type={type} size={size}>

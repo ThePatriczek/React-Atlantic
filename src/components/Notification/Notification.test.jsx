@@ -4,9 +4,9 @@ import expect from 'expect';
 import { defaultValues } from '../../constants/defaultValues';
 import { Notification } from './Notification';
 
-export const Component = (children, title, size, type) => {
+export const Component = (children, title, size, type, onClose) => {
   return (
-    <Notification title={title} size={size} type={type}>
+    <Notification title={title} size={size} type={type} onClose={onClose}>
       {children}
     </Notification>
   );

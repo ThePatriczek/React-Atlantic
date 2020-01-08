@@ -25,8 +25,8 @@ stories.add(
       ['default', 'primary', 'warning', 'success', 'error'],
       defaultValues.type
     );
-
-    const notification = Component(children, title, size, type);
+    const onClose = action(`onClose`);
+    const notification = Component(children, title, size, type, onClose);
     specs(() => tests(notification));
 
     return notification;
