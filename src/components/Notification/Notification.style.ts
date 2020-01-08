@@ -146,8 +146,7 @@ export const StyledNotificationContainer = styled.div<NotificationStyleProps>`
   border-radius: ${props => props.theme.radius};
   box-shadow: ${props => props.theme.boxShadow};
 
-  font-size: 14px;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI';
+  font-family: ${props => props.theme.font.family};
   
   ${props =>
     props.size === 'medium' &&
