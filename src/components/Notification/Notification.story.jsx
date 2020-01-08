@@ -25,70 +25,8 @@ stories.add(
       ['default', 'primary', 'warning', 'success', 'error'],
       defaultValues.type
     );
-    const primaryButtonFullWidth = boolean(
-      'Primary button full width: ',
-      defaultValues.isFullWidth
-    );
 
-    const primaryButtonIcon = select(
-      'Primary button icon: ',
-      [
-        'arrowUp',
-        'arrowDoubleUp',
-        'arrowRight',
-        'arrowDoubleRight',
-        'arrowDown',
-        'arrowDoubleDown',
-        'arrowLeft',
-        'arrowDoubleLeft',
-        'hamburger',
-        'loading',
-        'edit',
-        'copy',
-        'check',
-        'users',
-        'user',
-        'upload',
-        'trash',
-        'search',
-        'plus',
-        'logout',
-        'license',
-        'key',
-        'info',
-        'import',
-        'export',
-        'eye',
-        'eyeSlash',
-        'close',
-        'clear',
-        'enter',
-        'error',
-        'warning',
-        'checkCircle'
-      ],
-      null
-    );
-
-    const primaryButtonContent = text(
-      'Primary button content: ',
-      defaultValues.primaryButtonContent
-    );
-    const secondaryButtonContent = text(
-      'Secondary button content: ',
-      defaultValues.secondaryButtonContent
-    );
-
-    const notification = Component(
-      children,
-      title,
-      size,
-      type,
-      primaryButtonFullWidth,
-      primaryButtonIcon,
-      primaryButtonContent,
-      secondaryButtonContent
-    );
+    const notification = Component(children, title, size, type);
     specs(() => tests(notification));
 
     return notification;

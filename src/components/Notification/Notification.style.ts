@@ -14,26 +14,14 @@ interface NotificationStyleProps {
 }
 
 export const StyledNotificationTitleIcon = styled(Icon)<NotificationStyleProps>`
-    height: 14px;
-    flex: ${props => props.theme.height.md};
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: default;
-    
-    &:last-of-type {
-    cursor: pointer;
-    color: ${props => props.theme.color.text.beta};
-    &:hover {
-      color: ${props => props.theme.color.error.alpha};
-    }
-  }
-`;
+  height: 14px;
+  flex: ${props => props.theme.height.md};
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-export const StyledNotificationButtonIcon = styled(Icon)<
-  NotificationStyleProps
->`
-  color: ${props => props.theme.color.text.gamma};
+  cursor: pointer;
+  color: ${props => props.theme.color.text.beta};
 `;
 
 Title.defaultProps = {
@@ -92,8 +80,8 @@ export const StyledNotificationTitleContainer = styled.div<
     props.type === 'primary' &&
     css`
       color: ${props.theme.color.primary.alpha};
-      
-      i{
+
+      i {
         color: ${props.theme.color.primary.alpha};
       }
     `}
@@ -101,8 +89,8 @@ export const StyledNotificationTitleContainer = styled.div<
       props.type === 'success' &&
       css`
         color: ${props.theme.color.success.alpha};
-        
-        i{
+
+        i {
           color: ${props.theme.color.success.alpha};
         }
       `}
@@ -110,8 +98,8 @@ export const StyledNotificationTitleContainer = styled.div<
       props.type === 'error' &&
       css`
         color: ${props.theme.color.error.alpha};
-        
-        i{
+
+        i {
           color: ${props.theme.color.error.alpha};
         }
       `}
@@ -119,44 +107,31 @@ export const StyledNotificationTitleContainer = styled.div<
       props.type === 'warning' &&
       css`
         color: ${props.theme.color.warning.alpha};
-        
-        i{
+
+        i {
           color: ${props.theme.color.warning.alpha};
         }
       `}
 `;
 
-export const StyledNotificationFooter = styled.div<NotificationStyleProps>`
-  margin-left: ${props => props.theme.margin.sm};
-  text-align: right;
-  button,
-  > p,
-  > span {
-    margin: 0;
-  }
+export const StyledNotificationFooter = styled.div<NotificationStyleProps>``;
 
-  button + button,
-  span + button {
-    margin: 0 0 0 ${props => props.theme.margin.sm};
-  }
-`;
 export const StyledNotificationSpan = styled.span<NotificationStyleProps>``;
-export const StyledNotificationButton = styled(Button)<NotificationStyleProps>`
-  ${props =>
-    css`
-      &:last-of-type {
-        background-color: ${props.theme.color.primary.alpha};
-        color: ${props.theme.color.text.gamma};
-      }
-    `}
 
-  ${props =>
-    props.primaryButtonIcon &&
-    css`
-      &span {
-        margin-right: 10px;
+export const StyledNotificationCloseButton = styled(Button)<
+  NotificationStyleProps
+>`
+  && {
+    background: transparent;
+    border: none;
+    box-shadow: none;
+
+    &:hover {
+      > ${StyledNotificationTitleIcon} {
+        color: ${props => props.theme.color.error.alpha};
       }
-    `}
+    }
+  }
 `;
 
 export const StyledNotificationContainer = styled.div<NotificationStyleProps>`
@@ -203,14 +178,6 @@ StyledNotificationTitle.defaultProps = {
   theme
 };
 
-StyledNotificationButton.defaultProps = {
-  theme
-};
-
-StyledNotificationButtonIcon.defaultProps = {
-  theme
-};
-
 StyledNotificationContentContainer.defaultProps = {
   theme
 };
@@ -230,8 +197,6 @@ StyledNotificationTitleContainer.defaultProps = {
 StyledNotificationContainer.displayName = 'StyledNotificationContainer';
 StyledNotificationTitleIcon.displayName = 'StyledNotificationTitleIcon';
 StyledNotificationTitle.displayName = 'StyledNotificationTitle';
-StyledNotificationButton.displayName = 'StyledNotificationButton';
-StyledNotificationButtonIcon.displayName = 'StyledNotificationButtonIcon';
 StyledNotificationContentContainer.displayName =
   'StyledNotificationContentContainer';
 StyledNotificationFooter.displayName = 'StyledNotificationFooter';

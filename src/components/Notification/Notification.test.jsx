@@ -4,26 +4,9 @@ import expect from 'expect';
 import { defaultValues } from '../../constants/defaultValues';
 import { Notification } from './Notification';
 
-export const Component = (
-  children,
-  title,
-  size,
-  type,
-  primaryButtonFullWidth,
-  primaryButtonIcon,
-  primaryButtonContent,
-  secondaryButtonContent
-) => {
+export const Component = (children, title, size, type) => {
   return (
-    <Notification
-      title={title}
-      size={size}
-      type={type}
-      isPrimaryButtonFullWidth={primaryButtonFullWidth}
-      primaryButtonIcon={primaryButtonIcon}
-      primaryButton={primaryButtonContent}
-      secondaryButton={secondaryButtonContent}
-    >
+    <Notification title={title} size={size} type={type}>
       {children}
     </Notification>
   );
@@ -34,11 +17,7 @@ export const tests = (
     defaultValues.children,
     defaultValues.notificationTitle,
     defaultValues.size,
-    defaultValues.type,
-    defaultValues.isFullWidth,
-    defaultValues.notificationButonIcon,
-    defaultValues.primaryButtonContent,
-    defaultValues.secondaryButtonContent
+    defaultValues.type
   )
 ) => {
   let output = shallow(notification);
