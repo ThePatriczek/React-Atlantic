@@ -8,7 +8,7 @@ export interface SkeletonProps {
     /** custom className */
     className?: string;
     /** width */
-    width?: number;
+    width?: number | string;
     /** height */
     height?: number;
 }

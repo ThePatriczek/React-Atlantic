@@ -1,7 +1,7 @@
 import { Shape, Size } from '../../types';
 interface StyledSkeletonProps {
     size?: Size;
-    width?: number;
+    width?: number | string;
     height?: number;
     shape?: Shape;
 }
