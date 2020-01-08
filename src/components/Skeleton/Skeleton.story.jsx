@@ -24,7 +24,9 @@ stories.add(
         <Skeleton shape={'rectangle'} size={'small'} />
         <Skeleton shape={'rectangle'} size={'medium'} />
         <Skeleton shape={'rectangle'} size={'large'} />
-        <Skeleton shape={'rectangle'} width={200} />
+        <Skeleton shape={'rectangle'} width={200} height={60} />
+        <Skeleton width={'90%'} size={'large'} />
+        <Skeleton width={'10cm'} size={'large'} />
       </>
     );
   },
@@ -50,10 +52,15 @@ stories.add(
     const width = text(`width:`, defaultValues.width.toString());
     const height = text(`height:`, defaultValues.height.toString());
 
+    let isMeasureWidth = false;
+    if (width.includes('%') || width.includes('cm')) {
+      isMeasureWidth = true;
+    }
+
     const skeleton = Component(
       shape,
       size,
-      parseInt(width) || undefined,
+      isMeasureWidth ? width : parseInt(width) || undefined,
       parseInt(height) || undefined
     );
 
