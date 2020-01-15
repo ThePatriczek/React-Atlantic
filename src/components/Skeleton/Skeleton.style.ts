@@ -7,6 +7,12 @@ interface StyledSkeletonProps {
   width?: number | string;
   height?: number;
   shape?: Shape;
+  bgColor?: string;
+  animationColors?: {
+    alpha: string;
+    beta: string;
+    gamma: string;
+  };
 }
 
 const sizeFactory = (size: Size, theme: Theme): FlattenSimpleInterpolation => {
@@ -38,7 +44,7 @@ const parseWidth = (width: number | string): FlattenSimpleInterpolation => {
 
 export const StyledSkeleton = styled.div<StyledSkeletonProps>`
   position: relative;
-  background-color: ${props => props.theme.color.default};
+  background-color: ${props => props.bgColor || props.theme.color.default};
   margin: ${props => props.theme.margin.sm} 0px;
   border-radius: 4px;
 
@@ -46,15 +52,33 @@ export const StyledSkeleton = styled.div<StyledSkeletonProps>`
     linear,
     left top,
     right top,
-    color-stop(25%, ${props => props.theme.color.background.beta}),
-    color-stop(37%, ${props => props.theme.color.border}),
-    color-stop(63%, ${props => props.theme.color.background.beta})
+    color-stop(25%, ${props =>
+      props.animationColors
+        ? props.animationColors.alpha
+        : props.theme.color.background.beta}),
+    color-stop(37%, ${props =>
+      props.animationColors
+        ? props.animationColors.beta
+        : props.theme.color.border}),
+    color-stop(63%, ${props =>
+      props.animationColors
+        ? props.animationColors.gamma
+        : props.theme.color.background.beta})
   );
   background: linear-gradient(
     90deg,
-    ${props => props.theme.color.background.beta} 25%,
-    ${props => props.theme.color.border} 37%,
-    ${props => props.theme.color.background.beta} 63%
+    ${props =>
+      props.animationColors
+        ? props.animationColors.alpha
+        : props.theme.color.background.beta} 25%,
+    ${props =>
+      props.animationColors
+        ? props.animationColors.beta
+        : props.theme.color.border} 37%,
+    ${props =>
+      props.animationColors
+        ? props.animationColors.gamma
+        : props.theme.color.background.beta} 63%
   );
   background-size: 400% 100%;
   -webkit-animation: shine 1.6s ease infinite;

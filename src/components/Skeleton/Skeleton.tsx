@@ -13,10 +13,26 @@ export interface SkeletonProps {
   width?: number | string;
   /** height */
   height?: number;
+  /** custom background color */
+  bgColor?: string;
+  /** custom colors for animation */
+  animationColors?: {
+    alpha: string;
+    beta: string;
+    gamma: string;
+  };
 }
 
 export const Skeleton: FC<SkeletonProps> = props => {
-  const { className, size, shape, height, width } = props;
+  const {
+    className,
+    size,
+    shape,
+    height,
+    width,
+    animationColors,
+    bgColor
+  } = props;
 
   return (
     <StyledSkeleton
@@ -25,6 +41,8 @@ export const Skeleton: FC<SkeletonProps> = props => {
       size={size}
       width={width}
       height={height}
+      animationColors={animationColors}
+      bgColor={bgColor}
     />
   );
 };

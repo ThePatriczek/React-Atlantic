@@ -18,7 +18,11 @@ stories.add(
         <div style={{ height: 100 }}>
           <Skeleton />
         </div>
-        <Skeleton shape={'circle'} size={'large'} />
+        <Skeleton
+          size={'large'}
+          animationColors={{ alpha: `#434343`, beta: `#000`, gamma: `#434343` }}
+          bgColor={`#262626`}
+        />
         <Skeleton shape={'circle'} size={'medium'} />
         <Skeleton shape={'circle'} size={'small'} />
         <Skeleton shape={'rectangle'} size={'small'} />
