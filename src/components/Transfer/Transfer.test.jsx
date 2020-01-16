@@ -3,8 +3,8 @@ import React from 'react';
 import { Transfer } from './Transfer';
 import expect from 'expect';
 
-export const Component = placeholder => {
-  return <Transfer placeholder={'Placeholder'} />;
+export const Component = (placeholder, data) => {
+  return <Transfer placeholder={placeholder} data={data} />;
 };
 
 export const tests = (transfer = Component()) => {

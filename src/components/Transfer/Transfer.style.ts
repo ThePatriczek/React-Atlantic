@@ -10,6 +10,7 @@ import { StyledInput } from '../Input/Input.style';
 
 interface StyledTransferProps {
   isOpen?: boolean;
+  isHalfOpen?: boolean;
 }
 
 export const StyledTransferContainer = styled.div<StyledTransferProps>`
@@ -24,7 +25,8 @@ export const StyledTransferSideHeader = styled.div<StyledTransferProps>`
 
 export const StyledTransfer = styled.div<StyledTransferProps>`
   display: block;
-  width: 700px;
+  min-width: 350px;
+  width: ${props => (props.isOpen && props.isHalfOpen ? '700px' : '350px')};
   position: absolute;
   background-color: #fff;
   border: 1px solid #d9d9d9;
@@ -49,10 +51,11 @@ export const StyledTransferInput = styled(Input)<StyledTransferProps>`
 export const StyledTransferSide = styled.div<StyledTransferProps>`
   display: block;
   float: left;
-  width: 50%;
+  width: ${props => (props.isOpen ? '50%' : '100%')};
 
   &:first-child {
-    width: calc(50% - 1px);
+    width: ${props =>
+      props.isHalfOpen && props.isOpen ? 'calc(50% - 1px)' : '100%'};
     border-right: 1px solid #d9d9d9;
   }
 
