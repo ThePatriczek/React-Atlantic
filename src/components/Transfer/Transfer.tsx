@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { FC, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { Button } from '../Button';
 import { Checkbox } from '../Checkbox';
 import { Icon } from '../Icon';
@@ -28,7 +28,7 @@ const arr = [
   { name: 'second', isChecked: false },
   { name: 'third', isChecked: false },
   { name: 'fourth', isChecked: false },
-  { name: 'fifth', isChecked: true },
+  { name: 'fifth', isChecked: false },
   { name: 'sixth', isChecked: false },
   { name: 'seventh', isChecked: false },
   { name: 'eight', isChecked: false }
@@ -38,78 +38,72 @@ export const Transfer: FC<TransferProps> = (props): React.ReactElement => {
   const { placeholder } = props;
   const [isOpen, setOpen] = useState<boolean>(false);
   const [value, setValue] = useState<string>('');
-  const [savedItems, setSavedItems] = useState<
-    Array<{ name: string; isChecked: boolean }>
-  >();
+
+  const [savedItems, setSavedItems] = useState<Map<string, boolean>>(new Map());
+
   const [items, setItems] = useState<
-    Array<{ name: string; isChecked: boolean }>
+    ReadonlyArray<{ name: string; isChecked: boolean }>
   >(arr);
 
-  const pickingArray = [...items];
-  const pickedArray = items.filter(item => item.isChecked);
+  const checkedItems = items.filter(item => item.isChecked);
+
+  useEffect(() => {
+    const map: Map<string, boolean> = new Map();
+
+    checkedItems.forEach(item => {
+      if (!savedItems.has(item.name)) {
+        map.set(item.name, false);
+      }
+    });
+
+    items.forEach(item => {
+      if (!savedItems.has(item.name)) {
+        map.set(item.name, false);
+      }
+    });
+
+    setItems(prevState =>
+      prevState.map(item => {
+        item.isChecked = !map.has(item.name);
+        return item;
+      })
+    );
+  }, [isOpen]);
 
   const onChange = (name: string, isChecked: boolean) => {
-    pickingArray.map(item => {
-      if (item.name === name) {
-        item.isChecked = isChecked;
-      }
-    });
-
-    setItems(pickingArray);
-  };
-
-  const uncheckOne = (item: { name: string; isChecked: boolean }) => {
-    pickingArray.map(x => {
-      if (item.name === x.name) {
-        item.isChecked = !item.isChecked;
-      }
-    });
-
-    setItems(pickingArray);
+    setItems(prevState =>
+      prevState.map(item => {
+        if (item.name === name) {
+          item.isChecked = isChecked;
+        }
+        return item;
+      })
+    );
   };
 
   const uncheckAll = () => {
-    pickingArray.map(item => {
-      if (item.isChecked) {
-        item.isChecked = !item.isChecked;
-      }
-    });
-
     setValue('');
-    setItems(pickingArray);
-    setOpen(!isOpen);
+    setItems(prevState =>
+      prevState.map(item => {
+        item.isChecked = false;
+        return item;
+      })
+    );
   };
 
   const submit = () => {
-    let result = '';
+    const arr = checkedItems.map(item => item.name);
+    const map: Map<string, boolean> = new Map();
 
-    pickedArray.map((item, index) => {
-      if (index === pickedArray.length - 1) {
-        result += item.name;
-      } else {
-        result += item.name + ', ';
-      }
+    checkedItems.forEach(item => {
+      map.set(item.name, true);
     });
 
-    setValue(result);
-    setSavedItems(pickedArray);
+    setValue(arr.join(`, `));
+    setSavedItems(map);
   };
 
   const closeWithoutSaving = () => {
-    // const tmp: any = [...items];
-    // if (
-    //   savedItems &&
-    //   JSON.stringify(savedItems) !== JSON.stringify(pickedArray)
-    // ) {
-    //   tmp.map((x: any) =>
-    //     Object.assign(
-    //       x,
-    //       savedItems.find((y: any) => y.name === x.name)
-    //     )
-    //   );
-    //   setItems(tmp);
-    // }
-
     setOpen(!isOpen);
   };
 
@@ -149,7 +143,7 @@ export const Transfer: FC<TransferProps> = (props): React.ReactElement => {
               <StyledTransferSideHeader>
                 <StyledTransferSpan>
                   <strong>{`Vybráno: `}</strong>
-                  {`${pickedArray.length} z ${items.length}`}
+                  {`${checkedItems.length} z ${items.length}`}
                 </StyledTransferSpan>
                 <Button
                   isTransparent
@@ -164,11 +158,11 @@ export const Transfer: FC<TransferProps> = (props): React.ReactElement => {
                 </Button>
               </StyledTransferSideHeader>
               <StyledTransferUl>
-                {pickedArray.map(item => (
+                {checkedItems.map(item => (
                   <StyledTransferLi
                     key={item.name}
                     onClick={() => {
-                      uncheckOne(item);
+                      onChange(item.name, false);
                     }}
                   >
                     <StyledTransferSpan>{item.name}</StyledTransferSpan>
