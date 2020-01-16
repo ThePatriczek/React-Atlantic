@@ -1,5 +1,6 @@
-import { animated } from 'react-spring/web.cjs';
+import { animated } from 'react-spring';
 import styled, { css, keyframes } from 'styled-components';
+import { theme } from '../../theme';
 import { IconName } from './Icon';
 
 export interface StyledIconProps {
@@ -42,5 +43,9 @@ export const StyledIcon = styled.i<StyledIconProps>`
 `;
 
 export const StyledSVG = styled(animated.svg)``;
+
+StyledIcon.defaultProps = {
+  theme
+};
 
 StyledIcon.displayName = 'StyledIcon';

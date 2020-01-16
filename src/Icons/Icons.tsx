@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { animated } from 'react-spring/web.cjs';
+import { animated } from 'react-spring';
 import { StyledSVG } from '../components/Icon/Icon.style';
 
 export const ArrowUp = () => (
@@ -213,7 +213,7 @@ export const Copy = () => (
   </svg>
 );
 
-export const CheckSimple = (props: { [key: string]: number | string }) => (
+export const CheckSimple = (props: any) => (
   <StyledSVG
     width="14px"
     height="14px"
