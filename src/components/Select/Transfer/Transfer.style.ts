@@ -1,16 +1,17 @@
 import styled, { css } from 'styled-components';
-import { theme } from '../../theme';
+import { theme } from '../../../theme';
 import {
   StyledCheckboxInputShown,
   StyledCheckboxLabel
-} from '../Checkbox/Checkbox.style';
-import { Icon } from '../Icon';
-import { Input } from '../Input';
-import { StyledInput } from '../Input/Input.style';
+} from '../../Checkbox/Checkbox.style';
+import { Icon, IconName } from '../../Icon';
+import { Input } from '../../Input';
+import { StyledInput } from '../../Input/Input.style';
 
 interface StyledTransferProps {
   isOpen?: boolean;
   isHalfOpen?: boolean;
+  iconLeft?: IconName;
 }
 
 export const StyledTransferContainer = styled.div<StyledTransferProps>`
@@ -21,6 +22,7 @@ export const StyledTransferContainer = styled.div<StyledTransferProps>`
 
 export const StyledTransferSideHeader = styled.div<StyledTransferProps>`
   border-bottom: 1px solid #d9d9d9;
+  height: ${props => props.theme.height.md};
 `;
 
 export const StyledTransfer = styled.div<StyledTransferProps>`
@@ -30,7 +32,7 @@ export const StyledTransfer = styled.div<StyledTransferProps>`
   position: absolute;
   background-color: #fff;
   border: 1px solid #d9d9d9;
-  border-radius: 2px;
+  border-radius: 4px;
   box-shadow: ${props => props.theme.boxShadow.md};
 
   font-size: 14px;
@@ -38,6 +40,16 @@ export const StyledTransfer = styled.div<StyledTransferProps>`
 `;
 
 export const StyledTransferInput = styled(Input)<StyledTransferProps>`
+  ${StyledInput} {
+    border: 0;
+  }
+
+  ${props =>
+    props.iconLeft === undefined &&
+    css`
+      padding-left: 20px;
+    `}
+
   ${props =>
     props.isOpen &&
     css`
@@ -64,19 +76,16 @@ export const StyledTransferSide = styled.div<StyledTransferProps>`
     align-items: center;
     justify-content: space-between;
     width: 100%;
-    height: 40px;
     color: ${props => props.theme.color.primary.alpha};
 
     ${StyledTransferInput} {
-      width: calc(100% - 10px);
-
       input {
         width: 100%;
       }
     }
 
     button,
-    span:not(.icon) {
+    span:not(.icon):nth-child(1) {
       margin: 0 ${props => props.theme.padding.sm};
     }
   }
@@ -103,11 +112,12 @@ export const StyledTransferDeleteAllButtonIcon = styled(Icon)<
 `;
 
 export const StyledTransferUl = styled.ul<StyledTransferProps>`
+  min-height: 150px;
+  max-height: 150px;
   list-style: none;
   padding-left: 0;
   margin-top: 0;
   margin-bottom: 0;
-  max-height: 150px;
   overflow: scroll;
 `;
 
@@ -188,6 +198,10 @@ StyledTransfer.defaultProps = {
 };
 
 StyledTransferSide.defaultProps = {
+  theme
+};
+
+StyledTransferSideHeader.defaultProps = {
   theme
 };
 

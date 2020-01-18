@@ -1,9 +1,12 @@
 import * as React from 'react';
-import { FC, useEffect, useRef, useState } from 'react';
-import { Button } from '../Button';
-import { Checkbox } from '../Checkbox';
-import { Icon } from '../Icon';
-import { Typography } from '../Typography';
+import { useEffect, useRef, useState } from 'react';
+import { act } from 'react-dom/test-utils';
+import { Button } from '../../Button';
+import { Checkbox } from '../../Checkbox';
+import { Icon } from '../../Icon';
+import { Typography } from '../../Typography';
+import { checkChildrenAndOptions, OptionType } from '../functions';
+import { Option, OptionProps } from '../Option';
 import {
   StyledTransfer,
   StyledTransferContainer,
@@ -16,24 +19,27 @@ import {
   StyledTransferSpan,
   StyledTransferUl
 } from './Transfer.style';
-import { act } from 'react-dom/test-utils';
 
 const { Text } = Typography;
 
 export interface TransferProps {
   placeholder?: string;
-  data: ReadonlyArray<{ name: string; isChecked: boolean }>;
+  isDisabled?: boolean;
+  options: OptionType[];
 }
 
-export const Transfer: FC<TransferProps> = (props): React.ReactElement => {
-  const { placeholder, data } = props;
+export const Transfer: React.FC<React.PropsWithChildren<TransferProps>> & {
+  Option: React.FC<OptionProps>;
+} = (props: React.PropsWithChildren<TransferProps>) => {
+  const { placeholder, options, isDisabled, children } = props;
   const ref = useRef<HTMLDivElement>(null);
   const [isOpen, setOpen] = useState<boolean>(false);
-  const [value, setValue] = useState<string>('');
+  const [resultValue, setResultValue] = useState<string>('');
+  const [searchedValue, setSearchedValue] = useState<string>('');
   const [savedItems, setSavedItems] = useState<Map<string, boolean>>(new Map());
-  const [items, setItems] = useState<
-    ReadonlyArray<{ name: string; isChecked: boolean }>
-  >(data);
+  const [items, setItems] = useState<OptionType[]>(
+    checkChildrenAndOptions(children, options)
+  );
   const checkedItems = items?.filter(item => item.isChecked);
 
   useEffect(() => {
@@ -42,23 +48,25 @@ export const Transfer: FC<TransferProps> = (props): React.ReactElement => {
     const map: Map<string, boolean> = new Map();
 
     checkedItems?.forEach(item => {
-      if (!savedItems.has(item.name)) {
-        map.set(item.name, false);
+      if (!savedItems.has(item.value)) {
+        map.set(item.value, false);
       }
     });
 
     items?.forEach(item => {
-      if (!savedItems.has(item.name)) {
-        map.set(item.name, false);
+      if (!savedItems.has(item.value)) {
+        map.set(item.value, false);
       }
     });
 
     setItems(prevState =>
       prevState?.map(item => {
-        item.isChecked = !map.has(item.name);
+        item.isChecked = !map.has(item.value);
         return item;
       })
     );
+
+    setSearchedValue('');
   }, [isOpen]);
 
   const handleClickOutside: EventListener = (e: Event) => {
@@ -71,10 +79,10 @@ export const Transfer: FC<TransferProps> = (props): React.ReactElement => {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   };
 
-  const onChange = (name: string, isChecked: boolean) => {
+  const onChange = (value: string, isChecked: boolean) => {
     setItems(prevState =>
-      prevState?.map(item => {
-        if (item.name === name) {
+      prevState.map(item => {
+        if (item.value === value) {
           item.isChecked = isChecked;
         }
         return item;
@@ -83,9 +91,9 @@ export const Transfer: FC<TransferProps> = (props): React.ReactElement => {
   };
 
   const uncheckAll = () => {
-    setValue('');
+    setResultValue('');
     setItems(prevState =>
-      prevState?.map(item => {
+      prevState.map(item => {
         item.isChecked = false;
         return item;
       })
@@ -93,15 +101,19 @@ export const Transfer: FC<TransferProps> = (props): React.ReactElement => {
   };
 
   const submit = () => {
-    const arr = checkedItems?.map(item => item.name);
+    const arr = checkedItems?.map(item => item.value);
     const map: Map<string, boolean> = new Map();
 
-    checkedItems?.forEach(item => {
-      map.set(item.name, true);
+    checkedItems.forEach(item => {
+      map.set(item.value as string, true);
     });
 
-    setValue(arr.join(`, `));
+    setResultValue(arr.join(`, `));
     setSavedItems(map);
+  };
+
+  const inputOnChange = (e: any) => {
+    setSearchedValue(e);
   };
 
   const isHalfOpen = checkedItems?.length > 0;
@@ -111,27 +123,51 @@ export const Transfer: FC<TransferProps> = (props): React.ReactElement => {
       <StyledTransfer isHalfOpen={isHalfOpen} isOpen={isOpen}>
         <StyledTransferSide isHalfOpen={isHalfOpen} isOpen={isOpen}>
           <StyledTransferSideHeader>
-            <StyledTransferInput
-              isOpen={isOpen}
-              value={value}
-              placeholder={placeholder}
-              iconLeft={'search'}
-              isFullWidth
-              onFocus={() => setOpen(!isOpen)}
-            />
+            {isOpen ? (
+              <StyledTransferInput
+                onChange={inputOnChange}
+                isOpen={isOpen}
+                value={searchedValue}
+                placeholder={placeholder}
+                iconLeft={searchedValue ? undefined : 'search'}
+                iconRight={searchedValue ? 'close' : undefined}
+                isFullWidth
+              />
+            ) : (
+              <StyledTransferInput
+                isDisabled={isDisabled}
+                isOpen={isOpen}
+                value={resultValue}
+                placeholder={placeholder}
+                iconLeft={'search'}
+                isFullWidth
+                onFocus={() => setOpen(!isOpen)}
+              />
+            )}
           </StyledTransferSideHeader>
           {isOpen && (
             <StyledTransferUl>
-              {items?.map((item, index) => (
-                <StyledTransferLi key={index}>
-                  <Checkbox
-                    isChecked={item.isChecked}
-                    onChange={isChecked => onChange(item.name, isChecked)}
-                  >
-                    <Text>{item.name}</Text>
-                  </Checkbox>
+              {items
+                ?.filter(item =>
+                  item.value.toLowerCase().includes(searchedValue.toLowerCase())
+                )
+                .map(item => (
+                  <StyledTransferLi key={item.value}>
+                    <Checkbox
+                      isChecked={item.isChecked}
+                      onChange={isChecked => onChange(item.value, isChecked)}
+                    >
+                      <Text>{item.value}</Text>
+                    </Checkbox>
+                  </StyledTransferLi>
+                ))}
+              {items?.filter(item =>
+                item.value.toLowerCase().includes(searchedValue.toLowerCase())
+              ).length === 0 && (
+                <StyledTransferLi>
+                  <Text>{`Zadaný výraz nebyl nalezen`}</Text>
                 </StyledTransferLi>
-              ))}
+              )}
             </StyledTransferUl>
           )}
         </StyledTransferSide>
@@ -158,12 +194,12 @@ export const Transfer: FC<TransferProps> = (props): React.ReactElement => {
             <StyledTransferUl>
               {checkedItems?.map(item => (
                 <StyledTransferLi
-                  key={item.name}
+                  key={item.value}
                   onClick={() => {
-                    onChange(item.name, false);
+                    onChange(item.value, false);
                   }}
                 >
-                  <StyledTransferSpan>{item.name}</StyledTransferSpan>
+                  <StyledTransferSpan>{item.value}</StyledTransferSpan>
                   <Icon name={'error'} />
                 </StyledTransferLi>
               ))}
@@ -189,3 +225,5 @@ export const Transfer: FC<TransferProps> = (props): React.ReactElement => {
     </StyledTransferContainer>
   );
 };
+
+Transfer.Option = Option;

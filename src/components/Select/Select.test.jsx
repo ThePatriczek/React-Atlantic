@@ -7,6 +7,8 @@ import { Typography } from '../Typography';
 const { Option } = Select;
 const { Text } = Typography;
 
+const options = [{ value: 'first', label: 'first' }];
+
 export const Component = (
   size,
   isMulti,
@@ -27,6 +29,7 @@ export const Component = (
       isDisabled={isDisabled}
       isFullWidth={isFullWidth}
       onChange={onChange}
+      options={options}
     >
       <Option value={`value 1`}>
         <Text>{`Option 1`}</Text>
