@@ -1,7 +1,7 @@
 import React, { FC, useEffect, useState } from 'react';
-import { StyledPagination } from './Pagination.style';
 import { ButtonList } from './ButtonList';
-import { QuickJumper } from './QuickJumper/QuickJumper';
+import { StyledPagination } from './Pagination.style';
+import { QuickJumper } from './QuickJumper';
 import { SizeChanger } from './SizeChanger';
 
 export interface PaginationProps {

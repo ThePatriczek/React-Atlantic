@@ -1,7 +1,11 @@
 import React, { FC, useState } from 'react';
 import { Icon } from '../../../../Icon';
 import { Tooltip } from '../../../../Tooltip';
-import { StyledPaginationIcon, StyledPaginationStepIcon } from './ThreeDots.style';
+import {
+  StyledPaginationIcon,
+  StyledPaginationStepIcon,
+  StyledThreeDotsText
+} from './ThreeDots.style';
 
 interface ThreeDotsProps {
   onClick?: (value: boolean) => void;
@@ -41,15 +45,18 @@ export const ThreeDots: FC<ThreeDotsProps> = props => {
       {!hovered ? (
         <StyledPaginationIcon>•••</StyledPaginationIcon>
       ) : (
-        <StyledPaginationStepIcon
-          onClick={onClick}
-        >
-          <Icon name={isRight ? 'arrowDoubleRight' : 'arrowDoubleLeft'}/>
+        <StyledPaginationStepIcon onClick={onClick}>
+          <Icon name={isRight ? 'arrowDoubleRight' : 'arrowDoubleLeft'} />
         </StyledPaginationStepIcon>
       )}
 
-      {hovered && !isClicked &&
-      <Tooltip place={'bottom'} id={unique.toString()}>{isRight ? 'Dalších' : 'Předchozích'} 5 stránek</Tooltip>}
+      {hovered && !isClicked && (
+        <Tooltip place={'bottom'} id={unique.toString()}>
+          <StyledThreeDotsText>
+            {isRight ? `Dalších 5 stránek` : `Předchozích 5 stránek`}
+          </StyledThreeDotsText>
+        </Tooltip>
+      )}
     </li>
   );
 };
