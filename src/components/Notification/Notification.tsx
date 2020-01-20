@@ -3,8 +3,7 @@ import { Size, Type } from '../../types';
 import { IconName } from '../Icon';
 import { Paragraph } from '../Typography/Paragraph';
 import {
-  StyledNotificationButton,
-  StyledNotificationButtonIcon,
+  StyledNotificationCloseButton,
   StyledNotificationContainer,
   StyledNotificationContentContainer,
   StyledNotificationFooter,
@@ -19,26 +18,14 @@ export interface NotificationProps {
   className?: string;
   size?: Size;
   type?: Type;
-  isPrimaryButtonFullWidth?: boolean;
-  primaryButtonIcon?: IconName;
-  primaryButton?: string;
-  secondaryButton?: string;
+  onClose?: () => void;
+  footer?: JSX.Element;
 }
 
 export const Notification: FC<PropsWithChildren<NotificationProps>> = (
   props
 ): React.ReactElement => {
-  const {
-    isPrimaryButtonFullWidth,
-    children,
-    title,
-    className,
-    size,
-    type,
-    primaryButtonIcon,
-    secondaryButton,
-    primaryButton
-  } = props;
+  const { children, title, className, size, type, footer, onClose } = props;
 
   let titleIcon: IconName;
 
@@ -63,48 +50,29 @@ export const Notification: FC<PropsWithChildren<NotificationProps>> = (
 
   return (
     <StyledNotificationContainer size={size} type={type} className={className}>
-      <StyledNotificationTitleContainer type={type} className={className}>
+      <StyledNotificationTitleContainer type={type}>
         {iconTitle()}
+
         {title && (
-          <StyledNotificationTitle type={type} className={className}>
-            {title}
-          </StyledNotificationTitle>
+          <StyledNotificationTitle type={type}>{title}</StyledNotificationTitle>
         )}
-        <StyledNotificationTitleIcon
-          name={'close'}
-          type={type}
-          className={className}
-        />
+
+        {onClose && (
+          <StyledNotificationCloseButton onClick={onClose}>
+            <StyledNotificationTitleIcon name={'close'} type={type} />
+          </StyledNotificationCloseButton>
+        )}
       </StyledNotificationTitleContainer>
-      <StyledNotificationContentContainer
-        type={type}
-        size={size}
-        className={className}
-      >
+
+      <StyledNotificationContentContainer type={type} size={size}>
         <Paragraph>{children}</Paragraph>
       </StyledNotificationContentContainer>
-      <StyledNotificationFooter type={type} size={size} className={className}>
-        {secondaryButton && !isPrimaryButtonFullWidth && (
-          <StyledNotificationButton className={className}>
-            {secondaryButton}
-          </StyledNotificationButton>
-        )}
-        <StyledNotificationButton
-          primaryButtonIcon={primaryButtonIcon}
-          secondaryButton={secondaryButton}
-          isFullWidth={isPrimaryButtonFullWidth}
-          className={className}
-        >
-          {primaryButtonIcon && (
-            <StyledNotificationButtonIcon
-              name={primaryButtonIcon}
-              className={className}
-            />
-          )}
-          <StyledNotificationSpan>{primaryButton}</StyledNotificationSpan>
-        </StyledNotificationButton>
-        <StyledNotificationSpan />
-      </StyledNotificationFooter>
+
+      {footer && (
+        <StyledNotificationFooter type={type} size={size}>
+          {footer}
+        </StyledNotificationFooter>
+      )}
     </StyledNotificationContainer>
   );
 };
