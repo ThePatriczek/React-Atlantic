@@ -1,9 +1,11 @@
 import styled, { css } from 'styled-components';
 import { theme } from '../../../theme';
+import { Size } from '../../../types';
 import { Button } from '../../Button';
 import {
   StyledCheckboxInputShown,
-  StyledCheckboxLabel
+  StyledCheckboxLabel,
+  StyledCheckboxSpan
 } from '../../Checkbox/Checkbox.style';
 import { Icon, IconName } from '../../Icon';
 import { StyledIcon } from '../../Icon/Icon.style';
@@ -18,10 +20,13 @@ interface StyledTransferProps {
   placeholder?: string;
   isDisabled?: boolean;
   options?: OptionType[];
-  closeButton?: string;
-  submitButton?: string;
-  deleteAllButton?: string;
-  notFoundMessage?: string;
+  closeText?: string;
+  submitText?: string;
+  deleteAllText?: string;
+  notFoundMessage?: any;
+  isFocused?: boolean;
+  size?: Size;
+  notFoundComponent?: any;
 }
 
 export const StyledTransferContainer = styled.div<StyledTransferProps>`
@@ -29,39 +34,63 @@ export const StyledTransferContainer = styled.div<StyledTransferProps>`
   z-index: 1000;
 `;
 
-export const StyledTransferSideHeader = styled.div<StyledTransferProps>`
-  border-bottom: 1px solid #d9d9d9;
-  height: ${props => props.theme.height.md};
+export const StyledTransferUl = styled.ul<StyledTransferProps>`
+  min-height: 150px;
+  max-height: 150px;
+  list-style: none;
+  padding-left: 0;
+  margin-top: 0;
+  margin-bottom: 0;
+  overflow: scroll;
 `;
 
 export const StyledTransfer = styled.div<StyledTransferProps>`
   display: block;
-  min-width: 350px;
-  width: ${props => (props.isOpen && props.isHalfOpen ? '700px' : '350px')};
+  min-width: 300px;
+  width: ${props => (props.isOpen && props.isHalfOpen ? '600px' : '300px')};
   position: absolute;
   background-color: #fff;
   border: 1px solid #d9d9d9;
   border-radius: 4px;
-  box-shadow: ${props => props.theme.boxShadow.md};
-
+  box-shadow: none;
   font-size: 14px;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI';
+
+  ${props =>
+    props.isOpen &&
+    css`
+      box-shadow: ${props => props.theme.boxShadow.md};
+    `}
+  }
+  ${props =>
+    !props.isDisabled &&
+    css`
+      &:hover {
+        border-color: ${props => props.theme.color.primary.alpha};
+      }
+    `}
+  
+  ${props =>
+    props.isFocused &&
+    css`
+      border-color: ${props => props.theme.color.primary.alpha};
+    `}
 `;
 
 export const StyledTransferInput = styled(Input)<StyledTransferProps>`
   ${StyledInput} {
     border: 0;
+    padding-right: 55px;
   }
-
-  ${props =>
-    props.iconLeft === undefined &&
-    css`
-      padding-left: 20px;
-    `}
 
   ${props =>
     props.isOpen &&
     css`
+      border-bottom: 1px solid #d9d9d9;
+
+      :hover {
+        border-color: ${props => props.theme.color.primary.alpha};
+      }
       ${StyledInput} {
         border-bottom-left-radius: 0;
         border-bottom-right-radius: 0;
@@ -101,9 +130,9 @@ export const StyledSearchButton = styled(Button)<StyledTransferProps>`
   }
 
   && {
-    position: relative;
+    position: absolute;
     top: -3px;
-    right: 0;
+    right: 25px;
     ${StyledIcon} {
       color: ${props => props.theme.color.text.beta};
       :hover {
@@ -111,6 +140,35 @@ export const StyledSearchButton = styled(Button)<StyledTransferProps>`
       }
     }
   }
+`;
+
+export const StyledChosenHeader = styled.div<StyledTransferProps>`
+${props =>
+  props.size === 'small' &&
+  css`
+    font-size: ${props.theme.font.size.sm};
+    height: ${parseInt(props.theme.height.sm, 0)}px;
+    line-height: ${parseInt(props.theme.height.sm, 0)}px;
+  `}
+    ${props =>
+      props.size === 'medium' &&
+      css`
+        font-size: ${props.theme.font.size.md};
+        height: ${parseInt(props.theme.height.md, 0)}px;
+        line-height: ${parseInt(props.theme.height.md, 0)}px;
+      `}
+    ${props =>
+      props.size === 'large' &&
+      css`
+        font-size: ${props.theme.font.size.lg};
+        height: ${parseInt(props.theme.height.lg, 0)}px;
+        line-height: ${parseInt(props.theme.height.lg, 0)}px;
+      `}
+    border-bottom: 1px solid #d9d9d9
+`;
+
+export const StyledInputHeader = styled.div<StyledTransferProps>`
+  position: relative;
 `;
 
 export const StyledTransferSide = styled.div<StyledTransferProps>`
@@ -121,10 +179,30 @@ export const StyledTransferSide = styled.div<StyledTransferProps>`
   &:first-child {
     width: ${props =>
       props.isHalfOpen && props.isOpen ? 'calc(50% - 1px)' : '100%'};
-    border-right: 1px solid #d9d9d9;
+    ${props =>
+      props.isOpen &&
+      !props.isHalfOpen &&
+      css`
+        border-right: 1px solid #d9d9d9;
+        border-top-right-radius: 4px;
+      `}
+    
+    ${props =>
+      props.isOpen &&
+      !props.isHalfOpen &&
+      css`
+        border-color: ${props => props.theme.color.primary.alpha};
+      `}
+
+    ${props =>
+      props.isOpen &&
+      props.isHalfOpen &&
+      css`
+        border-right: 1px solid #d9d9d9;
+      `}
   }
 
-  > ${StyledTransferSideHeader} {
+  > ${StyledChosenHeader} {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -138,7 +216,7 @@ export const StyledTransferSide = styled.div<StyledTransferProps>`
     }
 
     button,
-    span:not(.icon):nth-child(1) {
+    span:not(.icon) {
       margin: 0 ${props => props.theme.padding.sm};
     }
   }
@@ -162,16 +240,11 @@ export const StyledTransferDeleteAllButtonIcon = styled(Icon)<
   StyledTransferProps
 >`
   padding-right: 5px;
-`;
-
-export const StyledTransferUl = styled.ul<StyledTransferProps>`
-  min-height: 150px;
-  max-height: 150px;
-  list-style: none;
-  padding-left: 0;
-  margin-top: 0;
-  margin-bottom: 0;
-  overflow: scroll;
+  ${props =>
+    props.size === 'small' &&
+    css`
+      padding-right: 0;
+    `}
 `;
 
 export const StyledTransferLi = styled.li<StyledTransferProps>`
@@ -207,16 +280,58 @@ export const StyledTransferLi = styled.li<StyledTransferProps>`
     display: flex;
     width: 100%;
   }
+  
+ > span {
+  ${props =>
+    props.size === 'small' &&
+    css`
+      font-size: ${props.theme.font.size.sm};
+      height: ${parseInt(props.theme.height.sm, 0)}px;
+      line-height: ${parseInt(props.theme.height.sm, 0)}px;
+    `}
+    ${props =>
+      props.size === 'medium' &&
+      css`
+        font-size: ${props.theme.font.size.md};
+        height: ${parseInt(props.theme.height.md, 0)}px;
+        line-height: ${parseInt(props.theme.height.md, 0)}px;
+      `}
+    ${props =>
+      props.size === 'large' &&
+      css`
+        font-size: ${props.theme.font.size.lg};
+        height: ${parseInt(props.theme.height.lg, 0)}px;
+        line-height: ${parseInt(props.theme.height.lg, 0)}px;
+      `}
+ }
+  
+  ${StyledCheckboxSpan} > span{
+  ${props =>
+    props.size === 'small' &&
+    css`
+      font-size: ${props.theme.font.size.sm};
+      height: ${parseInt(props.theme.height.sm, 0)}px;
+      line-height: ${parseInt(props.theme.height.sm, 0)}px;
+    `}
+    ${props =>
+      props.size === 'medium' &&
+      css`
+        font-size: ${props.theme.font.size.md};
+        height: ${parseInt(props.theme.height.md, 0)}px;
+        line-height: ${parseInt(props.theme.height.md, 0)}px;
+      `}
+    ${props =>
+      props.size === 'large' &&
+      css`
+        font-size: ${props.theme.font.size.lg};
+        height: ${parseInt(props.theme.height.lg, 0)}px;
+        line-height: ${parseInt(props.theme.height.lg, 0)}px;
+      `}
+  }
+  
 
   ${StyledCheckboxInputShown} {
     min-width: 16px;
-  }
-
-  span {
-    height: 34px;
-    line-height: 34px;
-    margin: 0;
-    padding-right: ${props => props.theme.margin.sm};
   }
 
   div,
@@ -228,7 +343,31 @@ export const StyledTransferLi = styled.li<StyledTransferProps>`
   }
 `;
 
-export const StyledTransferSpan = styled.span<StyledTransferProps>``;
+export const DeleteAllButton = styled(Button)<StyledTransferProps>``;
+
+export const StyledTransferSpan = styled.span<StyledTransferProps>`
+${props =>
+  props.size === 'small' &&
+  css`
+    font-size: ${props.theme.font.size.sm};
+    height: ${parseInt(props.theme.height.sm, 0)}px;
+    line-height: ${parseInt(props.theme.height.sm, 0)}px;
+  `}
+    ${props =>
+      props.size === 'medium' &&
+      css`
+        font-size: ${props.theme.font.size.md};
+        height: ${parseInt(props.theme.height.md, 0)}px;
+        line-height: ${parseInt(props.theme.height.md, 0)}px;
+      `}
+    ${props =>
+      props.size === 'large' &&
+      css`
+        font-size: ${props.theme.font.size.lg};
+        height: ${parseInt(props.theme.height.lg, 0)}px;
+        line-height: ${parseInt(props.theme.height.lg, 0)}px;
+      `}
+`;
 
 StyledTransferUl.defaultProps = {
   theme
@@ -254,10 +393,6 @@ StyledTransferSide.defaultProps = {
   theme
 };
 
-StyledTransferSideHeader.defaultProps = {
-  theme
-};
-
 StyledTransferSpan.defaultProps = {
   theme
 };
@@ -267,6 +402,5 @@ StyledTransferLi.displayName = 'StyledTransferLi';
 StyledTransferFooter.displayName = 'StyledTransferFooter';
 StyledTransfer.displayName = 'StyledTransfer';
 StyledTransferSide.displayName = 'StyledTransferSide';
-StyledTransferSideHeader.displayName = 'StyledTransferSideHeader';
 StyledTransferContainer.displayName = 'StyledTransferContainer';
 StyledTransferSpan.displayName = 'StyledTransferSpan';
