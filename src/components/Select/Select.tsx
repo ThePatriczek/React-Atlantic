@@ -5,7 +5,6 @@ import { Icon } from '../Icon';
 import { Option as OptionComponent } from './components';
 import { Option, OptionProps } from './Option';
 
-import { checkChildrenAndOptions, OptionType } from './functions';
 import {
   ClearIndicator,
   Control,
@@ -24,6 +23,7 @@ import {
   SingleValue,
   ValueContainer
 } from './Select.style';
+import { checkChildrenAndOptions, OptionType } from './Select.utils';
 
 export interface SelectProps {
   onChange?: (value?: any) => void;

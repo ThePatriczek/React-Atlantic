@@ -7,8 +7,6 @@ import { Typography } from '../Typography';
 const { Option } = Select;
 const { Text } = Typography;
 
-const options = [{ value: 'first', label: 'first' }];
-
 export const Component = (
   size,
   isMulti,
@@ -17,6 +15,7 @@ export const Component = (
   defaultValue,
   isDisabled,
   isFullWidth,
+  options,
   onChange
 ) => {
   return (
@@ -51,7 +50,8 @@ export const tests = (
     defaultValues.selectValue,
     defaultValues.defaultValue,
     defaultValues.isDisabled,
-    defaultValues.isFullWidth
+    defaultValues.isFullWidth,
+    defaultValues.options
   )
 ) => {
   let output = shallow(select);

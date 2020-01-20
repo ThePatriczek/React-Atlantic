@@ -5,9 +5,10 @@ import { Button } from '../../Button';
 import { Checkbox } from '../../Checkbox';
 import { Icon } from '../../Icon';
 import { Typography } from '../../Typography';
-import { checkChildrenAndOptions, OptionType } from '../functions';
 import { Option, OptionProps } from '../Option';
+import { checkChildrenAndOptions, OptionType } from '../Select.utils';
 import {
+  StyledSearchButton,
   StyledTransfer,
   StyledTransferContainer,
   StyledTransferDeleteAllButtonIcon,
@@ -25,13 +26,26 @@ const { Text } = Typography;
 export interface TransferProps {
   placeholder?: string;
   isDisabled?: boolean;
-  options: OptionType[];
+  options?: OptionType[];
+  closeButton?: string;
+  submitButton?: string;
+  deleteAllButton?: string;
+  notFoundMessage: string;
 }
 
 export const Transfer: React.FC<React.PropsWithChildren<TransferProps>> & {
   Option: React.FC<OptionProps>;
 } = (props: React.PropsWithChildren<TransferProps>) => {
-  const { placeholder, options, isDisabled, children } = props;
+  const {
+    placeholder,
+    options,
+    isDisabled,
+    children,
+    closeButton,
+    submitButton,
+    deleteAllButton,
+    notFoundMessage
+  } = props;
   const ref = useRef<HTMLDivElement>(null);
   const [isOpen, setOpen] = useState<boolean>(false);
   const [resultValue, setResultValue] = useState<string>('');
@@ -105,7 +119,7 @@ export const Transfer: React.FC<React.PropsWithChildren<TransferProps>> & {
     const map: Map<string, boolean> = new Map();
 
     checkedItems.forEach(item => {
-      map.set(item.value as string, true);
+      map.set(item.value, true);
     });
 
     setResultValue(arr.join(`, `));
@@ -119,20 +133,38 @@ export const Transfer: React.FC<React.PropsWithChildren<TransferProps>> & {
   const isHalfOpen = checkedItems?.length > 0;
 
   return (
-    <StyledTransferContainer ref={ref}>
+    <StyledTransferContainer
+      ref={ref}
+      placeholder={placeholder}
+      deleteAllButton={deleteAllButton}
+      closeButton={closeButton}
+      submitButton={submitButton}
+      isDisabled={isDisabled}
+      options={options}
+      notFoundMessage={notFoundMessage}
+    >
       <StyledTransfer isHalfOpen={isHalfOpen} isOpen={isOpen}>
         <StyledTransferSide isHalfOpen={isHalfOpen} isOpen={isOpen}>
           <StyledTransferSideHeader>
             {isOpen ? (
-              <StyledTransferInput
-                onChange={inputOnChange}
-                isOpen={isOpen}
-                value={searchedValue}
-                placeholder={placeholder}
-                iconLeft={searchedValue ? undefined : 'search'}
-                iconRight={searchedValue ? 'close' : undefined}
-                isFullWidth
-              />
+              <>
+                <StyledTransferInput
+                  onChange={inputOnChange}
+                  isOpen={isOpen}
+                  value={searchedValue}
+                  placeholder={placeholder}
+                  iconLeft={searchedValue ? undefined : 'search'}
+                  isFullWidth
+                />
+                {searchedValue && (
+                  <StyledSearchButton
+                    onClick={() => setSearchedValue('')}
+                    size={'medium'}
+                  >
+                    <Icon name={'clear'} />
+                  </StyledSearchButton>
+                )}
+              </>
             ) : (
               <StyledTransferInput
                 isDisabled={isDisabled}
@@ -157,7 +189,7 @@ export const Transfer: React.FC<React.PropsWithChildren<TransferProps>> & {
                       isChecked={item.isChecked}
                       onChange={isChecked => onChange(item.value, isChecked)}
                     >
-                      <Text>{item.value}</Text>
+                      <StyledTransferSpan>{item.label}</StyledTransferSpan>
                     </Checkbox>
                   </StyledTransferLi>
                 ))}
@@ -165,7 +197,7 @@ export const Transfer: React.FC<React.PropsWithChildren<TransferProps>> & {
                 item.value.toLowerCase().includes(searchedValue.toLowerCase())
               ).length === 0 && (
                 <StyledTransferLi>
-                  <Text>{`Zadaný výraz nebyl nalezen`}</Text>
+                  <Text>{notFoundMessage}</Text>
                 </StyledTransferLi>
               )}
             </StyledTransferUl>
@@ -188,7 +220,7 @@ export const Transfer: React.FC<React.PropsWithChildren<TransferProps>> & {
                 }}
               >
                 <StyledTransferDeleteAllButtonIcon name={'trash'} />
-                {`Odstranit vše`}
+                {deleteAllButton}
               </Button>
             </StyledTransferSideHeader>
             <StyledTransferUl>
@@ -199,7 +231,7 @@ export const Transfer: React.FC<React.PropsWithChildren<TransferProps>> & {
                     onChange(item.value, false);
                   }}
                 >
-                  <StyledTransferSpan>{item.value}</StyledTransferSpan>
+                  <StyledTransferSpan>{item.label}</StyledTransferSpan>
                   <Icon name={'error'} />
                 </StyledTransferLi>
               ))}
@@ -208,17 +240,18 @@ export const Transfer: React.FC<React.PropsWithChildren<TransferProps>> & {
         )}
         {isOpen && (
           <StyledTransferFooter>
-            <Button
-              type={'default'}
-              onClick={() => setOpen(!isOpen)}
-            >{`Zavřít`}</Button>
+            <Button type={'default'} onClick={() => setOpen(!isOpen)}>
+              {closeButton}
+            </Button>
             <Button
               type={'primary'}
               onClick={() => {
                 submit();
                 setOpen(!isOpen);
               }}
-            >{`Potvrdit`}</Button>
+            >
+              {submitButton}
+            </Button>
           </StyledTransferFooter>
         )}
       </StyledTransfer>

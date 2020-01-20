@@ -1,22 +1,31 @@
 import styled, { css } from 'styled-components';
 import { theme } from '../../../theme';
+import { Button } from '../../Button';
 import {
   StyledCheckboxInputShown,
   StyledCheckboxLabel
 } from '../../Checkbox/Checkbox.style';
 import { Icon, IconName } from '../../Icon';
+import { StyledIcon } from '../../Icon/Icon.style';
 import { Input } from '../../Input';
 import { StyledInput } from '../../Input/Input.style';
+import { OptionType } from '../Select.utils';
 
 interface StyledTransferProps {
   isOpen?: boolean;
   isHalfOpen?: boolean;
   iconLeft?: IconName;
+  placeholder?: string;
+  isDisabled?: boolean;
+  options?: OptionType[];
+  closeButton?: string;
+  submitButton?: string;
+  deleteAllButton?: string;
+  notFoundMessage?: string;
 }
 
 export const StyledTransferContainer = styled.div<StyledTransferProps>`
   position: relative;
-  margin-left: 40px;
   z-index: 1000;
 `;
 
@@ -58,6 +67,50 @@ export const StyledTransferInput = styled(Input)<StyledTransferProps>`
         border-bottom-right-radius: 0;
       }
     `}
+`;
+
+export const StyledSearchButton = styled(Button)<StyledTransferProps>`
+  svg {
+    height: 20px;
+  }
+
+  && {
+    background: none;
+    border: none;
+    box-shadow: none;
+    :hover {
+      background: none;
+    }
+    :after {
+      display: none;
+    }
+  }
+
+  && {
+    ${StyledIcon} {
+      color: ${props => props.theme.color.text.beta};
+    }
+
+    :hover {
+      background: none;
+      color: ${props => props.theme.color.error.alpha};
+      ${StyledIcon} {
+        color: ${props => props.theme.color.error.alpha};
+      }
+    }
+  }
+
+  && {
+    position: relative;
+    top: -3px;
+    right: 0;
+    ${StyledIcon} {
+      color: ${props => props.theme.color.text.beta};
+      :hover {
+        color: ${props => props.theme.color.error.alpha};
+      }
+    }
+  }
 `;
 
 export const StyledTransferSide = styled.div<StyledTransferProps>`
@@ -205,4 +258,15 @@ StyledTransferSideHeader.defaultProps = {
   theme
 };
 
+StyledTransferSpan.defaultProps = {
+  theme
+};
+
+StyledTransferUl.displayName = 'StyledTransferUl';
+StyledTransferLi.displayName = 'StyledTransferLi';
+StyledTransferFooter.displayName = 'StyledTransferFooter';
+StyledTransfer.displayName = 'StyledTransfer';
+StyledTransferSide.displayName = 'StyledTransferSide';
+StyledTransferSideHeader.displayName = 'StyledTransferSideHeader';
 StyledTransferContainer.displayName = 'StyledTransferContainer';
+StyledTransferSpan.displayName = 'StyledTransferSpan';

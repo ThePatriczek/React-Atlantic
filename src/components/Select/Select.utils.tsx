@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { Option, OptionProps } from '../Option';
-import { Select } from '../Select';
+import { Option, OptionProps } from './Option';
+import { Select } from './Select';
 
 export interface OptionType {
   value: any;
