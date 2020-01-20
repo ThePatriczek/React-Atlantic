@@ -101,10 +101,3 @@ export const StyledSimplePaginationButton = styled(
       border: 0;
     `}
 `;
-
-export const StyledPaginationIcon = styled.span`
-  margin: 0 ${props => props.theme.margin.sm};
-  display: inline-block;
-  vertical-align: middle;
-  color: ${props => props.theme.color.text.beta};
-`;

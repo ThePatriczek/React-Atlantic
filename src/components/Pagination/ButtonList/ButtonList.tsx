@@ -1,13 +1,11 @@
 import React, { FC } from 'react';
-import { Typography } from '../../Typography';
-import { Icon } from '../../Icon';
 import {
   ButtonPaginationText,
   StyledNormalPaginationButton,
-  StyledPaginationButton,
-  StyledPaginationIcon,
   StyledSimplePaginationButton
 } from './ButtonList.style';
+import { ArrowButton } from './Parts/ArrowButton';
+import { ThreeDots } from './Parts/ThreeDots';
 
 interface ButtonListProps {
   count: number;
@@ -45,55 +43,16 @@ export const ButtonList: FC<ButtonListProps> = props => {
     right ? setPage(count) : setPage(1);
   };
 
-  const leftArrow = (
-    <li key={-1}>
-      <StyledPaginationButton
-        onClick={() => onSingleArrowClick(false)}
-        isDisabled={isDisabled || disabledMinCondition}
-        isSimple={isSimple}
-      >
-        <Icon name={'arrowLeft'}/>
-      </StyledPaginationButton>
-    </li>
-  );
-
-  const rightArrow = (
-    <li key={-2}>
-      <StyledPaginationButton
-        onClick={() => onSingleArrowClick(true)}
-        isDisabled={isDisabled || disabledMaxCondition}
-        isSimple={isSimple}
-      >
-        <Icon name={'arrowRight'}/>
-      </StyledPaginationButton>
-    </li>
-  );
-
-  const doubleLeftArrow = (
-    <li key={-3}>
-      <StyledPaginationButton
-        onClick={() => onDoubleArrowClick(false)}
-        isDisabled={disabledMinCondition}
-        isSimple={isSimple}
-      >
-        <Icon name={'arrowDoubleLeft'}/>
-      </StyledPaginationButton>
-    </li>
-  );
-
-  const doubleRightArrow = (
-    <li key={-4}>
-      <StyledPaginationButton
-        onClick={() => onDoubleArrowClick(true)}
-        isDisabled={disabledMaxCondition}
-        isSimple={isSimple}
-      >
-        <Icon name={'arrowDoubleRight'}/>
-      </StyledPaginationButton>
-    </li>
-  );
-
-  const threeDots = <StyledPaginationIcon>•••</StyledPaginationIcon>;
+  const onStepClick = (right: boolean) => {
+    const step: number = 5;
+    right
+      ? currentPage + 5 > count
+      ? setPage(count)
+      : setPage(currentPage + step)
+      : currentPage - 5 < 1
+      ? setPage(1)
+      : setPage(currentPage - 5);
+  };
 
   const middleScenario = (list: number[]) => {
     if (showThreeDots) {
@@ -147,13 +106,31 @@ export const ButtonList: FC<ButtonListProps> = props => {
     return result;
   };
 
+  const array = generateArray();
+
   return (
     <ul>
-      {showDoubleArrowJumper && doubleLeftArrow}
-      {showArrowJumper && leftArrow}
-      {generateArray().map((item: number, key: number) => {
+      <ArrowButton
+        onClick={() => onDoubleArrowClick(false)}
+        isDisabled={isDisabled || disabledMinCondition}
+        isSimple={isSimple}
+        unique={-3}
+        visible={showDoubleArrowJumper}
+      />
+      <ArrowButton
+        onClick={() => onSingleArrowClick(false)}
+        isDisabled={isDisabled || disabledMinCondition}
+        isSimple={isSimple}
+        unique={-1}
+        visible={showArrowJumper}
+      />
+      {array.map((item: number, key: number) => {
         return item === -1 ? (
-          <li key={-key - 5}>{threeDots}</li>
+          <ThreeDots
+            unique={-key - 5}
+            onClick={isDisabled ? undefined : onStepClick}
+            isRight={key > array.length / 2}
+          />
         ) : !isSimple ? (
           <li key={item}>
             <StyledNormalPaginationButton
@@ -177,8 +154,20 @@ export const ButtonList: FC<ButtonListProps> = props => {
           </li>
         );
       })}
-      {showArrowJumper && rightArrow}
-      {showDoubleArrowJumper && doubleRightArrow}
+      <ArrowButton
+        onClick={() => onSingleArrowClick(true)}
+        isDisabled={isDisabled || disabledMaxCondition}
+        isSimple={isSimple}
+        unique={-2}
+        visible={showArrowJumper}
+      />
+      <ArrowButton
+        onClick={() => onDoubleArrowClick(true)}
+        isDisabled={isDisabled || disabledMaxCondition}
+        isSimple={isSimple}
+        unique={-4}
+        visible={showDoubleArrowJumper}
+      />
     </ul>
   );
 };

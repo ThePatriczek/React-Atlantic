@@ -36,8 +36,6 @@ export const Component = (
 export const tests = (pagination = Component()) => {
   let output = shallow(pagination);
 
-  console.log(`props`, pagination.props);
-
   return describe(`Pagination`, () => {
     it(`Should have total: ${pagination.props.total}`, () => {
       expect(output.props().total).toEqual(pagination.props.total);

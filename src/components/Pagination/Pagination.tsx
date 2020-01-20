@@ -55,8 +55,8 @@ export const Pagination: FC<PaginationProps> = props => {
     showThreeDots
   } = props;
 
-  const [currentPage, setPage] = useState(defaultCurrent);
-  const [pageSize, setPageSize] = useState(
+  const [currentPage, setPage] = useState<number>(defaultCurrent);
+  const [pageSize, setPageSize] = useState<number>(
     pageSizeOptions ? pageSizeOptions[0] : props.pageSize
   );
 
