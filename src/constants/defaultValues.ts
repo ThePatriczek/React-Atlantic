@@ -1,4 +1,10 @@
 export const defaultValues = {
+  showThreeDots: true,
+  hideArrowJumper: false,
+  showQuickJumper: false,
+  showDoubleArrowJumper: true,
+  showSizeChanger: false,
+  isSimple: false,
   isChecked: false,
   isDefaultChecked: false,
   isDisabled: false,
@@ -38,5 +44,7 @@ export const defaultValues = {
   messageType: 'primary',
   shape: 'circle',
   width: 20,
-  height: 50
+  height: 50,
+  pageSizeOptions: [10, 20, 30, 40, 50],
+  total: 1000
 };

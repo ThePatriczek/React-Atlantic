@@ -113,7 +113,6 @@ export const Input: React.FC<InputProps> & {
     if (!isDisabled) {
       if (props.value === undefined) {
         setValue(val);
-
         if (props.onChange) {
           props.onChange(handlersWithEvent ? e : val);
         }
@@ -128,8 +127,8 @@ export const Input: React.FC<InputProps> & {
   const onKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (onEnterPress) {
       if (e.key === `Enter`) {
-        if (value) {
-          onEnterPress(value);
+        if(props.value || value) {
+          props.value ? onEnterPress(props.value) : onEnterPress(value);
         }
       }
     }
