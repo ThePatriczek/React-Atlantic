@@ -34,7 +34,16 @@ export const defaultValues = {
   position: 'left',
   children: 'Change me, please 🥺',
   value: 'Change me, please 🥺',
+  notFoundMessage: 'Zadaný výraz nebyl nalezen...',
   selectValue: [{ value: 'Change me, please 🥺' }],
+  options: [
+    { value: 'first option', label: 'First option' },
+    { value: 'second option', label: 'Second option' },
+    { value: 'third option', label: 'Third option' }
+  ],
+  closeButton: 'Zavřít',
+  submitButton: 'Potvrdit',
+  deleteAllButton: 'Odebrat vše',
   placeholder: 'Change me, please 🥺',
   defaultValue: 'Change me, please 🥺',
   notificationContent: 'Change me, please 🥺',

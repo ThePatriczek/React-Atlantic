@@ -23,6 +23,7 @@ import {
   SingleValue,
   ValueContainer
 } from './Select.style';
+import { checkChildrenAndOptions, OptionType } from './Select.utils';
 
 export interface SelectProps {
   onChange?: (value?: any) => void;
@@ -37,26 +38,6 @@ export interface SelectProps {
   className?: string;
   autoFocus?: boolean;
 }
-
-export interface OptionType {
-  value: any;
-  label: React.ReactNode;
-}
-
-const getChild = (
-  child: React.ComponentElement<OptionProps, never>,
-  key: number,
-  error: string
-) => {
-  if (!child.type || child.type.displayName !== Option.displayName) {
-    throw Error(error);
-  }
-
-  const { props } = child;
-  const { value, children, className } = props;
-
-  return { value, label: children, className };
-};
 
 export const Select: React.FC<React.PropsWithChildren<SelectProps>> & {
   Option: React.FC<OptionProps>;
@@ -76,37 +57,7 @@ export const Select: React.FC<React.PropsWithChildren<SelectProps>> & {
   const [value, setValue] = React.useState<any>(defaultValue);
 
   let items: OptionType[] = [];
-  if (children) {
-    if (Array.isArray(children)) {
-      items = children as OptionType[];
-    } else {
-      items.push(children as OptionType);
-    }
-
-    items = items.map((item: unknown, key: number) => {
-      if (item) {
-        if (Array.isArray(item)) {
-          return item.map((child, childKey) =>
-            getChild(
-              child,
-              childKey,
-              `${Select.displayName} accepts only ${Option.displayName} components!`
-            )
-          );
-        }
-
-        return getChild(
-          item as React.ComponentElement<OptionProps, never>,
-          key,
-          `${Select.displayName} accepts only ${Option.displayName} components!`
-        );
-      }
-
-      return null;
-    }) as OptionType[];
-  } else if (options) {
-    items = options;
-  }
+  items = checkChildrenAndOptions(children, options);
 
   const onChange = (value?: OptionType | OptionType[]) => {
     if (!isDisabled) {

@@ -15,6 +15,7 @@ export const Component = (
   defaultValue,
   isDisabled,
   isFullWidth,
+  options,
   onChange
 ) => {
   return (
@@ -27,6 +28,7 @@ export const Component = (
       isDisabled={isDisabled}
       isFullWidth={isFullWidth}
       onChange={onChange}
+      options={options}
     >
       <Option value={`value 1`}>
         <Text>{`Option 1`}</Text>
@@ -48,7 +50,8 @@ export const tests = (
     defaultValues.selectValue,
     defaultValues.defaultValue,
     defaultValues.isDisabled,
-    defaultValues.isFullWidth
+    defaultValues.isFullWidth,
+    defaultValues.options
   )
 ) => {
   let output = shallow(select);
