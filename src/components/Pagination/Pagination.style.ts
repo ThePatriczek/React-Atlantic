@@ -8,6 +8,8 @@ interface StyledPaginationProps extends PaginationProps{
 }
 
 export const StyledPagination = styled.div<StyledPaginationProps>`
+  user-select: none;
+
   ul {
     display: inline-block;
     vertical-align: middle;

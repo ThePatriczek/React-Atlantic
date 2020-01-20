@@ -18,5 +18,6 @@ export const StyledPaginationStepIcon = styled(StyledPaginationIcon)`
     display: inline-block;
     vertical-align: middle;
     color: ${props => props.theme.color.primary.alpha};
+    cursor: pointer;
   }
 `;
