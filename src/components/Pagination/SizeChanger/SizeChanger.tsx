@@ -8,15 +8,25 @@ interface SelectProps {
   pageSizeOptions?: number[];
   pageSize: number;
   setPageSize: (value: number) => void;
+  text: string;
+  onSizeChange: (value: number) => void;
 }
 
 const { Text } = Typography;
 
 export const SizeChanger: FC<SelectProps> = props => {
-  const { pageSizeOptions, pageSize, isDisabled, setPageSize } = props;
+  const {
+    pageSizeOptions,
+    pageSize,
+    isDisabled,
+    setPageSize,
+    text,
+    onSizeChange
+  } = props;
 
   const onChange = (value?: any) => {
     setPageSize(value.value);
+    onSizeChange(value.value);
   };
 
   if (!pageSizeOptions) {
@@ -28,7 +38,7 @@ export const SizeChanger: FC<SelectProps> = props => {
       <Select isDisabled={isDisabled} value={pageSize} onChange={onChange}>
         {pageSizeOptions.map((item: number, key: number) => (
           <Option value={item} key={key}>
-            <Text>{`${item} / stránka`}</Text>
+            <Text>{`${item} / ${text}`}</Text>
           </Option>
         ))}
       </Select>

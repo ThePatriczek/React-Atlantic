@@ -11,10 +11,11 @@ interface ThreeDotsProps {
   onClick?: (value: boolean) => void;
   isRight: boolean;
   unique: number;
+  text: string;
 }
 
 export const ThreeDots: FC<ThreeDotsProps> = props => {
-  const { isRight, unique } = props;
+  const { isRight, unique, text } = props;
   const [hovered, setHovered] = useState<boolean>(false);
   const [isClicked, setClicked] = useState<boolean>(false);
 
@@ -53,7 +54,7 @@ export const ThreeDots: FC<ThreeDotsProps> = props => {
       {hovered && !isClicked && (
         <Tooltip place={'bottom'} id={unique.toString()}>
           <StyledThreeDotsText>
-            {isRight ? `Dalších 5 stránek` : `Předchozích 5 stránek`}
+            {text}
           </StyledThreeDotsText>
         </Tooltip>
       )}
