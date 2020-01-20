@@ -47,8 +47,8 @@ export const ButtonList: FC<ButtonListProps> = props => {
     const step: number = 5;
     right
       ? currentPage + 5 > count
-      ? setPage(count)
-      : setPage(currentPage + step)
+        ? setPage(count)
+        : setPage(currentPage + step)
       : currentPage - 5 < 1
       ? setPage(1)
       : setPage(currentPage - 5);
@@ -147,7 +147,7 @@ export const ButtonList: FC<ButtonListProps> = props => {
               onClick={() => setPage(item)}
               isActive={item === currentPage}
               isDisabled={isDisabled || item === 0}
-              isSimple={true}
+              isSimple
             >
               <ButtonPaginationText>{item.toString()}</ButtonPaginationText>
             </StyledSimplePaginationButton>

@@ -16,7 +16,8 @@ export const QuickJumper: FC<QuickJumperProps> = props => {
   const [val, setValue] = useState<string>(``);
 
   const onEnter = () => {
-    const num: any = parseInt(val);
+    const num: number = parseInt(val,0);
+
     if (num > 0 && num <= count) {
       setPage(num);
     }

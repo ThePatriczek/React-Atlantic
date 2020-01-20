@@ -19,7 +19,11 @@ export const SizeChanger: FC<SelectProps> = props => {
     setPageSize(value.value);
   };
 
-  return pageSizeOptions ? (
+  if (!pageSizeOptions) {
+    return null;
+  }
+
+  return (
     <StyledSizeChanger>
       <Select isDisabled={isDisabled} value={pageSize} onChange={onChange}>
         {pageSizeOptions.map((item: number, key: number) => (
@@ -29,5 +33,5 @@ export const SizeChanger: FC<SelectProps> = props => {
         ))}
       </Select>
     </StyledSizeChanger>
-  ) : null;
+  );
 };
