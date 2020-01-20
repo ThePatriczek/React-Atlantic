@@ -86,9 +86,11 @@ stories.add(
     const total = text(`total`, defaultValues.total.toString());
     const showThreeDots = boolean(`showThreeDots`, defaultValues.showThreeDots);
 
+    const _total = parseInt(total);
+
 
     const pagination = Component(
-      parseInt(total),
+      _total ? _total : 0,
       onChange,
       onSizeChange,
       isDisabled,
