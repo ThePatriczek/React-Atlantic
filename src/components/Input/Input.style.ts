@@ -139,7 +139,7 @@ export const StyledInput = styled.input<{
   white-space: nowrap;
   text-overflow: ellipsis;
   user-select: text;
-  -webkit-appearance: textfield;
+  -webkit-appearance: none;
   touch-action: manipulation;
 
   background-color: ${props => props.theme.color.background.alpha};

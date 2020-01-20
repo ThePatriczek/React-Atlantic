@@ -61,7 +61,7 @@ export const StyledTextArea = styled.textarea`
   font-size: ${props => props.theme.font.size.md};
   font-weight: 400;
   overflow: auto;
-  -webkit-appearance: textfield;
+  -webkit-appearance: none;
   touch-action: manipulation;
 
   background-color: ${props => props.theme.color.background.alpha};
