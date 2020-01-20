@@ -144,7 +144,7 @@ export const StyledNotificationContainer = styled.div<NotificationStyleProps>`
   margin-left: auto;
   border: 1px solid ${props => props.theme.color.border};
   border-radius: ${props => props.theme.radius};
-  box-shadow: ${props => props.theme.boxShadow};
+  box-shadow: ${props => props.theme.boxShadow.md};
 
   font-family: ${props => props.theme.font.family};
   
