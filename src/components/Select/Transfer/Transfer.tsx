@@ -38,7 +38,7 @@ export interface TransferProps {
   notFoundComponent?: any;
   size?: Size;
   chosenComponent?: (checked: number, total: number) => ReactNode;
-  onChange?: (item: OptionType) => void;
+  onChange?: (item: OptionType[]) => void;
   onCancel?: (items: Map<string, boolean>) => void;
   onSubmit?: (items: OptionType[]) => void;
   className?: string;
@@ -123,24 +123,24 @@ export const Transfer: React.FC<React.PropsWithChildren<TransferProps>> & {
   };
 
   const onChange = (value: string, isChecked: boolean) => {
-    setItems(prevState =>
-      prevState.map(item => {
+    setItems(prevState => {
+      const arr = prevState.map(item => {
         if (item.value === value) {
           item.isChecked = isChecked;
-          if (props.onChange) {
-            const obj = {
-              value: item.value,
-              label: item.label,
-              className: item.className && item.className
-            };
-
-            props.onChange(obj);
-          }
         }
-
         return item;
-      })
-    );
+      });
+
+      props.onChange?.(
+        arr.filter(item => item.isChecked).map(item => ({
+          value: item.value,
+          label: item.label,
+          className: item.className && item.className
+        }))
+      );
+
+      return arr;
+    });
   };
 
   const uncheckAll = () => {
