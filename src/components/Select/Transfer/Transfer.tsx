@@ -69,42 +69,47 @@ export const Transfer: React.FC<React.PropsWithChildren<TransferProps>> & {
   const isHalfOpen: boolean = checkedItems.length > 0;
 
   useEffect(() => {
-    document.addEventListener('mousedown', handleClickOutside);
+    if (isOpen) {
+      window.onmousedown = onMouseDown;
+    }
 
-    ref?.current && !isElementInViewport(ref.current)
+    ref.current && !isElementInViewport(ref.current)
       ? setPosition(getPositionOfElementInViewport(ref.current))
       : setPosition('unset');
 
     const map: Map<string, boolean> = new Map();
 
-    checkedItems?.forEach(item => {
+    checkedItems.forEach(item => {
       if (!savedItems.has(item.value)) {
         map.set(item.value, false);
       }
     });
 
-    items?.forEach(item => {
+    items.forEach(item => {
       if (!savedItems.has(item.value)) {
         map.set(item.value, false);
       }
     });
 
     setItems(prevState =>
-      prevState?.map(item => {
+      prevState.map(item => {
         item.isChecked = !map.has(item.value);
         return item;
       })
     );
 
     setSearchedValue('');
+
+    return () => {
+      window.onmousedown = null;
+    };
   }, [isOpen]);
 
-  const handleClickOutside: EventListener = (e: Event) => {
-    if (!ref?.current?.contains(e.target as Node)) {
+  const onMouseDown: EventListener = (e: Event) => {
+    if (!ref.current?.contains(e.target as Node)) {
       setOpen(false);
       setFocus(false);
     }
-    return () => document.removeEventListener('mousedown', handleClickOutside);
   };
 
   const onChange = (value: string, isChecked: boolean) => {
@@ -129,7 +134,7 @@ export const Transfer: React.FC<React.PropsWithChildren<TransferProps>> & {
   };
 
   const submit = () => {
-    const arr = checkedItems?.map(item => item.value);
+    const arr = checkedItems.map(item => item.value);
     const map: Map<string, boolean> = new Map();
 
     checkedItems.forEach(item => {
@@ -190,12 +195,12 @@ export const Transfer: React.FC<React.PropsWithChildren<TransferProps>> & {
       )}
       {isOpen && (
         <>
-          {items?.filter(item =>
+          {items.filter(item =>
             item.value.toLowerCase().includes(searchedValue.toLowerCase())
           ).length !== 0 && (
             <StyledTransferUl isOpen={isOpen}>
               {items
-                ?.filter(item =>
+                .filter(item =>
                   item.value.toLowerCase().includes(searchedValue.toLowerCase())
                 )
                 .map(item => (
@@ -210,7 +215,7 @@ export const Transfer: React.FC<React.PropsWithChildren<TransferProps>> & {
                 ))}
             </StyledTransferUl>
           )}
-          {items?.filter(item =>
+          {items.filter(item =>
             item.value.toLowerCase().includes(searchedValue.toLowerCase())
           ).length === 0 && <>{notFoundComponent}</>}
         </>
@@ -238,7 +243,7 @@ export const Transfer: React.FC<React.PropsWithChildren<TransferProps>> & {
         </DeleteAllButton>
       </StyledChosenHeader>
       <StyledTransferUl>
-        {checkedItems?.map(item => (
+        {checkedItems.map(item => (
           <StyledTransferLi
             size={size}
             key={item.value}
