@@ -35,7 +35,7 @@ export interface TransferProps {
   closeText?: string;
   submitText?: string;
   deleteAllText?: string;
-  notFoundComponent?: any;
+  notFoundComponent?: ReactNode;
   size?: Size;
   chosenComponent?: (checked: number, total: number) => ReactNode;
   onChange?: (item: OptionType[]) => void;
