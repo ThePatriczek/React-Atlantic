@@ -224,6 +224,7 @@ export const Transfer: React.FC<React.PropsWithChildren<TransferProps>> & {
             placeholder={placeholder}
             iconRight={'arrowUp'}
             isFullWidth
+            autoFocus
             size={size}
           />
           {searchedValue && (
