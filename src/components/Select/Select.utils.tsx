@@ -6,7 +6,6 @@ import { Select } from './Select';
 export interface OptionType {
   value: any;
   label: React.ReactNode;
-  isChecked?: boolean;
 }
 
 const getChild = (

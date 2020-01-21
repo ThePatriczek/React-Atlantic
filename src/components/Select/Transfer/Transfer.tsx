@@ -4,6 +4,7 @@ import { Position, Size } from '../../../types';
 import { Button } from '../../Button';
 import { Checkbox } from '../../Checkbox';
 import { Icon } from '../../Icon';
+import { NotFound } from '../../NotFound';
 import { Option, OptionProps } from '../Option';
 import {
   checkChildrenAndOptions,
@@ -37,6 +38,15 @@ export interface TransferProps {
   notFoundComponent?: any;
   size?: Size;
   chosenComponent?: (checked: number, total: number) => ReactNode;
+  onChange?: (item: OptionType) => void;
+  onCancel?: (items: Map<string, boolean>) => void;
+  onSubmit?: (items: OptionType[]) => void;
+  className?: string;
+}
+
+export interface TransferItems extends OptionType {
+  isChecked?: boolean;
+  className?: string;
 }
 
 export const Transfer: React.FC<React.PropsWithChildren<TransferProps>> & {
@@ -60,12 +70,12 @@ export const Transfer: React.FC<React.PropsWithChildren<TransferProps>> & {
   const [searchedValue, setSearchedValue] = useState<string>('');
   const [savedItems, setSavedItems] = useState<Map<string, boolean>>(new Map());
   const [isFocused, setFocus] = useState<boolean>(false);
-  const [items, setItems] = useState<OptionType[]>(
+  const [items, setItems] = useState<TransferItems[]>(
     checkChildrenAndOptions(children, options)
   );
   const [position, setPosition] = useState<Position | 'unset' | null>('unset');
   const ref = useRef<HTMLDivElement>(null);
-  const checkedItems: OptionType[] = items.filter(item => item.isChecked);
+  const checkedItems: TransferItems[] = items.filter(item => item.isChecked);
   const isHalfOpen: boolean = checkedItems.length > 0;
 
   useEffect(() => {
@@ -117,14 +127,23 @@ export const Transfer: React.FC<React.PropsWithChildren<TransferProps>> & {
       prevState.map(item => {
         if (item.value === value) {
           item.isChecked = isChecked;
+          if (props.onChange) {
+            const obj = {
+              value: item.value,
+              label: item.label,
+              className: item.className && item.className
+            };
+
+            props.onChange(obj);
+          }
         }
+
         return item;
       })
     );
   };
 
   const uncheckAll = () => {
-    setResultValue('');
     setItems(prevState =>
       prevState.map(item => {
         item.isChecked = false;
@@ -133,7 +152,28 @@ export const Transfer: React.FC<React.PropsWithChildren<TransferProps>> & {
     );
   };
 
-  const submit = () => {
+  const onClose = () => {
+    setOpen(!isOpen);
+
+    if (props.onCancel) {
+      props.onCancel(savedItems);
+    }
+  };
+
+  const onSubmit = () => {
+    if (props.onSubmit) {
+      const arr: OptionType[] = [];
+      checkedItems.forEach(item => {
+        const obj = {
+          value: item.value,
+          label: item.label,
+          className: item.className && item.className
+        };
+        arr.push(obj);
+      });
+
+      props.onSubmit(arr);
+    }
     const arr = checkedItems.map(item => item.value);
     const map: Map<string, boolean> = new Map();
 
@@ -143,6 +183,9 @@ export const Transfer: React.FC<React.PropsWithChildren<TransferProps>> & {
 
     setResultValue(arr.join(`, `));
     setSavedItems(map);
+
+    setOpen(!isOpen);
+    setFocus(!isFocused);
   };
 
   const inputOnChange = (value: string) => {
@@ -151,8 +194,8 @@ export const Transfer: React.FC<React.PropsWithChildren<TransferProps>> & {
 
   const defaultChosenComponent = (
     <>
-      <strong>{`Vybráno: `}</strong>
-      {`${checkedItems.length} z ${items.length}`}
+      <strong>{`Chosen: `}</strong>
+      {`${checkedItems.length} of ${items.length}`}
     </>
   );
 
@@ -207,7 +250,9 @@ export const Transfer: React.FC<React.PropsWithChildren<TransferProps>> & {
                   <StyledTransferLi key={item.value} size={size}>
                     <Checkbox
                       isChecked={item.isChecked}
-                      onChange={isChecked => onChange(item.value, isChecked)}
+                      onChange={isChecked => {
+                        onChange(item.value, isChecked);
+                      }}
                     >
                       {item.label}
                     </Checkbox>
@@ -261,18 +306,10 @@ export const Transfer: React.FC<React.PropsWithChildren<TransferProps>> & {
 
   const Footer = (
     <StyledTransferFooter>
-      <Button size={size} type={'default'} onClick={() => setOpen(!isOpen)}>
+      <Button size={size} type={'default'} onClick={onClose}>
         {closeText}
       </Button>
-      <Button
-        size={size}
-        type={'primary'}
-        onClick={() => {
-          submit();
-          setOpen(!isOpen);
-          setFocus(!isFocused);
-        }}
-      >
+      <Button size={size} type={'primary'} onClick={onSubmit}>
         {submitText}
       </Button>
     </StyledTransferFooter>
@@ -303,6 +340,16 @@ export const Transfer: React.FC<React.PropsWithChildren<TransferProps>> & {
       </StyledTransfer>
     </StyledTransferContainer>
   );
+};
+
+Transfer.defaultProps = {
+  isDisabled: false,
+  submitText: 'Submit',
+  closeText: 'Close',
+  deleteAllText: 'Delete all',
+  placeholder: 'Select an option',
+  size: 'medium',
+  notFoundComponent: <NotFound title={`No items found...`} />
 };
 
 Transfer.Option = Option;
