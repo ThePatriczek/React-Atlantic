@@ -5,26 +5,34 @@ import expect from 'expect';
 import { Select } from '../Select';
 import { Text } from '../../Typography/Text';
 import { defaultValues } from '../../../constants/defaultValues';
+import { NotFound } from '../../NotFound';
 const { Option } = Select;
+
+const notFoundComponent = (
+  <NotFound
+    title={`Zadaný výraz nebyl nalezen...`}
+  >{`Zadaný výraz nebyl nalezen...`}</NotFound>
+);
 
 export const Component = (
   placeholder,
   isDisabled,
-  closeButton,
-  submitButton,
-  deleteAllButton,
+  closeText,
+  submitText,
+  deleteAllText,
   options,
-  notFoundMessage
+  size
 ) => {
   return (
     <Transfer
       placeholder={placeholder}
       isDisabled={isDisabled}
-      closeButton={closeButton}
-      submitButton={submitButton}
-      deleteAllButton={deleteAllButton}
+      closeText={closeText}
+      submitText={submitText}
+      deleteAllText={deleteAllText}
       options={options}
-      notFoundMessage={notFoundMessage}
+      notFoundComponent={notFoundComponent}
+      size={size}
     >
       <Option value={`fourth option`}>
         <Text>{`Fourth option`}</Text>
@@ -43,10 +51,11 @@ export const tests = (
   transfer = Component(
     defaultValues.placeholder,
     defaultValues.isDisabled,
-    defaultValues.closeButton,
-    defaultValues.submitButton,
-    defaultValues.deleteAllButton,
-    defaultValues.options
+    defaultValues.closeText,
+    defaultValues.submitText,
+    defaultValues.deleteAllText,
+    defaultValues.options,
+    defaultValues.size
   )
 ) => {
   let output = shallow(transfer);
@@ -60,17 +69,17 @@ export const tests = (
       expect(output.props().isDisabled).toEqual(transfer.props.isDisabled);
     });
 
-    it(`Should have closeButton: ${transfer.props.closeButton}`, () => {
-      expect(output.props().closeButton).toEqual(transfer.props.closeButton);
+    it(`Should have closeText: ${transfer.props.closeText}`, () => {
+      expect(output.props().closeText).toEqual(transfer.props.closeText);
     });
 
-    it(`Should have submitButton: ${transfer.props.submitButton}`, () => {
-      expect(output.props().submitButton).toEqual(transfer.props.submitButton);
+    it(`Should have submitText: ${transfer.props.submitText}`, () => {
+      expect(output.props().submitText).toEqual(transfer.props.submitText);
     });
 
-    it(`Should have deleteAllButton: ${transfer.props.deleteAllButton}`, () => {
-      expect(output.props().deleteAllButton).toEqual(
-        transfer.props.deleteAllButton
+    it(`Should have deleteAllText: ${transfer.props.deleteAllText}`, () => {
+      expect(output.props().deleteAllText).toEqual(
+        transfer.props.deleteAllText
       );
     });
 
@@ -78,10 +87,8 @@ export const tests = (
       expect(output.props().options).toEqual(transfer.props.options);
     });
 
-    it(`Should have notFoundMessage: ${transfer.props.notFoundMessage}`, () => {
-      expect(output.props().notFoundMessage).toEqual(
-        transfer.props.notFoundMessage
-      );
+    it(`Should have size: ${transfer.props.size}`, () => {
+      expect(output.props().size).toEqual(transfer.props.size);
     });
   });
 };

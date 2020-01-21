@@ -1,4 +1,4 @@
-import { boolean, text, withKnobs } from '@storybook/addon-knobs';
+import { boolean, select, text, withKnobs } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/react';
 import * as React from 'react';
 import { specs } from 'storybook-addon-specifications';
@@ -14,27 +14,29 @@ stories.add(
   'Playground',
   () => {
     const placeholder = text('Placeholder: ', defaultValues.placeholder);
-    const isDisabled = boolean('isDisabled: ', defaultValues.isDisabled);
-    const closeButton = text('Close button: ', defaultValues.closeButton);
-    const submitButton = text('Submit button: ', defaultValues.submitButton);
-    const notFoundMessage = text(
-      'Not found message: ',
-      defaultValues.notFoundMessage
+    const closeText = text('Close button: ', defaultValues.closeText);
+    const submitText = text('Submit button: ', defaultValues.submitText);
+    const size = select(
+      'Size: ',
+      ['small', 'medium', 'large'],
+      defaultValues.size
     );
-    const deleteAllButton = text(
+    const deleteAllText = text(
       'Delete all button: ',
-      defaultValues.deleteAllButton
+      defaultValues.deleteAllText
     );
+
+    const isDisabled = boolean('isDisabled: ', defaultValues.isDisabled);
     const options = defaultValues.options;
 
     const transfer = Component(
       placeholder,
       isDisabled,
-      closeButton,
-      submitButton,
-      deleteAllButton,
+      closeText,
+      submitText,
+      deleteAllText,
       options,
-      notFoundMessage
+      size
     );
 
     specs(() => tests(transfer));

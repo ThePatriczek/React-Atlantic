@@ -1,11 +1,11 @@
 import * as React from 'react';
+import { Position } from '../../types';
 import { Option, OptionProps } from './Option';
 import { Select } from './Select';
 
 export interface OptionType {
   value: any;
   label: React.ReactNode;
-  isChecked?: boolean;
 }
 
 const getChild = (
@@ -56,10 +56,50 @@ export const checkChildrenAndOptions = (
 
       return null;
     }) as OptionType[];
-  }
-  if (options) {
-    items = [...items, ...options];
+  } else if (options) {
+    items = options;
   }
 
   return items;
+};
+
+export const isElementInViewport = (el: Element): boolean => {
+  const bounding = el.getBoundingClientRect();
+
+  return (
+    bounding.top > 0 &&
+    bounding.left > 0 &&
+    bounding.bottom <
+      (window.innerHeight || document.documentElement.clientHeight) &&
+    bounding.right < (window.innerWidth || document.documentElement.clientWidth)
+  );
+};
+
+export const getPositionOfElementInViewport = (
+  el: Element
+): Position | null => {
+  const bounding = el.getBoundingClientRect();
+
+  if (bounding.top < 0) {
+    return 'top';
+  }
+
+  if (bounding.left < 0) {
+    return 'left';
+  }
+
+  if (
+    bounding.bottom >
+    (window.innerHeight || document.documentElement.clientHeight)
+  ) {
+    return 'bottom';
+  }
+
+  if (
+    bounding.right > (window.innerWidth || document.documentElement.clientWidth)
+  ) {
+    return 'right';
+  }
+
+  return null;
 };
