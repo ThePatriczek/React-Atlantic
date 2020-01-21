@@ -14,10 +14,6 @@ const notFoundComponent = (
   >{`Zadaný výraz nebyl nalezen...`}</NotFound>
 );
 
-const onClose = e => console.log('Close:', e);
-const onSubmit = e => console.log('Submit:', e);
-const onChange = e => console.log('Change:', e);
-
 export const Component = (
   placeholder,
   isDisabled,
@@ -35,9 +31,6 @@ export const Component = (
       submitText={submitText}
       deleteAllText={deleteAllText}
       options={options}
-      onCancel={onClose}
-      onSubmit={onSubmit}
-      onChange={onChange}
       notFoundComponent={notFoundComponent}
       size={size}
     >

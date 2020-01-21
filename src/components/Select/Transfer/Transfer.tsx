@@ -39,7 +39,7 @@ export interface TransferProps {
   size?: Size;
   chosenComponent?: (checked: number, total: number) => ReactNode;
   onChange?: (item: OptionType[]) => void;
-  onCancel?: (items: Map<string, boolean>) => void;
+  onCancel?: (items: OptionType[]) => void;
   onSubmit?: (items: OptionType[]) => void;
   className?: string;
 }
@@ -132,11 +132,13 @@ export const Transfer: React.FC<React.PropsWithChildren<TransferProps>> & {
       });
 
       props.onChange?.(
-        arr.filter(item => item.isChecked).map(item => ({
-          value: item.value,
-          label: item.label,
-          className: item.className && item.className
-        }))
+        arr
+          .filter(item => item.isChecked)
+          .map(item => ({
+            value: item.value,
+            label: item.label,
+            className: item.className && item.className
+          }))
       );
 
       return arr;
@@ -156,7 +158,19 @@ export const Transfer: React.FC<React.PropsWithChildren<TransferProps>> & {
     setOpen(!isOpen);
 
     if (props.onCancel) {
-      props.onCancel(savedItems);
+      const arr: OptionType[] = [];
+      items.forEach(item => {
+        const obj = {
+          value: item.value,
+          label: item.label,
+          className: item.className && item.className
+        };
+        if (savedItems.has(item.value)) {
+          arr.push(obj);
+        }
+      });
+
+      props.onCancel(arr);
     }
   };
 
