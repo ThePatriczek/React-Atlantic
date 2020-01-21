@@ -88,20 +88,14 @@ export const Pagination: FC<PaginationProps> = props => {
     }
   }, [pageSize]);
 
-  /*
-  useEffect(() => {
-    onChange?.(currentPage, pageSize);
-  }, [currentPage]);
-
-  useEffect(() => {
-    onSizeChange?.(currentPage, pageSize);
-  }, [pageSize]);
-  */
-
 
   const onSizeChange = (pageSize: number) => {
+    let page: number=  0;
+    if (currentPage > Math.ceil(total / pageSize)) {
+      page = Math.ceil(total / pageSize);
+    }
     setPageSize(pageSize);
-    props.onSizeChange?.(currentPage, pageSize);
+    props.onSizeChange?.(page, pageSize);
   };
 
   const onChange = (currentPage: number) => {

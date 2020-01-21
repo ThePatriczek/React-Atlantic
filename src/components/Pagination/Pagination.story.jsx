@@ -84,6 +84,9 @@ stories.add(
     const onChange = action(`onChange`);
     const onSizeChange = action(`onSizeChange`);
     const total = text(`total`, defaultValues.total.toString());
+
+    const pageSize = text(`pageSize`, `20`);
+
     const showThreeDots = boolean(`showThreeDots`, defaultValues.showThreeDots);
 
     const _total = parseInt(total);
@@ -100,7 +103,8 @@ stories.add(
       showSizeChanger,
       isSimple,
       showThreeDots,
-      showQuickJumper
+      showQuickJumper,
+      parseInt(pageSize)
     );
 
     specs(() => tests(pagination));

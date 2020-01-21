@@ -14,7 +14,8 @@ export const Component = (
   showSizeChanger,
   isSimple,
   showThreeDots,
-  showQuickJumper
+  showQuickJumper,
+  pageSize
 ) => {
   return (
     <Pagination
@@ -29,6 +30,7 @@ export const Component = (
       pageSizeOptions={pageSizeOptions}
       showThreeDots={showThreeDots}
       showQuickJumper={showQuickJumper}
+      pageSize={pageSize}
     />
   );
 };
