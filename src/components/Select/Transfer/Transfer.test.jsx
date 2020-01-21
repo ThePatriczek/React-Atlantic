@@ -32,7 +32,7 @@ export const Component = (
       deleteAllText={deleteAllText}
       options={options}
       notFoundComponent={notFoundComponent}
-      chosenText={defaultValues.chosenText('Vybráno', 'z')}
+      chosenComponent={(x,y) => `${x} of ${y}`}
       size={size}
     >
       <Option value={`fourth option`}>

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useEffect, useRef, useState } from 'react';
+import { ReactNode, useEffect, useRef, useState } from 'react';
 import { Position, Size } from '../../../types';
 import { Button } from '../../Button';
 import { Checkbox } from '../../Checkbox';
@@ -36,7 +36,7 @@ export interface TransferProps {
   deleteAllText?: string;
   notFoundComponent?: any;
   size?: Size;
-  chosenText?: (chosen: string, outOf: string) => { [key: string]: string };
+  chosenComponent?: (checked: number, total: number) => ReactNode;
 }
 
 export const Transfer: React.FC<React.PropsWithChildren<TransferProps>> & {
@@ -52,8 +52,9 @@ export const Transfer: React.FC<React.PropsWithChildren<TransferProps>> & {
     deleteAllText,
     notFoundComponent,
     size,
-    chosenText
+    chosenComponent
   } = props;
+
   const [isOpen, setOpen] = useState<boolean>(false);
   const [resultValue, setResultValue] = useState<string>('');
   const [searchedValue, setSearchedValue] = useState<string>('');
@@ -64,8 +65,8 @@ export const Transfer: React.FC<React.PropsWithChildren<TransferProps>> & {
   );
   const [position, setPosition] = useState<Position | 'unset' | null>('unset');
   const ref = useRef<HTMLDivElement>(null);
-  const checkedItems = items?.filter(item => item.isChecked);
-  const isHalfOpen = checkedItems?.length > 0;
+  const checkedItems: OptionType[] = items.filter(item => item.isChecked);
+  const isHalfOpen: boolean = checkedItems.length > 0;
 
   useEffect(() => {
     document.addEventListener('mousedown', handleClickOutside);
@@ -143,14 +144,12 @@ export const Transfer: React.FC<React.PropsWithChildren<TransferProps>> & {
     setSearchedValue(value);
   };
 
-  const assembleChosenText = (object: any) => {
-    return (
-      <>
-        <strong>{`${object && object.chosen}: `}</strong>
-        {`${checkedItems.length} ${object && object.outOf} ${items.length}`}
-      </>
-    );
-  };
+  const defaultChosenComponent = (
+    <>
+      <strong>{`Vybráno: `}</strong>
+      {`${checkedItems.length} z ${items.length}`}
+    </>
+  );
 
   const LeftSide = (
     <StyledTransferSide isHalfOpen={isHalfOpen} isOpen={isOpen}>
@@ -223,7 +222,8 @@ export const Transfer: React.FC<React.PropsWithChildren<TransferProps>> & {
     <StyledTransferSide isHalfOpen={isHalfOpen} isOpen={isOpen}>
       <StyledChosenHeader size={size}>
         <StyledTransferSpan>
-          {assembleChosenText(chosenText)}
+          {chosenComponent?.(checkedItems.length, items.length) ||
+            defaultChosenComponent}
         </StyledTransferSpan>
         <DeleteAllButton
           isTransparent
