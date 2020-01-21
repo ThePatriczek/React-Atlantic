@@ -14,8 +14,10 @@ interface ButtonListProps {
   showArrowJumper: boolean;
   showDoubleArrowJumper: boolean;
   showThreeDots: boolean;
-  setPage: (value: number) => void;
   isSimple: boolean;
+  textRight: string;
+  textLeft: string;
+  onChange: (value: number) => void;
 }
 
 export const ButtonList: FC<ButtonListProps> = props => {
@@ -25,9 +27,11 @@ export const ButtonList: FC<ButtonListProps> = props => {
     showDoubleArrowJumper,
     showArrowJumper,
     showThreeDots,
-    setPage,
     currentPage,
-    isSimple
+    isSimple,
+    textLeft,
+    textRight,
+    onChange
   } = props;
 
   const disabledMaxCondition: boolean =
@@ -36,32 +40,32 @@ export const ButtonList: FC<ButtonListProps> = props => {
     isDisabled || currentPage === 1 || count === 0;
 
   const onSingleArrowClick = (right: boolean) => {
-    right ? setPage(currentPage + 1) : setPage(currentPage - 1);
+    right ? onChange(currentPage + 1) : onChange(currentPage - 1);
   };
 
   const onDoubleArrowClick = (right: boolean) => {
-    right ? setPage(count) : setPage(1);
+    right ? onChange(count) : onChange(1);
   };
 
   const onStepClick = (right: boolean) => {
     const step: number = 5;
     right
       ? currentPage + 5 > count
-      ? setPage(count)
-      : setPage(currentPage + step)
+        ? onChange(count)
+        : onChange(currentPage + step)
       : currentPage - 5 < 1
-      ? setPage(1)
-      : setPage(currentPage - 5);
+      ? onChange(1)
+      : onChange(currentPage - 5);
   };
 
   const middleScenario = (list: number[]) => {
-    if (showThreeDots) {
+    if (showThreeDots && Math.abs(currentPage - 1) > 3) {
       list.push(-1);
     }
     for (let i = currentPage - 2; i <= currentPage + 2; i++) {
       list.push(i);
     }
-    if (showThreeDots) {
+    if (showThreeDots && Math.abs(currentPage - count) > 3) {
       list.push(-1);
     }
   };
@@ -127,6 +131,7 @@ export const ButtonList: FC<ButtonListProps> = props => {
       {array.map((item: number, key: number) => {
         return item === -1 ? (
           <ThreeDots
+            text={key > array.length / 2 ? textRight : textLeft}
             unique={-key - 5}
             onClick={isDisabled ? undefined : onStepClick}
             isRight={key > array.length / 2}
@@ -134,7 +139,7 @@ export const ButtonList: FC<ButtonListProps> = props => {
         ) : !isSimple ? (
           <li key={item}>
             <StyledNormalPaginationButton
-              onClick={() => setPage(item)}
+              onClick={() => onChange(item)}
               isActive={item === currentPage}
               isDisabled={isDisabled || item === 0}
             >
@@ -144,10 +149,10 @@ export const ButtonList: FC<ButtonListProps> = props => {
         ) : (
           <li key={item}>
             <StyledSimplePaginationButton
-              onClick={() => setPage(item)}
+              onClick={() => onChange(item)}
               isActive={item === currentPage}
               isDisabled={isDisabled || item === 0}
-              isSimple={true}
+              isSimple
             >
               <ButtonPaginationText>{item.toString()}</ButtonPaginationText>
             </StyledSimplePaginationButton>
