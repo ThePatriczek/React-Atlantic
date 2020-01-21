@@ -1,11 +1,16 @@
 import * as React from 'react';
-import { ReactNode, useEffect, useRef, useState } from 'react';
-import { Size } from '../../../types';
+import { useEffect, useRef, useState } from 'react';
+import { Position, Size } from '../../../types';
 import { Button } from '../../Button';
 import { Checkbox } from '../../Checkbox';
 import { Icon } from '../../Icon';
 import { Option, OptionProps } from '../Option';
-import { checkChildrenAndOptions, OptionType } from '../Select.utils';
+import {
+  checkChildrenAndOptions,
+  getPositionOfElementInViewport,
+  isElementInViewport,
+  OptionType
+} from '../Select.utils';
 import {
   DeleteAllButton,
   StyledChosenHeader,
@@ -57,12 +62,17 @@ export const Transfer: React.FC<React.PropsWithChildren<TransferProps>> & {
   const [items, setItems] = useState<OptionType[]>(
     checkChildrenAndOptions(children, options)
   );
+  const [position, setPosition] = useState<Position | 'unset' | null>('unset');
   const ref = useRef<HTMLDivElement>(null);
   const checkedItems = items?.filter(item => item.isChecked);
   const isHalfOpen = checkedItems?.length > 0;
 
   useEffect(() => {
     document.addEventListener('mousedown', handleClickOutside);
+
+    ref?.current && !isElementInViewport(ref.current)
+      ? setPosition(getPositionOfElementInViewport(ref.current))
+      : setPosition('unset');
 
     const map: Map<string, boolean> = new Map();
 
@@ -265,7 +275,6 @@ export const Transfer: React.FC<React.PropsWithChildren<TransferProps>> & {
 
   return (
     <StyledTransferContainer
-      ref={ref}
       placeholder={placeholder}
       deleteAllText={deleteAllText}
       closeText={closeText}
@@ -276,6 +285,8 @@ export const Transfer: React.FC<React.PropsWithChildren<TransferProps>> & {
       size={size}
     >
       <StyledTransfer
+        ref={ref}
+        position={position}
         isHalfOpen={isHalfOpen}
         isOpen={isOpen}
         isFocused={isFocused}

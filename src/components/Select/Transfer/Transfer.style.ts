@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 import { theme } from '../../../theme';
-import { Size } from '../../../types';
+import { Position, Size } from '../../../types';
 import { Button } from '../../Button';
 import {
   StyledCheckboxInputShown,
@@ -27,6 +27,7 @@ interface StyledTransferProps {
   isFocused?: boolean;
   size?: Size;
   notFoundComponent?: any;
+  position?: Position | 'unset' | null;
 }
 
 export const StyledTransferContainer = styled.div<StyledTransferProps>`
@@ -42,39 +43,6 @@ export const StyledTransferUl = styled.ul<StyledTransferProps>`
   margin-top: 0;
   margin-bottom: 0;
   overflow: scroll;
-`;
-
-export const StyledTransfer = styled.div<StyledTransferProps>`
-  display: block;
-  min-width: 300px;
-  width: ${props => (props.isOpen && props.isHalfOpen ? '600px' : '300px')};
-  position: absolute;
-  background-color: #fff;
-  border: 1px solid #d9d9d9;
-  border-radius: 4px;
-  box-shadow: none;
-  font-size: 14px;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI';
-
-  ${props =>
-    props.isOpen &&
-    css`
-      box-shadow: ${props => props.theme.boxShadow.md};
-    `}
-  }
-  ${props =>
-    !props.isDisabled &&
-    css`
-      &:hover {
-        border-color: ${props => props.theme.color.primary.alpha};
-      }
-    `}
-  
-  ${props =>
-    props.isFocused &&
-    css`
-      border-color: ${props => props.theme.color.primary.alpha};
-    `}
 `;
 
 export const StyledTransferInput = styled(Input)<StyledTransferProps>`
@@ -367,6 +335,62 @@ ${props =>
         height: ${parseInt(props.theme.height.lg, 0)}px;
         line-height: ${parseInt(props.theme.height.lg, 0)}px;
       `}
+`;
+
+export const StyledTransfer = styled.div<StyledTransferProps>`
+  display: block;
+  min-width: 300px;
+  width: ${props => (props.isOpen && props.isHalfOpen ? '600px' : '300px')};
+  position: absolute;
+  background-color: #fff;
+  border: 1px solid #d9d9d9;
+  border-radius: 4px;
+  box-shadow: none;
+  font-size: 14px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI';
+
+  ${props =>
+    props.isOpen &&
+    css`
+      box-shadow: ${props => props.theme.boxShadow.md};
+    `}
+  }
+  ${props =>
+    !props.isDisabled &&
+    css`
+      &:hover {
+        border-color: ${props => props.theme.color.primary.alpha};
+      }
+    `}
+  
+  ${props =>
+    props.isFocused &&
+    css`
+      border-color: ${props => props.theme.color.primary.alpha};
+    `}
+  
+  ${props =>
+    props.position === 'bottom' &&
+    css`
+      bottom: 0;
+    `}
+  
+   ${props =>
+     props.position === 'top' &&
+     css`
+       top: 0;
+     `}
+   ${props =>
+     props.position === 'right' &&
+     css`
+       right: 0;
+     `}
+   
+   ${props =>
+     props.position === 'left' &&
+     css`
+       left: 0;
+     `}
 `;
 
 StyledTransferUl.defaultProps = {
