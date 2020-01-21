@@ -206,13 +206,6 @@ export const Transfer: React.FC<React.PropsWithChildren<TransferProps>> & {
     setSearchedValue(value);
   };
 
-  const defaultChosenComponent = (
-    <>
-      <strong>{`Chosen: `}</strong>
-      {`${checkedItems.length} of ${items.length}`}
-    </>
-  );
-
   const LeftSide = (
     <StyledTransferSide isHalfOpen={isHalfOpen} isOpen={isOpen}>
       {isOpen ? (
@@ -287,8 +280,7 @@ export const Transfer: React.FC<React.PropsWithChildren<TransferProps>> & {
     <StyledTransferSide isHalfOpen={isHalfOpen} isOpen={isOpen}>
       <StyledChosenHeader size={size}>
         <StyledTransferSpan>
-          {chosenComponent?.(checkedItems.length, items.length) ||
-            defaultChosenComponent}
+          {chosenComponent?.(checkedItems.length, items.length)}
         </StyledTransferSpan>
         <DeleteAllButton
           isTransparent
@@ -364,7 +356,13 @@ Transfer.defaultProps = {
   deleteAllText: 'Delete all',
   placeholder: 'Select an option',
   size: 'medium',
-  notFoundComponent: <NotFound title={`No items found...`} />
+  notFoundComponent: <NotFound title={`No items found...`} />,
+  chosenComponent: (checked, total) => (
+    <>
+      <strong>{`Chosen: `}</strong>
+      {`${checked} of ${total}`}
+    </>
+  )
 };
 
 Transfer.Option = Option;
