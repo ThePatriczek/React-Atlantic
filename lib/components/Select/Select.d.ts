@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { Size } from '../../types';
 import { OptionProps } from './Option';
+import { OptionType } from './Select.utils';
 export interface SelectProps {
     onChange?: (value?: any) => void;
     value?: any;
@@ -13,10 +14,6 @@ export interface SelectProps {
     size?: Size;
     className?: string;
     autoFocus?: boolean;
-}
-export interface OptionType {
-    value: any;
-    label: React.ReactNode;
 }
 export declare const Select: React.FC<React.PropsWithChildren<SelectProps>> & {
     Option: React.FC<OptionProps>;

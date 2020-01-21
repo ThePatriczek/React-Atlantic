@@ -1,4 +1,10 @@
 export declare const defaultValues: {
+    showThreeDots: boolean;
+    hideArrowJumper: boolean;
+    showQuickJumper: boolean;
+    showDoubleArrowJumper: boolean;
+    showSizeChanger: boolean;
+    isSimple: boolean;
     isChecked: boolean;
     isDefaultChecked: boolean;
     isDisabled: boolean;
@@ -31,6 +37,17 @@ export declare const defaultValues: {
     selectValue: {
         value: string;
     }[];
+    options: {
+        value: string;
+        label: string;
+    }[];
+    chosenText: (chosen: string, outOf: string) => {
+        chosen: string;
+        outOf: string;
+    };
+    closeText: string;
+    submitText: string;
+    deleteAllText: string;
     placeholder: string;
     defaultValue: string;
     notificationContent: string;
@@ -41,4 +58,6 @@ export declare const defaultValues: {
     shape: string;
     width: number;
     height: number;
+    pageSizeOptions: number[];
+    total: number;
 };

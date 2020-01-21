@@ -11,9 +11,7 @@ export declare const Hamburger: () => JSX.Element;
 export declare const Loading: () => JSX.Element;
 export declare const Edit: () => JSX.Element;
 export declare const Copy: () => JSX.Element;
-export declare const CheckSimple: (props: {
-    [key: string]: string | number;
-}) => JSX.Element;
+export declare const CheckSimple: (props: any) => JSX.Element;
 export declare const Check: () => JSX.Element;
 export declare const Users: () => JSX.Element;
 export declare const User: () => JSX.Element;
@@ -59,6 +57,7 @@ export declare const BookOpened: () => JSX.Element;
 export declare const Citex: () => JSX.Element;
 export declare const ZoomIn: () => JSX.Element;
 export declare const Play: () => JSX.Element;
+export declare const ThreeDots: () => JSX.Element;
 export declare const FlagParagraph: () => JSX.Element;
 export declare const FlagCzech: () => JSX.Element;
 export declare const FlagComments: () => JSX.Element;
