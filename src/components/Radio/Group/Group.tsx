@@ -3,7 +3,7 @@ import { RadioGroupContextProvider } from '../Context';
 import { StyledRadioGroup } from './Group.style';
 
 export interface GroupProps {
-  onChange: (value: any) => void;
+  onChange?: (value: any) => void;
 }
 
 export const Group: React.FC<React.PropsWithChildren<GroupProps>> = (

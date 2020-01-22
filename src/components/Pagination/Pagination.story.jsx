@@ -4,7 +4,7 @@ import { specs } from 'storybook-addon-specifications';
 import { storiesOf } from '@storybook/react';
 import { Pagination } from './Pagination';
 import { Component, tests } from './Pagination.test';
-import { defaultValues } from '../..';
+import { defaultValues } from '../../constants/defaultValues';
 import { action } from '@storybook/addon-actions';
 
 const stories = storiesOf('Pagination', module);

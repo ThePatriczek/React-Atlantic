@@ -2,9 +2,9 @@ import { darken, lighten } from 'polished';
 import styled, { css, keyframes } from 'styled-components';
 import { theme } from '../../theme';
 import { Size } from '../../types';
-import { ButtonType } from './Button';
 import {StyledIcon} from "../Icon/Icon.style";
 import {StyledText} from "../Typography/Text/Text.style";
+import { ButtonType } from './Button';
 
 interface StyledButtonProps {
   styleType?: ButtonType;
