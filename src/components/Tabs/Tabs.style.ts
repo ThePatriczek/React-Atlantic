@@ -6,7 +6,7 @@ interface StyledTabsContainerProps {
   size: Size;
 }
 
-export const StyledTabsContainer = styled.div<StyledTabsContainerProps & TabsProps>``;
+export const StyledTabsContainer = styled.div<StyledTabsContainerProps>``;
 
 interface StyledTabsBarProps extends StyledTabsContainerProps {
   isAlternative: boolean;

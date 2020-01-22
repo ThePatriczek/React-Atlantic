@@ -8,9 +8,12 @@ interface StyledTabProps {
 }
 
 export const StyledTab = styled.label<StyledTabProps>`
+  
+  color: ${props => props.theme.color.text.alpha};
   * {
     color: ${props => props.theme.color.text.alpha};
   }
+  
   user-select: none;
   position: relative;
   display: inline-block;
@@ -23,6 +26,9 @@ export const StyledTab = styled.label<StyledTabProps>`
 
   cursor: pointer;
   text-decoration: none;
+  
+   -webkit-transition: color 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+   transition: color 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
   * {
     -webkit-transition: color 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
     transition: color 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
@@ -61,6 +67,8 @@ export const StyledTab = styled.label<StyledTabProps>`
         right: 0;
       }
 
+      color: ${props.theme.color.primary.alpha};
+      font-weight: bold;
       * {
         color: ${props.theme.color.primary.alpha};
         font-weight: bold;
@@ -94,6 +102,7 @@ export const StyledTab = styled.label<StyledTabProps>`
   ${props =>
     props.isDisabled
       ? css`
+          color: ${props.theme.color.text.beta};
           * {
             color: ${props.theme.color.text.beta};
           }
@@ -102,6 +111,7 @@ export const StyledTab = styled.label<StyledTabProps>`
         `
       : css`
           :hover {
+            color: ${props => props.theme.color.primary.alpha};
             * {
               color: ${props => props.theme.color.primary.alpha};
             }
