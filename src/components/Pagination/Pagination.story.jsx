@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { boolean, text, withKnobs } from '@storybook/addon-knobs';
+import { boolean, select, text, withKnobs } from '@storybook/addon-knobs';
 import { specs } from 'storybook-addon-specifications';
 import { storiesOf } from '@storybook/react';
 import { Pagination } from './Pagination';
@@ -89,6 +89,12 @@ stories.add(
 
     const showThreeDots = boolean(`showThreeDots`, defaultValues.showThreeDots);
 
+    const size = select(
+      `size:`,
+      ['small', 'medium', 'large'],
+      defaultValues.size
+    );
+
     const _total = parseInt(total);
 
 
@@ -104,7 +110,8 @@ stories.add(
       isSimple,
       showThreeDots,
       showQuickJumper,
-      parseInt(pageSize)
+      parseInt(pageSize),
+      size
     );
 
     specs(() => tests(pagination));

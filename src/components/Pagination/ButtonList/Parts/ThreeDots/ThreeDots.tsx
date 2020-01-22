@@ -11,7 +11,7 @@ interface ThreeDotsProps {
   onClick?: (value: boolean) => void;
   isRight: boolean;
   unique: number;
-  text: string;
+  text?: string;
 }
 
 export const ThreeDots: FC<ThreeDotsProps> = props => {
@@ -47,15 +47,17 @@ export const ThreeDots: FC<ThreeDotsProps> = props => {
         <StyledPaginationIcon>•••</StyledPaginationIcon>
       ) : (
         <StyledPaginationStepIcon onClick={onClick}>
-          <Icon name={isRight ? 'arrowDoubleRight' : 'arrowDoubleLeft'} />
+          <Icon name={isRight ? 'arrowDoubleRight' : 'arrowDoubleLeft'}/>
         </StyledPaginationStepIcon>
       )}
 
       {hovered && !isClicked && (
         <Tooltip place={'bottom'} id={unique.toString()}>
+          {text &&
           <StyledThreeDotsText>
             {text}
           </StyledThreeDotsText>
+          }
         </Tooltip>
       )}
     </li>

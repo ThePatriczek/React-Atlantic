@@ -2,14 +2,16 @@ import React, { FC } from 'react';
 import { Option, Select } from '../../Select';
 import { Typography } from '../../Typography';
 import { StyledSizeChanger } from './SizeChanger.style';
+import { Size } from '../../../types';
 
 interface SelectProps {
   isDisabled: boolean;
   pageSizeOptions?: number[];
   pageSize: number;
   setPageSize: (value: number) => void;
-  text: string;
+  text?: string;
   onSizeChange: (value: number) => void;
+  size: Size;
 }
 
 const { Text } = Typography;
@@ -21,7 +23,8 @@ export const SizeChanger: FC<SelectProps> = props => {
     isDisabled,
     setPageSize,
     text,
-    onSizeChange
+    onSizeChange,
+    size
   } = props;
 
   const onChange = (value?: any) => {
@@ -35,7 +38,7 @@ export const SizeChanger: FC<SelectProps> = props => {
 
   return (
     <StyledSizeChanger>
-      <Select isDisabled={isDisabled} value={pageSize} onChange={onChange}>
+      <Select size={size} isDisabled={isDisabled} value={pageSize} onChange={onChange}>
         {pageSizeOptions.map((item: number, key: number) => (
           <Option value={item} key={key}>
             <Text>{`${item} / ${text}`}</Text>
