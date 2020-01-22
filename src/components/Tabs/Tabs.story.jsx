@@ -7,6 +7,7 @@ import { Tabs } from './Tabs';
 import { Typography } from '../Typography';
 import { Icon } from '../Icon';
 import { action } from '@storybook/addon-actions';
+import { Component, tests } from './Tabs.test';
 
 const stories = storiesOf('Tabs', module);
 
@@ -21,60 +22,29 @@ stories.add(
       `isAlternative:`,
       defaultValues.isAlternative
     );
-    const children = text(`children:`, defaultValues.children);
-    const onChange = action(`onChange`);
-    const tabs = [
-      {
-        value: `cz`,
-        label: (
-          <>
-            <Icon name={'flagCzech'} />
-            <Text>{`Czech Republic`}</Text>
-          </>
-        )
-      },
-      {
-        value: `sk`,
-        label: (
-          <>
-            <Icon name={'flagSlovakia'} />
-            <Text>{`Slovakia`}</Text>
-          </>
-        )
-      },
-      {
-        value: `disabled`,
-        label: (
-          <>
-            <Icon name={'clear'} />
-            <Text>{`isDisabled`}</Text>
-          </>
-        ),
-        isDisabled: true
-      },
-      {
-        value: `eu`,
-        label: (
-          <>
-            <Icon name={'flagEU'} />
-            <Text>{`Europe`}</Text>
-          </>
-        )
-      }
-    ];
-
-    return (
-      <Tabs
-        isAlternative={isAlternative}
-        isBordered={isBordered}
-        tabs={tabs}
-        onChange={onChange}
-      >
-        <Paragraph>
-          <Text key={children}>{children}</Text>
-        </Paragraph>
-      </Tabs>
+    const size = select(
+      `size:`,
+      ['small', `medium`, 'large'],
+      defaultValues.size
     );
+    const children = text(`children:`, defaultValues.children);
+    const className = text(`className:`, defaultValues.className);
+    const onChange = action(`onChange`);
+    const tabs = defaultValues.tabs;
+
+    const Tabs = Component(
+      tabs,
+      children,
+      size,
+      className,
+      isAlternative,
+      isBordered,
+      onChange
+    );
+
+    specs(() => tests(Tabs));
+
+    return Tabs;
   },
   {
     info: { inline: true }

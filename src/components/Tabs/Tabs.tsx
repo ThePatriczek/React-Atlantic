@@ -41,7 +41,7 @@ export const Tabs: FC<TabsProps> = props => {
   }
 
   return (
-    <StyledTabsContainer className={className} size={size as Size}>
+    <StyledTabsContainer className={className} size={size as Size} {...props}>
       <RadioGroupContextProvider onChange={onChange}>
         <StyledTabsBar isAlternative={!!isAlternative} size={size as Size}>
           {tabs.map(item => (

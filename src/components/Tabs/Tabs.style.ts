@@ -1,11 +1,12 @@
 import styled, { css } from 'styled-components';
 import { Size } from '../../types';
+import { TabsProps } from './Tabs';
 
 interface StyledTabsContainerProps {
   size: Size;
 }
 
-export const StyledTabsContainer = styled.div<StyledTabsContainerProps>``;
+export const StyledTabsContainer = styled.div<StyledTabsContainerProps & TabsProps>``;
 
 interface StyledTabsBarProps extends StyledTabsContainerProps {
   isAlternative: boolean;
@@ -64,3 +65,5 @@ export const StyledTabsContent = styled.div<StyledTabsContentProps>`
       border-radius: 0 0 ${props.theme.radius} ${props.theme.radius};
     `}
 `;
+
+StyledTabsContent.displayName = `StyledTabsContent`;

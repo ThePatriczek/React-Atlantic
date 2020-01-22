@@ -18,6 +18,23 @@ export const defaultValues = {
   isMulti: false,
   iconRight: false,
   iconLeft: false,
+  isBordered: false,
+  tabs: [
+    {
+      value: `1`,
+      label: `Tab 1`
+    },
+    {
+      value: `2`,
+      label: `Tab 2`
+    },
+    {
+      value: `3`,
+      label: `Tab 3`,
+      isDisabled: true
+    }
+  ],
+  className: `atlantic-component`,
   selectDefaultValueOne: 'value 1',
   selectDefaultValueTwo: 'value 2',
   place: 'top',
