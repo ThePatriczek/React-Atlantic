@@ -19,10 +19,12 @@ export const Component = (
   deleteAllText,
   options,
   size,
-  isFullWidth
+  isFullWidth,
+  direction
 ) => {
   return (
     <Transfer
+      direction={direction}
       placeholder={placeholder}
       isDisabled={isDisabled}
       closeText={closeText}
@@ -45,7 +47,8 @@ export const tests = (
     defaultValues.deleteAllText,
     defaultValues.options,
     defaultValues.size,
-    defaultValues.isFullWidth
+    defaultValues.isFullWidth,
+    defaultValues.direction
   )
 ) => {
   let output = shallow(transfer);
@@ -83,6 +86,10 @@ export const tests = (
 
     it(`Should have size: ${transfer.props.size}`, () => {
       expect(output.props().size).toEqual(transfer.props.size);
+    });
+
+    it(`Should have direction: ${transfer.props.direction}`, () => {
+      expect(output.props().direction).toEqual(transfer.props.direction);
     });
   });
 };

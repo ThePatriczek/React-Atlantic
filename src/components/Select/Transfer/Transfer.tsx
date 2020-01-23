@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { ReactNode, useEffect, useRef, useState } from 'react';
-import { Position, Size } from '../../../types';
+import { Direction, Position, Size } from '../../../types';
 import { NotFound } from '../../NotFound';
 import { Option, OptionProps } from '../Option';
 import {
@@ -29,6 +29,7 @@ export interface TransferProps {
   onSubmit?: (items: OptionType[]) => void;
   className?: string;
   isFullWidth?: boolean;
+  direction?: Direction;
 }
 
 export interface TransferItems extends OptionType {
@@ -50,7 +51,8 @@ export const Transfer: React.FC<React.PropsWithChildren<TransferProps>> & {
     notFoundComponent,
     size,
     chosenComponent,
-    isFullWidth
+    isFullWidth,
+    direction
   } = props;
 
   const [isOpen, setOpen] = useState<boolean>(false);
@@ -219,6 +221,7 @@ export const Transfer: React.FC<React.PropsWithChildren<TransferProps>> & {
       notFoundComponent={notFoundComponent}
       size={size}
       isFullWidth={isFullWidth}
+      direction={direction}
     >
       <StyledTransfer
         size={size}
@@ -229,9 +232,11 @@ export const Transfer: React.FC<React.PropsWithChildren<TransferProps>> & {
         isOpen={isOpen}
         isFocused={isFocused}
         isDisabled={isDisabled}
+        direction={direction}
       >
         <form onSubmit={formSubmit}>
           <LeftSide
+            direction={direction}
             isHalfOpen={isHalfOpen}
             isOpen={isOpen}
             onKeyDown={onKeyDown}
@@ -253,6 +258,7 @@ export const Transfer: React.FC<React.PropsWithChildren<TransferProps>> & {
           />
           {isOpen && isHalfOpen && (
             <RightSide
+              direction={direction}
               chosenComponent={chosenComponent}
               checkedItems={checkedItems}
               isHalfOpen={isHalfOpen}

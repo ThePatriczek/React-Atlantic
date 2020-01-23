@@ -1,5 +1,5 @@
 import React, { Dispatch, FC, ReactNode, SetStateAction } from 'react';
-import { Size } from '../../../../types';
+import { Direction, Size } from '../../../../types';
 import { Checkbox } from '../../../Checkbox';
 import { Icon } from '../../../Icon';
 import { OptionType } from '../../Select.utils';
@@ -16,6 +16,7 @@ import {
 
 export interface LeftSideProps {
   placeholder?: string;
+  direction?: Direction;
   isDisabled?: boolean;
   options?: OptionType[];
   closeText?: string;
@@ -59,7 +60,8 @@ const LeftSide: FC<LeftSideProps> = props => {
     savedItems,
     onChange,
     notFoundComponent,
-    isFullWidth
+    isFullWidth,
+    direction
   } = props;
 
   const filter = (item: OptionType) => {
@@ -73,6 +75,7 @@ const LeftSide: FC<LeftSideProps> = props => {
 
   return (
     <StyledTransferSide
+      direction={direction}
       isHalfOpen={isHalfOpen}
       isOpen={isOpen}
       isFullWidth={isFullWidth}

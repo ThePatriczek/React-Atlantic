@@ -1,9 +1,11 @@
 import React, { FC, ReactNode } from 'react';
-import { Size } from '../../../../types';
+import { Direction, Size } from '../../../../types';
 import { TransferItems } from '../Transfer';
 import {
   DeleteAllButton,
-  StyledChosenHeader, StyledDeleteOneIcon,
+  StyledChosenHeader,
+  StyledDeleteOneButton,
+  StyledDeleteOneIcon,
   StyledTransferDeleteAllButtonIcon,
   StyledTransferLi,
   StyledTransferSide,
@@ -21,6 +23,7 @@ interface RightSideProps {
   isFullWidth?: boolean;
   deleteAllText?: string;
   size?: Size;
+  direction?: Direction;
   chosenComponent?: (checked: number, total: number) => ReactNode;
 }
 
@@ -35,11 +38,13 @@ const RightSide: FC<RightSideProps> = props => {
     size,
     deleteAllText,
     onChange,
-    isFullWidth
+    isFullWidth,
+    direction
   } = props;
 
   return (
     <StyledTransferSide
+      direction={direction}
       isHalfOpen={isHalfOpen}
       isOpen={isOpen}
       isFullWidth={isFullWidth}
@@ -73,7 +78,9 @@ const RightSide: FC<RightSideProps> = props => {
             }}
           >
             {item.label}
-            <StyledDeleteOneIcon name={'error'} />
+            <StyledDeleteOneButton size={'small'}>
+              <StyledDeleteOneIcon name={'error'} />
+            </StyledDeleteOneButton>
           </StyledTransferLi>
         ))}
       </StyledTransferUl>

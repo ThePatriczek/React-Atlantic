@@ -18,6 +18,7 @@ export const defaultValues = {
   isMulti: false,
   iconRight: false,
   iconLeft: false,
+  direction: 'horizontal',
   selectDefaultValueOne: 'value 1',
   selectDefaultValueTwo: 'value 2',
   place: 'top',

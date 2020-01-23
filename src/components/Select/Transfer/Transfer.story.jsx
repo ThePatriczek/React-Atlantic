@@ -21,6 +21,11 @@ stories.add(
       ['small', 'medium', 'large'],
       defaultValues.size
     );
+    const direction = select(
+      'Direction: ',
+      ['horizontal', 'vertical'],
+      defaultValues.direction
+    );
     const deleteAllText = text(
       'Delete all button: ',
       defaultValues.deleteAllText
@@ -40,6 +45,7 @@ stories.add(
       options,
       size,
       isFullWidth,
+      direction
     );
 
     specs(() => tests(transfer));

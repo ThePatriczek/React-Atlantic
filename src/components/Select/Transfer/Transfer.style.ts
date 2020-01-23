@@ -1,7 +1,7 @@
 import { ReactNode } from 'react';
 import styled, { css } from 'styled-components';
 import { theme } from '../../../theme';
-import { Position, Size } from '../../../types';
+import { Direction, Position, Size } from '../../../types';
 import { Button } from '../../Button';
 import {
   StyledCheckboxInputShown,
@@ -16,6 +16,7 @@ import { OptionType } from '../Select.utils';
 
 interface StyledTransferProps {
   isOpen?: boolean;
+  direction?: Direction;
   isHalfOpen?: boolean;
   iconLeft?: IconName;
   placeholder?: string;
@@ -96,7 +97,12 @@ export const StyledTransferInput = styled(Input)<StyledTransferProps>`
       :hover {
         border-color: ${props => props.theme.color.primary.alpha};
         border-right: 1px solid ${props => props.theme.color.primary.alpha};
+        ${!props.isHalfOpen &&
+          css`
+            border-top-right-radius: ${props => props.theme.radius};
+          `}
       }
+
       ${StyledInput} {
         border-bottom-left-radius: 0;
         border-bottom-right-radius: 0;
@@ -117,8 +123,12 @@ export const StyledTransferInput = styled(Input)<StyledTransferProps>`
     `}
 `;
 
-export const StyledDeleteOneIcon = styled(Icon)<StyledTransferProps>`
-  padding-right: 1px;
+export const StyledDeleteOneIcon = styled(Icon)<StyledTransferProps>``;
+
+export const StyledDeleteOneButton = styled(Button)<StyledTransferProps>`
+  border: none;
+  background: none;
+  box-shadow: none;
 `;
 
 export const StyledInputHeader = styled.div<StyledTransferProps>`
@@ -231,16 +241,25 @@ export const StyledChosenHeader = styled.div<StyledTransferProps>`
 
 export const StyledTransferSide = styled.div<StyledTransferProps>`
   display: block;
-  float: left;
-  width: ${props => (props.isOpen ? '50%' : '100%')};
+  width: ${props =>
+    props.isOpen && props.direction === 'horizontal' ? '50%' : '100%'};
    ${props =>
      props.isOpen &&
      css`
        min-width: 220px;
      `}
+   
+   ${props =>
+     props.direction === 'horizontal'
+       ? css`
+           float: left;
+         `
+       : css``}
   &:first-child {
     width: ${props =>
-      props.isHalfOpen && props.isOpen ? 'calc(50% - 1px)' : '100%'};
+      props.isHalfOpen && props.direction === 'horizontal' && props.isOpen
+        ? 'calc(50% - 1px)'
+        : '100%'};
     ${props =>
       props.isOpen &&
       !props.isHalfOpen &&
@@ -258,6 +277,7 @@ export const StyledTransferSide = styled.div<StyledTransferProps>`
     ${props =>
       props.isOpen &&
       props.isHalfOpen &&
+      props.direction === 'horizontal' &&
       css`
         border-right: 1px solid ${props => props.theme.color.border};
       `}
@@ -268,7 +288,14 @@ export const StyledTransferSide = styled.div<StyledTransferProps>`
     justify-content: space-between;
     width: 100%;
     color: ${props => props.theme.color.primary.alpha};
-   
+    ${props =>
+      props.direction === 'horizontal'
+        ? css`
+            border-top: none;
+          `
+        : css`
+            border-top: 1px solid ${props => props.theme.color.border};
+          `}
     button,
     span:not(Icon) {
       margin: 0 ${props => props.theme.padding.sm};
@@ -321,11 +348,13 @@ export const StyledTransferLi = styled.li<StyledTransferProps>`
   }
 
   > i {
+  
     color: ${props => props.theme.color.text.beta};
   }
 
   &:hover {
-    > i {
+    button, button > i {
+      background-color: unset!important;
       color: ${props => props.theme.color.error.alpha};
     }
   }
@@ -436,7 +465,18 @@ export const StyledTransferOptions = styled.div<StyledTransferProps>`
 `;
 
 export const StyledTransfer = styled.div<StyledTransferProps>`
-  min-width: ${props => props.isOpen && props.isHalfOpen && '600px'};
+  ${props =>
+    props.isOpen &&
+    props.isHalfOpen &&
+    props.direction === 'horizontal' &&
+    css`
+      min-width: 600px;
+    `};
+  ${props =>
+    props.isOpen &&
+    props.isHalfOpen &&
+    props.direction === 'vertical' &&
+    css``};
   display: block;
   position: absolute;
   background-color: ${props => props.theme.color.background.delta};
