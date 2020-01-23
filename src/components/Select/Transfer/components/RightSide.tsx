@@ -78,7 +78,7 @@ const RightSide: FC<RightSideProps> = props => {
             }}
           >
             {item.label}
-            <StyledDeleteOneButton size={'small'}>
+            <StyledDeleteOneButton size={size}>
               <StyledDeleteOneIcon name={'error'} />
             </StyledDeleteOneButton>
           </StyledTransferLi>

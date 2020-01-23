@@ -64,6 +64,7 @@ export const StyledTransferUl = styled.ul<StyledTransferProps>`
   margin-top: 0;
   margin-bottom: 0;
   overflow: scroll;
+  color: ${props => props.theme.color.text.alpha};
 `;
 
 export const StyledTransferInput = styled(Input)<StyledTransferProps>`
@@ -123,7 +124,12 @@ export const StyledTransferInput = styled(Input)<StyledTransferProps>`
     `}
 `;
 
-export const StyledDeleteOneIcon = styled(Icon)<StyledTransferProps>``;
+export const StyledDeleteOneIcon = styled(Icon)<StyledTransferProps>`
+  svg,
+  path {
+    color: ${props => props.theme.color.text.beta};
+  }
+`;
 
 export const StyledDeleteOneButton = styled(Button)<StyledTransferProps>`
   border: none;
@@ -189,6 +195,7 @@ export const StyledInputText = styled.div<StyledTransferProps>`
   z-index: 0;
   white-space: nowrap;
   width: calc(100% - 40px);
+  color: ${props => props.theme.color.text.alpha};
   span  {
     ${props =>
       props.size === 'small' &&
@@ -348,12 +355,11 @@ export const StyledTransferLi = styled.li<StyledTransferProps>`
   }
 
   > i {
-  
     color: ${props => props.theme.color.text.beta};
   }
 
-  &:hover {
-    button, button > i {
+  :hover {
+    button, ${StyledDeleteOneIcon} > svg > path {
       background-color: unset!important;
       color: ${props => props.theme.color.error.alpha};
     }
@@ -479,7 +485,7 @@ export const StyledTransfer = styled.div<StyledTransferProps>`
     css``};
   display: block;
   position: absolute;
-  background-color: ${props => props.theme.color.background.delta};
+  background-color: ${props => props.theme.color.background.alpha};
   border: 1px solid ${props => props.theme.color.border};
   border-radius: ${props => props.theme.radius};
   box-shadow: none;
