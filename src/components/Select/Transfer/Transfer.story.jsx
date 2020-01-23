@@ -27,6 +27,8 @@ stories.add(
     );
 
     const isDisabled = boolean('isDisabled: ', defaultValues.isDisabled);
+    const isFullWidth = boolean('isFullWidth: ', defaultValues.isFullWidth);
+
     const options = defaultValues.options;
 
     const transfer = Component(
@@ -36,7 +38,8 @@ stories.add(
       submitText,
       deleteAllText,
       options,
-      size
+      size,
+      isFullWidth,
     );
 
     specs(() => tests(transfer));

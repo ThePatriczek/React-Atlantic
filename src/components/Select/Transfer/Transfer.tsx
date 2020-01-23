@@ -1,9 +1,6 @@
 import * as React from 'react';
 import { ReactNode, useEffect, useRef, useState } from 'react';
 import { Position, Size } from '../../../types';
-import { Button } from '../../Button';
-import { Checkbox } from '../../Checkbox';
-import { Icon } from '../../Icon';
 import { NotFound } from '../../NotFound';
 import { Option, OptionProps } from '../Option';
 import {
@@ -12,20 +9,12 @@ import {
   isElementInViewport,
   OptionType
 } from '../Select.utils';
+import Footer from './components/Footer';
+import LeftSide from './components/LeftSide';
+import RightSide from './components/RightSide';
 import {
-  DeleteAllButton,
-  StyledChosenHeader,
-  StyledInputHeader,
-  StyledSearchButton,
   StyledTransfer,
   StyledTransferContainer,
-  StyledTransferDeleteAllButtonIcon,
-  StyledTransferFooter,
-  StyledTransferInput,
-  StyledTransferLi,
-  StyledTransferSide,
-  StyledTransferSpan,
-  StyledTransferUl
 } from './Transfer.style';
 
 export interface TransferProps {
@@ -42,6 +31,7 @@ export interface TransferProps {
   onCancel?: (items: OptionType[]) => void;
   onSubmit?: (items: OptionType[]) => void;
   className?: string;
+  isFullWidth?: boolean;
 }
 
 export interface TransferItems extends OptionType {
@@ -62,7 +52,8 @@ export const Transfer: React.FC<React.PropsWithChildren<TransferProps>> & {
     deleteAllText,
     notFoundComponent,
     size,
-    chosenComponent
+    chosenComponent,
+    isFullWidth
   } = props;
 
   const [isOpen, setOpen] = useState<boolean>(false);
@@ -81,6 +72,7 @@ export const Transfer: React.FC<React.PropsWithChildren<TransferProps>> & {
   useEffect(() => {
     if (isOpen) {
       window.onmousedown = onMouseDown;
+      window.onkeydown = onKeyDown;
     }
 
     ref.current && !isElementInViewport(ref.current)
@@ -112,11 +104,19 @@ export const Transfer: React.FC<React.PropsWithChildren<TransferProps>> & {
 
     return () => {
       window.onmousedown = null;
+      window.onkeydown = null;
     };
   }, [isOpen]);
 
   const onMouseDown: EventListener = (e: Event) => {
     if (!ref.current?.contains(e.target as Node)) {
+      setOpen(false);
+      setFocus(false);
+    }
+  };
+
+  const onKeyDown = (e: any) => {
+    if (e.key === 'Escape') {
       setOpen(false);
       setFocus(false);
     }
@@ -174,6 +174,11 @@ export const Transfer: React.FC<React.PropsWithChildren<TransferProps>> & {
     }
   };
 
+  const formSubmit = (e: any) => {
+    e.preventDefault();
+    onSubmit();
+  };
+
   const onSubmit = () => {
     if (props.onSubmit) {
       const arr: OptionType[] = [];
@@ -188,7 +193,7 @@ export const Transfer: React.FC<React.PropsWithChildren<TransferProps>> & {
 
       props.onSubmit(arr);
     }
-    const arr = checkedItems.map(item => item.value);
+    const arr = checkedItems.map(item => item.label);
     const map: Map<string, boolean> = new Map();
 
     checkedItems.forEach(item => {
@@ -206,122 +211,6 @@ export const Transfer: React.FC<React.PropsWithChildren<TransferProps>> & {
     setSearchedValue(value);
   };
 
-  const LeftSide = (
-    <StyledTransferSide isHalfOpen={isHalfOpen} isOpen={isOpen}>
-      {isOpen ? (
-        <StyledInputHeader>
-          <StyledTransferInput
-            onChange={inputOnChange}
-            isOpen={isOpen}
-            value={searchedValue}
-            placeholder={placeholder}
-            iconRight={'arrowUp'}
-            isFullWidth
-            autoFocus
-            size={size}
-          />
-          {searchedValue && (
-            <StyledSearchButton
-              onClick={() => setSearchedValue('')}
-              size={size}
-            >
-              <Icon name={'clear'} />
-            </StyledSearchButton>
-          )}
-        </StyledInputHeader>
-      ) : (
-        <StyledTransferInput
-          size={size}
-          isDisabled={isDisabled}
-          isOpen={isOpen}
-          value={resultValue}
-          placeholder={placeholder}
-          iconRight={'arrowDown'}
-          isFullWidth
-          onFocus={() => {
-            setOpen(!isOpen);
-            setFocus(!isFocused);
-          }}
-        />
-      )}
-      {isOpen && (
-        <>
-          {items.filter(item =>
-            item.value.toLowerCase().includes(searchedValue.toLowerCase())
-          ).length !== 0 && (
-            <StyledTransferUl isOpen={isOpen}>
-              {items
-                .filter(item =>
-                  item.value.toLowerCase().includes(searchedValue.toLowerCase())
-                )
-                .map(item => (
-                  <StyledTransferLi key={item.value} size={size}>
-                    <Checkbox
-                      isChecked={item.isChecked}
-                      onChange={isChecked => {
-                        onChange(item.value, isChecked);
-                      }}
-                    >
-                      {item.label}
-                    </Checkbox>
-                  </StyledTransferLi>
-                ))}
-            </StyledTransferUl>
-          )}
-          {items.filter(item =>
-            item.value.toLowerCase().includes(searchedValue.toLowerCase())
-          ).length === 0 && <>{notFoundComponent}</>}
-        </>
-      )}
-    </StyledTransferSide>
-  );
-
-  const RightSide = (
-    <StyledTransferSide isHalfOpen={isHalfOpen} isOpen={isOpen}>
-      <StyledChosenHeader size={size}>
-        <StyledTransferSpan>
-          {chosenComponent?.(checkedItems.length, items.length)}
-        </StyledTransferSpan>
-        <DeleteAllButton
-          isTransparent
-          size={'small'}
-          type={'error'}
-          onClick={() => {
-            uncheckAll();
-          }}
-        >
-          <StyledTransferDeleteAllButtonIcon name={'trash'} size={size} />
-          {size === 'small' ? null : deleteAllText}
-        </DeleteAllButton>
-      </StyledChosenHeader>
-      <StyledTransferUl>
-        {checkedItems.map(item => (
-          <StyledTransferLi
-            size={size}
-            key={item.value}
-            onClick={() => {
-              onChange(item.value, false);
-            }}
-          >
-            {item.label}
-            <Icon name={'error'} />
-          </StyledTransferLi>
-        ))}
-      </StyledTransferUl>
-    </StyledTransferSide>
-  );
-
-  const Footer = (
-    <StyledTransferFooter>
-      <Button size={size} type={'default'} onClick={onClose}>
-        {closeText}
-      </Button>
-      <Button size={size} type={'primary'} onClick={onSubmit}>
-        {submitText}
-      </Button>
-    </StyledTransferFooter>
-  );
-
   return (
     <StyledTransferContainer
       placeholder={placeholder}
@@ -335,21 +224,65 @@ export const Transfer: React.FC<React.PropsWithChildren<TransferProps>> & {
     >
       <StyledTransfer
         ref={ref}
+        isFullWidth={isFullWidth}
         position={position}
         isHalfOpen={isHalfOpen}
         isOpen={isOpen}
         isFocused={isFocused}
         isDisabled={isDisabled}
       >
-        {LeftSide}
-        {isOpen && isHalfOpen && RightSide}
-        {isOpen && Footer}
+        <form onSubmit={formSubmit}>
+          <LeftSide
+            isHalfOpen={isHalfOpen}
+            isOpen={isOpen}
+            onKeyDown={onKeyDown}
+            inputOnChange={inputOnChange}
+            searchedValue={searchedValue}
+            placeholder={placeholder}
+            setSearchedValue={setSearchedValue}
+            isDisabled={isDisabled}
+            resultValue={resultValue}
+            setOpen={setOpen}
+            setFocus={setFocus}
+            size={size}
+            savedItems={savedItems}
+            onChange={onChange}
+            notFoundComponent={notFoundComponent}
+            isFocused={isFocused}
+            items={items}
+            isFullWidth={isFullWidth}
+          />
+          {isOpen && isHalfOpen && (
+            <RightSide
+              chosenComponent={chosenComponent}
+              checkedItems={checkedItems}
+              isHalfOpen={isHalfOpen}
+              isOpen={isOpen}
+              isFullWidth={isFullWidth}
+              items={items}
+              uncheckAll={uncheckAll}
+              size={size}
+              deleteAllText={deleteAllText}
+              onChange={onChange}
+            />
+          )}
+        </form>
+        {isOpen && (
+          <Footer
+            closeText={closeText}
+            size={size}
+            onClose={onClose}
+            onSubmit={onSubmit}
+            submitText={submitText}
+          />
+        )}
       </StyledTransfer>
     </StyledTransferContainer>
   );
 };
 
 Transfer.defaultProps = {
+  isFullWidth: false,
   isDisabled: false,
   submitText: 'Submit',
   closeText: 'Close',
