@@ -163,6 +163,9 @@ export const StyledNotificationContainer = styled.div<NotificationStyleProps>`
     css`
       max-width: 700px;
     `}
+  
+    max-width: 96%;
+    right: 2%;
 `;
 
 StyledNotificationContainer.defaultProps = {
