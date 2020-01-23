@@ -39,6 +39,12 @@ stories.add('Overview', () => (
     <div>
       <Icon name={'arrowDoubleLeft'} />
     </div>
+    <div>
+      <Icon name={'filter'} />
+    </div>
+    <div>
+      <Icon name={'diff'} />
+    </div>
   </div>
 ));
 
