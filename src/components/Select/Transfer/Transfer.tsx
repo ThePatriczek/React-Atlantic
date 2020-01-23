@@ -12,10 +12,7 @@ import {
 import Footer from './components/Footer';
 import LeftSide from './components/LeftSide';
 import RightSide from './components/RightSide';
-import {
-  StyledTransfer,
-  StyledTransferContainer,
-} from './Transfer.style';
+import { StyledTransfer, StyledTransferContainer } from './Transfer.style';
 
 export interface TransferProps {
   placeholder?: string;
@@ -221,8 +218,10 @@ export const Transfer: React.FC<React.PropsWithChildren<TransferProps>> & {
       options={options}
       notFoundComponent={notFoundComponent}
       size={size}
+      isFullWidth={isFullWidth}
     >
       <StyledTransfer
+        size={size}
         ref={ref}
         isFullWidth={isFullWidth}
         position={position}

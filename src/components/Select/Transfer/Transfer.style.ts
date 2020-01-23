@@ -21,6 +21,7 @@ interface StyledTransferProps {
   placeholder?: string;
   isDisabled?: boolean;
   options?: OptionType[];
+  globalSize?: Size;
   closeText?: string;
   submitText?: string;
   deleteAllText?: string;
@@ -68,16 +69,33 @@ export const StyledTransferInput = styled(Input)<StyledTransferProps>`
   z-index: 20;
   ${StyledInput} {
     border: 0;
-    padding-right: 55px;
+    box-sizing: border-box;
+    ${props =>
+      props.isOpen &&
+      css`
+         ${props.size === 'small' &&
+           css`
+             padding-right: 50px;
+           `}
+         ${props.size === 'medium' &&
+           css`
+             padding-right: 55px;
+           `}
+         ${props.size === 'large' &&
+           css`
+             padding-right: 65px;
+           `};
+      `}
   }
 
   ${props =>
     props.isOpen &&
     css`
-      border-bottom: 1px solid #d9d9d9;
+      border-bottom: 1px solid ${props => props.theme.color.border};
 
       :hover {
         border-color: ${props => props.theme.color.primary.alpha};
+        border-right: 1px solid ${props => props.theme.color.primary.alpha};
       }
       ${StyledInput} {
         border-bottom-left-radius: 0;
@@ -88,11 +106,19 @@ export const StyledTransferInput = styled(Input)<StyledTransferProps>`
   ${props =>
     !props.isOpen &&
     css`
+      :hover {
+        border-top-right-radius: ${props => props.theme.radius};
+      }
+
       ${StyledInput} {
         background: none;
         color: transparent;
       }
     `}
+`;
+
+export const StyledDeleteOneIcon = styled(Icon)<StyledTransferProps>`
+  padding-right: 1px;
 `;
 
 export const StyledInputHeader = styled.div<StyledTransferProps>`
@@ -153,37 +179,40 @@ export const StyledInputText = styled.div<StyledTransferProps>`
   z-index: 0;
   white-space: nowrap;
   width: calc(100% - 40px);
-  span{${props =>
-    props.size === 'small' &&
-    css`
-      font-size: ${props.theme.font.size.sm};
-      height: ${parseInt(props.theme.height.sm, 0)}px;
-      line-height: ${parseInt(props.theme.height.sm, 0)}px;
-    `}
+  span  {
     ${props =>
-      props.size === 'medium' &&
+      props.size === 'small' &&
       css`
-        font-size: ${props.theme.font.size.md};
-        height: ${parseInt(props.theme.height.md, 0)}px;
-        line-height: ${parseInt(props.theme.height.md, 0)}px;
+        font-size: ${props.theme.font.size.sm};
+        height: ${parseInt(props.theme.height.sm, 0)}px;
+        line-height: ${parseInt(props.theme.height.sm, 0)}px;
       `}
-    ${props =>
-      props.size === 'large' &&
-      css`
-        font-size: ${props.theme.font.size.lg};
-        height: ${parseInt(props.theme.height.lg, 0)}px;
-        line-height: ${parseInt(props.theme.height.lg, 0)}px;
-      `}}
+      ${props =>
+        props.size === 'medium' &&
+        css`
+          font-size: ${props.theme.font.size.md};
+          height: ${parseInt(props.theme.height.md, 0)}px;
+          line-height: ${parseInt(props.theme.height.md, 0)}px;
+        `}
+      ${props =>
+        props.size === 'large' &&
+        css`
+          font-size: ${props.theme.font.size.lg};
+          height: ${parseInt(props.theme.height.lg, 0)}px;
+          line-height: ${parseInt(props.theme.height.lg, 0)}px;
+        `}
+  }
 `;
 
 export const StyledChosenHeader = styled.div<StyledTransferProps>`
-${props =>
-  props.size === 'small' &&
-  css`
-    font-size: ${props.theme.font.size.sm};
-    height: ${parseInt(props.theme.height.sm, 0)}px;
-    line-height: ${parseInt(props.theme.height.sm, 0)}px;
-  `}
+  border-bottom: 1px solid ${props => props.theme.color.border};
+    ${props =>
+      props.size === 'small' &&
+      css`
+        font-size: ${props.theme.font.size.sm};
+        height: ${parseInt(props.theme.height.sm, 0)}px;
+        line-height: ${parseInt(props.theme.height.sm, 0)}px;
+      `}
     ${props =>
       props.size === 'medium' &&
       css`
@@ -197,32 +226,27 @@ ${props =>
         font-size: ${props.theme.font.size.lg};
         height: ${parseInt(props.theme.height.lg, 0)}px;
         line-height: ${parseInt(props.theme.height.lg, 0)}px;
-      `}
-    border-bottom: 1px solid #d9d9d9
+      `};
 `;
 
 export const StyledTransferSide = styled.div<StyledTransferProps>`
   display: block;
   float: left;
-  
-  width: ${props => props.isOpen && props.isFullWidth && '50%'} ${props =>
-  props.isOpen && !props.isFullWidth && ''};
-  
-  &:last-child {
-    width: ${props => props.isFullWidth && 'calc(50% - 1px)'};
-    min-width: ${props => !props.isOpen && props.isFullWidth && '100%'};
-  }; 
-  
+  width: ${props => (props.isOpen ? '50%' : '100%')};
+   ${props =>
+     props.isOpen &&
+     css`
+       min-width: 220px;
+     `}
   &:first-child {
-    width: ${props => props.isFullWidth && '100%'} ${props =>
-  props.isHalfOpen && props.isFullWidth && 'calc(50% - 1px)'}; 
-    
+    width: ${props =>
+      props.isHalfOpen && props.isOpen ? 'calc(50% - 1px)' : '100%'};
     ${props =>
       props.isOpen &&
       !props.isHalfOpen &&
       css`
-        border-right: 1px solid #d9d9d9;
-        border-top-right-radius: 4px;
+        border-right: 1px solid ${props => props.theme.color.border};
+        border-top-right-radius: ${props => props.theme.radius};
       `}
     
     ${props =>
@@ -231,30 +255,22 @@ export const StyledTransferSide = styled.div<StyledTransferProps>`
       css`
         border-color: ${props => props.theme.color.primary.alpha};
       `}
-
     ${props =>
       props.isOpen &&
       props.isHalfOpen &&
       css`
-        border-right: 1px solid #d9d9d9;
+        border-right: 1px solid ${props => props.theme.color.border};
       `}
   }
-
   > ${StyledChosenHeader} {
     display: flex;
     align-items: center;
     justify-content: space-between;
     width: 100%;
     color: ${props => props.theme.color.primary.alpha};
-
-    ${StyledTransferInput} {
-      input {
-        width: 100%;
-      }
-    }
-
+   
     button,
-    span:not(.icon) {
+    span:not(Icon) {
       margin: 0 ${props => props.theme.padding.sm};
     }
   }
@@ -381,7 +397,13 @@ export const StyledTransferLi = styled.li<StyledTransferProps>`
   }
 `;
 
-export const DeleteAllButton = styled(Button)<StyledTransferProps>``;
+export const DeleteAllButton = styled(Button)<StyledTransferProps>`
+  ${props =>
+    props.globalSize === 'small' &&
+    css`
+      border: none;
+    `}
+`;
 
 export const StyledTransferSpan = styled.span<StyledTransferProps>`
   ${props =>
@@ -414,17 +436,50 @@ export const StyledTransferOptions = styled.div<StyledTransferProps>`
 `;
 
 export const StyledTransfer = styled.div<StyledTransferProps>`
+  min-width: ${props => props.isOpen && props.isHalfOpen && '600px'};
   display: block;
   position: absolute;
-  background-color: ${props => props.theme.color.background.alpha};
+  background-color: ${props => props.theme.color.background.delta};
   border: 1px solid ${props => props.theme.color.border};
-  border-radius: 4px;
+  border-radius: ${props => props.theme.radius};
   box-shadow: none;
   font-size: 14px;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI';
-  z-index: 0;
-  min-width: max-content;
+  box-sizing: border-box;
+  font-family: ${props => props.theme.font.family};
+   
+  ${props =>
+    props.isDisabled &&
+    css`
+      color: ${props.theme.color.text.beta};
+      cursor: not-allowed;
+      background-color: ${props.theme.color.default};
+      outline: 0;
 
+      &:hover,
+      &:focus {
+        outline: 0;
+        box-shadow: none;
+        border: 1px solid ${props.theme.color.border};
+      }
+    `}
+   
+   ${props =>
+     !props.isOpen &&
+     css`
+       ${props.size === 'small' &&
+         css`
+           height: ${parseInt(props.theme.height.sm, 0)}px;
+         `}
+  ${props.size === 'medium' &&
+    css`
+      height: ${parseInt(props.theme.height.md, 0)}px;
+    `}
+  ${props.size === 'large' &&
+    css`
+      height: ${parseInt(props.theme.height.lg, 0)}px;
+    `}
+     `}
+  
   ${props =>
     props.isFullWidth &&
     css`

@@ -2,12 +2,8 @@ import { shallow } from 'enzyme';
 import React from 'react';
 import { Transfer } from './Transfer';
 import expect from 'expect';
-import { Select } from '../Select';
-import { Text } from '../../Typography/Text';
 import { defaultValues } from '../../../constants/defaultValues';
 import { NotFound } from '../../NotFound';
-import { Title } from '../../Typography/Title';
-const { Option } = Select;
 
 const notFoundComponent = (
   <NotFound
@@ -26,7 +22,7 @@ export const Component = (
   isFullWidth
 ) => {
   return (
-    <div
+    <Transfer
       placeholder={placeholder}
       isDisabled={isDisabled}
       closeText={closeText}
@@ -36,178 +32,7 @@ export const Component = (
       notFoundComponent={notFoundComponent}
       size={size}
       isFullWidth={isFullWidth}
-      style={{ padding: 30,width: 300 }}
-    >
-      <div style={{ paddingBottom: 20 }}>
-        <Transfer
-          placeholder={placeholder}
-          isDisabled={isDisabled}
-          closeText={closeText}
-          submitText={submitText}
-          deleteAllText={deleteAllText}
-          options={options}
-          notFoundComponent={notFoundComponent}
-          size={size}
-          isFullWidth={isFullWidth}
-        >
-          <Option value={`first option`}>
-            <Text>{`First option`}</Text>
-          </Option>
-          <Option value={`second option`}>
-            <Text>{`Second option`}</Text>
-          </Option>
-          <Option value={`third option`}>
-            <Text>{`Third option`}</Text>
-          </Option>
-          <Option value={`fourth option`}>
-            <Text>{`Fourth option`}</Text>
-          </Option>
-          <Option value={`fifth option`}>
-            <Text>{`Fifth option`}</Text>
-          </Option>
-        </Transfer>
-      </div>
-      <div style={{ paddingBottom: 20 }}>
-        <Transfer
-          placeholder={placeholder}
-          isDisabled={isDisabled}
-          closeText={closeText}
-          submitText={submitText}
-          deleteAllText={deleteAllText}
-          options={options}
-          notFoundComponent={notFoundComponent}
-          size={size}
-        >
-          <Option value={`first option`}>
-            <Text>{`First option`}</Text>
-          </Option>
-          <Option value={`second option`}>
-            <Text>{`Second option`}</Text>
-          </Option>
-          <Option value={`third option`}>
-            <Text>{`Third option`}</Text>
-          </Option>
-          <Option value={`fourth option`}>
-            <Text>{`Fourth option`}</Text>
-          </Option>
-          <Option value={`fifth option`}>
-            <Text>{`Fifth option`}</Text>
-          </Option>
-        </Transfer>
-      </div>{' '}
-      <div style={{ paddingBottom: 20 }}>
-        <Transfer
-          placeholder={placeholder}
-          isDisabled={isDisabled}
-          closeText={closeText}
-          submitText={submitText}
-          deleteAllText={deleteAllText}
-          options={options}
-          notFoundComponent={notFoundComponent}
-          size={size}
-        >
-          <Option value={`first option`}>
-            <Text>{`First option`}</Text>
-          </Option>
-          <Option value={`second option`}>
-            <Text>{`Second option`}</Text>
-          </Option>
-          <Option value={`third option`}>
-            <Text>{`Third option`}</Text>
-          </Option>
-          <Option value={`fourth option`}>
-            <Text>{`Fourth option`}</Text>
-          </Option>
-          <Option value={`fifth option`}>
-            <Text>{`Fifth option`}</Text>
-          </Option>
-        </Transfer>
-      </div>{' '}
-      <div style={{ paddingBottom: 20 }}>
-        <Transfer
-          placeholder={placeholder}
-          isDisabled={isDisabled}
-          closeText={closeText}
-          submitText={submitText}
-          deleteAllText={deleteAllText}
-          options={options}
-          notFoundComponent={notFoundComponent}
-          size={size}
-        >
-          <Option value={`first option`}>
-            <Text>{`First option`}</Text>
-          </Option>
-          <Option value={`second option`}>
-            <Text>{`Second option`}</Text>
-          </Option>
-          <Option value={`third option`}>
-            <Text>{`Third option`}</Text>
-          </Option>
-          <Option value={`fourth option`}>
-            <Text>{`Fourth option`}</Text>
-          </Option>
-          <Option value={`fifth option`}>
-            <Text>{`Fifth option`}</Text>
-          </Option>
-        </Transfer>
-      </div>{' '}
-      <div style={{ paddingBottom: 20 }}>
-        <Transfer
-          placeholder={placeholder}
-          isDisabled={isDisabled}
-          closeText={closeText}
-          submitText={submitText}
-          deleteAllText={deleteAllText}
-          options={options}
-          notFoundComponent={notFoundComponent}
-          size={size}
-        >
-          <Option value={`first option`}>
-            <Text>{`First option`}</Text>
-          </Option>
-          <Option value={`second option`}>
-            <Text>{`Second option`}</Text>
-          </Option>
-          <Option value={`third option`}>
-            <Text>{`Third option`}</Text>
-          </Option>
-          <Option value={`fourth option`}>
-            <Text>{`Fourth option`}</Text>
-          </Option>
-          <Option value={`fifth option`}>
-            <Text>{`Fifth option`}</Text>
-          </Option>
-        </Transfer>
-      </div>{' '}
-      <div style={{ paddingBottom: 20 }}>
-        <Transfer
-          placeholder={placeholder}
-          isDisabled={isDisabled}
-          closeText={closeText}
-          submitText={submitText}
-          deleteAllText={deleteAllText}
-          options={options}
-          notFoundComponent={notFoundComponent}
-          size={size}
-        >
-          <Option value={`first option`}>
-            <Text>{`First option`}</Text>
-          </Option>
-          <Option value={`second option`}>
-            <Text>{`Second option`}</Text>
-          </Option>
-          <Option value={`third option`}>
-            <Text>{`Third option`}</Text>
-          </Option>
-          <Option value={`fourth option`}>
-            <Text>{`Fourth option`}</Text>
-          </Option>
-          <Option value={`fifth option`}>
-            <Text>{`Fifth option`}</Text>
-          </Option>
-        </Transfer>
-      </div>
-    </div>
+    />
   );
 };
 

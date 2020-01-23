@@ -1,4 +1,4 @@
-import React, { Dispatch, FC, ReactNode, SetStateAction, useRef } from 'react';
+import React, { Dispatch, FC, ReactNode, SetStateAction } from 'react';
 import { Size } from '../../../../types';
 import { Checkbox } from '../../../Checkbox';
 import { Icon } from '../../../Icon';
@@ -62,8 +62,15 @@ const LeftSide: FC<LeftSideProps> = props => {
     isFullWidth
   } = props;
 
-  // const input = useRef<HTMLInputElement>(null);
-  // console.log(input);
+  const filter = (item: OptionType) => {
+    if (typeof item.label === 'string') {
+      return item.label.toLowerCase().includes(searchedValue.toLowerCase());
+    } else {
+      return item.value.toLowerCase().includes(searchedValue.toLowerCase());
+    }
+  };
+  const filtered = items.filter(filter);
+
   return (
     <StyledTransferSide
       isHalfOpen={isHalfOpen}
@@ -100,9 +107,9 @@ const LeftSide: FC<LeftSideProps> = props => {
             isDisabled={isDisabled}
             isOpen={isOpen}
             value={resultValue}
+            isFullWidth={isFullWidth}
             placeholder={placeholder}
             iconRight={'arrowDown'}
-            isFullWidth
             onFocus={() => {
               setOpen(!isOpen);
               setFocus(!isFocused);
@@ -113,10 +120,10 @@ const LeftSide: FC<LeftSideProps> = props => {
               {items
                 .filter(item => savedItems.has(item.value))
                 .map((item, index) => (
-                  <>
+                  <span>
                     {item.label}
                     {index < savedItems.size - 1 ? `, ` : ``}
-                  </>
+                  </span>
                 ))}
             </>
           </StyledInputText>
@@ -124,31 +131,23 @@ const LeftSide: FC<LeftSideProps> = props => {
       )}
       {isOpen && (
         <>
-          {items.filter(item =>
-            item.value.toLowerCase().includes(searchedValue.toLowerCase())
-          ).length !== 0 && (
+          {filtered.length > 0 && (
             <StyledTransferUl isOpen={isOpen}>
-              {items
-                .filter(item =>
-                  item.value.toLowerCase().includes(searchedValue.toLowerCase())
-                )
-                .map(item => (
-                  <StyledTransferLi key={item.value} size={size}>
-                    <Checkbox
-                      isChecked={item.isChecked}
-                      onChange={isChecked => {
-                        onChange(item.value, isChecked);
-                      }}
-                    >
-                      {item.label}
-                    </Checkbox>
-                  </StyledTransferLi>
-                ))}
+              {filtered.map(item => (
+                <StyledTransferLi key={item.value} size={size}>
+                  <Checkbox
+                    isChecked={item.isChecked}
+                    onChange={isChecked => {
+                      onChange(item.value, isChecked);
+                    }}
+                  >
+                    {item.label}
+                  </Checkbox>
+                </StyledTransferLi>
+              ))}
             </StyledTransferUl>
           )}
-          {items.filter(item =>
-            item.value.toLowerCase().includes(searchedValue.toLowerCase())
-          ).length === 0 && <>{notFoundComponent}</>}
+          {filtered.length === 0 && <>{notFoundComponent}</>}
         </>
       )}
     </StyledTransferSide>

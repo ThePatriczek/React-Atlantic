@@ -1,10 +1,9 @@
 import React, { FC, ReactNode } from 'react';
 import { Size } from '../../../../types';
-import { Icon } from '../../../Icon';
 import { TransferItems } from '../Transfer';
 import {
   DeleteAllButton,
-  StyledChosenHeader,
+  StyledChosenHeader, StyledDeleteOneIcon,
   StyledTransferDeleteAllButtonIcon,
   StyledTransferLi,
   StyledTransferSide,
@@ -40,21 +39,28 @@ const RightSide: FC<RightSideProps> = props => {
   } = props;
 
   return (
-    <StyledTransferSide isHalfOpen={isHalfOpen} isOpen={isOpen} isFullWidth={isFullWidth}>
+    <StyledTransferSide
+      isHalfOpen={isHalfOpen}
+      isOpen={isOpen}
+      isFullWidth={isFullWidth}
+    >
       <StyledChosenHeader size={size}>
         <StyledTransferSpan>
           {chosenComponent?.(checkedItems.length, items.length)}
         </StyledTransferSpan>
         <DeleteAllButton
           isTransparent
+          globalSize={size}
           size={'small'}
           type={'error'}
           onClick={() => {
             uncheckAll();
           }}
         >
-          <StyledTransferDeleteAllButtonIcon name={'trash'} size={size} />
-          {size === 'small' ? null : deleteAllText}
+          {size === 'small' && (
+            <StyledTransferDeleteAllButtonIcon name={'trash'} size={size} />
+          )}
+          {size !== 'small' && deleteAllText}
         </DeleteAllButton>
       </StyledChosenHeader>
       <StyledTransferUl>
@@ -67,7 +73,7 @@ const RightSide: FC<RightSideProps> = props => {
             }}
           >
             {item.label}
-            <Icon name={'error'} />
+            <StyledDeleteOneIcon name={'error'} />
           </StyledTransferLi>
         ))}
       </StyledTransferUl>
