@@ -9,6 +9,7 @@ interface StyledTabsBarProps extends StyledTabsContainerProps {
 export declare const StyledTabsBar: import("styled-components").StyledComponent<"div", any, StyledTabsBarProps, never>;
 interface StyledTabsContentProps extends StyledTabsContainerProps {
     isBordered: boolean;
+    hasBackground?: boolean;
 }
 export declare const StyledTabsContent: import("styled-components").StyledComponent<"div", any, StyledTabsContentProps, never>;
 export {};
