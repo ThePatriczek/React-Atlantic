@@ -5,7 +5,7 @@ import expect from 'expect';
 
 export const Component = (
   total,
-  onChange,
+  onPageChange,
   onSizeChange,
   isDisabled,
   pageSizeOptions,
@@ -15,12 +15,13 @@ export const Component = (
   isSimple,
   showThreeDots,
   showQuickJumper,
-  pageSize
+  pageSize,
+  size
 ) => {
   return (
     <Pagination
       total={total}
-      onChange={onChange}
+      onPageChange={onPageChange}
       onSizeChange={onSizeChange}
       hideArrowJumper={hideArrowJumper}
       isDisabled={isDisabled}
@@ -31,6 +32,7 @@ export const Component = (
       showThreeDots={showThreeDots}
       showQuickJumper={showQuickJumper}
       pageSize={pageSize}
+      size={size}
     />
   );
 };
@@ -62,6 +64,9 @@ export const tests = (pagination = Component()) => {
     });
     it(`Should have showQuickJumper: ${pagination.props.showQuickJumper}`, () => {
       expect(output.props().showQuickJumper).toEqual(pagination.props.showQuickJumper);
+    });
+    it(`Should have size: ${pagination.props.size}`, () => {
+      expect(output.props().size).toEqual(pagination.props.size);
     });
   });
 };
