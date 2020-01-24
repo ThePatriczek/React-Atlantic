@@ -10,5 +10,6 @@ export * from './Typography';
 export * from './Message';
 export * from './Notification';
 export * from './DatePicker';
-export * from '../constants/defaultValues';
 export * from './Badge';
+export * from './Pagination';
+export * from './Skeleton';

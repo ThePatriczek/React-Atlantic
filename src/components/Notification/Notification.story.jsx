@@ -3,7 +3,7 @@ import { storiesOf } from '@storybook/react';
 import * as React from 'react';
 import { specs } from 'storybook-addon-specifications';
 import { action } from '@storybook/addon-actions';
-import { defaultValues } from '../..';
+import { defaultValues } from '../../constants/defaultValues';
 import { Component, tests } from './Notification.test';
 
 const stories = storiesOf('Notification', module);
