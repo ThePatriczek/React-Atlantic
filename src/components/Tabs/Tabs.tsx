@@ -1,6 +1,6 @@
-import React, { FC, ReactText } from 'react';
+import React, { FC, PropsWithChildren, ReactText } from 'react';
 import { Size, Type } from '../../types';
-import { RadioGroupContextProvider } from '../Radio/Context';
+import { RadioGroupContextProvider, useRadioGroup } from '../Radio/Context';
 import { GroupProps } from '../Radio/Group';
 import { Tab, TabProps } from './Tab';
 import {
@@ -32,6 +32,18 @@ export const Tabs: FC<TabsProps> = props => {
     isBordered,
     isAlternative
   } = props;
+  return (
+    <StyledTabsContainer className={className} size={size as Size} {...props}>
+      <RadioGroupContextProvider onChange={onChange}>
+        <TabsWithContext {...props}>{children}</TabsWithContext>
+      </RadioGroupContextProvider>
+    </StyledTabsContainer>
+  );
+};
+
+const TabsWithContext: FC<PropsWithChildren<TabsProps>> = props => {
+  const { isAlternative, activeTab, children, isBordered, size } = props;
+  const { value } = useRadioGroup();
   let tabs: TabProps[] = [];
 
   if (Array.isArray(props.tabs)) {
@@ -41,28 +53,32 @@ export const Tabs: FC<TabsProps> = props => {
   }
 
   return (
-    <StyledTabsContainer className={className} size={size as Size} {...props}>
-      <RadioGroupContextProvider onChange={onChange}>
-        <StyledTabsBar isAlternative={!!isAlternative} size={size as Size}>
-          {tabs.map(item => (
-            <Tab
-              key={item.value}
-              value={item.value}
-              label={item.label}
-              isDisabled={item.isDisabled}
-              isActive={activeTab ? activeTab === item.value : undefined}
-              isAlternative={!!isAlternative}
-            />
-          ))}
-        </StyledTabsBar>
-      </RadioGroupContextProvider>
-
-      <StyledTabsContent isBordered={!!isBordered} size={size as Size}>
+    <>
+      <StyledTabsBar isAlternative={!!isAlternative} size={size as Size}>
+        {tabs.map(item => (
+          <Tab
+            key={item.value}
+            value={item.value}
+            label={item.label}
+            isDisabled={item.isDisabled}
+            isActive={activeTab ? activeTab === item.value : undefined}
+            isAlternative={!!isAlternative}
+          />
+        ))}
+      </StyledTabsBar>
+      <StyledTabsContent
+        isBordered={!!isBordered}
+        size={size as Size}
+        hasBackground={!!value}
+      >
         {children}
       </StyledTabsContent>
-    </StyledTabsContainer>
+    </>
   );
 };
+
+TabsWithContext.displayName = `TabsWithContext`;
+
 Tabs.defaultProps = {
   size: 'medium',
   isAlternative: false,

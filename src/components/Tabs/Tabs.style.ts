@@ -21,7 +21,7 @@ export const StyledTabsBar = styled.div<StyledTabsBarProps>`
   transition: padding 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
 
   font-family: ${props => props.theme.font.family};
-  
+
   ${props => {
     switch (props.size) {
       case 'small':
@@ -31,7 +31,7 @@ export const StyledTabsBar = styled.div<StyledTabsBarProps>`
             line-height: ${props.theme.font.size.sm};
           }
         `;
-        
+
       default:
       case 'medium':
         return css`
@@ -40,7 +40,7 @@ export const StyledTabsBar = styled.div<StyledTabsBarProps>`
             line-height: ${props.theme.font.size.md};
           }
         `;
-        
+
       case 'large':
         return css`
           * {
@@ -54,13 +54,21 @@ export const StyledTabsBar = styled.div<StyledTabsBarProps>`
 
 interface StyledTabsContentProps extends StyledTabsContainerProps {
   isBordered: boolean;
+  hasBackground?: boolean;
 }
 
 export const StyledTabsContent = styled.div<StyledTabsContentProps>`
   font-size: ${props => props.theme.font.size.md};
   font-family: ${props => props.theme.font.family};
-  padding: ${props => props.theme.padding.md} ${props => props.theme.padding.lg} ${props => props.theme.padding.md} ${props => props.theme.padding.lg};
- 
+  padding: ${props => props.theme.padding.md} ${props => props.theme.padding.lg}
+    ${props => props.theme.padding.md} ${props => props.theme.padding.lg};
+
+  ${props =>
+    props.hasBackground &&
+    css`
+      background: ${props.theme.color.background.alpha};
+    `}
+
   ${props =>
     props.isBordered &&
     css`

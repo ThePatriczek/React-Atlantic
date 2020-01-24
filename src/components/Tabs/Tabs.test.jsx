@@ -42,7 +42,7 @@ export const tests = (
       expect(output.props().tabs).toEqual(tabs.props.tabs);
     });
     it(`Should have children: ${tabs.props.children}`, () => {
-      expect(output.find(`StyledTabsContent`).props().children).toEqual(
+      expect(output.find(`TabsWithContext`).props().children).toEqual(
         tabs.props.children
       );
     });

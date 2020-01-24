@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 import { StyledIcon } from '../../Icon/Icon.style';
-import {StyledText} from "../../Typography/Text/Text.style";
+import { StyledText } from '../../Typography/Text/Text.style';
 
 interface StyledTabProps {
   isDisabled: boolean;
@@ -15,8 +15,10 @@ export const StyledTab = styled.label<StyledTabProps>`
   display: inline-block;
   height: 100%;
   margin: 0;
-  padding: ${props => props.theme.padding.md} ${props => props.theme.padding.lg};
-  border-radius: ${props => props.theme.radius} ${props => props.theme.radius} 0 0;
+  padding: ${props => props.theme.padding.md} ${props =>
+  props.theme.padding.lg};
+  border-radius: ${props => props.theme.radius} ${props =>
+  props.theme.radius} 0 0;
   box-sizing: border-box;
 
   cursor: pointer;
@@ -49,7 +51,8 @@ export const StyledTab = styled.label<StyledTabProps>`
         right: 0;
 
         border-top: 2px solid transparent;
-        border-radius: ${props => props.theme.radius} ${props => props.theme.radius} 0 0;
+        border-radius: ${props => props.theme.radius} ${props =>
+      props.theme.radius} 0 0;
         -webkit-transition: all 0.3s;
         transition: all 0.3s;
         pointer-events: none;
@@ -88,7 +91,7 @@ export const StyledTab = styled.label<StyledTabProps>`
       border-color: ${props.theme.color.border};
       border-style: solid;
       border-width: 1px 1px 0 1px;
-
+      background: ${props.theme.color.background.alpha};
       :after {
         background: ${props => props.theme.color.background.alpha};
         border-radius: 0;
