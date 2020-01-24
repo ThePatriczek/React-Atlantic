@@ -107,6 +107,13 @@ export const Transfer: React.FC<React.PropsWithChildren<TransferProps>> & {
     };
   }, [isOpen]);
 
+  useEffect(() => {
+    if(isDisabled) {
+      setOpen(false);
+      setFocus(false);
+    }
+  },[isDisabled]);
+
   const onMouseDown: EventListener = (e: Event) => {
     if (!ref.current?.contains(e.target as Node)) {
       setOpen(false);

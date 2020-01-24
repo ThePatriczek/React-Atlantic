@@ -20,7 +20,10 @@ export const Component = (
   options,
   size,
   isFullWidth,
-  direction
+  direction,
+  onChange,
+  onCancel,
+  onSubmit
 ) => {
   return (
     <Transfer
@@ -34,6 +37,9 @@ export const Component = (
       notFoundComponent={notFoundComponent}
       size={size}
       isFullWidth={isFullWidth}
+      onChange={onChange}
+      onCancel={onCancel}
+      onSubmit={onSubmit}
     />
   );
 };

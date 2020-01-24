@@ -5,6 +5,7 @@ import { specs } from 'storybook-addon-specifications';
 import { Transfer } from './Transfer';
 import { Component, tests } from './Transfer.test';
 import { defaultValues } from '../../../constants/defaultValues';
+import { action } from '@storybook/addon-actions';
 
 const stories = storiesOf('Transfer', module);
 
@@ -14,8 +15,8 @@ stories.add(
   'Playground',
   () => {
     const placeholder = text('Placeholder: ', defaultValues.placeholder);
-    const closeText = text('Close button: ', defaultValues.closeText);
-    const submitText = text('Submit button: ', defaultValues.submitText);
+    const closeText = text('Close text: ', defaultValues.closeText);
+    const submitText = text('Submit text: ', defaultValues.submitText);
     const size = select(
       'Size: ',
       ['small', 'medium', 'large'],
@@ -35,6 +36,9 @@ stories.add(
     const isFullWidth = boolean('isFullWidth: ', defaultValues.isFullWidth);
 
     const options = defaultValues.options;
+    const onChange = action(`onChange`);
+    const onCancel = action(`onCancel`);
+    const onSubmit = action(`onSubmit`);
 
     const transfer = Component(
       placeholder,
@@ -45,7 +49,10 @@ stories.add(
       options,
       size,
       isFullWidth,
-      direction
+      direction,
+      onChange,
+      onCancel,
+      onSubmit
     );
 
     specs(() => tests(transfer));
