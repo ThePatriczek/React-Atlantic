@@ -1,9 +1,10 @@
-import * as React from 'react';
-import { ReactNode } from 'react';
-import { Size } from '../../../types';
+import { FC, PropsWithChildren, ReactNode } from 'react';
+import { Direction, Size } from '../../../types';
 import { OptionProps } from '../Option';
 import { OptionType } from '../Select.utils';
 export interface TransferProps {
+    value?: OptionType[];
+    defaultValue?: OptionType[];
     placeholder?: string;
     isDisabled?: boolean;
     options?: OptionType[];
@@ -17,11 +18,13 @@ export interface TransferProps {
     onCancel?: (items: OptionType[]) => void;
     onSubmit?: (items: OptionType[]) => void;
     className?: string;
+    isFullWidth?: boolean;
+    direction?: Direction;
 }
-export interface TransferItems extends OptionType {
+export interface TransferItem extends OptionType {
     isChecked?: boolean;
     className?: string;
 }
-export declare const Transfer: React.FC<React.PropsWithChildren<TransferProps>> & {
-    Option: React.FC<OptionProps>;
+export declare const Transfer: FC<PropsWithChildren<TransferProps>> & {
+    Option: FC<OptionProps>;
 };
