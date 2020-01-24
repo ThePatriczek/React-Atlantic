@@ -35,6 +35,7 @@ export const defaultValues = {
     }
   ],
   className: `atlantic-component`,
+  direction: 'horizontal',
   selectDefaultValueOne: 'value 1',
   selectDefaultValueTwo: 'value 2',
   place: 'top',

@@ -1,9 +1,13 @@
-import * as React from 'react';
-import { ReactNode, useEffect, useRef, useState } from 'react';
-import { Position, Size } from '../../../types';
-import { Button } from '../../Button';
-import { Checkbox } from '../../Checkbox';
-import { Icon } from '../../Icon';
+import React, {
+  FC,
+  PropsWithChildren,
+  ReactElement,
+  ReactNode,
+  useEffect,
+  useRef,
+  useState
+} from 'react';
+import { Direction, Position, Size } from '../../../types';
 import { NotFound } from '../../NotFound';
 import { Option, OptionProps } from '../Option';
 import {
@@ -12,23 +16,15 @@ import {
   isElementInViewport,
   OptionType
 } from '../Select.utils';
-import {
-  DeleteAllButton,
-  StyledChosenHeader,
-  StyledInputHeader,
-  StyledSearchButton,
-  StyledTransfer,
-  StyledTransferContainer,
-  StyledTransferDeleteAllButtonIcon,
-  StyledTransferFooter,
-  StyledTransferInput,
-  StyledTransferLi,
-  StyledTransferSide,
-  StyledTransferSpan,
-  StyledTransferUl
-} from './Transfer.style';
+import Footer from './components/Footer';
+import LeftSide from './components/LeftSide';
+import RightSide from './components/RightSide';
+import { StyledTransfer, StyledTransferContainer } from './Transfer.style';
+import { getMergedItems } from './Transfer.utils';
 
 export interface TransferProps {
+  value?: OptionType[];
+  defaultValue?: OptionType[];
   placeholder?: string;
   isDisabled?: boolean;
   options?: OptionType[];
@@ -42,17 +38,21 @@ export interface TransferProps {
   onCancel?: (items: OptionType[]) => void;
   onSubmit?: (items: OptionType[]) => void;
   className?: string;
+  isFullWidth?: boolean;
+  direction?: Direction;
 }
 
-export interface TransferItems extends OptionType {
+export interface TransferItem extends OptionType {
   isChecked?: boolean;
   className?: string;
 }
 
-export const Transfer: React.FC<React.PropsWithChildren<TransferProps>> & {
-  Option: React.FC<OptionProps>;
-} = (props: React.PropsWithChildren<TransferProps>) => {
+export const Transfer: FC<PropsWithChildren<TransferProps>> & {
+  Option: FC<OptionProps>;
+} = (props): ReactElement => {
   const {
+    value,
+    defaultValue,
     placeholder,
     options,
     isDisabled,
@@ -62,56 +62,97 @@ export const Transfer: React.FC<React.PropsWithChildren<TransferProps>> & {
     deleteAllText,
     notFoundComponent,
     size,
-    chosenComponent
+    chosenComponent,
+    isFullWidth,
+    direction
   } = props;
 
   const [isOpen, setOpen] = useState<boolean>(false);
   const [resultValue, setResultValue] = useState<string>('');
   const [searchedValue, setSearchedValue] = useState<string>('');
-  const [savedItems, setSavedItems] = useState<Map<string, boolean>>(new Map());
   const [isFocused, setFocus] = useState<boolean>(false);
-  const [items, setItems] = useState<TransferItems[]>(
+  const [items, setItems] = useState<TransferItem[]>(
     checkChildrenAndOptions(children, options)
   );
+  const checkedItems: TransferItem[] = items.filter(item => item.isChecked);
+  const [savedItems, setSavedItems] = useState<Map<string, boolean>>(new Map());
   const [position, setPosition] = useState<Position | 'unset' | null>('unset');
   const ref = useRef<HTMLDivElement>(null);
-  const checkedItems: TransferItems[] = items.filter(item => item.isChecked);
   const isHalfOpen: boolean = checkedItems.length > 0;
+
+  useEffect(() => {
+    if (defaultValue && !value) {
+      const map: Map<string, boolean> = new Map(
+        defaultValue.map(item => [item.value, true])
+      );
+
+      setResultValue(defaultValue.map(item => item.label).join(`, `));
+      setSavedItems(map);
+      setItems(
+        getMergedItems(checkChildrenAndOptions(children, options), defaultValue)
+      );
+    }
+  }, []);
+
+  useEffect(() => {
+    if (value) {
+      const map: Map<string, boolean> = new Map(
+        value.map(item => [item.value, true])
+      );
+
+      setResultValue(value.map(item => item.label).join(`, `));
+      setSavedItems(map);
+      setItems((prevState: ReadonlyArray<TransferItem>) =>
+        getMergedItems(prevState, value)
+      );
+    }
+  }, [value]);
+
+  useEffect(() => {
+    if (isDisabled) {
+      setOpen(false);
+      setFocus(false);
+    }
+  }, [isDisabled]);
 
   useEffect(() => {
     if (isOpen) {
       window.onmousedown = onMouseDown;
+      window.onkeydown = onKeyDown;
     }
 
     ref.current && !isElementInViewport(ref.current)
       ? setPosition(getPositionOfElementInViewport(ref.current))
       : setPosition('unset');
 
-    const map: Map<string, boolean> = new Map();
+    if (!value) {
+      const map: Map<string, boolean> = new Map();
 
-    checkedItems.forEach(item => {
-      if (!savedItems.has(item.value)) {
-        map.set(item.value, false);
-      }
-    });
+      checkedItems.forEach(item => {
+        if (!savedItems.has(item.value)) {
+          map.set(item.value, false);
+        }
+      });
 
-    items.forEach(item => {
-      if (!savedItems.has(item.value)) {
-        map.set(item.value, false);
-      }
-    });
+      items.forEach(item => {
+        if (!savedItems.has(item.value)) {
+          map.set(item.value, false);
+        }
+      });
 
-    setItems(prevState =>
-      prevState.map(item => {
-        item.isChecked = !map.has(item.value);
-        return item;
-      })
-    );
+      setItems(prevState =>
+        prevState.map(item => {
+          item.isChecked = !map.has(item.value);
+          return item;
+        })
+      );
 
-    setSearchedValue('');
+      setSearchedValue('');
+    }
 
     return () => {
       window.onmousedown = null;
+      window.onkeydown = null;
     };
   }, [isOpen]);
 
@@ -122,36 +163,56 @@ export const Transfer: React.FC<React.PropsWithChildren<TransferProps>> & {
     }
   };
 
+  const onKeyDown = (e: any) => {
+    if (e.key === 'Escape') {
+      setOpen(false);
+      setFocus(false);
+    }
+  };
+
   const onChange = (value: string, isChecked: boolean) => {
-    setItems(prevState => {
-      const arr = prevState.map(item => {
-        if (item.value === value) {
-          item.isChecked = isChecked;
-        }
-        return item;
+    if (!isDisabled) {
+      setItems((prevState: ReadonlyArray<TransferItem>) => {
+        const arr = prevState.map((oldItem: Readonly<TransferItem>) => {
+          const item = { ...oldItem };
+
+          if (item.value === value) {
+            item.isChecked = isChecked;
+          }
+
+          return item;
+        });
+
+        props.onChange?.(
+          arr
+            .filter(item => item.isChecked)
+            .map(item => ({
+              value: item.value,
+              label: item.label,
+              className: item.className && item.className
+            }))
+        );
+
+        return props.value ? [...prevState] : arr;
       });
-
-      props.onChange?.(
-        arr
-          .filter(item => item.isChecked)
-          .map(item => ({
-            value: item.value,
-            label: item.label,
-            className: item.className && item.className
-          }))
-      );
-
-      return arr;
-    });
+    }
   };
 
   const uncheckAll = () => {
-    setItems(prevState =>
-      prevState.map(item => {
-        item.isChecked = false;
-        return item;
-      })
-    );
+    if (!isDisabled) {
+      setItems((prevState: Readonly<TransferItem[]>) => {
+        const arr = prevState.map((oldItem: Readonly<TransferItem>) => {
+          const item = { ...oldItem };
+          item.isChecked = false;
+
+          return item;
+        });
+
+        props.onChange?.([]);
+
+        return props.value ? [...prevState] : arr;
+      });
+    }
   };
 
   const onClose = () => {
@@ -174,153 +235,44 @@ export const Transfer: React.FC<React.PropsWithChildren<TransferProps>> & {
     }
   };
 
+  const formSubmit = (e: any) => {
+    e.preventDefault();
+    onSubmit();
+  };
+
   const onSubmit = () => {
-    if (props.onSubmit) {
-      const arr: OptionType[] = [];
+    if (!isDisabled) {
+      if (props.onSubmit) {
+        const arr: OptionType[] = [];
+        checkedItems.forEach(item => {
+          const obj = {
+            value: item.value,
+            label: item.label,
+            className: item.className && item.className
+          };
+          arr.push(obj);
+        });
+
+        props.onSubmit(arr);
+      }
+      const arr = checkedItems.map(item => item.label);
+      const map: Map<string, boolean> = new Map();
+
       checkedItems.forEach(item => {
-        const obj = {
-          value: item.value,
-          label: item.label,
-          className: item.className && item.className
-        };
-        arr.push(obj);
+        map.set(item.value, true);
       });
 
-      props.onSubmit(arr);
+      setResultValue(arr.join(`, `));
+      setSavedItems(map);
+
+      setOpen(!isOpen);
+      setFocus(!isFocused);
     }
-    const arr = checkedItems.map(item => item.value);
-    const map: Map<string, boolean> = new Map();
-
-    checkedItems.forEach(item => {
-      map.set(item.value, true);
-    });
-
-    setResultValue(arr.join(`, `));
-    setSavedItems(map);
-
-    setOpen(!isOpen);
-    setFocus(!isFocused);
   };
 
   const inputOnChange = (value: string) => {
     setSearchedValue(value);
   };
-
-  const LeftSide = (
-    <StyledTransferSide isHalfOpen={isHalfOpen} isOpen={isOpen}>
-      {isOpen ? (
-        <StyledInputHeader>
-          <StyledTransferInput
-            onChange={inputOnChange}
-            isOpen={isOpen}
-            value={searchedValue}
-            placeholder={placeholder}
-            iconRight={'arrowUp'}
-            isFullWidth
-            autoFocus
-            size={size}
-          />
-          {searchedValue && (
-            <StyledSearchButton
-              onClick={() => setSearchedValue('')}
-              size={size}
-            >
-              <Icon name={'clear'} />
-            </StyledSearchButton>
-          )}
-        </StyledInputHeader>
-      ) : (
-        <StyledTransferInput
-          size={size}
-          isDisabled={isDisabled}
-          isOpen={isOpen}
-          value={resultValue}
-          placeholder={placeholder}
-          iconRight={'arrowDown'}
-          isFullWidth
-          onFocus={() => {
-            setOpen(!isOpen);
-            setFocus(!isFocused);
-          }}
-        />
-      )}
-      {isOpen && (
-        <>
-          {items.filter(item =>
-            item.value.toLowerCase().includes(searchedValue.toLowerCase())
-          ).length !== 0 && (
-            <StyledTransferUl isOpen={isOpen}>
-              {items
-                .filter(item =>
-                  item.value.toLowerCase().includes(searchedValue.toLowerCase())
-                )
-                .map(item => (
-                  <StyledTransferLi key={item.value} size={size}>
-                    <Checkbox
-                      isChecked={item.isChecked}
-                      onChange={isChecked => {
-                        onChange(item.value, isChecked);
-                      }}
-                    >
-                      {item.label}
-                    </Checkbox>
-                  </StyledTransferLi>
-                ))}
-            </StyledTransferUl>
-          )}
-          {items.filter(item =>
-            item.value.toLowerCase().includes(searchedValue.toLowerCase())
-          ).length === 0 && <>{notFoundComponent}</>}
-        </>
-      )}
-    </StyledTransferSide>
-  );
-
-  const RightSide = (
-    <StyledTransferSide isHalfOpen={isHalfOpen} isOpen={isOpen}>
-      <StyledChosenHeader size={size}>
-        <StyledTransferSpan>
-          {chosenComponent?.(checkedItems.length, items.length)}
-        </StyledTransferSpan>
-        <DeleteAllButton
-          isTransparent
-          size={'small'}
-          type={'error'}
-          onClick={() => {
-            uncheckAll();
-          }}
-        >
-          <StyledTransferDeleteAllButtonIcon name={'trash'} size={size} />
-          {size === 'small' ? null : deleteAllText}
-        </DeleteAllButton>
-      </StyledChosenHeader>
-      <StyledTransferUl>
-        {checkedItems.map(item => (
-          <StyledTransferLi
-            size={size}
-            key={item.value}
-            onClick={() => {
-              onChange(item.value, false);
-            }}
-          >
-            {item.label}
-            <Icon name={'error'} />
-          </StyledTransferLi>
-        ))}
-      </StyledTransferUl>
-    </StyledTransferSide>
-  );
-
-  const Footer = (
-    <StyledTransferFooter>
-      <Button size={size} type={'default'} onClick={onClose}>
-        {closeText}
-      </Button>
-      <Button size={size} type={'primary'} onClick={onSubmit}>
-        {submitText}
-      </Button>
-    </StyledTransferFooter>
-  );
 
   return (
     <StyledTransferContainer
@@ -332,24 +284,74 @@ export const Transfer: React.FC<React.PropsWithChildren<TransferProps>> & {
       options={options}
       notFoundComponent={notFoundComponent}
       size={size}
+      isFullWidth={isFullWidth}
+      direction={direction}
     >
       <StyledTransfer
+        size={size}
         ref={ref}
+        isFullWidth={isFullWidth}
         position={position}
         isHalfOpen={isHalfOpen}
         isOpen={isOpen}
         isFocused={isFocused}
         isDisabled={isDisabled}
+        direction={direction}
       >
-        {LeftSide}
-        {isOpen && isHalfOpen && RightSide}
-        {isOpen && Footer}
+        <form onSubmit={formSubmit}>
+          <LeftSide
+            direction={direction}
+            isHalfOpen={isHalfOpen}
+            isOpen={isOpen}
+            onKeyDown={onKeyDown}
+            inputOnChange={inputOnChange}
+            searchedValue={searchedValue}
+            placeholder={placeholder}
+            setSearchedValue={setSearchedValue}
+            isDisabled={isDisabled}
+            resultValue={resultValue}
+            setOpen={setOpen}
+            setFocus={setFocus}
+            size={size}
+            savedItems={savedItems}
+            onChange={onChange}
+            notFoundComponent={notFoundComponent}
+            isFocused={isFocused}
+            items={items}
+            isFullWidth={isFullWidth}
+          />
+          {isOpen && isHalfOpen && (
+            <RightSide
+              direction={direction}
+              chosenComponent={chosenComponent}
+              checkedItems={checkedItems}
+              isHalfOpen={isHalfOpen}
+              isOpen={isOpen}
+              isFullWidth={isFullWidth}
+              items={items}
+              uncheckAll={uncheckAll}
+              size={size}
+              deleteAllText={deleteAllText}
+              onChange={onChange}
+            />
+          )}
+        </form>
+        {isOpen && (
+          <Footer
+            closeText={closeText}
+            size={size}
+            onClose={onClose}
+            onSubmit={onSubmit}
+            submitText={submitText}
+          />
+        )}
       </StyledTransfer>
     </StyledTransferContainer>
   );
 };
 
 Transfer.defaultProps = {
+  isFullWidth: false,
   isDisabled: false,
   submitText: 'Submit',
   closeText: 'Close',
