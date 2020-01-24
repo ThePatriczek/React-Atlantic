@@ -69,7 +69,7 @@ const TabsWithContext: FC<PropsWithChildren<TabsProps>> = props => {
       <StyledTabsContent
         isBordered={!!isBordered}
         size={size as Size}
-        hasBackground={!!value}
+        hasBackground={!!value || !!activeTab}
       >
         {children}
       </StyledTabsContent>
