@@ -3,7 +3,7 @@ import { Direction, Size } from '../../../../types';
 import { Checkbox } from '../../../Checkbox';
 import { Icon } from '../../../Icon';
 import { OptionType } from '../../Select.utils';
-import { TransferItems } from '../Transfer';
+import { TransferItem } from '../Transfer';
 import {
   StyledInputHeader,
   StyledInputText,
@@ -28,7 +28,7 @@ export interface LeftSideProps {
   isFullWidth?: boolean;
   isHalfOpen: boolean;
   isOpen: boolean;
-  items: TransferItems[];
+  items: TransferItem[];
   onChange: (value: string, isChecked: boolean) => void;
   savedItems: Map<string, boolean>;
   setFocus: Dispatch<SetStateAction<boolean>>;

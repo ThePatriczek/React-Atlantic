@@ -1,6 +1,6 @@
 import React, { FC, ReactNode } from 'react';
 import { Direction, Size } from '../../../../types';
-import { TransferItems } from '../Transfer';
+import { TransferItem } from '../Transfer';
 import {
   DeleteAllButton,
   StyledChosenHeader,
@@ -14,10 +14,10 @@ import {
 } from '../Transfer.style';
 
 interface RightSideProps {
-  checkedItems: TransferItems[];
+  checkedItems: TransferItem[];
   isHalfOpen: boolean;
   isOpen: boolean;
-  items: TransferItems[];
+  items: TransferItem[];
   uncheckAll: () => void;
   onChange: (value: string, isChecked: boolean) => void;
   isFullWidth?: boolean;

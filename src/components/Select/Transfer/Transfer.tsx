@@ -1,5 +1,12 @@
-import * as React from 'react';
-import { ReactNode, useEffect, useRef, useState } from 'react';
+import React, {
+  FC,
+  PropsWithChildren,
+  ReactElement,
+  ReactNode,
+  useEffect,
+  useRef,
+  useState
+} from 'react';
 import { Direction, Position, Size } from '../../../types';
 import { NotFound } from '../../NotFound';
 import { Option, OptionProps } from '../Option';
@@ -13,8 +20,11 @@ import Footer from './components/Footer';
 import LeftSide from './components/LeftSide';
 import RightSide from './components/RightSide';
 import { StyledTransfer, StyledTransferContainer } from './Transfer.style';
+import { getMergedItems } from './Transfer.utils';
 
 export interface TransferProps {
+  value?: OptionType[];
+  defaultValue?: OptionType[];
   placeholder?: string;
   isDisabled?: boolean;
   options?: OptionType[];
@@ -32,15 +42,17 @@ export interface TransferProps {
   direction?: Direction;
 }
 
-export interface TransferItems extends OptionType {
+export interface TransferItem extends OptionType {
   isChecked?: boolean;
   className?: string;
 }
 
-export const Transfer: React.FC<React.PropsWithChildren<TransferProps>> & {
-  Option: React.FC<OptionProps>;
-} = (props: React.PropsWithChildren<TransferProps>) => {
+export const Transfer: FC<PropsWithChildren<TransferProps>> & {
+  Option: FC<OptionProps>;
+} = (props): ReactElement => {
   const {
+    value,
+    defaultValue,
     placeholder,
     options,
     isDisabled,
@@ -58,15 +70,50 @@ export const Transfer: React.FC<React.PropsWithChildren<TransferProps>> & {
   const [isOpen, setOpen] = useState<boolean>(false);
   const [resultValue, setResultValue] = useState<string>('');
   const [searchedValue, setSearchedValue] = useState<string>('');
-  const [savedItems, setSavedItems] = useState<Map<string, boolean>>(new Map());
   const [isFocused, setFocus] = useState<boolean>(false);
-  const [items, setItems] = useState<TransferItems[]>(
+  const [items, setItems] = useState<TransferItem[]>(
     checkChildrenAndOptions(children, options)
   );
+  const checkedItems: TransferItem[] = items.filter(item => item.isChecked);
+  const [savedItems, setSavedItems] = useState<Map<string, boolean>>(new Map());
   const [position, setPosition] = useState<Position | 'unset' | null>('unset');
   const ref = useRef<HTMLDivElement>(null);
-  const checkedItems: TransferItems[] = items.filter(item => item.isChecked);
   const isHalfOpen: boolean = checkedItems.length > 0;
+
+  useEffect(() => {
+    if (defaultValue && !value) {
+      const map: Map<string, boolean> = new Map(
+        defaultValue.map(item => [item.value, true])
+      );
+
+      setResultValue(defaultValue.map(item => item.label).join(`, `));
+      setSavedItems(map);
+      setItems(
+        getMergedItems(checkChildrenAndOptions(children, options), defaultValue)
+      );
+    }
+  }, []);
+
+  useEffect(() => {
+    if (value) {
+      const map: Map<string, boolean> = new Map(
+        value.map(item => [item.value, true])
+      );
+
+      setResultValue(value.map(item => item.label).join(`, `));
+      setSavedItems(map);
+      setItems((prevState: ReadonlyArray<TransferItem>) =>
+        getMergedItems(prevState, value)
+      );
+    }
+  }, [value]);
+
+  useEffect(() => {
+    if (isDisabled) {
+      setOpen(false);
+      setFocus(false);
+    }
+  }, [isDisabled]);
 
   useEffect(() => {
     if (isOpen) {
@@ -78,41 +125,36 @@ export const Transfer: React.FC<React.PropsWithChildren<TransferProps>> & {
       ? setPosition(getPositionOfElementInViewport(ref.current))
       : setPosition('unset');
 
-    const map: Map<string, boolean> = new Map();
+    if (!value) {
+      const map: Map<string, boolean> = new Map();
 
-    checkedItems.forEach(item => {
-      if (!savedItems.has(item.value)) {
-        map.set(item.value, false);
-      }
-    });
+      checkedItems.forEach(item => {
+        if (!savedItems.has(item.value)) {
+          map.set(item.value, false);
+        }
+      });
 
-    items.forEach(item => {
-      if (!savedItems.has(item.value)) {
-        map.set(item.value, false);
-      }
-    });
+      items.forEach(item => {
+        if (!savedItems.has(item.value)) {
+          map.set(item.value, false);
+        }
+      });
 
-    setItems(prevState =>
-      prevState.map(item => {
-        item.isChecked = !map.has(item.value);
-        return item;
-      })
-    );
+      setItems(prevState =>
+        prevState.map(item => {
+          item.isChecked = !map.has(item.value);
+          return item;
+        })
+      );
 
-    setSearchedValue('');
+      setSearchedValue('');
+    }
 
     return () => {
       window.onmousedown = null;
       window.onkeydown = null;
     };
   }, [isOpen]);
-
-  useEffect(() => {
-    if(isDisabled) {
-      setOpen(false);
-      setFocus(false);
-    }
-  },[isDisabled]);
 
   const onMouseDown: EventListener = (e: Event) => {
     if (!ref.current?.contains(e.target as Node)) {
@@ -129,35 +171,48 @@ export const Transfer: React.FC<React.PropsWithChildren<TransferProps>> & {
   };
 
   const onChange = (value: string, isChecked: boolean) => {
-    setItems(prevState => {
-      const arr = prevState.map(item => {
-        if (item.value === value) {
-          item.isChecked = isChecked;
-        }
-        return item;
+    if (!isDisabled) {
+      setItems((prevState: ReadonlyArray<TransferItem>) => {
+        const arr = prevState.map((oldItem: Readonly<TransferItem>) => {
+          const item = { ...oldItem };
+
+          if (item.value === value) {
+            item.isChecked = isChecked;
+          }
+
+          return item;
+        });
+
+        props.onChange?.(
+          arr
+            .filter(item => item.isChecked)
+            .map(item => ({
+              value: item.value,
+              label: item.label,
+              className: item.className && item.className
+            }))
+        );
+
+        return props.value ? [...prevState] : arr;
       });
-
-      props.onChange?.(
-        arr
-          .filter(item => item.isChecked)
-          .map(item => ({
-            value: item.value,
-            label: item.label,
-            className: item.className && item.className
-          }))
-      );
-
-      return arr;
-    });
+    }
   };
 
   const uncheckAll = () => {
-    setItems(prevState =>
-      prevState.map(item => {
-        item.isChecked = false;
-        return item;
-      })
-    );
+    if (!isDisabled) {
+      setItems((prevState: Readonly<TransferItem[]>) => {
+        const arr = prevState.map((oldItem: Readonly<TransferItem>) => {
+          const item = { ...oldItem };
+          item.isChecked = false;
+
+          return item;
+        });
+
+        props.onChange?.([]);
+
+        return props.value ? [...prevState] : arr;
+      });
+    }
   };
 
   const onClose = () => {
@@ -186,31 +241,33 @@ export const Transfer: React.FC<React.PropsWithChildren<TransferProps>> & {
   };
 
   const onSubmit = () => {
-    if (props.onSubmit) {
-      const arr: OptionType[] = [];
+    if (!isDisabled) {
+      if (props.onSubmit) {
+        const arr: OptionType[] = [];
+        checkedItems.forEach(item => {
+          const obj = {
+            value: item.value,
+            label: item.label,
+            className: item.className && item.className
+          };
+          arr.push(obj);
+        });
+
+        props.onSubmit(arr);
+      }
+      const arr = checkedItems.map(item => item.label);
+      const map: Map<string, boolean> = new Map();
+
       checkedItems.forEach(item => {
-        const obj = {
-          value: item.value,
-          label: item.label,
-          className: item.className && item.className
-        };
-        arr.push(obj);
+        map.set(item.value, true);
       });
 
-      props.onSubmit(arr);
+      setResultValue(arr.join(`, `));
+      setSavedItems(map);
+
+      setOpen(!isOpen);
+      setFocus(!isFocused);
     }
-    const arr = checkedItems.map(item => item.label);
-    const map: Map<string, boolean> = new Map();
-
-    checkedItems.forEach(item => {
-      map.set(item.value, true);
-    });
-
-    setResultValue(arr.join(`, `));
-    setSavedItems(map);
-
-    setOpen(!isOpen);
-    setFocus(!isFocused);
   };
 
   const inputOnChange = (value: string) => {
