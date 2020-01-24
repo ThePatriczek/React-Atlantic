@@ -1,6 +1,7 @@
 import React, { FC } from 'react';
 import { Icon, IconName } from '../../../../Icon';
 import { StyledPaginationButton } from '../../ButtonList.style';
+import { Size } from '../../../../../types';
 
 interface ArrowButtonProps {
   visible: boolean;
@@ -8,10 +9,11 @@ interface ArrowButtonProps {
   isDisabled: boolean;
   isSimple: boolean;
   unique: number;
+  size: Size;
 }
 
 export const ArrowButton: FC<ArrowButtonProps> = props => {
-  const { isDisabled, isSimple, onClick, unique, visible } = props;
+  const { isDisabled, isSimple, onClick, unique, visible, size } = props;
 
   const map = (key: string): IconName => {
     switch (key) {
@@ -33,6 +35,7 @@ export const ArrowButton: FC<ArrowButtonProps> = props => {
         onClick={onClick}
         isDisabled={isDisabled}
         isSimple={isSimple}
+        size={size}
       >
         <Icon name={map(unique.toString())} />
       </StyledPaginationButton>

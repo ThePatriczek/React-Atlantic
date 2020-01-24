@@ -4,7 +4,7 @@ import * as React from 'react';
 import { specs } from 'storybook-addon-specifications';
 import { Tooltip } from './Tooltip';
 import { Typography } from '../Typography';
-import { defaultValues } from '../..';
+import { defaultValues } from '../../constants/defaultValues';
 import { Component, tests } from './Tooltip.test';
 
 const { Text } = Typography;

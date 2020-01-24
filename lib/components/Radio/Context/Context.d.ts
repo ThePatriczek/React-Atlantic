@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { FC, PropsWithChildren } from 'react';
 export interface RadioGroupContextState {
     value: any;
     setValue: (value: any) => void;
@@ -8,5 +8,5 @@ export declare const useRadioGroup: () => RadioGroupContextState;
 interface RadioGroupContextProviderProps {
     onChange?: (value: any) => void;
 }
-export declare const RadioGroupContextProvider: React.FC<React.PropsWithChildren<RadioGroupContextProviderProps>>;
+export declare const RadioGroupContextProvider: FC<PropsWithChildren<RadioGroupContextProviderProps>>;
 export {};

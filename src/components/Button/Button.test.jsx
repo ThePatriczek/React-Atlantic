@@ -1,7 +1,7 @@
 import { shallow } from 'enzyme';
 import 'jest-styled-components';
 import React from 'react';
-import { defaultValues } from '../..';
+import { defaultValues } from '../../constants/defaultValues';
 import { Button } from './Button';
 
 export const Component = (

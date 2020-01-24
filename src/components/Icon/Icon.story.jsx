@@ -3,7 +3,7 @@ import { storiesOf } from '@storybook/react';
 import * as React from 'react';
 import { specs } from 'storybook-addon-specifications';
 import { Icon } from './Icon';
-import { defaultValues } from '../..';
+import { defaultValues } from '../../constants/defaultValues';
 import { Component, tests } from './Icon.test';
 
 const stories = storiesOf('Icon', module);
@@ -38,6 +38,12 @@ stories.add('Overview', () => (
     </div>
     <div>
       <Icon name={'arrowDoubleLeft'} />
+    </div>
+    <div>
+      <Icon name={'filter'} />
+    </div>
+    <div>
+      <Icon name={'diff'} />
     </div>
   </div>
 ));

@@ -1,4 +1,11 @@
-import * as React from 'react';
+import React, {
+  createContext,
+  FC,
+  PropsWithChildren,
+  ReactElement,
+  useContext,
+  useState
+} from 'react';
 
 export interface RadioGroupContextState {
   value: any;
@@ -10,33 +17,29 @@ const defaultValue: RadioGroupContextState = {
   setValue: () => null
 };
 
-export const RadioGroupContext = React.createContext<RadioGroupContextState>(
+export const RadioGroupContext = createContext<RadioGroupContextState>(
   defaultValue
 );
 
 export const useRadioGroup = () =>
-  React.useContext<RadioGroupContextState>(RadioGroupContext);
+  useContext<RadioGroupContextState>(RadioGroupContext);
 
 interface RadioGroupContextProviderProps {
   onChange?: (value: any) => void;
 }
 
-export const RadioGroupContextProvider: React.FC<
-  React.PropsWithChildren<RadioGroupContextProviderProps>
-> = (
-  props: React.PropsWithChildren<RadioGroupContextProviderProps>
-): React.ReactElement => {
+export const RadioGroupContextProvider: FC<PropsWithChildren<
+  RadioGroupContextProviderProps
+>> = (
+  props: PropsWithChildren<RadioGroupContextProviderProps>
+): ReactElement => {
   const { children, onChange } = props;
-  const [value, setVal] = React.useState<any>(
-    defaultValue.value
-  );
+  const [value, setVal] = useState<any>(defaultValue.value);
 
   const setValue = (value: any) => {
     setVal(value);
 
-    if (onChange) {
-      onChange(value);
-    }
+    onChange?.(value);
   };
 
   return (

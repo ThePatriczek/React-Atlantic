@@ -1,19 +1,27 @@
-import * as React from 'react';
+import React, {
+  ChangeEvent,
+  FC,
+  PropsWithChildren,
+  ReactElement,
+  useState
+} from 'react';
 import { Size } from '../../../types';
 import { useRadioGroup } from '../Context';
 import { RadioProps } from '../Radio';
 
-import { StyledRadioButtonInputHidden, StyledRadioButtonLabel, StyledRadioButtonSpan } from './Button.style';
+import {
+  StyledRadioButtonInputHidden,
+  StyledRadioButtonLabel,
+  StyledRadioButtonSpan
+} from './Button.style';
 
-export interface ButtonProps {
+export interface ButtonProps extends RadioProps {
   size?: Size;
 }
 
-export const Button: React.FC<
-  React.PropsWithChildren<RadioProps & ButtonProps>
-> = (
-  props: React.PropsWithChildren<RadioProps & ButtonProps>
-): React.ReactElement => {
+export const Button: FC<PropsWithChildren<ButtonProps>> = (
+  props
+): ReactElement => {
   const {
     isDefaultChecked,
     isDisabled,
@@ -23,9 +31,9 @@ export const Button: React.FC<
     size
   } = props;
   const { value: ctxVal, setValue: setCtxVal } = useRadioGroup();
-  const [isChecked, setChecked] = React.useState<boolean>(!!isDefaultChecked);
+  const [isChecked, setChecked] = useState<boolean>(!!isDefaultChecked);
 
-  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const onChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (!isDisabled) {
       if (props.isChecked === undefined) {
         setChecked(e.target.checked);

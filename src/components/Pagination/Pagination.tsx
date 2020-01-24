@@ -1,4 +1,5 @@
 import React, { FC, useEffect, useState } from 'react';
+import { Size } from '../../types';
 import { ButtonList } from './ButtonList';
 import { StyledPagination } from './Pagination.style';
 import { QuickJumper } from './QuickJumper';
@@ -8,11 +9,11 @@ export interface PaginationProps {
   /** Current page number */
   current?: number;
   /** Default initial page number */
-  defaultCurrent: number;
+  defaultCurrent?: number;
   /** Disable pagination */
   isDisabled?: boolean;
   /** Number of data per page */
-  pageSize: number;
+  pageSize?: number;
   /** Specify select options */
   pageSizeOptions?: number[];
   /** Determine whether you can jump to pages directly */
@@ -28,26 +29,27 @@ export interface PaginationProps {
   /** Simple mode */
   isSimple?: boolean;
   /** Total number of data items */
-  total: number;
+  total?: number;
   /** custom className */
   className?: string;
   /** Called when the page number is changed */
-  onChange?: (page: number, pageSize: number) => void;
+  onPageChange?: (page: number, pageSize: number) => void;
   /** Called when pageSize is changed */
   onSizeChange?: (current: number, size: number) => void;
   /** Tooltip text right */
-  tooltipTextRight: string;
+  tooltipTextRight?: string;
   /** Tooltip text left */
-  tooltipTextLeft: string;
+  tooltipTextLeft?: string;
   /** Select text */
-  sizeChangerText: string;
+  sizeChangerText?: string;
   /** Jumper text */
-  quickJumperText: string;
+  quickJumperText?: string;
+  /** small | medium | large */
+  size?: Size;
 }
 
 export const Pagination: FC<PaginationProps> = props => {
   const {
-    current,
     defaultCurrent,
     isDisabled,
     pageSizeOptions,
@@ -62,12 +64,13 @@ export const Pagination: FC<PaginationProps> = props => {
     sizeChangerText,
     quickJumperText,
     tooltipTextRight,
-    tooltipTextLeft
+    tooltipTextLeft,
+    size
   } = props;
 
-  const [currentPage, setPage] = useState<number>(defaultCurrent);
+  const [currentPage, setPage] = useState<number>(defaultCurrent || 1);
   const [pageSize, setPageSize] = useState<number>(
-    pageSizeOptions ? pageSizeOptions[0] : props.pageSize
+    pageSizeOptions ? pageSizeOptions[0] : props.pageSize || 20
   );
 
   useEffect(() => {
@@ -77,21 +80,21 @@ export const Pagination: FC<PaginationProps> = props => {
   }, [props.pageSize]);
 
   useEffect(() => {
-    if (current) {
-      setPage(current);
+    if (props.current) {
+      setPage(props.current);
     }
-  }, [current]);
+  }, [props.current]);
 
   useEffect(() => {
-    if (currentPage > Math.ceil(total / pageSize)) {
+    if (total && currentPage > Math.ceil(total / pageSize)) {
       setPage(Math.ceil(total / pageSize));
     }
   }, [pageSize]);
 
 
   const onSizeChange = (pageSize: number) => {
-    let page: number=  0;
-    if (currentPage > Math.ceil(total / pageSize)) {
+    let page: number=  currentPage;
+    if (total && currentPage > Math.ceil(total / pageSize)) {
       page = Math.ceil(total / pageSize);
     }
     setPageSize(pageSize);
@@ -100,29 +103,14 @@ export const Pagination: FC<PaginationProps> = props => {
 
   const onChange = (currentPage: number) => {
     setPage(currentPage);
-    props.onChange?.(currentPage, pageSize);
+    props.onPageChange?.(currentPage, pageSize);
   };
 
-
-  const count = Math.ceil(total / pageSize);
+  const count = total ? Math.ceil(total / pageSize) : 0;
 
   return (
     <StyledPagination
-      isDisabled={isDisabled}
-      total={total}
-      className={className}
-      showQuickJumper={showQuickJumper}
-      hideArrowJumper={hideArrowJumper}
-      showDoubleArrowJumper={showDoubleArrowJumper}
-      showSizeChanger={showSizeChanger}
-      showThreeDots={showThreeDots}
-      isSimple={isSimple}
-      defaultCurrent={defaultCurrent}
-      pageSize={pageSize}
-      quickJumperText={quickJumperText}
-      sizeChangerText={sizeChangerText}
-      tooltipTextRight ={tooltipTextRight}
-      tooltipTextLeft={tooltipTextLeft}
+      {...props}
     >
       <ButtonList
         isSimple={!!isSimple}
@@ -135,6 +123,7 @@ export const Pagination: FC<PaginationProps> = props => {
         textRight={tooltipTextRight}
         textLeft={tooltipTextLeft}
         onChange={onChange}
+        size={size || 'medium'}
       />
       {showQuickJumper && (
         <QuickJumper
@@ -143,6 +132,7 @@ export const Pagination: FC<PaginationProps> = props => {
           isDisabled={!!isDisabled || count === 0}
           text={quickJumperText}
           onChange={onChange}
+          size={size || 'medium'}
         />
       )}
       {showSizeChanger && (
@@ -153,6 +143,7 @@ export const Pagination: FC<PaginationProps> = props => {
           pageSizeOptions={pageSizeOptions}
           text={sizeChangerText}
           onSizeChange={onSizeChange}
+          size={size || 'medium'}
         />
       )}
     </StyledPagination>
@@ -168,7 +159,8 @@ Pagination.defaultProps = {
   tooltipTextRight: `Next 5 pages`,
   tooltipTextLeft: `Previous 5 pages`,
   sizeChangerText: `page`,
-  quickJumperText: `Go to`
+  quickJumperText: `Go to`,
+  size: 'medium'
 };
 
 Pagination.displayName = `Pagination`;

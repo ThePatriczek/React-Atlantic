@@ -18,6 +18,18 @@ export declare const defaultValues: {
     isMulti: boolean;
     iconRight: boolean;
     iconLeft: boolean;
+    isBordered: boolean;
+    tabs: ({
+        value: string;
+        label: string;
+        isDisabled?: undefined;
+    } | {
+        value: string;
+        label: string;
+        isDisabled: boolean;
+    })[];
+    className: string;
+    direction: string;
     selectDefaultValueOne: string;
     selectDefaultValueTwo: string;
     place: string;

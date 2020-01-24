@@ -69,7 +69,9 @@ export type IconName =
   | 'flagLawEU'
   | 'flagLiterature'
   | 'flagSlovakia'
-  | 'threeDots';
+  | 'threeDots'
+  | 'filter'
+  | 'diff';
 
 export interface IconProps {
   name: IconName;
@@ -286,6 +288,12 @@ export const Icon: React.FC<IconProps> = (
       break;
     case 'threeDots':
       Component = <Icons.ThreeDots />;
+      break;
+    case 'filter':
+      Component = <Icons.Filter />;
+      break;
+    case 'diff':
+      Component = <Icons.Diff />;
       break;
   }
 

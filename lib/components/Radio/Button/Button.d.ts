@@ -1,7 +1,7 @@
-import * as React from 'react';
+import { FC, PropsWithChildren } from 'react';
 import { Size } from '../../../types';
 import { RadioProps } from '../Radio';
-export interface ButtonProps {
+export interface ButtonProps extends RadioProps {
     size?: Size;
 }
-export declare const Button: React.FC<React.PropsWithChildren<RadioProps & ButtonProps>>;
+export declare const Button: FC<PropsWithChildren<ButtonProps>>;

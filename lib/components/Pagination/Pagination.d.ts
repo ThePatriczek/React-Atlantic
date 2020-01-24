@@ -1,13 +1,14 @@
 import { FC } from 'react';
+import { Size } from '../../types';
 export interface PaginationProps {
     /** Current page number */
     current?: number;
     /** Default initial page number */
-    defaultCurrent: number;
+    defaultCurrent?: number;
     /** Disable pagination */
     isDisabled?: boolean;
     /** Number of data per page */
-    pageSize: number;
+    pageSize?: number;
     /** Specify select options */
     pageSizeOptions?: number[];
     /** Determine whether you can jump to pages directly */
@@ -23,20 +24,22 @@ export interface PaginationProps {
     /** Simple mode */
     isSimple?: boolean;
     /** Total number of data items */
-    total: number;
+    total?: number;
     /** custom className */
     className?: string;
     /** Called when the page number is changed */
-    onChange?: (page: number, pageSize: number) => void;
+    onPageChange?: (page: number, pageSize: number) => void;
     /** Called when pageSize is changed */
     onSizeChange?: (current: number, size: number) => void;
     /** Tooltip text right */
-    tooltipTextRight: string;
+    tooltipTextRight?: string;
     /** Tooltip text left */
-    tooltipTextLeft: string;
+    tooltipTextLeft?: string;
     /** Select text */
-    sizeChangerText: string;
+    sizeChangerText?: string;
     /** Jumper text */
-    quickJumperText: string;
+    quickJumperText?: string;
+    /** small | medium | large */
+    size?: Size;
 }
 export declare const Pagination: FC<PaginationProps>;

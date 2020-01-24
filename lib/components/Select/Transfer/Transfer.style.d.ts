@@ -1,14 +1,16 @@
-/// <reference types="react" />
-import { Position, Size } from '../../../types';
+import { ReactNode } from 'react';
+import { Direction, Position, Size } from '../../../types';
 import { IconName } from '../../Icon';
 import { OptionType } from '../Select.utils';
 interface StyledTransferProps {
     isOpen?: boolean;
+    direction?: Direction;
     isHalfOpen?: boolean;
     iconLeft?: IconName;
     placeholder?: string;
     isDisabled?: boolean;
     options?: OptionType[];
+    globalSize?: Size;
     closeText?: string;
     submitText?: string;
     deleteAllText?: string;
@@ -17,20 +19,28 @@ interface StyledTransferProps {
     size?: Size;
     notFoundComponent?: any;
     position?: Position | 'unset' | null;
+    isFullWidth?: boolean;
+    labelLeft?: string | ReactNode;
+    labelTop?: string | ReactNode;
+    ref?: any;
 }
 export declare const StyledTransferContainer: import("styled-components").StyledComponent<"div", any, StyledTransferProps, never>;
 export declare const StyledTransferUl: import("styled-components").StyledComponent<"ul", any, StyledTransferProps, never>;
 export declare const StyledTransferInput: import("styled-components").StyledComponent<import("react").FC<import("../../Input").InputProps> & {
     TextArea: import("react").FC<import("../../Input").TextAreaProps>;
 }, any, StyledTransferProps, never>;
-export declare const StyledSearchButton: import("styled-components").StyledComponent<import("react").FC<import("react").PropsWithChildren<import("../../Button").ButtonProps>>, any, StyledTransferProps, never>;
-export declare const StyledChosenHeader: import("styled-components").StyledComponent<"div", any, StyledTransferProps, never>;
+export declare const StyledDeleteOneIcon: import("styled-components").StyledComponent<import("react").FC<import("../../Icon").IconProps>, any, StyledTransferProps, never>;
+export declare const StyledDeleteOneButton: import("styled-components").StyledComponent<import("react").FC<import("react").PropsWithChildren<import("../../Button").ButtonProps>>, any, StyledTransferProps, never>;
 export declare const StyledInputHeader: import("styled-components").StyledComponent<"div", any, StyledTransferProps, never>;
+export declare const StyledSearchButton: import("styled-components").StyledComponent<import("react").FC<import("react").PropsWithChildren<import("../../Button").ButtonProps>>, any, StyledTransferProps, never>;
+export declare const StyledInputText: import("styled-components").StyledComponent<"div", any, StyledTransferProps, never>;
+export declare const StyledChosenHeader: import("styled-components").StyledComponent<"div", any, StyledTransferProps, never>;
 export declare const StyledTransferSide: import("styled-components").StyledComponent<"div", any, StyledTransferProps, never>;
 export declare const StyledTransferFooter: import("styled-components").StyledComponent<"div", any, StyledTransferProps, never>;
 export declare const StyledTransferDeleteAllButtonIcon: import("styled-components").StyledComponent<import("react").FC<import("../../Icon").IconProps>, any, StyledTransferProps, never>;
 export declare const StyledTransferLi: import("styled-components").StyledComponent<"li", any, StyledTransferProps, never>;
 export declare const DeleteAllButton: import("styled-components").StyledComponent<import("react").FC<import("react").PropsWithChildren<import("../../Button").ButtonProps>>, any, StyledTransferProps, never>;
 export declare const StyledTransferSpan: import("styled-components").StyledComponent<"span", any, StyledTransferProps, never>;
+export declare const StyledTransferOptions: import("styled-components").StyledComponent<"div", any, StyledTransferProps, never>;
 export declare const StyledTransfer: import("styled-components").StyledComponent<"div", any, StyledTransferProps, never>;
 export {};

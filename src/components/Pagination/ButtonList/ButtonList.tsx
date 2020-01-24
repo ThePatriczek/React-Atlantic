@@ -6,6 +6,7 @@ import {
 } from './ButtonList.style';
 import { ArrowButton } from './Parts/ArrowButton';
 import { ThreeDots } from './Parts/ThreeDots';
+import { Size } from '../../../types';
 
 interface ButtonListProps {
   count: number;
@@ -15,9 +16,10 @@ interface ButtonListProps {
   showDoubleArrowJumper: boolean;
   showThreeDots: boolean;
   isSimple: boolean;
-  textRight: string;
-  textLeft: string;
+  textRight?: string;
+  textLeft?: string;
   onChange: (value: number) => void;
+  size: Size;
 }
 
 export const ButtonList: FC<ButtonListProps> = props => {
@@ -31,7 +33,8 @@ export const ButtonList: FC<ButtonListProps> = props => {
     isSimple,
     textLeft,
     textRight,
-    onChange
+    onChange,
+    size,
   } = props;
 
   const disabledMaxCondition: boolean =
@@ -120,6 +123,7 @@ export const ButtonList: FC<ButtonListProps> = props => {
         isSimple={isSimple}
         unique={-3}
         visible={showDoubleArrowJumper}
+        size={size}
       />
       <ArrowButton
         onClick={() => onSingleArrowClick(false)}
@@ -127,6 +131,7 @@ export const ButtonList: FC<ButtonListProps> = props => {
         isSimple={isSimple}
         unique={-1}
         visible={showArrowJumper}
+        size={size}
       />
       {array.map((item: number, key: number) => {
         return item === -1 ? (
@@ -142,6 +147,7 @@ export const ButtonList: FC<ButtonListProps> = props => {
               onClick={() => onChange(item)}
               isActive={item === currentPage}
               isDisabled={isDisabled || item === 0}
+              size={size}
             >
               <ButtonPaginationText>{item.toString()}</ButtonPaginationText>
             </StyledNormalPaginationButton>
@@ -153,6 +159,7 @@ export const ButtonList: FC<ButtonListProps> = props => {
               isActive={item === currentPage}
               isDisabled={isDisabled || item === 0}
               isSimple
+              size={size}
             >
               <ButtonPaginationText>{item.toString()}</ButtonPaginationText>
             </StyledSimplePaginationButton>
@@ -165,6 +172,7 @@ export const ButtonList: FC<ButtonListProps> = props => {
         isSimple={isSimple}
         unique={-2}
         visible={showArrowJumper}
+        size={size}
       />
       <ArrowButton
         onClick={() => onDoubleArrowClick(true)}
@@ -172,6 +180,7 @@ export const ButtonList: FC<ButtonListProps> = props => {
         isSimple={isSimple}
         unique={-4}
         visible={showDoubleArrowJumper}
+        size={size}
       />
     </ul>
   );

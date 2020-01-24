@@ -2,11 +2,8 @@ import { shallow } from 'enzyme';
 import React from 'react';
 import { Transfer } from './Transfer';
 import expect from 'expect';
-import { Select } from '../Select';
-import { Text } from '../../Typography/Text';
 import { defaultValues } from '../../../constants/defaultValues';
 import { NotFound } from '../../NotFound';
-const { Option } = Select;
 
 const notFoundComponent = (
   <NotFound
@@ -21,10 +18,16 @@ export const Component = (
   submitText,
   deleteAllText,
   options,
-  size
+  size,
+  isFullWidth,
+  direction,
+  onChange,
+  onCancel,
+  onSubmit
 ) => {
   return (
     <Transfer
+      direction={direction}
       placeholder={placeholder}
       isDisabled={isDisabled}
       closeText={closeText}
@@ -33,17 +36,11 @@ export const Component = (
       options={options}
       notFoundComponent={notFoundComponent}
       size={size}
-    >
-      <Option value={`fourth option`}>
-        <Text>{`Fourth option`}</Text>
-      </Option>
-      <Option value={`fifth option`}>
-        <Text>{`Fifth option`}</Text>
-      </Option>
-      <Option value={`sixth option`}>
-        <Text>{`Sixth option`}</Text>
-      </Option>
-    </Transfer>
+      isFullWidth={isFullWidth}
+      onChange={onChange}
+      onCancel={onCancel}
+      onSubmit={onSubmit}
+    />
   );
 };
 
@@ -55,7 +52,9 @@ export const tests = (
     defaultValues.submitText,
     defaultValues.deleteAllText,
     defaultValues.options,
-    defaultValues.size
+    defaultValues.size,
+    defaultValues.isFullWidth,
+    defaultValues.direction
   )
 ) => {
   let output = shallow(transfer);
@@ -67,6 +66,10 @@ export const tests = (
 
     it(`Should have isDisabled: ${transfer.props.isDisabled}`, () => {
       expect(output.props().isDisabled).toEqual(transfer.props.isDisabled);
+    });
+
+    it(`Should have isFullWidth: ${transfer.props.isFullWidth}`, () => {
+      expect(output.props().isFullWidth).toEqual(transfer.props.isFullWidth);
     });
 
     it(`Should have closeText: ${transfer.props.closeText}`, () => {
@@ -89,6 +92,10 @@ export const tests = (
 
     it(`Should have size: ${transfer.props.size}`, () => {
       expect(output.props().size).toEqual(transfer.props.size);
+    });
+
+    it(`Should have direction: ${transfer.props.direction}`, () => {
+      expect(output.props().direction).toEqual(transfer.props.direction);
     });
   });
 };

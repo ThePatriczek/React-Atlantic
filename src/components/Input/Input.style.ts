@@ -54,43 +54,45 @@ export const StyledInputWrapper = styled.span<StyledInputWrapperProps>`
     `}
     
     ${props =>
-      props.isDisabled ? css`
+      props.isDisabled
+        ? css`
             color: ${props.theme.color.text.beta};
             cursor: not-allowed;
-          ` : css`
+          `
+        : css`
             color: ${props.theme.color.text.beta};
             cursor: text;
           `};
     
     ${props =>
       props.size === 'small' &&
-        css`
-          i{
-            top: 7px;
-            height: ${props.theme.font.size.sm};
-            width: ${props.theme.font.size.sm};
-          }
-        `};
+      css`
+        i {
+          top: 7px;
+          height: ${props.theme.font.size.sm};
+          width: ${props.theme.font.size.sm};
+        }
+      `};
         
     ${props =>
       props.size === 'medium' &&
-        css`
-          i{
-            top: 10px;
-            height: ${props.theme.font.size.md};
-            width: ${props.theme.font.size.md};
-          }
-        `};    
+      css`
+        i {
+          top: 10px;
+          height: ${props.theme.font.size.md};
+          width: ${props.theme.font.size.md};
+        }
+      `};    
     
     ${props =>
       props.size === 'large' &&
-        css`
-          i{
-            top: 12px;
-            height: ${props.theme.font.size.lg};
-            width: ${props.theme.font.size.lg};
-          }
-        `};
+      css`
+        i {
+          top: 12px;
+          height: ${props.theme.font.size.lg};
+          width: ${props.theme.font.size.lg};
+        }
+      `};
 
   i {
     display: flex;
@@ -130,7 +132,7 @@ export const StyledInput = styled.input<{
   props.theme.padding.md};
   height: ${props => props.theme.height.md};
   margin: 0;
-
+  width: 200px;
   position: relative;
   display: inline-block;
 
@@ -200,6 +202,7 @@ export const StyledInput = styled.input<{
   ${props =>
     props.size === 'small' &&
     css`
+      width: 180px;
       height: ${props.theme.height.sm};
       font-size: 12px;
 
@@ -212,6 +215,7 @@ export const StyledInput = styled.input<{
     ${props =>
       props.size === 'large' &&
       css`
+        width: 220px;
         height: ${props.theme.height.lg};
         font-size: ${props.theme.font.size.lg};
 
@@ -263,8 +267,8 @@ export const StyledInputWrapperAlt = styled.span<StyledInputWrapperProps>`
 
     -webkit-transition: color 0.2s ease-out, transform 0.2s ease-out;
     transition: color 0.2s ease-out, transform 0.2s ease-out;
-    -webkit-transform-origin: 0% 100%;
-    transform-origin: 0% 100%;
+    -webkit-transform-origin: 0 100%;
+    transform-origin: 0 100%;
     -webkit-transform: translateY(12px);
     transform: translateY(12px);
     
@@ -305,7 +309,7 @@ export const StyledInputWrapperAlt = styled.span<StyledInputWrapperProps>`
         transform: translateY(0px) scale(0.8);
         -webkit-transform-origin: 0 0;
         transform-origin: 0 0;
-        
+
         ${props.size === 'small' &&
           css`
             height: 16px;
