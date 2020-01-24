@@ -31,14 +31,22 @@ export const Tab: FC<TabComponentProps> = (props): ReactElement => {
     isChecked = ctxVal === value;
   }
 
-  const onChange = () => {
+  const onChange = (e: ChangeEvent<HTMLInputElement>) => {
+    e.preventDefault();
+    e.stopPropagation();
+    e.nativeEvent.stopPropagation();
+
     if (!isDisabled) {
       setCtxVal(value);
     }
   };
 
   return (
-    <StyledTab isDisabled={!!isDisabled} isActive={isChecked} isAlternative={isAlternative}>
+    <StyledTab
+      isDisabled={!!isDisabled}
+      isActive={isChecked}
+      isAlternative={isAlternative}
+    >
       {label}
       <StyledRadioInputHidden
         checked={isChecked}
