@@ -68,7 +68,6 @@ export const StyledTransferUl = styled.ul<StyledTransferProps>`
 `;
 
 export const StyledTransferInput = styled(Input)<StyledTransferProps>`
-  z-index: 20;
   ${StyledInput} {
     border: 0;
     box-sizing: border-box;
@@ -536,7 +535,7 @@ export const StyledTransfer = styled.div<StyledTransferProps>`
     props.isOpen &&
     css`
       box-shadow: ${props => props.theme.boxShadow.md};
-      z-index: 100000;
+      z-index: 3;
     `}
   }
   ${props =>
