@@ -68,6 +68,7 @@ export const StyledTransferUl = styled.ul<StyledTransferProps>`
 `;
 
 export const StyledTransferInput = styled(Input)<StyledTransferProps>`
+  z-index: 1;
   ${StyledInput} {
     border: 0;
     box-sizing: border-box;
