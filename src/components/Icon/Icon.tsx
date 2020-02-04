@@ -22,6 +22,7 @@ export type IconName =
   | 'upload'
   | 'trash'
   | 'search'
+  | 'table'
   | 'plus'
   | 'logout'
   | 'license'
@@ -165,6 +166,9 @@ export const Icon: React.FC<IconProps> = (
       break;
     case 'search':
       Component = <Icons.Search />;
+      break;
+    case 'table':
+      Component = <Icons.Table />;
       break;
     case 'trash':
       Component = <Icons.Trash />;

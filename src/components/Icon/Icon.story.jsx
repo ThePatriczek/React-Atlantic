@@ -45,6 +45,9 @@ stories.add('Overview', () => (
     <div>
       <Icon name={'diff'} />
     </div>
+    <div>
+      <Icon name={'table'} />
+    </div>
   </div>
 ));
 
