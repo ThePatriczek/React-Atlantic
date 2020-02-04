@@ -3,6 +3,7 @@ import * as Icons from '../../Icons';
 import { StyledIcon } from './Icon.style';
 
 export type IconName =
+  | 'arrowsVertical'
   | 'arrowUp'
   | 'arrowDoubleUp'
   | 'arrowRight'
@@ -89,6 +90,9 @@ export const Icon: React.FC<IconProps> = (
   let Component = <i className={className} />;
 
   switch (name) {
+    case 'arrowsVertical':
+      Component = <Icons.ArrowsVertical />;
+      break;
     case 'arrowUp':
       Component = <Icons.ArrowUp />;
       break;

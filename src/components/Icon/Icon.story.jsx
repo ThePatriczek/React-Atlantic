@@ -13,6 +13,9 @@ stories.addDecorator(withKnobs);
 stories.add('Overview', () => (
   <div>
     <div>
+      <Icon name={'arrowsVertical'} />
+    </div>
+    <div>
       <Icon name={'hamburger'} />
     </div>
     <div>

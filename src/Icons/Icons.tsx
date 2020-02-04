@@ -6,25 +6,34 @@ export const ArrowUp = () => (
   <svg
     aria-hidden="true"
     focusable="false"
-    data-prefix="fas"
-    data-icon="angle-up"
     role="img"
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 320 512"
   >
     <path
-      fill="currentColor"
-      d="M177 159.7l136 136c9.4 9.4 9.4 24.6 0 33.9l-22.6 22.6c-9.4 9.4-24.6 9.4-33.9 0L160 255.9l-96.4 96.4c-9.4 9.4-24.6 9.4-33.9 0L7 329.7c-9.4-9.4-9.4-24.6 0-33.9l136-136c9.4-9.5 24.6-9.5 34-.1z"
+      fill="currentColor" d="M177 159.7l136 136c9.4 9.4 9.4 24.6 0 33.9l-22.6 22.6c-9.4 9.4-24.6 9.4-33.9 0L160 255.9l-96.4 96.4c-9.4 9.4-24.6 9.4-33.9 0L7 329.7c-9.4-9.4-9.4-24.6 0-33.9l136-136c9.4-9.5 24.6-9.5 34-.1z"
     />
   </svg>
+);
+
+export const ArrowsVertical = () => (
+    <svg
+        viewBox="0 0 322 460"
+        version="1.1"
+        xmlns="http://www.w3.org/2000/svg"
+    >
+      <g stroke="none" stroke-width="1" fill="currentColor" fill-rule="evenodd">
+        <g fill="currentColor" fill-rule="nonzero">
+          <path d="M178,452.31245 L314,316.31245 C323.4,306.91245 323.4,291.71245 314,282.41245 L291.4,259.81245 C282,250.41245 266.8,250.41245 257.5,259.81245 L161,356.11245 L64.6,259.71245 C55.2,250.31245 40,250.31245 30.7,259.71245 L8,282.31245 C-1.4,291.71245 -1.4,306.91245 8,316.21245 L144,452.21245 C153.4,461.71245 168.6,461.71245 178,452.31245 Z M144,7.7 L8,143.7 C-1.4,153.1 -1.4,168.3 8,177.6 L30.6,200.2 C40,209.6 55.2,209.6 64.5,200.2 L160.9,103.8 L257.3,200.2 C266.7,209.6 281.9,209.6 291.2,200.2 L313.8,177.6 C323.2,168.2 323.2,153 313.8,143.7 L177.8,7.7 C168.6,-1.7 153.4,-1.7 144,7.7 Z"></path>
+        </g>
+      </g>
+    </svg>
 );
 
 export const ArrowDoubleUp = () => (
   <svg
     aria-hidden="true"
     focusable="false"
-    data-prefix="fas"
-    data-icon="angle-double-up"
     role="img"
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 320 512"
@@ -39,9 +48,6 @@ export const ArrowDoubleUp = () => (
 export const ArrowRight = () => (
   <svg
     aria-hidden="true"
-    focusable="false"
-    data-prefix="fas"
-    data-icon="angle-right"
     role="img"
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 256 512"
@@ -57,8 +63,6 @@ export const ArrowDoubleRight = () => (
   <svg
     aria-hidden="true"
     focusable="false"
-    data-prefix="fas"
-    data-icon="angle-double-right"
     role="img"
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 448 512"
@@ -74,8 +78,6 @@ export const ArrowDown = () => (
   <svg
     aria-hidden="true"
     focusable="false"
-    data-prefix="fas"
-    data-icon="angle-down"
     role="img"
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 320 512"
@@ -91,8 +93,6 @@ export const ArrowDoubleDown = () => (
   <svg
     aria-hidden="true"
     focusable="false"
-    data-prefix="fas"
-    data-icon="angle-double-down"
     role="img"
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 320 512"
@@ -108,8 +108,6 @@ export const ArrowLeft = () => (
   <svg
     aria-hidden="true"
     focusable="false"
-    data-prefix="fas"
-    data-icon="angle-left"
     role="img"
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 256 512"
@@ -125,8 +123,6 @@ export const ArrowDoubleLeft = () => (
   <svg
     aria-hidden="true"
     focusable="false"
-    data-prefix="fas"
-    data-icon="angle-double-left"
     role="img"
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 448 512"
@@ -142,8 +138,6 @@ export const Hamburger = () => (
   <svg
     aria-hidden="true"
     focusable="false"
-    data-prefix="fas"
-    data-icon="bars"
     role="img"
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 448 512"
@@ -562,14 +556,12 @@ export const Clear = () => (
 export const Enter = () => (
   <svg viewBox="0 0 512 512" version="1.1">
     <g
-      id="Icons"
       stroke="none"
       stroke-width="1"
       fill="currentColor"
       fill-rule="evenodd"
     >
       <g
-        id="turn-bottom-arrow"
         transform="translate(256.500000, 256.500000) scale(-1, 1) rotate(-90.000000) translate(-256.500000, -256.500000) translate(73.000000, 44.000000)"
         fill="currentColor"
       >
