@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { animated } from 'react-spring';
+import { animated } from 'react-spring/web.cjs';
 import { StyledSVG } from '../components/Icon/Icon.style';
 
 export const ArrowUp = () => (
