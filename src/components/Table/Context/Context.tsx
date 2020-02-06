@@ -4,6 +4,7 @@ import React, {
   PropsWithChildren,
   ReactElement,
   useContext,
+  useEffect,
   useState
 } from 'react';
 
@@ -37,6 +38,14 @@ export const TableContextProvider: FC<Readonly<
   const [sortBy, setSortBy] = useState<Readonly<string>>(defaultValue.sortBy);
   const [order, setOrder] = useState<Readonly<SortOrder>>();
 
+  useEffect(() => {
+    setSortBy(props.sortBy || ``);
+  }, [props.sortBy]);
+
+  useEffect(() => {
+    setOrder(props.order);
+  }, [props.order]);
+
   const onSort = (sortBy: Readonly<string>) => {
     setSortBy(sortBy);
 
@@ -63,9 +72,9 @@ export const TableContextProvider: FC<Readonly<
   return (
     <TableContext.Provider
       value={{
-        sortBy: props.sortBy || sortBy,
+        sortBy,
         onSort,
-        order: props.order || order
+        order
       }}
     >
       {children}

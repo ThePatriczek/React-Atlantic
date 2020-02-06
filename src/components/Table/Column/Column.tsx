@@ -26,7 +26,7 @@ export const Column: FC<Readonly<PropsWithChildren<HiddenColumnProps>>> = (
   const hasName: Readonly<boolean> = typeof name !== 'undefined';
   const hasSortBy: Readonly<boolean> = typeof sortBy !== 'undefined';
   const isActive: Readonly<boolean> = hasName && hasSortBy && name === sortBy;
-  console.log(sortBy);
+
   const onClick = () => {
     props.onClick?.();
 
