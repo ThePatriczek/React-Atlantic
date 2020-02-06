@@ -3,6 +3,7 @@ import { Direction, Position, Size } from '../../../types';
 import { IconName } from '../../Icon';
 import { OptionType } from '../Select.utils';
 interface StyledTransferProps {
+    className?: string;
     isOpen?: boolean;
     direction?: Direction;
     isHalfOpen?: boolean;
