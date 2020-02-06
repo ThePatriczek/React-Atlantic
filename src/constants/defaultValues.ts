@@ -82,5 +82,7 @@ export const defaultValues = {
   width: 20,
   height: 50,
   pageSizeOptions: [10, 20, 30, 40, 50],
-  total: 1000
+  total: 1000,
+  sortBy: `name`,
+  order: 'asc'
 };
