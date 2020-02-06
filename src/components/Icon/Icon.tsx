@@ -3,6 +3,7 @@ import * as Icons from '../../Icons';
 import { StyledIcon } from './Icon.style';
 
 export type IconName =
+  | 'arrowsVertical'
   | 'arrowUp'
   | 'arrowDoubleUp'
   | 'arrowRight'
@@ -22,6 +23,7 @@ export type IconName =
   | 'upload'
   | 'trash'
   | 'search'
+  | 'table'
   | 'plus'
   | 'logout'
   | 'license'
@@ -88,6 +90,9 @@ export const Icon: React.FC<IconProps> = (
   let Component = <i className={className} />;
 
   switch (name) {
+    case 'arrowsVertical':
+      Component = <Icons.ArrowsVertical />;
+      break;
     case 'arrowUp':
       Component = <Icons.ArrowUp />;
       break;
@@ -165,6 +170,9 @@ export const Icon: React.FC<IconProps> = (
       break;
     case 'search':
       Component = <Icons.Search />;
+      break;
+    case 'table':
+      Component = <Icons.Table />;
       break;
     case 'trash':
       Component = <Icons.Trash />;

@@ -3,7 +3,7 @@ import { theme } from '../../../theme';
 
 const titleStyle = css`
   color: ${props => props.theme.color.text.alpha};
-  font-weight: bold;
+  font-weight: 600;
   font-family: ${props => props.theme.font.family};
   ::selection,
   ::-moz-selection {
