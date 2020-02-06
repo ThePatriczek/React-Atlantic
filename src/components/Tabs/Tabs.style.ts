@@ -60,6 +60,8 @@ interface StyledTabsContentProps extends StyledTabsContainerProps {
 export const StyledTabsContent = styled.div<StyledTabsContentProps>`
   font-size: ${props => props.theme.font.size.md};
   font-family: ${props => props.theme.font.family};
+  padding: ${props => props.theme.padding.md} ${props => props.theme.padding.lg}
+    ${props => props.theme.padding.md} ${props => props.theme.padding.lg};
 
   ${props =>
     props.hasBackground &&
