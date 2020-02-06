@@ -72,4 +72,6 @@ export declare const defaultValues: {
     height: number;
     pageSizeOptions: number[];
     total: number;
+    sortBy: string;
+    order: string;
 };

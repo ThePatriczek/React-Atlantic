@@ -1,5 +1,6 @@
 /// <reference types="react" />
 export declare const ArrowUp: () => JSX.Element;
+export declare const ArrowsVertical: () => JSX.Element;
 export declare const ArrowDoubleUp: () => JSX.Element;
 export declare const ArrowRight: () => JSX.Element;
 export declare const ArrowDoubleRight: () => JSX.Element;
@@ -18,6 +19,7 @@ export declare const User: () => JSX.Element;
 export declare const Upload: () => JSX.Element;
 export declare const Trash: () => JSX.Element;
 export declare const Search: () => JSX.Element;
+export declare const Table: () => JSX.Element;
 export declare const Plus: () => JSX.Element;
 export declare const Logout: () => JSX.Element;
 export declare const License: () => JSX.Element;
