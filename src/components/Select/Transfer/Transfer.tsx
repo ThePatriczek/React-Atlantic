@@ -118,7 +118,7 @@ export const Transfer: FC<PropsWithChildren<TransferProps>> & {
 
   useEffect(() => {
     if (isOpen) {
-      window.onmousedown = onMouseDown;
+      window.addEventListener('onmousedown', onMouseDown);
       window.addEventListener('keydown', onKeyDown);
     }
 
@@ -152,7 +152,7 @@ export const Transfer: FC<PropsWithChildren<TransferProps>> & {
     }
 
     return () => {
-      window.onmousedown = null;
+      window.removeEventListener('onmousedown', onMouseDown);
       window.removeEventListener('keydown', onKeyDown);
     };
   }, [isOpen]);
