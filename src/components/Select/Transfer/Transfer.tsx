@@ -52,6 +52,7 @@ export const Transfer: FC<PropsWithChildren<TransferProps>> & {
 } = (props): ReactElement => {
   const {
     value,
+    className,
     defaultValue,
     placeholder,
     options,
@@ -276,6 +277,7 @@ export const Transfer: FC<PropsWithChildren<TransferProps>> & {
 
   return (
     <StyledTransferContainer
+      className={className}
       placeholder={placeholder}
       deleteAllText={deleteAllText}
       closeText={closeText}
