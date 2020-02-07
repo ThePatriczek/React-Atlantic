@@ -19,7 +19,7 @@ const switchWidthNormal = '70px';
 const switchWidthSmall = '50px';
 
 const switchColorOff = theme.color.text.alpha;
-const switchBackgroundColorOff = theme.color.default;
+const switchBackgroundColorOff = theme.color.border;
 const switchColorOn = theme.color.text.gamma;
 
 const paddingMD = parseInt(theme.padding.md, 0);
