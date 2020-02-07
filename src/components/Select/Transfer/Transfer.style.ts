@@ -86,6 +86,12 @@ export const StyledTransferInput = styled(Input)<StyledTransferProps>`
           css`
             border-top-right-radius: ${props => props.theme.radius};
           `}
+
+        ${props.isHalfOpen &&
+          props.direction === 'vertical' &&
+          css`
+            border-top-right-radius: ${props => props.theme.radius};
+          `}
       }
 
       ${StyledInput} {

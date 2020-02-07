@@ -83,6 +83,8 @@ const LeftSide: FC<LeftSideProps> = props => {
       {isOpen ? (
         <StyledInputHeader>
           <StyledTransferInput
+            direction={direction}
+            isHalfOpen={isHalfOpen}
             onKeyDown={onKeyDown}
             onChange={inputOnChange}
             isOpen={isOpen}
