@@ -9,11 +9,11 @@ interface StyledCheckboxProps {
 export declare const HiddenCheckbox: import("styled-components").StyledComponent<"input", any, {
     type: "checkbox";
 }, "type">;
-export declare const StyledCheckboxInputShown: import("styled-components").StyledComponent<import("@react-spring/web").AnimatedComponent<"div">, any, {
-    className: "atlantic--checkbox";
-} & StyledCheckboxProps, "className">;
+export declare const StyledCheckboxInputShown: import("styled-components").StyledComponent<any, any, object & {
+    className: string;
+} & StyledCheckboxProps, string | number | symbol>;
 export declare const StyledCheckboxLabel: import("styled-components").StyledComponent<"label", any, StyledCheckboxProps, never>;
-export declare const StyledCheckboxMark: import("styled-components").StyledComponent<import("@react-spring/web").AnimatedComponent<"div">, any, StyledCheckboxProps, never>;
+export declare const StyledCheckboxMark: import("styled-components").StyledComponent<any, any, object & StyledCheckboxProps, string | number | symbol>;
 export declare const StyledCheckboxSpan: import("styled-components").StyledComponent<"span", any, StyledCheckboxProps, never>;
 export declare const StyledCheckboxIcon: import("styled-components").StyledComponent<"i", any, StyledCheckboxProps, never>;
 export {};
