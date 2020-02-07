@@ -83,6 +83,8 @@ const LeftSide: FC<LeftSideProps> = props => {
       {isOpen ? (
         <StyledInputHeader>
           <StyledTransferInput
+            direction={direction}
+            isHalfOpen={isHalfOpen}
             onKeyDown={onKeyDown}
             onChange={inputOnChange}
             isOpen={isOpen}
@@ -118,18 +120,6 @@ const LeftSide: FC<LeftSideProps> = props => {
               setFocus(!isFocused);
             }}
           />
-          <StyledInputText size={size}>
-            <>
-              {items
-                .filter(item => savedItems.has(item.value))
-                .map((item, index) => (
-                  <span>
-                    {item.label}
-                    {index < savedItems.size - 1 ? `, ` : ``}
-                  </span>
-                ))}
-            </>
-          </StyledInputText>
         </>
       )}
       {isOpen && (

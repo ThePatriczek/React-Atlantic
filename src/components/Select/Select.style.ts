@@ -91,8 +91,7 @@ export const Control = styled.div<SelectProps>`
   ${props =>
     props.isMenuOpened &&
     css`
-      border-bottom: 1px solid
-        ${props => props.theme.color.border};
+      border-bottom: 1px solid ${props => props.theme.color.border};
       border-bottom-left-radius: 0;
       border-bottom-right-radius: 0;
     `}
@@ -197,8 +196,9 @@ export const MultiValue = styled.div<SelectProps>`
     white-space: nowrap;
     overflow: hidden;
   }
-  
-  span,i{
+
+  span,
+  i {
     color: ${props => props.theme.color.text.gamma};
   }
 
@@ -233,8 +233,9 @@ export const ClearIndicator = styled.div<SelectProps>`
   justify-content: center;
   width: ${props => props.theme.width.md};
   color: ${props => props.theme.color.text.beta};
-  
-  i,span{
+
+  i,
+  span {
     color: ${props => props.theme.color.text.beta};
   }
 
@@ -261,8 +262,9 @@ export const MultiValueRemove = styled.div<SelectProps>`
   align-items: center;
   min-width: 26px;
   border-left: 1px solid ${props => props.theme.color.primary.alpha};
-  
-  span,i{
+
+  span,
+  i {
     color: ${props => props.theme.color.text.gamma};
   }
 
@@ -342,8 +344,8 @@ export const DropdownIndicator = styled.div<SelectProps>`
   justify-content: center;
   width: ${props => props.theme.width.md};
   color: ${props => props.theme.color.text.beta};
-  
-  i{
+
+  i {
     color: ${props => props.theme.color.text.beta};
   }
 
@@ -377,12 +379,13 @@ export const Menu = styled.div`
 `;
 
 export const MenuList = styled.div`
+  overflow-y: scroll;
+  max-height: 175px;
   border: 1px solid ${props => props.theme.color.primary.alpha};
   border-top: 0;
   border-radius: 0 0 ${props => props.theme.radius}
     ${props => props.theme.radius};
   background: ${props => props.theme.color.background.alpha};
-  overflow: hidden;
   outline-offset: -2px;
 `;
 

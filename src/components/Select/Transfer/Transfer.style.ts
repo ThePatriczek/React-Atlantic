@@ -38,24 +38,7 @@ interface StyledTransferProps {
   ref?: any;
 }
 
-export const StyledTransferContainer = styled.div<StyledTransferProps>`
-  position: relative;
-   ${props =>
-     props.size === 'small' &&
-     css`
-       height: ${parseInt(props.theme.height.sm, 0)}px;
-     `}
-  ${props =>
-    props.size === 'medium' &&
-    css`
-      height: ${parseInt(props.theme.height.md, 0)}px;
-    `}
-  ${props =>
-    props.size === 'large' &&
-    css`
-      height: ${parseInt(props.theme.height.lg, 0)}px;
-    `}
-`;
+export const StyledTransferContainer = styled.div<StyledTransferProps>``;
 
 export const StyledTransferUl = styled.ul<StyledTransferProps>`
   min-height: 150px;
@@ -103,6 +86,12 @@ export const StyledTransferInput = styled(Input)<StyledTransferProps>`
           css`
             border-top-right-radius: ${props => props.theme.radius};
           `}
+
+        ${props.isHalfOpen &&
+          props.direction === 'vertical' &&
+          css`
+            border-top-right-radius: ${props => props.theme.radius};
+          `}
       }
 
       ${StyledInput} {
@@ -120,7 +109,6 @@ export const StyledTransferInput = styled(Input)<StyledTransferProps>`
 
       ${StyledInput} {
         background: none;
-        color: transparent;
       }
     `}
 `;
@@ -316,7 +304,6 @@ export const StyledTransferFooter = styled.div<StyledTransferProps>`
   align-items: center;
   justify-content: flex-end;
   width: 100%;
-  float: left;
   border-top: 1px solid ${props => props.theme.color.border};
 
   button {
@@ -484,8 +471,8 @@ export const StyledTransfer = styled.div<StyledTransferProps>`
     props.isHalfOpen &&
     props.direction === 'vertical' &&
     css``};
+  width: fit-content;
   display: block;
-  position: absolute;
   background-color: ${props => props.theme.color.background.alpha};
   border: 1px solid ${props => props.theme.color.border};
   border-radius: ${props => props.theme.radius};
