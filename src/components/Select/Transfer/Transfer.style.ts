@@ -358,6 +358,27 @@ export const StyledTransferLi = styled.li<StyledTransferProps>`
   ${StyledCheckboxLabel} {
     display: flex;
     width: 100%;
+     ${props =>
+       props.size === 'small' &&
+       css`
+         font-size: ${props.theme.font.size.sm};
+         height: ${parseInt(props.theme.height.sm, 0)}px;
+         line-height: ${parseInt(props.theme.height.sm, 0)}px;
+       `}
+    ${props =>
+      props.size === 'medium' &&
+      css`
+        font-size: ${props.theme.font.size.md};
+        height: ${parseInt(props.theme.height.md, 0)}px;
+        line-height: ${parseInt(props.theme.height.md, 0)}px;
+      `}
+    ${props =>
+      props.size === 'large' &&
+      css`
+        font-size: ${props.theme.font.size.lg};
+        height: ${parseInt(props.theme.height.lg, 0)}px;
+        line-height: ${parseInt(props.theme.height.lg, 0)}px;
+      `}
   }
   
  > span {
