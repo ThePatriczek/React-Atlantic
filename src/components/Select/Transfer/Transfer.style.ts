@@ -109,6 +109,7 @@ export const StyledTransferInput = styled(Input)<StyledTransferProps>`
 
       ${StyledInput} {
         background: none;
+        color: transparent;
       }
     `}
 `;
@@ -184,8 +185,8 @@ export const StyledInputText = styled.div<StyledTransferProps>`
   z-index: 0;
   white-space: nowrap;
   width: calc(100% - 40px);
-  color: ${props => props.theme.color.text.alpha};
-  span  {
+  color: ${props => props.theme.color.text.alpha}; 
+   span {
     ${props =>
       props.size === 'small' &&
       css`
@@ -207,7 +208,7 @@ export const StyledInputText = styled.div<StyledTransferProps>`
           height: ${parseInt(props.theme.height.lg, 0)}px;
           line-height: ${parseInt(props.theme.height.lg, 0)}px;
         `}
-  }
+   }
 `;
 
 export const StyledChosenHeader = styled.div<StyledTransferProps>`
@@ -236,6 +237,7 @@ export const StyledChosenHeader = styled.div<StyledTransferProps>`
 `;
 
 export const StyledTransferSide = styled.div<StyledTransferProps>`
+  position: relative;
   display: block;
   width: ${props =>
     props.isOpen && props.direction === 'horizontal' ? '50%' : '100%'};
