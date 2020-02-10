@@ -531,19 +531,13 @@ export const StyledTransfer = styled.div<StyledTransferProps>`
   
   ${props =>
     props.isOpen &&
+    !props.isHalfOpen &&
     css`
       width: 300px;
       box-shadow: ${props => props.theme.boxShadow.md};
       z-index: 3;
     `}
   
-   ${props =>
-     props.isOpen &&
-     props.isHalfOpen &&
-     props.direction === 'horizontal' &&
-     css`
-       width: 600px;
-     `};
    
     ${props =>
       props.isOpen &&
@@ -556,6 +550,14 @@ export const StyledTransfer = styled.div<StyledTransferProps>`
     css`
       width: 100%;
     `}
+  
+  ${props =>
+    props.isOpen &&
+    props.isHalfOpen &&
+    props.direction === 'horizontal' &&
+    css`
+      min-width: 600px;
+    `};
   
   ${props =>
     !props.isDisabled &&
