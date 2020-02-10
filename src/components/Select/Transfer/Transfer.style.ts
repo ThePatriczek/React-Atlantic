@@ -47,7 +47,8 @@ export const StyledTransferUl = styled.ul<StyledTransferProps>`
   padding-left: 0;
   margin-top: 0;
   margin-bottom: 0;
-  overflow: scroll;
+  overflow-y: auto;
+  overflow-x: hidden;
   color: ${props => props.theme.color.text.alpha};
 `;
 
@@ -178,7 +179,8 @@ export const StyledSearchButton = styled(Button)<StyledTransferProps>`
 
 export const StyledInputText = styled.div<StyledTransferProps>`
   position: absolute;
-  overflow: hidden;
+  overflow-y: auto;
+  overflow-x: hidden;
   text-overflow: ellipsis;
   left: 10px;
   top: 0;
@@ -333,7 +335,8 @@ export const StyledTransferLi = styled.li<StyledTransferProps>`
   height: ${props => props.theme.height.md};
   line-height: ${props => props.theme.height.md};
 
-  overflow: hidden;
+  overflow-y: auto;
+  overflow-x: hidden;
   text-overflow: ellipsis;
   cursor: pointer;
 
@@ -381,7 +384,7 @@ export const StyledTransferLi = styled.li<StyledTransferProps>`
       `}
   }
   
- > span {
+  span {
   ${props =>
     props.size === 'small' &&
     css`
@@ -439,7 +442,8 @@ export const StyledTransferLi = styled.li<StyledTransferProps>`
   i {
     text-overflow: ellipsis;
     white-space: nowrap;
-    overflow: hidden;
+    overflow-y:auto;
+    overflow-x: hidden;
   }
 `;
 
@@ -482,18 +486,6 @@ export const StyledTransferOptions = styled.div<StyledTransferProps>`
 `;
 
 export const StyledTransfer = styled.div<StyledTransferProps>`
-  ${props =>
-    props.isOpen &&
-    props.isHalfOpen &&
-    props.direction === 'horizontal' &&
-    css`
-      min-width: 600px;
-    `};
-  ${props =>
-    props.isOpen &&
-    props.isHalfOpen &&
-    props.direction === 'vertical' &&
-    css``};
   width: fit-content;
   display: block;
   background-color: ${props => props.theme.color.background.alpha};
@@ -538,18 +530,33 @@ export const StyledTransfer = styled.div<StyledTransferProps>`
      `}
   
   ${props =>
+    props.isOpen &&
+    css`
+      width: 300px;
+      box-shadow: ${props => props.theme.boxShadow.md};
+      z-index: 3;
+    `}
+  
+   ${props =>
+     props.isOpen &&
+     props.isHalfOpen &&
+     props.direction === 'horizontal' &&
+     css`
+       width: 600px;
+     `};
+   
+    ${props =>
+      props.isOpen &&
+      props.isHalfOpen &&
+      props.direction === 'vertical' &&
+      css``};
+  
+  ${props =>
     props.isFullWidth &&
     css`
       width: 100%;
     `}
-
-  ${props =>
-    props.isOpen &&
-    css`
-      box-shadow: ${props => props.theme.boxShadow.md};
-      z-index: 3;
-    `}
-  }
+  
   ${props =>
     !props.isDisabled &&
     css`
