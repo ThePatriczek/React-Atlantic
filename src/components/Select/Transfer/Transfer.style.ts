@@ -532,8 +532,19 @@ export const StyledTransfer = styled.div<StyledTransferProps>`
   ${props =>
     props.isOpen &&
     !props.isHalfOpen &&
+    !props.isFullWidth &&
     css`
       width: 300px;
+      box-shadow: ${props => props.theme.boxShadow.md};
+      z-index: 3;
+    `}
+  
+  ${props =>
+    props.isOpen &&
+    props.isHalfOpen &&
+    !props.isFullWidth &&
+    css`
+      width: 600px;
       box-shadow: ${props => props.theme.boxShadow.md};
       z-index: 3;
     `}
