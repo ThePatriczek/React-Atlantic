@@ -275,6 +275,51 @@ export const Transfer: FC<PropsWithChildren<TransferProps>> & {
     setSearchedValue(value);
   };
 
+  const sortedItems = () => {
+    return items.sort((a, b) => {
+      if (
+        typeof a.label === 'object' &&
+        typeof b.label === 'object' &&
+        b.label &&
+        a.label
+      ) {
+        if (
+          'props' in a.label &&
+          'props' in b.label &&
+          a.label.props?.children.toLowerCase() >
+            b.label.props?.children.toLowerCase()
+        ) {
+          return 1;
+        } else if (
+          'props' in a.label &&
+          'props' in b.label &&
+          a.label.props?.children.toLowerCase() <
+            b.label.props?.children.toLowerCase()
+        ) {
+          return -1;
+        }
+        return 0;
+      } else if (
+        typeof a.label !== 'object' &&
+        typeof b.label !== 'object' &&
+        b.label &&
+        a.label
+      ) {
+        if (
+          a.label.toString().toLowerCase() > b.label.toString().toLowerCase()
+        ) {
+          return 1;
+        } else if (
+          a.label.toString().toLowerCase() < b.label.toString().toLowerCase()
+        ) {
+          return -1;
+        }
+        return 0;
+      }
+      return 0;
+    });
+  };
+
   return (
     <StyledTransferContainer
       className={className}
@@ -319,7 +364,7 @@ export const Transfer: FC<PropsWithChildren<TransferProps>> & {
             onChange={onChange}
             notFoundComponent={notFoundComponent}
             isFocused={isFocused}
-            items={items}
+            items={sortedItems()}
             isFullWidth={isFullWidth}
           />
           {isOpen && isHalfOpen && (
@@ -330,7 +375,7 @@ export const Transfer: FC<PropsWithChildren<TransferProps>> & {
               isHalfOpen={isHalfOpen}
               isOpen={isOpen}
               isFullWidth={isFullWidth}
-              items={items}
+              items={sortedItems()}
               uncheckAll={uncheckAll}
               size={size}
               deleteAllText={deleteAllText}
