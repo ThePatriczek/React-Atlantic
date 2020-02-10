@@ -21,6 +21,7 @@ import LeftSide from './components/LeftSide';
 import RightSide from './components/RightSide';
 import { StyledTransfer, StyledTransferContainer } from './Transfer.style';
 import { getMergedItems } from './Transfer.utils';
+import { isCaseInsensitive } from 'awesome-typescript-loader/dist/helpers';
 
 export interface TransferProps {
   value?: OptionType[];
@@ -281,42 +282,16 @@ export const Transfer: FC<PropsWithChildren<TransferProps>> & {
         typeof a.label === 'object' &&
         typeof b.label === 'object' &&
         b.label &&
-        a.label
+        a.label &&
+        'props' in a.label &&
+        'props' in b.label
       ) {
-        if (
-          'props' in a.label &&
-          'props' in b.label &&
-          a.label.props?.children.toLowerCase() >
-            b.label.props?.children.toLowerCase()
-        ) {
-          return 1;
-        } else if (
-          'props' in a.label &&
-          'props' in b.label &&
-          a.label.props?.children.toLowerCase() <
-            b.label.props?.children.toLowerCase()
-        ) {
-          return -1;
-        }
-        return 0;
-      } else if (
-        typeof a.label !== 'object' &&
-        typeof b.label !== 'object' &&
-        b.label &&
-        a.label
-      ) {
-        if (
-          a.label.toString().toLowerCase() > b.label.toString().toLowerCase()
-        ) {
-          return 1;
-        } else if (
-          a.label.toString().toLowerCase() < b.label.toString().toLowerCase()
-        ) {
-          return -1;
-        }
-        return 0;
+        return a.label.props?.children
+          .toString()
+          .localeCompare(b.label.props?.children.toString(), 'cs');
+      } else if (b.label && a.label) {
+        return a.label.toString().localeCompare(b.label.toString(), 'cs');
       }
-      return 0;
     });
   };
 
