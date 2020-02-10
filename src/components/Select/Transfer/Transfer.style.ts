@@ -41,8 +41,7 @@ interface StyledTransferProps {
 export const StyledTransferContainer = styled.div<StyledTransferProps>``;
 
 export const StyledTransferUl = styled.ul<StyledTransferProps>`
-  min-height: 150px;
-  max-height: 150px;
+  height: 170px;
   list-style: none;
   padding-left: 0;
   margin-top: 0;
