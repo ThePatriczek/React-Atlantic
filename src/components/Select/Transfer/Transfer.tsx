@@ -288,9 +288,9 @@ export const Transfer: FC<PropsWithChildren<TransferProps>> & {
       ) {
         return a.label.props?.children
           .toString()
-          .localeCompare(b.label.props?.children.toString(), 'cs');
+          .localeCompare(b.label.props?.children.toString());
       } else if (b.label && a.label) {
-        return a.label.toString().localeCompare(b.label.toString(), 'cs');
+        return a.label.toString().localeCompare(b.label.toString());
       }
     });
   };
