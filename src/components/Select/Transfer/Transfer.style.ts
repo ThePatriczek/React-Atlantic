@@ -561,6 +561,22 @@ export const StyledTransfer = styled.div<StyledTransferProps>`
     css`
       width: 100%;
     `}
+  ${props =>
+    props.isOpen &&
+    props.isHalfOpen &&
+    props.isFullWidth &&
+    css`
+      min-width: 600px;
+      width: 100%;
+    `}
+  ${props =>
+    props.isOpen &&
+    !props.isHalfOpen &&
+    props.isFullWidth &&
+    css`
+      min-width: 300px;
+      width: 100%;
+    `}
   
   ${props =>
     props.isOpen &&
