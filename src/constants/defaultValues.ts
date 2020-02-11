@@ -54,9 +54,9 @@ export const defaultValues = {
   value: 'Change me, please 🥺',
   selectValue: [{ value: 'Change me, please 🥺' }],
   options: [
-    { value: 'first option', label: 'First option' },
-    { value: 'second option', label: 'Second option' },
-    { value: 'third option', label: 'Third option' }
+    { value: 'value1', label: 'First option' },
+    { value: 'value2', label: 'Second option' },
+    { value: 'value3', label: 'Third option' }
   ],
   chosenText: (chosen: string, outOf: string) => {
     const object = {

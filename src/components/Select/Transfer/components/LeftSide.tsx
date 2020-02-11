@@ -67,10 +67,18 @@ const LeftSide: FC<LeftSideProps> = props => {
   const filter = (item: OptionType) => {
     if (typeof item.label === 'string') {
       return item.label.toLowerCase().includes(searchedValue.toLowerCase());
-    } else {
-      return item.value.toLowerCase().includes(searchedValue.toLowerCase());
+    } else if (
+      item.label &&
+      typeof item.label === 'object' &&
+      'props' in item.label
+    ) {
+      return item.label.props.children
+        .toLowerCase()
+        .includes(searchedValue.toLowerCase());
     }
+    return null;
   };
+
   const filtered = items.filter(filter);
 
   return (

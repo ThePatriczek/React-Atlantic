@@ -178,8 +178,6 @@ export const StyledSearchButton = styled(Button)<StyledTransferProps>`
 
 export const StyledInputText = styled.div<StyledTransferProps>`
   position: absolute;
-  overflow-y: auto;
-  overflow-x: hidden;
   text-overflow: ellipsis;
   left: 10px;
   top: 0;
@@ -334,8 +332,6 @@ export const StyledTransferLi = styled.li<StyledTransferProps>`
   height: ${props => props.theme.height.md};
   line-height: ${props => props.theme.height.md};
 
-  overflow-y: auto;
-  overflow-x: hidden;
   text-overflow: ellipsis;
   cursor: pointer;
 
@@ -441,8 +437,6 @@ export const StyledTransferLi = styled.li<StyledTransferProps>`
   i {
     text-overflow: ellipsis;
     white-space: nowrap;
-    overflow-y:auto;
-    overflow-x: hidden;
   }
 `;
 
