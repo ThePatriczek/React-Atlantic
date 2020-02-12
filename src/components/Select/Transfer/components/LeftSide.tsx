@@ -64,7 +64,7 @@ const LeftSide: FC<LeftSideProps> = props => {
     direction
   } = props;
 
-  const filter = (item: OptionType) => {
+  const filtration = (item: OptionType) => {
     if (typeof item.label === 'string') {
       return item.label.toLowerCase().includes(searchedValue.toLowerCase());
     } else if (
@@ -79,7 +79,7 @@ const LeftSide: FC<LeftSideProps> = props => {
     return null;
   };
 
-  const filtered = items.filter(filter);
+  const filtered = items.filter(filtration);
 
   return (
     <StyledTransferSide

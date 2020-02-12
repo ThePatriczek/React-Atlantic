@@ -77,7 +77,7 @@ const RightSide: FC<RightSideProps> = props => {
               onChange(item.value, false);
             }}
           >
-            <span>{item.label}</span>
+            {item.label}
             <StyledDeleteOneButton size={size}>
               <StyledDeleteOneIcon name={'error'} />
             </StyledDeleteOneButton>

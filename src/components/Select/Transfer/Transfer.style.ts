@@ -179,10 +179,11 @@ export const StyledSearchButton = styled(Button)<StyledTransferProps>`
 export const StyledInputText = styled.div<StyledTransferProps>`
   position: absolute;
   text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
   left: 10px;
   top: 0;
   z-index: 0;
-  white-space: nowrap;
   width: calc(100% - 40px);
   color: ${props => props.theme.color.text.alpha}; 
    span {
@@ -404,6 +405,9 @@ export const StyledTransferLi = styled.li<StyledTransferProps>`
  }
   
   ${StyledCheckboxSpan} > span{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   ${props =>
     props.size === 'small' &&
     css`
@@ -432,9 +436,8 @@ export const StyledTransferLi = styled.li<StyledTransferProps>`
     min-width: 16px;
   }
 
-  div,
-  span,
-  i {
+  span {
+    overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
   }
