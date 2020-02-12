@@ -24,7 +24,7 @@ export const getMergedItems: (
   return arr;
 };
 
-export const distinguishTypeOfLabel = (item: TransferItem) => {
+export const distinguishTypeAndReturnLabel = (item: TransferItem) => {
   if (item.label && typeof item.label === 'string') {
     return item.label;
   } else if (

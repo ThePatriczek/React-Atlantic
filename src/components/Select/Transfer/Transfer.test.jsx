@@ -6,7 +6,12 @@ import { defaultValues } from '../../../constants/defaultValues';
 import { NotFound } from '../../NotFound';
 import { Select } from '../Select';
 import { Text } from '../../Typography/Text';
+import {
+  distinguishTypeAndReturnLabel,
+  transferItemsRender
+} from './Transfer.utils';
 const { Option } = Select;
+const assert = require('assert');
 
 const notFoundComponent = (
   <NotFound
@@ -44,6 +49,7 @@ export const Component = (
       onCancel={onCancel}
       onSubmit={onSubmit}
     >
+      <Text>Receiving options as children</Text>
       <Transfer
         direction={direction}
         placeholder={placeholder}
@@ -69,26 +75,23 @@ export const Component = (
           <Text>Third</Text>
         </Option>
         <Option value={'value4'}>
-          <Text>Čtvrtá</Text>
+          <Text>Fourth</Text>
         </Option>
         <Option value={'value5'}>
-          <Text>Pátá</Text>
+          <Text>Fifth</Text>
         </Option>
         <Option value={'value6'}>
-          <Text>Šestá</Text>
+          <Text>Sixth</Text>
         </Option>
         <Option value={'value7'}>
-          <Text>Sedmá</Text>
+          <Text>Seventh</Text>
         </Option>
         <Option value={'value8'}>
-          <Text>Osmá</Text>
-        </Option>
-        <Option value={'value9'}>
-          <Text>
-            Aasdsdadasdasdasdasdasdasdasdasdadasdasdadasdasdadasdasdadasdsdasdasdasdasdasdasdasdasdasdasd
-          </Text>
+          <Text>XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</Text>
         </Option>
       </Transfer>
+      <br />
+      <Text>Receiving options as array</Text>
       <Transfer
         direction={direction}
         placeholder={placeholder}
@@ -122,6 +125,7 @@ export const tests = (
   )
 ) => {
   let output = shallow(transfer);
+  let expected;
 
   return describe('Transfer', () => {
     it(`Should have placeholder: ${transfer.props.placeholder}`, () => {
@@ -161,6 +165,79 @@ export const tests = (
     it(`Should have direction: ${transfer.props.direction}`, () => {
       expect(output.props().direction).toEqual(transfer.props.direction);
     });
+
+    expected = transferItemsRender({ value: 'value1', label: 'First' });
+    assert(
+      expected.type === 'span' && expected.props.children === 'First',
+      `transferItemsRender should return type 'span'.`
+    );
+    assert(
+      expected.props.children === 'First',
+      `transferItemsRender should return children 'First'.`
+    );
+
+    expected = transferItemsRender({
+      value: 'value1',
+      label: { props: { children: 'First' } }
+    });
+    assert(
+      expected.type === 'span' && expected.props.children === 'First',
+      `transferItemsRender should return type 'span'.`
+    );
+    assert(
+      expected.props.children === 'First',
+      `transferItemsRender should return children 'First'.`
+    );
+
+    expected = transferItemsRender(
+      {
+        value: 'value1',
+        label: { props: { children: 'First' } }
+      },
+      true
+    );
+    assert(
+      typeof expected.type === 'symbol' && expected.props.children === 'First',
+      `transferItemsRender should return type 'symbol'.`
+    );
+    assert(
+      expected.props.children === 'First',
+      `transferItemsRender should return children 'First'.`
+    );
+
+    expected = transferItemsRender(
+      {
+        value: 'value1',
+        label: { props: { children: 'First' } }
+      },
+      false
+    );
+    assert(
+      expected.type === 'span' && expected.props.children === 'First',
+      `transferItemsRender should return type 'symbol'.`
+    );
+    assert(
+      expected.props.children === 'First',
+      `transferItemsRender should return children 'First'.`
+    );
+
+    expected = distinguishTypeAndReturnLabel({
+      value: 'value1',
+      label: 'First'
+    });
+    assert(
+      expected === 'First',
+      `distinguishTypeAndReturnLabel should return 'First'.`
+    );
+
+    expected = distinguishTypeAndReturnLabel({
+      value: 'value1',
+      label: { props: { children: 'First' } }
+    });
+    assert(
+      expected === 'First',
+      `distinguishTypeAndReturnLabel should return 'First'.`
+    );
   });
 };
 

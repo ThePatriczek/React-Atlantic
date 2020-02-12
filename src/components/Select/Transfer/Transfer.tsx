@@ -21,7 +21,7 @@ import Footer from './components/Footer';
 import LeftSide from './components/LeftSide';
 import RightSide from './components/RightSide';
 import { StyledTransfer, StyledTransferContainer } from './Transfer.style';
-import { distinguishTypeOfLabel, getMergedItems } from './Transfer.utils';
+import { distinguishTypeAndReturnLabel, getMergedItems } from './Transfer.utils';
 
 export interface TransferProps {
   value?: OptionType[];
@@ -89,7 +89,7 @@ export const Transfer: FC<PropsWithChildren<TransferProps>> & {
       );
 
       setResultValue(
-        defaultValue.map(item => distinguishTypeOfLabel(item)).join(`, `)
+        defaultValue.map(item => distinguishTypeAndReturnLabel(item)).join(`, `)
       );
       setSavedItems(map);
       setItems(
@@ -105,7 +105,7 @@ export const Transfer: FC<PropsWithChildren<TransferProps>> & {
       );
 
       setResultValue(
-        value.map(item => distinguishTypeOfLabel(item)).join(`, `)
+        value.map(item => distinguishTypeAndReturnLabel(item)).join(`, `)
       );
       setSavedItems(map);
       setItems((prevState: ReadonlyArray<TransferItem>) =>
@@ -261,7 +261,7 @@ export const Transfer: FC<PropsWithChildren<TransferProps>> & {
 
         props.onSubmit(arr);
       }
-      const arr = checkedItems.map(item => distinguishTypeOfLabel(item));
+      const arr = checkedItems.map(item => distinguishTypeAndReturnLabel(item));
       const map: Map<string, boolean> = new Map();
 
       checkedItems.forEach(item => {

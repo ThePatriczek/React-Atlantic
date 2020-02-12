@@ -78,7 +78,7 @@ const RightSide: FC<RightSideProps> = props => {
               onChange(item.value, false);
             }}
           >
-            {transferItemsRender(item, false)}
+            {transferItemsRender(item)}
             <StyledDeleteOneButton size={size}>
               <StyledDeleteOneIcon name={'error'} />
             </StyledDeleteOneButton>

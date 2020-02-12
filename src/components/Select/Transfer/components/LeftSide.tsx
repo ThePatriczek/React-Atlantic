@@ -112,22 +112,20 @@ const LeftSide: FC<LeftSideProps> = props => {
           )}
         </StyledInputHeader>
       ) : (
-        <>
-          <StyledTransferInput
-            onKeyDown={onKeyDown}
-            size={size}
-            isDisabled={isDisabled}
-            isOpen={isOpen}
-            value={resultValue}
-            isFullWidth={isFullWidth}
-            placeholder={placeholder}
-            iconRight={'arrowDown'}
-            onFocus={() => {
-              setOpen(!isOpen);
-              setFocus(!isFocused);
-            }}
-          />
-        </>
+        <StyledTransferInput
+          onKeyDown={onKeyDown}
+          size={size}
+          isDisabled={isDisabled}
+          isOpen={isOpen}
+          value={resultValue}
+          isFullWidth={isFullWidth}
+          placeholder={placeholder}
+          iconRight={'arrowDown'}
+          onFocus={() => {
+            setOpen(!isOpen);
+            setFocus(!isFocused);
+          }}
+        />
       )}
       {isOpen && (
         <>
