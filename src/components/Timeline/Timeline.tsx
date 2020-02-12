@@ -15,22 +15,12 @@ export const Timeline: FC<PropsWithChildren<TimelineProps>> & {
   const { children, onChange, index } = props;
   const { getFilteredChildren } = useComposition();
 
-  const timelineItems = getFilteredChildren(
-    children,
-    Timeline.Item.displayName
-  );
+  const timelineItem = getFilteredChildren(children, Timeline.Item.displayName);
+  const items: JSX.Element[] = [...timelineItem];
 
   return (
     <TimelineContextProvider onChange={onChange} index={index}>
-      <StyledTimelineContainer>
-        {timelineItems.map(
-          (item: Readonly<JSX.Element>, index: Readonly<number>) => (
-            <Timeline.Item index={index} key={index}>
-              {item.props?.children}
-            </Timeline.Item>
-          )
-        )}
-      </StyledTimelineContainer>
+      <StyledTimelineContainer>{items}</StyledTimelineContainer>
     </TimelineContextProvider>
   );
 };
