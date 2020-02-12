@@ -109,7 +109,6 @@ export const StyledTransferInput = styled(Input)<StyledTransferProps>`
 
       ${StyledInput} {
         background: none;
-        color: transparent;
       }
     `}
 `;

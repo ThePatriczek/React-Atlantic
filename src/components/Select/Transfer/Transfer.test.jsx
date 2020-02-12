@@ -4,6 +4,9 @@ import { Transfer } from './Transfer';
 import expect from 'expect';
 import { defaultValues } from '../../../constants/defaultValues';
 import { NotFound } from '../../NotFound';
+import { Select } from '../Select';
+import { Text } from '../../Typography/Text';
+const { Option } = Select;
 
 const notFoundComponent = (
   <NotFound
@@ -26,7 +29,7 @@ export const Component = (
   onSubmit
 ) => {
   return (
-    <Transfer
+    <div
       direction={direction}
       placeholder={placeholder}
       isDisabled={isDisabled}
@@ -40,7 +43,68 @@ export const Component = (
       onChange={onChange}
       onCancel={onCancel}
       onSubmit={onSubmit}
-    />
+    >
+      <Transfer
+        direction={direction}
+        placeholder={placeholder}
+        isDisabled={isDisabled}
+        closeText={closeText}
+        submitText={submitText}
+        deleteAllText={deleteAllText}
+        options={options}
+        notFoundComponent={notFoundComponent}
+        size={size}
+        isFullWidth={isFullWidth}
+        onChange={onChange}
+        onCancel={onCancel}
+        onSubmit={onSubmit}
+      >
+        <Option value={'value1'}>
+          <Text>First</Text>
+        </Option>
+        <Option value={'value2'}>
+          <Text>Second</Text>
+        </Option>
+        <Option value={'value3'}>
+          <Text>Third</Text>
+        </Option>
+        <Option value={'value4'}>
+          <Text>Čtvrtá</Text>
+        </Option>
+        <Option value={'value5'}>
+          <Text>Pátá</Text>
+        </Option>
+        <Option value={'value6'}>
+          <Text>Šestá</Text>
+        </Option>
+        <Option value={'value7'}>
+          <Text>Sedmá</Text>
+        </Option>
+        <Option value={'value8'}>
+          <Text>Osmá</Text>
+        </Option>
+        <Option value={'value9'}>
+          <Text>
+            Aasdsdadasdasdasdasdasdasdasdasdadasdasdadasdasdadasdasdadasdsdasdasdasdasdasdasdasdasdasdasd
+          </Text>
+        </Option>
+      </Transfer>
+      <Transfer
+        direction={direction}
+        placeholder={placeholder}
+        isDisabled={isDisabled}
+        closeText={closeText}
+        submitText={submitText}
+        deleteAllText={deleteAllText}
+        options={options}
+        notFoundComponent={notFoundComponent}
+        size={size}
+        isFullWidth={isFullWidth}
+        onChange={onChange}
+        onCancel={onCancel}
+        onSubmit={onSubmit}
+      />
+    </div>
   );
 };
 

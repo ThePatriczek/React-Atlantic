@@ -12,6 +12,7 @@ import {
   StyledTransferSpan,
   StyledTransferUl
 } from '../Transfer.style';
+import { transferItemsRender } from '../Transfer.utils';
 
 interface RightSideProps {
   checkedItems: TransferItem[];
@@ -77,7 +78,7 @@ const RightSide: FC<RightSideProps> = props => {
               onChange(item.value, false);
             }}
           >
-            {item.label}
+            {transferItemsRender(item, false)}
             <StyledDeleteOneButton size={size}>
               <StyledDeleteOneIcon name={'error'} />
             </StyledDeleteOneButton>

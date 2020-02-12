@@ -6,13 +6,13 @@ import { OptionType } from '../../Select.utils';
 import { TransferItem } from '../Transfer';
 import {
   StyledInputHeader,
-  StyledInputText,
   StyledSearchButton,
   StyledTransferInput,
   StyledTransferLi,
   StyledTransferSide,
   StyledTransferUl
 } from '../Transfer.style';
+import { transferItemsRender } from '../Transfer.utils';
 
 export interface LeftSideProps {
   placeholder?: string;
@@ -57,7 +57,6 @@ const LeftSide: FC<LeftSideProps> = props => {
     setOpen,
     setFocus,
     size,
-    savedItems,
     onChange,
     notFoundComponent,
     isFullWidth,
@@ -128,18 +127,6 @@ const LeftSide: FC<LeftSideProps> = props => {
               setFocus(!isFocused);
             }}
           />
-          <StyledInputText size={size}>
-            <>
-              {items
-                .filter(item => savedItems.has(item.value))
-                .map((item, index) => (
-                  <span>
-                    {item.label}
-                    {index < savedItems.size - 1 ? `, ` : ``}
-                  </span>
-                ))}
-            </>
-          </StyledInputText>
         </>
       )}
       {isOpen && (
@@ -154,7 +141,7 @@ const LeftSide: FC<LeftSideProps> = props => {
                       onChange(item.value, isChecked);
                     }}
                   >
-                    {item.label}
+                    {transferItemsRender(item, true)}
                   </Checkbox>
                 </StyledTransferLi>
               ))}

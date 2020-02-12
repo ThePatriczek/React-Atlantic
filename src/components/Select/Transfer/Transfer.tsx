@@ -1,6 +1,7 @@
 import React, {
   FC,
   PropsWithChildren,
+  ReactChild,
   ReactElement,
   ReactNode,
   useEffect,
@@ -20,8 +21,7 @@ import Footer from './components/Footer';
 import LeftSide from './components/LeftSide';
 import RightSide from './components/RightSide';
 import { StyledTransfer, StyledTransferContainer } from './Transfer.style';
-import { getMergedItems } from './Transfer.utils';
-import { isCaseInsensitive } from 'awesome-typescript-loader/dist/helpers';
+import { distinguishTypeOfLabel, getMergedItems } from './Transfer.utils';
 
 export interface TransferProps {
   value?: OptionType[];
@@ -88,7 +88,9 @@ export const Transfer: FC<PropsWithChildren<TransferProps>> & {
         defaultValue.map(item => [item.value, true])
       );
 
-      setResultValue(defaultValue.map(item => item.label).join(`, `));
+      setResultValue(
+        defaultValue.map(item => distinguishTypeOfLabel(item)).join(`, `)
+      );
       setSavedItems(map);
       setItems(
         getMergedItems(checkChildrenAndOptions(children, options), defaultValue)
@@ -102,7 +104,9 @@ export const Transfer: FC<PropsWithChildren<TransferProps>> & {
         value.map(item => [item.value, true])
       );
 
-      setResultValue(value.map(item => item.label).join(`, `));
+      setResultValue(
+        value.map(item => distinguishTypeOfLabel(item)).join(`, `)
+      );
       setSavedItems(map);
       setItems((prevState: ReadonlyArray<TransferItem>) =>
         getMergedItems(prevState, value)
@@ -257,7 +261,7 @@ export const Transfer: FC<PropsWithChildren<TransferProps>> & {
 
         props.onSubmit(arr);
       }
-      const arr = checkedItems.map(item => item.label);
+      const arr = checkedItems.map(item => distinguishTypeOfLabel(item));
       const map: Map<string, boolean> = new Map();
 
       checkedItems.forEach(item => {
