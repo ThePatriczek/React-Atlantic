@@ -4,6 +4,7 @@ import React, {
   PropsWithChildren,
   ReactElement,
   useContext,
+  useEffect,
   useState
 } from 'react';
 
@@ -25,7 +26,7 @@ export const useTimeline = () =>
   useContext<TimelineContextState>(TimelineContext);
 
 interface TimelineContextProps {
-  onChange?: (index: Readonly<number>) => void;
+  onChange?: (index: number) => void;
   index?: Readonly<number>;
 }
 
@@ -33,13 +34,19 @@ export const TimelineContextProvider: FC<Readonly<
   PropsWithChildren<Readonly<TimelineContextProps>>
 >> = (props): Readonly<ReactElement> => {
   const { children } = props;
-  const [index, setIndex] = useState<Readonly<number>>(0);
+  const [index, setIndex] = useState<Readonly<number>>(defaultValue.index);
+
+  useEffect(() => {
+    setIndex(props.index || 0);
+  }, [props.index]);
 
   const onChange = (index: Readonly<number>) => {
     setIndex(index);
 
     props.onChange?.(index);
   };
+
+  console.log(index);
 
   return (
     <TimelineContext.Provider value={{ onChange, index }}>
