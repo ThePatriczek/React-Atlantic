@@ -6,13 +6,13 @@ import { OptionType } from '../../Select.utils';
 import { TransferItem } from '../Transfer';
 import {
   StyledInputHeader,
-  StyledInputText,
   StyledSearchButton,
   StyledTransferInput,
   StyledTransferLi,
   StyledTransferSide,
   StyledTransferUl
 } from '../Transfer.style';
+import { transferItemsRender } from '../Transfer.utils';
 
 export interface LeftSideProps {
   placeholder?: string;
@@ -57,21 +57,28 @@ const LeftSide: FC<LeftSideProps> = props => {
     setOpen,
     setFocus,
     size,
-    savedItems,
     onChange,
     notFoundComponent,
     isFullWidth,
     direction
   } = props;
 
-  const filter = (item: OptionType) => {
+  const filtration = (item: OptionType) => {
     if (typeof item.label === 'string') {
       return item.label.toLowerCase().includes(searchedValue.toLowerCase());
-    } else {
-      return item.value.toLowerCase().includes(searchedValue.toLowerCase());
+    } else if (
+      item.label &&
+      typeof item.label === 'object' &&
+      'props' in item.label
+    ) {
+      return item.label.props.children
+        .toLowerCase()
+        .includes(searchedValue.toLowerCase());
     }
+    return null;
   };
-  const filtered = items.filter(filter);
+
+  const filtered = items.filter(filtration);
 
   return (
     <StyledTransferSide
@@ -105,34 +112,20 @@ const LeftSide: FC<LeftSideProps> = props => {
           )}
         </StyledInputHeader>
       ) : (
-        <>
-          <StyledTransferInput
-            onKeyDown={onKeyDown}
-            size={size}
-            isDisabled={isDisabled}
-            isOpen={isOpen}
-            value={resultValue}
-            isFullWidth={isFullWidth}
-            placeholder={placeholder}
-            iconRight={'arrowDown'}
-            onFocus={() => {
-              setOpen(!isOpen);
-              setFocus(!isFocused);
-            }}
-          />
-          <StyledInputText size={size}>
-            <>
-              {items
-                .filter(item => savedItems.has(item.value))
-                .map((item, index) => (
-                  <span>
-                    {item.label}
-                    {index < savedItems.size - 1 ? `, ` : ``}
-                  </span>
-                ))}
-            </>
-          </StyledInputText>
-        </>
+        <StyledTransferInput
+          onKeyDown={onKeyDown}
+          size={size}
+          isDisabled={isDisabled}
+          isOpen={isOpen}
+          value={resultValue}
+          isFullWidth={isFullWidth}
+          placeholder={placeholder}
+          iconRight={'arrowDown'}
+          onFocus={() => {
+            setOpen(!isOpen);
+            setFocus(!isFocused);
+          }}
+        />
       )}
       {isOpen && (
         <>
@@ -146,7 +139,7 @@ const LeftSide: FC<LeftSideProps> = props => {
                       onChange(item.value, isChecked);
                     }}
                   >
-                    {item.label}
+                    {transferItemsRender(item, true)}
                   </Checkbox>
                 </StyledTransferLi>
               ))}
