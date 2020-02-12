@@ -37,7 +37,7 @@ export const TimelineContextProvider: FC<Readonly<
   const [index, setIndex] = useState<Readonly<number>>(defaultValue.index);
 
   useEffect(() => {
-    setIndex(props.index || 0);
+    setIndex(props.index ?? 0);
   }, [props.index]);
 
   const onChange = (index: Readonly<number>) => {

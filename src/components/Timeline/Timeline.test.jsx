@@ -20,6 +20,10 @@ export const tests = (timeline = Component(defaultValues.index)) => {
     it(`Should have index: ${timeline.props.index}`, () => {
       expect(output.props().index).toEqual(timeline.props.index);
     });
+
+    it(`Should have onChange: ${timeline.props.onChange}`, () => {
+      expect(output.props().onChange).toEqual(timeline.props.onChange);
+    });
   });
 };
 
