@@ -15,24 +15,19 @@ export interface ItemProps {
 }
 
 export const Item: FC<PropsWithChildren<ItemProps>> = (props): ReactElement => {
-  const { children, index: contextIndex, className } = props;
+  const { children, index, className } = props;
   const { onChange } = useTimeline();
-  const [index, setIndex] = useState<number>(0);
-
-  useEffect(() => {
-    setIndex(prevIndex => prevIndex++);
-  }, []);
 
   const onClick = () => {
     props.onClick?.();
 
-    if (typeof contextIndex !== 'undefined') {
-      onChange(contextIndex);
+    if (typeof index !== 'undefined') {
+      onChange(index);
     }
   };
 
   return (
-    <StyledTimelineItem onClick={onClick} className={className} index={index}>
+    <StyledTimelineItem onClick={onClick} className={className}>
       {children}
     </StyledTimelineItem>
   );
