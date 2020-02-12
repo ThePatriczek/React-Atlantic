@@ -17,8 +17,8 @@ export const tests = (timeline = Component(defaultValues.index)) => {
   let output = shallow(timeline);
 
   return describe('Timeline', () => {
-    it(`1`, () => {
-      expect(1).toEqual(1);
+    it(`Should have index: ${timeline.props.index}`, () => {
+      expect(output.props().index).toEqual(timeline.props.index);
     });
   });
 };
