@@ -178,7 +178,7 @@ export const tests = (
 
     expected = transferItemsRender({
       value: 'value1',
-      label: { props: { children: 'First' } }
+      label: <Text>First</Text>
     });
     assert(
       expected.type === 'span' && expected.props.children === 'First',
@@ -192,7 +192,7 @@ export const tests = (
     expected = transferItemsRender(
       {
         value: 'value1',
-        label: { props: { children: 'First' } }
+        label: <Text>First</Text>
       },
       true
     );
@@ -208,7 +208,7 @@ export const tests = (
     expected = transferItemsRender(
       {
         value: 'value1',
-        label: { props: { children: 'First' } }
+        label: <Text>First</Text>
       },
       false
     );
@@ -232,7 +232,7 @@ export const tests = (
 
     expected = distinguishTypeAndReturnLabel({
       value: 'value1',
-      label: { props: { children: 'First' } }
+      label: <Text>First</Text>
     });
     assert(
       expected === 'First',
