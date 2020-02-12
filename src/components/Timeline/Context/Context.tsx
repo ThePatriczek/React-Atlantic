@@ -46,8 +46,6 @@ export const TimelineContextProvider: FC<Readonly<
     props.onChange?.(index);
   };
 
-  console.log(index);
-
   return (
     <TimelineContext.Provider value={{ onChange, index }}>
       {children}
