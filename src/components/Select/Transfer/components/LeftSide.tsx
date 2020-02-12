@@ -37,6 +37,7 @@ export interface LeftSideProps {
   resultValue: string;
   setSearchedValue: Dispatch<SetStateAction<string>>;
   searchedValue: string;
+  isAlternative?: boolean;
   inputOnChange: (value: string) => void;
   onKeyDown: (e: any) => void;
 }
@@ -52,6 +53,7 @@ const LeftSide: FC<LeftSideProps> = props => {
     searchedValue,
     placeholder,
     setSearchedValue,
+    isAlternative,
     isDisabled,
     resultValue,
     setOpen,
@@ -90,6 +92,7 @@ const LeftSide: FC<LeftSideProps> = props => {
       {isOpen ? (
         <StyledInputHeader>
           <StyledTransferInput
+            isAlternative={isAlternative}
             direction={direction}
             isHalfOpen={isHalfOpen}
             onKeyDown={onKeyDown}
@@ -113,6 +116,7 @@ const LeftSide: FC<LeftSideProps> = props => {
         </StyledInputHeader>
       ) : (
         <StyledTransferInput
+          isAlternative={isAlternative}
           onKeyDown={onKeyDown}
           size={size}
           isDisabled={isDisabled}

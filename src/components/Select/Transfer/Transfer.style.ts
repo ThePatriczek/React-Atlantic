@@ -11,7 +11,7 @@ import {
 import { Icon, IconName } from '../../Icon';
 import { StyledIcon } from '../../Icon/Icon.style';
 import { Input } from '../../Input';
-import { StyledInput } from '../../Input/Input.style';
+import { StyledInput, StyledInputWrapper } from '../../Input/Input.style';
 import { OptionType } from '../Select.utils';
 
 interface StyledTransferProps {
@@ -81,17 +81,19 @@ export const StyledTransferInput = styled(Input)<StyledTransferProps>`
 
       :hover {
         border-color: ${props => props.theme.color.primary.alpha};
-        border-right: 1px solid ${props => props.theme.color.primary.alpha};
-        ${!props.isHalfOpen &&
-          css`
-            border-top-right-radius: ${props => props.theme.radius};
-          `}
+        ${StyledInputWrapper} {
+          border-right: 1px solid ${props => props.theme.color.primary.alpha};
+          ${!props.isHalfOpen &&
+            css`
+              border-top-right-radius: ${props => props.theme.radius};
+            `}
 
-        ${props.isHalfOpen &&
-          props.direction === 'vertical' &&
-          css`
-            border-top-right-radius: ${props => props.theme.radius};
-          `}
+          ${props.isHalfOpen &&
+            props.direction === 'vertical' &&
+            css`
+              border-top-right-radius: ${props => props.theme.radius};
+            `}
+        }
       }
 
       ${StyledInput} {
