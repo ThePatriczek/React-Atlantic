@@ -1,5 +1,4 @@
 import { ReactNode } from 'react';
-import index from '@storybook/addon-actions/dist/containers/ActionLogger';
 
 interface UseCompositionValue {
   getFilteredChildren: (

@@ -1,4 +1,10 @@
-import * as React from 'react';
+import {
+  ChangeEvent,
+  FocusEvent,
+  KeyboardEvent,
+  MouseEvent,
+  useState
+} from 'react';
 
 interface UseOnChangeValue {
   onChangeClick: (e, x?) => void;
@@ -10,27 +16,33 @@ interface UseOnChangeValue {
   onClick: () => void;
   isChecked: Readonly<boolean>;
   isFocused: Readonly<boolean>;
-  value: Readonly<string>;
+  value: Readonly<unknown>;
 }
 
-export type eventHandlers = React.MouseEvent<HTMLLabelElement> &
-  React.ChangeEvent<HTMLInputElement> &
-  React.ChangeEvent<HTMLTextAreaElement> &
-  React.MouseEvent<HTMLAnchorElement>;
+export type EventHandlers = MouseEvent<HTMLLabelElement> &
+  ChangeEvent<HTMLInputElement> &
+  ChangeEvent<HTMLTextAreaElement> &
+  MouseEvent<HTMLAnchorElement>;
 
-export const useEventHandlers = (props: {
-  isDisabled?;
+interface UseEventHandlersProps {
+  isDisabled?: Readonly<boolean>;
   others?;
-  isDefaultChecked?;
-  defaultValue?;
-}): Readonly<UseOnChangeValue> => {
-  const [isChecked, setChecked] = React.useState<boolean>(
+  isDefaultChecked?: Readonly<boolean>;
+  defaultValue?: Readonly<unknown>;
+}
+
+export const useEventHandlers = (
+  props: Readonly<UseEventHandlersProps>
+): Readonly<UseOnChangeValue> => {
+  const [isChecked, setChecked] = useState<Readonly<boolean>>(
     props?.others?.isDefaultChecked && props?.others?.isDefaultChecked
   );
-  const [value, setValue] = React.useState<string>(props?.defaultValue || ``);
-  const [isFocused, setFocused] = React.useState<boolean>(false);
+  const [value, setValue] = useState<Readonly<unknown>>(
+    props?.defaultValue || ``
+  );
+  const [isFocused, setFocused] = useState<Readonly<boolean>>(false);
 
-  const onChangeClick = (e: eventHandlers, isPartiallyChecked?) => {
+  const onChangeClick = (e: EventHandlers, isPartiallyChecked?) => {
     if (e.type === 'click') {
       e.preventDefault();
     }
@@ -51,7 +63,7 @@ export const useEventHandlers = (props: {
     }
   };
 
-  const onChangeInput = (e: eventHandlers, handlersWithEvent?) => {
+  const onChangeInput = (e: EventHandlers, handlersWithEvent?) => {
     const val: string = e.target.value;
 
     if (!props.isDisabled) {
@@ -69,7 +81,7 @@ export const useEventHandlers = (props: {
   };
 
   const onKeyDown = (
-    e: React.KeyboardEvent<HTMLInputElement>,
+    e: KeyboardEvent<HTMLInputElement>,
     onEnterPress?,
     handlersWithEvent?
   ) => {
@@ -88,7 +100,7 @@ export const useEventHandlers = (props: {
   };
 
   const onKeyDownTextArea = (
-    e: React.KeyboardEvent<HTMLTextAreaElement>,
+    e: KeyboardEvent<HTMLTextAreaElement>,
     onEnterPress?
   ) => {
     if (onEnterPress) {
@@ -99,21 +111,21 @@ export const useEventHandlers = (props: {
     }
   };
 
-  const onFocus = (e: React.FocusEvent<HTMLInputElement>, onFocus?) => {
+  const onFocus = (e: FocusEvent<HTMLInputElement>, onFocus?) => {
     setFocused(true);
     if (onFocus) {
       onFocus();
     }
   };
 
-  const onBlur = (e: React.FocusEvent<HTMLInputElement>, onBlur?) => {
+  const onBlur = (e: FocusEvent<HTMLInputElement>, onBlur?) => {
     setFocused(false);
     if (onBlur) {
       onBlur();
     }
   };
 
-  const onClick = (e?: eventHandlers) => {
+  const onClick = (e?: EventHandlers) => {
     if (props.others.onClick) {
       if (e) {
         e.preventDefault();
