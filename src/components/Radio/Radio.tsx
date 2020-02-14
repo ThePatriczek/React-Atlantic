@@ -67,6 +67,8 @@ export const Radio: React.FC<React.PropsWithChildren<RadioProps>> & {
       isChecked={checked}
       isDisabled={isDisabled}
       className={className}
+      position={position}
+      isDefaultChecked={isDefaultChecked}
     >
       {position === 'right' && (
         <StyledRadioSpan isDisabled={isDisabled}>{children}</StyledRadioSpan>

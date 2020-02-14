@@ -5,7 +5,8 @@ interface StyledRadioProps {
   isChecked?: boolean;
   isDisabled?: boolean;
   name?: string;
-  textPosition?: 'right' | 'left';
+  position?: 'right' | 'left';
+  isDefaultChecked?: boolean;
 }
 
 export const StyledRadioInputHidden = styled.input.attrs({
@@ -45,6 +46,8 @@ export const StyledRadioSpan = styled.span<StyledRadioProps>`
       color: ${props.theme.color.text.beta};
     `}
 `;
+
+StyledRadioSpan.displayName = `StyledRadioSpan`;
 
 export const StyledRadioInputShown = styled.div<StyledRadioProps>`
   display: flex;

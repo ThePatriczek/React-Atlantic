@@ -1,4 +1,4 @@
-import { mount } from 'enzyme';
+import { shallow } from 'enzyme';
 import React from 'react';
 import expect from 'expect';
 import { defaultValues } from '../../constants/defaultValues';
@@ -29,10 +29,10 @@ export const tests = (
     defaultValues.children
   )
 ) => {
-  output = mount(tooltip);
+  output = shallow(tooltip);
 
   return describe('Tooltip', () => {
-    const output = mount(tooltip);
+    const output = shallow(tooltip);
 
     it(`Should have place: ${tooltip.props.place}`, () => {
       expect(output.props().place).toEqual(tooltip.props.place);
