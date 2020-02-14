@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useEventHandlers } from '../../hooks/useEventHandlers';
 import { HorizontalPosition } from '../../types';
 import { Button, ButtonProps } from './Button';
 import { useRadioGroup } from './Context';
@@ -35,21 +36,16 @@ export const Radio: React.FC<React.PropsWithChildren<RadioProps>> & {
     value
   } = props;
   const { value: ctxVal, setValue: setCtxVal } = useRadioGroup();
-  const [isChecked, setChecked] = React.useState<boolean>(!!isDefaultChecked);
+  const { onChangeClick: hookOnChange, isChecked } = useEventHandlers({
+    isDisabled,
+    others: props,
+    isDefaultChecked
+  });
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (!isDisabled) {
-      if (props.isChecked === undefined) {
-        setChecked(e.target.checked);
-        if (props.onChange) {
-          props.onChange(!isChecked);
-        }
-      } else {
-        if (props.onChange) {
-          props.onChange(!props.isChecked);
-        }
-      }
+    hookOnChange(e);
 
+    if (!isDisabled) {
       if (value !== undefined) {
         setCtxVal(value);
       }

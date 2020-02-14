@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useEventHandlers } from '../../hooks/useEventHandlers';
 import { Size } from '../../types';
 import { Icon, IconName } from '../Icon';
 import {
@@ -100,70 +101,28 @@ export const Input: React.FC<InputProps> & {
     isFullWidth,
     handlersWithEvent
   } = props;
-
+  const {
+    onChangeInput,
+    value,
+    onKeyDown,
+    onFocus,
+    onBlur,
+    isFocused
+  } = useEventHandlers({ isDisabled, others: props, defaultValue });
   const ref = React.createRef<HTMLInputElement>();
-
-  const [value, setValue] = React.useState<string>(defaultValue || ``);
-
-  const [isFocused, setFocused] = React.useState<boolean>(false);
-
-  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const val: string = e.target.value;
-
-    if (!isDisabled) {
-      if (props.value === undefined) {
-        setValue(val);
-        if (props.onChange) {
-          props.onChange(handlersWithEvent ? e : val);
-        }
-      } else {
-        if (props.onChange) {
-          props.onChange(handlersWithEvent ? e : val);
-        }
-      }
-    }
-  };
-
-  const onKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (onEnterPress) {
-      if (e.key === `Enter`) {
-        if(props.value || value) {
-          props.value ? onEnterPress(props.value) : onEnterPress(value);
-        }
-      }
-    }
-    if (handlersWithEvent && props.onKeyDown) {
-      props.onKeyDown(e);
-    }
-  };
-
-  const onBlur = (e: React.FocusEvent<HTMLInputElement>) => {
-    setFocused(false);
-    if (props.onBlur) {
-      props.onBlur();
-    }
-  };
-
-  const onFocus = (e: React.FocusEvent<HTMLInputElement>) => {
-    setFocused(true);
-    if (props.onFocus) {
-      props.onFocus();
-    }
-  };
-
   const val = props.value !== undefined ? props.value : value;
 
   const Component = (
     <StyledInput
       id={id}
       value={val}
-      onChange={onChange}
+      onChange={e => onChangeInput(e, handlersWithEvent)}
       disabled={isDisabled}
       placeholder={isAlternative ? `` : placeholder}
-      onKeyDown={onKeyDown}
+      onKeyDown={e => onKeyDown(e, onEnterPress, handlersWithEvent)}
       autoFocus={autoFocus}
-      onBlur={onBlur}
-      onFocus={onFocus}
+      onBlur={e => onBlur(e, props.onFocus)}
+      onFocus={e => onFocus(e, props.onBlur)}
       ref={ref}
       size={size as never}
       autoComplete={autoComplete}

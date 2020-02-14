@@ -3,7 +3,7 @@ import { boolean, select, text, withKnobs } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/react';
 import * as React from 'react';
 import { describe, it, specs } from 'storybook-addon-specifications';
-import { mount } from 'enzyme';
+import { shallow } from 'enzyme';
 import expect from 'expect';
 import { Input } from '../Input';
 
@@ -71,30 +71,30 @@ stories.add(
 
     specs(() =>
       describe('Input.TextArea', () => {
-        const wrapper = mount(textArea);
+        const wrapper = shallow(textArea);
 
         it(`Should have isDisabled: ${isDisabled}`, () => {
-          expect(wrapper.prop('isDisabled')).toEqual(isDisabled);
+          expect(wrapper.props().isDisabled).toEqual(isDisabled);
         });
 
         it(`Should have iconRight: ${iconRight}`, () => {
-          expect(wrapper.prop('iconRight')).toEqual(iconRight);
+          expect(wrapper.props().iconRight).toEqual(iconRight);
         });
 
         it(`Should have iconLeft: ${iconLeft}`, () => {
-          expect(wrapper.prop('iconLeft')).toEqual(iconLeft);
+          expect(wrapper.props().iconLeft).toEqual(iconLeft);
         });
 
         it(`Should have placeholder: ${placeholder}`, () => {
-          expect(wrapper.prop('placeholder')).toEqual(placeholder);
+          expect(wrapper.props().placeholder).toEqual(placeholder);
         });
 
         it(`Should have defaultValue: ${defaultValue}`, () => {
-          expect(wrapper.prop('defaultValue')).toEqual(defaultValue);
+          expect(wrapper.props().defaultValue).toEqual(defaultValue);
         });
 
         it(`Should have value: ${value}`, () => {
-          expect(wrapper.prop('value')).toEqual(value);
+          expect(wrapper.props().value).toEqual(value);
         });
       })
     );

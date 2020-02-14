@@ -1,6 +1,11 @@
 import * as React from 'react';
+import { useEventHandlers } from '../../../hooks/useEventHandlers';
 import { Icon, IconName } from '../../Icon';
-import { StyledTextArea, StyledTextAreaIcon, StyledTextAreaWrapper } from './TextArea.style';
+import {
+  StyledTextArea,
+  StyledTextAreaIcon,
+  StyledTextAreaWrapper
+} from './TextArea.style';
 
 export interface TextAreaProps {
   isDisabled?: boolean;
@@ -28,61 +33,31 @@ export const TextArea: React.FC<TextAreaProps> = (
     iconLeft,
     iconRight
   } = props;
-
-  const [value, setValue] = React.useState<string>(defaultValue || ``);
-
-  const onChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    const val: string = e.target.value;
-
-    if (!isDisabled) {
-      if (props.value === undefined) {
-        setValue(val);
-
-        if (props.onChange) {
-          props.onChange(val);
-        }
-      } else {
-        if (props.onChange) {
-          props.onChange(val);
-        }
-      }
-    }
-  };
-
-  const onKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
-    if (onEnterPress) {
-      if (e.key === `Enter`) {
-        e.preventDefault();
-        onEnterPress(e.currentTarget.value);
-      }
-    }
-  };
-
-  const onBlur = (e: React.FocusEvent<HTMLTextAreaElement>) => {
-    if (props.onBlur) {
-      props.onBlur();
-    }
-  };
-
-  const onFocus = (e: React.FocusEvent<HTMLTextAreaElement>) => {
-    if (props.onFocus) {
-      props.onFocus();
-    }
-  };
-
+  const {
+    onKeyDownTextArea,
+    onFocus,
+    onBlur,
+    onChangeInput,
+    value
+  } = useEventHandlers({ isDisabled, others: props, defaultValue });
   const val = props.value !== undefined ? props.value : value;
+
   return (
     <StyledTextAreaWrapper
-      iconLeft={!!iconLeft}
-      iconRight={!!iconRight}
-      isDisabled={!!isDisabled}
+      iconLeft={iconLeft}
+      iconRight={iconRight}
+      isDisabled={isDisabled}
+      placeholder={placeholder}
+      value={val}
+      defaultValue={defaultValue}
+      autoFocus={autoFocus}
     >
       <StyledTextArea
         placeholder={placeholder}
         value={val}
-        onChange={onChange}
+        onChange={onChangeInput}
         disabled={isDisabled}
-        onKeyDown={onKeyDown}
+        onKeyDown={e => onKeyDownTextArea(e, onEnterPress)}
         onBlur={onBlur}
         onFocus={onFocus}
         autoFocus={autoFocus}

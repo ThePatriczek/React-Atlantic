@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useEventHandlers } from '../../hooks/useEventHandlers';
 import { Size, Type } from '../../types';
 import { StyledButton } from './Button.style';
 
@@ -34,13 +35,11 @@ export const Button: React.FC<React.PropsWithChildren<ButtonProps>> = (
     className
   } = props;
   const [animation, setAnimation] = React.useState<boolean>(false);
+  const { onClick: hookOnClick } = useEventHandlers({ others: props });
 
   const onClick = () => {
     setAnimation(true);
-
-    if (props.onClick) {
-      props.onClick();
-    }
+    hookOnClick();
   };
 
   return (

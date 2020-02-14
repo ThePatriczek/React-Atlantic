@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useEventHandlers } from '../../hooks/useEventHandlers';
 import { Size, Type } from '../../types';
 import { HiddenCheckbox } from '../Checkbox/Checkbox.style';
 import {
@@ -34,22 +35,11 @@ export const Switch: React.FC<SwitchProps> = (
     type
   } = props;
 
-  const [isChecked, setChecked] = React.useState<boolean>(!!isDefaultChecked);
-
-  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (!isDisabled) {
-      if (props.isChecked === undefined) {
-        setChecked(e.target.checked);
-        if (props.onChange) {
-          props.onChange(!isChecked);
-        }
-      } else {
-        if (props.onChange) {
-          props.onChange(!props.isChecked);
-        }
-      }
-    }
-  };
+  const { onChangeClick, isChecked } = useEventHandlers({
+    isDisabled,
+    others: props,
+    isDefaultChecked
+  });
 
   return (
     <StyledSwitchLabel
@@ -60,7 +50,7 @@ export const Switch: React.FC<SwitchProps> = (
       className={className}
     >
       <HiddenCheckbox
-        onChange={onChange}
+        onChange={onChangeClick}
         checked={props.isChecked || isChecked}
         disabled={isDisabled}
       />
