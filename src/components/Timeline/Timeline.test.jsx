@@ -1,0 +1,30 @@
+import { shallow } from 'enzyme';
+import React from 'react';
+import expect from 'expect';
+import { Timeline } from './Timeline';
+import { defaultValues } from '../../constants/defaultValues';
+
+export const Component = (index, onChange) => (
+  <Timeline onChange={onChange} index={index}>
+    <Timeline.Item>Item0</Timeline.Item>
+    <Timeline.Item>Item1</Timeline.Item>
+    <Timeline.Item>Item2</Timeline.Item>
+    <Timeline.Item>Item3</Timeline.Item>
+  </Timeline>
+);
+
+export const tests = (timeline = Component(defaultValues.index)) => {
+  let output = shallow(timeline);
+
+  return describe('Timeline', () => {
+    it(`Should have index: ${timeline.props.index}`, () => {
+      expect(output.props().index).toEqual(timeline.props.index);
+    });
+
+    it(`Should have onChange: ${timeline.props.onChange}`, () => {
+      expect(output.props().onChange).toEqual(timeline.props.onChange);
+    });
+  });
+};
+
+tests();

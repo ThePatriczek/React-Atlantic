@@ -1,6 +1,15 @@
 import React, { FC, PropsWithChildren, ReactElement } from 'react';
+import { Icon } from '../../Icon';
 import { useTimeline } from '../Context';
-import { StyledTimelineItem } from './Item.style';
+import {
+  StyledTimelineButton,
+  StyledTimelineCaption,
+  StyledTimelineCircle,
+  StyledTimelineContainer,
+  StyledTimelineItem,
+  StyledTimelineSide,
+  StyledTimelineTitle
+} from './Item.style';
 
 export interface ItemProps {
   onClick?: () => void;
@@ -20,9 +29,22 @@ export const Item: FC<PropsWithChildren<ItemProps>> = (props): ReactElement => {
     }
   };
 
+  const isActive: Readonly<boolean> = true;
+
   return (
     <StyledTimelineItem onClick={onClick} className={className}>
-      {children}
+      <StyledTimelineSide>
+        {isActive ? <StyledTimelineCircle blue /> : <StyledTimelineCircle />}
+      </StyledTimelineSide>
+      <StyledTimelineContainer>
+        <StyledTimelineTitle>1.12.2018 - bez omezení</StyledTimelineTitle>
+        <StyledTimelineCaption>113/2018 Sb.</StyledTimelineCaption>
+      </StyledTimelineContainer>
+      <StyledTimelineContainer>
+        <StyledTimelineButton size={'small'}>
+          <Icon name={'hamburger'} />
+        </StyledTimelineButton>
+      </StyledTimelineContainer>
     </StyledTimelineItem>
   );
 };
