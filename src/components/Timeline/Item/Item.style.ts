@@ -1,7 +1,6 @@
 import styled, { css } from 'styled-components';
 import { PureButton } from '../../Button/Pure';
 import { StyledIcon } from '../../Icon/Icon.style';
-import { Text } from '../../Typography';
 import { Link } from '../../Typography/Link';
 
 const circleSize = `15px`;
