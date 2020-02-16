@@ -36,7 +36,7 @@ export const Item: FC<PropsWithChildren<ItemProps>> = (props): ReactElement => {
       <StyledTimelineSide>
         <StyledTimelineCircle {...(isActive ? { blue: true } : {})}/>
       </StyledTimelineSide>
-      <StyledTimelineContainer>
+      <StyledTimelineContainer isMain>
         <StyledTimelineTitle href={"#"} {...(isActive ? { blue: true } : {})}>1.12.2018 - bez omezení</StyledTimelineTitle>
         <StyledTimelineCaption href={"#"}>113/2018 Sb.</StyledTimelineCaption>
       </StyledTimelineContainer>
