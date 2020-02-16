@@ -1,14 +1,22 @@
-import styled from 'styled-components';
-import { Button } from '../../Button';
+import styled, { css } from 'styled-components';
 import { PureButton } from '../../Button/Pure';
+import { StyledIcon } from '../../Icon/Icon.style';
 import { Text } from '../../Typography';
+import { Link } from '../../Typography/Link';
+
+const circleSize = `15px`;
 
 export interface StyledTimelineItemProps {
   index?: number;
+  highlight?: boolean;
 }
 export interface StyledTimelineCircleProps {
-  blue?: boolean
+  blue?: boolean;
 };
+
+export interface StyledTimelineTitleProps {
+  blue?: boolean;
+}
 
 export const StyledTimelineItem = styled.li<StyledTimelineItemProps>`
   position: relative;
@@ -17,35 +25,67 @@ export const StyledTimelineItem = styled.li<StyledTimelineItemProps>`
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
-  margin-left: 20px;
+  margin-left: ${props => parseFloat(props.theme.margin.sm) + parseFloat(circleSize)}px;
   padding: ${props => props.theme.padding.sm};
   margin-bottom: ${props => props.theme.margin.md};
-  background-color: ${props => props.theme.color.default};
-  border-radius: ${props => props.theme.border};
+  background-color: ${props => props.theme.color.background.alpha};
+  border-radius: ${props => props.theme.radius};
+  
+  ${props =>
+    props.highlight &&
+    css`
+      background-color: ${props => props.theme.color.default};
+    `}
 `;
 
 export const StyledTimelineSide = styled.div`
   position: absolute;
   height: 100%;
-  right: 100%;
+  right: calc(100% + ${props => props.theme.margin.sm});
+  width: ${circleSize};
 `;
 
 export const StyledTimelineCircle = styled.div<StyledTimelineCircleProps>`
+  position: relative;
+  box-sizing: border-box;
+  width: 14px;
+  height: 14px;
+  top: 8px;
+  border-radius: 50%;
+  border: 2px solid ${props => props.theme.color.text.beta};
+  background-color: ${props => props.theme.color.background.alpha};
   
-
+  ${props =>
+    props.blue &&
+    css`
+      border-color: ${props => props.theme.color.primary.alpha};
+    `}
 `;
 
-export const StyledTimelineTitle = styled(Text)`
+export const StyledTimelineTitle = styled(Link)<StyledTimelineTitleProps>`
   display: block;
   margin: 0;
+  font-weight: 600;
+  color: ${props => props.theme.color.text.alpha};
+  
+  ${props =>
+    props.blue &&
+    css`
+      color: ${props => props.theme.color.primary.alpha};
+    `}
 `;
 
-export const StyledTimelineCaption = styled(Text)`
+export const StyledTimelineCaption = styled(Link)`
   display: block;
   margin: 0;
+  color: ${props => props.theme.color.text.beta};
   font-size: ${props => props.theme.font.size.sm};
 `;
 
 export const StyledTimelineContainer = styled.div``;
 
-export const StyledTimelineButton = styled(PureButton)``;
+export const StyledTimelineButton = styled(PureButton)`
+  ${StyledIcon} {
+    height: auto;
+  }
+`;

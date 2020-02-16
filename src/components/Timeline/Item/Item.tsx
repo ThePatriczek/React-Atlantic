@@ -32,13 +32,13 @@ export const Item: FC<PropsWithChildren<ItemProps>> = (props): ReactElement => {
   const isActive: Readonly<boolean> = true;
 
   return (
-    <StyledTimelineItem onClick={onClick} className={className}>
+    <StyledTimelineItem onClick={onClick} className={className} {...(isActive ? { highlight: true } : {})}>
       <StyledTimelineSide>
-        {isActive ? <StyledTimelineCircle blue /> : <StyledTimelineCircle />}
+        <StyledTimelineCircle {...(isActive ? { blue: true } : {})}/>
       </StyledTimelineSide>
       <StyledTimelineContainer>
-        <StyledTimelineTitle>1.12.2018 - bez omezení</StyledTimelineTitle>
-        <StyledTimelineCaption>113/2018 Sb.</StyledTimelineCaption>
+        <StyledTimelineTitle href={"#"} {...(isActive ? { blue: true } : {})}>1.12.2018 - bez omezení</StyledTimelineTitle>
+        <StyledTimelineCaption href={"#"}>113/2018 Sb.</StyledTimelineCaption>
       </StyledTimelineContainer>
       <StyledTimelineContainer>
         <StyledTimelineButton size={'small'}>
