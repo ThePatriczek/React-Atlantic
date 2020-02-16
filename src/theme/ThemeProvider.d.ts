@@ -1,7 +1,6 @@
-import * as React from 'react';
+import { FC, PropsWithChildren } from 'react';
 import { Theme } from './theme';
-interface ThemeProviderProps {
-    theme: Theme;
+export interface ThemeProviderProps {
+    theme: Readonly<Theme>;
 }
-export declare const ThemeProvider: React.FC<React.PropsWithChildren<ThemeProviderProps>>;
-export {};
+export declare const ThemeProvider: FC<Readonly<PropsWithChildren<Readonly<ThemeProviderProps>>>>;
