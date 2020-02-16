@@ -10,7 +10,7 @@ import {
   useState
 } from 'react';
 
-export type Device =
+export type DeviceType =
   | 'mobile'
   | 'tabletVertical'
   | 'tabletHorizontal'
@@ -22,19 +22,19 @@ export interface DeviceObject {
   max?: Readonly<number>;
 }
 
-export type Devices = ReadonlyMap<Device, DeviceObject>;
+export type Devices = ReadonlyMap<DeviceType, DeviceObject>;
 
 export interface DeviceContextState {
   devices: Readonly<Devices>;
-  currentDevice: Readonly<Device>;
+  currentDevice: Readonly<DeviceType>;
 }
 
 interface ContextProps {
-  currentDevice: Readonly<Device>;
+  currentDevice: Readonly<DeviceType>;
   isTouchable: Readonly<boolean>;
 }
 
-const devices: Readonly<Devices> = new Map<Device, DeviceObject>([
+const devices: Readonly<Devices> = new Map<DeviceType, DeviceObject>([
   ['mobile', { max: 480 }],
   ['tabletVertical', { min: 481, max: 900 }],
   ['tabletHorizontal', { min: 901, max: 1200 }],
@@ -57,7 +57,7 @@ export const useDevice = () =>
 
 export interface DeviceProviderProps {
   devices?: Readonly<Devices>;
-  currentDevice?: Readonly<Device>;
+  currentDevice?: Readonly<DeviceType>;
 }
 
 export const DeviceProvider: FC<Readonly<
@@ -66,13 +66,13 @@ export const DeviceProvider: FC<Readonly<
   const { children } = props;
   const devices = props.devices || defaultValue.devices;
 
-  const [currentDevice, setCurrentDevice] = useState<Readonly<Device>>(
+  const [currentDevice, setCurrentDevice] = useState<Readonly<DeviceType>>(
     props.currentDevice || defaultValue.currentDevice
   );
 
   const getCurrentDevice = (
     clientWidth: Readonly<number>
-  ): Readonly<Device> => {
+  ): Readonly<DeviceType> => {
     const mobile = devices.get('mobile');
     const tabletVertical = devices.get('tabletVertical');
     const tabletHorizontal = devices.get('tabletHorizontal');
