@@ -1,6 +1,6 @@
 {
   "name": "react-atlantic",
-  "version": "0.5.4",
+  "version": "0.5.5",
   "description": "React Atlantic UI Library",
   "main": "index.js",
   "scripts": {
@@ -75,6 +75,8 @@
     "@storybook/addon-viewport": "5.2.0",
     "@storybook/addons": "5.2.0",
     "@storybook/react": "5.2.0",
+    "@testing-library/react": "^9.4.0",
+    "@testing-library/react-hooks": "^3.2.1",
     "@types/d3-ease": "1.0.9",
     "@types/enzyme": "3.10.4",
     "@types/enzyme-adapter-react-16": "1.0.5",
@@ -90,16 +92,16 @@
     "awesome-typescript-loader": "5.2.1",
     "babel-core": "6.26.3",
     "babel-eslint": "10.0.3",
-    "babel-jest": "24.9.0",
+    "babel-jest": "25.1.0",
     "babel-loader": "8.0.6",
     "babel-plugin-import": "1.13.0",
     "babel-plugin-transform-flow-strip-types": "6.22.0",
     "dotenv": "latest",
     "enzyme": "3.11.0",
     "enzyme-adapter-react-16": "1.15.2",
-    "expect": "24.9.0",
-    "jest": "24.9.0",
-    "jest-mock": "24.9.0",
+    "expect": "25.1.0",
+    "jest": "25.1.0",
+    "jest-mock": "25.1.0",
     "jest-styled-components": "7.0.0",
     "pre-commit": "1.2.2",
     "prettier": "1.19.1",
@@ -123,8 +125,7 @@
     ],
     "browser": false,
     "moduleNameMapper": {
-      "styled-components": "<rootDir>/node_modules/styled-components",
-      "\\.(css|less)$": "<rootDir>/src"
+      "styled-components": "<rootDir>/node_modules/styled-components"
     },
     "setupFiles": [
       "<rootDir>/config/jest/storybook.js",

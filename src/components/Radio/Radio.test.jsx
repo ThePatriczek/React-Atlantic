@@ -1,4 +1,4 @@
-import { mount } from 'enzyme';
+import { shallow } from 'enzyme';
 import React from 'react';
 import { Radio } from '../Radio';
 import expect from 'expect';
@@ -38,10 +38,10 @@ export const tests = (
     defaultValues.children
   )
 ) => {
-  output = mount(radio);
+  output = shallow(radio);
 
   return describe('Radio', () => {
-    const output = mount(radio);
+    const output = shallow(radio);
 
     it(`Should have isChecked: ${radio.props.isChecked}`, () => {
       expect(output.prop('isChecked')).toEqual(radio.props.isChecked);
@@ -62,7 +62,7 @@ export const tests = (
     });
 
     it(`Should have children: ${radio.props.children}`, () => {
-      expect(output.prop('children')).toEqual(radio.props.children);
+      expect(output.find(`StyledRadioSpan`).prop('children')).toEqual(radio.props.children);
     });
   });
 };
