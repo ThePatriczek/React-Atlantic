@@ -8,18 +8,19 @@ const circleSize = `15px`;
 export interface StyledTimelineItemProps {
   index?: number;
   highlight?: boolean;
-}
+};
+
 export interface StyledTimelineCircleProps {
   blue?: boolean;
-}
+};
 
 export interface StyledTimelineTitleProps {
   blue?: boolean;
-}
+};
 
 export interface StyledTimelineContainerProps {
   isMain?: boolean;
-}
+};
 
 export const StyledTimelineItem = styled.li<StyledTimelineItemProps>`
   position: relative;
@@ -52,8 +53,8 @@ export const StyledTimelineSide = styled.div`
 export const StyledTimelineCircle = styled.div<StyledTimelineCircleProps>`
   position: relative;
   box-sizing: border-box;
-  width: 14px;
-  height: 14px;
+  width: ${circleSize};
+  height: ${circleSize};
   top: 8px;
   border-radius: 50%;
   border: 2px solid ${props => props.theme.color.text.beta};
