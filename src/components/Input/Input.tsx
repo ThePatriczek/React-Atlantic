@@ -115,7 +115,7 @@ export const Input: React.FC<InputProps> & {
   const Component = (
     <StyledInput
       id={id}
-      value={val}
+      value={val as string}
       onChange={e => onChangeInput(e, handlersWithEvent)}
       disabled={isDisabled}
       placeholder={isAlternative ? `` : placeholder}

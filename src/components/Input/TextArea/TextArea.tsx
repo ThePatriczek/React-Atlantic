@@ -48,13 +48,13 @@ export const TextArea: React.FC<TextAreaProps> = (
       iconRight={iconRight}
       isDisabled={isDisabled}
       placeholder={placeholder}
-      value={val}
+      value={val as string}
       defaultValue={defaultValue}
       autoFocus={autoFocus}
     >
       <StyledTextArea
         placeholder={placeholder}
-        value={val}
+        value={val as string}
         onChange={onChangeInput}
         disabled={isDisabled}
         onKeyDown={e => onKeyDownTextArea(e, onEnterPress)}

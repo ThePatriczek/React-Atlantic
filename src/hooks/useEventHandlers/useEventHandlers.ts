@@ -6,29 +6,49 @@ import {
   useState
 } from 'react';
 
-interface UseOnChangeValue {
-  onChangeClick: (e, x?) => void;
-  onChangeInput: (e, x?) => void;
-  onKeyDown: (e, x?, y?) => void;
-  onKeyDownTextArea: (e, x?) => void;
-  onBlur: (e, x?) => void;
-  onFocus: (e, x?) => void;
+export interface UseOnChangeValue {
+  onChangeClick: (
+    e: MouseEvent<HTMLLabelElement> | ChangeEvent<HTMLInputElement>,
+    isPartiallyChecked?: Readonly<boolean>
+  ) => void;
+  onChangeInput: (
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+    handlersWithEvent?: Readonly<boolean>
+  ) => void;
+  onKeyDown: (
+    e: KeyboardEvent<HTMLInputElement>,
+    onEnterPress?: (value: Readonly<unknown>) => void,
+    handlersWithEvent?: Readonly<boolean>
+  ) => void;
+  onKeyDownTextArea: (
+    e: KeyboardEvent<HTMLTextAreaElement>,
+    onEnterPress?: (value: Readonly<string>) => void
+  ) => void;
+  onBlur: (
+    e: FocusEvent<HTMLInputElement | HTMLTextAreaElement>,
+    onBlur?: () => void
+  ) => void;
+  onFocus: (
+    e: FocusEvent<HTMLInputElement | HTMLTextAreaElement>,
+    onFocus?: () => void
+  ) => void;
   onClick: () => void;
   isChecked: Readonly<boolean>;
   isFocused: Readonly<boolean>;
   value: Readonly<unknown>;
 }
 
-export type EventHandlers = MouseEvent<HTMLLabelElement> &
-  ChangeEvent<HTMLInputElement> &
-  ChangeEvent<HTMLTextAreaElement> &
-  MouseEvent<HTMLAnchorElement>;
+export type EventHandlers =
+  | MouseEvent<HTMLLabelElement>
+  | ChangeEvent<HTMLInputElement>
+  | ChangeEvent<HTMLTextAreaElement>
+  | KeyboardEvent<HTMLTextAreaElement>;
 
 interface UseEventHandlersProps {
   isDisabled?: Readonly<boolean>;
-  others?;
   isDefaultChecked?: Readonly<boolean>;
   defaultValue?: Readonly<unknown>;
+  others?;
 }
 
 export const useEventHandlers = (
@@ -42,7 +62,7 @@ export const useEventHandlers = (
   );
   const [isFocused, setFocused] = useState<Readonly<boolean>>(false);
 
-  const onChangeClick = (e: EventHandlers, isPartiallyChecked?) => {
+  const onChangeClick = (e, isPartiallyChecked?: Readonly<boolean>) => {
     if (e.type === 'click') {
       e.preventDefault();
     }
@@ -50,7 +70,7 @@ export const useEventHandlers = (
     if (!props.isDisabled) {
       if (props.others.isChecked === undefined) {
         if (!isPartiallyChecked) {
-          setChecked(e.type === 'click' ? !isChecked : e.target.checked);
+          setChecked(e.type === 'click' ? !isChecked : e?.target.checked);
         }
         if (props.others.onChange) {
           props.others.onChange(!isChecked);
@@ -63,18 +83,21 @@ export const useEventHandlers = (
     }
   };
 
-  const onChangeInput = (e: EventHandlers, handlersWithEvent?) => {
-    const val: string = e.target.value;
+  const onChangeInput = (
+    e: ChangeEvent<HTMLInputElement>,
+    handlersWithEvent?: Readonly<boolean>
+  ) => {
+    const value: Readonly<string> = e.target.value;
 
     if (!props.isDisabled) {
       if (props.others.value === undefined) {
-        setValue(val);
+        setValue(value);
         if (props.others.onChange) {
-          props.others.onChange(handlersWithEvent ? e : val);
+          props.others.onChange(handlersWithEvent ? e : value);
         }
       } else {
         if (props.others.onChange) {
-          props.others.onChange(handlersWithEvent ? e : val);
+          props.others.onChange(handlersWithEvent ? e : value);
         }
       }
     }
@@ -82,8 +105,8 @@ export const useEventHandlers = (
 
   const onKeyDown = (
     e: KeyboardEvent<HTMLInputElement>,
-    onEnterPress?,
-    handlersWithEvent?
+    onEnterPress?: (value: Readonly<unknown>) => void,
+    handlersWithEvent?: Readonly<boolean>
   ) => {
     if (onEnterPress) {
       if (e.key === `Enter`) {
@@ -101,7 +124,7 @@ export const useEventHandlers = (
 
   const onKeyDownTextArea = (
     e: KeyboardEvent<HTMLTextAreaElement>,
-    onEnterPress?
+    onEnterPress?: (value: Readonly<string>) => void
   ) => {
     if (onEnterPress) {
       if (e.key === `Enter`) {
@@ -111,21 +134,27 @@ export const useEventHandlers = (
     }
   };
 
-  const onFocus = (e: FocusEvent<HTMLInputElement>, onFocus?) => {
+  const onFocus = (
+    e: FocusEvent<HTMLInputElement | HTMLTextAreaElement>,
+    onFocus?: () => void
+  ) => {
     setFocused(true);
     if (onFocus) {
       onFocus();
     }
   };
 
-  const onBlur = (e: FocusEvent<HTMLInputElement>, onBlur?) => {
+  const onBlur = (
+    e: FocusEvent<HTMLInputElement | HTMLTextAreaElement>,
+    onBlur?: () => void
+  ) => {
     setFocused(false);
     if (onBlur) {
       onBlur();
     }
   };
 
-  const onClick = (e?: EventHandlers) => {
+  const onClick = (e?: MouseEvent<HTMLAnchorElement>) => {
     if (props.others.onClick) {
       if (e) {
         e.preventDefault();
@@ -143,7 +172,7 @@ export const useEventHandlers = (
     onBlur,
     onClick,
     isChecked,
-    value,
-    isFocused
+    isFocused,
+    value
   };
 };
