@@ -6,6 +6,7 @@ import { describe, it, specs } from 'storybook-addon-specifications';
 import { shallow } from 'enzyme';
 import expect from 'expect';
 import { Input } from '../Input';
+import { TextArea } from './TextArea';
 
 const stories = storiesOf('Input', module);
 

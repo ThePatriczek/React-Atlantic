@@ -2,7 +2,7 @@ import * as easings from 'd3-ease';
 import * as React from 'react';
 import { useRef } from 'react';
 import { useChain, useSpring, useTrail } from 'react-spring/web.cjs';
-import { useEventHandlers } from '../../hooks/useEventHandlers';
+import { useClickChange } from '../../hooks/EventHandlers/useClickChange';
 import { CheckSimple } from '../../Icons';
 import { HorizontalPosition } from '../../types';
 import {
@@ -37,7 +37,7 @@ export const Checkbox: React.FC<React.PropsWithChildren<CheckboxProps>> = (
     children
   } = props;
 
-  const { onChangeClick, isChecked } = useEventHandlers({
+  const { onChangeClick, isChecked } = useClickChange({
     isDisabled,
     others: props,
     isDefaultChecked

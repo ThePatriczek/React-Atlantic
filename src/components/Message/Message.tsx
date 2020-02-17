@@ -1,5 +1,5 @@
-import React, { FC, MouseEvent, PropsWithChildren, ReactElement } from 'react';
-import { useEventHandlers } from '../../hooks/useEventHandlers';
+import React, { FC, PropsWithChildren, ReactElement } from 'react';
+import { useClick } from '../../hooks/EventHandlers/useClick';
 import { Type } from '../../types';
 import { IconName } from '../Icon';
 import {
@@ -21,7 +21,7 @@ export const Message: FC<PropsWithChildren<MessageProps>> = (
   props
 ): ReactElement => {
   const { children, isLoading, isAlternative } = props;
-  const { onClick } = useEventHandlers({ others: props });
+  const { onClick } = useClick({ others: props });
 
   let type = props.type;
 

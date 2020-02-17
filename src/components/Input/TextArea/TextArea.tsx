@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { useEventHandlers } from '../../../hooks/useEventHandlers';
+import { useFocus } from '../../../hooks/EventHandlers/useFocus';
+import { useKeyboardChange } from '../../../hooks/EventHandlers/useKeyboardChange';
 import { Icon, IconName } from '../../Icon';
 import {
   StyledTextArea,
@@ -33,13 +34,14 @@ export const TextArea: React.FC<TextAreaProps> = (
     iconLeft,
     iconRight
   } = props;
-  const {
-    onKeyDownTextArea,
-    onFocus,
-    onBlur,
-    onChangeInput,
-    value
-  } = useEventHandlers({ isDisabled, others: props, defaultValue });
+
+  const { onKeyDownTextArea, onChangeInput, value } = useKeyboardChange({
+    others: props,
+    defaultValue,
+    isDisabled
+  });
+  const { onFocus, onBlur } = useFocus();
+
   const val = props.value !== undefined ? props.value : value;
 
   return (
@@ -58,8 +60,8 @@ export const TextArea: React.FC<TextAreaProps> = (
         onChange={onChangeInput}
         disabled={isDisabled}
         onKeyDown={e => onKeyDownTextArea(e, onEnterPress)}
-        onBlur={onBlur}
-        onFocus={onFocus}
+        onBlur={e => onBlur(e, props.onBlur)}
+        onFocus={e => onFocus(e, props.onFocus)}
         autoFocus={autoFocus}
       />
 

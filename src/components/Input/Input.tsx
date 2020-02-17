@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { useEventHandlers } from '../../hooks/useEventHandlers';
+import { useFocus } from '../../hooks/EventHandlers/useFocus';
+import { useKeyboardChange } from '../../hooks/EventHandlers/useKeyboardChange';
 import { Size } from '../../types';
 import { Icon, IconName } from '../Icon';
 import {
@@ -101,14 +102,13 @@ export const Input: React.FC<InputProps> & {
     isFullWidth,
     handlersWithEvent
   } = props;
-  const {
-    onChangeInput,
-    value,
-    onKeyDown,
-    onFocus,
-    onBlur,
-    isFocused
-  } = useEventHandlers({ isDisabled, others: props, defaultValue });
+  const { onChangeInput, value, onKeyDown } = useKeyboardChange({
+    isDisabled,
+    others: props,
+    defaultValue
+  });
+  const { onFocus, onBlur, isFocused } = useFocus();
+
   const ref = React.createRef<HTMLInputElement>();
   const val = props.value !== undefined ? props.value : value;
 
@@ -121,8 +121,8 @@ export const Input: React.FC<InputProps> & {
       placeholder={isAlternative ? `` : placeholder}
       onKeyDown={e => onKeyDown(e, onEnterPress, handlersWithEvent)}
       autoFocus={autoFocus}
-      onBlur={e => onBlur(e, props.onFocus)}
-      onFocus={e => onFocus(e, props.onBlur)}
+      onBlur={e => onBlur(e, props.onBlur)}
+      onFocus={e => onFocus(e, props.onFocus)}
       ref={ref}
       size={size as never}
       autoComplete={autoComplete}

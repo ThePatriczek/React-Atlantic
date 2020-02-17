@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useEventHandlers } from '../../../hooks/useEventHandlers';
+import { useClick } from '../../../hooks/EventHandlers/useClick';
 import { StyledLink } from './Link.style';
 
 export interface LinkProps {
@@ -14,7 +14,7 @@ export const Link: React.FC<React.PropsWithChildren<LinkProps>> = (
   props: React.PropsWithChildren<LinkProps>
 ): React.ReactElement => {
   const { children, href, target, className } = props;
-  const { onClick } = useEventHandlers({});
+  const { onClick } = useClick({ others: props });
 
   return (
     <StyledLink

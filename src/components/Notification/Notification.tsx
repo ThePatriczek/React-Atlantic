@@ -1,5 +1,5 @@
 import React, { FC, PropsWithChildren } from 'react';
-import { useEventHandlers } from '../../hooks/useEventHandlers';
+import { useClick } from '../../hooks/EventHandlers/useClick';
 import { Size, Type } from '../../types';
 import { IconName } from '../Icon';
 import { Paragraph } from '../Typography/Paragraph';
@@ -26,7 +26,7 @@ export const Notification: FC<PropsWithChildren<NotificationProps>> = (
   props
 ): React.ReactElement => {
   const { children, title, className, size, type, footer } = props;
-  const { onClick } = useEventHandlers({ others: props });
+  const { onClick } = useClick({ others: props });
 
   let titleIcon: IconName;
 

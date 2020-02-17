@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useEventHandlers } from '../../hooks/useEventHandlers';
+import { useClickChange } from '../../hooks/EventHandlers/useClickChange';
 import { Size, Type } from '../../types';
 import { HiddenCheckbox } from '../Checkbox/Checkbox.style';
 import {
@@ -35,7 +35,7 @@ export const Switch: React.FC<SwitchProps> = (
     type
   } = props;
 
-  const { onChangeClick, isChecked } = useEventHandlers({
+  const { onChangeClick, isChecked } = useClickChange({
     isDisabled,
     others: props,
     isDefaultChecked

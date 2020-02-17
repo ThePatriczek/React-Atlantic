@@ -18,7 +18,8 @@ stories.add('Overview', () => (
       <Input placeholder={`FullWidth input`} isFullWidth />
       <Input placeholder={`FullWidth input`} isFullWidth isAlternative />
       <Input placeholder={`Loading...`} isLoading />
-      <Input placeholder={`Disabled`}
+      <Input
+        placeholder={`Disabled`}
         isDisabled
         iconRight={'hamburger'}
         isAlternative
@@ -27,10 +28,7 @@ stories.add('Overview', () => (
       <Input placeholder={`Icon right`} iconRight={'hamburger'} />
     </div>
     <div>
-      <Input
-          placeholder={`Alertnative input`}
-          isAlternative
-      />
+      <Input placeholder={`Alertnative input`} isAlternative />
       <Input
         placeholder={`Alertnative Icon left`}
         isAlternative

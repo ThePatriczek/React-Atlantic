@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useEventHandlers } from '../../hooks/useEventHandlers';
+import { useClickChange } from '../../hooks/EventHandlers/useClickChange';
 import { HorizontalPosition } from '../../types';
 import { Button, ButtonProps } from './Button';
 import { useRadioGroup } from './Context';
@@ -36,7 +36,7 @@ export const Radio: React.FC<React.PropsWithChildren<RadioProps>> & {
     value
   } = props;
   const { value: ctxVal, setValue: setCtxVal } = useRadioGroup();
-  const { onChangeClick: hookOnChange, isChecked } = useEventHandlers({
+  const { onChangeClick: hookOnChange, isChecked } = useClickChange({
     isDisabled,
     others: props,
     isDefaultChecked

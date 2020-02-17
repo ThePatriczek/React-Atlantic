@@ -1,5 +1,5 @@
-import React, { FC, PropsWithChildren, ReactText } from 'react';
-import { Size, Type } from '../../types';
+import React, { FC, PropsWithChildren } from 'react';
+import { Size } from '../../types';
 import { RadioGroupContextProvider, useRadioGroup } from '../Radio/Context';
 import { GroupProps } from '../Radio/Group';
 import { Tab, TabProps } from './Tab';
