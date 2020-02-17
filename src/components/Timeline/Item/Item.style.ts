@@ -8,7 +8,7 @@ const circleSize = `15px`;
 export interface StyledTimelineItemProps {
   index?: number;
   highlight?: boolean;
-};
+}
 
 export interface StyledTimelineCircleProps {
   isActive?: boolean;
@@ -20,11 +20,11 @@ export interface StyledTimelineCircleProps {
 
 export interface StyledTimelineTitleProps {
   isActive?: boolean;
-};
+}
 
 export interface StyledTimelineContainerProps {
   isMain?: boolean;
-};
+}
 
 export const StyledTimelineItem = styled.li<StyledTimelineItemProps>`
   position: relative;
@@ -64,8 +64,8 @@ export const StyledTimelineCircle = styled.div<StyledTimelineCircleProps>`
   border: 2px solid ${props => props.theme.color.text.beta};
   background-color: ${props => props.theme.color.background.alpha};
 
-  ${props => 
-    (props.primary || props.isActive) && 
+  ${props =>
+    (props.primary || props.isActive) &&
     css`
       border-color: ${props => props.theme.color.primary.alpha};
     `}
@@ -94,12 +94,12 @@ export const StyledTimelineTitle = styled(Link)<StyledTimelineTitleProps>`
   margin: 0;
   font-weight: 600;
   color: ${props => props.theme.color.text.alpha};
-  
+
   &:hover {
     color: ${props => props.theme.color.primary.alpha};
   }
 
-  ${props => 
+  ${props =>
     props.isActive &&
     css`
       color: ${props => props.theme.color.primary.alpha};
@@ -114,14 +114,22 @@ export const StyledTimelineCaption = styled(Link)`
 `;
 
 export const StyledTimelineContainer = styled.div<StyledTimelineContainerProps>`
-  ${props => 
-    props.isMain && 
+  ${props =>
+    props.isMain &&
     css`
       flex: 1 1 0;
     `}
 `;
 
 export const StyledTimelineButton = styled(PureButton)`
+  &&:hover {
+    background-color: ${props => props.theme.color.primary.alpha};
+
+    ${StyledIcon} {
+      color: ${props => props.theme.color.text.gamma};
+    }
+  }
+
   ${StyledIcon} {
     height: auto;
   }
