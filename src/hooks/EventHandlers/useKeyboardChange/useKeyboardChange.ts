@@ -59,17 +59,19 @@ export const useKeyboardChange = (
       onEnterPress?: (value: Readonly<unknown>) => void,
       handlersWithEvent?: Readonly<boolean>
     ) => {
-      if (onEnterPress) {
-        if (e.key === `Enter`) {
-          if (props.others.value || value) {
-            props.others.value
-              ? onEnterPress(props.others.value)
-              : onEnterPress(value);
+      if (!props.isDisabled) {
+        if (onEnterPress) {
+          if (e.key === `Enter`) {
+            if (props.others.value || value) {
+              props.others.value
+                ? onEnterPress(props.others.value)
+                : onEnterPress(value);
+            }
           }
         }
-      }
-      if (handlersWithEvent && props.others.onKeyDown) {
-        props.others.onKeyDown(e);
+        if (handlersWithEvent && props.others.onKeyDown) {
+          props.others.onKeyDown(e);
+        }
       }
     },
     [value, props.others.value]
@@ -80,10 +82,12 @@ export const useKeyboardChange = (
       e: KeyboardEvent<HTMLTextAreaElement>,
       onEnterPress?: (value: Readonly<string>) => void
     ) => {
-      if (onEnterPress) {
-        if (e.key === `Enter`) {
-          e.preventDefault();
-          onEnterPress(e.currentTarget.value);
+      if (!props.isDisabled) {
+        if (onEnterPress) {
+          if (e.key === `Enter`) {
+            e.preventDefault();
+            onEnterPress(e.currentTarget.value);
+          }
         }
       }
     },
