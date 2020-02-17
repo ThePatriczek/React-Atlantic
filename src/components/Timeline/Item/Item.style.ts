@@ -11,11 +11,15 @@ export interface StyledTimelineItemProps {
 };
 
 export interface StyledTimelineCircleProps {
-  blue?: boolean;
-};
+  isActive?: boolean;
+  primary?: boolean;
+  success?: boolean;
+  warning?: boolean;
+  error?: boolean;
+}
 
 export interface StyledTimelineTitleProps {
-  blue?: boolean;
+  isActive?: boolean;
 };
 
 export interface StyledTimelineContainerProps {
@@ -60,10 +64,28 @@ export const StyledTimelineCircle = styled.div<StyledTimelineCircleProps>`
   border: 2px solid ${props => props.theme.color.text.beta};
   background-color: ${props => props.theme.color.background.alpha};
 
-  ${props =>
-    props.blue &&
+  ${props => 
+    (props.primary || props.isActive) && 
     css`
       border-color: ${props => props.theme.color.primary.alpha};
+    `}
+  
+  ${props =>
+    props.success &&
+    css`
+      border-color: ${props => props.theme.color.success.alpha};
+    `}
+  
+  ${props =>
+    props.warning &&
+    css`
+      border-color: ${props => props.theme.color.warning.alpha};
+    `}
+  
+  ${props =>
+    props.error &&
+    css`
+      border-color: ${props => props.theme.color.error.alpha};
     `}
 `;
 
@@ -72,9 +94,13 @@ export const StyledTimelineTitle = styled(Link)<StyledTimelineTitleProps>`
   margin: 0;
   font-weight: 600;
   color: ${props => props.theme.color.text.alpha};
+  
+  &:hover {
+    color: ${props => props.theme.color.primary.alpha};
+  }
 
-  ${props =>
-    props.blue &&
+  ${props => 
+    props.isActive &&
     css`
       color: ${props => props.theme.color.primary.alpha};
     `}

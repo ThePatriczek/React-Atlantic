@@ -29,15 +29,15 @@ export const Item: FC<PropsWithChildren<ItemProps>> = (props): ReactElement => {
     }
   };
 
-  const isActive: Readonly<boolean> = true;
+  const isActive: Readonly<boolean> = false;
 
   return (
-    <StyledTimelineItem onClick={onClick} className={className} {...(isActive ? { highlight: true } : {})}>
+    <StyledTimelineItem onClick={onClick} className={className} highlight={isActive}>
       <StyledTimelineSide>
-        <StyledTimelineCircle {...(isActive ? { blue: true } : {})}/>
+        <StyledTimelineCircle isActive={isActive}/>
       </StyledTimelineSide>
       <StyledTimelineContainer isMain>
-        <StyledTimelineTitle href={"#"} {...(isActive ? { blue: true } : {})}>1.12.2018 - bez omezení</StyledTimelineTitle>
+        <StyledTimelineTitle href={"#"} isActive={isActive}>1.12.2018 - bez omezení</StyledTimelineTitle>
         <StyledTimelineCaption href={"#"}>113/2018 Sb.</StyledTimelineCaption>
       </StyledTimelineContainer>
       <StyledTimelineContainer>
