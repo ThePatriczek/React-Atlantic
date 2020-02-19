@@ -3,14 +3,18 @@ import { MutableRefObject, useEffect } from 'react';
 export interface UseEventListenerValue {
   onKeyDown: EventListener;
   onMouseDown: EventListener;
+  onEscape: EventListener;
+  onEnter: EventListener;
 }
 
 export interface UseEventListenerProps {
   ref?: Readonly<MutableRefObject<Readonly<null> | Readonly<Element>>>;
   onMouseDown?: () => void;
   onKeyDown?: () => void;
+  onEscape?: () => void;
+  onEnter?: () => void;
   isOpen?: Readonly<boolean>;
-  others?;
+  deps?: ReadonlyArray<unknown>;
 }
 
 export const useEventListener = (
@@ -24,6 +28,12 @@ export const useEventListener = (
       if (props.onKeyDown) {
         window.addEventListener('keydown', onKeyDown);
       }
+      if (props.onEnter) {
+        window.addEventListener('keydown', onEnter);
+      }
+      if (props.onEscape) {
+        window.addEventListener('keydown', onEscape);
+      }
     }
 
     return () => {
@@ -33,8 +43,14 @@ export const useEventListener = (
       if (props.onKeyDown) {
         window.removeEventListener('keydown', onKeyDown);
       }
+      if (props.onEnter) {
+        window.removeEventListener('keydown', onEnter);
+      }
+      if (props.onEscape) {
+        window.removeEventListener('keydown', onEscape);
+      }
     };
-  }, [props.isOpen]);
+  }, [props.deps]);
 
   const onMouseDown: EventListener = (e: Event) => {
     if (!props.ref?.current?.contains(e.target as Node)) {
@@ -45,12 +61,26 @@ export const useEventListener = (
   };
 
   const onKeyDown: EventListener = (e: KeyboardEvent) => {
-    if (e.key === 'Escape' || e.key === 'Enter') {
-      if (props.onKeyDown) {
-        props.onKeyDown();
+    if (props.onKeyDown) {
+      props.onKeyDown();
+    }
+  };
+
+  const onEnter: EventListener = (e: KeyboardEvent) => {
+    if (e.key === 'Enter') {
+      if (props.onEnter) {
+        props.onEnter();
       }
     }
   };
 
-  return { onKeyDown, onMouseDown };
+  const onEscape: EventListener = (e: KeyboardEvent) => {
+    if (e.key === 'Escape') {
+      if (props.onEscape) {
+        props.onEscape();
+      }
+    }
+  };
+
+  return { onKeyDown, onMouseDown, onEscape, onEnter };
 };

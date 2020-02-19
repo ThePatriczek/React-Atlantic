@@ -87,12 +87,13 @@ export const Transfer: FC<PropsWithChildren<TransferProps>> & {
 
   const { onKeyDown } = useEventListener({
     ref,
+    deps: [isOpen],
     isOpen,
     onMouseDown: () => {
       setOpen(false);
       setFocus(false);
     },
-    onKeyDown: () => {
+    onEscape: () => {
       setOpen(false);
       setFocus(false);
     }
