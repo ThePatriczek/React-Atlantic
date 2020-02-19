@@ -37,6 +37,7 @@ export interface LeftSideProps {
   resultValue: string;
   setSearchedValue: Dispatch<SetStateAction<string>>;
   searchedValue: string;
+  isAlternative?: boolean;
   inputOnChange: (value: string) => void;
   onKeyDown: (e: any) => void;
 }
@@ -52,6 +53,7 @@ const LeftSide: FC<LeftSideProps> = props => {
     searchedValue,
     placeholder,
     setSearchedValue,
+    isAlternative,
     isDisabled,
     resultValue,
     setOpen,
@@ -80,6 +82,13 @@ const LeftSide: FC<LeftSideProps> = props => {
 
   const filtered = items.filter(filtration);
 
+  const onFocus = () => {
+    if (!isOpen) {
+      setOpen(!isOpen);
+      setFocus(!isFocused);
+    }
+  };
+
   return (
     <StyledTransferSide
       direction={direction}
@@ -87,46 +96,28 @@ const LeftSide: FC<LeftSideProps> = props => {
       isOpen={isOpen}
       isFullWidth={isFullWidth}
     >
-      {isOpen ? (
-        <StyledInputHeader>
-          <StyledTransferInput
-            direction={direction}
-            isHalfOpen={isHalfOpen}
-            onKeyDown={onKeyDown}
-            onChange={inputOnChange}
-            isOpen={isOpen}
-            value={searchedValue}
-            placeholder={placeholder}
-            iconRight={'arrowUp'}
-            isFullWidth
-            autoFocus
-            size={size}
-          />
-          {searchedValue && (
-            <StyledSearchButton
-              onClick={() => setSearchedValue('')}
-              size={size}
-            >
-              <Icon name={'clear'} />
-            </StyledSearchButton>
-          )}
-        </StyledInputHeader>
-      ) : (
+      <StyledInputHeader>
         <StyledTransferInput
+          transferFocus={isOpen}
+          isAlternative={isAlternative}
+          direction={direction}
+          isHalfOpen={isHalfOpen}
           onKeyDown={onKeyDown}
-          size={size}
-          isDisabled={isDisabled}
+          onChange={inputOnChange}
           isOpen={isOpen}
-          value={resultValue}
-          isFullWidth={isFullWidth}
+          value={isOpen ? searchedValue : resultValue}
           placeholder={placeholder}
-          iconRight={'arrowDown'}
-          onFocus={() => {
-            setOpen(!isOpen);
-            setFocus(!isFocused);
-          }}
+          iconRight={isOpen ? 'arrowUp' : 'arrowDown'}
+          isFullWidth
+          onFocus={onFocus}
+          size={size}
         />
-      )}
+        {searchedValue && (
+          <StyledSearchButton onClick={() => setSearchedValue('')} size={size}>
+            <Icon name={'clear'} />
+          </StyledSearchButton>
+        )}
+      </StyledInputHeader>
       {isOpen && (
         <>
           {filtered.length > 0 && (

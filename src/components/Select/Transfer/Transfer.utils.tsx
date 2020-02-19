@@ -1,6 +1,5 @@
-import { TransferItem } from './Transfer';
-import { StyledTransferLi } from './Transfer.style';
 import React from 'react';
+import { TransferItem } from './Transfer';
 
 export const getMergedItems: (
   items: ReadonlyArray<TransferItem>,
