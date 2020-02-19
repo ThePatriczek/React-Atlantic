@@ -72,7 +72,7 @@ export const StyledTimelineCircle = styled.div<StyledTimelineCircleProps>`
     `}
 
   ${props =>
-    (props.type === 'primary' || props.isActive) &&
+    props.isActive &&
     css`
       border-color: ${props => props.theme.color.primary.alpha};
     `}
