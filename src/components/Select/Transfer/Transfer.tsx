@@ -7,6 +7,7 @@ import React, {
   useRef,
   useState
 } from 'react';
+import { useEventListener } from '../../../hooks/EventHandlers/useEventListener';
 import { Direction, Position, Size } from '../../../types';
 import { NotFound } from '../../NotFound';
 import { Option, OptionProps } from '../Option';
@@ -20,7 +21,10 @@ import Footer from './components/Footer';
 import LeftSide from './components/LeftSide';
 import RightSide from './components/RightSide';
 import { StyledTransfer, StyledTransferContainer } from './Transfer.style';
-import { distinguishTypeAndReturnLabel, getMergedItems } from './Transfer.utils';
+import {
+  distinguishTypeAndReturnLabel,
+  getMergedItems
+} from './Transfer.utils';
 
 export interface TransferProps {
   value?: OptionType[];
@@ -81,6 +85,19 @@ export const Transfer: FC<PropsWithChildren<TransferProps>> & {
   const ref = useRef<HTMLDivElement>(null);
   const isHalfOpen: boolean = checkedItems.length > 0;
 
+  const { onKeyDown } = useEventListener({
+    ref,
+    isOpen,
+    onMouseDown: () => {
+      setOpen(false);
+      setFocus(false);
+    },
+    onKeyDown: () => {
+      setOpen(false);
+      setFocus(false);
+    }
+  });
+
   useEffect(() => {
     if (defaultValue && !value) {
       const map: Map<string, boolean> = new Map(
@@ -121,11 +138,6 @@ export const Transfer: FC<PropsWithChildren<TransferProps>> & {
   }, [isDisabled]);
 
   useEffect(() => {
-    if (isOpen) {
-      window.addEventListener('mousedown', onMouseDown);
-      window.addEventListener('keydown', onKeyDown);
-    }
-
     ref.current && !isElementInViewport(ref.current)
       ? setPosition(getPositionOfElementInViewport(ref.current))
       : setPosition('unset');
@@ -154,26 +166,7 @@ export const Transfer: FC<PropsWithChildren<TransferProps>> & {
 
       setSearchedValue('');
     }
-
-    return () => {
-      window.removeEventListener('mousedown', onMouseDown);
-      window.removeEventListener('keydown', onKeyDown);
-    };
   }, [isOpen]);
-
-  const onMouseDown: EventListener = (e: Event) => {
-    if (!ref.current?.contains(e.target as Node)) {
-      setOpen(false);
-      setFocus(false);
-    }
-  };
-
-  const onKeyDown = (e: any) => {
-    if (e.key === 'Escape') {
-      setOpen(false);
-      setFocus(false);
-    }
-  };
 
   const onChange = (value: string, isChecked: boolean) => {
     if (!isDisabled) {
