@@ -17,7 +17,7 @@ export interface UseOnChangeValue {
   value: Readonly<unknown>;
 }
 
-interface UseEventHandlersProps {
+export interface UseEventHandlersProps {
   isDisabled?: Readonly<boolean>;
   defaultValue?: Readonly<unknown>;
   others?;

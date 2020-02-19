@@ -8,7 +8,7 @@ export interface UseClickChangeValue {
   isChecked: Readonly<boolean>;
 }
 
-interface UseClickChangeProps {
+export interface UseClickChangeProps {
   isDisabled?: Readonly<boolean>;
   isDefaultChecked?: Readonly<boolean>;
   others?;

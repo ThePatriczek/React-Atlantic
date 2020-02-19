@@ -4,7 +4,7 @@ export interface UseClickValue {
   onClick: () => void;
 }
 
-interface UseClickProps {
+export interface UseClickProps {
   others?;
 }
 
