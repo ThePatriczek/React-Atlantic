@@ -27,7 +27,7 @@ export const useKeyboardChange = (
   props: Readonly<UseEventHandlersProps>
 ): Readonly<UseOnChangeValue> => {
   const [value, setValue] = useState<Readonly<unknown>>(
-    props?.defaultValue || ``
+    props.defaultValue ?? ``
   );
 
   const onChangeInput = useCallback(
@@ -88,6 +88,9 @@ export const useKeyboardChange = (
             e.preventDefault();
             onEnterPress(e.currentTarget.value);
           }
+        }
+        if (props.others.onKeyDown) {
+          props.others.onKeyDown(e);
         }
       }
     },

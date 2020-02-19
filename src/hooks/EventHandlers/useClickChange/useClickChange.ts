@@ -18,7 +18,7 @@ export const useClickChange = (
   props: Readonly<UseClickChangeProps>
 ): Readonly<UseClickChangeValue> => {
   const [isChecked, setChecked] = useState<Readonly<boolean>>(
-    props?.others?.isDefaultChecked && props?.others?.isDefaultChecked
+    props.others.isDefaultChecked
   );
 
   const onChangeClick = useCallback(
