@@ -21,7 +21,10 @@ export const Message: FC<PropsWithChildren<MessageProps>> = (
   props
 ): ReactElement => {
   const { children, isLoading, isAlternative } = props;
-  const { onClick } = useClick({ others: props });
+  const { onClick } = useClick({
+    deps: [props.onClick],
+    onClick: props.onClick
+  });
 
   let type = props.type;
 

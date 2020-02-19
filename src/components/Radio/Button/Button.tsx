@@ -28,8 +28,10 @@ export const Button: FC<PropsWithChildren<ButtonProps>> = (
   const { value: ctxVal, setValue: setCtxVal } = useRadioGroup();
   const { onChangeClick: hookOnChange, isChecked } = useClickChange({
     isDisabled,
-    others: props,
-    isDefaultChecked
+    isDefaultChecked,
+    deps: [props.isChecked],
+    isChecked: props.isChecked,
+    onChange: props.onChange
   });
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -42,7 +44,7 @@ export const Button: FC<PropsWithChildren<ButtonProps>> = (
     }
   };
 
-  let checked: boolean = props.isChecked || isChecked;
+  let checked: boolean | undefined = props.isChecked || isChecked;
 
   if (ctxVal !== undefined) {
     checked = ctxVal === value;

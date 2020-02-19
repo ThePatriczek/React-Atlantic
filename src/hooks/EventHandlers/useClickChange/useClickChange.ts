@@ -5,20 +5,22 @@ export interface UseClickChangeValue {
     e: MouseEvent<HTMLLabelElement> | ChangeEvent<HTMLInputElement>,
     isPartiallyChecked?: Readonly<boolean>
   ) => void;
-  isChecked: Readonly<boolean>;
+  isChecked: Readonly<boolean> | undefined;
 }
 
 export interface UseClickChangeProps {
   isDisabled?: Readonly<boolean>;
   isDefaultChecked?: Readonly<boolean>;
-  others?;
+  isChecked?: Readonly<boolean>;
+  onChange?: (isChecked: Readonly<boolean>) => void;
+  deps?: ReadonlyArray<unknown>;
 }
 
 export const useClickChange = (
   props: Readonly<UseClickChangeProps>
 ): Readonly<UseClickChangeValue> => {
-  const [isChecked, setChecked] = useState<Readonly<boolean>>(
-    props.others.isDefaultChecked
+  const [isChecked, setChecked] = useState<Readonly<boolean> | undefined>(
+    props.isDefaultChecked
   );
 
   const onChangeClick = useCallback(
@@ -28,21 +30,21 @@ export const useClickChange = (
       }
 
       if (!props.isDisabled) {
-        if (props.others.isChecked === undefined) {
+        if (props.isChecked === undefined) {
           if (!isPartiallyChecked) {
             setChecked(e.type === 'click' ? !isChecked : e?.target.checked);
           }
-          if (props.others.onChange) {
-            props.others.onChange(!isChecked);
+          if (props.onChange) {
+            props.onChange(!isChecked);
           }
         } else {
-          if (props.others.onChange) {
-            props.others.onChange(!props.others.isChecked);
+          if (props.onChange) {
+            props.onChange(!props.isChecked);
           }
         }
       }
     },
-    [isChecked, props.others.isChecked]
+    [isChecked, props.deps]
   );
 
   return {

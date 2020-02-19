@@ -26,7 +26,7 @@ export const Notification: FC<PropsWithChildren<NotificationProps>> = (
   props
 ): React.ReactElement => {
   const { children, title, className, size, type, footer } = props;
-  const { onClick } = useClick({ others: props });
+  const { onClick } = useClick({ deps: [] });
 
   let titleIcon: IconName;
 

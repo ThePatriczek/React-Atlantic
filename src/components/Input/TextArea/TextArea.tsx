@@ -36,9 +36,11 @@ export const TextArea: React.FC<TextAreaProps> = (
   } = props;
 
   const { onKeyDownTextArea, onChangeInput, value } = useKeyboardChange({
-    others: props,
+    isDisabled,
     defaultValue,
-    isDisabled
+    deps: [props.value],
+    onChange: props.onChange,
+    value: props.value
   });
   const { onFocus, onBlur } = useFocus();
 

@@ -5,7 +5,8 @@ export interface UseClickValue {
 }
 
 export interface UseClickProps {
-  others?;
+  deps?: ReadonlyArray<unknown>;
+  onClick?: () => void;
 }
 
 export const useClick = (
@@ -13,14 +14,14 @@ export const useClick = (
 ): Readonly<UseClickValue> => {
   const onClick = useCallback(
     (e?: MouseEvent<HTMLAnchorElement>) => {
-      if (props.others.onClick) {
+      if (props.onClick) {
         if (e) {
           e.preventDefault();
         }
-        props.others.onClick();
+        props.onClick();
       }
     },
-    [props.others.onClick]
+    [props.deps]
   );
 
   return {

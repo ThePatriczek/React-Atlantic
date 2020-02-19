@@ -14,7 +14,7 @@ export const Link: React.FC<React.PropsWithChildren<LinkProps>> = (
   props: React.PropsWithChildren<LinkProps>
 ): React.ReactElement => {
   const { children, href, target, className } = props;
-  const { onClick } = useClick({ others: props });
+  const { onClick } = useClick({ deps: [props.onClick] });
 
   return (
     <StyledLink

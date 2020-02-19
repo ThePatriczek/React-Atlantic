@@ -104,8 +104,11 @@ export const Input: React.FC<InputProps> & {
   } = props;
   const { onChangeInput, value, onKeyDown } = useKeyboardChange({
     isDisabled,
-    others: props,
-    defaultValue
+    defaultValue,
+    deps: [props.value],
+    onChange: props.onChange,
+    onKeyDown: props.onKeyDown,
+    value: props.value
   });
   const { onFocus, onBlur, isFocused } = useFocus();
 

@@ -35,7 +35,11 @@ export const Button: React.FC<React.PropsWithChildren<ButtonProps>> = (
     className
   } = props;
   const [animation, setAnimation] = React.useState<boolean>(false);
-  const { onClick: hookOnClick } = useClick({ others: props });
+
+  const { onClick: hookOnClick } = useClick({
+    deps: [props.onClick],
+    onClick: props.onClick
+  });
 
   const onClick = () => {
     setAnimation(true);

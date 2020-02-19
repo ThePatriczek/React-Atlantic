@@ -20,7 +20,12 @@ export interface UseOnChangeValue {
 export interface UseEventHandlersProps {
   isDisabled?: Readonly<boolean>;
   defaultValue?: Readonly<unknown>;
-  others?;
+  value?: Readonly<string>;
+  onChange?: (x: string | ChangeEvent<HTMLInputElement>) => void;
+  onKeyDown?: (
+    e: KeyboardEvent<HTMLInputElement> | KeyboardEvent<HTMLTextAreaElement>
+  ) => void;
+  deps?: ReadonlyArray<unknown>;
 }
 
 export const useKeyboardChange = (
@@ -38,19 +43,19 @@ export const useKeyboardChange = (
       const value: Readonly<string> = e.target.value;
 
       if (!props.isDisabled) {
-        if (props.others.value === undefined) {
+        if (props.value === undefined) {
           setValue(value);
-          if (props.others.onChange) {
-            props.others.onChange(handlersWithEvent ? e : value);
+          if (props.onChange) {
+            props.onChange(handlersWithEvent ? e : value);
           }
         } else {
-          if (props.others.onChange) {
-            props.others.onChange(handlersWithEvent ? e : value);
+          if (props.onChange) {
+            props.onChange(handlersWithEvent ? e : value);
           }
         }
       }
     },
-    [value, props.others.value]
+    [value, props.deps]
   );
 
   const onKeyDown = useCallback(
@@ -62,19 +67,17 @@ export const useKeyboardChange = (
       if (!props.isDisabled) {
         if (onEnterPress) {
           if (e.key === `Enter`) {
-            if (props.others.value || value) {
-              props.others.value
-                ? onEnterPress(props.others.value)
-                : onEnterPress(value);
+            if (props.value || value) {
+              props.value ? onEnterPress(props.value) : onEnterPress(value);
             }
           }
         }
-        if (handlersWithEvent && props.others.onKeyDown) {
-          props.others.onKeyDown(e);
+        if (handlersWithEvent && props.onKeyDown) {
+          props.onKeyDown(e);
         }
       }
     },
-    [value, props.others.value]
+    [value, props.deps]
   );
 
   const onKeyDownTextArea = useCallback(
@@ -89,12 +92,12 @@ export const useKeyboardChange = (
             onEnterPress(e.currentTarget.value);
           }
         }
-        if (props.others.onKeyDown) {
-          props.others.onKeyDown(e);
+        if (props.onKeyDown) {
+          props.onKeyDown(e);
         }
       }
     },
-    [value, props.others.value]
+    [value, props.deps]
   );
 
   return {

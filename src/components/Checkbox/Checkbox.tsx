@@ -39,8 +39,10 @@ export const Checkbox: React.FC<React.PropsWithChildren<CheckboxProps>> = (
 
   const { onChangeClick, isChecked } = useClickChange({
     isDisabled,
-    others: props,
-    isDefaultChecked
+    isDefaultChecked,
+    deps: [props.isChecked],
+    isChecked: props.isChecked,
+    onChange: props.onChange
   });
 
   const springRef = useRef(null);
