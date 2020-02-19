@@ -6,10 +6,10 @@ export interface UseEventListenerValue {
 }
 
 export interface UseEventListenerProps {
-  ref?: Readonly<MutableRefObject<any>>;
+  ref?: Readonly<MutableRefObject<Readonly<null> | Readonly<Element>>>;
   onMouseDown?: () => void;
   onKeyDown?: () => void;
-  isOpen?: boolean;
+  isOpen?: Readonly<boolean>;
   others?;
 }
 
