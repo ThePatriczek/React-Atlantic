@@ -5,12 +5,14 @@ import { Item, ItemProps } from './Item';
 import { StyledTimelineContainer } from './Timeline.style';
 
 export interface TimelineProps {
-  onChange?: (index: number) => void;
+  onChange?: (index: Readonly<number>) => void;
   activeIndex?: Readonly<number>;
   defaultActiveIndex?: Readonly<number>;
 }
 
-export const Timeline: FC<PropsWithChildren<TimelineProps>> & {
+export const Timeline: FC<
+  Readonly<PropsWithChildren<Readonly<TimelineProps>>>
+> & {
   Item: FC<Readonly<ItemProps>>;
 } = (props): Readonly<ReactElement> => {
   const { children, onChange, activeIndex, defaultActiveIndex } = props;
