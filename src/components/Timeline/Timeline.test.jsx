@@ -1,0 +1,47 @@
+import { shallow } from 'enzyme';
+import React from 'react';
+import expect from 'expect';
+import { Timeline } from './Timeline';
+import { defaultValues } from '../../constants/defaultValues';
+
+export const Component = (index, onChange, onClick, onCaptionClick) => (
+  <Timeline onChange={onChange} defaultActiveIndex={index} activeIndex={index}>
+    <Timeline.Item
+      caption={`Caption`}
+      onClick={onClick}
+      onCaptionClick={onCaptionClick}
+      buttons={[
+        { icon: 'diff', onClick },
+        { icon: 'search', onClick }
+      ]}
+    >
+      {`Item0`}
+    </Timeline.Item>
+    <Timeline.Item>{`Item1`}</Timeline.Item>
+    <Timeline.Item buttons={[{ icon: 'diff' }]}>{`Item2`}</Timeline.Item>
+    <Timeline.Item
+      onClick={onClick}
+      caption={`Caption`}
+    >{`Item3`}</Timeline.Item>
+  </Timeline>
+);
+
+export const tests = (timeline = Component(defaultValues.index)) => {
+  let output = shallow(timeline);
+
+  return describe('Timeline', () => {
+    it(`Should have activeIndex: ${timeline.props.activeIndex}`, () => {
+      expect(output.props().activeIndex).toEqual(timeline.props.activeIndex);
+    });
+
+    it(`Should have defaultActiveIndex: ${timeline.props.defaultActiveIndex}`, () => {
+      expect(output.props().defaultActiveIndex).toEqual(timeline.props.defaultActiveIndex);
+    });
+
+    it(`Should have onChange: ${timeline.props.onChange}`, () => {
+      expect(output.props().onChange).toEqual(timeline.props.onChange);
+    });
+  });
+};
+
+tests();

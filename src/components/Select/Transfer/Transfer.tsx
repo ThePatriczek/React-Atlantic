@@ -21,7 +21,10 @@ import Footer from './components/Footer';
 import LeftSide from './components/LeftSide';
 import RightSide from './components/RightSide';
 import { StyledTransfer, StyledTransferContainer } from './Transfer.style';
-import { distinguishTypeAndReturnLabel, getMergedItems } from './Transfer.utils';
+import {
+  distinguishTypeAndReturnLabel,
+  getMergedItems
+} from './Transfer.utils';
 
 export interface TransferProps {
   value?: OptionType[];
@@ -39,6 +42,7 @@ export interface TransferProps {
   onCancel?: (items: OptionType[]) => void;
   onSubmit?: (items: OptionType[]) => void;
   className?: string;
+  isAlternative?: boolean;
   isFullWidth?: boolean;
   direction?: Direction;
 }
@@ -63,6 +67,7 @@ export const Transfer: FC<PropsWithChildren<TransferProps>> & {
     submitText,
     deleteAllText,
     notFoundComponent,
+    isAlternative,
     size,
     chosenComponent,
     isFullWidth,
@@ -326,6 +331,7 @@ export const Transfer: FC<PropsWithChildren<TransferProps>> & {
       >
         <form onSubmit={formSubmit}>
           <LeftSide
+            isAlternative={isAlternative}
             direction={direction}
             isHalfOpen={isHalfOpen}
             isOpen={isOpen}

@@ -29,6 +29,7 @@ export const Component = (
   size,
   isFullWidth,
   direction,
+  isAlternative,
   onChange,
   onCancel,
   onSubmit
@@ -45,6 +46,7 @@ export const Component = (
       notFoundComponent={notFoundComponent}
       size={size}
       isFullWidth={isFullWidth}
+      isAlternative={isAlternative}
       onChange={onChange}
       onCancel={onCancel}
       onSubmit={onSubmit}
@@ -60,6 +62,7 @@ export const Component = (
         options={options}
         notFoundComponent={notFoundComponent}
         size={size}
+        isAlternative={isAlternative}
         isFullWidth={isFullWidth}
         onChange={onChange}
         onCancel={onCancel}
@@ -93,6 +96,7 @@ export const Component = (
       <br />
       <Text>Receiving options as array</Text>
       <Transfer
+        isAlternative={isAlternative}
         direction={direction}
         placeholder={placeholder}
         isDisabled={isDisabled}
@@ -121,7 +125,8 @@ export const tests = (
     defaultValues.options,
     defaultValues.size,
     defaultValues.isFullWidth,
-    defaultValues.direction
+    defaultValues.direction,
+    defaultValues.isAlternative
   )
 ) => {
   let output = shallow(transfer);
@@ -164,6 +169,12 @@ export const tests = (
 
     it(`Should have direction: ${transfer.props.direction}`, () => {
       expect(output.props().direction).toEqual(transfer.props.direction);
+    });
+
+    it(`Should have isAlternative: ${transfer.props.isAlternative}`, () => {
+      expect(output.props().isAlternative).toEqual(
+        transfer.props.isAlternative
+      );
     });
 
     expected = transferItemsRender({ value: 'value1', label: 'First' });

@@ -55,6 +55,7 @@ export type AutoComplete =
   | 'photo';
 
 export interface InputProps {
+  transferFocus?: boolean;
   value?: string;
   defaultValue?: string;
   isDisabled?: boolean;
@@ -83,6 +84,7 @@ export const Input: React.FC<InputProps> & {
   TextArea: React.FC<TextAreaProps>;
 } = (props: InputProps): React.ReactElement => {
   const {
+    transferFocus,
     defaultValue,
     isDisabled,
     placeholder,
@@ -127,7 +129,7 @@ export const Input: React.FC<InputProps> & {
   const onKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (onEnterPress) {
       if (e.key === `Enter`) {
-        if(props.value || value) {
+        if (props.value || value) {
           props.value ? onEnterPress(props.value) : onEnterPress(value);
         }
       }
@@ -171,6 +173,55 @@ export const Input: React.FC<InputProps> & {
       isFullWidth={isFullWidth}
     />
   );
+
+  if (transferFocus && isAlternative && !isDisabled) {
+    return (
+      <StyledInputWrapperAlt
+        size={size as Size}
+        isFocused={transferFocus}
+        iconLeft={!!iconLeft}
+        iconRight={!!(iconRight || isLoading)}
+        hasValue={!!val}
+        isDisabled={isDisabled}
+        onClick={() => {
+          if (ref.current) {
+            ref.current.focus();
+          }
+        }}
+        className={className}
+        isFullWidth={isFullWidth}
+      >
+        {iconLeft || iconRight ? (
+          <StyledInputWrapper
+            size={size as Size}
+            isFocused={transferFocus}
+            iconLeft={!!iconLeft}
+            iconRight={!!(iconRight || isLoading)}
+            isDisabled={isDisabled}
+            onClick={() => {
+              if (ref.current) {
+                ref.current.focus();
+              }
+            }}
+            isFullWidth={isFullWidth}
+          >
+            {iconLeft && <Icon name={iconLeft} />}
+
+            {Component}
+
+            <label>{placeholder}</label>
+            {isLoading && <Icon name={'loading'} isRotating />}
+            {iconRight && !isLoading && <Icon name={iconRight} />}
+          </StyledInputWrapper>
+        ) : (
+          <>
+            {Component}
+            <label>{placeholder}</label>
+          </>
+        )}
+      </StyledInputWrapperAlt>
+    );
+  }
 
   if (isAlternative && !isDisabled) {
     return (
