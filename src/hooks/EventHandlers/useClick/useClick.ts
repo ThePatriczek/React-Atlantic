@@ -1,16 +1,16 @@
 import { MouseEvent, useCallback } from 'react';
 
-export interface UseOnChangeValue {
+export interface UseClickValue {
   onClick: () => void;
 }
 
-interface UseEventHandlersProps {
+interface UseClickProps {
   others?;
 }
 
 export const useClick = (
-  props: Readonly<UseEventHandlersProps>
-): Readonly<UseOnChangeValue> => {
+  props: Readonly<UseClickProps>
+): Readonly<UseClickValue> => {
   const onClick = useCallback(
     (e?: MouseEvent<HTMLAnchorElement>) => {
       if (props.others.onClick) {
