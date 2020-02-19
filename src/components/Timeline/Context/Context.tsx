@@ -7,15 +7,15 @@ import React, {
   useEffect,
   useState
 } from 'react';
+import { TimelineProps } from '../Timeline';
 
 export interface TimelineContextState {
   onChange: (index?: Readonly<number>) => void;
-  index: Readonly<number>;
+  activeIndex?: Readonly<number>;
 }
 
 const defaultValue: TimelineContextState = {
-  onChange: () => null,
-  index: 0
+  onChange: () => null
 };
 
 export const TimelineContext = createContext<TimelineContextState>(
@@ -25,29 +25,30 @@ export const TimelineContext = createContext<TimelineContextState>(
 export const useTimeline = () =>
   useContext<TimelineContextState>(TimelineContext);
 
-interface TimelineContextProps {
-  onChange?: (index: number) => void;
-  index?: Readonly<number>;
-}
+interface TimelineContextProps extends TimelineProps {}
 
 export const TimelineContextProvider: FC<Readonly<
   PropsWithChildren<Readonly<TimelineContextProps>>
 >> = (props): Readonly<ReactElement> => {
-  const { children } = props;
-  const [index, setIndex] = useState<Readonly<number>>(defaultValue.index);
+  const { children, defaultActiveIndex } = props;
+  const [activeIndex, setActiveIndex] = useState<Readonly<number | undefined>>(
+    defaultActiveIndex
+  );
 
   useEffect(() => {
-    setIndex(props.index ?? 0);
-  }, [props.index]);
+    if (typeof props.activeIndex !== 'undefined') {
+      setActiveIndex(props.activeIndex);
+    }
+  }, [props.activeIndex]);
 
   const onChange = (index: Readonly<number>) => {
-    setIndex(index);
+    setActiveIndex(props.activeIndex ?? index);
 
     props.onChange?.(index);
   };
 
   return (
-    <TimelineContext.Provider value={{ onChange, index }}>
+    <TimelineContext.Provider value={{ onChange, activeIndex }}>
       {children}
     </TimelineContext.Provider>
   );

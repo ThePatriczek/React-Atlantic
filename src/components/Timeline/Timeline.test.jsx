@@ -4,12 +4,25 @@ import expect from 'expect';
 import { Timeline } from './Timeline';
 import { defaultValues } from '../../constants/defaultValues';
 
-export const Component = (index, onChange) => (
-  <Timeline onChange={onChange} index={index}>
-    <Timeline.Item index={0}>Item0</Timeline.Item>
-    <Timeline.Item index={1}>Item1</Timeline.Item>
-    <Timeline.Item index={2}>Item2</Timeline.Item>
-    <Timeline.Item index={3}>Item3</Timeline.Item>
+export const Component = (index, onChange, onClick, onCaptionClick) => (
+  <Timeline onChange={onChange} defaultActiveIndex={index} activeIndex={index}>
+    <Timeline.Item
+      caption={`Caption`}
+      onClick={onClick}
+      onCaptionClick={onCaptionClick}
+      buttons={[
+        { icon: 'diff', onClick },
+        { icon: 'search', onClick }
+      ]}
+    >
+      {`Item0`}
+    </Timeline.Item>
+    <Timeline.Item>{`Item1`}</Timeline.Item>
+    <Timeline.Item buttons={[{ icon: 'diff' }]}>{`Item2`}</Timeline.Item>
+    <Timeline.Item
+      onClick={onClick}
+      caption={`Caption`}
+    >{`Item3`}</Timeline.Item>
   </Timeline>
 );
 
@@ -17,8 +30,12 @@ export const tests = (timeline = Component(defaultValues.index)) => {
   let output = shallow(timeline);
 
   return describe('Timeline', () => {
-    it(`Should have index: ${timeline.props.index}`, () => {
-      expect(output.props().index).toEqual(timeline.props.index);
+    it(`Should have activeIndex: ${timeline.props.activeIndex}`, () => {
+      expect(output.props().activeIndex).toEqual(timeline.props.activeIndex);
+    });
+
+    it(`Should have defaultActiveIndex: ${timeline.props.defaultActiveIndex}`, () => {
+      expect(output.props().defaultActiveIndex).toEqual(timeline.props.defaultActiveIndex);
     });
 
     it(`Should have onChange: ${timeline.props.onChange}`, () => {
