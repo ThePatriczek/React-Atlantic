@@ -67,11 +67,7 @@ export const Item: FC<ItemPropsPrivate> = (props): Readonly<ReactElement> => {
         <StyledTimelineContainer>
           {buttons.map(
             (button: Readonly<TimelineButton>, key: Readonly<number>) => (
-              <StyledTimelineButton
-                key={key}
-                size={'small'}
-                onClick={button.onClick}
-              >
+              <StyledTimelineButton key={key} onClick={button.onClick}>
                 <Icon name={button.icon} />
               </StyledTimelineButton>
             )
