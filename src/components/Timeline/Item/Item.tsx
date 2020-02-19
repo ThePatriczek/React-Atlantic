@@ -1,5 +1,6 @@
-import React, { FC, PropsWithChildren, ReactElement } from 'react';
-import { Icon } from '../../Icon';
+import React, { FC, ReactElement } from 'react';
+import { Icon, IconName } from '../../Icon';
+import { Typography } from '../../Typography';
 import { useTimeline } from '../Context';
 import {
   StyledTimelineButton,
@@ -11,15 +12,30 @@ import {
   StyledTimelineTitle
 } from './Item.style';
 
-export interface ItemProps {
+interface TimelineButton {
+  icon: IconName;
   onClick?: () => void;
-  index?: Readonly<number>;
-  className?: Readonly<string>;
 }
 
-export const Item: FC<PropsWithChildren<ItemProps>> = (props): ReactElement => {
-  const { children, index, className } = props;
-  const { onChange } = useTimeline();
+export interface ItemProps {
+  onClick?: () => void;
+  onCaptionClick?: () => void;
+  className?: Readonly<string>;
+  caption?: Readonly<string>;
+  children: Readonly<string>;
+  buttons?: ReadonlyArray<Readonly<TimelineButton>>;
+}
+
+interface ItemPropsPrivate extends ItemProps {
+  index?: Readonly<number>;
+}
+
+const { Title, Text } = Typography;
+
+export const Item: FC<ItemPropsPrivate> = (props): Readonly<ReactElement> => {
+  const { index, className, children, caption, buttons } = props;
+  const { onChange, activeIndex } = useTimeline();
+  const isActive: Readonly<boolean> = index === activeIndex;
 
   const onClick = () => {
     props.onClick?.();
@@ -29,22 +45,39 @@ export const Item: FC<PropsWithChildren<ItemProps>> = (props): ReactElement => {
     }
   };
 
-  const isActive: Readonly<boolean> = false;
+  const onCaptionClick = () => props.onCaptionClick?.();
 
   return (
-    <StyledTimelineItem onClick={onClick} className={className} highlight={isActive}>
+    <StyledTimelineItem className={className} highlight={isActive}>
       <StyledTimelineSide>
-        <StyledTimelineCircle isActive={isActive}/>
+        <StyledTimelineCircle isActive={isActive} onClick={onClick} />
       </StyledTimelineSide>
       <StyledTimelineContainer isMain>
-        <StyledTimelineTitle href={"#"} isActive={isActive}>1.12.2018 - bez omezení</StyledTimelineTitle>
-        <StyledTimelineCaption href={"#"}>113/2018 Sb.</StyledTimelineCaption>
+        <StyledTimelineTitle href={'#'} isActive={isActive} onClick={onClick}>
+          <Title level={5}>{children}</Title>
+        </StyledTimelineTitle>
+        {caption && (
+          <StyledTimelineCaption href={'#'} onClick={onCaptionClick}>
+            <Text>{caption}</Text>
+          </StyledTimelineCaption>
+        )}
       </StyledTimelineContainer>
-      <StyledTimelineContainer>
-        <StyledTimelineButton size={'small'}>
-          <Icon name={'hamburger'} />
-        </StyledTimelineButton>
-      </StyledTimelineContainer>
+
+      {buttons && (
+        <StyledTimelineContainer>
+          {buttons.map(
+            (button: Readonly<TimelineButton>, key: Readonly<number>) => (
+              <StyledTimelineButton
+                key={key}
+                size={'small'}
+                onClick={button.onClick}
+              >
+                <Icon name={button.icon} />
+              </StyledTimelineButton>
+            )
+          )}
+        </StyledTimelineContainer>
+      )}
     </StyledTimelineItem>
   );
 };

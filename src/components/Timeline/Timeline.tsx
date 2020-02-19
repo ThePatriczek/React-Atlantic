@@ -5,31 +5,31 @@ import { Item, ItemProps } from './Item';
 import { StyledTimelineContainer } from './Timeline.style';
 
 export interface TimelineProps {
-  onChange?: (index: Readonly<number>) => void;
-  index?: Readonly<number>;
+  onChange?: (index: number) => void;
+  activeIndex?: Readonly<number>;
+  defaultActiveIndex?: Readonly<number>;
 }
 
 export const Timeline: FC<PropsWithChildren<TimelineProps>> & {
   Item: FC<Readonly<ItemProps>>;
 } = (props): Readonly<ReactElement> => {
-  const { children, onChange, index } = props;
+  const { children, onChange, activeIndex, defaultActiveIndex } = props;
   const { getFilteredChildren } = useComposition();
 
-  const timelineItems: JSX.Element[] = getFilteredChildren(
-    children,
-    Timeline.Item.displayName
-  );
+  const items = getFilteredChildren(children, Timeline.Item.displayName);
 
   return (
-    <TimelineContextProvider onChange={onChange} index={index}>
+    <TimelineContextProvider
+      onChange={onChange}
+      activeIndex={activeIndex}
+      defaultActiveIndex={defaultActiveIndex}
+    >
       <StyledTimelineContainer>
-        {timelineItems.map(
-          (item: Readonly<JSX.Element>, index: Readonly<number>) => (
-            <Timeline.Item index={index} key={index}>
-              {item.props?.children}
-            </Timeline.Item>
-          )
-        )}
+        {items.map((item, index: Readonly<number>) => (
+          <Timeline.Item key={index} {...item.props} index={index}>
+            {item.props?.children}
+          </Timeline.Item>
+        ))}
       </StyledTimelineContainer>
     </TimelineContextProvider>
   );

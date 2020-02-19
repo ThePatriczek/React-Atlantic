@@ -13,10 +13,12 @@ stories.addDecorator(withKnobs);
 stories.add(
   'Playground',
   () => {
-    const index = number(`index:`, defaultValues.index);
+    const index = number(`activeIndex:`, defaultValues.index);
     const onChange = action(`onChange`);
+    const onClick = action(`onClick`);
+    const onCaptionClick = action(`onCaptionClick`);
 
-    const Timeline = Component(index, onChange);
+    const Timeline = Component(index, onChange, onClick, onCaptionClick);
 
     specs(() => tests(Timeline));
 
