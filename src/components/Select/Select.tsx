@@ -20,6 +20,7 @@ import {
   NoOptionsMessage,
   Placeholder,
   SelectContainer,
+  SelectContainerWrapper,
   SingleValue,
   ValueContainer
 } from './Select.style';
@@ -32,6 +33,7 @@ export interface SelectProps {
   options?: OptionType[];
   isMulti?: boolean;
   isFullWidth?: boolean;
+  isAlternative?: boolean;
   placeholder?: string;
   isDisabled?: boolean;
   size?: Size;
@@ -50,6 +52,7 @@ export const Select: React.FC<React.PropsWithChildren<SelectProps>> & {
     options,
     isMulti,
     isFullWidth,
+    isAlternative,
     size,
     defaultValue,
     autoFocus
@@ -103,7 +106,7 @@ export const Select: React.FC<React.PropsWithChildren<SelectProps>> & {
       size={size}
       isDisabled={isDisabled}
       options={items}
-      placeholder={placeholder || `Select an option`}
+      placeholder={isAlternative ? `` : placeholder}
       isSearchable={false}
       className={className || ``}
       onChange={onChange}
@@ -204,15 +207,32 @@ export const Select: React.FC<React.PropsWithChildren<SelectProps>> & {
         Placeholder: ({ children, innerProps }) => (
           <Placeholder {...innerProps}>{children}</Placeholder>
         ),
-        SelectContainer: ({ children, innerProps, ...rest }) => (
-          <SelectContainer
-            isFullWidth={isFullWidth}
-            size={size}
-            {...innerProps}
-          >
-            {children}
-          </SelectContainer>
-        ),
+        SelectContainer: ({ children, innerProps, ...rest }) =>
+          isAlternative ? (
+            <SelectContainerWrapper
+              isFullWidth={isFullWidth}
+              size={size}
+              hasValue={!!value}
+              {...innerProps}
+            >
+              <SelectContainer
+                isFullWidth={isFullWidth}
+                size={size}
+                {...innerProps}
+              >
+                {children}
+              </SelectContainer>
+              <label>{placeholder}</label>
+            </SelectContainerWrapper>
+          ) : (
+            <SelectContainer
+              isFullWidth={isFullWidth}
+              size={size}
+              {...innerProps}
+            >
+              {children}
+            </SelectContainer>
+          ),
         SingleValue: ({ children, innerProps }) => (
           <SingleValue size={size} isFullWidth={isFullWidth} {...innerProps}>
             {children}

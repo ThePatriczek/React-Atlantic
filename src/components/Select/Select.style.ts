@@ -8,6 +8,7 @@ interface SelectProps {
   isMulti?: boolean;
   hasValue?: boolean;
   isFullWidth?: boolean;
+  isAlternative?: boolean;
   isDisabled?: boolean;
   size?: Size;
 }
@@ -43,6 +44,86 @@ export const SelectContainer = styled.div<SelectProps>`
     css`
       font-size: ${props => props.theme.font.size.lg};
     `}
+`;
+
+export const SelectContainerWrapper = styled.span<any>`
+   font-family: ${props => props.theme.font.family};
+  display: inline-block;
+  position: relative;
+  margin-top: -${props => props.theme.margin.md};
+  padding-top: ${props => props.theme.padding.md};
+
+    label {   
+    z-index: 1;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    padding: 0 ${props => props.theme.padding.md};
+    border-radius: ${props => props.theme.radius};
+
+    color: ${props => props.theme.color.text.beta};
+    cursor: text;
+    border: ${props => props.theme.radius};
+
+    -webkit-transition: color 10s ease-in-out, transform 10s ease-in-out;
+    transition: color 10s ease-in-out, transform 10s ease-in-out;
+    -webkit-transform-origin: 0 100%;
+    transform-origin: 0 100%;
+    -webkit-transform: translateY(12px);
+    transform: translateY(12px);
+    
+    ${props =>
+      props.size === 'small' &&
+      css`
+        font-size: ${props.theme.font.size.sm};
+        height: ${parseInt(props.theme.height.sm, 0) - 2}px;
+        line-height: ${parseInt(props.theme.height.sm, 0) - 2}px;
+      `}
+    ${props =>
+      props.size === 'medium' &&
+      css`
+        font-size: ${props.theme.font.size.md};
+        height: ${parseInt(props.theme.height.md, 0) - 2}px;
+        line-height: ${parseInt(props.theme.height.md, 0) - 2}px;
+      `}
+    ${props =>
+      props.size === 'large' &&
+      css`
+        font-size: ${props.theme.font.size.lg};
+        height: ${parseInt(props.theme.height.lg, 0) - 2}px;
+        line-height: ${parseInt(props.theme.height.lg, 0) - 2}px;
+      `}
+
+    ${props =>
+      props.hasValue &&
+      css`
+        height: ${props.theme.height.sm};
+        line-height: ${props.theme.height.sm};
+        left: 5px;
+        right: auto;
+
+        background: ${props.theme.color.background.alpha};
+        color: ${props.theme.color.primary.alpha};
+
+        -webkit-transform: translateY(-14px) scale(0.8);
+        transform: translateY(0px) scale(0.8);
+        -webkit-transform-origin: 0 0;
+        transform-origin: 0 0;
+
+        ${props.size === 'small' &&
+          css`
+            height: 16px;
+            line-height: 16px;
+          `}
+      `}
+  }
+    
+    ${props =>
+      props.isFullWidth &&
+      css`
+        width: 100%;
+      `}
 `;
 
 export const Control = styled.div<SelectProps>`
@@ -119,7 +200,7 @@ export const ValueContainer = styled.div<SelectProps>`
   ${props =>
     props.isMulti &&
     css`
-      max-width: calc(100% - 72px);
+      max-width: calc(100% - 67px);
     `}
 
   ${props =>
@@ -433,6 +514,11 @@ CrossIcon.defaultProps = {
 Placeholder.defaultProps = {
   theme
 };
+
+SelectContainerWrapper.defaultProps = {
+  theme
+};
+
 IndicatorSeparator.defaultProps = {
   theme
 };

@@ -16,6 +16,7 @@ export const Component = (
   isDisabled,
   isFullWidth,
   options,
+  isAlternative,
   onChange
 ) => {
   return (
@@ -29,6 +30,7 @@ export const Component = (
       isFullWidth={isFullWidth}
       onChange={onChange}
       options={options}
+      isAlternative={isAlternative}
     >
       <Option value={`value 1`}>
         <Text>{`Option 1`}</Text>
