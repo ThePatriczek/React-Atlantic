@@ -1,5 +1,7 @@
-import React, { FC, PropsWithChildren, ReactText, useMemo } from 'react';
-import { Size, Type } from '../../types';
+import React, { FC, PropsWithChildren } from 'react';
+import { SpringConfig } from 'react-spring/web.cjs';
+import { Size } from '../../types';
+import { Carousel } from '../Carousel';
 import { RadioGroupContextProvider, useRadioGroup } from '../Radio/Context';
 import { GroupProps } from '../Radio/Group';
 import { Tab, TabProps } from './Tab';
@@ -8,13 +10,13 @@ import {
   StyledTabsContainer,
   StyledTabsContent
 } from './Tabs.style';
-import { Carousel } from '../Carousel';
-import { MobileCarousel } from '../Carousel/Mobile';
 
 export interface TabsProps extends GroupProps {
-  /* value of activeTab */
+  /** Animation config */
+  animationConfig?: SpringConfig;
+  /** value of activeTab */
   activeTab?: any;
-  /* tabs which render in group */
+  /** tabs which render in group */
   tabs: TabProps | TabProps[];
   /** small | medium | large */
   size?: Size;
@@ -44,7 +46,14 @@ export const Tabs: FC<TabsProps> = props => {
 };
 
 const TabsWithContext: FC<PropsWithChildren<TabsProps>> = props => {
-  const { isAlternative, activeTab, children, isBordered, size } = props;
+  const {
+    isAlternative,
+    activeTab,
+    children,
+    isBordered,
+    size,
+    animationConfig
+  } = props;
   const { value } = useRadioGroup();
   let tabs: TabProps[] = [];
 
@@ -54,29 +63,33 @@ const TabsWithContext: FC<PropsWithChildren<TabsProps>> = props => {
     tabs.push(props.tabs);
   }
 
-  let activeSlide = 0;
-  const memoContent = tabs.map((tab, index) => {
-    if (tab.value === value) {
-      activeSlide = index;
+  let activeSlide: number = 0;
+  const slides = tabs.map(
+    (tab: Readonly<TabProps>, index: Readonly<number>) => {
+      if (tab.value === value) {
+        activeSlide = index;
 
-      return (
-        <Carousel.Slide>
-          {activeSlide === index}
-          {activeSlide === index ? (
-            children
-          ) : index + 1 === activeSlide || index - 1 === activeSlide ? (
-            <div></div>
-          ) : null}
-        </Carousel.Slide>
-      );
+        const isActiveSlide: Readonly<boolean> = activeSlide === index;
+        const isNextSlide: Readonly<boolean> = index - 1 === activeSlide;
+        const isPrevSlide: Readonly<boolean> = index + 1 === activeSlide;
+        return (
+          <Carousel.Slide>
+            {isActiveSlide ? (
+              children
+            ) : isNextSlide || isPrevSlide ? (
+              <div></div>
+            ) : null}
+          </Carousel.Slide>
+        );
+      }
+      return <Carousel.Slide />;
     }
-    return <Carousel.Slide />;
-  });
+  );
 
   const Content = () => {
     return (
-      <Carousel springConfig={{ duration: 500 }} activeSlide={activeSlide}>
-        {memoContent}
+      <Carousel springConfig={animationConfig} activeSlide={activeSlide}>
+        {slides}
       </Carousel>
     );
   };
@@ -111,6 +124,7 @@ TabsWithContext.displayName = `TabsWithContext`;
 Tabs.defaultProps = {
   size: 'medium',
   isAlternative: false,
-  isBordered: false
+  isBordered: false,
+  animationConfig: { duration: 0 }
 };
 Tabs.displayName = `Tabs`;

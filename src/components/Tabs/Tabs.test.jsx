@@ -11,7 +11,8 @@ export const Component = (
   className,
   isAlternative,
   isBordered,
-  onChange
+  onChange,
+  animationConfig
 ) => (
   <Tabs
     tabs={tabs}
@@ -20,6 +21,7 @@ export const Component = (
     isAlternative={isAlternative}
     isBordered={isBordered}
     onChange={onChange}
+    animationConfig={animationConfig}
   >
     {children}
   </Tabs>
