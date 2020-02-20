@@ -30,8 +30,11 @@ export const defaultValues = {
     },
     {
       value: `3`,
-      label: `Tab 3`,
-      isDisabled: true
+      label: `Tab 3`
+    },
+    {
+      value: `4`,
+      label: `Tab 4`
     }
   ],
   className: `atlantic-component`,

@@ -1,4 +1,4 @@
-import React, { FC, PropsWithChildren, ReactText } from 'react';
+import React, { FC, PropsWithChildren, ReactText, useMemo } from 'react';
 import { Size, Type } from '../../types';
 import { RadioGroupContextProvider, useRadioGroup } from '../Radio/Context';
 import { GroupProps } from '../Radio/Group';
@@ -8,6 +8,8 @@ import {
   StyledTabsContainer,
   StyledTabsContent
 } from './Tabs.style';
+import { Carousel } from '../Carousel';
+import { MobileCarousel } from '../Carousel/Mobile';
 
 export interface TabsProps extends GroupProps {
   /* value of activeTab */
@@ -52,6 +54,33 @@ const TabsWithContext: FC<PropsWithChildren<TabsProps>> = props => {
     tabs.push(props.tabs);
   }
 
+  let activeSlide = 0;
+  const memoContent = tabs.map((tab, index) => {
+    if (tab.value === value) {
+      activeSlide = index;
+
+      return (
+        <Carousel.Slide>
+          {activeSlide === index}
+          {activeSlide === index ? (
+            children
+          ) : index + 1 === activeSlide || index - 1 === activeSlide ? (
+            <div></div>
+          ) : null}
+        </Carousel.Slide>
+      );
+    }
+    return <Carousel.Slide />;
+  });
+
+  const Content = () => {
+    return (
+      <Carousel springConfig={{ duration: 500 }} activeSlide={activeSlide}>
+        {memoContent}
+      </Carousel>
+    );
+  };
+
   return (
     <>
       <StyledTabsBar isAlternative={!!isAlternative} size={size as Size}>
@@ -71,7 +100,7 @@ const TabsWithContext: FC<PropsWithChildren<TabsProps>> = props => {
         size={size as Size}
         hasBackground={!!value || !!activeTab}
       >
-        {children}
+        {Content()}
       </StyledTabsContent>
     </>
   );
