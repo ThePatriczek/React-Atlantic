@@ -144,7 +144,12 @@ export const Carousel: FC<Readonly<CarouselProps>> & {
   }, [auto, children.length, slide]);
 
   return (
-    <StyledCarousel height={height}>
+    <StyledCarousel
+      height={height}
+      auto={props.auto}
+      autoHeight={autoHeight}
+      activeSlide={props.activeSlide}
+    >
       {springs.map(({ offset, opacity, display, touchAction }, i) => (
         <StyledSlide
           ref={ref => (elements[i] = ref)}

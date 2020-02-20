@@ -107,9 +107,9 @@ stories.add(
     const autoHeight = boolean(`autoHeight:`, false);
     const activeSlide = text(`activeSlide`, `1`);
     const auto = text(`interval`, ``);
-    const childs = text(`children`, `SPLIT FUNCTION IS HERE`);
+    const child = text(`children`, `SPLIT FUNCTION IS HERE`);
 
-    const children = childs.split(' ').map(item => (
+    const children = child.split(' ').map(item => (
       <Carousel.Slide>
         <div
           style={{
