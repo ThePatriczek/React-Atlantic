@@ -1,4 +1,10 @@
-import { boolean, select, text, withKnobs, object } from '@storybook/addon-knobs';
+import {
+  boolean,
+  select,
+  text,
+  withKnobs,
+  object
+} from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/react';
 import * as React from 'react';
 import { specs } from 'storybook-addon-specifications';
@@ -37,7 +43,7 @@ stories.add(
         tension: 1000,
         friction: 120
       },
-      `id1`
+      `animation`
     );
     const tabs = defaultValues.tabs;
 
