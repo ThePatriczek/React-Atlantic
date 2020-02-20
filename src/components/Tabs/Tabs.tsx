@@ -15,18 +15,18 @@ export interface TabsProps extends GroupProps {
   /** Animation config */
   animationConfig?: SpringConfig;
   /** value of activeTab */
-  activeTab?: any;
+  activeTab?: Readonly<any>;
   /** tabs which render in group */
   tabs: TabProps | TabProps[];
   /** small | medium | large */
-  size?: Size;
+  size?: Readonly<Size>;
   /** custom className */
-  className?: string;
-  isBordered?: boolean;
-  isAlternative?: boolean;
+  className?: Readonly<string>;
+  isBordered?: Readonly<boolean>;
+  isAlternative?: Readonly<boolean>;
 }
 
-export const Tabs: FC<TabsProps> = props => {
+export const Tabs: FC<Readonly<TabsProps>> = props => {
   const {
     children,
     className,
@@ -64,7 +64,7 @@ const TabsWithContext: FC<PropsWithChildren<TabsProps>> = props => {
   }
 
   let activeSlide: number = 0;
-  const slides = tabs.map(
+  const slides: Readonly<JSX.Element[]> = tabs.map(
     (tab: Readonly<TabProps>, index: Readonly<number>) => {
       if (tab.value === value) {
         activeSlide = index;
@@ -86,7 +86,7 @@ const TabsWithContext: FC<PropsWithChildren<TabsProps>> = props => {
     }
   );
 
-  const Content = () => {
+  const Content = (): Readonly<React.ReactElement> => {
     return (
       <Carousel springConfig={animationConfig} activeSlide={activeSlide}>
         {slides}
