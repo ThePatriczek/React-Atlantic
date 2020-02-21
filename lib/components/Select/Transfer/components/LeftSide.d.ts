@@ -25,6 +25,7 @@ export interface LeftSideProps {
     resultValue: string;
     setSearchedValue: Dispatch<SetStateAction<string>>;
     searchedValue: string;
+    isAlternative?: boolean;
     inputOnChange: (value: string) => void;
     onKeyDown: (e: any) => void;
 }

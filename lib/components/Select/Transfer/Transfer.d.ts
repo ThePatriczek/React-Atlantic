@@ -18,6 +18,7 @@ export interface TransferProps {
     onCancel?: (items: OptionType[]) => void;
     onSubmit?: (items: OptionType[]) => void;
     className?: string;
+    isAlternative?: boolean;
     isFullWidth?: boolean;
     direction?: Direction;
 }

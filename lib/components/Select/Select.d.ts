@@ -9,6 +9,7 @@ export interface SelectProps {
     options?: OptionType[];
     isMulti?: boolean;
     isFullWidth?: boolean;
+    isAlternative?: boolean;
     placeholder?: string;
     isDisabled?: boolean;
     size?: Size;
