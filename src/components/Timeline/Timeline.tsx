@@ -1,7 +1,7 @@
 import React, { FC, PropsWithChildren, ReactElement } from 'react';
 import { useComposition } from '../../hooks/useComposition';
 
-import { TimelineContextProvider } from './Context/Context';
+import { TimelineContextProvider } from './Context';
 import { Item, ItemProps } from './Item/Item';
 import { StyledTimelineContainer } from './Timeline.style';
 
