@@ -14,10 +14,9 @@ export const useClick = (
 ): Readonly<UseClickValue> => {
   const onClick = useCallback(
     (e?: MouseEvent<HTMLAnchorElement>) => {
+      e?.preventDefault();
+
       if (props.onClick) {
-        if (e) {
-          e.preventDefault();
-        }
         props.onClick();
       }
     },
