@@ -18,6 +18,9 @@ export declare const StyledTimelineItem: import("styled-components").StyledCompo
 export declare const StyledTimelineSide: import("styled-components").StyledComponent<"div", any, {}, never>;
 export declare const StyledTimelineCircle: import("styled-components").StyledComponent<"div", any, StyledTimelineCircleProps, never>;
 export declare const StyledTimelineTitle: import("styled-components").StyledComponent<import("react").FC<import("react").PropsWithChildren<import("../../Typography/Link").LinkProps>>, any, StyledTimelineTitleProps, never>;
-export declare const StyledTimelineCaption: import("styled-components").StyledComponent<import("react").FC<import("react").PropsWithChildren<import("../../Typography/Link").LinkProps>>, any, {}, never>;
+export declare const StyledTimelineCaption: import("styled-components").StyledComponent<import("react").FC<import("react").PropsWithChildren<import("../../Typography/Link").LinkProps>>, any, {
+    hasMarginRight: boolean;
+}, never>;
 export declare const StyledTimelineContainer: import("styled-components").StyledComponent<"div", any, StyledTimelineContainerProps, never>;
 export declare const StyledTimelineButton: import("styled-components").StyledComponent<import("react").FC<import("react").PropsWithChildren<import("../..").ButtonProps>>, any, {}, never>;
+export declare const StyledTimelineCaptionContainer: import("styled-components").StyledComponent<"div", any, {}, never>;
