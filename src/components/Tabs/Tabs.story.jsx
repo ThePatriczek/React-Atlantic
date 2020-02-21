@@ -1,4 +1,10 @@
-import { boolean, select, text, withKnobs } from '@storybook/addon-knobs';
+import {
+  boolean,
+  select,
+  text,
+  withKnobs,
+  object
+} from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/react';
 import * as React from 'react';
 import { specs } from 'storybook-addon-specifications';
@@ -27,9 +33,18 @@ stories.add(
       ['small', `medium`, 'large'],
       defaultValues.size
     );
-    const children = text(`children:`, defaultValues.children);
+    const children = text(`children:`, defaultValues.dumbText);
     const className = text(`className:`, defaultValues.className);
     const onChange = action(`onChange`);
+    const animationConfig = object(
+      `animationConfig`,
+      {
+        mass: 1,
+        tension: 1000,
+        friction: 120
+      },
+      `animation`
+    );
     const tabs = defaultValues.tabs;
 
     const Tabs = Component(
@@ -39,7 +54,8 @@ stories.add(
       className,
       isAlternative,
       isBordered,
-      onChange
+      onChange,
+      animationConfig
     );
 
     specs(() => tests(Tabs));

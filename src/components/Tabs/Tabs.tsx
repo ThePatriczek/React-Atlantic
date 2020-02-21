@@ -1,5 +1,7 @@
-import React, { FC, PropsWithChildren, ReactText } from 'react';
-import { Size, Type } from '../../types';
+import React, { FC, PropsWithChildren } from 'react';
+import { SpringConfig } from 'react-spring/web.cjs';
+import { Size } from '../../types';
+import { Carousel } from '../Carousel';
 import { RadioGroupContextProvider, useRadioGroup } from '../Radio/Context';
 import { GroupProps } from '../Radio/Group';
 import { Tab, TabProps } from './Tab';
@@ -10,19 +12,21 @@ import {
 } from './Tabs.style';
 
 export interface TabsProps extends GroupProps {
-  /* value of activeTab */
-  activeTab?: any;
-  /* tabs which render in group */
+  /** Animation config */
+  animationConfig?: SpringConfig;
+  /** value of activeTab */
+  activeTab?: Readonly<any>;
+  /** tabs which render in group */
   tabs: TabProps | TabProps[];
   /** small | medium | large */
-  size?: Size;
+  size?: Readonly<Size>;
   /** custom className */
-  className?: string;
-  isBordered?: boolean;
-  isAlternative?: boolean;
+  className?: Readonly<string>;
+  isBordered?: Readonly<boolean>;
+  isAlternative?: Readonly<boolean>;
 }
 
-export const Tabs: FC<TabsProps> = props => {
+export const Tabs: FC<Readonly<TabsProps>> = props => {
   const {
     children,
     className,
@@ -42,7 +46,14 @@ export const Tabs: FC<TabsProps> = props => {
 };
 
 const TabsWithContext: FC<PropsWithChildren<TabsProps>> = props => {
-  const { isAlternative, activeTab, children, isBordered, size } = props;
+  const {
+    isAlternative,
+    activeTab,
+    children,
+    isBordered,
+    size,
+    animationConfig
+  } = props;
   const { value } = useRadioGroup();
   let tabs: TabProps[] = [];
 
@@ -51,6 +62,37 @@ const TabsWithContext: FC<PropsWithChildren<TabsProps>> = props => {
   } else {
     tabs.push(props.tabs);
   }
+
+  let activeSlide: number = 0;
+  const slides: Readonly<JSX.Element[]> = tabs.map(
+    (tab: Readonly<TabProps>, index: Readonly<number>) => {
+      if (tab.value === value) {
+        activeSlide = index;
+
+        const isActiveSlide: Readonly<boolean> = activeSlide === index;
+        const isNextSlide: Readonly<boolean> = index - 1 === activeSlide;
+        const isPrevSlide: Readonly<boolean> = index + 1 === activeSlide;
+        return (
+          <Carousel.Slide>
+            {isActiveSlide ? (
+              children
+            ) : isNextSlide || isPrevSlide ? (
+              <div></div>
+            ) : null}
+          </Carousel.Slide>
+        );
+      }
+      return <Carousel.Slide />;
+    }
+  );
+
+  const Content = (): Readonly<React.ReactElement> => {
+    return (
+      <Carousel springConfig={animationConfig} activeSlide={activeSlide}>
+        {slides}
+      </Carousel>
+    );
+  };
 
   return (
     <>
@@ -71,7 +113,7 @@ const TabsWithContext: FC<PropsWithChildren<TabsProps>> = props => {
         size={size as Size}
         hasBackground={!!value || !!activeTab}
       >
-        {children}
+        {Content()}
       </StyledTabsContent>
     </>
   );
@@ -82,6 +124,7 @@ TabsWithContext.displayName = `TabsWithContext`;
 Tabs.defaultProps = {
   size: 'medium',
   isAlternative: false,
-  isBordered: false
+  isBordered: false,
+  animationConfig: { duration: 0 }
 };
 Tabs.displayName = `Tabs`;
