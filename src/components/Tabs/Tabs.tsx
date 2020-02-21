@@ -76,10 +76,10 @@ const TabsWithContext: FC<PropsWithChildren<TabsProps>> = props => {
       const isActiveSlide: Readonly<boolean> = activeSlide === index;
 
       if (isActiveSlide) {
-        return <Carousel.Slide>{children}</Carousel.Slide>;
+        return <Carousel.Slide key={index}>{children}</Carousel.Slide>;
       }
 
-      return <Carousel.Slide />;
+      return <Carousel.Slide key={index} />;
     }
   );
 
