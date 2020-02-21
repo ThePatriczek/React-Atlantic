@@ -76,7 +76,8 @@ export const Carousel: FC<Readonly<CarouselProps>> & {
     opacity: 0,
     display: `block`,
     touchAction: `auto`,
-    config: props.springConfig || defaultConfig
+    config: props.springConfig || defaultConfig,
+    immediate: false
   }));
 
   const setSlider = useCallback((directionRight: Readonly<boolean> = true) => {
