@@ -2,7 +2,8 @@ interface StyledRadioProps {
     isChecked?: boolean;
     isDisabled?: boolean;
     name?: string;
-    textPosition?: 'right' | 'left';
+    position?: 'right' | 'left';
+    isDefaultChecked?: boolean;
 }
 export declare const StyledRadioInputHidden: import("styled-components").StyledComponent<"input", any, {
     type: "radio";

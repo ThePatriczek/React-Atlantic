@@ -31,6 +31,11 @@ stories.add(
       ['value 1', `value 2`, 'value 3'],
       defaultValues.selectDefaultValueTwo
     );
+
+    const isAlternative = boolean(
+      'isAlternative: ',
+      defaultValues.isAlternative
+    );
     const onChange = action(`onChange`);
 
     const component = Component(
@@ -41,6 +46,8 @@ stories.add(
       defaultValue,
       isDisabled,
       isFullWidth,
+      null,
+      isAlternative,
       onChange
     );
 

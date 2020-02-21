@@ -5,6 +5,7 @@ import { Icon } from '../Icon';
 import { Option as OptionComponent } from './components';
 import { Option, OptionProps } from './Option';
 
+import { useEffect, useRef, useState } from 'react';
 import {
   ClearIndicator,
   Control,
@@ -20,6 +21,7 @@ import {
   NoOptionsMessage,
   Placeholder,
   SelectContainer,
+  SelectContainerWrapper,
   SingleValue,
   ValueContainer
 } from './Select.style';
@@ -32,6 +34,7 @@ export interface SelectProps {
   options?: OptionType[];
   isMulti?: boolean;
   isFullWidth?: boolean;
+  isAlternative?: boolean;
   placeholder?: string;
   isDisabled?: boolean;
   size?: Size;
@@ -50,11 +53,13 @@ export const Select: React.FC<React.PropsWithChildren<SelectProps>> & {
     options,
     isMulti,
     isFullWidth,
+    isAlternative,
     size,
     defaultValue,
     autoFocus
   } = props;
   const [value, setValue] = React.useState<any>(defaultValue);
+  const [isFocused, setFocused] = useState<boolean>(false);
 
   let items: OptionType[] = [];
   items = checkChildrenAndOptions(children, options);
@@ -97,13 +102,31 @@ export const Select: React.FC<React.PropsWithChildren<SelectProps>> & {
     fillValues(value);
   }
 
+  const ref = useRef<any>();
+
+  useEffect(() => {
+    window.addEventListener('mousedown', onMouseDown);
+
+    return () => {
+      window.removeEventListener('mousedown', onMouseDown);
+    };
+  }, [isFocused]);
+
+  const onMouseDown: EventListener = (e: Event) => {
+    if (!ref.current?.contains(e.target as Node)) {
+      setFocused(false);
+    }
+  };
+
   return (
     <ReactSelect
+      menuIsOpen={isFocused}
       value={val}
+      isFocused={isFocused}
       size={size}
       isDisabled={isDisabled}
       options={items}
-      placeholder={placeholder || `Select an option`}
+      placeholder={isAlternative ? `` : placeholder}
       isSearchable={false}
       className={className || ``}
       onChange={onChange}
@@ -122,26 +145,19 @@ export const Select: React.FC<React.PropsWithChildren<SelectProps>> & {
             <Icon name={'clear'} />
           </ClearIndicator>
         ),
-        Control: ({
-          children,
-          innerProps,
-          menuIsOpen,
-          isFocused,
-          isMulti,
-          hasValue,
-          isDisabled
-        }: any) => (
+        Control: (props: any) => (
           <Control
-            {...innerProps}
-            isMenuOpened={menuIsOpen}
+            ref={ref}
+            {...props.innerProps}
+            isMenuOpened={props.menuIsOpen}
             isFocused={isFocused}
-            isMulti={isMulti}
-            hasValue={hasValue}
-            isFullWidth={isFullWidth}
+            isMulti={props.isMulti}
+            hasValue={props.hasValue}
+            isFullWidth={props.isFullWidth}
             size={size}
-            isDisabled={isDisabled}
+            isDisabled={props.isDisabled}
           >
-            {children}
+            {props.children}
           </Control>
         ),
         CrossIcon: ({ children, innerProps }) => (
@@ -204,15 +220,36 @@ export const Select: React.FC<React.PropsWithChildren<SelectProps>> & {
         Placeholder: ({ children, innerProps }) => (
           <Placeholder {...innerProps}>{children}</Placeholder>
         ),
-        SelectContainer: ({ children, innerProps, ...rest }) => (
-          <SelectContainer
-            isFullWidth={isFullWidth}
-            size={size}
-            {...innerProps}
-          >
-            {children}
-          </SelectContainer>
-        ),
+        SelectContainer: ({ children, innerProps, ...rest }) =>
+          isAlternative ? (
+            <SelectContainerWrapper
+              isMulti={isMulti}
+              hasValue={!!value}
+              onClick={() => setFocused(!isFocused)}
+              isFullWidth={isFullWidth}
+              size={size}
+              isFocused={isFocused}
+              {...innerProps}
+            >
+              <SelectContainer
+                isFullWidth={isFullWidth}
+                size={size}
+                {...innerProps}
+              >
+                {children}
+              </SelectContainer>
+              <label>{placeholder}</label>
+            </SelectContainerWrapper>
+          ) : (
+            <SelectContainer
+              onClick={() => setFocused(!isFocused)}
+              isFullWidth={isFullWidth}
+              size={size}
+              {...innerProps}
+            >
+              {children}
+            </SelectContainer>
+          ),
         SingleValue: ({ children, innerProps }) => (
           <SingleValue size={size} isFullWidth={isFullWidth} {...innerProps}>
             {children}
