@@ -1,6 +1,4 @@
 import * as React from 'react';
-import { useFocus } from '../../hooks/EventHandlers/useFocus';
-import { useKeyboardChange } from '../../hooks/EventHandlers/useKeyboardChange';
 import { Size } from '../../types';
 import { Icon, IconName } from '../Icon';
 import {
@@ -57,6 +55,7 @@ export type AutoComplete =
   | 'photo';
 
 export interface InputProps {
+  transferFocus?: boolean;
   value?: string;
   defaultValue?: string;
   isDisabled?: boolean;
@@ -85,6 +84,7 @@ export const Input: React.FC<InputProps> & {
   TextArea: React.FC<TextAreaProps>;
 } = (props: InputProps): React.ReactElement => {
   const {
+    transferFocus,
     defaultValue,
     isDisabled,
     placeholder,
@@ -102,30 +102,70 @@ export const Input: React.FC<InputProps> & {
     isFullWidth,
     handlersWithEvent
   } = props;
-  const { onChangeInput, value, onKeyDown } = useKeyboardChange({
-    isDisabled,
-    defaultValue,
-    deps: [props.value],
-    onChange: props.onChange,
-    onKeyDown: props.onKeyDown,
-    value: props.value
-  });
-  const { onFocus, onBlur, isFocused } = useFocus();
 
   const ref = React.createRef<HTMLInputElement>();
+
+  const [value, setValue] = React.useState<string>(defaultValue || ``);
+
+  const [isFocused, setFocused] = React.useState<boolean>(false);
+
+  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const val: string = e.target.value;
+
+    if (!isDisabled) {
+      if (props.value === undefined) {
+        setValue(val);
+        if (props.onChange) {
+          props.onChange(handlersWithEvent ? e : val);
+        }
+      } else {
+        if (props.onChange) {
+          props.onChange(handlersWithEvent ? e : val);
+        }
+      }
+    }
+  };
+
+  const onKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (onEnterPress) {
+      if (e.key === `Enter`) {
+        if (props.value || value) {
+          props.value ? onEnterPress(props.value) : onEnterPress(value);
+        }
+      }
+    }
+    if (handlersWithEvent && props.onKeyDown) {
+      props.onKeyDown(e);
+    }
+  };
+
+  const onBlur = (e: React.FocusEvent<HTMLInputElement>) => {
+    setFocused(false);
+    if (props.onBlur) {
+      props.onBlur();
+    }
+  };
+
+  const onFocus = (e: React.FocusEvent<HTMLInputElement>) => {
+    setFocused(true);
+    if (props.onFocus) {
+      props.onFocus();
+    }
+  };
+
   const val = props.value !== undefined ? props.value : value;
 
   const Component = (
     <StyledInput
       id={id}
-      value={val as string}
-      onChange={e => onChangeInput(e, handlersWithEvent)}
+      value={val}
+      onChange={onChange}
       disabled={isDisabled}
       placeholder={isAlternative ? `` : placeholder}
-      onKeyDown={e => onKeyDown(e, onEnterPress, handlersWithEvent)}
+      onKeyDown={onKeyDown}
       autoFocus={autoFocus}
-      onBlur={e => onBlur(e, props.onBlur)}
-      onFocus={e => onFocus(e, props.onFocus)}
+      onBlur={onBlur}
+      onFocus={onFocus}
       ref={ref}
       size={size as never}
       autoComplete={autoComplete}
@@ -134,10 +174,10 @@ export const Input: React.FC<InputProps> & {
     />
   );
 
-  return isAlternative && !isDisabled ? (
+  const AlternativeComponent = (
     <StyledInputWrapperAlt
       size={size as Size}
-      isFocused={isFocused}
+      isFocused={transferFocus}
       iconLeft={!!iconLeft}
       iconRight={!!(iconRight || isLoading)}
       hasValue={!!val}
@@ -153,7 +193,9 @@ export const Input: React.FC<InputProps> & {
       {iconLeft || iconRight ? (
         <StyledInputWrapper
           size={size as Size}
-          isFocused={isFocused}
+          isFocused={
+            typeof transferFocus !== 'undefined' ? transferFocus : isFocused
+          }
           iconLeft={!!iconLeft}
           iconRight={!!(iconRight || isLoading)}
           isDisabled={isDisabled}
@@ -179,7 +221,13 @@ export const Input: React.FC<InputProps> & {
         </>
       )}
     </StyledInputWrapperAlt>
-  ) : (
+  );
+
+  if (isAlternative && !isDisabled) {
+    return AlternativeComponent;
+  }
+
+  return (
     <StyledInputWrapper
       isFocused={isFocused}
       iconLeft={!!iconLeft}
