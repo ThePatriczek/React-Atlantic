@@ -66,22 +66,15 @@ const TabsWithContext: FC<PropsWithChildren<TabsProps>> = props => {
   let activeSlide: number = 0;
   const slides: Readonly<JSX.Element[]> = tabs.map(
     (tab: Readonly<TabProps>, index: Readonly<number>) => {
-      if (tab.value === value) {
+      if (tab.value === value || tab.value === props.activeTab) {
         activeSlide = index;
-
-        const isActiveSlide: Readonly<boolean> = activeSlide === index;
-        const isNextSlide: Readonly<boolean> = index - 1 === activeSlide;
-        const isPrevSlide: Readonly<boolean> = index + 1 === activeSlide;
-        return (
-          <Carousel.Slide>
-            {isActiveSlide ? (
-              children
-            ) : isNextSlide || isPrevSlide ? (
-              <div></div>
-            ) : null}
-          </Carousel.Slide>
-        );
       }
+
+      const isActiveSlide: Readonly<boolean> = activeSlide === index;
+      if (isActiveSlide) {
+        return <Carousel.Slide>{children}</Carousel.Slide>;
+      }
+
       return <Carousel.Slide />;
     }
   );

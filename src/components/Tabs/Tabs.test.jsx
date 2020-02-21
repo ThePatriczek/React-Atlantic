@@ -5,6 +5,7 @@ import { defaultValues } from '../../constants/defaultValues';
 import expect from 'expect';
 
 export const Component = (
+  activeTab,
   tabs,
   children,
   size,
@@ -15,6 +16,7 @@ export const Component = (
   animationConfig
 ) => (
   <Tabs
+    activeTab={activeTab}
     tabs={tabs}
     size={size}
     className={className}
@@ -29,6 +31,7 @@ export const Component = (
 
 export const tests = (
   tabs = Component(
+    '1',
     defaultValues.tabs,
     defaultValues.children,
     defaultValues.size,
