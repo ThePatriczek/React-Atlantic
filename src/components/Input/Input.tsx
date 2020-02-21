@@ -134,56 +134,52 @@ export const Input: React.FC<InputProps> & {
     />
   );
 
-  if (isAlternative && !isDisabled) {
-    return (
-      <StyledInputWrapperAlt
-        size={size as Size}
-        isFocused={isFocused}
-        iconLeft={!!iconLeft}
-        iconRight={!!(iconRight || isLoading)}
-        hasValue={!!val}
-        isDisabled={isDisabled}
-        onClick={() => {
-          if (ref.current) {
-            ref.current.focus();
-          }
-        }}
-        className={className}
-        isFullWidth={isFullWidth}
-      >
-        {iconLeft || iconRight ? (
-          <StyledInputWrapper
-            size={size as Size}
-            isFocused={isFocused}
-            iconLeft={!!iconLeft}
-            iconRight={!!(iconRight || isLoading)}
-            isDisabled={isDisabled}
-            onClick={() => {
-              if (ref.current) {
-                ref.current.focus();
-              }
-            }}
-            isFullWidth={isFullWidth}
-          >
-            {iconLeft && <Icon name={iconLeft} />}
+  return isAlternative && !isDisabled ? (
+    <StyledInputWrapperAlt
+      size={size as Size}
+      isFocused={isFocused}
+      iconLeft={!!iconLeft}
+      iconRight={!!(iconRight || isLoading)}
+      hasValue={!!val}
+      isDisabled={isDisabled}
+      onClick={() => {
+        if (ref.current) {
+          ref.current.focus();
+        }
+      }}
+      className={className}
+      isFullWidth={isFullWidth}
+    >
+      {iconLeft || iconRight ? (
+        <StyledInputWrapper
+          size={size as Size}
+          isFocused={isFocused}
+          iconLeft={!!iconLeft}
+          iconRight={!!(iconRight || isLoading)}
+          isDisabled={isDisabled}
+          onClick={() => {
+            if (ref.current) {
+              ref.current.focus();
+            }
+          }}
+          isFullWidth={isFullWidth}
+        >
+          {iconLeft && <Icon name={iconLeft} />}
 
-            {Component}
+          {Component}
 
-            <label>{placeholder}</label>
-            {isLoading && <Icon name={'loading'} isRotating />}
-            {iconRight && !isLoading && <Icon name={iconRight} />}
-          </StyledInputWrapper>
-        ) : (
-          <>
-            {Component}
-            <label>{placeholder}</label>
-          </>
-        )}
-      </StyledInputWrapperAlt>
-    );
-  }
-
-  return (
+          <label>{placeholder}</label>
+          {isLoading && <Icon name={'loading'} isRotating />}
+          {iconRight && !isLoading && <Icon name={iconRight} />}
+        </StyledInputWrapper>
+      ) : (
+        <>
+          {Component}
+          <label>{placeholder}</label>
+        </>
+      )}
+    </StyledInputWrapperAlt>
+  ) : (
     <StyledInputWrapper
       isFocused={isFocused}
       iconLeft={!!iconLeft}
