@@ -104,11 +104,19 @@ export const StyledTimelineTitle = styled(Link)<StyledTimelineTitleProps>`
   }
 `;
 
-export const StyledTimelineCaption = styled(Link)`
+export const StyledTimelineCaption = styled(Link)<{
+  hasMarginRight: Readonly<boolean>;
+}>`
   display: block;
   margin: 0;
   color: ${props => props.theme.color.text.beta};
   font-size: ${props => props.theme.font.size.sm};
+
+  ${props =>
+    props.hasMarginRight &&
+    css`
+      margin-right: ${props.theme.margin.sm};
+    `}
 
   ${StyledText} {
     color: ${props => props.theme.color.text.beta};
@@ -127,4 +135,8 @@ export const StyledTimelineButton = styled(PureButton)`
   ${StyledIcon} {
     height: auto;
   }
+`;
+
+export const StyledTimelineCaptionContainer = styled.div`
+  display: flex;
 `;

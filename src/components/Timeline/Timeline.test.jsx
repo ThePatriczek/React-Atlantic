@@ -7,9 +7,12 @@ import { defaultValues } from '../../constants/defaultValues';
 export const Component = (index, onChange, onClick, onCaptionClick) => (
   <Timeline onChange={onChange} defaultActiveIndex={index} activeIndex={index}>
     <Timeline.Item
-      caption={`Caption`}
+      captions={[
+        { value: `Caption1`, onClick: onCaptionClick },
+        { value: `Caption2` },
+        { value: `Caption3`, onClick: onCaptionClick }
+      ]}
       onClick={onClick}
-      onCaptionClick={onCaptionClick}
       buttons={[
         { icon: 'diff', onClick },
         { icon: 'search', onClick }
@@ -21,7 +24,7 @@ export const Component = (index, onChange, onClick, onCaptionClick) => (
     <Timeline.Item buttons={[{ icon: 'diff' }]}>{`Item2`}</Timeline.Item>
     <Timeline.Item
       onClick={onClick}
-      caption={`Caption`}
+      captions={[{ value: `Caption` }]}
     >{`Item3`}</Timeline.Item>
   </Timeline>
 );
@@ -35,7 +38,9 @@ export const tests = (timeline = Component(defaultValues.index)) => {
     });
 
     it(`Should have defaultActiveIndex: ${timeline.props.defaultActiveIndex}`, () => {
-      expect(output.props().defaultActiveIndex).toEqual(timeline.props.defaultActiveIndex);
+      expect(output.props().defaultActiveIndex).toEqual(
+        timeline.props.defaultActiveIndex
+      );
     });
 
     it(`Should have onChange: ${timeline.props.onChange}`, () => {
