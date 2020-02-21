@@ -5,6 +5,7 @@ import { useTimeline } from '../Context';
 import {
   StyledTimelineButton,
   StyledTimelineCaption,
+  StyledTimelineCaptionContainer,
   StyledTimelineCircle,
   StyledTimelineContainer,
   StyledTimelineItem,
@@ -12,16 +13,19 @@ import {
   StyledTimelineTitle
 } from './Item.style';
 
-interface TimelineButton {
-  icon: IconName;
+export interface TimelineButton {
+  icon: Readonly<IconName>;
+  onClick?: () => void;
+}
+export interface TimelineCaption {
+  value: Readonly<string>;
   onClick?: () => void;
 }
 
 export interface ItemProps {
   onClick?: () => void;
-  onCaptionClick?: () => void;
   className?: Readonly<string>;
-  caption?: Readonly<string>;
+  captions?: ReadonlyArray<Readonly<TimelineCaption>>;
   children: Readonly<string>;
   buttons?: ReadonlyArray<Readonly<TimelineButton>>;
 }
@@ -33,7 +37,7 @@ interface ItemPropsPrivate extends ItemProps {
 const { Title, Text } = Typography;
 
 export const Item: FC<ItemPropsPrivate> = (props): Readonly<ReactElement> => {
-  const { index, className, children, caption, buttons } = props;
+  const { index, className, children, captions, buttons } = props;
   const { onChange, activeIndex } = useTimeline();
   const isActive: Readonly<boolean> = index === activeIndex;
 
@@ -45,8 +49,6 @@ export const Item: FC<ItemPropsPrivate> = (props): Readonly<ReactElement> => {
     }
   };
 
-  const onCaptionClick = () => props.onCaptionClick?.();
-
   return (
     <StyledTimelineItem className={className} highlight={isActive}>
       <StyledTimelineSide>
@@ -56,10 +58,21 @@ export const Item: FC<ItemPropsPrivate> = (props): Readonly<ReactElement> => {
         <StyledTimelineTitle href={'#'} isActive={isActive} onClick={onClick}>
           <Title level={5}>{children}</Title>
         </StyledTimelineTitle>
-        {caption && (
-          <StyledTimelineCaption href={'#'} onClick={onCaptionClick}>
-            <Text>{caption}</Text>
-          </StyledTimelineCaption>
+        {captions && (
+          <StyledTimelineCaptionContainer>
+            {captions.map((item, key) => (
+              <StyledTimelineCaption
+                href={'#'}
+                onClick={item.onClick}
+                key={key}
+                hasMarginRight={key < captions.length - 1}
+              >
+                <Text>
+                  {key < captions.length - 1 ? `${item.value},` : item.value}
+                </Text>
+              </StyledTimelineCaption>
+            ))}
+          </StyledTimelineCaptionContainer>
         )}
       </StyledTimelineContainer>
 

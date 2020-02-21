@@ -1,14 +1,17 @@
 import { FC } from 'react';
 import { IconName } from '../../Icon';
-interface TimelineButton {
-    icon: IconName;
+export interface TimelineButton {
+    icon: Readonly<IconName>;
+    onClick?: () => void;
+}
+export interface TimelineCaption {
+    value: Readonly<string>;
     onClick?: () => void;
 }
 export interface ItemProps {
     onClick?: () => void;
-    onCaptionClick?: () => void;
     className?: Readonly<string>;
-    caption?: Readonly<string>;
+    captions?: ReadonlyArray<Readonly<TimelineCaption>>;
     children: Readonly<string>;
     buttons?: ReadonlyArray<Readonly<TimelineButton>>;
 }
