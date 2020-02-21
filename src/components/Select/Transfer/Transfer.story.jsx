@@ -34,6 +34,10 @@ stories.add(
 
     const isDisabled = boolean('isDisabled: ', defaultValues.isDisabled);
     const isFullWidth = boolean('isFullWidth: ', defaultValues.isFullWidth);
+    const isAlternative = boolean(
+      'isAlternative: ',
+      defaultValues.isAlternative
+    );
 
     const options = defaultValues.options;
     const onChange = action(`onChange`);
@@ -50,6 +54,7 @@ stories.add(
       size,
       isFullWidth,
       direction,
+      isAlternative,
       onChange,
       onCancel,
       onSubmit
