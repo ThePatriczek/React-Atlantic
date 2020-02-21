@@ -15,21 +15,10 @@ interface TabComponentProps extends TabProps {
 }
 
 export const Tab: FC<TabComponentProps> = (props): ReactElement => {
-  const {
-    value,
-    label,
-    isDisabled,
-    className,
-    isActive,
-    isAlternative
-  } = props;
+  const { value, label, isDisabled, isAlternative } = props;
   const { value: ctxVal, setValue: setCtxVal } = useRadioGroup();
 
-  let isChecked: boolean = !!isActive;
-
-  if (ctxVal !== undefined) {
-    isChecked = ctxVal === value;
-  }
+  const isChecked: boolean = ctxVal === value;
 
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
