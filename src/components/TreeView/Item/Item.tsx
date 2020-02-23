@@ -1,12 +1,32 @@
 import React, { FC, PropsWithChildren, ReactElement } from 'react';
-import { StyledTreeViewItem } from './Item.style';
+import {
+  StyledTreeViewButton,
+  StyledTreeViewIcon,
+  StyledTreeViewItem
+} from './Item.style';
 
 export interface ItemProps {}
 
 export const Item: FC<PropsWithChildren<ItemProps>> = (props): ReactElement => {
   const { children } = props;
+  let icon: JSX.Element = <></>;
 
-  return <StyledTreeViewItem>{children}</StyledTreeViewItem>;
+  const hasChildren: Readonly<boolean> = true;
+
+  if (hasChildren) {
+    icon = (
+      <StyledTreeViewButton size={'small'}>
+        <StyledTreeViewIcon name={'arrowRight'} />
+      </StyledTreeViewButton>
+    );
+  }
+
+  return (
+    <StyledTreeViewItem>
+      {icon}
+      {children}
+    </StyledTreeViewItem>
+  );
 };
 
 Item.displayName = `Item`;
