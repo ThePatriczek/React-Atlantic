@@ -1,19 +1,19 @@
 import styled, { css } from 'styled-components';
-import { theme } from '../../../theme';
 import { PureButton } from '../../Button/Pure';
 import { Icon } from '../../Icon/Icon';
-import { StyledTreeView } from '../TreeView.style';
+import { Link } from '../../Typography/Link';
+import {
+  listGapSizeLg,
+  listGapSizeMd,
+  listGapSizeSm,
+  StyledTreeView
+} from '../TreeView.style';
 
 export interface StyledTreeViewItemProps {
-  size?: string;
+  size: string;
   isOpened?: boolean;
   isAlternative?: boolean;
 }
-
-const buttonSizeSm = theme.height.sm;
-const buttonSizeMd = theme.height.md;
-const buttonSizeLg = theme.height.lg;
-const itemOuterGap = theme.margin.xs;
 
 export const StyledTreeViewIcon = styled(Icon)``;
 
@@ -22,9 +22,9 @@ export const StyledTreeViewButton = styled(PureButton)`
   align-items: center;
   justify-content: center;
   align-self: flex-start;
-  height: auto;
+  flex-shrink: 0;
   margin-right: ${props => props.theme.margin.sm};
-  margin-left: -${props => props.theme.margin.sm};
+  margin-left: 0;
 
   &:hover {
     background-color: ${props => props.theme.color.background.beta};
@@ -44,17 +44,21 @@ export const StyledTreeViewButton = styled(PureButton)`
   }
 `;
 
-export const StyledTreeViewItemTitle = styled.span`
-  display: flex;
-  align-items: center;
+export const StyledTreeViewItemLine = styled.div`
   width: 100%;
-  padding: ${props => props.theme.padding.xs} ${props => props.theme.padding.sm};
-
+  padding: 0 ${props => props.theme.padding.xs};
+  
   border-radius: ${props => props.theme.radius};
-
+  
   &:hover {
     background-color: ${props => props.theme.color.default};
   }
+`;
+
+export const StyledTreeViewItemTitle = styled(Link)`
+  display: inline-flex;
+  align-items: center;
+
 `;
 
 export const StyledTreeViewItem = styled.li<StyledTreeViewItemProps>`
@@ -65,7 +69,7 @@ export const StyledTreeViewItem = styled.li<StyledTreeViewItemProps>`
   justify-content: flex-start;
   align-items: center;
   max-width: 100%;
-  margin: ${itemOuterGap} 0;
+  margin: 0;
 
   font-size: ${props => props.theme.font.size.lg};
 
@@ -83,54 +87,51 @@ export const StyledTreeViewItem = styled.li<StyledTreeViewItemProps>`
   ${props =>
     props.isAlternative &&
     css`
-      &:after {
-        content: '';
-        position: absolute;
-        left: -${parseFloat(buttonSizeSm) / 2}px;
-        height: calc(100% + ${2 * parseFloat(itemOuterGap)}px);
-
-        border-left: 1px solid ${props => props.theme.color.border};
-      }
-
-      &:before {
-        content: '';
-        position: absolute;
-        width: ${parseFloat(buttonSizeSm) / 2}px;
-        left: -${parseFloat(buttonSizeSm) / 2}px;
-        top: ${parseFloat(buttonSizeSm) / 2}px;
-
-        border-bottom: 1px solid ${props => props.theme.color.border};
-      }
-
-      &:first-child {
-        &:after {
-          top: ${parseFloat(buttonSizeSm) / 2}px;
-          height: calc(
-            100% - ${parseFloat(buttonSizeSm) / 2}px + ${itemOuterGap}
-          );
-        }
-      }
-
-      &:last-child {
-        &:after {
-          top: -${itemOuterGap};
-          height: calc(${parseFloat(buttonSizeSm) / 2}px + ${itemOuterGap});
-        }
-      }
-
       ${StyledTreeView} ${StyledTreeView} & {
-        &:first-child {
-          &:after {
-            top: 0;
-            height: calc(100% + ${2 * parseFloat(itemOuterGap)}px);
-          }
-        }
+        &:before {
+          content: '';
+          position: absolute;
 
-        &:last-child {
-          &:after {
-            top: -${itemOuterGap};
-            height: calc(${parseFloat(buttonSizeSm) / 2}px + ${itemOuterGap});
-          }
+          border-bottom: 1px dashed ${props => props.theme.color.border};
+        }
+      }
+    `}
+  
+  ${props =>
+    props.isAlternative &&
+    props.size === 'small' &&
+    css`
+      ${StyledTreeView} ${StyledTreeView} & {
+        &:before {
+          width: ${parseFloat(listGapSizeSm) / 2}px;
+          left: -${parseFloat(listGapSizeSm) / 2}px;
+          top: ${props => parseFloat(props.theme.height.sm) / 2}px;
+        }
+      }
+    `}
+  
+  ${props =>
+    props.isAlternative &&
+    props.size === 'medium' &&
+    css`
+      ${StyledTreeView} ${StyledTreeView} & {
+        &:before {
+          width: ${parseFloat(listGapSizeMd) / 2}px;
+          left: -${parseFloat(listGapSizeMd) / 2}px;
+          top: ${props => parseFloat(props.theme.height.md) / 2}px;
+        }
+      }
+    `}
+  
+  ${props =>
+    props.isAlternative &&
+    props.size === 'large' &&
+    css`
+      ${StyledTreeView} ${StyledTreeView} & {
+        &:before {
+          width: ${parseFloat(listGapSizeLg) / 2}px;
+          left: -${parseFloat(listGapSizeLg) / 2}px;
+          top: ${props => parseFloat(props.theme.height.lg) / 2}px;
         }
       }
     `}
@@ -139,42 +140,19 @@ export const StyledTreeViewItem = styled.li<StyledTreeViewItemProps>`
     ${props =>
       props.size === 'small' &&
       css`
-        min-height: ${buttonSizeSm};
+        min-height: ${props => props.theme.height.sm};
       `}
     
     ${props =>
       props.size === 'medium' &&
       css`
-        min-height: ${buttonSizeMd};
+        min-height: ${props => props.theme.height.md};
       `}
     
     ${props =>
       props.size === 'large' &&
       css`
-        min-height: ${buttonSizeLg};
-      `}
-  }
-  
-  ${StyledTreeViewButton} {
-    ${props =>
-      props.size === 'small' &&
-      css`
-        min-width: ${buttonSizeSm};
-        height: ${buttonSizeSm};
-      `}
-  
-    ${props =>
-      props.size === 'medium' &&
-      css`
-        min-width: ${buttonSizeMd};
-        height: ${buttonSizeMd};
-      `}
-    
-    ${props =>
-      props.size === 'large' &&
-      css`
-        min-width: ${buttonSizeLg};
-        height: ${buttonSizeLg};
+        min-height: ${props => props.theme.height.lg};
       `}
   }
 `;

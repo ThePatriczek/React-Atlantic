@@ -1,11 +1,15 @@
-import styled, { css, keyframes } from 'styled-components';
+import styled, { css } from 'styled-components';
 import { theme } from '../../theme';
-import { StyledTreeViewButton, StyledTreeViewItem } from './Item/Item.style';
+import { StyledTreeViewItem } from './Item/Item.style';
 
 export interface StyledTreeViewProps {
-  size?: string;
+  size: string;
   isAlternative?: boolean;
 }
+
+export const listGapSizeSm = '22px';
+export const listGapSizeMd = '32px';
+export const listGapSizeLg = '42px';
 
 export const StyledTreeView = styled.ul<StyledTreeViewProps>`
   display: flex;
@@ -17,29 +21,80 @@ export const StyledTreeView = styled.ul<StyledTreeViewProps>`
   width: 100%;
   max-width: 100%;
   
+  & & {
+    ${props =>
+      props.size === 'small' &&
+      css`
+        padding-left: ${listGapSizeSm};
+      `}
+    
+    ${props =>
+      props.size === 'medium' &&
+      css`
+        padding-left: ${listGapSizeMd};
+      `}
+    
+    ${props =>
+      props.size === 'large' &&
+      css`
+        padding-left: ${listGapSizeLg};
+      `}
+  }
+  
   ${props =>
     props.isAlternative &&
     css`
-      margin-left: ${props => props.theme.width.sm};
+      ${StyledTreeViewItem}:not(:last-child) ${StyledTreeView}:before {
+        bottom: 0;
+      }
+
+      & & {
+        &:before {
+          content: '';
+          position: absolute;
+          border-left: 1px dashed ${props => props.theme.color.border};
+        }
+      }
     `}
-
-  & & {
-    margin-left: ${props => props.theme.width.sm};
-    
-    ${StyledTreeViewItem} {
-      ${props =>
-        props.size === 'medium' &&
-        css`
-          margin-left: ${props => props.theme.width.md};
-        `}
-
-      ${props =>
-        props.size === 'large' &&
-        css`
-          margin-left: ${props => props.theme.width.lg};
-        `}
-    }
-  }
+  
+  ${props =>
+    props.isAlternative &&
+    props.size === 'small' &&
+    css`
+      & & {
+        &:before {
+          top: ${props => props.theme.height.sm};
+          bottom: ${props => parseFloat(props.theme.height.sm) / 2}px;
+          left: ${parseFloat(listGapSizeSm) / 2}px;
+        }
+      }
+    `}
+  
+  ${props =>
+    props.isAlternative &&
+    props.size === 'medium' &&
+    css`
+      & & {
+        &:before {
+          top: ${props => props.theme.height.md};
+          bottom: ${parseFloat(props.theme.height.md) / 2}px;
+          left: ${parseFloat(listGapSizeMd) / 2}px;
+        }
+      }
+    `}
+  
+  ${props =>
+    props.isAlternative &&
+    props.size === 'large' &&
+    css`
+      & & {
+        &:before {
+          top: ${props => props.theme.height.lg};
+          bottom: ${parseFloat(props.theme.height.lg) / 2}px;
+          left: ${parseFloat(listGapSizeLg) / 2}px;
+        }
+      }
+    `}
 `;
 
 StyledTreeView.defaultProps = {

@@ -5,10 +5,10 @@ import { StyledTreeView } from './TreeView.style';
 import {
   StyledTreeViewItemTitle,
   StyledTreeViewButton,
+  StyledTreeViewItemLine,
   StyledTreeViewItem,
   StyledTreeViewIcon
 } from './Item/Item.style';
-import { isA } from 'expect/build/jasmineUtils';
 
 const stories = storiesOf('Tree View', module);
 
@@ -16,7 +16,7 @@ stories.addDecorator(withKnobs);
 
 stories.add('Overview', () => {
   const treeSize = "small";
-  const isAlternative = true;
+  const isAlternative = false;
   const baseButtonIcon = 'arrowRight';
   const alternativeButtonIcon = 'hamburger';
   let iconName = baseButtonIcon;
@@ -28,54 +28,88 @@ stories.add('Overview', () => {
   return (
     <StyledTreeView size={treeSize} isAlternative={isAlternative}>
       <StyledTreeViewItem size={treeSize} isAlternative={isAlternative} isOpened>
-        <StyledTreeViewItemTitle>
-          <StyledTreeViewButton>
-            <StyledTreeViewIcon name={iconName} />
-          </StyledTreeViewButton>
-          Row 1
-        </StyledTreeViewItemTitle>
+        <StyledTreeViewItemLine>
+          <StyledTreeViewItemTitle>
+            <StyledTreeViewButton size={treeSize}>
+              <StyledTreeViewIcon name={iconName} />
+            </StyledTreeViewButton>
+              Row 1
+          </StyledTreeViewItemTitle>
+        </StyledTreeViewItemLine>
         <StyledTreeView>
           <StyledTreeViewItem size={treeSize} isAlternative={isAlternative}>
-            <StyledTreeViewItemTitle>
-              <StyledTreeViewButton>
-                <StyledTreeViewIcon name={iconName} />
-              </StyledTreeViewButton>
-              Row 1
-            </StyledTreeViewItemTitle>
+            <StyledTreeViewItemLine>
+              <StyledTreeViewItemTitle>
+                <StyledTreeViewButton size={treeSize}>
+                  <StyledTreeViewIcon name={iconName} />
+                </StyledTreeViewButton>
+                  Row 1
+              </StyledTreeViewItemTitle>
+            </StyledTreeViewItemLine>
+            <StyledTreeView>
+              <StyledTreeViewItem size={treeSize} isAlternative={isAlternative}>
+                <StyledTreeViewItemLine>
+                  <StyledTreeViewItemTitle>
+                    <StyledTreeViewButton size={treeSize}>
+                      <StyledTreeViewIcon name={iconName} />
+                    </StyledTreeViewButton>
+                      Row 1
+                  </StyledTreeViewItemTitle>
+                </StyledTreeViewItemLine>
+              </StyledTreeViewItem>
+              <StyledTreeViewItem size={treeSize} isAlternative={isAlternative}>
+                <StyledTreeViewItemLine>
+                  <StyledTreeViewItemTitle>
+                    <StyledTreeViewButton size={treeSize}>
+                      <StyledTreeViewIcon name={iconName} />
+                    </StyledTreeViewButton>
+                      Row 2
+                  </StyledTreeViewItemTitle>
+                </StyledTreeViewItemLine>
+              </StyledTreeViewItem>
+            </StyledTreeView>
           </StyledTreeViewItem>
         </StyledTreeView>
       </StyledTreeViewItem>
       <StyledTreeViewItem size={treeSize} isAlternative={isAlternative}>
-        <StyledTreeViewItemTitle>
-          <StyledTreeViewButton>
-            <StyledTreeViewIcon name={iconName} />
-          </StyledTreeViewButton>
-          Row 2
-        </StyledTreeViewItemTitle>
+        <StyledTreeViewItemLine>
+          <StyledTreeViewItemTitle>
+            <StyledTreeViewButton size={treeSize}>
+              <StyledTreeViewIcon name={iconName} />
+            </StyledTreeViewButton>
+              Row 2
+          </StyledTreeViewItemTitle>
+        </StyledTreeViewItemLine>
       </StyledTreeViewItem>
       <StyledTreeViewItem size={treeSize} isAlternative={isAlternative} isOpened>
-        <StyledTreeViewItemTitle>
-          <StyledTreeViewButton>
-            <StyledTreeViewIcon name={iconName} />
-          </StyledTreeViewButton>
-          Row 3
-        </StyledTreeViewItemTitle>
+        <StyledTreeViewItemLine>
+          <StyledTreeViewItemTitle>
+            <StyledTreeViewButton size={treeSize}>
+              <StyledTreeViewIcon name={iconName} />
+            </StyledTreeViewButton>
+              Row 3
+          </StyledTreeViewItemTitle>
+        </StyledTreeViewItemLine>
         <StyledTreeView>
           <StyledTreeViewItem size={treeSize} isAlternative={isAlternative}>
-            <StyledTreeViewItemTitle>
-              <StyledTreeViewButton>
-                <StyledTreeViewIcon name={iconName} />
-              </StyledTreeViewButton>
-              Row 1
-            </StyledTreeViewItemTitle>
+            <StyledTreeViewItemLine>
+              <StyledTreeViewItemTitle>
+                <StyledTreeViewButton size={treeSize}>
+                  <StyledTreeViewIcon name={iconName} />
+                </StyledTreeViewButton>
+                  Row 1
+              </StyledTreeViewItemTitle>
+            </StyledTreeViewItemLine>
           </StyledTreeViewItem>
           <StyledTreeViewItem size={treeSize} isAlternative={isAlternative}>
-            <StyledTreeViewItemTitle>
-              <StyledTreeViewButton>
-                <StyledTreeViewIcon name={iconName} />
-              </StyledTreeViewButton>
-              Row 2
-            </StyledTreeViewItemTitle>
+            <StyledTreeViewItemLine>
+              <StyledTreeViewItemTitle>
+                <StyledTreeViewButton size={treeSize}>
+                  <StyledTreeViewIcon name={iconName} />
+                </StyledTreeViewButton>
+                  Row 2
+              </StyledTreeViewItemTitle>
+            </StyledTreeViewItemLine>
           </StyledTreeViewItem>
         </StyledTreeView>
       </StyledTreeViewItem>
