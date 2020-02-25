@@ -1,14 +1,14 @@
 import styled, { css } from 'styled-components';
 import { Size } from '../../types';
+import { TabsProps } from './Tabs';
 
-interface StyledTabsContainerProps {
-  size: Size;
-}
+interface StyledTabsContainerProps extends TabsProps {}
 
 export const StyledTabsContainer = styled.div<StyledTabsContainerProps>``;
 
-interface StyledTabsBarProps extends StyledTabsContainerProps {
+interface StyledTabsBarProps {
   isAlternative: boolean;
+  size: Size;
 }
 
 export const StyledTabsBar = styled.div<StyledTabsBarProps>`
@@ -52,9 +52,10 @@ export const StyledTabsBar = styled.div<StyledTabsBarProps>`
   }};
 `;
 
-interface StyledTabsContentProps extends StyledTabsContainerProps {
+interface StyledTabsContentProps {
   isBordered: boolean;
   hasBackground?: boolean;
+  size: Size;
 }
 
 export const StyledTabsContent = styled.div<StyledTabsContentProps>`

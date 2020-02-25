@@ -37,7 +37,14 @@ export const Tabs: FC<Readonly<TabsProps>> = props => {
     isAlternative
   } = props;
   return (
-    <StyledTabsContainer className={className} size={size as Size} {...props}>
+    <StyledTabsContainer
+      className={className}
+      size={size as Size}
+      isAlternative={isAlternative}
+      isBordered={isBordered}
+      tabs={props.tabs}
+      activeTab={activeTab}
+    >
       <RadioGroupContextProvider onChange={onChange}>
         <TabsWithContext {...props}>{children}</TabsWithContext>
       </RadioGroupContextProvider>
