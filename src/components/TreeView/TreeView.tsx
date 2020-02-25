@@ -1,7 +1,7 @@
 import React, { FC, PropsWithChildren, ReactElement } from 'react';
 import { useComposition } from '../../hooks/useComposition';
 import { Item, ItemProps } from './Item';
-import { StyledTreeView } from './TreeView.style';
+import { StyledTreeView } from './style/TreeView.style';
 
 export interface TreeViewProps {}
 
@@ -16,13 +16,13 @@ export const TreeView: React.FC<PropsWithChildren<TreeViewProps>> & {
   );
 
   return (
-    <StyledTreeView>
+    <>
       {treeViewItems.map(
         (item: Readonly<JSX.Element>, index: Readonly<number>) => (
           <TreeView.Item key={index}>{item.props?.children}</TreeView.Item>
         )
       )}
-    </StyledTreeView>
+    </>
   );
 };
 
