@@ -1,4 +1,4 @@
-import React, { FC, PropsWithChildren } from 'react';
+import React, { FC, PropsWithChildren, useEffect } from 'react';
 import { SpringConfig } from 'react-spring/web.cjs';
 import { Size } from '../../types';
 import { Carousel } from '../Carousel';
@@ -27,15 +27,8 @@ export interface TabsProps extends GroupProps {
 }
 
 export const Tabs: FC<Readonly<TabsProps>> = props => {
-  const {
-    children,
-    className,
-    size,
-    onChange,
-    activeTab,
-    isBordered,
-    isAlternative
-  } = props;
+  const { children, className, size, onChange } = props;
+
   return (
     <StyledTabsContainer
       className={className}
@@ -61,8 +54,18 @@ const TabsWithContext: FC<PropsWithChildren<TabsProps>> = props => {
     size,
     animationConfig
   } = props;
-  const { value } = useRadioGroup();
+  const { value, setValue } = useRadioGroup();
   let tabs: TabProps[] = [];
+
+  useEffect(() => {
+    setValue(tabs?.[0].value);
+  }, []);
+
+  useEffect(() => {
+    if (activeTab !== undefined) {
+      setValue(activeTab);
+    }
+  }, [activeTab]);
 
   if (Array.isArray(props.tabs)) {
     tabs = props.tabs;
@@ -73,16 +76,17 @@ const TabsWithContext: FC<PropsWithChildren<TabsProps>> = props => {
   let activeSlide: number = 0;
   const slides: Readonly<JSX.Element[]> = tabs.map(
     (tab: Readonly<TabProps>, index: Readonly<number>) => {
-      if (tab.value === value || tab.value === props.activeTab) {
+      if (tab.value === value) {
         activeSlide = index;
       }
 
       const isActiveSlide: Readonly<boolean> = activeSlide === index;
+
       if (isActiveSlide) {
-        return <Carousel.Slide>{children}</Carousel.Slide>;
+        return <Carousel.Slide key={index}>{children}</Carousel.Slide>;
       }
 
-      return <Carousel.Slide />;
+      return <Carousel.Slide key={index} />;
     }
   );
 
@@ -103,7 +107,6 @@ const TabsWithContext: FC<PropsWithChildren<TabsProps>> = props => {
             value={item.value}
             label={item.label}
             isDisabled={item.isDisabled}
-            isActive={activeTab ? activeTab === item.value : undefined}
             isAlternative={!!isAlternative}
           />
         ))}
