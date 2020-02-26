@@ -2,6 +2,7 @@ import { withKnobs } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/react';
 import * as React from 'react';
 import { Typography } from './Typography';
+import { action } from '@storybook/addon-actions';
 
 const stories = storiesOf('Typography', module);
 
@@ -9,6 +10,8 @@ stories.addDecorator(withKnobs);
 
 stories.add('Overview', () => {
   const { Title, Paragraph, Text, Link } = Typography;
+  const onClick = action(`onClick`);
+
   return (
     <div>
       <div>
@@ -48,6 +51,9 @@ stories.add('Overview', () => {
         </div>
         <div>
           <Link href={`#`}>{`Link`}</Link>
+        </div>
+        <div>
+          <Link href={`#`} onClick={onClick}>{`Link onClick`}</Link>
         </div>
         <div>
           <Text isCopyable>{`Copyable Text`}</Text>
