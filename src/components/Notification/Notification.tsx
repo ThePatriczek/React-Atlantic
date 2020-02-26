@@ -1,4 +1,5 @@
 import React, { FC, PropsWithChildren } from 'react';
+import { useClick } from '../../hooks/EventHandlers/useClick';
 import { Size, Type } from '../../types';
 import { IconName } from '../Icon';
 import { Paragraph } from '../Typography/Paragraph';
@@ -7,7 +8,6 @@ import {
   StyledNotificationContainer,
   StyledNotificationContentContainer,
   StyledNotificationFooter,
-  StyledNotificationSpan,
   StyledNotificationTitle,
   StyledNotificationTitleContainer,
   StyledNotificationTitleIcon
@@ -25,7 +25,8 @@ export interface NotificationProps {
 export const Notification: FC<PropsWithChildren<NotificationProps>> = (
   props
 ): React.ReactElement => {
-  const { children, title, className, size, type, footer, onClose } = props;
+  const { children, title, className, size, type, footer } = props;
+  const { onClick } = useClick({ deps: [] });
 
   let titleIcon: IconName;
 
@@ -57,11 +58,9 @@ export const Notification: FC<PropsWithChildren<NotificationProps>> = (
           <StyledNotificationTitle type={type}>{title}</StyledNotificationTitle>
         )}
 
-        {onClose && (
-          <StyledNotificationCloseButton onClick={onClose}>
-            <StyledNotificationTitleIcon name={'close'} type={type} />
-          </StyledNotificationCloseButton>
-        )}
+        <StyledNotificationCloseButton onClick={onClick}>
+          <StyledNotificationTitleIcon name={'close'} type={type} />
+        </StyledNotificationCloseButton>
       </StyledNotificationTitleContainer>
 
       <StyledNotificationContentContainer type={type} size={size}>

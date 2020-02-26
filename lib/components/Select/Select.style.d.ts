@@ -5,11 +5,13 @@ interface SelectProps {
     isMulti?: boolean;
     hasValue?: boolean;
     isFullWidth?: boolean;
+    isAlternative?: boolean;
     isDisabled?: boolean;
     size?: Size;
 }
 export declare const SelectContainer: import("styled-components").StyledComponent<"div", any, SelectProps, never>;
 export declare const Control: import("styled-components").StyledComponent<"div", any, SelectProps, never>;
+export declare const SelectContainerWrapper: import("styled-components").StyledComponent<"span", any, any, never>;
 export declare const ValueContainer: import("styled-components").StyledComponent<"div", any, SelectProps, never>;
 export declare const SingleValue: import("styled-components").StyledComponent<"div", any, SelectProps, never>;
 export declare const MultiValue: import("styled-components").StyledComponent<"div", any, SelectProps, never>;

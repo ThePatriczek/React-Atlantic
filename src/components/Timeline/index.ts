@@ -1,2 +1,3 @@
-export * from './Timeline.style';
+export * from './Context';
+export * from './Item';
 export * from './Timeline';

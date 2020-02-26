@@ -1,11 +1,22 @@
 import styled, { css } from 'styled-components';
 import { theme } from '../../../theme';
+import { IconName } from '../../Icon';
 
-export const StyledTextAreaWrapper = styled.div<{
-  iconLeft: boolean;
-  iconRight: boolean;
-  isDisabled: boolean;
-}>`
+export interface StyledTextAreaProps {
+  isDisabled?: boolean;
+  placeholder?: string;
+  autoFocus?: boolean;
+  value?: string;
+  defaultValue?: string;
+  onChange?: (value: string) => void;
+  onEnterPress?: (value: string) => void;
+  onBlur?: () => void;
+  onFocus?: () => void;
+  iconLeft?: IconName;
+  iconRight?: IconName;
+}
+
+export const StyledTextAreaWrapper = styled.div<StyledTextAreaProps>`
   position: relative;
 
   ${props =>
@@ -116,8 +127,8 @@ export const StyledTextAreaIcon = styled.span<{
   height: auto;
   line-height: inherit;
   color: ${props => props.theme.color.text.beta};
-  
-  i{
+
+  i {
     color: ${props => props.theme.color.text.beta};
   }
 

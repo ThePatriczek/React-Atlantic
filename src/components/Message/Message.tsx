@@ -1,4 +1,5 @@
-import React, { FC, MouseEvent, PropsWithChildren, ReactElement } from 'react';
+import React, { FC, PropsWithChildren, ReactElement } from 'react';
+import { useClick } from '../../hooks/EventHandlers/useClick';
 import { Type } from '../../types';
 import { IconName } from '../Icon';
 import {
@@ -20,6 +21,11 @@ export const Message: FC<PropsWithChildren<MessageProps>> = (
   props
 ): ReactElement => {
   const { children, isLoading, isAlternative } = props;
+  const { onClick } = useClick({
+    deps: [props.onClick],
+    onClick: props.onClick
+  });
+
   let type = props.type;
 
   if (type === 'default') {
@@ -54,12 +60,6 @@ export const Message: FC<PropsWithChildren<MessageProps>> = (
         type={type}
       />
     );
-  };
-
-  const onClick = (e: MouseEvent<HTMLDivElement>) => {
-    if (props.onClick) {
-      props.onClick();
-    }
   };
 
   return (

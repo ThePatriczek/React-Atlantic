@@ -1,13 +1,13 @@
 import React, {
   FC,
   PropsWithChildren,
-  ReactChild,
   ReactElement,
   ReactNode,
   useEffect,
   useRef,
   useState
 } from 'react';
+import { useEventListener } from '../../../hooks/EventHandlers/useEventListener';
 import { Direction, Position, Size } from '../../../types';
 import { NotFound } from '../../NotFound';
 import { Option, OptionProps } from '../Option';
@@ -87,6 +87,20 @@ export const Transfer: FC<PropsWithChildren<TransferProps>> & {
   const ref = useRef<HTMLDivElement>(null);
   const isHalfOpen: boolean = checkedItems.length > 0;
 
+  const { onKeyDown } = useEventListener({
+    ref,
+    deps: [isOpen],
+    isOpen,
+    onMouseDown: () => {
+      setOpen(false);
+      setFocus(false);
+    },
+    onEscape: () => {
+      setOpen(false);
+      setFocus(false);
+    }
+  });
+
   useEffect(() => {
     if (defaultValue && !value) {
       const map: Map<string, boolean> = new Map(
@@ -127,11 +141,6 @@ export const Transfer: FC<PropsWithChildren<TransferProps>> & {
   }, [isDisabled]);
 
   useEffect(() => {
-    if (isOpen) {
-      window.addEventListener('mousedown', onMouseDown);
-      window.addEventListener('keydown', onKeyDown);
-    }
-
     ref.current && !isElementInViewport(ref.current)
       ? setPosition(getPositionOfElementInViewport(ref.current))
       : setPosition('unset');
@@ -160,26 +169,7 @@ export const Transfer: FC<PropsWithChildren<TransferProps>> & {
 
       setSearchedValue('');
     }
-
-    return () => {
-      window.removeEventListener('mousedown', onMouseDown);
-      window.removeEventListener('keydown', onKeyDown);
-    };
   }, [isOpen]);
-
-  const onMouseDown: EventListener = (e: Event) => {
-    if (!ref.current?.contains(e.target as Node)) {
-      setOpen(false);
-      setFocus(false);
-    }
-  };
-
-  const onKeyDown = (e: any) => {
-    if (e.key === 'Escape') {
-      setOpen(false);
-      setFocus(false);
-    }
-  };
 
   const onChange = (value: string, isChecked: boolean) => {
     if (!isDisabled) {

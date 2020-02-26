@@ -174,102 +174,57 @@ export const Input: React.FC<InputProps> & {
     />
   );
 
-  if (transferFocus && isAlternative && !isDisabled) {
-    return (
-      <StyledInputWrapperAlt
-        size={size as Size}
-        isFocused={transferFocus}
-        iconLeft={!!iconLeft}
-        iconRight={!!(iconRight || isLoading)}
-        hasValue={!!val}
-        isDisabled={isDisabled}
-        onClick={() => {
-          if (ref.current) {
-            ref.current.focus();
+  const AlternativeComponent = (
+    <StyledInputWrapperAlt
+      size={size as Size}
+      isFocused={transferFocus}
+      iconLeft={!!iconLeft}
+      iconRight={!!(iconRight || isLoading)}
+      hasValue={!!val}
+      isDisabled={isDisabled}
+      onClick={() => {
+        if (ref.current) {
+          ref.current.focus();
+        }
+      }}
+      className={className}
+      isFullWidth={isFullWidth}
+    >
+      {iconLeft || iconRight ? (
+        <StyledInputWrapper
+          size={size as Size}
+          isFocused={
+            typeof transferFocus !== 'undefined' ? transferFocus : isFocused
           }
-        }}
-        className={className}
-        isFullWidth={isFullWidth}
-      >
-        {iconLeft || iconRight ? (
-          <StyledInputWrapper
-            size={size as Size}
-            isFocused={transferFocus}
-            iconLeft={!!iconLeft}
-            iconRight={!!(iconRight || isLoading)}
-            isDisabled={isDisabled}
-            onClick={() => {
-              if (ref.current) {
-                ref.current.focus();
-              }
-            }}
-            isFullWidth={isFullWidth}
-          >
-            {iconLeft && <Icon name={iconLeft} />}
+          iconLeft={!!iconLeft}
+          iconRight={!!(iconRight || isLoading)}
+          isDisabled={isDisabled}
+          onClick={() => {
+            if (ref.current) {
+              ref.current.focus();
+            }
+          }}
+          isFullWidth={isFullWidth}
+        >
+          {iconLeft && <Icon name={iconLeft} />}
 
-            {Component}
+          {Component}
 
-            <label>{placeholder}</label>
-            {isLoading && <Icon name={'loading'} isRotating />}
-            {iconRight && !isLoading && <Icon name={iconRight} />}
-          </StyledInputWrapper>
-        ) : (
-          <>
-            {Component}
-            <label>{placeholder}</label>
-          </>
-        )}
-      </StyledInputWrapperAlt>
-    );
-  }
+          <label>{placeholder}</label>
+          {isLoading && <Icon name={'loading'} isRotating />}
+          {iconRight && !isLoading && <Icon name={iconRight} />}
+        </StyledInputWrapper>
+      ) : (
+        <>
+          {Component}
+          <label>{placeholder}</label>
+        </>
+      )}
+    </StyledInputWrapperAlt>
+  );
 
   if (isAlternative && !isDisabled) {
-    return (
-      <StyledInputWrapperAlt
-        size={size as Size}
-        isFocused={isFocused}
-        iconLeft={!!iconLeft}
-        iconRight={!!(iconRight || isLoading)}
-        hasValue={!!val}
-        isDisabled={isDisabled}
-        onClick={() => {
-          if (ref.current) {
-            ref.current.focus();
-          }
-        }}
-        className={className}
-        isFullWidth={isFullWidth}
-      >
-        {iconLeft || iconRight ? (
-          <StyledInputWrapper
-            size={size as Size}
-            isFocused={isFocused}
-            iconLeft={!!iconLeft}
-            iconRight={!!(iconRight || isLoading)}
-            isDisabled={isDisabled}
-            onClick={() => {
-              if (ref.current) {
-                ref.current.focus();
-              }
-            }}
-            isFullWidth={isFullWidth}
-          >
-            {iconLeft && <Icon name={iconLeft} />}
-
-            {Component}
-
-            <label>{placeholder}</label>
-            {isLoading && <Icon name={'loading'} isRotating />}
-            {iconRight && !isLoading && <Icon name={iconRight} />}
-          </StyledInputWrapper>
-        ) : (
-          <>
-            {Component}
-            <label>{placeholder}</label>
-          </>
-        )}
-      </StyledInputWrapperAlt>
-    );
+    return AlternativeComponent;
   }
 
   return (

@@ -1,4 +1,5 @@
 import React, { FC } from 'react';
+import { Size } from '../../../types';
 import {
   ButtonPaginationText,
   StyledNormalPaginationButton,
@@ -6,7 +7,6 @@ import {
 } from './ButtonList.style';
 import { ArrowButton } from './Parts/ArrowButton';
 import { ThreeDots } from './Parts/ThreeDots';
-import { Size } from '../../../types';
 
 interface ButtonListProps {
   count: number;
@@ -34,7 +34,7 @@ export const ButtonList: FC<ButtonListProps> = props => {
     textLeft,
     textRight,
     onChange,
-    size,
+    size
   } = props;
 
   const disabledMaxCondition: boolean =

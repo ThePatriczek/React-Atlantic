@@ -2,6 +2,7 @@ import * as easings from 'd3-ease';
 import * as React from 'react';
 import { useRef } from 'react';
 import { useChain, useSpring, useTrail } from 'react-spring/web.cjs';
+import { useClickChange } from '../../hooks/EventHandlers/useClickChange';
 import { CheckSimple } from '../../Icons';
 import { HorizontalPosition } from '../../types';
 import {
@@ -35,25 +36,14 @@ export const Checkbox: React.FC<React.PropsWithChildren<CheckboxProps>> = (
     className,
     children
   } = props;
-  const [isChecked, setChecked] = React.useState<boolean>(!!isDefaultChecked);
 
-  const onClick = (e: React.MouseEvent<HTMLLabelElement>) => {
-    e.preventDefault();
-    if (!isDisabled) {
-      if (props.isChecked === undefined) {
-        if (!isPartiallyChecked) {
-          setChecked(!isChecked);
-        }
-        if (props.onChange) {
-          props.onChange(!isChecked);
-        }
-      } else {
-        if (props.onChange) {
-          props.onChange(!props.isChecked);
-        }
-      }
-    }
-  };
+  const { onChangeClick, isChecked } = useClickChange({
+    isDisabled,
+    isDefaultChecked,
+    deps: [props.isChecked],
+    isChecked: props.isChecked,
+    onChange: props.onChange
+  });
 
   const springRef = useRef(null);
   const springProps = useSpring({
@@ -78,7 +68,7 @@ export const Checkbox: React.FC<React.PropsWithChildren<CheckboxProps>> = (
 
   return (
     <StyledCheckboxLabel
-      onClick={onClick}
+      onClick={e => onChangeClick(e, isPartiallyChecked)}
       isChecked={props.isChecked || isChecked}
       isDisabled={isDisabled}
       className={className}

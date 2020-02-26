@@ -1,15 +1,17 @@
 import { Size } from '../../types';
-interface StyledTabsContainerProps {
-    size: Size;
+import { TabsProps } from './Tabs';
+interface StyledTabsContainerProps extends TabsProps {
 }
 export declare const StyledTabsContainer: import("styled-components").StyledComponent<"div", any, StyledTabsContainerProps, never>;
-interface StyledTabsBarProps extends StyledTabsContainerProps {
+interface StyledTabsBarProps {
     isAlternative: boolean;
+    size: Size;
 }
 export declare const StyledTabsBar: import("styled-components").StyledComponent<"div", any, StyledTabsBarProps, never>;
-interface StyledTabsContentProps extends StyledTabsContainerProps {
+interface StyledTabsContentProps {
     isBordered: boolean;
     hasBackground?: boolean;
+    size: Size;
 }
 export declare const StyledTabsContent: import("styled-components").StyledComponent<"div", any, StyledTabsContentProps, never>;
 export {};

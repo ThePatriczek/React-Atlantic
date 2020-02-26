@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
+import { Size } from '../../../../../types';
 import { Icon, IconName } from '../../../../Icon';
 import { StyledPaginationButton } from '../../ButtonList.style';
-import { Size } from '../../../../../types';
 
 interface ArrowButtonProps {
   visible: boolean;

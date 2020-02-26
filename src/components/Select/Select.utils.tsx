@@ -70,8 +70,8 @@ export const isElementInViewport = (el: Element): boolean => {
     bounding.top > 0 &&
     bounding.left > 0 &&
     bounding.bottom <
-      (window.innerHeight || document.documentElement.clientHeight) &&
-    bounding.right < (window.innerWidth || document.documentElement.clientWidth)
+      (window?.innerHeight || document.documentElement.clientHeight) &&
+    bounding.right < (window?.innerWidth || document.documentElement.clientWidth)
   );
 };
 
@@ -90,13 +90,13 @@ export const getPositionOfElementInViewport = (
 
   if (
     bounding.bottom >
-    (window.innerHeight || document.documentElement.clientHeight)
+    (window?.innerHeight || document.documentElement.clientHeight)
   ) {
     return 'bottom';
   }
 
   if (
-    bounding.right > (window.innerWidth || document.documentElement.clientWidth)
+    bounding.right > (window?.innerWidth || document.documentElement.clientWidth)
   ) {
     return 'right';
   }

@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useClick } from '../../../hooks/EventHandlers/useClick';
 import { StyledLink } from './Link.style';
 
 export interface LinkProps {
@@ -13,13 +14,10 @@ export const Link: React.FC<React.PropsWithChildren<LinkProps>> = (
   props: React.PropsWithChildren<LinkProps>
 ): React.ReactElement => {
   const { children, href, target, className } = props;
-
-  const onClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    if (props.onClick) {
-      e.preventDefault();
-      props.onClick();
-    }
-  };
+  const { onClick } = useClick({
+    deps: [props.onClick],
+    onClick: props.onClick
+  });
 
   return (
     <StyledLink

@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useClick } from '../../hooks/EventHandlers/useClick';
 import { Size, Type } from '../../types';
 import { StyledButton } from './Button.style';
 
@@ -35,12 +36,14 @@ export const Button: React.FC<React.PropsWithChildren<ButtonProps>> = (
   } = props;
   const [animation, setAnimation] = React.useState<boolean>(false);
 
+  const { onClick: hookOnClick } = useClick({
+    deps: [props.onClick],
+    onClick: props.onClick
+  });
+
   const onClick = () => {
     setAnimation(true);
-
-    if (props.onClick) {
-      props.onClick();
-    }
+    hookOnClick();
   };
 
   return (

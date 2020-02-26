@@ -1,14 +1,9 @@
-import React, {
-  ChangeEvent,
-  FC,
-  PropsWithChildren,
-  ReactElement,
-  useState
-} from 'react';
+import React, { FC, PropsWithChildren, ReactElement } from 'react';
 import { Size } from '../../../types';
 import { useRadioGroup } from '../Context';
 import { RadioProps } from '../Radio';
 
+import { useClickChange } from '../../../hooks/EventHandlers/useClickChange';
 import {
   StyledRadioButtonInputHidden,
   StyledRadioButtonLabel,
@@ -31,28 +26,25 @@ export const Button: FC<PropsWithChildren<ButtonProps>> = (
     size
   } = props;
   const { value: ctxVal, setValue: setCtxVal } = useRadioGroup();
-  const [isChecked, setChecked] = useState<boolean>(!!isDefaultChecked);
+  const { onChangeClick: hookOnChange, isChecked } = useClickChange({
+    isDisabled,
+    isDefaultChecked,
+    deps: [props.isChecked],
+    isChecked: props.isChecked,
+    onChange: props.onChange
+  });
 
-  const onChange = (e: ChangeEvent<HTMLInputElement>) => {
+  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    hookOnChange(e);
+
     if (!isDisabled) {
-      if (props.isChecked === undefined) {
-        setChecked(e.target.checked);
-        if (props.onChange) {
-          props.onChange(!isChecked);
-        }
-      } else {
-        if (props.onChange) {
-          props.onChange(!props.isChecked);
-        }
-      }
-
       if (value !== undefined) {
         setCtxVal(value);
       }
     }
   };
 
-  let checked: boolean = props.isChecked || isChecked;
+  let checked: boolean | undefined = props.isChecked || isChecked;
 
   if (ctxVal !== undefined) {
     checked = ctxVal === value;

@@ -19,15 +19,10 @@ export declare const defaultValues: {
     iconRight: boolean;
     iconLeft: boolean;
     isBordered: boolean;
-    tabs: ({
+    tabs: {
         value: string;
         label: string;
-        isDisabled?: undefined;
-    } | {
-        value: string;
-        label: string;
-        isDisabled: boolean;
-    })[];
+    }[];
     className: string;
     direction: string;
     selectDefaultValueOne: string;
@@ -72,6 +67,8 @@ export declare const defaultValues: {
     height: number;
     pageSizeOptions: number[];
     total: number;
+    index: number;
     sortBy: string;
     order: string;
+    dumbText: string;
 };

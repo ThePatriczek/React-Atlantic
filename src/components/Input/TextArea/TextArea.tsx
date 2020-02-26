@@ -1,6 +1,12 @@
 import * as React from 'react';
+import { useFocus } from '../../../hooks/EventHandlers/useFocus';
+import { useKeyboardChange } from '../../../hooks/EventHandlers/useKeyboardChange';
 import { Icon, IconName } from '../../Icon';
-import { StyledTextArea, StyledTextAreaIcon, StyledTextAreaWrapper } from './TextArea.style';
+import {
+  StyledTextArea,
+  StyledTextAreaIcon,
+  StyledTextAreaWrapper
+} from './TextArea.style';
 
 export interface TextAreaProps {
   isDisabled?: boolean;
@@ -29,62 +35,35 @@ export const TextArea: React.FC<TextAreaProps> = (
     iconRight
   } = props;
 
-  const [value, setValue] = React.useState<string>(defaultValue || ``);
-
-  const onChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    const val: string = e.target.value;
-
-    if (!isDisabled) {
-      if (props.value === undefined) {
-        setValue(val);
-
-        if (props.onChange) {
-          props.onChange(val);
-        }
-      } else {
-        if (props.onChange) {
-          props.onChange(val);
-        }
-      }
-    }
-  };
-
-  const onKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
-    if (onEnterPress) {
-      if (e.key === `Enter`) {
-        e.preventDefault();
-        onEnterPress(e.currentTarget.value);
-      }
-    }
-  };
-
-  const onBlur = (e: React.FocusEvent<HTMLTextAreaElement>) => {
-    if (props.onBlur) {
-      props.onBlur();
-    }
-  };
-
-  const onFocus = (e: React.FocusEvent<HTMLTextAreaElement>) => {
-    if (props.onFocus) {
-      props.onFocus();
-    }
-  };
+  const { onKeyDownTextArea, onChangeInput, value } = useKeyboardChange({
+    isDisabled,
+    defaultValue,
+    deps: [props.value],
+    onChange: props.onChange,
+    value: props.value
+  });
+  const { onFocus, onBlur } = useFocus();
 
   const val = props.value !== undefined ? props.value : value;
+
   return (
     <StyledTextAreaWrapper
-      iconLeft={!!iconLeft}
-      iconRight={!!iconRight}
-      isDisabled={!!isDisabled}
+      iconLeft={iconLeft}
+      iconRight={iconRight}
+      isDisabled={isDisabled}
+      placeholder={placeholder}
+      value={val as string}
+      defaultValue={defaultValue}
+      autoFocus={autoFocus}
     >
       <StyledTextArea
         placeholder={placeholder}
-        value={val}
-        onChange={onChange}
+        value={val as string}
+        onChange={onChangeInput}
         disabled={isDisabled}
-        onKeyDown={onKeyDown}
-        onBlur={onBlur}
-        onFocus={onFocus}
+        onKeyDown={e => onKeyDownTextArea(e, onEnterPress)}
+        onBlur={e => onBlur(e, props.onBlur)}
+        onFocus={e => onFocus(e, props.onFocus)}
         autoFocus={autoFocus}
       />
 
