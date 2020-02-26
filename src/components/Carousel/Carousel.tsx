@@ -57,10 +57,7 @@ export const Carousel: FC<Readonly<CarouselProps>> & {
 } = (props): Readonly<ReactElement> => {
   const { getFilteredChildren } = useComposition();
   const { autoHeight, ref, defaultSlide, auto, onSlideChange } = props;
-  const children = useMemo(
-    () => getFilteredChildren(props.children, Slide.displayName),
-    [props.children]
-  );
+  const children = getFilteredChildren(props.children, Slide.displayName);
 
   const elements: HTMLDivElement[] = [];
   const width: Readonly<number> = useMemo(() => {
@@ -73,18 +70,21 @@ export const Carousel: FC<Readonly<CarouselProps>> & {
   );
   const [springs, setSprings] = useSprings(children?.length, i => ({
     offset: i,
-    opacity: 0,
+    opacity: 1,
     display: `block`,
     touchAction: `auto`,
     config: props.springConfig || defaultConfig,
     immediate: false
   }));
 
-  const setSlider = useCallback((directionRight: Readonly<boolean> = true) => {
-    setSlide(state =>
-      clamp(state + (directionRight ? +1 : -1), 0, children.length - 1)
-    );
-  }, []);
+  const setSlider = useCallback(
+    (directionRight: Readonly<boolean> = true) => {
+      setSlide(state =>
+        clamp(state + (directionRight ? +1 : -1), 0, children.length - 1)
+      );
+    },
+    [children]
+  );
 
   const gesture:
     | (() => HookReturnType<UseDragConfig>)
@@ -97,6 +97,12 @@ export const Carousel: FC<Readonly<CarouselProps>> & {
   );
 
   useEffect(() => {
+    if (slide < 0 || slide >= children?.length) {
+      setSlide(clamp(slide, 0, children.length - 1));
+    }
+  }, [children]);
+
+  useEffect(() => {
     if (props.activeSlide || props.activeSlide === 0) {
       setSlide(clamp(props.activeSlide, 0, children?.length));
     }
@@ -104,7 +110,7 @@ export const Carousel: FC<Readonly<CarouselProps>> & {
 
   useEffect(() => {
     onSlideChange?.(slide);
-  }, [slide, onSlideChange]);
+  }, [slide]);
 
   useEffect(() => {
     setSprings(i => {
