@@ -23,31 +23,31 @@ export const useEventListener = (
   useEffect(() => {
     if (props.ref?.current) {
       if (props.onMouseDown) {
-        window.addEventListener('mousedown', onMouseDown);
+        window?.addEventListener('mousedown', onMouseDown);
       }
       if (props.onKeyDown) {
-        window.addEventListener('keydown', onKeyDown);
+        window?.addEventListener('keydown', onKeyDown);
       }
       if (props.onEnter) {
-        window.addEventListener('keydown', onEnter);
+        window?.addEventListener('keydown', onEnter);
       }
       if (props.onEscape) {
-        window.addEventListener('keydown', onEscape);
+        window?.addEventListener('keydown', onEscape);
       }
     }
 
     return () => {
       if (props.onMouseDown) {
-        window.removeEventListener('mousedown', onMouseDown);
+        window?.removeEventListener('mousedown', onMouseDown);
       }
       if (props.onKeyDown) {
-        window.removeEventListener('keydown', onKeyDown);
+        window?.removeEventListener('keydown', onKeyDown);
       }
       if (props.onEnter) {
-        window.removeEventListener('keydown', onEnter);
+        window?.removeEventListener('keydown', onEnter);
       }
       if (props.onEscape) {
-        window.removeEventListener('keydown', onEscape);
+        window?.removeEventListener('keydown', onEscape);
       }
     };
   }, [props.deps]);

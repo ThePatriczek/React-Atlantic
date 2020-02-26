@@ -27,7 +27,15 @@ export interface TabsProps extends GroupProps {
 }
 
 export const Tabs: FC<Readonly<TabsProps>> = props => {
-  const { children, className, size, onChange } = props;
+  const {
+    children,
+    className,
+    size,
+    onChange,
+    isBordered,
+    isAlternative,
+    activeTab
+  } = props;
 
   return (
     <StyledTabsContainer

@@ -112,25 +112,32 @@ export const DeviceProvider: FC<Readonly<
   const getCurrentDeviceMemoized = useCallback(getCurrentDevice, []);
 
   useLayoutEffect(() => {
-    window.onresize = debounce(onResize, 50);
-    onResize();
+    if (window) {
+      window.onresize = debounce(onResize, 50);
+      onResize();
 
-    return () => {
-      window.onresize = null;
-    };
+      return () => {
+        window.onresize = null;
+      };
+    }
+
+    return () => null;
   }, []);
 
   const onResize: () => void = () => {
-    const device = getCurrentDeviceMemoized(window.innerWidth);
-    setCurrentDevice(device);
+    if (window) {
+      const device = getCurrentDeviceMemoized(window.innerWidth);
+      setCurrentDevice(device);
+    }
   };
 
   const isTouchable: Readonly<boolean> =
+    window &&
+    currentDevice !== 'laptop' &&
+    currentDevice !== 'desktop' &&
     ('ontouchstart' in window ||
       navigator.maxTouchPoints > 0 ||
-      navigator.msMaxTouchPoints > 0) &&
-    currentDevice !== 'laptop' &&
-    currentDevice !== 'desktop';
+      navigator.msMaxTouchPoints > 0);
 
   return (
     <DeviceContext.Provider

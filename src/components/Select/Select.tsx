@@ -105,10 +105,10 @@ export const Select: React.FC<React.PropsWithChildren<SelectProps>> & {
   const ref = useRef<any>();
 
   useEffect(() => {
-    window.addEventListener('mousedown', onMouseDown);
+    window?.addEventListener('mousedown', onMouseDown);
 
     return () => {
-      window.removeEventListener('mousedown', onMouseDown);
+      window?.removeEventListener('mousedown', onMouseDown);
     };
   }, [isFocused]);
 
