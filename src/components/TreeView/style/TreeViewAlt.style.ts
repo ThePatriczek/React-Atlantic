@@ -1,23 +1,9 @@
 import styled, { css } from 'styled-components';
-import { StyledTreeViewItemAlt } from '../Item/style/ItemAlt.style';
-import { StyledTreeView } from './TreeView.style';
+import { StyledTreeViewItemShared } from '../Item/style/ItemShared.styled';
 import { StyledTreeViewShared } from './TreeViewShared.style';
 import { listGapSizeLg, listGapSizeMd, listGapSizeSm } from './variables';
 
 export const StyledTreeViewAlt = styled(StyledTreeViewShared)`
-  ${StyledTreeViewItemAlt}:not(:last-child) ${StyledTreeView}:before {
-    bottom: 0;
-  }
-  
-  & & {
-    &:before {
-      content: '';
-      position: absolute;
-
-      border-left: 1px dashed ${props => props.theme.color.border};
-    }
-  }
-    
   ${props =>
     props.size === 'small' &&
     css`

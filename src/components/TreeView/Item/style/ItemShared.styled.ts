@@ -6,7 +6,6 @@ import { Text } from '../../../Typography/Text';
 export interface StyledTreeViewItemSharedProps {
   size: string;
   isOpened?: boolean;
-  isAlternative?: boolean;
 }
 
 export const StyledTreeViewIconShared = styled(Icon)``;

@@ -9,7 +9,10 @@ import {
   StyledTreeViewItem,
   StyledTreeViewIcon
 } from './Item/style/Item.style';
-import { StyledTreeViewItemAlt } from './Item/style/ItemAlt.style';
+import {
+  StyledTreeViewItemAlt,
+  StyledTreeViewItemAltNoChilds
+} from './Item/style/ItemAlt.style';
 
 const stories = storiesOf('Tree View', module);
 
@@ -132,7 +135,7 @@ stories.add('Overview', () => {
                 </StyledTreeViewItemTitle>
               </StyledTreeViewItemLine>
               <StyledTreeViewAlt>
-                <StyledTreeViewItemAlt size={treeSize}>
+                <StyledTreeViewItemAltNoChilds size={treeSize}>
                   <StyledTreeViewItemLine>
                     <StyledTreeViewItemTitle>
                       <StyledTreeViewButton size={treeSize}>
@@ -141,8 +144,8 @@ stories.add('Overview', () => {
                       Row 1
                     </StyledTreeViewItemTitle>
                   </StyledTreeViewItemLine>
-                </StyledTreeViewItemAlt>
-                <StyledTreeViewItemAlt size={treeSize}>
+                </StyledTreeViewItemAltNoChilds>
+                <StyledTreeViewItemAltNoChilds size={treeSize}>
                   <StyledTreeViewItemLine>
                     <StyledTreeViewItemTitle>
                       <StyledTreeViewButton size={treeSize}>
@@ -151,7 +154,7 @@ stories.add('Overview', () => {
                       Row 2
                     </StyledTreeViewItemTitle>
                   </StyledTreeViewItemLine>
-                </StyledTreeViewItemAlt>
+                </StyledTreeViewItemAltNoChilds>
               </StyledTreeViewAlt>
             </StyledTreeViewItemAlt>
           </StyledTreeViewAlt>
@@ -176,7 +179,7 @@ stories.add('Overview', () => {
             </StyledTreeViewItemTitle>
           </StyledTreeViewItemLine>
           <StyledTreeViewAlt>
-            <StyledTreeViewItemAlt size={treeSize}>
+            <StyledTreeViewItemAltNoChilds size={treeSize}>
               <StyledTreeViewItemLine>
                 <StyledTreeViewItemTitle>
                   <StyledTreeViewButton size={treeSize}>
@@ -185,8 +188,8 @@ stories.add('Overview', () => {
                   Row 1
                 </StyledTreeViewItemTitle>
               </StyledTreeViewItemLine>
-            </StyledTreeViewItemAlt>
-            <StyledTreeViewItemAlt size={treeSize}>
+            </StyledTreeViewItemAltNoChilds>
+            <StyledTreeViewItemAltNoChilds size={treeSize}>
               <StyledTreeViewItemLine>
                 <StyledTreeViewItemTitle>
                   <StyledTreeViewButton size={treeSize}>
@@ -195,7 +198,7 @@ stories.add('Overview', () => {
                   Row 2
                 </StyledTreeViewItemTitle>
               </StyledTreeViewItemLine>
-            </StyledTreeViewItemAlt>
+            </StyledTreeViewItemAltNoChilds>
           </StyledTreeViewAlt>
         </StyledTreeViewItemAlt>
       </StyledTreeViewAlt>
