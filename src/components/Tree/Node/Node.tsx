@@ -90,9 +90,9 @@ export const Node: FC<Readonly<
   return (
     <>
       <TreeNode size={size} isOpened={isOpen}>
-        <TreeNodeContent>
+          <TreeNodeContent isLeftShift={!hasChildren}>
           {hasChildren && (
-            <TreeButton onClick={onClick}>
+            <TreeButton onClick={onClick} size={size}>
               <TreeIcon name={(isOpen ? iconClose : iconOpen) as IconName} />
             </TreeButton>
           )}

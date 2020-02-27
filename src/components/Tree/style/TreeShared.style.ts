@@ -20,19 +20,19 @@ export const StyledTreeShared = styled.ul<StyledTreeProps>`
     ${props =>
       props.size === 'small' &&
       css`
-        padding-left: ${listGapSizeSm};
+        margin-left: ${listGapSizeSm};
       `}
     
     ${props =>
       props.size === 'medium' &&
       css`
-        padding-left: ${listGapSizeMd};
+        margin-left: ${listGapSizeMd};
       `}
     
     ${props =>
       props.size === 'large' &&
       css`
-        padding-left: ${listGapSizeLg};
+        margin-left: ${listGapSizeLg};
       `}
   }
 `;

@@ -22,6 +22,7 @@ stories.add('Playground', () => {
     <>
       <Tree
         isAlternative={isAlternative}
+        size={'medium'}
         nodes={[
           <Tree.Node>
             <Text>{`Node 1`}</Text>
