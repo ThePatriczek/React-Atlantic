@@ -8,22 +8,22 @@ import {
 import {
   StyledTreeButtonShared,
   StyledTreeIconShared,
-  StyledTreeItemLineShared,
-  StyledTreeItemShared,
-  StyledTreeItemTitleShared
-} from './ItemShared.styled';
+  StyledTreeNodeLineShared,
+  StyledTreeNodeShared,
+  StyledTreeNodeTitleShared
+} from './NodeShared.styled';
 
 export const StyledTreeIconAlt = styled(StyledTreeIconShared)``;
 
 export const StyledTreeButtonAlt = styled(StyledTreeButtonShared)``;
 
-export const StyledTreeItemLineAlt = styled(StyledTreeItemLineShared)``;
+export const StyledTreeNodeLineAlt = styled(StyledTreeNodeLineShared)``;
 
-export const StyledTreeItemTitleAlt = styled(
-  StyledTreeItemTitleShared
+export const StyledTreeNodeTitleAlt = styled(
+  StyledTreeNodeTitleShared
 )``;
 
-export const StyledTreeItemAlt = styled(StyledTreeItemShared)`  
+export const StyledTreeNodeAlt = styled(StyledTreeNodeShared)`  
   ${StyledTreeAlt} ${StyledTreeAlt} & {
     &:before {
       content: '';
@@ -97,7 +97,7 @@ export const StyledTreeItemAlt = styled(StyledTreeItemShared)`
     `}
 `;
 
-export const StyledTreeItemAltNoChilds = styled(StyledTreeItemAlt)`
+export const StyledTreeNodeAltNoChilds = styled(StyledTreeNodeAlt)`
   &:last-child {
     &:before {
       bottom: auto;

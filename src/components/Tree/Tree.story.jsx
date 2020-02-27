@@ -3,16 +3,16 @@ import { storiesOf } from '@storybook/react';
 import * as React from 'react';
 import { StyledTree, StyledTreeAlt } from './style';
 import {
-  StyledTreeItemTitle,
+  StyledTreeNodeTitle,
   StyledTreeButton,
-  StyledTreeItemLine,
-  StyledTreeItem,
+  StyledTreeNodeLine,
+  StyledTreeNode,
   StyledTreeIcon
-} from './Item/style/Item.style';
+} from './Node/style/Node.style';
 import {
-  StyledTreeItemAlt,
-  StyledTreeItemAltNoChilds
-} from './Item/style/ItemAlt.style';
+  StyledTreeNodeAlt,
+  StyledTreeNodeAltNoChilds
+} from './Node/style/NodeAlt.style';
 
 const stories = storiesOf('Tree', module);
 
@@ -26,181 +26,181 @@ stories.add('Overview', () => {
   return (
     <>
       <StyledTree size={treeSize}>
-        <StyledTreeItem size={treeSize} isOpened>
-          <StyledTreeItemLine>
-            <StyledTreeItemTitle>
+        <StyledTreeNode size={treeSize} isOpened>
+          <StyledTreeNodeLine>
+            <StyledTreeNodeTitle>
               <StyledTreeButton size={treeSize}>
                 <StyledTreeIcon name={buttonIcon} />
               </StyledTreeButton>
               Row 1
-            </StyledTreeItemTitle>
-          </StyledTreeItemLine>
+            </StyledTreeNodeTitle>
+          </StyledTreeNodeLine>
           <StyledTree>
-            <StyledTreeItem size={treeSize} isOpened>
-              <StyledTreeItemLine>
-                <StyledTreeItemTitle>
+            <StyledTreeNode size={treeSize} isOpened>
+              <StyledTreeNodeLine>
+                <StyledTreeNodeTitle>
                   <StyledTreeButton size={treeSize}>
                     <StyledTreeIcon name={buttonIcon} />
                   </StyledTreeButton>
                   Row 1
-                </StyledTreeItemTitle>
-              </StyledTreeItemLine>
+                </StyledTreeNodeTitle>
+              </StyledTreeNodeLine>
               <StyledTree>
-                <StyledTreeItem size={treeSize}>
-                  <StyledTreeItemLine>
-                    <StyledTreeItemTitle>
+                <StyledTreeNode size={treeSize}>
+                  <StyledTreeNodeLine>
+                    <StyledTreeNodeTitle>
                       <StyledTreeButton size={treeSize}>
                         <StyledTreeIcon name={buttonIcon} />
                       </StyledTreeButton>
                       Row 1
-                    </StyledTreeItemTitle>
-                  </StyledTreeItemLine>
-                </StyledTreeItem>
-                <StyledTreeItem size={treeSize}>
-                  <StyledTreeItemLine>
-                    <StyledTreeItemTitle>
+                    </StyledTreeNodeTitle>
+                  </StyledTreeNodeLine>
+                </StyledTreeNode>
+                <StyledTreeNode size={treeSize}>
+                  <StyledTreeNodeLine>
+                    <StyledTreeNodeTitle>
                       <StyledTreeButton size={treeSize}>
                         <StyledTreeIcon name={buttonIcon} />
                       </StyledTreeButton>
                       Row 2
-                    </StyledTreeItemTitle>
-                  </StyledTreeItemLine>
-                </StyledTreeItem>
+                    </StyledTreeNodeTitle>
+                  </StyledTreeNodeLine>
+                </StyledTreeNode>
               </StyledTree>
-            </StyledTreeItem>
+            </StyledTreeNode>
           </StyledTree>
-        </StyledTreeItem>
-        <StyledTreeItem size={treeSize}>
-          <StyledTreeItemLine>
-            <StyledTreeItemTitle>
+        </StyledTreeNode>
+        <StyledTreeNode size={treeSize}>
+          <StyledTreeNodeLine>
+            <StyledTreeNodeTitle>
               <StyledTreeButton size={treeSize}>
                 <StyledTreeIcon name={buttonIcon} />
               </StyledTreeButton>
               Row 2
-            </StyledTreeItemTitle>
-          </StyledTreeItemLine>
-        </StyledTreeItem>
-        <StyledTreeItem size={treeSize} isOpened>
-          <StyledTreeItemLine>
-            <StyledTreeItemTitle>
+            </StyledTreeNodeTitle>
+          </StyledTreeNodeLine>
+        </StyledTreeNode>
+        <StyledTreeNode size={treeSize} isOpened>
+          <StyledTreeNodeLine>
+            <StyledTreeNodeTitle>
               <StyledTreeButton size={treeSize}>
                 <StyledTreeIcon name={buttonIcon} />
               </StyledTreeButton>
               Row 3
-            </StyledTreeItemTitle>
-          </StyledTreeItemLine>
+            </StyledTreeNodeTitle>
+          </StyledTreeNodeLine>
           <StyledTree>
-            <StyledTreeItem size={treeSize}>
-              <StyledTreeItemLine>
-                <StyledTreeItemTitle>
+            <StyledTreeNode size={treeSize}>
+              <StyledTreeNodeLine>
+                <StyledTreeNodeTitle>
                   <StyledTreeButton size={treeSize}>
                     <StyledTreeIcon name={buttonIcon} />
                   </StyledTreeButton>
                   Row 1
-                </StyledTreeItemTitle>
-              </StyledTreeItemLine>
-            </StyledTreeItem>
-            <StyledTreeItem size={treeSize}>
-              <StyledTreeItemLine>
-                <StyledTreeItemTitle>
+                </StyledTreeNodeTitle>
+              </StyledTreeNodeLine>
+            </StyledTreeNode>
+            <StyledTreeNode size={treeSize}>
+              <StyledTreeNodeLine>
+                <StyledTreeNodeTitle>
                   <StyledTreeButton size={treeSize}>
                     <StyledTreeIcon name={buttonIcon} />
                   </StyledTreeButton>
                   Row 2
-                </StyledTreeItemTitle>
-              </StyledTreeItemLine>
-            </StyledTreeItem>
+                </StyledTreeNodeTitle>
+              </StyledTreeNodeLine>
+            </StyledTreeNode>
           </StyledTree>
-        </StyledTreeItem>
+        </StyledTreeNode>
       </StyledTree>
 
       <StyledTreeAlt size={treeSize}>
-        <StyledTreeItemAlt size={treeSize} isOpened>
-          <StyledTreeItemLine>
-            <StyledTreeItemTitle>
+        <StyledTreeNodeAlt size={treeSize} isOpened>
+          <StyledTreeNodeLine>
+            <StyledTreeNodeTitle>
               <StyledTreeButton size={treeSize}>
                 <StyledTreeIcon name={buttonIconAlt} />
               </StyledTreeButton>
               Row 1
-            </StyledTreeItemTitle>
-          </StyledTreeItemLine>
+            </StyledTreeNodeTitle>
+          </StyledTreeNodeLine>
           <StyledTreeAlt>
-            <StyledTreeItemAlt size={treeSize}>
-              <StyledTreeItemLine>
-                <StyledTreeItemTitle>
+            <StyledTreeNodeAlt size={treeSize}>
+              <StyledTreeNodeLine>
+                <StyledTreeNodeTitle>
                   <StyledTreeButton size={treeSize}>
                     <StyledTreeIcon name={buttonIconAlt} />
                   </StyledTreeButton>
                   Row 1
-                </StyledTreeItemTitle>
-              </StyledTreeItemLine>
+                </StyledTreeNodeTitle>
+              </StyledTreeNodeLine>
               <StyledTreeAlt>
-                <StyledTreeItemAltNoChilds size={treeSize}>
-                  <StyledTreeItemLine>
-                    <StyledTreeItemTitle>
+                <StyledTreeNodeAltNoChilds size={treeSize}>
+                  <StyledTreeNodeLine>
+                    <StyledTreeNodeTitle>
                       <StyledTreeButton size={treeSize}>
                         <StyledTreeIcon name={buttonIconAlt} />
                       </StyledTreeButton>
                       Row 1
-                    </StyledTreeItemTitle>
-                  </StyledTreeItemLine>
-                </StyledTreeItemAltNoChilds>
-                <StyledTreeItemAltNoChilds size={treeSize}>
-                  <StyledTreeItemLine>
-                    <StyledTreeItemTitle>
+                    </StyledTreeNodeTitle>
+                  </StyledTreeNodeLine>
+                </StyledTreeNodeAltNoChilds>
+                <StyledTreeNodeAltNoChilds size={treeSize}>
+                  <StyledTreeNodeLine>
+                    <StyledTreeNodeTitle>
                       <StyledTreeButton size={treeSize}>
                         <StyledTreeIcon name={buttonIconAlt} />
                       </StyledTreeButton>
                       Row 2
-                    </StyledTreeItemTitle>
-                  </StyledTreeItemLine>
-                </StyledTreeItemAltNoChilds>
+                    </StyledTreeNodeTitle>
+                  </StyledTreeNodeLine>
+                </StyledTreeNodeAltNoChilds>
               </StyledTreeAlt>
-            </StyledTreeItemAlt>
+            </StyledTreeNodeAlt>
           </StyledTreeAlt>
-        </StyledTreeItemAlt>
-        <StyledTreeItemAlt size={treeSize}>
-          <StyledTreeItemLine>
-            <StyledTreeItemTitle>
+        </StyledTreeNodeAlt>
+        <StyledTreeNodeAlt size={treeSize}>
+          <StyledTreeNodeLine>
+            <StyledTreeNodeTitle>
               <StyledTreeButton size={treeSize}>
                 <StyledTreeIcon name={buttonIconAlt} />
               </StyledTreeButton>
               Row 2
-            </StyledTreeItemTitle>
-          </StyledTreeItemLine>
-        </StyledTreeItemAlt>
-        <StyledTreeItemAlt size={treeSize} isOpened>
-          <StyledTreeItemLine>
-            <StyledTreeItemTitle>
+            </StyledTreeNodeTitle>
+          </StyledTreeNodeLine>
+        </StyledTreeNodeAlt>
+        <StyledTreeNodeAlt size={treeSize} isOpened>
+          <StyledTreeNodeLine>
+            <StyledTreeNodeTitle>
               <StyledTreeButton size={treeSize}>
                 <StyledTreeIcon name={buttonIconAlt} />
               </StyledTreeButton>
               Row 3
-            </StyledTreeItemTitle>
-          </StyledTreeItemLine>
+            </StyledTreeNodeTitle>
+          </StyledTreeNodeLine>
           <StyledTreeAlt>
-            <StyledTreeItemAltNoChilds size={treeSize}>
-              <StyledTreeItemLine>
-                <StyledTreeItemTitle>
+            <StyledTreeNodeAltNoChilds size={treeSize}>
+              <StyledTreeNodeLine>
+                <StyledTreeNodeTitle>
                   <StyledTreeButton size={treeSize}>
                     <StyledTreeIcon name={buttonIconAlt} />
                   </StyledTreeButton>
                   Row 1
-                </StyledTreeItemTitle>
-              </StyledTreeItemLine>
-            </StyledTreeItemAltNoChilds>
-            <StyledTreeItemAltNoChilds size={treeSize}>
-              <StyledTreeItemLine>
-                <StyledTreeItemTitle>
+                </StyledTreeNodeTitle>
+              </StyledTreeNodeLine>
+            </StyledTreeNodeAltNoChilds>
+            <StyledTreeNodeAltNoChilds size={treeSize}>
+              <StyledTreeNodeLine>
+                <StyledTreeNodeTitle>
                   <StyledTreeButton size={treeSize}>
                     <StyledTreeIcon name={buttonIconAlt} />
                   </StyledTreeButton>
                   Row 2
-                </StyledTreeItemTitle>
-              </StyledTreeItemLine>
-            </StyledTreeItemAltNoChilds>
+                </StyledTreeNodeTitle>
+              </StyledTreeNodeLine>
+            </StyledTreeNodeAltNoChilds>
           </StyledTreeAlt>
-        </StyledTreeItemAlt>
+        </StyledTreeNodeAlt>
       </StyledTreeAlt>
     </>
   );

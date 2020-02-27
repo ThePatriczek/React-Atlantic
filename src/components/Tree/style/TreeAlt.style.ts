@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import { StyledTreeItemShared } from '../Item/style/ItemShared.styled';
+import { StyledTreeNodeShared } from '../Node/style/NodeShared.styled';
 import { StyledTreeShared } from './TreeShared.style';
 import { listGapSizeLg, listGapSizeMd, listGapSizeSm } from './variables';
 
