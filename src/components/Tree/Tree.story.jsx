@@ -1,207 +1,55 @@
-import { withKnobs } from '@storybook/addon-knobs';
+import { boolean, withKnobs } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/react';
 import * as React from 'react';
-import { StyledTree, StyledTreeAlt } from './style';
-import {
-  StyledTreeNodeTitle,
-  StyledTreeButton,
-  StyledTreeNodeLine,
-  StyledTreeNode,
-  StyledTreeIcon
-} from './Node/style/Node.style';
-import {
-  StyledTreeNodeAlt,
-  StyledTreeNodeAltNoChilds
-} from './Node/style/NodeAlt.style';
+import { Tree } from './Tree';
+import { Typography } from '../Typography';
+import { action } from '@storybook/addon-actions';
+import { defaultValues } from '../../constants/defaultValues';
 
 const stories = storiesOf('Tree', module);
 
 stories.addDecorator(withKnobs);
 
-stories.add('Overview', () => {
-  const treeSize = 'small';
-  const buttonIcon = 'arrowRight';
-  const buttonIconAlt = 'hamburger';
+const { Text } = Typography;
+
+stories.add('Playground', () => {
+  const isAlternative = boolean(`isAlternative:`, defaultValues.isAlternative);
+  const onChange = action(`onChange`);
 
   return (
     <>
-      <StyledTree size={treeSize}>
-        <StyledTreeNode size={treeSize} isOpened>
-          <StyledTreeNodeLine>
-            <StyledTreeNodeTitle>
-              <StyledTreeButton size={treeSize}>
-                <StyledTreeIcon name={buttonIcon} />
-              </StyledTreeButton>
-              Row 1
-            </StyledTreeNodeTitle>
-          </StyledTreeNodeLine>
-          <StyledTree>
-            <StyledTreeNode size={treeSize} isOpened>
-              <StyledTreeNodeLine>
-                <StyledTreeNodeTitle>
-                  <StyledTreeButton size={treeSize}>
-                    <StyledTreeIcon name={buttonIcon} />
-                  </StyledTreeButton>
-                  Row 1
-                </StyledTreeNodeTitle>
-              </StyledTreeNodeLine>
-              <StyledTree>
-                <StyledTreeNode size={treeSize}>
-                  <StyledTreeNodeLine>
-                    <StyledTreeNodeTitle>
-                      <StyledTreeButton size={treeSize}>
-                        <StyledTreeIcon name={buttonIcon} />
-                      </StyledTreeButton>
-                      Row 1
-                    </StyledTreeNodeTitle>
-                  </StyledTreeNodeLine>
-                </StyledTreeNode>
-                <StyledTreeNode size={treeSize}>
-                  <StyledTreeNodeLine>
-                    <StyledTreeNodeTitle>
-                      <StyledTreeButton size={treeSize}>
-                        <StyledTreeIcon name={buttonIcon} />
-                      </StyledTreeButton>
-                      Row 2
-                    </StyledTreeNodeTitle>
-                  </StyledTreeNodeLine>
-                </StyledTreeNode>
-              </StyledTree>
-            </StyledTreeNode>
-          </StyledTree>
-        </StyledTreeNode>
-        <StyledTreeNode size={treeSize}>
-          <StyledTreeNodeLine>
-            <StyledTreeNodeTitle>
-              <StyledTreeButton size={treeSize}>
-                <StyledTreeIcon name={buttonIcon} />
-              </StyledTreeButton>
-              Row 2
-            </StyledTreeNodeTitle>
-          </StyledTreeNodeLine>
-        </StyledTreeNode>
-        <StyledTreeNode size={treeSize} isOpened>
-          <StyledTreeNodeLine>
-            <StyledTreeNodeTitle>
-              <StyledTreeButton size={treeSize}>
-                <StyledTreeIcon name={buttonIcon} />
-              </StyledTreeButton>
-              Row 3
-            </StyledTreeNodeTitle>
-          </StyledTreeNodeLine>
-          <StyledTree>
-            <StyledTreeNode size={treeSize}>
-              <StyledTreeNodeLine>
-                <StyledTreeNodeTitle>
-                  <StyledTreeButton size={treeSize}>
-                    <StyledTreeIcon name={buttonIcon} />
-                  </StyledTreeButton>
-                  Row 1
-                </StyledTreeNodeTitle>
-              </StyledTreeNodeLine>
-            </StyledTreeNode>
-            <StyledTreeNode size={treeSize}>
-              <StyledTreeNodeLine>
-                <StyledTreeNodeTitle>
-                  <StyledTreeButton size={treeSize}>
-                    <StyledTreeIcon name={buttonIcon} />
-                  </StyledTreeButton>
-                  Row 2
-                </StyledTreeNodeTitle>
-              </StyledTreeNodeLine>
-            </StyledTreeNode>
-          </StyledTree>
-        </StyledTreeNode>
-      </StyledTree>
+      <Tree
+        isAlternative={isAlternative}
+        nodes={[
+          <Tree.Node>
+            <Text>{`Node 1`}</Text>
+            <Tree.Node>
+              <Text>{`Node 1.1`}</Text>
+            </Tree.Node>
+          </Tree.Node>
+        ]}
+      >
+        <Tree.Node isDefaultOpen onChange={console.log} id={5} data={1}>
+          <Text>{`Node 2`}</Text>
 
-      <StyledTreeAlt size={treeSize}>
-        <StyledTreeNodeAlt size={treeSize} isOpened>
-          <StyledTreeNodeLine>
-            <StyledTreeNodeTitle>
-              <StyledTreeButton size={treeSize}>
-                <StyledTreeIcon name={buttonIconAlt} />
-              </StyledTreeButton>
-              Row 1
-            </StyledTreeNodeTitle>
-          </StyledTreeNodeLine>
-          <StyledTreeAlt>
-            <StyledTreeNodeAlt size={treeSize}>
-              <StyledTreeNodeLine>
-                <StyledTreeNodeTitle>
-                  <StyledTreeButton size={treeSize}>
-                    <StyledTreeIcon name={buttonIconAlt} />
-                  </StyledTreeButton>
-                  Row 1
-                </StyledTreeNodeTitle>
-              </StyledTreeNodeLine>
-              <StyledTreeAlt>
-                <StyledTreeNodeAltNoChilds size={treeSize}>
-                  <StyledTreeNodeLine>
-                    <StyledTreeNodeTitle>
-                      <StyledTreeButton size={treeSize}>
-                        <StyledTreeIcon name={buttonIconAlt} />
-                      </StyledTreeButton>
-                      Row 1
-                    </StyledTreeNodeTitle>
-                  </StyledTreeNodeLine>
-                </StyledTreeNodeAltNoChilds>
-                <StyledTreeNodeAltNoChilds size={treeSize}>
-                  <StyledTreeNodeLine>
-                    <StyledTreeNodeTitle>
-                      <StyledTreeButton size={treeSize}>
-                        <StyledTreeIcon name={buttonIconAlt} />
-                      </StyledTreeButton>
-                      Row 2
-                    </StyledTreeNodeTitle>
-                  </StyledTreeNodeLine>
-                </StyledTreeNodeAltNoChilds>
-              </StyledTreeAlt>
-            </StyledTreeNodeAlt>
-          </StyledTreeAlt>
-        </StyledTreeNodeAlt>
-        <StyledTreeNodeAlt size={treeSize}>
-          <StyledTreeNodeLine>
-            <StyledTreeNodeTitle>
-              <StyledTreeButton size={treeSize}>
-                <StyledTreeIcon name={buttonIconAlt} />
-              </StyledTreeButton>
-              Row 2
-            </StyledTreeNodeTitle>
-          </StyledTreeNodeLine>
-        </StyledTreeNodeAlt>
-        <StyledTreeNodeAlt size={treeSize} isOpened>
-          <StyledTreeNodeLine>
-            <StyledTreeNodeTitle>
-              <StyledTreeButton size={treeSize}>
-                <StyledTreeIcon name={buttonIconAlt} />
-              </StyledTreeButton>
-              Row 3
-            </StyledTreeNodeTitle>
-          </StyledTreeNodeLine>
-          <StyledTreeAlt>
-            <StyledTreeNodeAltNoChilds size={treeSize}>
-              <StyledTreeNodeLine>
-                <StyledTreeNodeTitle>
-                  <StyledTreeButton size={treeSize}>
-                    <StyledTreeIcon name={buttonIconAlt} />
-                  </StyledTreeButton>
-                  Row 1
-                </StyledTreeNodeTitle>
-              </StyledTreeNodeLine>
-            </StyledTreeNodeAltNoChilds>
-            <StyledTreeNodeAltNoChilds size={treeSize}>
-              <StyledTreeNodeLine>
-                <StyledTreeNodeTitle>
-                  <StyledTreeButton size={treeSize}>
-                    <StyledTreeIcon name={buttonIconAlt} />
-                  </StyledTreeButton>
-                  Row 2
-                </StyledTreeNodeTitle>
-              </StyledTreeNodeLine>
-            </StyledTreeNodeAltNoChilds>
-          </StyledTreeAlt>
-        </StyledTreeNodeAlt>
-      </StyledTreeAlt>
+          <Tree.Node isOpen onChange={onChange}>
+            <Text>{`Node 2.1`}</Text>
+            <Tree.Node>
+              <Text>{`Node 2.1.1`}</Text>
+            </Tree.Node>
+            <Tree.Node isOpen>
+              <Text>{`Node 2.1.2`}</Text>
+            </Tree.Node>
+          </Tree.Node>
+        </Tree.Node>
+
+        <Tree.Node>
+          <Text>{`Node 3`}</Text>
+          <Tree.Node>
+            <Text>{`Node 3.1`}</Text>
+          </Tree.Node>
+        </Tree.Node>
+      </Tree>
     </>
   );
 });

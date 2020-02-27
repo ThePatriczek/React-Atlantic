@@ -8,7 +8,7 @@ import {
 import {
   StyledTreeButtonShared,
   StyledTreeIconShared,
-  StyledTreeNodeLineShared,
+  StyledTreeNodeContentShared,
   StyledTreeNodeShared,
   StyledTreeNodeTitleShared
 } from './NodeShared.styled';
@@ -17,11 +17,9 @@ export const StyledTreeIconAlt = styled(StyledTreeIconShared)``;
 
 export const StyledTreeButtonAlt = styled(StyledTreeButtonShared)``;
 
-export const StyledTreeNodeLineAlt = styled(StyledTreeNodeLineShared)``;
+export const StyledTreeNodeContentAlt = styled(StyledTreeNodeContentShared)``;
 
-export const StyledTreeNodeTitleAlt = styled(
-  StyledTreeNodeTitleShared
-)``;
+export const StyledTreeNodeTitleAlt = styled(StyledTreeNodeTitleShared)``;
 
 export const StyledTreeNodeAlt = styled(StyledTreeNodeShared)`  
   ${StyledTreeAlt} ${StyledTreeAlt} & {

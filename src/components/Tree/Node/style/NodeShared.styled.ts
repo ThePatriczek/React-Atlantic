@@ -4,7 +4,7 @@ import { Icon } from '../../../Icon/Icon';
 import { Text } from '../../../Typography/Text';
 
 export interface StyledTreeNodeSharedProps {
-  size: string;
+  size?: string;
   isOpened?: boolean;
 }
 
@@ -12,11 +12,11 @@ export const StyledTreeIconShared = styled(Icon)``;
 
 export const StyledTreeButtonShared = styled(PureButton)`
   display: flex;
-  align-Nodes: center;
+  align-nodes: center;
   justify-content: center;
   align-self: flex-start;
   flex-shrink: 0;
-  
+
   && {
     margin: 0;
   }
@@ -39,7 +39,7 @@ export const StyledTreeButtonShared = styled(PureButton)`
   }
 `;
 
-export const StyledTreeNodeLineShared = styled.div`
+export const StyledTreeNodeContentShared = styled.div`
   width: 100%;
   padding: 0 ${props => props.theme.padding.xs};
 
@@ -52,13 +52,13 @@ export const StyledTreeNodeLineShared = styled.div`
 
 export const StyledTreeNodeTitleShared = styled(Text)`
   display: inline-flex;
-  align-Nodes: center;
+  align-nodes: center;
   margin: 0;
 `;
 
-export const StyledTreeNodeShared = styled.li<
-  StyledTreeNodeSharedProps
->`
+StyledTreeNodeContentShared.displayName = `NodeContent`;
+
+export const StyledTreeNodeShared = styled.li<StyledTreeNodeSharedProps>`
   position: relative;
   display: flex;
   flex-direction: row;

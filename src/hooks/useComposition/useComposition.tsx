@@ -1,17 +1,22 @@
 import { ReactNode } from 'react';
 
+type GetFilteredChildren = (
+  children: Readonly<ReactNode>,
+  displayName?: Readonly<string>,
+  negation?: Readonly<boolean>
+) => Array<Readonly<JSX.Element>>;
+
 interface UseCompositionValue {
-  getFilteredChildren: (
-    children: Readonly<ReactNode>,
-    displayName?: Readonly<string>
-  ) => Array<Readonly<JSX.Element>>;
+  getFilteredChildren: GetFilteredChildren;
 }
 
 export const useComposition = (): Readonly<UseCompositionValue> => {
-  const getFilteredChildren = (
-    children: Readonly<ReactNode>,
-    displayName?: Readonly<string>
-  ): Array<Readonly<JSX.Element>> => {
+
+  const getFilteredChildren: GetFilteredChildren = (
+    children,
+    displayName?,
+    negation = false
+  ) => {
     const items: Array<Readonly<JSX.Element>> = [];
 
     if (!displayName) {
@@ -20,14 +25,21 @@ export const useComposition = (): Readonly<UseCompositionValue> => {
 
     if (Array.isArray(children)) {
       children.forEach((item: JSX.Element) => {
-        if (item?.type?.displayName === displayName) {
+        const condition: Readonly<boolean> = negation
+          ? item?.type?.displayName !== displayName
+          : item?.type?.displayName === displayName;
+
+        if (condition) {
           items.push(item);
         }
       });
     } else {
       const item = children as JSX.Element;
+      const condition: Readonly<boolean> = negation
+        ? item?.type?.displayName !== displayName
+        : item?.type?.displayName === displayName;
 
-      if (item?.type?.displayName === displayName) {
+      if (condition) {
         items.push(item);
       }
     }

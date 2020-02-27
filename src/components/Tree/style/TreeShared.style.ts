@@ -3,7 +3,7 @@ import { Size } from '../../../types';
 import { listGapSizeLg, listGapSizeMd, listGapSizeSm } from './variables';
 
 export interface StyledTreeProps {
-  size: Size;
+  size?: Size;
 }
 
 export const StyledTreeShared = styled.ul<StyledTreeProps>`
