@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import {
   StyledTreeButtonShared,
   StyledTreeIconShared,
@@ -15,12 +15,4 @@ export const StyledTreeNodeContent = styled(StyledTreeNodeContentShared)``;
 
 export const StyledTreeNodeTitle = styled(StyledTreeNodeTitleShared)``;
 
-export const StyledTreeNode = styled(StyledTreeNodeShared)`
-  ${props =>
-    props.isOpened &&
-    css`
-      & > ${StyledTreeNodeContent} ${StyledTreeIcon} {
-        transform: rotate(90deg);
-      }
-    `}
-`;
+export const StyledTreeNode = styled(StyledTreeNodeShared)``;

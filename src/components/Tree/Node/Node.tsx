@@ -8,6 +8,7 @@ import React, {
 } from 'react';
 import { useComposition } from '../../../hooks/useComposition';
 import { Size } from '../../../types';
+import { IconName } from '../../Icon';
 import { Tree } from '../Tree';
 import {
   StyledTreeButton,
@@ -29,6 +30,8 @@ export interface INode<T = unknown> {
 export interface NodeProps extends INode {
   readonly isDefaultOpen?: Readonly<boolean>;
   readonly onChange?: (node: Readonly<INode>) => void;
+  readonly iconOpen?: Readonly<IconName>;
+  readonly iconClose?: Readonly<IconName>;
 }
 
 export interface NodePropsIntern extends NodeProps {
@@ -39,7 +42,16 @@ export interface NodePropsIntern extends NodeProps {
 export const Node: FC<Readonly<
   PropsWithChildren<Readonly<NodePropsIntern>>
 >> = (props): Readonly<ReactElement> => {
-  const { children, size, isAlternative, data, id, isDefaultOpen } = props;
+  const {
+    children,
+    size,
+    isAlternative,
+    data,
+    id,
+    isDefaultOpen,
+    iconOpen,
+    iconClose
+  } = props;
   const [isOpen, setOpen] = useState<Readonly<boolean>>(!!isDefaultOpen);
 
   useEffect(() => {
@@ -79,9 +91,9 @@ export const Node: FC<Readonly<
     <>
       <TreeNode size={size} isOpened={isOpen}>
         <TreeNodeContent>
-          {!isAlternative && hasChildren && (
+          {hasChildren && (
             <TreeButton onClick={onClick}>
-              <TreeIcon name={isOpen ? 'arrowRight' : 'arrowDown'} />
+              <TreeIcon name={(isOpen ? iconClose : iconOpen) as IconName} />
             </TreeButton>
           )}
 
@@ -101,7 +113,9 @@ export const Node: FC<Readonly<
 };
 
 Node.defaultProps = {
-  isAlternative: false
+  isAlternative: false,
+  iconOpen: 'arrowRight',
+  iconClose: 'arrowDown'
 };
 
 Node.displayName = `Node`;

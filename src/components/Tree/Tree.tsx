@@ -2,7 +2,7 @@ import React, { FC, PropsWithChildren, ReactElement } from 'react';
 import { useComposition } from '../../hooks/useComposition';
 import { Size } from '../../types';
 import { Node, NodeProps } from './Node';
-import { StyledTree } from './style';
+import { StyledTree, StyledTreeAlt } from './style';
 
 export interface TreeProps {
   readonly isAlternative?: Readonly<boolean>;
@@ -19,8 +19,10 @@ export const Tree: React.FC<PropsWithChildren<TreeProps>> & {
   let nodes = getFilteredChildren(props.nodes, Tree.Node.displayName);
   nodes = [...nodes, ...getFilteredChildren(children, Tree.Node.displayName)];
 
+  const TreeComponent = isAlternative ? StyledTreeAlt : StyledTree;
+
   return (
-    <StyledTree size={size}>
+    <TreeComponent size={size}>
       {nodes.map((node, key) => (
         <Tree.Node
           key={key}
@@ -29,7 +31,7 @@ export const Tree: React.FC<PropsWithChildren<TreeProps>> & {
           isAlternative={isAlternative}
         />
       ))}
-    </StyledTree>
+    </TreeComponent>
   );
 };
 

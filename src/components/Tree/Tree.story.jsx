@@ -5,6 +5,8 @@ import { Tree } from './Tree';
 import { Typography } from '../Typography';
 import { action } from '@storybook/addon-actions';
 import { defaultValues } from '../../constants/defaultValues';
+import { Button } from '../Button';
+import { Icon } from '../Icon';
 
 const stories = storiesOf('Tree', module);
 
@@ -30,10 +32,17 @@ stories.add('Playground', () => {
         ]}
       >
         <Tree.Node isDefaultOpen onChange={console.log} id={5} data={1}>
-          <Text>{`Node 2`}</Text>
+          <div>
+            <Button>
+              <Icon name={'folder'} />
+            </Button>
+            <Text>{`Node 2`}</Text>
+          </div>
 
           <Tree.Node isOpen onChange={onChange}>
+            <Icon name={'flagCzech'} />
             <Text>{`Node 2.1`}</Text>
+
             <Tree.Node>
               <Text>{`Node 2.1.1`}</Text>
             </Tree.Node>
