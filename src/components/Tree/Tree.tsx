@@ -1,30 +1,30 @@
 import React, { FC, PropsWithChildren, ReactElement } from 'react';
 import { useComposition } from '../../hooks/useComposition';
 import { Item, ItemProps } from './Item';
-import { StyledTreeView } from './style/TreeView.style';
+import { StyledTree } from './style/Tree.style';
 
-export interface TreeViewProps {}
+export interface TreeProps {}
 
-export const TreeView: React.FC<PropsWithChildren<TreeViewProps>> & {
+export const Tree: React.FC<PropsWithChildren<TreeProps>> & {
   Item: FC<Readonly<ItemProps>>;
 } = (props): Readonly<ReactElement> => {
   const { children } = props;
   const { getFilteredChildren } = useComposition();
-  const treeViewItems = getFilteredChildren(
+  const TreeItems = getFilteredChildren(
     children,
-    TreeView.Item.displayName
+    Tree.Item.displayName
   );
 
   return (
     <>
-      {treeViewItems.map(
+      {TreeItems.map(
         (item: Readonly<JSX.Element>, index: Readonly<number>) => (
-          <TreeView.Item key={index}>{item.props?.children}</TreeView.Item>
+          <Tree.Item key={index}>{item.props?.children}</Tree.Item>
         )
       )}
     </>
   );
 };
 
-TreeView.Item = Item;
-TreeView.displayName = `TreeView`;
+Tree.Item = Item;
+Tree.displayName = `Tree`;

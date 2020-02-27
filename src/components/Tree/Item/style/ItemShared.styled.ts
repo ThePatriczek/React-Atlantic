@@ -3,14 +3,14 @@ import { PureButton } from '../../../Button/Pure';
 import { Icon } from '../../../Icon/Icon';
 import { Text } from '../../../Typography/Text';
 
-export interface StyledTreeViewItemSharedProps {
+export interface StyledTreeItemSharedProps {
   size: string;
   isOpened?: boolean;
 }
 
-export const StyledTreeViewIconShared = styled(Icon)``;
+export const StyledTreeIconShared = styled(Icon)``;
 
-export const StyledTreeViewButtonShared = styled(PureButton)`
+export const StyledTreeButtonShared = styled(PureButton)`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -24,12 +24,12 @@ export const StyledTreeViewButtonShared = styled(PureButton)`
   &:hover {
     background-color: ${props => props.theme.color.background.beta};
 
-    ${StyledTreeViewIconShared} {
+    ${StyledTreeIconShared} {
       color: ${props => props.theme.color.primary.alpha};
     }
   }
 
-  ${StyledTreeViewIconShared} {
+  ${StyledTreeIconShared} {
     width: auto;
     height: auto;
 
@@ -39,7 +39,7 @@ export const StyledTreeViewButtonShared = styled(PureButton)`
   }
 `;
 
-export const StyledTreeViewItemLineShared = styled.div`
+export const StyledTreeItemLineShared = styled.div`
   width: 100%;
   padding: 0 ${props => props.theme.padding.xs};
 
@@ -50,14 +50,14 @@ export const StyledTreeViewItemLineShared = styled.div`
   }
 `;
 
-export const StyledTreeViewItemTitleShared = styled(Text)`
+export const StyledTreeItemTitleShared = styled(Text)`
   display: inline-flex;
   align-items: center;
   margin: 0;
 `;
 
-export const StyledTreeViewItemShared = styled.li<
-  StyledTreeViewItemSharedProps
+export const StyledTreeItemShared = styled.li<
+  StyledTreeItemSharedProps
 >`
   position: relative;
   display: flex;
@@ -70,7 +70,7 @@ export const StyledTreeViewItemShared = styled.li<
 
   font-size: ${props => props.theme.font.size.lg};
   
-  ${StyledTreeViewItemTitleShared} {
+  ${StyledTreeItemTitleShared} {
     ${props =>
       props.size === 'small' &&
       css`

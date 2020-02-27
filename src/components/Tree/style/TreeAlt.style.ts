@@ -1,9 +1,9 @@
 import styled, { css } from 'styled-components';
-import { StyledTreeViewItemShared } from '../Item/style/ItemShared.styled';
-import { StyledTreeViewShared } from './TreeViewShared.style';
+import { StyledTreeItemShared } from '../Item/style/ItemShared.styled';
+import { StyledTreeShared } from './TreeShared.style';
 import { listGapSizeLg, listGapSizeMd, listGapSizeSm } from './variables';
 
-export const StyledTreeViewAlt = styled(StyledTreeViewShared)`
+export const StyledTreeAlt = styled(StyledTreeShared)`
   ${props =>
     props.size === 'small' &&
     css`

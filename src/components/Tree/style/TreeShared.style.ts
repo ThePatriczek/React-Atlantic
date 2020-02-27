@@ -2,11 +2,11 @@ import styled, { css } from 'styled-components';
 import { Size } from '../../../types';
 import { listGapSizeLg, listGapSizeMd, listGapSizeSm } from './variables';
 
-export interface StyledTreeViewProps {
+export interface StyledTreeProps {
   size: Size;
 }
 
-export const StyledTreeViewShared = styled.ul<StyledTreeViewProps>`
+export const StyledTreeShared = styled.ul<StyledTreeProps>`
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;

@@ -1,30 +1,30 @@
 import styled, { css } from 'styled-components';
-import { StyledTreeViewAlt } from '../../style';
+import { StyledTreeAlt } from '../../style';
 import {
   listGapSizeLg,
   listGapSizeMd,
   listGapSizeSm
 } from '../../style/variables';
 import {
-  StyledTreeViewButtonShared,
-  StyledTreeViewIconShared,
-  StyledTreeViewItemLineShared,
-  StyledTreeViewItemShared,
-  StyledTreeViewItemTitleShared
+  StyledTreeButtonShared,
+  StyledTreeIconShared,
+  StyledTreeItemLineShared,
+  StyledTreeItemShared,
+  StyledTreeItemTitleShared
 } from './ItemShared.styled';
 
-export const StyledTreeViewIconAlt = styled(StyledTreeViewIconShared)``;
+export const StyledTreeIconAlt = styled(StyledTreeIconShared)``;
 
-export const StyledTreeViewButtonAlt = styled(StyledTreeViewButtonShared)``;
+export const StyledTreeButtonAlt = styled(StyledTreeButtonShared)``;
 
-export const StyledTreeViewItemLineAlt = styled(StyledTreeViewItemLineShared)``;
+export const StyledTreeItemLineAlt = styled(StyledTreeItemLineShared)``;
 
-export const StyledTreeViewItemTitleAlt = styled(
-  StyledTreeViewItemTitleShared
+export const StyledTreeItemTitleAlt = styled(
+  StyledTreeItemTitleShared
 )``;
 
-export const StyledTreeViewItemAlt = styled(StyledTreeViewItemShared)`  
-  ${StyledTreeViewAlt} ${StyledTreeViewAlt} & {
+export const StyledTreeItemAlt = styled(StyledTreeItemShared)`  
+  ${StyledTreeAlt} ${StyledTreeAlt} & {
     &:before {
       content: '';
       position: absolute;
@@ -63,7 +63,7 @@ export const StyledTreeViewItemAlt = styled(StyledTreeViewItemShared)`
   ${props =>
     props.size === 'small' &&
     css`
-      ${StyledTreeViewAlt} ${StyledTreeViewAlt} & {
+      ${StyledTreeAlt} ${StyledTreeAlt} & {
         &:after {
           width: ${parseFloat(listGapSizeSm) / 2}px;
           left: -${parseFloat(listGapSizeSm) / 2}px;
@@ -75,7 +75,7 @@ export const StyledTreeViewItemAlt = styled(StyledTreeViewItemShared)`
   ${props =>
     props.size === 'medium' &&
     css`
-      ${StyledTreeViewAlt} ${StyledTreeViewAlt} & {
+      ${StyledTreeAlt} ${StyledTreeAlt} & {
         &:after {
           width: ${parseFloat(listGapSizeMd) / 2}px;
           left: -${parseFloat(listGapSizeMd) / 2}px;
@@ -87,7 +87,7 @@ export const StyledTreeViewItemAlt = styled(StyledTreeViewItemShared)`
   ${props =>
     props.size === 'large' &&
     css`
-      ${StyledTreeViewAlt} ${StyledTreeViewAlt} & {
+      ${StyledTreeAlt} ${StyledTreeAlt} & {
         &:after {
           width: ${parseFloat(listGapSizeLg) / 2}px;
           left: -${parseFloat(listGapSizeLg) / 2}px;
@@ -97,7 +97,7 @@ export const StyledTreeViewItemAlt = styled(StyledTreeViewItemShared)`
     `}
 `;
 
-export const StyledTreeViewItemAltNoChilds = styled(StyledTreeViewItemAlt)`
+export const StyledTreeItemAltNoChilds = styled(StyledTreeItemAlt)`
   &:last-child {
     &:before {
       bottom: auto;
