@@ -66,7 +66,9 @@ const TabsWithContext: FC<PropsWithChildren<TabsProps>> = props => {
   let tabs: TabProps[] = [];
 
   useEffect(() => {
-    setValue(tabs?.[0].value);
+    if (tabs?.[0]?.value !== undefined) {
+      setValue(tabs?.[0].value);
+    }
   }, []);
 
   useEffect(() => {
@@ -82,8 +84,10 @@ const TabsWithContext: FC<PropsWithChildren<TabsProps>> = props => {
   }
 
   let activeSlide: number = 0;
-  const slides: Readonly<JSX.Element[]> = tabs.map(
-    (tab: Readonly<TabProps>, index: Readonly<number>) => {
+  let slides: Readonly<JSX.Element[]> = [];
+
+  if (animationConfig) {
+    slides = tabs.map((tab: Readonly<TabProps>, index: Readonly<number>) => {
       if (tab.value === value) {
         activeSlide = index;
       }
@@ -95,8 +99,8 @@ const TabsWithContext: FC<PropsWithChildren<TabsProps>> = props => {
       }
 
       return <Carousel.Slide key={index} />;
-    }
-  );
+    });
+  }
 
   const Content = (): Readonly<React.ReactElement> => {
     return (
@@ -124,7 +128,7 @@ const TabsWithContext: FC<PropsWithChildren<TabsProps>> = props => {
         size={size as Size}
         hasBackground={!!value || !!activeTab}
       >
-        {Content()}
+        {animationConfig ? Content() : children}
       </StyledTabsContent>
     </>
   );
@@ -135,7 +139,6 @@ TabsWithContext.displayName = `TabsWithContext`;
 Tabs.defaultProps = {
   size: 'medium',
   isAlternative: false,
-  isBordered: false,
-  animationConfig: { duration: 0 }
+  isBordered: false
 };
 Tabs.displayName = `Tabs`;
