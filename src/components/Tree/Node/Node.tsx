@@ -17,7 +17,7 @@ import {
   StyledTreeIconAlt,
   StyledTreeNode,
   StyledTreeNodeAlt,
-  StyledTreeNodeAltNoChilds,
+  StyledTreeNodeAltNoChildren,
   StyledTreeNodeContent,
   StyledTreeNodeContentAlt
 } from './style';
@@ -78,7 +78,7 @@ export const Node: FC<Readonly<
     TreeIcon = StyledTreeIconAlt;
 
     if (!hasChildren) {
-      TreeNode = StyledTreeNodeAltNoChilds;
+      TreeNode = StyledTreeNodeAltNoChildren;
     }
   }
 

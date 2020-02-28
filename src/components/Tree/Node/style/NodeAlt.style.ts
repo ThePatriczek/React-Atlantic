@@ -95,7 +95,7 @@ export const StyledTreeNodeAlt = styled(StyledTreeNodeShared)`
     `}
 `;
 
-export const StyledTreeNodeAltNoChilds = styled(StyledTreeNodeAlt)`
+export const StyledTreeNodeAltNoChildren = styled(StyledTreeNodeAlt)`
   &:last-child {
     &:before {
       bottom: auto;
