@@ -74,7 +74,19 @@ export type IconName =
   | 'threeDots'
   | 'filter'
   | 'diff'
-  | 'news';
+  | 'news'
+  | 'folderOpen'
+  | 'fileCsv'
+  | 'fileDoc'
+  | 'fileJpg'
+  | 'filePdf'
+  | 'filePng'
+  | 'filePpt'
+  | 'fileRtf'
+  | 'fileTxt'
+  | 'fileXls'
+  | 'fileXml'
+  | 'fileZip';
 
 export interface IconProps {
   name: IconName;
@@ -306,6 +318,42 @@ export const Icon: React.FC<IconProps> = (
       break;
     case 'news':
       Component = <Icons.News />;
+      break;
+    case 'folderOpen':
+      Component = <Icons.FolderOpen />;
+      break;
+    case 'fileCsv':
+      Component = <Icons.FileCsv />;
+      break;
+    case 'fileDoc':
+      Component = <Icons.FileDoc />;
+      break;
+    case 'fileJpg':
+      Component = <Icons.FileJpg />;
+      break;
+    case 'filePdf':
+      Component = <Icons.FilePdf />;
+      break;
+    case 'filePng':
+      Component = <Icons.FilePng />;
+      break;
+    case 'filePpt':
+      Component = <Icons.FilePpt />;
+      break;
+    case 'fileRtf':
+      Component = <Icons.FileRtf />;
+      break;
+    case 'fileTxt':
+      Component = <Icons.FileTxt />;
+      break;
+    case 'fileXls':
+      Component = <Icons.FileXls />;
+      break;
+    case 'fileXml':
+      Component = <Icons.FileXml />;
+      break;
+    case 'fileZip':
+      Component = <Icons.FileZip />;
       break;
   }
 
