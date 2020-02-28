@@ -73,7 +73,8 @@ export type IconName =
   | 'flagSlovakia'
   | 'threeDots'
   | 'filter'
-  | 'diff';
+  | 'diff'
+  | 'news';
 
 export interface IconProps {
   name: IconName;
@@ -302,6 +303,9 @@ export const Icon: React.FC<IconProps> = (
       break;
     case 'diff':
       Component = <Icons.Diff />;
+      break;
+    case 'news':
+      Component = <Icons.News />;
       break;
   }
 

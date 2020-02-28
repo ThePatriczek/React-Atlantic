@@ -51,6 +51,9 @@ stories.add('Overview', () => (
     <div>
       <Icon name={'table'} />
     </div>
+    <div>
+      <Icon name={'news'} />
+    </div>
   </div>
 ));
 
