@@ -84,8 +84,12 @@ export const Node: FC<Readonly<
 
   const onClick = () => {
     setOpen(prev => {
-      const isOpen: Readonly<boolean> =
-        typeof props.isOpen !== 'undefined' ? props.isOpen : !prev;
+      const isOpen: Readonly<boolean> = !prev;
+
+      if (typeof props.isOpen !== 'undefined') {
+        props.onChange?.({ isOpen: !props.isOpen, data, id });
+        return props.isOpen;
+      }
 
       props.onChange?.({ isOpen, data, id });
       return isOpen;

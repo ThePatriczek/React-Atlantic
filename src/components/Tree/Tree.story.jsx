@@ -40,7 +40,7 @@ stories.add('Playground', () => {
             <Text>{`Node 2`}</Text>
           </div>
 
-          <Tree.Node isOpen onChange={onChange}>
+          <Tree.Node isOpen onChange={onChange} data={{lang: `cz`}} id={`czech`}>
             <Icon name={'flagCzech'} />
             <Text>{`Node 2.1`}</Text>
 
