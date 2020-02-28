@@ -17,6 +17,7 @@ import {
   StyledTreeIconAlt,
   StyledTreeNode,
   StyledTreeNodeAlt,
+  StyledTreeNodeAltNoChilds,
   StyledTreeNodeContent,
   StyledTreeNodeContentAlt
 } from './style';
@@ -75,6 +76,10 @@ export const Node: FC<Readonly<
     TreeNodeContent = StyledTreeNodeContentAlt;
     TreeButton = StyledTreeButtonAlt;
     TreeIcon = StyledTreeIconAlt;
+
+    if (!hasChildren) {
+      TreeNode = StyledTreeNodeAltNoChilds;
+    }
   }
 
   const onClick = () => {
@@ -90,7 +95,7 @@ export const Node: FC<Readonly<
   return (
     <>
       <TreeNode size={size} isOpened={isOpen}>
-          <TreeNodeContent isLeftShift={!hasChildren}>
+        <TreeNodeContent isLeftShift={!hasChildren}>
           {hasChildren && (
             <TreeButton onClick={onClick} size={size}>
               <TreeIcon name={(isOpen ? iconClose : iconOpen) as IconName} />
