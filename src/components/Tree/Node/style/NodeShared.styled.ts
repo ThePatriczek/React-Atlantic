@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components';
 import { PureButton } from '../../../Button/Pure';
 import { Icon } from '../../../Icon/Icon';
-import { Text } from '../../../Typography/Text';
+import { contentLeftGap } from './variables';
 
 export interface StyledTreeNodeSharedProps {
   size?: string;
@@ -45,19 +45,13 @@ export const StyledTreeNodeContentShared = styled.div<
   display: flex;
   align-items: center;
   width: 100%;
-  padding: 0 ${props => props.theme.padding.xs};
+  padding: 0 ${contentLeftGap};
 
   border-radius: ${props => props.theme.radius};
 
   &:hover {
     background-color: ${props => props.theme.color.default};
   }
-`;
-
-export const StyledTreeNodeTitleShared = styled(Text)`
-  display: inline-flex;
-  align-items: center;
-  margin: 0;
 `;
 
 StyledTreeNodeContentShared.displayName = `NodeContent`;

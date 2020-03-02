@@ -3,8 +3,7 @@ import {
   StyledTreeButtonShared,
   StyledTreeIconShared,
   StyledTreeNodeContentShared,
-  StyledTreeNodeShared,
-  StyledTreeNodeTitleShared
+  StyledTreeNodeShared
 } from './NodeShared.styled';
 
 export const StyledTreeIcon = styled(StyledTreeIconShared)``;
@@ -12,7 +11,5 @@ export const StyledTreeIcon = styled(StyledTreeIconShared)``;
 export const StyledTreeButton = styled(StyledTreeButtonShared)``;
 
 export const StyledTreeNodeContent = styled(StyledTreeNodeContentShared)``;
-
-export const StyledTreeNodeTitle = styled(StyledTreeNodeTitleShared)``;
 
 export const StyledTreeNode = styled(StyledTreeNodeShared)``;
