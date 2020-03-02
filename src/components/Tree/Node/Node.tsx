@@ -17,7 +17,6 @@ import {
   StyledTreeIconAlt,
   StyledTreeNode,
   StyledTreeNodeAlt,
-  StyledTreeNodeAltNoChildren,
   StyledTreeNodeContent,
   StyledTreeNodeContentAlt
 } from './style';
@@ -76,10 +75,6 @@ export const Node: FC<Readonly<
     TreeNodeContent = StyledTreeNodeContentAlt;
     TreeButton = StyledTreeButtonAlt;
     TreeIcon = StyledTreeIconAlt;
-
-    if (!hasChildren) {
-      TreeNode = StyledTreeNodeAltNoChildren;
-    }
   }
 
   const onClick = () => {

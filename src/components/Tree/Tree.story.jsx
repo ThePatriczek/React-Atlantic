@@ -49,6 +49,9 @@ stories.add('Playground', () => {
             </Tree.Node>
             <Tree.Node isOpen>
               <Text>{`Node 2.1.2`}</Text>
+              <Tree.Node isOpen>
+                <Text>{`Node 2.1.2`}</Text>
+              </Tree.Node>
             </Tree.Node>
           </Tree.Node>
         </Tree.Node>
