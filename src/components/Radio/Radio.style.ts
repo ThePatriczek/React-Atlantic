@@ -12,6 +12,7 @@ interface StyledRadioProps {
 export const StyledRadioInputHidden = styled.input.attrs({
   type: 'radio'
 })`
+  position: absolute;
   opacity: 0;
   width: 0;
   height: 0;
