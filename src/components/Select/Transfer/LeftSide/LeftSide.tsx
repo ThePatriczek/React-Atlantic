@@ -11,7 +11,7 @@ import {
   StyledTransferLi,
   StyledTransferSide,
   StyledTransferUl
-} from '../Transfer.style';
+} from '../style/Transfer.style';
 import { transferItemsRender } from '../Transfer.utils';
 
 export interface LeftSideProps {
@@ -42,7 +42,7 @@ export interface LeftSideProps {
   onKeyDown: (e: any) => void;
 }
 
-const LeftSide: FC<LeftSideProps> = props => {
+export const LeftSide: FC<LeftSideProps> = props => {
   const {
     items,
     isFocused,
@@ -142,5 +142,3 @@ const LeftSide: FC<LeftSideProps> = props => {
     </StyledTransferSide>
   );
 };
-
-export default LeftSide;

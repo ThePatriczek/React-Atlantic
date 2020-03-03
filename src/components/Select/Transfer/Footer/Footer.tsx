@@ -1,8 +1,8 @@
 import React from 'react';
 import { Button } from '../../../Button';
-import { StyledTransferFooter } from '../Transfer.style';
+import { StyledTransferFooter } from '../style/Transfer.style';
 
-const Footer = (props: any) => {
+export const Footer = (props: any) => {
   const { size, onClose, closeText, onSubmit, submitText } = props;
 
   return (
@@ -21,5 +21,3 @@ const Footer = (props: any) => {
     </StyledTransferFooter>
   );
 };
-
-export default Footer;

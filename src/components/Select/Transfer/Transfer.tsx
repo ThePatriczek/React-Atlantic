@@ -17,10 +17,10 @@ import {
   isElementInViewport,
   OptionType
 } from '../Select.utils';
-import Footer from './components/Footer';
-import LeftSide from './components/LeftSide';
-import RightSide from './components/RightSide';
-import { StyledTransfer, StyledTransferContainer } from './Transfer.style';
+import { Footer } from './Footer';
+import { LeftSide } from './LeftSide';
+import { RightSide } from './RightSide';
+import { StyledTransfer, StyledTransferContainer } from './style';
 import {
   distinguishTypeAndReturnLabel,
   getMergedItems

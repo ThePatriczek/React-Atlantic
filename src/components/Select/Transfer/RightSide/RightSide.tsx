@@ -11,7 +11,7 @@ import {
   StyledTransferSide,
   StyledTransferSpan,
   StyledTransferUl
-} from '../Transfer.style';
+} from '../style/Transfer.style';
 import { transferItemsRender } from '../Transfer.utils';
 
 interface RightSideProps {
@@ -28,7 +28,7 @@ interface RightSideProps {
   chosenComponent?: (checked: number, total: number) => ReactNode;
 }
 
-const RightSide: FC<RightSideProps> = props => {
+export const RightSide: FC<RightSideProps> = props => {
   const {
     chosenComponent,
     checkedItems,
@@ -88,5 +88,3 @@ const RightSide: FC<RightSideProps> = props => {
     </StyledTransferSide>
   );
 };
-
-export default RightSide;

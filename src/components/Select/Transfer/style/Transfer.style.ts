@@ -1,18 +1,18 @@
 import { ReactNode } from 'react';
 import styled, { css } from 'styled-components';
-import { theme } from '../../../theme';
-import { Direction, Position, Size } from '../../../types';
-import { Button } from '../../Button';
+import { theme } from '../../../../theme/index';
+import { Direction, Position, Size } from '../../../../types';
+import { Button } from '../../../Button';
 import {
   StyledCheckboxInputShown,
   StyledCheckboxLabel,
   StyledCheckboxSpan
-} from '../../Checkbox/Checkbox.style';
-import { Icon, IconName } from '../../Icon';
-import { StyledIcon } from '../../Icon/Icon.style';
-import { Input } from '../../Input';
-import { StyledInput, StyledInputWrapper } from '../../Input/Input.style';
-import { OptionType } from '../Select.utils';
+} from '../../../Checkbox/Checkbox.style';
+import { Icon, IconName } from '../../../Icon';
+import { StyledIcon } from '../../../Icon/Icon.style';
+import { Input } from '../../../Input';
+import { StyledInput, StyledInputWrapper } from '../../../Input/Input.style';
+import { OptionType } from '../../Select.utils';
 
 interface StyledTransferProps {
   className?: string;
