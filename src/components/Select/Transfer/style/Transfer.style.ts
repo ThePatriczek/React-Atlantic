@@ -231,46 +231,6 @@ export const StyledTransferLi = styled.li<StyledTransferProps>`
   }
 `;
 
-export const StyledTransferOptions = styled.div<StyledTransferProps>`
-  position: relative;
-  z-index: 100;
-`;
-
-export const StyledInputText = styled.div<StyledTransferProps>`
-  position: absolute;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  overflow: hidden;
-  left: 10px;
-  top: 0;
-  z-index: 0;
-  width: calc(100% - 40px);
-  color: ${props => props.theme.color.text.alpha}; 
-   span {
-    ${props =>
-  props.size === 'small' &&
-  css`
-        font-size: ${props.theme.font.size.sm};
-        height: ${parseInt(props.theme.height.sm, 0)}px;
-        line-height: ${parseInt(props.theme.height.sm, 0)}px;
-      `}
-      ${props =>
-  props.size === 'medium' &&
-  css`
-          font-size: ${props.theme.font.size.md};
-          height: ${parseInt(props.theme.height.md, 0)}px;
-          line-height: ${parseInt(props.theme.height.md, 0)}px;
-        `}
-      ${props =>
-  props.size === 'large' &&
-  css`
-          font-size: ${props.theme.font.size.lg};
-          height: ${parseInt(props.theme.height.lg, 0)}px;
-          line-height: ${parseInt(props.theme.height.lg, 0)}px;
-        `}
-   }
-`;
-
 export const StyledTransfer = styled.div<StyledTransferProps>`
   width: fit-content;
   display: block;
@@ -427,14 +387,6 @@ StyledTransfer.defaultProps = {
 };
 
 StyledTransferSide.defaultProps = {
-  theme
-};
-
-StyledTransferOptions.defaultProps = {
-  theme
-};
-
-StyledInputText.defaultProps = {
   theme
 };
 
