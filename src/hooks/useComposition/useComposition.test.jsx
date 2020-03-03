@@ -6,16 +6,16 @@ describe('useComposition()', () => {
   test('getFilteredChildren()', () => {
     const { result } = renderHook(() => useComposition());
 
-    const ExpectedChild = () => <span />;
+    const ExpectedChild = () => <span/>;
     ExpectedChild.displayName = `ExpectedChild`;
 
-    const children = [<div />, <ExpectedChild />];
+    const children = [<div/>, <ExpectedChild/>];
 
     const filtered = result.current.getFilteredChildren(
-      children,
-      ExpectedChild.displayName
+        children,
+        ExpectedChild.displayName,
     );
 
-    expect(filtered).toStrictEqual([<ExpectedChild />]);
+    expect(filtered).toStrictEqual([<ExpectedChild/>]);
   });
 });
