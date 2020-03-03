@@ -22,22 +22,22 @@ export const Tree: React.FC<PropsWithChildren<TreeProps>> & {
   const TreeComponent = isAlternative ? StyledTreeAlt : StyledTree;
 
   return (
-    <TreeComponent size={size}>
-      {nodes.map((node, key) => (
-        <Tree.Node
-          key={key}
-          {...node.props}
-          size={size}
-          isAlternative={isAlternative}
-        />
-      ))}
-    </TreeComponent>
+      <TreeComponent size={size}>
+        {nodes.map((node, key) => (
+            <Tree.Node
+                key={key}
+                {...node.props}
+                size={size}
+                isAlternative={isAlternative}
+            />
+        ))}
+      </TreeComponent>
   );
 };
 
 Tree.defaultProps = {
   isAlternative: false,
-  size: 'medium'
+  size: 'medium',
 };
 
 Tree.Node = Node;

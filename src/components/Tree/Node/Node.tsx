@@ -63,7 +63,7 @@ export const Node: FC<Readonly<
   const { getFilteredChildren } = useComposition();
   const nodes = getFilteredChildren(children, Node.displayName);
   const hasChildren: Readonly<boolean> = nodes.length > 0;
-  const content = getFilteredChildren(children, Tree.Node.displayName, true);
+  const content = getFilteredChildren(children, Node.displayName, true);
 
   let TreeNode = StyledTreeNode;
   let TreeNodeContent = StyledTreeNodeContent;

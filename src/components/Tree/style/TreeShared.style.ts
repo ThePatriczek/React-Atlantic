@@ -3,7 +3,7 @@ import { Size } from '../../../types';
 import { listGapSizeLg, listGapSizeMd, listGapSizeSm } from './variables';
 
 export interface StyledTreeProps {
-  size?: Size;
+    size?: Size;
 }
 
 export const StyledTreeShared = styled.ul<StyledTreeProps>`
@@ -18,20 +18,20 @@ export const StyledTreeShared = styled.ul<StyledTreeProps>`
   
   & & {
     ${props =>
-      props.size === 'small' &&
-      css`
+    props.size === 'small' &&
+    css`
         margin-left: ${listGapSizeSm};
       `}
     
     ${props =>
-      props.size === 'medium' &&
-      css`
+    props.size === 'medium' &&
+    css`
         margin-left: ${listGapSizeMd};
       `}
     
     ${props =>
-      props.size === 'large' &&
-      css`
+    props.size === 'large' &&
+    css`
         margin-left: ${listGapSizeLg};
       `}
   }
