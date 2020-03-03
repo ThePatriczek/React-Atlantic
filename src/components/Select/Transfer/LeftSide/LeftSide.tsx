@@ -3,16 +3,18 @@ import { Direction, Size } from '../../../../types';
 import { Checkbox } from '../../../Checkbox';
 import { Icon } from '../../../Icon';
 import { OptionType } from '../../Select.utils';
-import { TransferItem } from '../Transfer';
 import {
-  StyledInputHeader,
-  StyledSearchButton,
-  StyledTransferInput,
   StyledTransferLi,
   StyledTransferSide,
   StyledTransferUl
 } from '../style/Transfer.style';
+import { TransferItem } from '../Transfer';
 import { transferItemsRender } from '../Transfer.utils';
+import {
+  StyledInputHeader,
+  StyledSearchButton,
+  StyledTransferInput
+} from './style';
 
 export interface LeftSideProps {
   placeholder?: string;

@@ -1,18 +1,20 @@
 import React, { FC, ReactNode } from 'react';
 import { Direction, Size } from '../../../../types';
+import {
+  StyledTransferLi,
+  StyledTransferSide,
+  StyledTransferUl
+} from '../style/Transfer.style';
 import { TransferItem } from '../Transfer';
+import { transferItemsRender } from '../Transfer.utils';
 import {
   DeleteAllButton,
   StyledChosenHeader,
   StyledDeleteOneButton,
   StyledDeleteOneIcon,
   StyledTransferDeleteAllButtonIcon,
-  StyledTransferLi,
-  StyledTransferSide,
-  StyledTransferSpan,
-  StyledTransferUl
-} from '../style/Transfer.style';
-import { transferItemsRender } from '../Transfer.utils';
+  StyledTransferSpan
+} from './style';
 
 interface RightSideProps {
   checkedItems: TransferItem[];

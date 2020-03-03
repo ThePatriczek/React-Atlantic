@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button } from '../../../Button';
-import { StyledTransferFooter } from '../style/Transfer.style';
+import { StyledTransferFooter } from './style';
 
 export const Footer = (props: any) => {
   const { size, onClose, closeText, onSubmit, submitText } = props;
