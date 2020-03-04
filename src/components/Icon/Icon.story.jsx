@@ -54,6 +54,36 @@ stories.add('Overview', () => (
     <div>
       <Icon name={'news'} />
     </div>
+    <div>
+      <Icon name={'filePdf'} />
+    </div>
+    <div>
+      <Icon name={'fileDoc'} />
+    </div>
+    <div>
+      <Icon name={'fileJpg'} />
+    </div>
+    <div>
+      <Icon name={'filePng'} />
+    </div>
+    <div>
+      <Icon name={'filePpt'} />
+    </div>
+    <div>
+      <Icon name={'fileRtf'} />
+    </div>
+    <div>
+      <Icon name={'fileTxt'} />
+    </div>
+    <div>
+      <Icon name={'fileXls'} />
+    </div>
+    <div>
+      <Icon name={'fileXml'} />
+    </div>
+    <div>
+      <Icon name={'fileZip'} />
+    </div>
   </div>
 ));
 

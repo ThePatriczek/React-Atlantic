@@ -1,39 +1,48 @@
 import { ReactNode } from 'react';
 
+type GetFilteredChildren = (
+	children: Readonly<ReactNode>,
+	displayName?: Readonly<string>,
+	negation?: Readonly<boolean>,
+) => Array<Readonly<JSX.Element>>;
+
 interface UseCompositionValue {
-  getFilteredChildren: (
-    children: Readonly<ReactNode>,
-    displayName?: Readonly<string>
-  ) => Array<Readonly<JSX.Element>>;
+	getFilteredChildren: GetFilteredChildren;
 }
 
 export const useComposition = (): Readonly<UseCompositionValue> => {
-  const getFilteredChildren = (
-    children: Readonly<ReactNode>,
-    displayName?: Readonly<string>
-  ): Array<Readonly<JSX.Element>> => {
-    const items: Array<Readonly<JSX.Element>> = [];
+	const getFilteredChildren: GetFilteredChildren = (children, displayName?, negation = false) => {
+		const items: Array<Readonly<JSX.Element>> = [];
 
-    if (!displayName) {
-      throw new Error(`You have to fill displayName of the Component!`);
-    }
+		if (!displayName) {
+			throw new Error(`You have to fill displayName of the Component!`);
+		}
 
-    if (Array.isArray(children)) {
-      children.forEach((item: JSX.Element) => {
-        if (item?.type?.displayName === displayName) {
-          items.push(item);
-        }
-      });
-    } else {
-      const item = children as JSX.Element;
+		const filter = (item: Readonly<JSX.Element>) => {
+			const condition: Readonly<boolean> = negation
+				? item?.type?.displayName !== displayName
+				: item?.type?.displayName === displayName;
 
-      if (item?.type?.displayName === displayName) {
-        items.push(item);
-      }
-    }
+			if (condition && !Array.isArray(item)) {
+				items.push(item);
+			}
+		};
 
-    return items;
-  };
+		if (Array.isArray(children)) {
+			children.forEach((item) => {
+				filter(item);
 
-  return { getFilteredChildren };
+				if (Array.isArray(item)) {
+					item.map(filter);
+				}
+			});
+		} else {
+			const item = children as JSX.Element;
+			filter(item);
+		}
+
+		return items;
+	};
+
+	return { getFilteredChildren };
 };
