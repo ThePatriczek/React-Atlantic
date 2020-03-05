@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import * as React from 'react';
 import { Size } from '../../types';
 import { Icon, IconName } from '../Icon';
@@ -102,63 +103,53 @@ export const Input: React.FC<InputProps> & {
     isFullWidth,
     handlersWithEvent
   } = props;
-
   const ref = React.createRef<HTMLInputElement>();
-
   const [value, setValue] = React.useState<string>(defaultValue || ``);
-
   const [isFocused, setFocused] = React.useState<boolean>(false);
+
+  useEffect(() => {
+    if (typeof props.value !== 'undefined') {
+      setValue(props.value);
+    }
+  }, [props.value]);
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const val: string = e.target.value;
 
     if (!isDisabled) {
-      if (props.value === undefined) {
+      if (typeof props.value === 'undefined') {
         setValue(val);
-        if (props.onChange) {
-          props.onChange(handlersWithEvent ? e : val);
-        }
-      } else {
-        if (props.onChange) {
-          props.onChange(handlersWithEvent ? e : val);
-        }
       }
+
+      props.onChange?.(handlersWithEvent ? e : val);
     }
   };
 
   const onKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (onEnterPress) {
-      if (e.key === `Enter`) {
-        if (props.value || value) {
-          props.value ? onEnterPress(props.value) : onEnterPress(value);
-        }
-      }
+    if (e.key === `Enter`) {
+      onEnterPress?.(value);
     }
-    if (handlersWithEvent && props.onKeyDown) {
-      props.onKeyDown(e);
+
+    if (handlersWithEvent) {
+      props.onKeyDown?.(e);
     }
   };
 
   const onBlur = (e: React.FocusEvent<HTMLInputElement>) => {
     setFocused(false);
-    if (props.onBlur) {
-      props.onBlur();
-    }
+    props.onBlur?.();
   };
 
   const onFocus = (e: React.FocusEvent<HTMLInputElement>) => {
     setFocused(true);
-    if (props.onFocus) {
-      props.onFocus();
-    }
-  };
 
-  const val = props.value !== undefined ? props.value : value;
+    props.onFocus?.();
+  };
 
   const Component = (
     <StyledInput
       id={id}
-      value={val}
+      value={value}
       onChange={onChange}
       disabled={isDisabled}
       placeholder={isAlternative ? `` : placeholder}
@@ -180,7 +171,7 @@ export const Input: React.FC<InputProps> & {
       isFocused={transferFocus}
       iconLeft={!!iconLeft}
       iconRight={!!(iconRight || isLoading)}
-      hasValue={!!val}
+      hasValue={!!value}
       isDisabled={isDisabled}
       onClick={() => {
         if (ref.current) {
