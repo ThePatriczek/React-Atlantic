@@ -1,5 +1,6 @@
 export * from './Badge';
 export * from './Button';
+export * from './Carousel';
 export * from './Checkbox';
 export * from './DatePicker';
 export * from './Device';
