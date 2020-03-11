@@ -10,11 +10,7 @@ import {
 } from '../style/Transfer.style';
 import { TransferItem } from '../Transfer';
 import { transferItemsRender } from '../Transfer.utils';
-import {
-  StyledInputHeader,
-  StyledSearchButton,
-  StyledTransferInput
-} from './style';
+import { StyledSearchCancel, StyledTransferInput } from './style';
 
 export interface LeftSideProps {
   placeholder?: string;
@@ -97,29 +93,28 @@ export const LeftSide: FC<LeftSideProps> = props => {
       isHalfOpen={isHalfOpen}
       isOpen={isOpen}
       isFullWidth={isFullWidth}
+      side={'left'}
     >
-      <StyledInputHeader>
-        <StyledTransferInput
-          transferFocus={isOpen}
-          isAlternative={isAlternative}
-          direction={direction}
-          isHalfOpen={isHalfOpen}
-          onKeyDown={onKeyDown}
-          onChange={inputOnChange}
-          isOpen={isOpen}
-          value={isOpen ? searchedValue : resultValue}
-          placeholder={placeholder}
-          iconRight={isOpen ? 'arrowUp' : 'arrowDown'}
-          isFullWidth
-          onFocus={onFocus}
-          size={size}
-        />
-        {searchedValue && (
-          <StyledSearchButton onClick={() => setSearchedValue('')} size={size}>
-            <Icon name={'clear'} />
-          </StyledSearchButton>
-        )}
-      </StyledInputHeader>
+      <StyledTransferInput
+        transferFocus={isOpen}
+        isAlternative={isAlternative}
+        direction={direction}
+        isHalfOpen={isHalfOpen}
+        onKeyDown={onKeyDown}
+        onChange={inputOnChange}
+        isOpen={isOpen}
+        value={isOpen ? searchedValue : resultValue}
+        placeholder={placeholder}
+        iconRight={isOpen ? 'arrowUp' : 'arrowDown'}
+        isFullWidth
+        onFocus={onFocus}
+        size={size}
+      />
+      {searchedValue && (
+        <StyledSearchCancel onClick={() => setSearchedValue('')} size={size}>
+          <Icon name={'clear'} />
+        </StyledSearchCancel>
+      )}
       {isOpen && (
         <>
           {filtered.length > 0 && (

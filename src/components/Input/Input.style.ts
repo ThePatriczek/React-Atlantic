@@ -330,7 +330,7 @@ export const StyledInputWrapperAlt = styled.span<StyledInputWrapperProps>`
         ${!(props.isFocused || props.hasValue) &&
           css`
             padding-left: 30px;
-            transform: translateY(2px);
+            transform: translateY(0px);
           `}
       }
     `}
@@ -348,7 +348,7 @@ export const StyledInputWrapperAlt = styled.span<StyledInputWrapperProps>`
         ${!(props.isFocused || props.hasValue) &&
           css`
             padding-right: 30px;
-            transform: translateY(2px);
+            transform: translateY(0px);
           `}
       }
     `}

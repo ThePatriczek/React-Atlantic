@@ -8,8 +8,8 @@ import {
 import { TransferItem } from '../Transfer';
 import { transferItemsRender } from '../Transfer.utils';
 import {
-  DeleteAllButton,
   StyledChosenHeader,
+  StyledDeleteAllButton,
   StyledDeleteOneButton,
   StyledDeleteOneIcon,
   StyledTransferDeleteAllButtonIcon,
@@ -51,12 +51,13 @@ export const RightSide: FC<RightSideProps> = props => {
       isHalfOpen={isHalfOpen}
       isOpen={isOpen}
       isFullWidth={isFullWidth}
+      side={'right'}
     >
       <StyledChosenHeader size={size}>
         <StyledTransferSpan>
           {chosenComponent?.(checkedItems.length, items.length)}
         </StyledTransferSpan>
-        <DeleteAllButton
+        <StyledDeleteAllButton
           isTransparent
           globalSize={size}
           size={'small'}
@@ -69,7 +70,7 @@ export const RightSide: FC<RightSideProps> = props => {
             <StyledTransferDeleteAllButtonIcon name={'trash'} size={size} />
           )}
           {size !== 'small' && deleteAllText}
-        </DeleteAllButton>
+        </StyledDeleteAllButton>
       </StyledChosenHeader>
       <StyledTransferUl>
         {checkedItems.map((item: any) => (
