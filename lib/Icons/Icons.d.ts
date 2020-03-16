@@ -83,3 +83,4 @@ export declare const FlagLawCzech: () => JSX.Element;
 export declare const FlagLawEU: () => JSX.Element;
 export declare const FlagLiterature: () => JSX.Element;
 export declare const FlagSlovakia: () => JSX.Element;
+export declare const Virus: () => JSX.Element;
