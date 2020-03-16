@@ -86,7 +86,8 @@ export type IconName =
   | 'fileTxt'
   | 'fileXls'
   | 'fileXml'
-  | 'fileZip';
+  | 'fileZip'
+  | 'virus';
 
 export interface IconProps {
   name: IconName;
@@ -354,6 +355,9 @@ export const Icon: React.FC<IconProps> = (
       break;
     case 'fileZip':
       Component = <Icons.FileZip />;
+      break;
+    case 'virus':
+      Component = <Icons.Virus />;
       break;
   }
 
