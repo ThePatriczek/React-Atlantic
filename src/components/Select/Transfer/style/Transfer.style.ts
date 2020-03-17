@@ -173,7 +173,7 @@ export const StyledTransferLi = styled.li<StyledTransferProps>`
 
 export const StyledTransfer = styled.div<StyledTransferProps>`
   display: block;
-  width: fit-content;
+  width: 240px;
   border: 1px solid ${props => props.theme.color.border};
   border-radius: ${props => props.theme.radius};
   background-color: ${props => props.theme.color.background.alpha};
