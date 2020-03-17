@@ -52,10 +52,10 @@ export const Item: FC<ItemPropsPrivate> = (props): Readonly<ReactElement> => {
   return (
     <StyledTimelineItem className={className} highlight={isActive}>
       <StyledTimelineSide>
-        <StyledTimelineCircle isActive={isActive} onClick={onClick} />
+        <StyledTimelineCircle onClick={onClick} />
       </StyledTimelineSide>
       <StyledTimelineContainer isMain>
-        <StyledTimelineTitle href={'#'} isActive={isActive} onClick={onClick}>
+        <StyledTimelineTitle href={'#'} onClick={onClick}>
           <Title level={5}>{children}</Title>
         </StyledTimelineTitle>
         {captions && (

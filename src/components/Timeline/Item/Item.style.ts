@@ -14,38 +14,12 @@ export interface StyledTimelineItemProps {
 }
 
 export interface StyledTimelineCircleProps {
-  isActive?: boolean;
   type?: Type;
-}
-
-export interface StyledTimelineTitleProps {
-  isActive?: boolean;
 }
 
 export interface StyledTimelineContainerProps {
   isMain?: boolean;
 }
-
-export const StyledTimelineItem = styled.li<StyledTimelineItemProps>`
-  position: relative;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  margin-left: ${props =>
-    parseFloat(props.theme.margin.sm) + parseFloat(circleSize)}px;
-  padding: ${props => props.theme.padding.sm};
-  margin-bottom: ${props => props.theme.margin.md};
-  background-color: ${props => props.theme.color.background.alpha};
-  border-radius: ${props => props.theme.radius};
-
-  ${props =>
-    props.highlight &&
-    css`
-      background-color: ${props => props.theme.color.default};
-    `}
-`;
 
 export const StyledTimelineSide = styled.div`
   position: absolute;
@@ -70,15 +44,9 @@ export const StyledTimelineCircle = styled.div<StyledTimelineCircleProps>`
     css`
       border-color: ${props.theme.color[props.type]?.alpha};
     `}
-
-  ${props =>
-    props.isActive &&
-    css`
-      border-color: ${props => props.theme.color.primary.alpha};
-    `}
 `;
 
-export const StyledTimelineTitle = styled(Link)<StyledTimelineTitleProps>`
+export const StyledTimelineTitle = styled(Link)`
   display: block;
   margin: 0;
   font-weight: 600;
@@ -94,13 +62,9 @@ export const StyledTimelineTitle = styled(Link)<StyledTimelineTitleProps>`
 
   ${StyledTitle5} {
     margin: 0;
+    line-height: normal;
     color: ${props => props.theme.color.text.alpha};
-
-    ${props =>
-      props.isActive &&
-      css`
-        color: ${props => props.theme.color.primary.alpha};
-      `}
+    font-size: ${props => props.theme.font.size.md};
   }
 `;
 
@@ -119,7 +83,9 @@ export const StyledTimelineCaption = styled(Link)<{
     `}
 
   ${StyledText} {
+    margin: 0;
     color: ${props => props.theme.color.text.beta};
+    font-size: ${props => props.theme.font.size.sm};
   }
 `;
 
@@ -139,4 +105,50 @@ export const StyledTimelineButton = styled(PureButton)`
 
 export const StyledTimelineCaptionContainer = styled.div`
   display: flex;
+`;
+
+export const StyledTimelineItem = styled.li<StyledTimelineItemProps>`
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  margin-left: ${props =>
+    parseFloat(props.theme.margin.sm) + parseFloat(circleSize)}px;
+  padding: ${props => props.theme.padding.sm};
+  margin-bottom: ${props => props.theme.margin.md};
+  background-color: ${props => props.theme.color.default};
+  border-radius: ${props => props.theme.radius};
+
+  ${props =>
+    props.highlight &&
+    css`
+      background-color: ${props.theme.color.primary.alpha};
+
+      ${StyledTimelineCircle} {
+        border-color: ${props => props.theme.color.primary.alpha};
+      }
+
+      ${StyledTitle5} {
+        color: ${props.theme.color.text.gamma};
+
+        &:hover {
+          color: ${props.theme.color.text.gamma};
+          text-decoration: underline;
+        }
+      }
+
+      ${StyledTimelineCaption} {
+        color: ${props.theme.color.text.gamma};
+
+        ${StyledText} {
+          color: ${props.theme.color.text.gamma};
+        }
+      }
+
+      ${StyledTimelineButton} svg {
+        color: ${props.theme.color.text.gamma};
+      }
+    `}
 `;
