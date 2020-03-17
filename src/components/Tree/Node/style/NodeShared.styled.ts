@@ -18,6 +18,7 @@ export const StyledTreeButtonShared = styled(PureButton)`
   display: flex;
   align-items: center;
   justify-content: center;
+  align-self: flex-start;
   flex-basis: 0;
 
   && {
