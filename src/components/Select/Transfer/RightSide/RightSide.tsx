@@ -51,6 +51,7 @@ export const RightSide: FC<RightSideProps> = props => {
       isHalfOpen={isHalfOpen}
       isOpen={isOpen}
       isFullWidth={isFullWidth}
+      size={size}
       side={'right'}
     >
       <StyledChosenHeader size={size}>

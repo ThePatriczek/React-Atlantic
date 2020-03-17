@@ -74,7 +74,24 @@ export const StyledTransferSide = styled.div<StyledTransferSideProps>`
       ? '50%'
       : '100%'};
   font-family: ${props => props.theme.font.family};
-  font-size: ${props => props.theme.font.size.md};
+  
+  ${props =>
+    props.size === 'small' &&
+    css`
+      font-size: ${props.theme.font.size.sm};
+    `}
+  
+  ${props => 
+    props.size === 'medium' &&
+    css`
+      font-size: ${props.theme.font.size.md};
+    `}
+  
+  ${props =>
+    props.size === 'large' &&
+    css`
+      font-size: ${props.theme.font.size.lg};
+    `}
 
   ${props =>
     props.isHalfOpen &&

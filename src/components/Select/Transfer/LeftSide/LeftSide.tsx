@@ -93,6 +93,7 @@ export const LeftSide: FC<LeftSideProps> = props => {
       isHalfOpen={isHalfOpen}
       isOpen={isOpen}
       isFullWidth={isFullWidth}
+      size={size}
       side={'left'}
     >
       <StyledTransferInput
