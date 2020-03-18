@@ -15,6 +15,7 @@ import {
 } from './Checkbox.style';
 
 export interface CheckboxProps {
+  id?: Readonly<string>;
   isChecked?: boolean;
   isDefaultChecked?: boolean;
   isPartiallyChecked?: boolean;
@@ -36,7 +37,8 @@ export const Checkbox: React.FC<React.PropsWithChildren<CheckboxProps>> = (
     isDisabled,
     className,
     children,
-    handlersWithEvent
+    handlersWithEvent,
+    id
   } = props;
 
   const { onChangeClick, isChecked } = useClickChange({
@@ -75,6 +77,7 @@ export const Checkbox: React.FC<React.PropsWithChildren<CheckboxProps>> = (
       isChecked={props.isChecked || isChecked}
       isDisabled={isDisabled}
       className={className}
+      htmlFor={id}
     >
       {position === 'right' && (
         <StyledCheckboxSpan position={position} isDisabled={isDisabled}>
@@ -82,6 +85,7 @@ export const Checkbox: React.FC<React.PropsWithChildren<CheckboxProps>> = (
         </StyledCheckboxSpan>
       )}
       <HiddenCheckbox
+        id={id}
         checked={props.isChecked || isChecked}
         disabled={isDisabled}
       />
