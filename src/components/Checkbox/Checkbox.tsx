@@ -1,6 +1,6 @@
 import * as easings from 'd3-ease';
 import * as React from 'react';
-import { useRef } from 'react';
+import { ChangeEvent, useRef } from 'react';
 import { useChain, useSpring, useTrail } from 'react-spring/web.cjs';
 import { useClickChange } from '../../hooks/EventHandlers/useClickChange';
 import { CheckSimple } from '../../Icons';
@@ -19,10 +19,11 @@ export interface CheckboxProps {
   isDefaultChecked?: boolean;
   isPartiallyChecked?: boolean;
   isDisabled?: boolean;
-  onChange?: (isChecked: boolean) => void;
+  onChange?: (isChecked: boolean | ChangeEvent<HTMLInputElement>) => void;
   position?: HorizontalPosition;
   /** custom className */
   className?: string;
+  handlersWithEvent?: boolean;
 }
 
 export const Checkbox: React.FC<React.PropsWithChildren<CheckboxProps>> = (
@@ -34,7 +35,8 @@ export const Checkbox: React.FC<React.PropsWithChildren<CheckboxProps>> = (
     position,
     isDisabled,
     className,
-    children
+    children,
+    handlersWithEvent
   } = props;
 
   const { onChangeClick, isChecked } = useClickChange({
@@ -42,7 +44,8 @@ export const Checkbox: React.FC<React.PropsWithChildren<CheckboxProps>> = (
     isDefaultChecked,
     deps: [props.isChecked],
     isChecked: props.isChecked,
-    onChange: props.onChange
+    onChange: props.onChange,
+    handlersWithEvent
   });
 
   const springRef = useRef(null);

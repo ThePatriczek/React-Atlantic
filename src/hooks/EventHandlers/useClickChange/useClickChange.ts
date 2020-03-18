@@ -12,8 +12,11 @@ export interface UseClickChangeProps {
   isDisabled?: Readonly<boolean>;
   isDefaultChecked?: Readonly<boolean>;
   isChecked?: Readonly<boolean>;
-  onChange?: (isChecked: Readonly<boolean>) => void;
+  onChange?: (
+    isChecked: Readonly<boolean> | ChangeEvent<HTMLInputElement>
+  ) => void;
   deps?: ReadonlyArray<unknown>;
+  handlersWithEvent?: Readonly<boolean>;
 }
 
 export const useClickChange = (
@@ -35,11 +38,11 @@ export const useClickChange = (
             setChecked(e.type === 'click' ? !isChecked : e?.target.checked);
           }
           if (props.onChange) {
-            props.onChange(!isChecked);
+            props.onChange(props.handlersWithEvent ? e : !isChecked);
           }
         } else {
           if (props.onChange) {
-            props.onChange(!props.isChecked);
+            props.onChange(props.handlersWithEvent ? e : !props.isChecked);
           }
         }
       }
