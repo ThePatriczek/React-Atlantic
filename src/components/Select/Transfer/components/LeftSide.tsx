@@ -127,7 +127,9 @@ const LeftSide: FC<LeftSideProps> = props => {
                   <Checkbox
                     isChecked={item.isChecked}
                     onChange={isChecked => {
-                      onChange(item.value, isChecked);
+                      if (typeof isChecked === 'boolean') {
+                        onChange(item.value, isChecked);
+                      }
                     }}
                   >
                     {transferItemsRender(item, true)}
