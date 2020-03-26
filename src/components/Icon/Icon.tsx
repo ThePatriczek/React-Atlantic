@@ -89,7 +89,13 @@ export type IconName =
   | 'fileZip'
   | 'virus'
   | 'facebook'
-  | 'google';
+  | 'google'
+  | 'fileWithoutContent'
+  | 'notification'
+  | 'creditCard'
+  | 'attachment'
+  | 'inProgress'
+  | 'phone';
 
 export interface IconProps {
   name: IconName;
@@ -366,6 +372,24 @@ export const Icon: React.FC<IconProps> = (
       break;
     case 'google':
       Component = <Icons.Google />;
+      break;
+    case 'fileWithoutContent':
+      Component = <Icons.FileWithoutContent />;
+      break;
+    case 'notification':
+      Component = <Icons.Notification />;
+      break;
+    case 'creditCard':
+      Component = <Icons.CreditCard />;
+      break;
+    case 'attachment':
+      Component = <Icons.Attachment />;
+      break;
+    case 'inProgress':
+      Component = <Icons.InProgress />;
+      break;
+    case 'phone':
+      Component = <Icons.Phone />;
       break;
   }
 
