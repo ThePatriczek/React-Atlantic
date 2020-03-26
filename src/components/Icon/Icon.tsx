@@ -87,7 +87,9 @@ export type IconName =
   | 'fileXls'
   | 'fileXml'
   | 'fileZip'
-  | 'virus';
+  | 'virus'
+  | 'facebook'
+  | 'google';
 
 export interface IconProps {
   name: IconName;
@@ -358,6 +360,12 @@ export const Icon: React.FC<IconProps> = (
       break;
     case 'virus':
       Component = <Icons.Virus />;
+      break;
+    case 'facebook':
+      Component = <Icons.Facebook />;
+      break;
+    case 'google':
+      Component = <Icons.Google />;
       break;
   }
 
