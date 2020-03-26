@@ -87,7 +87,15 @@ export type IconName =
   | 'fileXls'
   | 'fileXml'
   | 'fileZip'
-  | 'virus';
+  | 'virus'
+  | 'facebook'
+  | 'google'
+  | 'fileWithoutContent'
+  | 'notification'
+  | 'creditCard'
+  | 'attachment'
+  | 'inProgress'
+  | 'phone';
 
 export interface IconProps {
   name: IconName;
@@ -358,6 +366,30 @@ export const Icon: React.FC<IconProps> = (
       break;
     case 'virus':
       Component = <Icons.Virus />;
+      break;
+    case 'facebook':
+      Component = <Icons.Facebook />;
+      break;
+    case 'google':
+      Component = <Icons.Google />;
+      break;
+    case 'fileWithoutContent':
+      Component = <Icons.FileWithoutContent />;
+      break;
+    case 'notification':
+      Component = <Icons.Notification />;
+      break;
+    case 'creditCard':
+      Component = <Icons.CreditCard />;
+      break;
+    case 'attachment':
+      Component = <Icons.Attachment />;
+      break;
+    case 'inProgress':
+      Component = <Icons.InProgress />;
+      break;
+    case 'phone':
+      Component = <Icons.Phone />;
       break;
   }
 
