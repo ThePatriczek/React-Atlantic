@@ -1,4 +1,5 @@
 import React, { createRef, FC, Fragment, ReactElement, useState } from 'react';
+import ReactTooltip from 'react-tooltip';
 import { Type } from '../../../types';
 import { StyledTypoButton } from '../../Button/Button.style';
 import { Icon } from '../../Icon';
@@ -32,6 +33,8 @@ export interface TextProps {
   copiedText?: string;
   /** text in edit tooltip */
   editText?: string;
+  /** tooltip tooltip */
+  tooltipProps?: Readonly<ReactTooltip.Props>;
 }
 
 const { TextArea } = Input;
@@ -45,7 +48,8 @@ export const Text: FC<TextProps> = (props: TextProps): ReactElement => {
     onEditConfirm,
     className,
     element,
-    editText
+    editText,
+    tooltipProps
   } = props;
   const [isEditing, setEditing] = useState<boolean>(false);
   const [value, setValue] = useState<string>(children);
@@ -116,7 +120,7 @@ export const Text: FC<TextProps> = (props: TextProps): ReactElement => {
           ref={editBtnRef}
         >
           <Icon name={'edit'} />
-          <Tooltip />
+          <Tooltip {...tooltipProps} />
         </StyledTypoButton>
       )}
       {isCopyable && (
@@ -138,7 +142,7 @@ export const Text: FC<TextProps> = (props: TextProps): ReactElement => {
           }}
         >
           <Icon name={'copy'} />
-          <Tooltip />
+          <Tooltip {...tooltipProps} />
         </StyledTypoButton>
       )}
     </Fragment>

@@ -95,7 +95,8 @@ export type IconName =
   | 'creditCard'
   | 'attachment'
   | 'inProgress'
-  | 'phone';
+  | 'phone'
+  | 'video';
 
 export interface IconProps {
   name: IconName;
@@ -390,6 +391,9 @@ export const Icon: React.FC<IconProps> = (
       break;
     case 'phone':
       Component = <Icons.Phone />;
+      break;
+    case 'video':
+      Component = <Icons.Video />;
       break;
   }
 

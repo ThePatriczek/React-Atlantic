@@ -2,6 +2,7 @@ import * as React from 'react';
 import { ChangeEvent } from 'react';
 import { HorizontalPosition } from '../../types';
 export interface CheckboxProps {
+    id?: Readonly<string>;
     isChecked?: boolean;
     isDefaultChecked?: boolean;
     isPartiallyChecked?: boolean;
