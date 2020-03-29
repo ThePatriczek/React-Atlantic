@@ -96,7 +96,11 @@ export type IconName =
   | 'attachment'
   | 'inProgress'
   | 'phone'
-  | 'video';
+  | 'video'
+  | 'crossedPhone'
+  | 'crossedCamera'
+  | 'microphone'
+  | 'crossedMicrophone';
 
 export interface IconProps {
   name: IconName;
@@ -394,6 +398,18 @@ export const Icon: React.FC<IconProps> = (
       break;
     case 'video':
       Component = <Icons.Video />;
+      break;
+    case 'crossedPhone':
+      Component = <Icons.CrossedPhone/>;
+      break;
+    case 'crossedCamera':
+      Component = <Icons.CrossedCamera/>;
+      break;
+    case 'microphone':
+      Component = <Icons.Microphone/>;
+      break;
+    case 'crossedMicrophone':
+      Component = <Icons.CrossedMicrophone/>;
       break;
   }
 
