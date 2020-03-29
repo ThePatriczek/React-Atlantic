@@ -1,4 +1,5 @@
 import { FC } from 'react';
+import ReactTooltip from 'react-tooltip';
 import { Type } from '../../../types';
 export declare type TextElement = 'span' | 'strong' | 'code' | 'del' | 'ins' | 'mark';
 export interface TextProps {
@@ -18,5 +19,7 @@ export interface TextProps {
     copiedText?: string;
     /** text in edit tooltip */
     editText?: string;
+    /** tooltip tooltip */
+    tooltipProps?: Readonly<ReactTooltip.Props>;
 }
 export declare const Text: FC<TextProps>;
