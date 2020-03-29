@@ -100,7 +100,8 @@ export type IconName =
   | 'crossedPhone'
   | 'crossedCamera'
   | 'microphone'
-  | 'crossedMicrophone';
+  | 'crossedMicrophone'
+  | 'emoji';
 
 export interface IconProps {
   name: IconName;
@@ -410,6 +411,9 @@ export const Icon: React.FC<IconProps> = (
       break;
     case 'crossedMicrophone':
       Component = <Icons.CrossedMicrophone/>;
+      break;
+    case 'emoji':
+      Component = <Icons.Emoji />;
       break;
   }
 
