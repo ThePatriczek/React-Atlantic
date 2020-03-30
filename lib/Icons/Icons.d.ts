@@ -97,3 +97,4 @@ export declare const CrossedPhone: () => JSX.Element;
 export declare const CrossedCamera: () => JSX.Element;
 export declare const Microphone: () => JSX.Element;
 export declare const CrossedMicrophone: () => JSX.Element;
+export declare const Emoji: () => JSX.Element;
