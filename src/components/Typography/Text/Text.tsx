@@ -1,5 +1,6 @@
 import React, { createRef, FC, Fragment, ReactElement, useState } from 'react';
 import ReactTooltip from 'react-tooltip';
+import { v4 } from 'uuid';
 import { Type } from '../../../types';
 import { StyledTypoButton } from '../../Button/Button.style';
 import { Icon } from '../../Icon';
@@ -51,6 +52,7 @@ export const Text: FC<TextProps> = (props: TextProps): ReactElement => {
     editText,
     tooltipProps
   } = props;
+  const id = v4();
   const [isEditing, setEditing] = useState<boolean>(false);
   const [value, setValue] = useState<string>(children);
   const [copyText, setCopyText] = useState<string>(props.copyText as string);
@@ -106,7 +108,8 @@ export const Text: FC<TextProps> = (props: TextProps): ReactElement => {
       {isEditable && (
         <StyledTypoButton
           onClick={onEdit}
-          data-tip={editText}
+          data-tip
+          data-for={id}
           onMouseEnter={() => {
             if (editBtnRef.current) {
               Tooltip.show(editBtnRef.current);
@@ -120,13 +123,16 @@ export const Text: FC<TextProps> = (props: TextProps): ReactElement => {
           ref={editBtnRef}
         >
           <Icon name={'edit'} />
-          <Tooltip {...tooltipProps} />
+          <Tooltip id={id} {...tooltipProps}>
+            {editText}
+          </Tooltip>
         </StyledTypoButton>
       )}
       {isCopyable && (
         <StyledTypoButton
           onClick={onCopy}
-          data-tip={copyText}
+          data-tip
+          data-for={id}
           ref={copyBtnRef}
           key={copyText}
           onMouseEnter={() => {
@@ -142,7 +148,9 @@ export const Text: FC<TextProps> = (props: TextProps): ReactElement => {
           }}
         >
           <Icon name={'copy'} />
-          <Tooltip {...tooltipProps} />
+          <Tooltip id={id} {...tooltipProps}>
+            {copyText}
+          </Tooltip>
         </StyledTypoButton>
       )}
     </Fragment>

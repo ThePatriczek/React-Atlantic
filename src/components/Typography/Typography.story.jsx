@@ -27,7 +27,11 @@ stories.add('Overview', () => {
           <Link href={`#`}>{`Custom link in paragraph`}</Link>
           <Text>{`Text`}</Text>
           <Text element={'strong'}>{`Strong Text`}</Text>
-          <Text isCopyable>{`Copyable Text`}</Text>
+          <Text isCopyable tooltipProps={{place: 'bottom'}}>{`Copyable Text`}</Text>
+          <Text isCopyable tooltipProps={{place: 'right'}}>{`Copyable Text`}</Text>
+          <Text isEditable>{`Copyable Text`}</Text>
+          <Text isEditable>{`Copyable Text`}</Text>
+          <Text isCopyable tooltipProps={{place: 'top'}}>{`Copyable Text`}</Text>
         </Paragraph>
       </div>
       <div>
