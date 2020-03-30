@@ -101,7 +101,12 @@ export type IconName =
   | 'crossedCamera'
   | 'microphone'
   | 'crossedMicrophone'
-  | 'emoji';
+  | 'emoji'
+  | 'facebookFilled'
+  | 'envelope'
+  | 'login'
+  | 'plusSquare'
+  | 'send';
 
 export interface IconProps {
   name: IconName;
@@ -414,6 +419,21 @@ export const Icon: React.FC<IconProps> = (
       break;
     case 'emoji':
       Component = <Icons.Emoji />;
+      break;
+    case 'facebookFilled':
+      Component = <Icons.FacebookFilled />;
+      break;
+    case 'envelope':
+      Component = <Icons.Envelope />;
+      break;
+    case 'login':
+      Component = <Icons.Login />;
+      break;
+    case 'plusSquare':
+      Component = <Icons.PlusSquare />;
+      break;
+    case 'send':
+      Component = <Icons.Send />;
       break;
   }
 
