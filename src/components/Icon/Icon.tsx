@@ -106,7 +106,11 @@ export type IconName =
   | 'envelope'
   | 'login'
   | 'plusSquare'
-  | 'send';
+  | 'send'
+  | 'cog'
+  | 'hash'
+  | 'robot'
+  | 'switch';
 
 export interface IconProps {
   name: IconName;
@@ -406,16 +410,16 @@ export const Icon: React.FC<IconProps> = (
       Component = <Icons.Video />;
       break;
     case 'crossedPhone':
-      Component = <Icons.CrossedPhone/>;
+      Component = <Icons.CrossedPhone />;
       break;
     case 'crossedCamera':
-      Component = <Icons.CrossedCamera/>;
+      Component = <Icons.CrossedCamera />;
       break;
     case 'microphone':
-      Component = <Icons.Microphone/>;
+      Component = <Icons.Microphone />;
       break;
     case 'crossedMicrophone':
-      Component = <Icons.CrossedMicrophone/>;
+      Component = <Icons.CrossedMicrophone />;
       break;
     case 'emoji':
       Component = <Icons.Emoji />;
@@ -434,6 +438,18 @@ export const Icon: React.FC<IconProps> = (
       break;
     case 'send':
       Component = <Icons.Send />;
+      break;
+    case 'cog':
+      Component = <Icons.Cog />;
+      break;
+    case 'hash':
+      Component = <Icons.Hash />;
+      break;
+    case 'robot':
+      Component = <Icons.Robot />;
+      break;
+    case 'switch':
+      Component = <Icons.Switch />;
       break;
   }
 
