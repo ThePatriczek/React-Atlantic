@@ -103,3 +103,7 @@ export declare const Envelope: () => JSX.Element;
 export declare const Login: () => JSX.Element;
 export declare const PlusSquare: () => JSX.Element;
 export declare const Send: () => JSX.Element;
+export declare const Cog: () => JSX.Element;
+export declare const Hash: () => JSX.Element;
+export declare const Robot: () => JSX.Element;
+export declare const Switch: () => JSX.Element;
