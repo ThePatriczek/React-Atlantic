@@ -107,12 +107,6 @@ export const Input: React.FC<InputProps> & {
   const [value, setValue] = React.useState<string>(defaultValue || ``);
   const [isFocused, setFocused] = React.useState<boolean>(false);
 
-  useEffect(() => {
-    if (typeof props.value !== 'undefined') {
-      setValue(props.value);
-    }
-  }, [props.value]);
-
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const val: string = e.target.value;
 
@@ -145,11 +139,12 @@ export const Input: React.FC<InputProps> & {
 
     props.onFocus?.();
   };
+  const val = props.value !== undefined ? props.value : value;
 
   const Component = (
     <StyledInput
       id={id}
-      value={value}
+      value={val}
       onChange={onChange}
       disabled={isDisabled}
       placeholder={isAlternative ? `` : placeholder}
@@ -171,7 +166,7 @@ export const Input: React.FC<InputProps> & {
       isFocused={transferFocus}
       iconLeft={!!iconLeft}
       iconRight={!!(iconRight || isLoading)}
-      hasValue={!!value}
+      hasValue={!!val}
       isDisabled={isDisabled}
       onClick={() => {
         if (ref.current) {
