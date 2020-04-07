@@ -46,6 +46,10 @@ export const DatePicker: React.FC<DatePickerProps> = (
   const selectToday = () => {
     setDate(new Date());
     datePickerRef.current?.setOpen(false);
+
+    if (onChange) {
+      onChange(new Date());
+    }
   };
 
   const handleChange = (date: Date) => {
