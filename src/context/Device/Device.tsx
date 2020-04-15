@@ -151,7 +151,7 @@ export const DeviceProvider: FC<Readonly<
   );
 };
 
-const debounce = (cb: () => void, interval: Readonly<number>) => {
+export const debounce = (cb: () => void, interval: Readonly<number>) => {
   let timeout;
 
   return (...args: ReadonlyArray<Event>) => {
