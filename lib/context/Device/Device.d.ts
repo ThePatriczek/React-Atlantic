@@ -21,4 +21,5 @@ export interface DeviceProviderProps {
     currentDevice?: Readonly<DeviceType>;
 }
 export declare const DeviceProvider: FC<Readonly<PropsWithChildren<Readonly<DeviceProviderProps>>>>;
+export declare const debounce: (cb: () => void, interval: number) => (...args: readonly Event[]) => void;
 export {};
