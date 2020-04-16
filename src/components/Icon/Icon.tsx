@@ -110,7 +110,9 @@ export type IconName =
   | 'cog'
   | 'hash'
   | 'robot'
-  | 'switch';
+  | 'switch'
+  | 'send'
+  | 'userAdd';
 
 export interface IconProps {
   name: IconName;
@@ -450,6 +452,9 @@ export const Icon: React.FC<IconProps> = (
       break;
     case 'switch':
       Component = <Icons.Switch />;
+      break;
+    case 'userAdd':
+      Component = <Icons.UserAdd />;
       break;
   }
 
