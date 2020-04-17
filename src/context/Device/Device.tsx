@@ -132,7 +132,7 @@ export const DeviceProvider: FC<Readonly<
   };
 
   const isTouchable: Readonly<boolean> =
-    window &&
+    typeof window !== 'undefined' &&
     currentDevice !== 'laptop' &&
     currentDevice !== 'desktop' &&
     ('ontouchstart' in window ||

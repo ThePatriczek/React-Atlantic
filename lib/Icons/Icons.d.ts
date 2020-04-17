@@ -107,3 +107,4 @@ export declare const Cog: () => JSX.Element;
 export declare const Hash: () => JSX.Element;
 export declare const Robot: () => JSX.Element;
 export declare const Switch: () => JSX.Element;
+export declare const UserAdd: () => JSX.Element;
