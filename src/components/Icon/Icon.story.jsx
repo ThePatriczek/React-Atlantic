@@ -84,6 +84,12 @@ stories.add('Overview', () => (
     <div>
       <Icon name={'fileZip'} />
     </div>
+    <div>
+      <Icon name={'building'} />
+    </div>
+    <div>
+      <Icon name={'offer'} />
+    </div>
   </div>
 ));
 

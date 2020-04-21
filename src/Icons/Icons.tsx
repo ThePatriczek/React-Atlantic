@@ -1875,6 +1875,7 @@ export const Attachment = () => (
     />
   </svg>
 );
+
 export const InProgress = () => (
   <svg
     aria-hidden="true"
@@ -1889,6 +1890,7 @@ export const InProgress = () => (
     ></path>
   </svg>
 );
+
 export const Phone = () => (
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14 14">
     <path
@@ -1898,6 +1900,7 @@ export const Phone = () => (
     />
   </svg>
 );
+
 export const Video = () => (
   <svg
     aria-hidden="true"
@@ -1912,6 +1915,7 @@ export const Video = () => (
     ></path>
   </svg>
 );
+
 export const CrossedPhone = () => (
   <svg
     aria-hidden="true"
@@ -1926,6 +1930,7 @@ export const CrossedPhone = () => (
     ></path>
   </svg>
 );
+
 export const CrossedCamera = () => (
   <svg
     aria-hidden="true"
@@ -1940,6 +1945,7 @@ export const CrossedCamera = () => (
     ></path>
   </svg>
 );
+
 export const Microphone = () => (
   <svg
     aria-hidden="true"
@@ -1954,6 +1960,7 @@ export const Microphone = () => (
     ></path>
   </svg>
 );
+
 export const CrossedMicrophone = () => (
   <svg
     aria-hidden="true"
@@ -1968,6 +1975,7 @@ export const CrossedMicrophone = () => (
     ></path>
   </svg>
 );
+
 export const Emoji = () => (
   <svg
     aria-hidden="true"
@@ -1982,6 +1990,7 @@ export const Emoji = () => (
     ></path>
   </svg>
 );
+
 export const FacebookFilled = () => (
   <svg
     aria-hidden="true"
@@ -1996,6 +2005,7 @@ export const FacebookFilled = () => (
     ></path>
   </svg>
 );
+
 export const Envelope = () => (
   <svg
     aria-hidden="true"
@@ -2010,6 +2020,7 @@ export const Envelope = () => (
     ></path>
   </svg>
 );
+
 export const Login = () => (
   <svg
     aria-hidden="true"
@@ -2024,6 +2035,7 @@ export const Login = () => (
     ></path>
   </svg>
 );
+
 export const PlusSquare = () => (
   <svg
     aria-hidden="true"
@@ -2038,6 +2050,7 @@ export const PlusSquare = () => (
     ></path>
   </svg>
 );
+
 export const Send = () => (
   <svg
     aria-hidden="true"
@@ -2112,6 +2125,7 @@ export const Switch = () => (
     ></path>
   </svg>
 );
+
 export const UserAdd = () => (
   <svg
     aria-hidden="true"
@@ -2124,5 +2138,29 @@ export const UserAdd = () => (
       fill="currentColor"
       d="M624 208h-64v-64c0-8.8-7.2-16-16-16h-32c-8.8 0-16 7.2-16 16v64h-64c-8.8 0-16 7.2-16 16v32c0 8.8 7.2 16 16 16h64v64c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16v-64h64c8.8 0 16-7.2 16-16v-32c0-8.8-7.2-16-16-16zm-400 48c70.7 0 128-57.3 128-128S294.7 0 224 0 96 57.3 96 128s57.3 128 128 128zm89.6 32h-16.7c-22.2 10.2-46.9 16-72.9 16s-50.6-5.8-72.9-16h-16.7C60.2 288 0 348.2 0 422.4V464c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48v-41.6c0-74.2-60.2-134.4-134.4-134.4z"
     ></path>
+  </svg>
+);
+
+export const Building = () => (
+  <svg
+    aria-hidden="true"
+    focusable="false"
+    role="img"
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 448 512"
+  >
+    <path
+      fill="currentColor"
+      d="M436 480h-20V24c0-13.255-10.745-24-24-24H56C42.745 0 32 10.745 32 24v456H12c-6.627 0-12 5.373-12 12v20h448v-20c0-6.627-5.373-12-12-12zM128 76c0-6.627 5.373-12 12-12h40c6.627 0 12 5.373 12 12v40c0 6.627-5.373 12-12 12h-40c-6.627 0-12-5.373-12-12V76zm0 96c0-6.627 5.373-12 12-12h40c6.627 0 12 5.373 12 12v40c0 6.627-5.373 12-12 12h-40c-6.627 0-12-5.373-12-12v-40zm52 148h-40c-6.627 0-12-5.373-12-12v-40c0-6.627 5.373-12 12-12h40c6.627 0 12 5.373 12 12v40c0 6.627-5.373 12-12 12zm76 160h-64v-84c0-6.627 5.373-12 12-12h40c6.627 0 12 5.373 12 12v84zm64-172c0 6.627-5.373 12-12 12h-40c-6.627 0-12-5.373-12-12v-40c0-6.627 5.373-12 12-12h40c6.627 0 12 5.373 12 12v40zm0-96c0 6.627-5.373 12-12 12h-40c-6.627 0-12-5.373-12-12v-40c0-6.627 5.373-12 12-12h40c6.627 0 12 5.373 12 12v40zm0-96c0 6.627-5.373 12-12 12h-40c-6.627 0-12-5.373-12-12V76c0-6.627 5.373-12 12-12h40c6.627 0 12 5.373 12 12v40z"
+    ></path>
+  </svg>
+);
+
+export const Offer = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 14.222">
+    <path
+      d="M4.444,12.444a3.369,3.369,0,0,1-1.778-.889C.889,10.311.356,9.867,0,9.6v3.733a.889.889,0,0,0,.889.889H8a.889.889,0,0,0,.889-.889V9.6c-.356.267-.889.711-2.667,1.956A3.369,3.369,0,0,1,4.444,12.444ZM8,7.111H.889A.889.889,0,0,0,0,8v.444c.711.533.622.533,3.2,2.4.267.178.8.711,1.244.711s.978-.533,1.244-.622c2.578-1.867,2.489-1.867,3.2-2.4V8A.889.889,0,0,0,8,7.111Zm7.111-2.667H6.222a.889.889,0,0,0-.889.889v.889H8A1.78,1.78,0,0,1,9.77,7.828l.008-.006v3.733h5.333A.889.889,0,0,0,16,10.667V5.333A.889.889,0,0,0,15.111,4.444ZM14.222,8H12.444V6.222h1.778ZM4.444,5.333A1.78,1.78,0,0,1,6.222,3.556h6.222V.889A.889.889,0,0,0,11.556,0H2.667a.889.889,0,0,0-.889.889V6.222H4.444Z"
+      fill="currentColor"
+    />
   </svg>
 );
