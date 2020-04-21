@@ -111,8 +111,9 @@ export type IconName =
   | 'hash'
   | 'robot'
   | 'switch'
-  | 'send'
-  | 'userAdd';
+  | 'userAdd'
+  | 'building'
+  | 'offer';
 
 export interface IconProps {
   name: IconName;
@@ -455,6 +456,12 @@ export const Icon: React.FC<IconProps> = (
       break;
     case 'userAdd':
       Component = <Icons.UserAdd />;
+      break;
+    case 'building':
+      Component = <Icons.Building />;
+      break;
+    case 'offer':
+      Component = <Icons.Offer />;
       break;
   }
 
