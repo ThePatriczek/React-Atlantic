@@ -4,8 +4,8 @@ import { Size } from '../../types';
 
 export interface StyledInputWrapperProps {
   isLoading?: boolean;
-  iconLeft?: boolean;
-  iconRight?: boolean;
+  isLeftComponent?: boolean;
+  isRightComponent?: boolean;
   isFocused?: boolean;
   hasValue?: boolean;
   isDisabled?: boolean;
@@ -32,7 +32,7 @@ export const StyledInputWrapper = styled.span<StyledInputWrapperProps>`
     `}
 
   ${props =>
-    props.iconLeft &&
+    props.isLeftComponent &&
     css`
       i {
         left: ${props.theme.padding.md};
@@ -43,7 +43,7 @@ export const StyledInputWrapper = styled.span<StyledInputWrapperProps>`
     `}
 
   ${props =>
-    props.iconRight &&
+    props.isRightComponent &&
     css`
       i {
         right: ${props.theme.padding.md};
@@ -319,7 +319,7 @@ export const StyledInputWrapperAlt = styled.span<StyledInputWrapperProps>`
   }
 
   ${props =>
-    props.iconLeft &&
+    props.isLeftComponent &&
     css`
       input {
         padding-right: ${props.theme.padding.md};
@@ -336,7 +336,7 @@ export const StyledInputWrapperAlt = styled.span<StyledInputWrapperProps>`
     `}
 
   ${props =>
-    props.iconRight &&
+    props.isRightComponent &&
     css`
       input {
         padding-left: ${props.theme.padding.md};

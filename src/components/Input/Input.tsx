@@ -1,5 +1,4 @@
-import { useEffect } from 'react';
-import * as React from 'react';
+import React, { useEffect } from 'react';
 import { Size } from '../../types';
 import { Icon, IconName } from '../Icon';
 import {
@@ -70,6 +69,8 @@ export interface InputProps {
   onFocus?: () => void;
   iconLeft?: IconName;
   iconRight?: IconName;
+  ComponentLeft?: Icon;
+  ComponentRight?: Icon;
   isAlternative?: boolean;
   size?: Size;
   isLoading?: boolean;
@@ -93,6 +94,8 @@ export const Input: React.FC<InputProps> & {
     onEnterPress,
     iconLeft,
     iconRight,
+    ComponentLeft,
+    ComponentRight,
     autoFocus,
     isAlternative,
     size,
@@ -103,6 +106,25 @@ export const Input: React.FC<InputProps> & {
     isFullWidth,
     handlersWithEvent
   } = props;
+
+  useEffect(() => {
+    if (!!iconRight && !!ComponentRight) {
+      const err = new Error(
+        `Only one of iconRight or componentRight can be defined at the same time`
+      );
+      throw err;
+    }
+  }, [iconRight, ComponentRight]);
+
+  useEffect(() => {
+    if (!!iconRight && !!ComponentRight) {
+      const err = new Error(
+        `Only one of iconLeft or componentLeft can be defined at the same time`
+      );
+      throw err;
+    }
+  }, [iconLeft, ComponentLeft]);
+
   const ref = React.createRef<HTMLInputElement>();
   const [value, setValue] = React.useState<string>(defaultValue || ``);
   const [isFocused, setFocused] = React.useState<boolean>(false);
@@ -164,8 +186,8 @@ export const Input: React.FC<InputProps> & {
     <StyledInputWrapperAlt
       size={size as Size}
       isFocused={transferFocus}
-      iconLeft={!!iconLeft}
-      iconRight={!!(iconRight || isLoading)}
+      isLeftComponent={!!iconLeft}
+      isRightComponent={!!(iconRight || isLoading)}
       hasValue={!!val}
       isDisabled={isDisabled}
       onClick={() => {
@@ -182,8 +204,8 @@ export const Input: React.FC<InputProps> & {
           isFocused={
             typeof transferFocus !== 'undefined' ? transferFocus : isFocused
           }
-          iconLeft={!!iconLeft}
-          iconRight={!!(iconRight || isLoading)}
+          isLeftComponent={!!iconLeft}
+          isRightComponent={!!(iconRight || isLoading)}
           isDisabled={isDisabled}
           onClick={() => {
             if (ref.current) {
@@ -193,12 +215,13 @@ export const Input: React.FC<InputProps> & {
           isFullWidth={isFullWidth}
         >
           {iconLeft && <Icon name={iconLeft} />}
-
+          {!!ComponentLeft && ComponentLeft}
           {Component}
 
           <label>{placeholder}</label>
           {isLoading && <Icon name={'loading'} isRotating />}
           {iconRight && !isLoading && <Icon name={iconRight} />}
+          {!!ComponentRight && !isLoading && ComponentRight}
         </StyledInputWrapper>
       ) : (
         <>
@@ -216,8 +239,8 @@ export const Input: React.FC<InputProps> & {
   return (
     <StyledInputWrapper
       isFocused={isFocused}
-      iconLeft={!!iconLeft}
-      iconRight={!!(iconRight || isLoading)}
+      isLeftComponent={!!(iconLeft || ComponentLeft)}
+      isRightComponent={!!(isLoading || iconRight || ComponentRight)}
       isDisabled={isDisabled}
       size={size as Size}
       onClick={() => {
@@ -229,11 +252,11 @@ export const Input: React.FC<InputProps> & {
       isFullWidth={isFullWidth}
     >
       {iconLeft && <Icon name={iconLeft} />}
-
+      {!!ComponentLeft && ComponentLeft}
       {Component}
-
       {isLoading && <Icon name={'loading'} isRotating />}
       {iconRight && !isLoading && <Icon name={iconRight} />}
+      {!!ComponentRight && !isLoading && ComponentRight}
     </StyledInputWrapper>
   );
 };
