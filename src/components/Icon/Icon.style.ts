@@ -1,12 +1,7 @@
 import { animated } from 'react-spring/web.cjs';
 import styled, { css, keyframes } from 'styled-components';
 import { theme } from '../../theme';
-import { IconName } from './Icon';
-
-export interface StyledIconProps {
-  isRotating?: boolean;
-  name?: IconName;
-}
+import { IconProps } from './Icon';
 
 export const spin = () => {
   return keyframes`
@@ -16,8 +11,9 @@ export const spin = () => {
   }`;
 };
 
-export const StyledIcon = styled.i<StyledIconProps>`
+export const StyledIcon = styled.i<IconProps>`
   display: inline-block;
+  cursor: ${props => (props.onClick ? 'pointer' : 'inherit')};
   line-height: 0;
   height: ${props => props.theme.font.size.md};
   width: ${props => props.theme.font.size.md};

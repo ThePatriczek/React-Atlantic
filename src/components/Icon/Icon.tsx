@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { DetailedHTMLProps } from 'react';
 import * as Icons from '../../Icons';
 import { StyledIcon } from './Icon.style';
 
@@ -115,19 +115,17 @@ export type IconName =
   | 'building'
   | 'offer';
 
-export interface IconProps {
+export interface IconProps extends React.HTMLAttributes<HTMLElement> {
   name: IconName;
   isRotating?: boolean;
-  /** custom className */
-  className?: string;
 }
 
-export const Icon: React.FC<IconProps> = (
-  props: IconProps
-): React.ReactElement => {
-  const { name, isRotating, className } = props;
-
-  let Component = <i className={className} />;
+export const Icon: React.FC<IconProps> = ({
+  name,
+  isRotating,
+  ...IProps
+}): React.ReactElement => {
+  let Component = <i {...IProps} />;
 
   switch (name) {
     case 'arrowsVertical':
@@ -466,7 +464,7 @@ export const Icon: React.FC<IconProps> = (
   }
 
   return (
-    <StyledIcon isRotating={isRotating} className={className} name={name}>
+    <StyledIcon isRotating={isRotating} name={name} {...IProps}>
       {Component}
     </StyledIcon>
   );
