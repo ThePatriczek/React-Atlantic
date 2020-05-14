@@ -3,16 +3,14 @@ import { Direction, Size } from '../../../../types';
 import { Checkbox } from '../../../Checkbox';
 import { Icon } from '../../../Icon';
 import { OptionType } from '../../Select.utils';
-import { TransferItem } from '../Transfer';
 import {
-  StyledInputHeader,
-  StyledSearchButton,
-  StyledTransferInput,
   StyledTransferLi,
   StyledTransferSide,
   StyledTransferUl
-} from '../Transfer.style';
+} from '../style/Transfer.style';
+import { TransferItem } from '../Transfer';
 import { transferItemsRender } from '../Transfer.utils';
+import { StyledSearchCancel, StyledTransferInput } from './style';
 
 export interface LeftSideProps {
   placeholder?: string;
@@ -42,7 +40,7 @@ export interface LeftSideProps {
   onKeyDown: (e: any) => void;
 }
 
-const LeftSide: FC<LeftSideProps> = props => {
+export const LeftSide: FC<LeftSideProps> = props => {
   const {
     items,
     isFocused,
@@ -95,29 +93,29 @@ const LeftSide: FC<LeftSideProps> = props => {
       isHalfOpen={isHalfOpen}
       isOpen={isOpen}
       isFullWidth={isFullWidth}
+      size={size}
+      side={'left'}
     >
-      <StyledInputHeader>
-        <StyledTransferInput
-          transferFocus={isOpen}
-          isAlternative={isAlternative}
-          direction={direction}
-          isHalfOpen={isHalfOpen}
-          onKeyDown={onKeyDown}
-          onChange={inputOnChange}
-          isOpen={isOpen}
-          value={isOpen ? searchedValue : resultValue}
-          placeholder={placeholder}
-          iconRight={isOpen ? 'arrowUp' : 'arrowDown'}
-          isFullWidth
-          onFocus={onFocus}
-          size={size}
-        />
-        {searchedValue && (
-          <StyledSearchButton onClick={() => setSearchedValue('')} size={size}>
-            <Icon name={'clear'} />
-          </StyledSearchButton>
-        )}
-      </StyledInputHeader>
+      <StyledTransferInput
+        transferFocus={isOpen}
+        isAlternative={isAlternative}
+        direction={direction}
+        isHalfOpen={isHalfOpen}
+        onKeyDown={onKeyDown}
+        onChange={inputOnChange}
+        isOpen={isOpen}
+        value={isOpen ? searchedValue : resultValue}
+        placeholder={placeholder}
+        iconRight={isOpen ? 'arrowUp' : 'arrowDown'}
+        isFullWidth
+        onFocus={onFocus}
+        size={size}
+      />
+      {searchedValue && (
+        <StyledSearchCancel onClick={() => setSearchedValue('')} size={size}>
+          <Icon name={'clear'} />
+        </StyledSearchCancel>
+      )}
       {isOpen && (
         <>
           {filtered.length > 0 && (
@@ -144,5 +142,3 @@ const LeftSide: FC<LeftSideProps> = props => {
     </StyledTransferSide>
   );
 };
-
-export default LeftSide;

@@ -1,18 +1,20 @@
 import React, { FC, ReactNode } from 'react';
 import { Direction, Size } from '../../../../types';
-import { TransferItem } from '../Transfer';
 import {
-  DeleteAllButton,
+  StyledTransferLi,
+  StyledTransferSide,
+  StyledTransferUl
+} from '../style/Transfer.style';
+import { TransferItem } from '../Transfer';
+import { transferItemsRender } from '../Transfer.utils';
+import {
   StyledChosenHeader,
+  StyledDeleteAllButton,
   StyledDeleteOneButton,
   StyledDeleteOneIcon,
   StyledTransferDeleteAllButtonIcon,
-  StyledTransferLi,
-  StyledTransferSide,
-  StyledTransferSpan,
-  StyledTransferUl
-} from '../Transfer.style';
-import { transferItemsRender } from '../Transfer.utils';
+  StyledTransferSpan
+} from './style';
 
 interface RightSideProps {
   checkedItems: TransferItem[];
@@ -28,7 +30,7 @@ interface RightSideProps {
   chosenComponent?: (checked: number, total: number) => ReactNode;
 }
 
-const RightSide: FC<RightSideProps> = props => {
+export const RightSide: FC<RightSideProps> = props => {
   const {
     chosenComponent,
     checkedItems,
@@ -49,12 +51,14 @@ const RightSide: FC<RightSideProps> = props => {
       isHalfOpen={isHalfOpen}
       isOpen={isOpen}
       isFullWidth={isFullWidth}
+      size={size}
+      side={'right'}
     >
       <StyledChosenHeader size={size}>
         <StyledTransferSpan>
           {chosenComponent?.(checkedItems.length, items.length)}
         </StyledTransferSpan>
-        <DeleteAllButton
+        <StyledDeleteAllButton
           isTransparent
           globalSize={size}
           size={'small'}
@@ -67,7 +71,7 @@ const RightSide: FC<RightSideProps> = props => {
             <StyledTransferDeleteAllButtonIcon name={'trash'} size={size} />
           )}
           {size !== 'small' && deleteAllText}
-        </DeleteAllButton>
+        </StyledDeleteAllButton>
       </StyledChosenHeader>
       <StyledTransferUl>
         {checkedItems.map((item: any) => (
@@ -88,5 +92,3 @@ const RightSide: FC<RightSideProps> = props => {
     </StyledTransferSide>
   );
 };
-
-export default RightSide;

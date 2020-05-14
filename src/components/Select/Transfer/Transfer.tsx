@@ -8,19 +8,14 @@ import React, {
   useState
 } from 'react';
 import { useEventListener } from '../../../hooks/EventHandlers/useEventListener';
-import { Direction, Position, Size } from '../../../types';
+import { Direction, Size } from '../../../types';
 import { NotFound } from '../../NotFound';
 import { Option, OptionProps } from '../Option';
-import {
-  checkChildrenAndOptions,
-  getPositionOfElementInViewport,
-  isElementInViewport,
-  OptionType
-} from '../Select.utils';
-import Footer from './components/Footer';
-import LeftSide from './components/LeftSide';
-import RightSide from './components/RightSide';
-import { StyledTransfer, StyledTransferContainer } from './Transfer.style';
+import { checkChildrenAndOptions, OptionType } from '../Select.utils';
+import { Footer } from './Footer';
+import { LeftSide } from './LeftSide';
+import { RightSide } from './RightSide';
+import { StyledTransfer, StyledTransferForm } from './style';
 import {
   distinguishTypeAndReturnLabel,
   getMergedItems
@@ -57,7 +52,6 @@ export const Transfer: FC<PropsWithChildren<TransferProps>> & {
 } = (props): ReactElement => {
   const {
     value,
-    className,
     defaultValue,
     placeholder,
     options,
@@ -83,7 +77,6 @@ export const Transfer: FC<PropsWithChildren<TransferProps>> & {
   );
   const checkedItems: TransferItem[] = items.filter(item => item.isChecked);
   const [savedItems, setSavedItems] = useState<Map<string, boolean>>(new Map());
-  const [position, setPosition] = useState<Position | 'unset' | null>('unset');
   const ref = useRef<HTMLDivElement>(null);
   const isHalfOpen: boolean = checkedItems.length > 0;
 
@@ -141,10 +134,6 @@ export const Transfer: FC<PropsWithChildren<TransferProps>> & {
   }, [isDisabled]);
 
   useEffect(() => {
-    ref.current && !isElementInViewport(ref.current)
-      ? setPosition(getPositionOfElementInViewport(ref.current))
-      : setPosition('unset');
-
     if (!value) {
       const map: Map<string, boolean> = new Map();
 
@@ -295,31 +284,18 @@ export const Transfer: FC<PropsWithChildren<TransferProps>> & {
   };
 
   return (
-    <StyledTransferContainer
-      className={className}
-      placeholder={placeholder}
-      deleteAllText={deleteAllText}
-      closeText={closeText}
-      submitText={submitText}
-      isDisabled={isDisabled}
-      options={options}
-      notFoundComponent={notFoundComponent}
-      size={size}
-      isFullWidth={isFullWidth}
-      direction={direction}
-    >
+    <>
       <StyledTransfer
         size={size}
         ref={ref}
         isFullWidth={isFullWidth}
-        position={position}
         isHalfOpen={isHalfOpen}
         isOpen={isOpen}
         isFocused={isFocused}
         isDisabled={isDisabled}
         direction={direction}
       >
-        <form onSubmit={formSubmit}>
+        <StyledTransferForm onSubmit={formSubmit} direction={direction}>
           <LeftSide
             isAlternative={isAlternative}
             direction={direction}
@@ -357,7 +333,7 @@ export const Transfer: FC<PropsWithChildren<TransferProps>> & {
               onChange={onChange}
             />
           )}
-        </form>
+        </StyledTransferForm>
         {isOpen && (
           <Footer
             closeText={closeText}
@@ -368,7 +344,7 @@ export const Transfer: FC<PropsWithChildren<TransferProps>> & {
           />
         )}
       </StyledTransfer>
-    </StyledTransferContainer>
+    </>
   );
 };
 
