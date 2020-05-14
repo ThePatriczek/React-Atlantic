@@ -1,11 +1,11 @@
 {
   "name": "react-atlantic",
-  "version": "0.5.30",
+  "version": "0.5.31",
   "description": "React Atlantic UI Library",
   "main": "index.js",
   "scripts": {
     "storybook": "start-storybook -p 6006",
-    "prepublishOnly": "npm run test && tsc -p tsconfig.publish.json && build-storybook -o docs",
+    "prepublishOnly": "npm run test && tsc -p tsconfig.publish.json",
     "test": "CI=true node scripts/tests.jsx --env=jsdom",
     "test:watch": "node scripts/tests.jsx --env=jsdom"
   },

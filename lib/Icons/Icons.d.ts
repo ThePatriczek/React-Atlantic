@@ -108,3 +108,5 @@ export declare const Hash: () => JSX.Element;
 export declare const Robot: () => JSX.Element;
 export declare const Switch: () => JSX.Element;
 export declare const UserAdd: () => JSX.Element;
+export declare const Building: () => JSX.Element;
+export declare const Offer: () => JSX.Element;

@@ -78,20 +78,6 @@ export const tests = (
         expect(output.props().iconRight).toEqual(input.props.isLoading);
       });
     }
-    if (input.props.iconRight === false && !input.props.isLoading) {
-      it(`Should have iconRight: ${false}`, () => {
-        expect(output.props().iconRight).toEqual(false);
-      });
-    }
-    if (input.props.iconRight === true) {
-      it(`Should have iconRight: ${true}`, () => {
-        expect(output.props().iconRight).toEqual(true);
-      });
-    }
-
-    it(`Should have iconLeft: ${input.props.iconLeft}`, () => {
-      expect(output.props().iconLeft).toEqual(input.props.iconLeft);
-    });
 
     it(`Should have size: ${input.props.size}`, () => {
       expect(output.props().size).toEqual(input.props.size);
