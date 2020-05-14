@@ -81,7 +81,7 @@ export const LeftSide: FC<LeftSideProps> = props => {
   const filtered = items.filter(filtration);
 
   const onFocus = () => {
-    if (!isOpen) {
+    if (!isOpen && !isDisabled) {
       setOpen(!isOpen);
       setFocus(!isFocused);
     }
@@ -97,7 +97,7 @@ export const LeftSide: FC<LeftSideProps> = props => {
       side={'left'}
     >
       <StyledTransferInput
-        transferFocus={isOpen}
+        isDisabled={isDisabled}transferFocus={isOpen}
         isAlternative={isAlternative}
         direction={direction}
         isHalfOpen={isHalfOpen}
