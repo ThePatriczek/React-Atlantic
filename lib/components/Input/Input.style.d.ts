@@ -1,8 +1,8 @@
 import { Size } from '../../types';
 export interface StyledInputWrapperProps {
     isLoading?: boolean;
-    iconLeft?: boolean;
-    iconRight?: boolean;
+    isLeftComponent?: boolean;
+    isRightComponent?: boolean;
     isFocused?: boolean;
     hasValue?: boolean;
     isDisabled?: boolean;
