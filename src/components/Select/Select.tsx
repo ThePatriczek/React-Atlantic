@@ -225,7 +225,7 @@ export const Select: React.FC<React.PropsWithChildren<SelectProps>> & {
             <SelectContainerWrapper
               isMulti={isMulti}
               hasValue={!!value}
-              onClick={() => setFocused(!isFocused)}
+              onClick={() => !isDisabled && setFocused(!isFocused)}
               isFullWidth={isFullWidth}
               size={size}
               isFocused={isFocused}
@@ -242,7 +242,7 @@ export const Select: React.FC<React.PropsWithChildren<SelectProps>> & {
             </SelectContainerWrapper>
           ) : (
             <SelectContainer
-              onClick={() => setFocused(!isFocused)}
+              onClick={() => !isDisabled && setFocused(!isFocused)}
               isFullWidth={isFullWidth}
               size={size}
               {...innerProps}
