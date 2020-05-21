@@ -90,6 +90,30 @@ stories.add('Overview', () => (
     <div>
       <Icon name={'offer'} />
     </div>
+    <div>
+      <Icon name={'prev'} />
+    </div>
+    <div>
+      <Icon name={'next'} />
+    </div>
+    <div>
+      <Icon name={'external'} />
+    </div>
+    <div>
+      <Icon name={'change'} />
+    </div>
+    <div>
+      <Icon name={'print'} />
+    </div>
+    <div>
+      <Icon name={'squaresGrid'} />
+    </div>
+    <div>
+      <Icon name={'tag'} />
+    </div>
+    <div>
+      <Icon name={'timeline'} />
+    </div>
   </div>
 ));
 

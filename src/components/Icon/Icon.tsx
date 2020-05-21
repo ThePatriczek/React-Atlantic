@@ -113,7 +113,15 @@ export type IconName =
   | 'switch'
   | 'userAdd'
   | 'building'
-  | 'offer';
+  | 'offer'
+  | 'prev'
+  | 'next'
+  | 'external'
+  | 'change'
+  | 'print'
+  | 'squaresGrid'
+  | 'tag'
+  | 'timeline';
 
 export interface IconProps extends React.HTMLAttributes<HTMLElement> {
   name: IconName;
@@ -460,6 +468,30 @@ export const Icon: React.FC<IconProps> = ({
       break;
     case 'offer':
       Component = <Icons.Offer />;
+      break;
+    case 'prev':
+      Component = <Icons.Prev />;
+      break;
+    case 'next':
+      Component = <Icons.Next />;
+      break;
+    case 'external':
+      Component = <Icons.External />;
+      break;
+    case 'change':
+      Component = <Icons.Change />;
+      break;
+    case 'print':
+      Component = <Icons.Print />;
+      break;
+    case 'squaresGrid':
+      Component = <Icons.SquaresGrid />;
+      break;
+    case 'tag':
+      Component = <Icons.Tag />;
+      break;
+    case 'timeline':
+      Component = <Icons.Timeline />;
       break;
   }
 
