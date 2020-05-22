@@ -1,0 +1,10 @@
+{
+    "plugins": [
+      "@babel/transform-flow-strip-types",
+      "@babel/plugin-proposal-optional-chaining",
+      "@babel/plugin-proposal-nullish-coalescing-operator"
+    ],
+    "presets": [
+      "react-app"
+    ]
+}
