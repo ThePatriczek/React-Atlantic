@@ -4,8 +4,7 @@ import { Size } from '../../types';
 import { Icon } from '../Icon';
 import { Option as OptionComponent } from './components';
 import { Option, OptionProps } from './Option';
-
-import { useEffect, useRef, useState } from 'react';
+import { useState } from 'react';
 import {
   ClearIndicator,
   Control,
@@ -102,27 +101,9 @@ export const Select: React.FC<React.PropsWithChildren<SelectProps>> & {
     fillValues(value);
   }
 
-  const ref = useRef<any>();
-
-  useEffect(() => {
-    window?.addEventListener('mousedown', onMouseDown);
-
-    return () => {
-      window?.removeEventListener('mousedown', onMouseDown);
-    };
-  }, [isFocused]);
-
-  const onMouseDown: EventListener = (e: Event) => {
-    if (!ref.current?.contains(e.target as Node)) {
-      setFocused(false);
-    }
-  };
-
   return (
     <ReactSelect
-      menuIsOpen={isFocused}
       value={val}
-      isFocused={isFocused}
       size={size}
       isDisabled={isDisabled}
       options={items}
@@ -147,7 +128,6 @@ export const Select: React.FC<React.PropsWithChildren<SelectProps>> & {
         ),
         Control: (props: any) => (
           <Control
-            ref={ref}
             {...props.innerProps}
             isMenuOpened={props.menuIsOpen}
             isFocused={isFocused}
