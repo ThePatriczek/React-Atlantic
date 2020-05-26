@@ -5,10 +5,47 @@ import { specs } from 'storybook-addon-specifications';
 import { Component, tests } from './Timeline.test';
 import { defaultValues } from '../../constants/defaultValues';
 import { action } from '@storybook/addon-actions';
+import { Timeline } from './Timeline';
+import { Button } from '../Button';
+import { Tooltip } from '../Tooltip';
 
 const stories = storiesOf('Timeline', module);
 
 stories.addDecorator(withKnobs);
+
+stories.add(
+  'Overview',
+  () => {
+    return (
+      <>
+        <Timeline>
+          <Timeline.Item
+            elements={[
+              <span data-tip data-for={`click-me`}>
+                <Button>Click</Button>
+                <Tooltip id={`click-me`} place={`top`}>
+                  {`Click me`}
+                </Tooltip>
+              </span>
+            ]}
+          >
+            A
+          </Timeline.Item>
+          <Timeline.Item
+            buttons={[{ icon: 'trash', hint: { description: `Hello World!` } }]}
+          >
+            B
+          </Timeline.Item>
+          <Timeline.Item elements={[<Button>Click</Button>]}>C</Timeline.Item>
+          <Timeline.Item elements={[<Button>Click</Button>]}>D</Timeline.Item>
+        </Timeline>
+      </>
+    );
+  },
+  {
+    info: { inline: true }
+  }
+);
 
 stories.add(
   'Playground',

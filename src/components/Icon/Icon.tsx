@@ -121,7 +121,9 @@ export type IconName =
   | 'print'
   | 'squaresGrid'
   | 'tag'
-  | 'timeline';
+  | 'timeline'
+  | 'brush'
+  | 'fontSize';
 
 export interface IconProps extends React.HTMLAttributes<HTMLElement> {
   name: IconName;
@@ -492,6 +494,12 @@ export const Icon: React.FC<IconProps> = ({
       break;
     case 'timeline':
       Component = <Icons.Timeline />;
+      break;
+    case 'brush':
+      Component = <Icons.Brush />;
+      break;
+    case 'fontSize':
+      Component = <Icons.FontSize />;
       break;
   }
 
