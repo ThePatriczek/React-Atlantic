@@ -24,3 +24,5 @@ export declare const StyledTimelineCaption: import("styled-components").StyledCo
 export declare const StyledTimelineContainer: import("styled-components").StyledComponent<"div", any, StyledTimelineContainerProps, never>;
 export declare const StyledTimelineButton: import("styled-components").StyledComponent<import("react").FC<import("react").PropsWithChildren<import("../..").ButtonProps>>, any, {}, never>;
 export declare const StyledTimelineCaptionContainer: import("styled-components").StyledComponent<"div", any, {}, never>;
+export declare const StyledListElementsContainer: import("styled-components").StyledComponent<"ul", any, {}, never>;
+export declare const StyledListItem: import("styled-components").StyledComponent<"li", any, {}, never>;

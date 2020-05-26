@@ -118,3 +118,5 @@ export declare const Print: () => JSX.Element;
 export declare const SquaresGrid: () => JSX.Element;
 export declare const Tag: () => JSX.Element;
 export declare const Timeline: () => JSX.Element;
+export declare const Brush: () => JSX.Element;
+export declare const FontSize: () => JSX.Element;
