@@ -140,3 +140,11 @@ export const StyledTimelineButton = styled(PureButton)`
 export const StyledTimelineCaptionContainer = styled.div`
   display: flex;
 `;
+
+export const StyledListElementsContainer = styled.ul`
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+`;
+
+export const StyledListItem = styled.li``;

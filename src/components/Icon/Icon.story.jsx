@@ -114,6 +114,12 @@ stories.add('Overview', () => (
     <div>
       <Icon name={'timeline'} />
     </div>
+    <div>
+      <Icon name={'brush'} />
+    </div>
+    <div>
+      <Icon name={'fontSize'} />
+    </div>
   </div>
 ));
 
