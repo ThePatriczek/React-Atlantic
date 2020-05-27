@@ -185,7 +185,7 @@ export const Input: React.FC<InputProps> & {
   const AlternativeComponent = (
     <StyledInputWrapperAlt
       size={size as Size}
-      isFocused={transferFocus}
+      isFocused={transferFocus || isFocused}
       isLeftComponent={!!iconLeft}
       isRightComponent={!!(iconRight || isLoading)}
       hasValue={!!val}

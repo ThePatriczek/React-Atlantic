@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "storybook": "start-storybook -p 6006",
-    "prepublishOnly": "npm run test && tsc -p tsconfig.publish.json",
+    "prepublishOnly": "npm run test && tsc -p tsconfig.publish.json && build-storybook -o docs",
     "test": "CI=true node scripts/tests.jsx --env=jsdom",
     "test:watch": "node scripts/tests.jsx --env=jsdom"
   },
