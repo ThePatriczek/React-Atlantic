@@ -2,8 +2,8 @@ import { darken, lighten } from 'polished';
 import styled, { css, keyframes } from 'styled-components';
 import { theme } from '../../theme';
 import { Size } from '../../types';
-import {StyledIcon} from "../Icon/Icon.style";
-import {StyledText} from "../Typography/Text/Text.style";
+import { StyledIcon } from '../Icon/Icon.style';
+import { StyledText } from '../Typography/Text/Text.style';
 import { ButtonType } from './Button';
 
 interface StyledButtonProps {
@@ -58,7 +58,7 @@ const DefaultButton = styled.button`
   border: 1px solid ${props => props.theme.color.border};
   border-radius: ${props => props.theme.radius};
 
-  > span{
+  > span {
     display: inline-block;
     vertical-align: top;
     height: 14px;
@@ -156,7 +156,7 @@ ${props =>
       background-color: ${bgColor};
       color: ${color};
       border: 1px ${borderType} ${borderColor};
-      
+
       ${StyledIcon}, ${StyledText} {
         color: ${color};
       }
@@ -179,6 +179,10 @@ ${props =>
       background-color: ${props.theme.color.default};
       color: ${props.theme.color.text.beta};
       cursor: not-allowed;
+
+      ${StyledIcon}, ${StyledText} {
+        color: ${props.theme.color.text.beta};
+      }
 
       &:hover {
         background-color: ${props.theme.color.default};
@@ -203,8 +207,8 @@ ${props =>
         font-size: ${props.theme.font.size.sm};
         height: ${props.theme.font.size.sm};
       }
-      
-      > i{
+
+      > i {
         width: ${props.theme.font.size.sm};
       }
 
@@ -226,8 +230,8 @@ ${props =>
         font-size: ${props.theme.font.size.lg};
         height: ${props.theme.font.size.lg};
       }
-      
-      > i{
+
+      > i {
         width: ${props.theme.font.size.lg};
       }
 

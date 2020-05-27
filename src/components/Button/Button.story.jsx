@@ -59,6 +59,13 @@ stories.add(
         <br />
       </div>
       <div>
+        <br />
+        <Button isDisabled={true}>
+          <Icon name={'arrowLeft'} />
+          <Text>{`Is disabled with icon left`}</Text>
+        </Button>
+        <br />
+        <br />
         <Button size={'small'}>
           <Icon name={'arrowLeft'} />
           <Text>{`Small with icon left`}</Text>
