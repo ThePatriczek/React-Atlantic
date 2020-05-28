@@ -29,6 +29,7 @@ export interface TimelineButton {
 export interface TimelineCaption {
   value: Readonly<string>;
   onClick?: () => void;
+  hint?: HintType;
 }
 
 export interface ItemProps {
@@ -38,6 +39,7 @@ export interface ItemProps {
   children: Readonly<string>;
   buttons?: ReadonlyArray<Readonly<TimelineButton>>;
   elements?: ReadonlyArray<JSX.Element>;
+  hint?: HintType;
 }
 
 interface ItemPropsPrivate extends ItemProps {
@@ -47,7 +49,15 @@ interface ItemPropsPrivate extends ItemProps {
 const { Title, Text } = Typography;
 
 export const Item: FC<ItemPropsPrivate> = (props): Readonly<ReactElement> => {
-  const { index, className, children, captions, buttons, elements } = props;
+  const {
+    index,
+    className,
+    children,
+    captions,
+    buttons,
+    elements,
+    hint
+  } = props;
   const { onChange, activeIndex } = useTimeline();
   const isActive: Readonly<boolean> = index === activeIndex;
 
@@ -59,57 +69,119 @@ export const Item: FC<ItemPropsPrivate> = (props): Readonly<ReactElement> => {
     }
   };
 
-  const buttonRenderer = useCallback(
-    (buttonsInput: ReadonlyArray<Readonly<TimelineButton>>): JSX.Element => {
-      const withHint = (
-        button: Readonly<TimelineButton>,
-        key: Readonly<number>
-      ): Readonly<JSX.Element> => {
-        const tooltipTipKey: Readonly<string> = `${button?.hint}-${key}`;
-        return button.hint?.hintComponent ? (
-          <span data-tip data-for={tooltipTipKey} key={key}>
-            <StyledTimelineButton key={key} onClick={button.onClick}>
-              <Icon name={button.icon} />
-            </StyledTimelineButton>
-            {button.hint.hintComponent(
-              button?.hint?.description,
-              tooltipTipKey
-            )}
-          </span>
-        ) : (
-          <span data-tip data-for={tooltipTipKey} key={key}>
-            <StyledTimelineButton key={key} onClick={button.onClick}>
-              <Icon name={button.icon} />
-            </StyledTimelineButton>
-            <Tooltip id={tooltipTipKey}>{button?.hint?.description}</Tooltip>
-          </span>
-        );
-      };
+  // const buttonRenderer = useCallback(
+  //   (buttonsInput: ReadonlyArray<Readonly<TimelineButton>>): JSX.Element => {
+  //     const withHint = (
+  //       button: Readonly<TimelineButton>,
+  //       key: Readonly<number>
+  //     ): Readonly<JSX.Element> => {
+  //       const tooltipTipKey: Readonly<string> = `${button?.hint}-${key}`;
+  //       return button.hint?.hintComponent ? (
+  //         <span data-tip data-for={tooltipTipKey} key={key}>
+  //           <StyledTimelineButton key={key} onClick={button.onClick}>
+  //             <Icon name={button.icon} />
+  //           </StyledTimelineButton>
+  //           {button.hint.hintComponent(
+  //             button?.hint?.description,
+  //             tooltipTipKey
+  //           )}
+  //         </span>
+  //       ) : (
+  //         <span data-tip data-for={tooltipTipKey} key={key}>
+  //           <StyledTimelineButton key={key} onClick={button.onClick}>
+  //             <Icon name={button.icon} />
+  //           </StyledTimelineButton>
+  //           <Tooltip id={tooltipTipKey}>{button?.hint?.description}</Tooltip>
+  //         </span>
+  //       );
+  //     };
+  //
+  //     const withoutHint = (
+  //       button: Readonly<TimelineButton>,
+  //       key: Readonly<number>
+  //     ): Readonly<JSX.Element> => {
+  //       return (
+  //         <StyledTimelineButton key={key} onClick={button.onClick}>
+  //           <Icon name={button.icon} />
+  //         </StyledTimelineButton>
+  //       );
+  //     };
+  //
+  //     return (
+  //       buttonsInput && (
+  //         <StyledTimelineContainer>
+  //           {buttonsInput.map(
+  //             (button: Readonly<TimelineButton>, key: Readonly<number>) =>
+  //               button?.hint ? withHint(button, key) : withoutHint(button, key)
+  //           )}
+  //         </StyledTimelineContainer>
+  //       )
+  //     );
+  //   },
+  //   []
+  // );
 
-      const withoutHint = (
-        button: Readonly<TimelineButton>,
-        key: Readonly<number>
-      ): Readonly<JSX.Element> => {
-        return (
-          <StyledTimelineButton key={key} onClick={button.onClick}>
-            <Icon name={button.icon} />
-          </StyledTimelineButton>
-        );
-      };
+  const TimelineTitle = (): JSX.Element => {
+    const element = (
+      <StyledTimelineTitle href={'#'} isActive={isActive} onClick={onClick}>
+        <Title level={5}>{children}</Title>
+      </StyledTimelineTitle>
+    );
+    return hint ? tooltipFactory(hint, element) : element;
+  };
 
-      return (
-        buttonsInput && (
-          <StyledTimelineContainer>
-            {buttonsInput.map(
-              (button: Readonly<TimelineButton>, key: Readonly<number>) =>
-                button?.hint ? withHint(button, key) : withoutHint(button, key)
-            )}
-          </StyledTimelineContainer>
-        )
-      );
-    },
-    []
-  );
+  const TimelineCaptions = (): JSX.Element | null => {
+    return captions ? (
+      <StyledTimelineCaptionContainer>
+        {captions.map((item, key) => {
+          const element = (
+            <StyledTimelineCaption
+              href={'#'}
+              onClick={item.onClick}
+              key={key}
+              hasMarginRight={key < captions.length - 1}
+            >
+              <Text>
+                {key < captions.length - 1 ? `${item.value},` : item.value}
+              </Text>
+            </StyledTimelineCaption>
+          );
+
+          return item.hint ? tooltipFactory(item.hint, element, key) : element;
+        })}
+      </StyledTimelineCaptionContainer>
+    ) : null;
+  };
+
+  const TimelineButtons = (): JSX.Element | null => {
+    return buttons ? (
+      <StyledTimelineContainer>
+        {buttons.map(
+          (button: Readonly<TimelineButton>, key: Readonly<number>) => {
+            const element = (
+              <StyledTimelineButton key={key} onClick={button.onClick}>
+                <Icon name={button.icon} />
+              </StyledTimelineButton>
+            );
+            return button.hint
+              ? tooltipFactory(button.hint, element, key)
+              : element;
+          }
+        )}
+      </StyledTimelineContainer>
+    ) : null;
+  };
+
+  const TimelineElements = (): JSX.Element | null => {
+    return elements ? (
+      <StyledListElementsContainer>
+        {elements.map((ele: Readonly<JSX.Element>, key: Readonly<number>) => {
+          const element = <StyledListItem key={key}>{ele}</StyledListItem>;
+          return element;
+        })}
+      </StyledListElementsContainer>
+    ) : null;
+  };
 
   return (
     <StyledTimelineItem className={className} highlight={isActive}>
@@ -117,42 +189,33 @@ export const Item: FC<ItemPropsPrivate> = (props): Readonly<ReactElement> => {
         <StyledTimelineCircle isActive={isActive} onClick={onClick} />
       </StyledTimelineSide>
       <StyledTimelineContainer isMain>
-        <StyledTimelineTitle href={'#'} isActive={isActive} onClick={onClick}>
-          <Title level={5}>{children}</Title>
-        </StyledTimelineTitle>
-        {captions && (
-          <StyledTimelineCaptionContainer>
-            {captions.map((item, key) => (
-              <StyledTimelineCaption
-                href={'#'}
-                onClick={item.onClick}
-                key={key}
-                hasMarginRight={key < captions.length - 1}
-              >
-                <Text>
-                  {key < captions.length - 1 ? `${item.value},` : item.value}
-                </Text>
-              </StyledTimelineCaption>
-            ))}
-          </StyledTimelineCaptionContainer>
-        )}
+        {TimelineTitle()}
+        {TimelineCaptions()}
       </StyledTimelineContainer>
 
-      {buttons && buttonRenderer(buttons)}
-
-      {elements && (
-        <StyledTimelineContainer>
-          <StyledListElementsContainer>
-            {elements.map(
-              (element: Readonly<JSX.Element>, key: Readonly<number>) => (
-                <StyledListItem key={key}>{element}</StyledListItem>
-              )
-            )}
-          </StyledListElementsContainer>
-        </StyledTimelineContainer>
-      )}
+      {TimelineButtons()}
+      {TimelineElements()}
     </StyledTimelineItem>
   );
 };
 
 Item.displayName = `Item`;
+
+const tooltipFactory = (
+  hint: HintType,
+  element: JSX.Element,
+  key?: Readonly<number>
+): JSX.Element => {
+  const tooltipTipKey: Readonly<string> = `${hint.description}-${key || -1}`;
+  return hint?.hintComponent ? (
+    <span data-tip data-for={tooltipTipKey} key={key}>
+      {element}
+      {hint.hintComponent(hint?.description, tooltipTipKey)}
+    </span>
+  ) : (
+    <span data-tip data-for={tooltipTipKey} key={key}>
+      {element}
+      <Tooltip id={tooltipTipKey}>{hint?.description}</Tooltip>
+    </span>
+  );
+};

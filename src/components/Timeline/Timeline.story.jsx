@@ -36,7 +36,16 @@ stories.add(
           >
             B
           </Timeline.Item>
-          <Timeline.Item elements={[<Button>Click</Button>]}>C</Timeline.Item>
+          <Timeline.Item
+            elements={[<Button>Click</Button>]}
+            captions={[
+              { value: `A`, hint: { description: `A` } },
+              { value: `B`, hint: { description: `B` } },
+              { value: `C`, hint: { description: `C` } }
+            ]}
+          >
+            C
+          </Timeline.Item>
           <Timeline.Item elements={[<Button>Click</Button>]}>D</Timeline.Item>
         </Timeline>
       </>
