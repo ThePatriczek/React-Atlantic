@@ -6,7 +6,7 @@ import {
   ReactElement,
   useCallback,
   useContext,
-  useLayoutEffect,
+  useEffect,
   useState
 } from 'react';
 
@@ -111,7 +111,7 @@ export const DeviceProvider: FC<Readonly<
 
   const getCurrentDeviceMemoized = useCallback(getCurrentDevice, []);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     if (window) {
       window.onresize = debounce(onResize, 50);
       onResize();
