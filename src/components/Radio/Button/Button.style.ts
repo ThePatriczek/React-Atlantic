@@ -11,6 +11,7 @@ interface StyledRadioButtonProps {
 export const StyledRadioButtonInputHidden = styled.input.attrs({
   type: 'radio'
 })`
+  position: absolute;
   opacity: 0;
   width: 0;
   height: 0;
@@ -52,8 +53,8 @@ export const StyledRadioButtonLabel = styled.label<StyledRadioButtonProps>`
       border: 1px solid ${props.theme.color.primary.alpha};
       background-color: ${props.theme.color.primary.alpha};
       color: ${props.theme.color.text.gamma};
-      
-      span{
+
+      span {
         color: ${props.theme.color.text.gamma};
       }
     `}
