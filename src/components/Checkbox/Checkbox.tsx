@@ -79,7 +79,7 @@ export const Checkbox: React.FC<React.PropsWithChildren<CheckboxProps>> = (
       className={className}
       htmlFor={id}
     >
-      {position === 'right' && (
+      {position === 'right' && children && (
         <StyledCheckboxSpan position={position} isDisabled={isDisabled}>
           {children}
         </StyledCheckboxSpan>
@@ -109,7 +109,7 @@ export const Checkbox: React.FC<React.PropsWithChildren<CheckboxProps>> = (
         ))}
       </StyledCheckboxInputShown>
 
-      {position === 'left' && (
+      {position === 'left' && children && (
         <StyledCheckboxSpan position={position} isDisabled={isDisabled}>
           {children}
         </StyledCheckboxSpan>
