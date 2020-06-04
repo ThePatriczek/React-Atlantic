@@ -10,7 +10,7 @@
     "test:watch": "node scripts/tests.jsx --env=jsdom"
   },
   "pre-commit": [
-//    "test"
+    "test"
   ],
   "eslintConfig": {
     "env": {
