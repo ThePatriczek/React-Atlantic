@@ -15,7 +15,7 @@ import { checkChildrenAndOptions, OptionType } from '../Select.utils';
 import { Footer } from './Footer';
 import { LeftSide } from './LeftSide';
 import { RightSide } from './RightSide';
-import { StyledTransfer, StyledTransferForm } from './style';
+import { StyledTransfer, StyledTransferContainer, StyledTransferForm } from './style';
 import {
   distinguishTypeAndReturnLabel,
   getMergedItems
@@ -284,7 +284,12 @@ export const Transfer: FC<PropsWithChildren<TransferProps>> & {
   };
 
   return (
-    <>
+    <StyledTransferContainer
+      size={size}
+      isOpen={isOpen}
+      isHalfOpen={isHalfOpen}
+      isFullWidth={isFullWidth}
+    >
       <StyledTransfer
         size={size}
         ref={ref}
@@ -344,7 +349,7 @@ export const Transfer: FC<PropsWithChildren<TransferProps>> & {
           />
         )}
       </StyledTransfer>
-    </>
+    </StyledTransferContainer>
   );
 };
 

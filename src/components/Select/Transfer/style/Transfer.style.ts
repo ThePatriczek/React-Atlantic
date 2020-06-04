@@ -1,11 +1,7 @@
 import { ReactNode } from 'react';
 import styled, { css } from 'styled-components';
 import { theme } from '../../../../theme';
-import {
-  Direction,
-  HorizontalPosition,
-  Size
-} from '../../../../types';
+import { Direction, HorizontalPosition, Size } from '../../../../types';
 import {
   StyledCheckboxInputShown,
   StyledCheckboxLabel,
@@ -49,8 +45,6 @@ export interface StyledTransferSideProps extends StyledTransferProps {
   side: HorizontalPosition;
 }
 
-export const StyledTransferContainer = styled.div<StyledTransferProps>``;
-
 export const StyledTransferForm = styled.form<StyledTransferProps>`
   display: flex;
   flex-wrap: nowrap;
@@ -81,7 +75,7 @@ export const StyledTransferSide = styled.div<StyledTransferSideProps>`
       font-size: ${props.theme.font.size.sm};
     `}
   
-  ${props => 
+  ${props =>
     props.size === 'medium' &&
     css`
       font-size: ${props.theme.font.size.md};
@@ -123,6 +117,7 @@ export const StyledTransferSide = styled.div<StyledTransferSideProps>`
 `;
 
 export const StyledTransferUl = styled.ul<StyledTransferProps>`
+  position: relative;
   overflow-y: auto;
   overflow-x: hidden;
   list-style-type: none;
@@ -235,6 +230,7 @@ export const StyledTransfer = styled.div<StyledTransferProps>`
   ${props =>
     (props.isOpen || (props.isOpen && props.isHalfOpen)) &&
     css`
+      position: absolute;
       box-shadow: ${props.theme.boxShadow.md};
       z-index: 3;
     `}
@@ -256,10 +252,59 @@ export const StyledTransfer = styled.div<StyledTransferProps>`
   ${props =>
     props.isOpen &&
     props.isHalfOpen &&
+    props.direction === 'horizontal' &&
     !props.isFullWidth &&
     css`
       width: 600px;
     `}
+  
+  ${props =>
+    props.isOpen &&
+    props.isHalfOpen &&
+    props.direction === 'vertical' &&
+    !props.isFullWidth &&
+    css`
+      width: 300px;
+    `}
+`;
+
+export const StyledTransferContainer = styled.div<StyledTransferProps>`
+  position: relative;
+
+  ${props =>
+    (props.isOpen || (props.isOpen && props.isHalfOpen)) &&
+    !props.isFullWidth &&
+    css`
+      width: 230px;
+    `}
+  
+  ${props =>
+    (props.isOpen || (props.isOpen && props.isHalfOpen)) &&
+    props.isFullWidth &&
+    css`
+      width: 100%;
+    `}
+   
+   ${props =>
+     (props.isOpen || (props.isOpen && props.isHalfOpen)) &&
+     props.size === 'small' &&
+     css`
+       height: ${props.theme.height.sm};
+     `}
+   
+   ${props =>
+     (props.isOpen || (props.isOpen && props.isHalfOpen)) &&
+     props.size === 'medium' &&
+     css`
+       height: ${props.theme.height.md};
+     `}
+   
+   ${props =>
+     (props.isOpen || (props.isOpen && props.isHalfOpen)) &&
+     props.size === 'large' &&
+     css`
+       height: ${props.theme.height.lg};
+     `}
 `;
 
 StyledTransferUl.defaultProps = {
