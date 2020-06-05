@@ -40,11 +40,16 @@ export interface TransferProps {
   isAlternative?: boolean;
   isFullWidth?: boolean;
   direction?: Direction;
+  visibleRows?: number;
 }
 
 export interface TransferItem extends OptionType {
   isChecked?: boolean;
   className?: string;
+}
+
+export interface BothSidesProps {
+  visibleRows?: number;
 }
 
 export const Transfer: FC<PropsWithChildren<TransferProps>> & {
@@ -65,7 +70,8 @@ export const Transfer: FC<PropsWithChildren<TransferProps>> & {
     size,
     chosenComponent,
     isFullWidth,
-    direction
+    direction,
+    visibleRows
   } = props;
 
   const [isOpen, setOpen] = useState<boolean>(false);
@@ -322,6 +328,7 @@ export const Transfer: FC<PropsWithChildren<TransferProps>> & {
             isFocused={isFocused}
             items={sortedItems()}
             isFullWidth={isFullWidth}
+            visibleRows={visibleRows}
           />
           {isOpen && isHalfOpen && (
             <RightSide
@@ -336,6 +343,7 @@ export const Transfer: FC<PropsWithChildren<TransferProps>> & {
               size={size}
               deleteAllText={deleteAllText}
               onChange={onChange}
+              visibleRows={visibleRows}
             />
           )}
         </StyledTransferForm>
@@ -361,6 +369,7 @@ Transfer.defaultProps = {
   deleteAllText: 'Delete all',
   placeholder: 'Select an option',
   size: 'medium',
+  visibleRows: 5,
   notFoundComponent: <NotFound title={`No items found...`} />,
   chosenComponent: (checked, total) => (
     <>

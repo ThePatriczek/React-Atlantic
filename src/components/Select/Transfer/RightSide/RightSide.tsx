@@ -5,7 +5,7 @@ import {
   StyledTransferSide,
   StyledTransferUl
 } from '../style/Transfer.style';
-import { TransferItem } from '../Transfer';
+import { BothSidesProps, TransferItem } from '../Transfer';
 import { transferItemsRender } from '../Transfer.utils';
 import {
   StyledChosenHeader,
@@ -16,7 +16,7 @@ import {
   StyledTransferSpan
 } from './style';
 
-interface RightSideProps {
+interface RightSideProps extends BothSidesProps {
   checkedItems: TransferItem[];
   isHalfOpen: boolean;
   isOpen: boolean;
@@ -42,7 +42,8 @@ export const RightSide: FC<RightSideProps> = props => {
     deleteAllText,
     onChange,
     isFullWidth,
-    direction
+    direction,
+    visibleRows
   } = props;
 
   return (
@@ -73,7 +74,7 @@ export const RightSide: FC<RightSideProps> = props => {
           {size !== 'small' && deleteAllText}
         </StyledDeleteAllButton>
       </StyledChosenHeader>
-      <StyledTransferUl>
+      <StyledTransferUl visibleRows={visibleRows} size={size}>
         {checkedItems.map((item: any) => (
           <StyledTransferLi
             size={size}

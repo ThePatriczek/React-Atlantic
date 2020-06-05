@@ -27,6 +27,11 @@ stories.add(
       ['horizontal', 'vertical'],
       defaultValues.direction
     );
+    const visibleRows = select(
+      'Visible rows: ',
+      [3, 5, 7],
+      defaultValues.visibleRows
+    );
     const deleteAllText = text(
       'Delete all button: ',
       defaultValues.deleteAllText
@@ -55,6 +60,7 @@ stories.add(
       isFullWidth,
       direction,
       isAlternative,
+      visibleRows,
       onChange,
       onCancel,
       onSubmit

@@ -30,6 +30,7 @@ export const Component = (
   isFullWidth,
   direction,
   isAlternative,
+  visibleRows,
   onChange,
   onCancel,
   onSubmit
@@ -47,6 +48,7 @@ export const Component = (
       size={size}
       isFullWidth={isFullWidth}
       isAlternative={isAlternative}
+      visibleRows={visibleRows}
       onChange={onChange}
       onCancel={onCancel}
       onSubmit={onSubmit}
@@ -64,6 +66,7 @@ export const Component = (
         size={size}
         isAlternative={isAlternative}
         isFullWidth={isFullWidth}
+        visibleRows={visibleRows}
         onChange={onChange}
         onCancel={onCancel}
         onSubmit={onSubmit}
@@ -107,6 +110,7 @@ export const Component = (
         notFoundComponent={notFoundComponent}
         size={size}
         isFullWidth={isFullWidth}
+        visibleRows={visibleRows}
         onChange={onChange}
         onCancel={onCancel}
         onSubmit={onSubmit}

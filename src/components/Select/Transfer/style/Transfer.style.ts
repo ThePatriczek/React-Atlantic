@@ -39,6 +39,7 @@ export interface StyledTransferProps {
   labelLeft?: string | ReactNode;
   labelTop?: string | ReactNode;
   ref?: any;
+  visibleRows?: number;
 }
 
 export interface StyledTransferSideProps extends StyledTransferProps {
@@ -123,8 +124,28 @@ export const StyledTransferUl = styled.ul<StyledTransferProps>`
   list-style-type: none;
   margin: 0;
   padding: 0;
-  height: 170px;
   color: ${props => props.theme.color.text.alpha};
+  
+  ${props =>
+    props.visibleRows &&
+    props.size === 'small' &&
+    css`
+      height: ${(props.visibleRows * parseFloat(props.theme.height.sm)) + 'px'};
+    `}
+  
+  ${props =>
+    props.visibleRows &&
+    props.size === 'medium' &&
+    css`
+      height: ${(props.visibleRows * parseFloat(props.theme.height.md)) + 'px'};
+    `}
+  
+  ${props =>
+    props.visibleRows &&
+    props.size === 'large' &&
+    css`
+      height: ${(props.visibleRows * parseFloat(props.theme.height.lg)) + 'px'};
+    `}
 `;
 
 export const StyledTransferLi = styled.li<StyledTransferProps>`

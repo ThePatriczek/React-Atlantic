@@ -8,11 +8,11 @@ import {
   StyledTransferSide,
   StyledTransferUl
 } from '../style/Transfer.style';
-import { TransferItem } from '../Transfer';
+import { BothSidesProps, TransferItem } from '../Transfer';
 import { transferItemsRender } from '../Transfer.utils';
 import { StyledSearchCancel, StyledTransferInput } from './style';
 
-export interface LeftSideProps {
+export interface LeftSideProps extends BothSidesProps {
   placeholder?: string;
   direction?: Direction;
   isDisabled?: boolean;
@@ -60,7 +60,8 @@ export const LeftSide: FC<LeftSideProps> = props => {
     onChange,
     notFoundComponent,
     isFullWidth,
-    direction
+    direction,
+    visibleRows
   } = props;
 
   const filtration = (item: OptionType) => {
@@ -119,7 +120,7 @@ export const LeftSide: FC<LeftSideProps> = props => {
       {isOpen && (
         <>
           {filtered.length > 0 && (
-            <StyledTransferUl isOpen={isOpen}>
+            <StyledTransferUl isOpen={isOpen} visibleRows={visibleRows} size={size}>
               {filtered.map(item => (
                 <StyledTransferLi key={item.value} size={size}>
                   <Checkbox
