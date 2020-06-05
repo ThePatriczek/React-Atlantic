@@ -40,6 +40,8 @@ export interface StyledTransferProps {
   labelTop?: string | ReactNode;
   ref?: any;
   visibleRows?: number;
+  openWidth?: string;
+  halfOpenWidth?: string;
 }
 
 export interface StyledTransferSideProps extends StyledTransferProps {
@@ -269,6 +271,15 @@ export const StyledTransfer = styled.div<StyledTransferProps>`
     css`
       width: 300px;
     `}
+  
+  ${props =>
+    props.isOpen &&
+    !props.isHalfOpen &&
+    props.openWidth &&
+    !props.isFullWidth &&
+    css`
+      width: ${props.openWidth};
+    `}
 
   ${props =>
     props.isOpen &&
@@ -286,6 +297,15 @@ export const StyledTransfer = styled.div<StyledTransferProps>`
     !props.isFullWidth &&
     css`
       width: 300px;
+    `}
+  
+  ${props =>
+    props.isOpen &&
+    props.isHalfOpen &&
+    props.halfOpenWidth &&
+    !props.isFullWidth &&
+    css`
+      width: ${props.halfOpenWidth};
     `}
 `;
 

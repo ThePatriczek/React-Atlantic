@@ -41,6 +41,8 @@ export interface TransferProps {
   isFullWidth?: boolean;
   direction?: Direction;
   visibleRows?: number;
+  openWidth?: string;
+  halfOpenWidth?: string;
 }
 
 export interface TransferItem extends OptionType {
@@ -71,7 +73,9 @@ export const Transfer: FC<PropsWithChildren<TransferProps>> & {
     chosenComponent,
     isFullWidth,
     direction,
-    visibleRows
+    visibleRows,
+    openWidth,
+    halfOpenWidth
   } = props;
 
   const [isOpen, setOpen] = useState<boolean>(false);
@@ -305,6 +309,8 @@ export const Transfer: FC<PropsWithChildren<TransferProps>> & {
         isFocused={isFocused}
         isDisabled={isDisabled}
         direction={direction}
+        openWidth={openWidth}
+        halfOpenWidth={halfOpenWidth}
       >
         <StyledTransferForm onSubmit={formSubmit} direction={direction}>
           <LeftSide
