@@ -206,6 +206,62 @@ export const StyledTransferLi = styled.li<StyledTransferProps>`
   }
 `;
 
+export const StyledTransferItem = styled.div<StyledTransferProps>`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 ${props => props.theme.padding.sm};
+  cursor: pointer;
+
+  &:hover {
+    background-color: ${props => props.theme.color.background.gamma};
+
+    ${StyledCheckboxInputShown} {
+      border: 1px solid ${props => props.theme.color.primary.alpha};
+    }
+    
+    ${StyledDeleteOneIcon} svg {
+      color: ${props => props.theme.color.error.alpha}
+    }
+  }
+
+  ${StyledCheckboxLabel} {
+    display: flex;
+    width: 100%;
+
+    ${props =>
+  props.size === 'small' &&
+  css`
+        height: ${parseInt(props.theme.height.sm, 0)}px;
+        line-height: ${parseInt(props.theme.height.sm, 0)}px;
+        font-size: ${props.theme.font.size.sm};
+      `}
+
+    ${props =>
+  props.size === 'medium' &&
+  css`
+        height: ${parseInt(props.theme.height.md, 0)}px;
+        line-height: ${parseInt(props.theme.height.md, 0)}px;
+        font-size: ${props.theme.font.size.md};
+      `}
+
+    ${props =>
+  props.size === 'large' &&
+  css`
+        font-size: ${props.theme.font.size.lg};
+        height: ${parseInt(props.theme.height.lg, 0)}px;
+        line-height: ${parseInt(props.theme.height.lg, 0)}px;
+      `}
+  }
+
+  ${StyledCheckboxSpan},
+  span {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+`;
+
 export const StyledTransfer = styled.div<StyledTransferProps>`
   display: block;
   width: 240px;
@@ -356,6 +412,10 @@ StyledTransferLi.defaultProps = {
   theme
 };
 
+StyledTransferItem.defaultProps = {
+  theme
+};
+
 StyledTransfer.defaultProps = {
   theme
 };
@@ -366,5 +426,6 @@ StyledTransferSide.defaultProps = {
 
 StyledTransferUl.displayName = 'StyledTransferUl';
 StyledTransferLi.displayName = 'StyledTransferLi';
+StyledTransferItem.displayName = 'StyledTransferItem';
 StyledTransfer.displayName = 'StyledTransfer';
 StyledTransferSide.displayName = 'StyledTransferSide';
