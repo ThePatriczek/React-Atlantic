@@ -1,9 +1,9 @@
 import React, { FC, ReactNode } from 'react';
 import { Direction, Size } from '../../../../types';
 import {
-  StyledTransferLi,
-  StyledTransferSide,
-  StyledTransferUl
+  StyledTransferItem,
+  StyledTransferRightList,
+  StyledTransferSide
 } from '../style/Transfer.style';
 import { BothSidesProps, TransferItem } from '../Transfer';
 import { transferItemsRender } from '../Transfer.utils';
@@ -74,9 +74,9 @@ export const RightSide: FC<RightSideProps> = props => {
           {size !== 'small' && deleteAllText}
         </StyledDeleteAllButton>
       </StyledChosenHeader>
-      <StyledTransferUl visibleRows={visibleRows} size={size}>
+      <StyledTransferRightList visibleRows={visibleRows} size={size}>
         {checkedItems.map((item: any) => (
-          <StyledTransferLi
+          <StyledTransferItem
             size={size}
             key={item.value}
             onClick={() => {
@@ -87,9 +87,9 @@ export const RightSide: FC<RightSideProps> = props => {
             <StyledDeleteOneButton size={size}>
               <StyledDeleteOneIcon name={'error'} />
             </StyledDeleteOneButton>
-          </StyledTransferLi>
+          </StyledTransferItem>
         ))}
-      </StyledTransferUl>
+      </StyledTransferRightList>
     </StyledTransferSide>
   );
 };

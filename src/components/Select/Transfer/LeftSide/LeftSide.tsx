@@ -5,7 +5,6 @@ import React, {
   SetStateAction,
   useCallback
 } from 'react';
-import { List } from 'react-virtualized';
 import { theme } from '../../../../theme';
 import { Direction, Size } from '../../../../types';
 import { Checkbox } from '../../../Checkbox';
@@ -13,8 +12,8 @@ import { Icon } from '../../../Icon';
 import { OptionType } from '../../Select.utils';
 import {
   StyledTransferItem,
-  StyledTransferSide,
-  StyledTransferUl
+  StyledTransferLeftList,
+  StyledTransferSide
 } from '../style/Transfer.style';
 import { BothSidesProps, TransferItem } from '../Transfer';
 import { transferItemsRender } from '../Transfer.utils';
@@ -126,6 +125,14 @@ export const LeftSide: FC<LeftSideProps> = props => {
     return map.get(size || 'medium');
   }, [size]);
 
+  const getListHeight = useCallback(() => {
+    const defaultVisibleRows = 5;
+    const rowHeight = getHeight();
+    const listVisibleRows = visibleRows ? visibleRows : defaultVisibleRows;
+
+    return listVisibleRows * (rowHeight as number);
+  }, [visibleRows, size]);
+
   return (
     <StyledTransferSide
       direction={direction}
@@ -159,12 +166,9 @@ export const LeftSide: FC<LeftSideProps> = props => {
       {isOpen && (
         <>
           {filtered.length > 0 && (
-            <List
-              height={170}
-              width={299}
-              style={{
-                outline: 'none'
-              }}
+            <StyledTransferLeftList
+              height={getListHeight()}
+              width={300}
               rowCount={filtered.length}
               rowHeight={getHeight() as number}
               rowRenderer={Row}

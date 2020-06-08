@@ -1,4 +1,5 @@
 import { ReactNode } from 'react';
+import { List } from 'react-virtualized';
 import styled, { css } from 'styled-components';
 import { theme } from '../../../../theme';
 import { Direction, HorizontalPosition, Size } from '../../../../types';
@@ -47,6 +48,13 @@ export interface StyledTransferProps {
 export interface StyledTransferSideProps extends StyledTransferProps {
   side: HorizontalPosition;
 }
+
+export const StyledSideList = (theme) => css`
+  position: relative;
+  overflow-y: auto;
+  overflow-x: hidden;
+  color: ${theme.color.text.alpha};
+`;
 
 export const StyledTransferForm = styled.form<StyledTransferProps>`
   display: flex;
@@ -119,38 +127,44 @@ export const StyledTransferSide = styled.div<StyledTransferSideProps>`
   }
 `;
 
-export const StyledTransferUl = styled.ul<StyledTransferProps>`
-  position: relative;
-  overflow-y: auto;
-  overflow-x: hidden;
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  color: ${props => props.theme.color.text.alpha};
-  
+export const StyledTransferRightList = styled.div<StyledTransferProps>`
+  ${props => StyledSideList(props.theme)};
+
   ${props =>
     props.visibleRows &&
     props.size === 'small' &&
     css`
-      height: ${(props.visibleRows * parseFloat(props.theme.height.sm)) + 'px'};
+      height: ${props.visibleRows * parseFloat(theme.height.sm) + 'px'};
     `}
   
   ${props =>
     props.visibleRows &&
     props.size === 'medium' &&
     css`
-      height: ${(props.visibleRows * parseFloat(props.theme.height.md)) + 'px'};
+      height: ${props.visibleRows * parseFloat(theme.height.md) + 'px'};
     `}
   
   ${props =>
     props.visibleRows &&
     props.size === 'large' &&
     css`
-      height: ${(props.visibleRows * parseFloat(props.theme.height.lg)) + 'px'};
+      height: ${props.visibleRows * parseFloat(theme.height.lg) + 'px'};
     `}
 `;
 
-export const StyledTransferLi = styled.li<StyledTransferProps>`
+export const StyledTransferLeftList = styled(List)<StyledTransferProps>`
+  && {
+    ${props => StyledSideList(props.theme)};
+    width: 100% !important;
+    outline: none;
+
+    .ReactVirtualized__Grid__innerScrollContainer {
+      max-width: none !important;
+    }
+  }
+`;
+
+export const StyledTransferItem = styled.div<StyledTransferProps>`
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -192,62 +206,6 @@ export const StyledTransferLi = styled.li<StyledTransferProps>`
     ${props =>
       props.size === 'large' &&
       css`
-        font-size: ${props.theme.font.size.lg};
-        height: ${parseInt(props.theme.height.lg, 0)}px;
-        line-height: ${parseInt(props.theme.height.lg, 0)}px;
-      `}
-  }
-
-  ${StyledCheckboxSpan},
-  span {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
-`;
-
-export const StyledTransferItem = styled.div<StyledTransferProps>`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 ${props => props.theme.padding.sm};
-  cursor: pointer;
-
-  &:hover {
-    background-color: ${props => props.theme.color.background.gamma};
-
-    ${StyledCheckboxInputShown} {
-      border: 1px solid ${props => props.theme.color.primary.alpha};
-    }
-    
-    ${StyledDeleteOneIcon} svg {
-      color: ${props => props.theme.color.error.alpha}
-    }
-  }
-
-  ${StyledCheckboxLabel} {
-    display: flex;
-    width: 100%;
-
-    ${props =>
-  props.size === 'small' &&
-  css`
-        height: ${parseInt(props.theme.height.sm, 0)}px;
-        line-height: ${parseInt(props.theme.height.sm, 0)}px;
-        font-size: ${props.theme.font.size.sm};
-      `}
-
-    ${props =>
-  props.size === 'medium' &&
-  css`
-        height: ${parseInt(props.theme.height.md, 0)}px;
-        line-height: ${parseInt(props.theme.height.md, 0)}px;
-        font-size: ${props.theme.font.size.md};
-      `}
-
-    ${props =>
-  props.size === 'large' &&
-  css`
         font-size: ${props.theme.font.size.lg};
         height: ${parseInt(props.theme.height.lg, 0)}px;
         line-height: ${parseInt(props.theme.height.lg, 0)}px;
@@ -404,11 +362,7 @@ export const StyledTransferContainer = styled.div<StyledTransferProps>`
      `}
 `;
 
-StyledTransferUl.defaultProps = {
-  theme
-};
-
-StyledTransferLi.defaultProps = {
+StyledTransferRightList.defaultProps = {
   theme
 };
 
@@ -424,8 +378,8 @@ StyledTransferSide.defaultProps = {
   theme
 };
 
-StyledTransferUl.displayName = 'StyledTransferUl';
-StyledTransferLi.displayName = 'StyledTransferLi';
+StyledTransferLeftList.displayName = 'StyledTransferLeftList';
+StyledTransferRightList.displayName = 'StyledTransferRightList';
 StyledTransferItem.displayName = 'StyledTransferItem';
 StyledTransfer.displayName = 'StyledTransfer';
 StyledTransferSide.displayName = 'StyledTransferSide';
