@@ -374,6 +374,7 @@ Transfer.defaultProps = {
   closeText: 'Close',
   deleteAllText: 'Delete all',
   placeholder: 'Select an option',
+  direction: 'horizontal',
   size: 'medium',
   visibleRows: 5,
   notFoundComponent: <NotFound title={`No items found...`} />,
