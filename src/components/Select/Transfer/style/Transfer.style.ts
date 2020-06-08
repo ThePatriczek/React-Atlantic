@@ -49,11 +49,30 @@ export interface StyledTransferSideProps extends StyledTransferProps {
   side: HorizontalPosition;
 }
 
-export const StyledSideList = (theme) => css`
+export const StyledSideList = theme => css`
   position: relative;
   overflow-y: auto;
   overflow-x: hidden;
   color: ${theme.color.text.alpha};
+`;
+
+export const StyledSideFontSettings = (theme, size) => css`
+  font-family: ${props => props.theme.font.family};
+  
+  ${size === 'small' &&
+    css`
+      font-size: ${theme.font.size.sm};
+    `}
+  
+  ${size === 'medium' &&
+    css`
+      font-size: ${theme.font.size.md};
+    `}
+  
+  ${size === 'large' &&
+    css`
+      font-size: ${theme.font.size.lg};
+    `}
 `;
 
 export const StyledTransferForm = styled.form<StyledTransferProps>`
@@ -78,25 +97,7 @@ export const StyledTransferSide = styled.div<StyledTransferSideProps>`
     props.isOpen && props.isHalfOpen && props.direction === 'horizontal'
       ? '50%'
       : '100%'};
-  font-family: ${props => props.theme.font.family};
-  
-  ${props =>
-    props.size === 'small' &&
-    css`
-      font-size: ${props.theme.font.size.sm};
-    `}
-  
-  ${props =>
-    props.size === 'medium' &&
-    css`
-      font-size: ${props.theme.font.size.md};
-    `}
-  
-  ${props =>
-    props.size === 'large' &&
-    css`
-      font-size: ${props.theme.font.size.lg};
-    `}
+  font-size: 0;
 
   ${props =>
     props.isHalfOpen &&
@@ -107,6 +108,7 @@ export const StyledTransferSide = styled.div<StyledTransferSideProps>`
     `}
 
   ${StyledChosenHeader} {
+    ${props => StyledSideFontSettings(props.theme, props.size)}
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -165,6 +167,7 @@ export const StyledTransferLeftList = styled(List)<StyledTransferProps>`
 `;
 
 export const StyledTransferItem = styled.div<StyledTransferProps>`
+  ${props => StyledSideFontSettings(props.theme, props.size)}
   display: flex;
   align-items: center;
   justify-content: space-between;
