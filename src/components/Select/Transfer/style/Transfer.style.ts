@@ -272,54 +272,82 @@ export const StyledTransfer = styled.div<StyledTransferProps>`
       z-index: 3;
     `}
   
+  // Full width
   ${props =>
     props.isFullWidth &&
     css`
       width: 100%;
     `}
   
+  // Opened transfer's left side
   ${props =>
     props.isOpen &&
     !props.isHalfOpen &&
-    !props.isFullWidth &&
     css`
-      width: 300px;
+      ${props.isFullWidth
+        ? css`
+            min-width: 300px;
+          `
+        : css`
+            width: 300px;
+          `}
     `}
-  
+
   ${props =>
     props.isOpen &&
-    !props.isHalfOpen &&
     props.openWidth &&
-    !props.isFullWidth &&
+    !props.isHalfOpen &&
     css`
-      width: ${props.openWidth};
+      ${props.isFullWidth
+        ? css`
+            min-width: ${props.openWidth};
+          `
+        : css`
+            width: ${props.openWidth};
+          `}
+    `}
+
+  // Opened transfer's both sides
+  ${props =>
+    props.isOpen &&
+    props.isHalfOpen &&
+    props.direction === 'horizontal' &&
+    css`
+      ${props.isFullWidth
+        ? css`
+            min-width: 600px;
+          `
+        : css`
+            width: 600px;
+          `}
     `}
 
   ${props =>
     props.isOpen &&
     props.isHalfOpen &&
-    props.direction === 'horizontal' &&
-    !props.isFullWidth &&
-    css`
-      width: 600px;
-    `}
-  
-  ${props =>
-    props.isOpen &&
-    props.isHalfOpen &&
     props.direction === 'vertical' &&
-    !props.isFullWidth &&
     css`
-      width: 300px;
+      ${props.isFullWidth
+        ? css`
+            min-width: 300px;
+          `
+        : css`
+            width: 300px;
+          `}
     `}
-  
+
   ${props =>
     props.isOpen &&
     props.isHalfOpen &&
     props.halfOpenWidth &&
-    !props.isFullWidth &&
     css`
-      width: ${props.halfOpenWidth};
+      ${props.isFullWidth
+        ? css`
+            min-width: ${props.halfOpenWidth};
+          `
+        : css`
+            width: ${props.halfOpenWidth};
+          `}
     `}
 `;
 
