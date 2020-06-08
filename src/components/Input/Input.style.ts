@@ -164,6 +164,11 @@ export const StyledInput = styled.input<{
     border-color: ${props => props.theme.color.primary.alpha};
     outline-offset: -2px;
   }
+  
+  // Hide IE clear button
+  &::-ms-clear {
+    display: none;
+  }
 
   ${props =>
     props.disabled &&
