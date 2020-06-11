@@ -1,4 +1,9 @@
-import React, { FC, PropsWithChildren, ReactElement } from 'react';
+import React, {
+  FC,
+  HTMLAttributes,
+  PropsWithChildren,
+  ReactElement
+} from 'react';
 import { Size } from '../../../types';
 import { useRadioGroup } from '../Context';
 import { RadioProps } from '../Radio';
@@ -10,7 +15,9 @@ import {
   StyledRadioButtonSpan
 } from './Button.style';
 
-export interface ButtonProps extends RadioProps {
+export interface ButtonProps
+  extends RadioProps,
+    Omit<HTMLAttributes<HTMLLabelElement>, 'onChange'> {
   size?: Size;
 }
 
@@ -23,7 +30,10 @@ export const Button: FC<PropsWithChildren<ButtonProps>> = (
     className,
     children,
     value,
-    size
+    size,
+    // tslint:disable-next-line: variable-name
+    onChange: _onChange,
+    ...labelProps
   } = props;
   const { value: ctxVal, setValue: setCtxVal } = useRadioGroup();
   const { onChangeClick: hookOnChange, isChecked } = useClickChange({
@@ -56,6 +66,7 @@ export const Button: FC<PropsWithChildren<ButtonProps>> = (
       isDisabled={isDisabled}
       className={`atlantic--radio_button ${className}`}
       size={size}
+      {...labelProps}
     >
       <StyledRadioButtonInputHidden
         onChange={onChange}
