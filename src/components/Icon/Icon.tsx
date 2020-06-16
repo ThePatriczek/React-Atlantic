@@ -123,7 +123,8 @@ export type IconName =
   | 'tag'
   | 'timeline'
   | 'brush'
-  | 'fontSize';
+  | 'fontSize'
+  | 'transformation';
 
 export interface IconProps extends React.HTMLAttributes<HTMLElement> {
   name: IconName;
@@ -501,6 +502,9 @@ export const Icon: React.FC<IconProps> = ({
     case 'fontSize':
       Component = <Icons.FontSize />;
       break;
+    case 'transformation':
+      Component = <Icons.Transformation />;
+      break; 
   }
 
   return (

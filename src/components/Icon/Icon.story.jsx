@@ -120,6 +120,9 @@ stories.add('Overview', () => (
     <div>
       <Icon name={'fontSize'} />
     </div>
+    <div>
+      <Icon name={'transformation'} />
+    </div>
   </div>
 ));
 
