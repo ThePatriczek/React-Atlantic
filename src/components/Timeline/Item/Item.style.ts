@@ -106,6 +106,7 @@ export const StyledTimelineTitle = styled(Link)<StyledTimelineTitleProps>`
 
 export const StyledTimelineCaption = styled(Link)<{
   hasMarginRight: Readonly<boolean>;
+  isDisabled?: Readonly<boolean>;
 }>`
   display: block;
   margin: 0;
@@ -121,6 +122,12 @@ export const StyledTimelineCaption = styled(Link)<{
   ${StyledText} {
     color: ${props => props.theme.color.text.beta};
   }
+
+  ${props =>
+    props.isDisabled &&
+    css`
+      cursor: not-allowed;
+    `}
 `;
 
 export const StyledTimelineContainer = styled.div<StyledTimelineContainerProps>`

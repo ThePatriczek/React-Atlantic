@@ -39,7 +39,7 @@ stories.add(
           <Timeline.Item
             elements={[<Button>Click</Button>]}
             captions={[
-              { value: `A`, hint: { description: `A` } },
+              { value: `A`, hint: { description: `A` }, isDisabled: true },
               { value: `B`, hint: { description: `B` } },
               { value: `C`, hint: { description: `C` } }
             ]}

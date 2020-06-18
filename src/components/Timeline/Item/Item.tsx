@@ -30,6 +30,7 @@ export interface TimelineCaption {
   value: Readonly<string>;
   onClick?: () => void;
   hint?: HintType;
+  isDisabled?: Readonly<boolean>;
 }
 
 export interface ItemProps {
@@ -136,8 +137,9 @@ export const Item: FC<ItemPropsPrivate> = (props): Readonly<ReactElement> => {
         {captions.map((item, key) => {
           const element = (
             <StyledTimelineCaption
+              isDisabled={item.isDisabled}
               href={'#'}
-              onClick={item.onClick}
+              onClick={() => !item.isDisabled && item.onClick}
               key={key}
               hasMarginRight={key < captions.length - 1}
             >
@@ -147,7 +149,9 @@ export const Item: FC<ItemPropsPrivate> = (props): Readonly<ReactElement> => {
             </StyledTimelineCaption>
           );
 
-          return item.hint ? tooltipFactory(item.hint, element, key) : element;
+          return item.hint && !item.isDisabled
+            ? tooltipFactory(item.hint, element, key)
+            : element;
         })}
       </StyledTimelineCaptionContainer>
     ) : null;
