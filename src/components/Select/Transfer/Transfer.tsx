@@ -7,6 +7,7 @@ import React, {
   useRef,
   useState
 } from 'react';
+import { ListProps } from 'react-virtualized';
 import { useEventListener } from '../../../hooks/EventHandlers/useEventListener';
 import { Direction, Size } from '../../../types';
 import { NotFound } from '../../NotFound';
@@ -15,7 +16,11 @@ import { checkChildrenAndOptions, OptionType } from '../Select.utils';
 import { Footer } from './Footer';
 import { LeftSide } from './LeftSide';
 import { RightSide } from './RightSide';
-import { StyledTransfer, StyledTransferContainer, StyledTransferForm } from './style';
+import {
+  StyledTransfer,
+  StyledTransferContainer,
+  StyledTransferForm
+} from './style';
 import {
   distinguishTypeAndReturnLabel,
   getMergedItems
@@ -43,6 +48,7 @@ export interface TransferProps {
   visibleRows?: number;
   openWidth?: string;
   halfOpenWidth?: string;
+  ListProps?: ListProps;
 }
 
 export interface TransferItem extends OptionType {
@@ -75,7 +81,8 @@ export const Transfer: FC<PropsWithChildren<TransferProps>> & {
     direction,
     visibleRows,
     openWidth,
-    halfOpenWidth
+    halfOpenWidth,
+    ListProps
   } = props;
 
   const [isOpen, setOpen] = useState<boolean>(false);
@@ -335,6 +342,7 @@ export const Transfer: FC<PropsWithChildren<TransferProps>> & {
             items={sortedItems()}
             isFullWidth={isFullWidth}
             visibleRows={visibleRows}
+            ListProps={ListProps}
           />
           {isOpen && isHalfOpen && (
             <RightSide
