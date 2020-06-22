@@ -139,7 +139,7 @@ export const Item: FC<ItemPropsPrivate> = (props): Readonly<ReactElement> => {
             <StyledTimelineCaption
               isDisabled={item.isDisabled}
               href={'#'}
-              onClick={() => !item.isDisabled && item.onClick}
+              onClick={() => !item.isDisabled && item?.onClick?.()}
               key={key}
               hasMarginRight={key < captions.length - 1}
             >
