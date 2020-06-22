@@ -5,6 +5,7 @@ import React, {
   SetStateAction,
   useCallback
 } from 'react';
+import { ListProps } from 'react-virtualized';
 import { theme } from '../../../../theme';
 import { Direction, Size } from '../../../../types';
 import { Checkbox } from '../../../Checkbox';
@@ -45,6 +46,7 @@ export interface LeftSideProps extends BothSidesProps {
   isAlternative?: boolean;
   inputOnChange: (value: string) => void;
   onKeyDown: (e: any) => void;
+  ListProps?: ListProps;
 }
 
 export const LeftSide: FC<LeftSideProps> = props => {
@@ -68,7 +70,8 @@ export const LeftSide: FC<LeftSideProps> = props => {
     notFoundComponent,
     isFullWidth,
     direction,
-    visibleRows
+    visibleRows,
+    ListProps
   } = props;
 
   const filtration = (item: OptionType) => {
@@ -172,6 +175,7 @@ export const LeftSide: FC<LeftSideProps> = props => {
               rowCount={filtered.length}
               rowHeight={getHeight() as number}
               rowRenderer={Row}
+              {...ListProps}
             />
           )}
           {filtered.length === 0 && <>{notFoundComponent}</>}
