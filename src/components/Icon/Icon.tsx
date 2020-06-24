@@ -21,6 +21,7 @@ export const IconsMap = {
   users: "users",
   user: "user",
   upload: "upload",
+  download: "download",
   trash: "trash",
   search: "search",
   table: "table",
@@ -231,6 +232,9 @@ export const Icon: React.FC<IconProps> = ({
       break;
     case 'upload':
       Component = <Icons.Upload />;
+      break;
+    case 'download':
+      Component = <Icons.Download />;
       break;
     case 'user':
       Component = <Icons.User />;
@@ -507,7 +511,7 @@ export const Icon: React.FC<IconProps> = ({
       break;
     case 'transformation':
       Component = <Icons.Transformation />;
-      break; 
+      break;
   }
 
   return (
