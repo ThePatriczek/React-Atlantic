@@ -1,5 +1,5 @@
 import { ReactNode } from 'react';
-import { List } from 'react-virtualized';
+import { List, ListProps } from 'react-virtualized';
 import styled, { css } from 'styled-components';
 import { theme } from '../../../../theme';
 import { Direction, HorizontalPosition, Size } from '../../../../types';
@@ -154,7 +154,9 @@ export const StyledTransferRightList = styled.div<StyledTransferProps>`
     `}
 `;
 
-export const StyledTransferLeftList = styled(List)<StyledTransferProps>`
+export const StyledTransferLeftList = styled(List)<
+  StyledTransferProps & ListProps
+>`
   && {
     ${props => StyledSideList(props.theme)};
     width: 100% !important;
