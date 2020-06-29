@@ -72,7 +72,9 @@ export const StyledCheckboxMark = styled(animated.div)<StyledCheckboxProps>`
   align-items: center;
   justify-content: center;
   width: ${props => props.theme.width.xs};
+  min-width: ${props => props.theme.width.xs};
   height: ${props => props.theme.width.xs};
+  min-height: ${props => props.theme.width.xs};
   border-radius: ${props => parseInt(props.theme.radius, 0) - 2}px;
   background-color: ${props => props.theme.color.primary.alpha};
   opacity: 0;

@@ -15,12 +15,13 @@ export interface MessageProps {
   isLoading?: boolean;
   isAlternative?: boolean;
   onClick?: () => void;
+  className?: Readonly<string>
 }
 
 export const Message: FC<PropsWithChildren<MessageProps>> = (
   props
 ): ReactElement => {
-  const { children, isLoading, isAlternative } = props;
+  const { children, isLoading, isAlternative, className } = props;
   const { onClick } = useClick({
     deps: [props.onClick],
     onClick: props.onClick
@@ -64,6 +65,7 @@ export const Message: FC<PropsWithChildren<MessageProps>> = (
 
   return (
     <StyledMessageContainer
+      className={className}
       isAlternative={isAlternative}
       type={type}
       onClick={onClick}
