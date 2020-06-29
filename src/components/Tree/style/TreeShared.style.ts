@@ -35,5 +35,9 @@ export const StyledTreeShared = styled.div<StyledTreeProps>`
     css`
         margin-left: ${listGapSizeLg};
       `}
+    
+    .rst__virtualScrollOverride {
+      overflow: visible !important;
+    }
   }
 `;

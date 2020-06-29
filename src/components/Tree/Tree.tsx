@@ -69,7 +69,7 @@ export const Tree: FC<TreeProps> & {
 
   return (
     <TreeComponent size={size}>
-      <AutoSizer>
+      <AutoSizer disableWidth>
         {({ width, height }) => (
           <SortableTree
             style={{ height, width }}

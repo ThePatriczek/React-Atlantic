@@ -17,7 +17,7 @@ stories.add('Playground', () => {
   const onChange = action(`onChange`);
 
   return (
-    <div style={{ height: 300, width: 500 }}>
+    <div style={{ height: 300 }}>
       <Tree
         isAlternative={isAlternative}
         size={'medium'}
