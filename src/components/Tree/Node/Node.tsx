@@ -23,6 +23,7 @@ export interface NodeProps extends TreeItem {
 export interface NodePropsIntern extends NodeProps {
   readonly isAlternative?: Readonly<boolean>;
   readonly size?: Readonly<Size>;
+  readonly level: Readonly<number>;
 }
 
 export const Node: FC<Readonly<NodePropsIntern>> = (
@@ -35,7 +36,8 @@ export const Node: FC<Readonly<NodePropsIntern>> = (
     iconClose,
     title,
     expanded,
-    children
+    children,
+    level
   } = props;
 
   let TreeNode = StyledTreeNode;

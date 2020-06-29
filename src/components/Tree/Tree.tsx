@@ -53,6 +53,7 @@ export const Tree: FC<TreeProps> & {
           title={node.title}
           expanded={node.expanded}
           size={size}
+          level={path.length}
         />
       );
     },

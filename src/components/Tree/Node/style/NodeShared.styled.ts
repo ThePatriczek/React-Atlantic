@@ -56,7 +56,7 @@ export const StyledTreeNodeContentShared = styled.div<
 
 StyledTreeNodeContentShared.displayName = `NodeContent`;
 
-export const StyledTreeNodeShared = styled.li<StyledTreeNodeSharedProps>`
+export const StyledTreeNodeShared = styled.div<StyledTreeNodeSharedProps>`
   position: relative;
   display: flex;
   flex-direction: row;
