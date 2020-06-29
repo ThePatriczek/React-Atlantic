@@ -6,7 +6,7 @@ export interface StyledTreeProps {
     size?: Size;
 }
 
-export const StyledTreeShared = styled.ul<StyledTreeProps>`
+export const StyledTreeShared = styled.div<StyledTreeProps>`
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
@@ -14,6 +14,7 @@ export const StyledTreeShared = styled.ul<StyledTreeProps>`
   margin: 0;
   padding: 0;
   width: 100%;
+  height: 100%;
   max-width: 100%;
   
   & & {

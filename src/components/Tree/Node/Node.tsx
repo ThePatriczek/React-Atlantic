@@ -1,15 +1,7 @@
-import React, {
-  FC,
-  PropsWithChildren,
-  ReactElement,
-  ReactText,
-  useEffect,
-  useState
-} from 'react';
-import { useComposition } from '../../../hooks/useComposition';
+import React, { FC, ReactElement, useEffect, useState } from 'react';
+import { TreeItem } from 'react-sortable-tree';
 import { Size } from '../../../types';
 import { IconName } from '../../Icon';
-import { Tree } from '../Tree';
 import {
   StyledTreeButton,
   StyledTreeButtonAlt,
@@ -21,49 +13,30 @@ import {
   StyledTreeNodeContentAlt
 } from './style';
 
-export interface INode<T = unknown> {
-  readonly isOpen?: Readonly<boolean>;
-  readonly id?: Readonly<ReactText>;
-  readonly data?: Readonly<T>;
-}
-
-export interface NodeProps extends INode {
-  readonly isDefaultOpen?: Readonly<boolean>;
-  readonly onChange?: (node: Readonly<INode>) => void;
+export interface NodeProps extends TreeItem {
+  readonly onClick?: () => void;
   readonly iconOpen?: Readonly<IconName>;
   readonly iconClose?: Readonly<IconName>;
 }
 
+
 export interface NodePropsIntern extends NodeProps {
-  readonly size?: Readonly<Size>;
   readonly isAlternative?: Readonly<boolean>;
+  readonly size?: Readonly<Size>;
 }
 
-export const Node: FC<Readonly<
-  PropsWithChildren<Readonly<NodePropsIntern>>
->> = (props): Readonly<ReactElement> => {
+export const Node: FC<Readonly<NodePropsIntern>> = (
+  props
+): Readonly<ReactElement> => {
   const {
-    children,
     size,
     isAlternative,
-    data,
-    id,
-    isDefaultOpen,
     iconOpen,
-    iconClose
+    iconClose,
+    title,
+    expanded,
+    children
   } = props;
-  const [isOpen, setOpen] = useState<Readonly<boolean>>(!!isDefaultOpen);
-
-  useEffect(() => {
-    if (typeof props.isOpen !== 'undefined') {
-      setOpen(props.isOpen);
-    }
-  }, [props.isOpen]);
-
-  const { getFilteredChildren } = useComposition();
-  const nodes = getFilteredChildren(children, Node.displayName);
-  const hasChildren: Readonly<boolean> = nodes.length > 0;
-  const content = getFilteredChildren(children, Node.displayName, true);
 
   let TreeNode = StyledTreeNode;
   let TreeNodeContent = StyledTreeNodeContent;
@@ -78,41 +51,20 @@ export const Node: FC<Readonly<
   }
 
   const onClick = () => {
-    setOpen(prev => {
-      const isOpen: Readonly<boolean> = !prev;
-
-      if (typeof props.isOpen !== 'undefined') {
-        props.onChange?.({ isOpen: !props.isOpen, data, id });
-        return props.isOpen;
-      }
-
-      props.onChange?.({ isOpen, data, id });
-      return isOpen;
-    });
+    props.onClick?.();
   };
 
   return (
-    <>
-      <TreeNode size={size} isOpened={isOpen}>
-        <TreeNodeContent isLeftShift={!hasChildren}>
-          {hasChildren && (
-            <TreeButton onClick={onClick} size={size}>
-              <TreeIcon name={(isOpen ? iconClose : iconOpen) as IconName} />
-            </TreeButton>
-          )}
-
-          {content}
-        </TreeNodeContent>
-
-        {isOpen && hasChildren && (
-          <Tree size={size} isAlternative={isAlternative}>
-            {nodes.map((node, key) => (
-              <Tree.Node key={key} {...node.props} />
-            ))}
-          </Tree>
+    <TreeNode size={size} isOpened={expanded}>
+      <TreeNodeContent>
+        {children?.length && children?.length > 0 && (
+          <TreeButton onClick={onClick} size={size}>
+            <TreeIcon name={(expanded ? iconClose : iconOpen) as IconName} />
+          </TreeButton>
         )}
-      </TreeNode>
-    </>
+        {title}
+      </TreeNodeContent>
+    </TreeNode>
   );
 };
 
