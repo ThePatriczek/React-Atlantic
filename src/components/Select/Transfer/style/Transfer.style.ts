@@ -268,7 +268,6 @@ export const StyledTransferItem = styled.div<StyledTransferProps>`
 `;
 
 export const StyledTransfer = styled.div<StyledTransferProps>`
-  overflow: hidden;
   box-sizing: border-box;
   display: block;
   width: 240px;
@@ -285,6 +284,7 @@ export const StyledTransfer = styled.div<StyledTransferProps>`
     !props.isOpen &&
     !props.isHalfOpen &&
     css`
+      overflow: hidden;
       height: ${props.theme.height.sm};
     `}
   
@@ -293,6 +293,7 @@ export const StyledTransfer = styled.div<StyledTransferProps>`
     !props.isOpen &&
     !props.isHalfOpen &&
     css`
+      overflow: hidden;
       height: ${props.theme.height.md};
     `}
   
@@ -301,6 +302,7 @@ export const StyledTransfer = styled.div<StyledTransferProps>`
     !props.isOpen &&
     !props.isHalfOpen &&
     css`
+      overflow: hidden;
       height: ${props.theme.height.lg};
     `}
 
