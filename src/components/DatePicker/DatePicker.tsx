@@ -51,6 +51,7 @@ export const DatePicker: React.FC<DatePickerProps> = (
 
     if (props?.onSelect) {
       props?.onSelect(new Date());
+
     }
   };
 
