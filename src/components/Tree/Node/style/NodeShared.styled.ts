@@ -1,6 +1,7 @@
 import styled, { css } from 'styled-components';
 import { PureButton } from '../../../Button/Pure';
 import { Icon } from '../../../Icon/Icon';
+import { StyledText } from '../../../Typography/Text/Text.style';
 import { contentLeftGap } from './variables';
 
 export interface StyledTreeNodeSharedProps {
@@ -52,6 +53,10 @@ export const StyledTreeNodeContentShared = styled.div<
   &:hover {
     background-color: ${props => props.theme.color.default};
   }
+  
+  ${StyledText} {
+    margin: 0;
+  }
 `;
 
 StyledTreeNodeContentShared.displayName = `NodeContent`;
@@ -72,19 +77,19 @@ export const StyledTreeNodeShared = styled.div<StyledTreeNodeSharedProps>`
     ${props =>
       props.size === 'small' &&
       css`
-        min-height: ${props => props.theme.height.sm};
+        min-height: ${props.theme.height.sm};
       `}
     
     ${props =>
       props.size === 'medium' &&
       css`
-        min-height: ${props => props.theme.height.md};
+        min-height: ${props.theme.height.md};
       `}
     
     ${props =>
       props.size === 'large' &&
       css`
-        min-height: ${props => props.theme.height.lg};
+        min-height: ${props.theme.height.lg};
       `}
   }
 `;

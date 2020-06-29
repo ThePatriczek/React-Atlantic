@@ -1,4 +1,4 @@
-import { boolean, withKnobs } from '@storybook/addon-knobs';
+import { boolean, select, withKnobs } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/react';
 import * as React from 'react';
 import { Tree } from './Tree';
@@ -30,7 +30,7 @@ stories.add('Playground', () => {
           {
             title: (
               <div>
-                <Button>
+                <Button size={'medium'}>
                   <Icon name={'folder'} />
                 </Button>
                 <Text>{`Node 2`}</Text>
@@ -38,9 +38,32 @@ stories.add('Playground', () => {
             ),
             children: [
               {
-                title: <Text>{`Node 2.1`}</Text>
+                title: <Text>{`Node 2.1`}</Text>,
+                children: [
+                  {
+                    title: <Text>{`Node 2.1.1`}</Text>
+                  },
+                  {
+                    title: <Text>{`Node 2.1.2`}</Text>
+                  }
+                ]
+              },
+              {
+                title: <Text>{`Node 2.1`}</Text>,
+                children: [
+                  {
+                    title: <Text>{`Node 2.1.1`}</Text>
+                  },
+                  {
+                    title: <Text>{`Node 2.1.2`}</Text>
+                  }
+                ]
               }
             ]
+          },
+          {
+            title: <Text>{`Node 3`}</Text>,
+            children: [{ title: <Text>{`Node 3.1`}</Text> }]
           }
         ]}
       />
