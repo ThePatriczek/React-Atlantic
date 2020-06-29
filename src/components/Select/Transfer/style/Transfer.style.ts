@@ -196,7 +196,6 @@ export const StyledTransferItem = styled.div<StyledTransferProps>`
       props.size === 'small' &&
       css`
         height: ${parseInt(props.theme.height.sm, 0)}px;
-        line-height: ${parseInt(props.theme.height.sm, 0)}px;
         font-size: ${props.theme.font.size.sm};
       `}
 
@@ -204,16 +203,14 @@ export const StyledTransferItem = styled.div<StyledTransferProps>`
       props.size === 'medium' &&
       css`
         height: ${parseInt(props.theme.height.md, 0)}px;
-        line-height: ${parseInt(props.theme.height.md, 0)}px;
         font-size: ${props.theme.font.size.md};
       `}
 
     ${props =>
       props.size === 'large' &&
       css`
-        font-size: ${props.theme.font.size.lg};
         height: ${parseInt(props.theme.height.lg, 0)}px;
-        line-height: ${parseInt(props.theme.height.lg, 0)}px;
+        font-size: ${props.theme.font.size.lg};
       `}
   }
 
@@ -222,6 +219,24 @@ export const StyledTransferItem = styled.div<StyledTransferProps>`
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+    
+    ${props =>
+      props.size === 'small' &&
+      css`
+        line-height: ${parseInt(props.theme.height.sm, 0)}px;
+      `}
+
+    ${props =>
+      props.size === 'medium' &&
+      css`
+        line-height: ${parseInt(props.theme.height.md, 0)}px;
+      `}
+
+    ${props =>
+      props.size === 'large' &&
+      css`
+        line-height: ${parseInt(props.theme.height.lg, 0)}px;
+      `}
   }
 `;
 
