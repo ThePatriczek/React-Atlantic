@@ -19,6 +19,7 @@ export interface DatePickerProps {
   className?: string;
   onChange?: (date?: Date | null) => void;
   onKeyDown?: (e: any) => void;
+  onSelect?: (date?: Date | null) => void;
   placeholder?: string;
   maxDate?: Date;
   minDate?: Date;
@@ -39,25 +40,28 @@ export const DatePicker: React.FC<DatePickerProps> = (
     minDate,
     isFullWidth
   } = props;
-
-  const [date, setDate] = useState<Date | undefined | null>(selected);
   const datePickerRef = useRef<ReactDatePicker>();
 
   const selectToday = () => {
-    setDate(new Date());
     datePickerRef.current?.setOpen(false);
 
     if (onChange) {
       onChange(new Date());
     }
+
+    if (props?.onSelect) {
+      props?.onSelect(new Date());
+    }
   };
 
   const handleChange = (date: Date) => {
-    setDate(date);
-
     if (onChange) {
       onChange(date);
     }
+  };
+
+  const onSelect = date => {
+    props.onSelect?.(date);
   };
 
   return (
@@ -87,8 +91,9 @@ export const DatePicker: React.FC<DatePickerProps> = (
             isFullWidth={isFullWidth}
           />
         }
-        selected={date}
+        selected={selected}
         onChange={handleChange}
+        onSelect={onSelect}
         id={id}
         locale="cs"
         className={className}
