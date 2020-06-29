@@ -324,7 +324,13 @@ export const Transfer: FC<PropsWithChildren<TransferProps>> & {
         openWidth={openWidth}
         halfOpenWidth={halfOpenWidth}
       >
-        <StyledTransferForm onSubmit={formSubmit} direction={direction}>
+        <StyledTransferForm
+          onSubmit={formSubmit}
+          direction={direction}
+          size={size}
+          isOpen={isOpen}
+          isHalfOpen={isHalfOpen}
+        >
           <LeftSide
             isAlternative={isAlternative}
             direction={direction}
