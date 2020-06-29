@@ -3,13 +3,17 @@ import React, {
   FC,
   ReactNode,
   SetStateAction,
-  useCallback
+  useCallback,
+  useMemo
 } from 'react';
+import { Props as TooltipProps } from 'react-tooltip';
 import { ListProps } from 'react-virtualized';
 import { theme } from '../../../../theme';
 import { Direction, Size } from '../../../../types';
 import { Checkbox } from '../../../Checkbox';
 import { Icon } from '../../../Icon';
+import { Tooltip } from '../../../Tooltip';
+import { Text } from '../../../Typography';
 import { OptionType } from '../../Select.utils';
 import {
   StyledTransferItem,
@@ -47,6 +51,8 @@ export interface LeftSideProps extends BothSidesProps {
   inputOnChange: (value: string) => void;
   onKeyDown: (e: any) => void;
   ListProps?: ListProps;
+  withTooltips?: boolean;
+  TooltipProps?: TooltipProps;
 }
 
 export const LeftSide: FC<LeftSideProps> = props => {
@@ -71,7 +77,9 @@ export const LeftSide: FC<LeftSideProps> = props => {
     isFullWidth,
     direction,
     visibleRows,
-    ListProps
+    ListProps,
+    withTooltips,
+    TooltipProps
   } = props;
 
   const filtration = (item: OptionType) => {
@@ -100,9 +108,20 @@ export const LeftSide: FC<LeftSideProps> = props => {
 
   const Row = ({ index, style }) => {
     const item = filtered[index];
+    const itemTextContent =
+      typeof item.label === 'string'
+        ? `${item.label}`
+        : `${(item.label as any).props.children.toString()}`;
+
     if (item) {
       return (
-        <StyledTransferItem key={item.value} size={size} style={style}>
+        <StyledTransferItem
+          data-for="transfer-tooltip"
+          data-tip={itemTextContent}
+          key={item.value}
+          size={size}
+          style={style}
+        >
           <Checkbox
             isChecked={item.isChecked}
             onChange={isChecked => {
@@ -176,9 +195,13 @@ export const LeftSide: FC<LeftSideProps> = props => {
               rowHeight={getHeight() as number}
               rowRenderer={Row}
               {...ListProps}
+              onScroll={() => Tooltip.rebuild()}
             />
           )}
           {filtered.length === 0 && <>{notFoundComponent}</>}
+          {withTooltips && (
+            <Tooltip id="transfer-tooltip" place="top" {...TooltipProps} />
+          )}
         </>
       )}
     </StyledTransferSide>
