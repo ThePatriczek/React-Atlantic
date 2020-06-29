@@ -1,41 +1,44 @@
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import { StyledTreeShared } from './TreeShared.style';
-import { listGapSizeLg, listGapSizeMd, listGapSizeSm } from './variables';
+
+const verticalLineWidth = `11px`;
 
 export const StyledTreeAlt = styled(StyledTreeShared)`
-  ${props =>
-    props.size === 'small' &&
-    css`
-      & & {
-        &:before {
-          top: ${props => props.theme.height.sm};
-          bottom: ${props => parseFloat(props.theme.height.sm) / 2}px;
-          left: ${parseFloat(listGapSizeSm) / 2}px;
-        }
-      }
-    `}
-  
-  ${props =>
-    props.size === 'medium' &&
-    css`
-      & & {
-        &:before {
-          top: ${props => props.theme.height.md};
-          bottom: ${parseFloat(props.theme.height.md) / 2}px;
-          left: ${parseFloat(listGapSizeMd) / 2}px;
-        }
-      }
-    `}
-  
-  ${props =>
-    props.size === 'large' &&
-    css`
-      & & {
-        &:before {
-          top: ${props => props.theme.height.lg};
-          bottom: ${parseFloat(props.theme.height.lg) / 2}px;
-          left: ${parseFloat(listGapSizeLg) / 2}px;
-        }
-      }
-    `}
+  .rst__lineFullVertical {
+    &:after {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: ${verticalLineWidth};
+      height: 100%;
+      border-left: 1px dashed ${props => props.theme.color.border};
+    }
+  }
+
+  .rst__lineHalfVerticalTop {
+    &:after {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: ${verticalLineWidth};
+      height: 50%;
+      border-left: 1px dashed ${props => props.theme.color.border};
+    }
+  }
+
+  .rst__lineFullVertical:first-child + .rst__lineHalfVerticalTop:after {
+    display: none;
+  }
+
+  .rst__lineHalfHorizontalRight {
+    &:before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      right: 0;
+      width: ${verticalLineWidth};
+      height: 1px;
+      border-bottom: 1px dashed ${props => props.theme.color.border};
+    }
+  }
 `;
