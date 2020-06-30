@@ -20,9 +20,15 @@ stories.add(
       <>
         <Timeline>
           <Timeline.Item
+            isDisabled={true}
             elements={[
               <span data-tip data-for={`click-me`}>
-                <Button>Click</Button>
+                <Button
+                  isDisabled={true}
+                  onClick={() => console.log(`Click me!`)}
+                >
+                  Click
+                </Button>
                 <Tooltip id={`click-me`} place={`top`}>
                   {`Click me`}
                 </Tooltip>
@@ -32,11 +38,18 @@ stories.add(
             A
           </Timeline.Item>
           <Timeline.Item
-            buttons={[{ icon: 'trash', hint: { description: `Hello World!` } }]}
+            buttons={[
+              {
+                icon: 'trash',
+                hint: { description: `Hello World!` },
+                isDisabled: true
+              }
+            ]}
           >
             B
           </Timeline.Item>
           <Timeline.Item
+            isDisabled={true}
             elements={[<Button>Click</Button>]}
             captions={[
               { value: `A`, hint: { description: `A` }, isDisabled: true },

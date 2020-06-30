@@ -11,15 +11,18 @@ const circleSize = `15px`;
 export interface StyledTimelineItemProps {
   index?: number;
   highlight?: boolean;
+  isDisabled?: Readonly<boolean>;
 }
 
 export interface StyledTimelineCircleProps {
   isActive?: boolean;
   type?: Type;
+  isDisabled?: Readonly<boolean>;
 }
 
 export interface StyledTimelineTitleProps {
   isActive?: boolean;
+  isDisabled?: Readonly<boolean>;
 }
 
 export interface StyledTimelineContainerProps {
@@ -44,6 +47,12 @@ export const StyledTimelineItem = styled.li<StyledTimelineItemProps>`
     props.highlight &&
     css`
       background-color: ${props => props.theme.color.default};
+    `}
+
+  ${props =>
+    props.isDisabled &&
+    css`
+      cursor: not-allowed;
     `}
 `;
 
@@ -76,6 +85,15 @@ export const StyledTimelineCircle = styled.div<StyledTimelineCircleProps>`
     css`
       border-color: ${props => props.theme.color.primary.alpha};
     `}
+  
+ 
+    ${props =>
+      props.isDisabled &&
+      css`
+        border-color: ${props => props.theme.color.text.beta};
+        cursor: not-allowed;
+      `}
+  
 `;
 
 export const StyledTimelineTitle = styled(Link)<StyledTimelineTitleProps>`
@@ -84,13 +102,17 @@ export const StyledTimelineTitle = styled(Link)<StyledTimelineTitleProps>`
   font-weight: 600;
   color: ${props => props.theme.color.text.alpha};
 
-  &:hover {
-    color: ${props => props.theme.color.primary.alpha};
+  ${props =>
+    !props.isDisabled &&
+    css`
+      &:hover {
+        color: ${props => props.theme.color.primary.alpha};
 
-    ${StyledTitle5} {
-      color: ${props => props.theme.color.primary.alpha};
-    }
-  }
+        ${StyledTitle5} {
+          color: ${props => props.theme.color.primary.alpha};
+        }
+      }
+    `}
 
   ${StyledTitle5} {
     margin: 0;
@@ -102,6 +124,20 @@ export const StyledTimelineTitle = styled(Link)<StyledTimelineTitleProps>`
         color: ${props => props.theme.color.primary.alpha};
       `}
   }
+
+  ${props =>
+    props.isDisabled &&
+    css`
+      &:hover {
+        text-decoration: none;
+      }
+
+      ${StyledTitle5} {
+        color: ${props.theme.color.text.beta};
+      }
+
+      cursor: not-allowed;
+    `}
 `;
 
 export const StyledTimelineCaption = styled(Link)<{
