@@ -6,7 +6,7 @@ import React, {
   useState
 } from 'react';
 import SortableTree, { NodeRendererProps, TreeItem } from 'react-sortable-tree';
-import { AutoSizer } from 'react-virtualized';
+import { AutoSizer, Index } from 'react-virtualized';
 import { theme } from '../../theme';
 import { Size } from '../../types';
 import { Node, NodeProps } from './Node';
@@ -21,6 +21,7 @@ export interface TreeProps {
   readonly onChange?: (nodes: Array<Readonly<NodeProps>>) => void;
   readonly isAlternative?: Readonly<boolean>;
   readonly size?: Readonly<Size>;
+  readonly rowHeight?: ((info: Index) => number) | number;
 }
 
 export const Tree: FC<TreeProps> & {
@@ -77,7 +78,7 @@ export const Tree: FC<TreeProps> & {
             treeData={treeData}
             onChange={onChange}
             canDrag={false}
-            rowHeight={parseInt(rowHeight, 0)}
+            rowHeight={props.rowHeight || parseInt(rowHeight, 0)}
             nodeContentRenderer={NodeContentRenderer}
           />
         )}
