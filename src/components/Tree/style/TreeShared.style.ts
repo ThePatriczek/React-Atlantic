@@ -16,6 +16,10 @@ export const StyledTreeShared = styled.div<StyledTreeProps>`
   height: 100%;
   max-width: 100%;
   
+  .rst__virtualScrollOverride {
+    outline: none;
+  }
+  
   .rst__nodeContent {
     flex: 1;  
   }
