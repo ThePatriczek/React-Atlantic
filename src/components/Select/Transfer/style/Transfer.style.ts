@@ -80,6 +80,33 @@ export const StyledTransferForm = styled.form<StyledTransferProps>`
   flex-wrap: nowrap;
 
   ${props =>
+    props.size === 'small' &&
+    !props.isOpen &&
+    !props.isHalfOpen &&
+    css`
+      height: ${parseFloat(props.theme.height.sm) - 2 + `px`};
+      overflow: hidden;
+    `}
+  
+  ${props =>
+    props.size === 'medium' &&
+    !props.isOpen &&
+    !props.isHalfOpen &&
+    css`
+      height: ${parseFloat(props.theme.height.md) - 2 + `px`};
+      overflow: hidden;
+    `}
+  
+  ${props =>
+    props.size === 'large' &&
+    !props.isOpen &&
+    !props.isHalfOpen &&
+    css`
+      height: ${parseFloat(props.theme.height.lg) - 2 + `px`};
+      overflow: hidden;
+    `}
+
+  ${props =>
     props.direction === 'horizontal'
       ? css`
           flex-direction: row;
@@ -241,6 +268,7 @@ export const StyledTransferItem = styled.div<StyledTransferProps>`
 `;
 
 export const StyledTransfer = styled.div<StyledTransferProps>`
+  box-sizing: border-box;
   display: block;
   width: 240px;
   border: 1px solid ${props => props.theme.color.border};
@@ -250,6 +278,33 @@ export const StyledTransfer = styled.div<StyledTransferProps>`
   &:hover {
     border-color: ${props => props.theme.color.primary.alpha};
   }
+  
+  ${props =>
+    props.size === 'small' &&
+    !props.isOpen &&
+    !props.isHalfOpen &&
+    css`
+      overflow: hidden;
+      height: ${props.theme.height.sm};
+    `}
+  
+  ${props =>
+    props.size === 'medium' &&
+    !props.isOpen &&
+    !props.isHalfOpen &&
+    css`
+      overflow: hidden;
+      height: ${props.theme.height.md};
+    `}
+  
+  ${props =>
+    props.size === 'large' &&
+    !props.isOpen &&
+    !props.isHalfOpen &&
+    css`
+      overflow: hidden;
+      height: ${props.theme.height.lg};
+    `}
 
   ${props =>
     props.isDisabled &&

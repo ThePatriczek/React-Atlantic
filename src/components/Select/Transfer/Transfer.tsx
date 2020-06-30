@@ -7,6 +7,7 @@ import React, {
   useRef,
   useState
 } from 'react';
+import { Props as TooltipProps } from 'react-tooltip';
 import { ListProps } from 'react-virtualized';
 import { useEventListener } from '../../../hooks/EventHandlers/useEventListener';
 import { Direction, Size } from '../../../types';
@@ -49,6 +50,8 @@ export interface TransferProps {
   openWidth?: string;
   halfOpenWidth?: string;
   ListProps?: ListProps;
+  withTooltips?: boolean;
+  TooltipProps?: TooltipProps;
 }
 
 export interface TransferItem extends OptionType {
@@ -82,7 +85,9 @@ export const Transfer: FC<PropsWithChildren<TransferProps>> & {
     visibleRows,
     openWidth,
     halfOpenWidth,
-    ListProps
+    ListProps,
+    TooltipProps,
+    withTooltips
   } = props;
 
   const [isOpen, setOpen] = useState<boolean>(false);
@@ -319,7 +324,13 @@ export const Transfer: FC<PropsWithChildren<TransferProps>> & {
         openWidth={openWidth}
         halfOpenWidth={halfOpenWidth}
       >
-        <StyledTransferForm onSubmit={formSubmit} direction={direction}>
+        <StyledTransferForm
+          onSubmit={formSubmit}
+          direction={direction}
+          size={size}
+          isOpen={isOpen}
+          isHalfOpen={isHalfOpen}
+        >
           <LeftSide
             isAlternative={isAlternative}
             direction={direction}
@@ -343,6 +354,8 @@ export const Transfer: FC<PropsWithChildren<TransferProps>> & {
             isFullWidth={isFullWidth}
             visibleRows={visibleRows}
             ListProps={ListProps}
+            TooltipProps={TooltipProps}
+            withTooltips={withTooltips}
           />
           {isOpen && isHalfOpen && (
             <RightSide
@@ -386,6 +399,8 @@ Transfer.defaultProps = {
   size: 'medium',
   visibleRows: 5,
   notFoundComponent: <NotFound title={`No items found...`} />,
+  TooltipProps: {},
+  withTooltips: false,
   chosenComponent: (checked, total) => (
     <>
       <strong>{`Chosen: `}</strong>
