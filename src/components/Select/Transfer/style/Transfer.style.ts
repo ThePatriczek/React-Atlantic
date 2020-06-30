@@ -80,33 +80,6 @@ export const StyledTransferForm = styled.form<StyledTransferProps>`
   flex-wrap: nowrap;
 
   ${props =>
-    props.size === 'small' &&
-    !props.isOpen &&
-    !props.isHalfOpen &&
-    css`
-      height: ${parseFloat(props.theme.height.sm) - 2 + `px`};
-      overflow: hidden;
-    `}
-  
-  ${props =>
-    props.size === 'medium' &&
-    !props.isOpen &&
-    !props.isHalfOpen &&
-    css`
-      height: ${parseFloat(props.theme.height.md) - 2 + `px`};
-      overflow: hidden;
-    `}
-  
-  ${props =>
-    props.size === 'large' &&
-    !props.isOpen &&
-    !props.isHalfOpen &&
-    css`
-      height: ${parseFloat(props.theme.height.lg) - 2 + `px`};
-      overflow: hidden;
-    `}
-
-  ${props =>
     props.direction === 'horizontal'
       ? css`
           flex-direction: row;
@@ -281,29 +254,32 @@ export const StyledTransfer = styled.div<StyledTransferProps>`
   
   ${props =>
     props.size === 'small' &&
-    !props.isOpen &&
-    !props.isHalfOpen &&
     css`
-      overflow: hidden;
-      height: ${props.theme.height.sm};
+      min-height: ${props.theme.height.sm};
+
+      ${StyledInput} {
+        height: ${parseFloat(props.theme.height.sm) - 2 + `px`};
+      }
     `}
   
   ${props =>
     props.size === 'medium' &&
-    !props.isOpen &&
-    !props.isHalfOpen &&
     css`
-      overflow: hidden;
-      height: ${props.theme.height.md};
+      min-height: ${props.theme.height.md};
+
+      ${StyledInput} {
+        height: ${parseFloat(props.theme.height.md) - 2 + `px`};
+      }
     `}
   
   ${props =>
     props.size === 'large' &&
-    !props.isOpen &&
-    !props.isHalfOpen &&
     css`
-      overflow: hidden;
-      height: ${props.theme.height.lg};
+      min-height: ${props.theme.height.lg};
+
+      ${StyledInput} {
+        height: ${parseFloat(props.theme.height.lg) - 2 + `px`};
+      }
     `}
 
   ${props =>

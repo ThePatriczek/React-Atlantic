@@ -21,24 +21,24 @@ export const StyledChosenHeader = styled.div<StyledTransferProps>`
     props.size === 'small' &&
     css`
       font-size: ${props.theme.font.size.sm};
-      height: ${parseInt(props.theme.height.sm, 0)}px;
-      line-height: ${parseInt(props.theme.height.sm, 0)}px;
+      height: ${parseInt(props.theme.height.sm, 0) - 2}px;
+      line-height: ${parseInt(props.theme.height.sm, 0) - 2}px;
     `}
 
   ${props =>
     props.size === 'medium' &&
     css`
       font-size: ${props.theme.font.size.md};
-      height: ${parseInt(props.theme.height.md, 0)}px;
-      line-height: ${parseInt(props.theme.height.md, 0)}px;
+      height: ${parseInt(props.theme.height.md, 0) - 2}px;
+      line-height: ${parseInt(props.theme.height.md, 0) - 2}px;
     `}
 
   ${props =>
     props.size === 'large' &&
     css`
       font-size: ${props.theme.font.size.lg};
-      height: ${parseInt(props.theme.height.lg, 0)}px;
-      line-height: ${parseInt(props.theme.height.lg, 0)}px;
+      height: ${parseInt(props.theme.height.lg, 0) - 2}px;
+      line-height: ${parseInt(props.theme.height.lg, 0) - 2}px;
     `};
 `;
 
