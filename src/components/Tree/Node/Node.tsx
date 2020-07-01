@@ -59,7 +59,7 @@ export const Node: FC<Readonly<NodePropsIntern>> = (
   return (
     <TreeNode size={size} isOpened={expanded}>
       <TreeNodeContent>
-        {children?.length && children?.length > 0 && (
+        {children && children.length > 0 && (
           <TreeButton onClick={onClick} size={size}>
             <TreeIcon name={(expanded ? iconClose : iconOpen) as IconName} />
           </TreeButton>
