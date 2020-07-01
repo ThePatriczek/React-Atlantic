@@ -4,6 +4,12 @@ import { StyledTreeShared } from './TreeShared.style';
 const verticalLineWidth = `11px`;
 
 export const StyledTreeAlt = styled(StyledTreeShared)`
+  .rst__nodeContent {
+    position: relative;
+    left: 0 !important;
+    background-color: ${props => props.theme.color.background.alpha};
+  }
+
   .rst__lineFullVertical {
     &:after {
       content: '';
