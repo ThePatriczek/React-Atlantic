@@ -25,7 +25,9 @@ stories.add('Playground', () => {
         nodes={[
           {
             title: <Text>{`Node 1`}</Text>,
-            children: [{ title: <Text>{`Node 1.1`}</Text> }]
+            children: [{ title: <Text>{`Node 1.1`}</Text> }],
+            iconOpen: 'folder',
+            iconClose: 'folderOpen',
           },
           {
             title: (

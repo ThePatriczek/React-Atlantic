@@ -55,6 +55,8 @@ export const Tree: FC<TreeProps> & {
           expanded={node.expanded}
           size={size}
           level={path.length}
+          iconOpen={node.iconOpen}
+          iconClose={node.iconClose}
         />
       );
     },
