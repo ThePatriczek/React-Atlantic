@@ -41,6 +41,7 @@ export const DatePicker: React.FC<DatePickerProps> = (
     isFullWidth
   } = props;
   const datePickerRef = useRef<ReactDatePicker>();
+  const [isFocused, setFocused] = useState<boolean>(false);
 
   const selectToday = () => {
     datePickerRef.current?.setOpen(false);
@@ -51,7 +52,6 @@ export const DatePicker: React.FC<DatePickerProps> = (
 
     if (props?.onSelect) {
       props?.onSelect(new Date());
-
     }
   };
 
@@ -108,6 +108,9 @@ export const DatePicker: React.FC<DatePickerProps> = (
         onKeyDown={onKeyDown}
         showPopperArrow={false}
         ref={datePickerRef}
+        onFocus={() => setFocused(true)}
+        onBlur={() => setFocused(false)}
+        open={isFocused}
       >
         <StyledReactDatePickerButtonContainer>
           <StyledReactDatePickerButton isFullWidth onClick={selectToday}>
