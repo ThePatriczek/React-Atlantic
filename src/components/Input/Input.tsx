@@ -169,7 +169,7 @@ export const Input: React.FC<InputProps> & {
       value={val}
       onChange={onChange}
       disabled={isDisabled}
-      placeholder={isAlternative ? `` : placeholder}
+      placeholder={isAlternative && !isDisabled ? `` : placeholder}
       onKeyDown={onKeyDown}
       autoFocus={autoFocus}
       onBlur={onBlur}
