@@ -63,6 +63,7 @@ export const DatePicker: React.FC<DatePickerProps> = (
 
   const onSelect = date => {
     props.onSelect?.(date);
+    setFocused(false);
   };
 
   return (
