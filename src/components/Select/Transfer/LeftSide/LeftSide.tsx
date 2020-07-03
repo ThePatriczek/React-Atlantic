@@ -4,7 +4,6 @@ import React, {
   ReactNode,
   SetStateAction,
   useCallback,
-  useMemo
 } from 'react';
 import { Props as TooltipProps } from 'react-tooltip';
 import { ListProps } from 'react-virtualized';
@@ -13,7 +12,6 @@ import { Direction, Size } from '../../../../types';
 import { Checkbox } from '../../../Checkbox';
 import { Icon } from '../../../Icon';
 import { Tooltip } from '../../../Tooltip';
-import { Text } from '../../../Typography';
 import { OptionType } from '../../Select.utils';
 import {
   StyledTransferItem,

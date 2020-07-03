@@ -22,12 +22,14 @@ stories.add('Playground', () => {
         isAlternative={isAlternative}
         size={'medium'}
         onChange={onChange}
+        withTooltips
         nodes={[
           {
             title: <Text>{`Node 1`}</Text>,
             children: [{ title: <Text>{`Node 1.1`}</Text> }],
             iconOpen: 'folder',
             iconClose: 'folderOpen',
+            tooltip: `Node 1`
           },
           {
             title: (

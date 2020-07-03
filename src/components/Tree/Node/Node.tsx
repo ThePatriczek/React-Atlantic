@@ -1,4 +1,5 @@
-import React, { FC, ReactElement, useEffect, useState } from 'react';
+import { type } from 'os';
+import React, { FC, ReactElement } from 'react';
 import { TreeItem } from 'react-sortable-tree';
 import { Size } from '../../../types';
 import { IconName } from '../../Icon';
@@ -17,8 +18,8 @@ export interface NodeProps extends TreeItem {
   readonly onClick?: () => void;
   readonly iconOpen?: Readonly<IconName>;
   readonly iconClose?: Readonly<IconName>;
+  readonly tooltip?: string;
 }
-
 
 export interface NodePropsIntern extends NodeProps {
   readonly isAlternative?: Readonly<boolean>;
@@ -37,7 +38,7 @@ export const Node: FC<Readonly<NodePropsIntern>> = (
     title,
     expanded,
     children,
-    level
+    tooltip
   } = props;
 
   let TreeNode = StyledTreeNode;
@@ -58,7 +59,7 @@ export const Node: FC<Readonly<NodePropsIntern>> = (
 
   return (
     <TreeNode size={size} isOpened={expanded}>
-      <TreeNodeContent>
+      <TreeNodeContent data-for="tree-tooltip" data-tip={tooltip}>
         {children && children.length > 0 && (
           <TreeButton onClick={onClick} size={size}>
             <TreeIcon name={(expanded ? iconClose : iconOpen) as IconName} />

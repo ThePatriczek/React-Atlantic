@@ -6,9 +6,11 @@ import React, {
   useState
 } from 'react';
 import SortableTree, { NodeRendererProps, TreeItem } from 'react-sortable-tree';
+import { Props as TooltipProps } from 'react-tooltip';
 import { AutoSizer, Index } from 'react-virtualized';
 import { theme } from '../../theme';
 import { Size } from '../../types';
+import { Tooltip } from '../Tooltip';
 import { Node, NodeProps } from './Node';
 import { StyledTree, StyledTreeAlt } from './style';
 
@@ -22,18 +24,21 @@ export interface TreeProps {
   readonly isAlternative?: Readonly<boolean>;
   readonly size?: Readonly<Size>;
   readonly rowHeight?: ((info: Index) => number) | number;
+  readonly withTooltips?: boolean;
+  readonly TooltipProps?: TooltipProps;
 }
 
 export const Tree: FC<TreeProps> & {
   Node: FC<Readonly<NodeProps>>;
 } = (props): Readonly<ReactElement> => {
-  const { isAlternative, size, nodes } = props;
+  const { isAlternative, size, nodes, withTooltips, TooltipProps } = props;
   const TreeComponent = isAlternative ? StyledTreeAlt : StyledTree;
 
   const [treeData, setTreeData] = useState<Array<Readonly<TreeItem>>>(nodes);
 
   useEffect(() => {
     setTreeData(nodes);
+    Tooltip.rebuild();
   }, [nodes]);
 
   const onChange = treeData => {
@@ -57,6 +62,7 @@ export const Tree: FC<TreeProps> & {
           level={path.length}
           iconOpen={node.iconOpen}
           iconClose={node.iconClose}
+          tooltip={node.tooltip}
         />
       );
     },
@@ -73,6 +79,9 @@ export const Tree: FC<TreeProps> & {
 
   return (
     <TreeComponent size={size}>
+      {withTooltips && (
+        <Tooltip id="tree-tooltip" place="top" {...TooltipProps} />
+      )}
       <AutoSizer disableWidth>
         {({ width, height }) => (
           <SortableTree
@@ -82,6 +91,10 @@ export const Tree: FC<TreeProps> & {
             canDrag={false}
             rowHeight={props.rowHeight || parseInt(rowHeight, 0)}
             nodeContentRenderer={NodeContentRenderer}
+            reactVirtualizedListProps={{
+              onScroll: () => Tooltip.rebuild(),
+              onRowsRendered: () => Tooltip.rebuild()
+            }}
           />
         )}
       </AutoSizer>
