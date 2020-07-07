@@ -31,6 +31,7 @@ export const Component = (
   direction,
   isAlternative,
   visibleRows,
+  isWithTooltip,
   onChange,
   onCancel,
   onSubmit
@@ -49,6 +50,7 @@ export const Component = (
       isFullWidth={isFullWidth}
       isAlternative={isAlternative}
       visibleRows={visibleRows}
+      withTooltips={isWithTooltip}
       onChange={onChange}
       onCancel={onCancel}
       onSubmit={onSubmit}
@@ -67,6 +69,7 @@ export const Component = (
         isAlternative={isAlternative}
         isFullWidth={isFullWidth}
         visibleRows={visibleRows}
+        withTooltips={isWithTooltip}
         onChange={onChange}
         onCancel={onCancel}
         onSubmit={onSubmit}
@@ -111,6 +114,7 @@ export const Component = (
         size={size}
         isFullWidth={isFullWidth}
         visibleRows={visibleRows}
+        withTooltips={isWithTooltip}
         onChange={onChange}
         onCancel={onCancel}
         onSubmit={onSubmit}

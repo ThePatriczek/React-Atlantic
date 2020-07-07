@@ -1,5 +1,6 @@
 import React, { FC, ReactNode } from 'react';
 import { Direction, Size } from '../../../../types';
+import { Tooltip } from '../../../Tooltip';
 import {
   StyledTransferItem,
   StyledTransferRightList,
@@ -43,7 +44,9 @@ export const RightSide: FC<RightSideProps> = props => {
     onChange,
     isFullWidth,
     direction,
-    visibleRows
+    visibleRows,
+    withTooltips,
+    TooltipProps
   } = props;
 
   return (
@@ -75,20 +78,32 @@ export const RightSide: FC<RightSideProps> = props => {
         </StyledDeleteAllButton>
       </StyledChosenHeader>
       <StyledTransferRightList visibleRows={visibleRows} size={size}>
-        {checkedItems.map((item: any) => (
-          <StyledTransferItem
-            size={size}
-            key={item.value}
-            onClick={() => {
-              onChange(item.value, false);
-            }}
-          >
-            {transferItemsRender(item)}
-            <StyledDeleteOneButton size={size}>
-              <StyledDeleteOneIcon name={'error'} />
-            </StyledDeleteOneButton>
-          </StyledTransferItem>
-        ))}
+        {checkedItems.map((item: any) => {
+          const itemTextContent =
+            typeof item.label === 'string'
+              ? `${item.label}`
+              : `${(item.label as any).props.children.toString()}`;
+
+          return (
+            <StyledTransferItem
+              data-for="transfer-tooltip-right"
+              data-tip={itemTextContent}
+              size={size}
+              key={item.value}
+              onClick={() => {
+                onChange(item.value, false);
+              }}
+            >
+              {transferItemsRender(item)}
+              <StyledDeleteOneButton size={size}>
+                <StyledDeleteOneIcon name={'error'} />
+              </StyledDeleteOneButton>
+              {withTooltips && (
+                <Tooltip id="transfer-tooltip-right" place="top" {...TooltipProps} />
+              )}
+            </StyledTransferItem>
+          )
+        })}
       </StyledTransferRightList>
     </StyledTransferSide>
   );

@@ -61,6 +61,8 @@ export interface TransferItem extends OptionType {
 
 export interface BothSidesProps {
   visibleRows?: number;
+  withTooltips?: boolean;
+  TooltipProps?: TooltipProps;
 }
 
 export const Transfer: FC<PropsWithChildren<TransferProps>> & {
@@ -371,6 +373,8 @@ export const Transfer: FC<PropsWithChildren<TransferProps>> & {
               deleteAllText={deleteAllText}
               onChange={onChange}
               visibleRows={visibleRows}
+              TooltipProps={TooltipProps}
+              withTooltips={withTooltips}
             />
           )}
         </StyledTransferForm>

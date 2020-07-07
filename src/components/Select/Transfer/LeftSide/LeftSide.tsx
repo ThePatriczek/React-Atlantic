@@ -49,8 +49,6 @@ export interface LeftSideProps extends BothSidesProps {
   inputOnChange: (value: string) => void;
   onKeyDown: (e: any) => void;
   ListProps?: ListProps;
-  withTooltips?: boolean;
-  TooltipProps?: TooltipProps;
 }
 
 export const LeftSide: FC<LeftSideProps> = props => {

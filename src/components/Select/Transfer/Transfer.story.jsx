@@ -43,6 +43,7 @@ stories.add(
       'isAlternative: ',
       defaultValues.isAlternative
     );
+    const isWithTooltip = boolean('isWithTooltip: ', false);
 
     const options = defaultValues.options;
     const onChange = action(`onChange`);
@@ -61,6 +62,7 @@ stories.add(
       direction,
       isAlternative,
       visibleRows,
+      isWithTooltip,
       onChange,
       onCancel,
       onSubmit
