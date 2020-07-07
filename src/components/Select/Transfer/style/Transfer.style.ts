@@ -170,7 +170,8 @@ export const StyledTransferLeftList = styled(List)<
 `;
 
 export const StyledTransferItem = styled.div<StyledTransferProps>`
-  ${props => StyledSideFontSettings(props.theme, props.size)}
+  ${props => StyledSideFontSettings(props.theme, props.size)};
+  box-sizing: border-box;
   display: flex;
   align-items: center;
   justify-content: space-between;
