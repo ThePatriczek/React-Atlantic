@@ -1,6 +1,6 @@
 import cs from 'date-fns/locale/cs';
 import * as React from 'react';
-import { useRef, useState } from 'react';
+import { ChangeEvent, useRef, useState } from 'react';
 import ReactDatePicker, { registerLocale } from 'react-datepicker';
 import { Input } from '../Input';
 import {
@@ -18,6 +18,7 @@ export interface DatePickerProps {
   selected?: Date | null;
   className?: string;
   onChange?: (date?: Date | null) => void;
+  onChangeRaw?: (value: string) => void;
   onKeyDown?: (e: any) => void;
   onSelect?: (date?: Date | null) => void;
   placeholder?: string;
@@ -35,6 +36,7 @@ export const DatePicker: React.FC<DatePickerProps> = (
     selected,
     placeholder,
     onChange,
+    onChangeRaw,
     onKeyDown,
     maxDate,
     minDate,
@@ -50,14 +52,34 @@ export const DatePicker: React.FC<DatePickerProps> = (
       onChange(new Date());
     }
 
+    if (onChangeRaw) {
+      onChangeRaw(
+        new Date().toLocaleDateString('cs', {
+          year: 'numeric',
+          month: '2-digit',
+          day: '2-digit'
+        })
+      );
+    }
+
     if (props?.onSelect) {
       props?.onSelect(new Date());
     }
+
+    setFocused(false);
   };
 
   const handleChange = (date: Date) => {
     if (onChange) {
       onChange(date);
+    }
+  };
+
+  const handleChangeRaw = (e: ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+
+    if (onChangeRaw) {
+      onChangeRaw(value);
     }
   };
 
@@ -94,6 +116,7 @@ export const DatePicker: React.FC<DatePickerProps> = (
           />
         }
         selected={selected}
+        onChangeRaw={handleChangeRaw}
         onChange={handleChange}
         onSelect={onSelect}
         id={id}
