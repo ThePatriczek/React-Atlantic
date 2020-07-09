@@ -126,6 +126,11 @@ export const IconsMap = {
   brush: "brush",
   fontSize: "fontSize",
   transformation: "transformation",
+  copyFilled: "copyFilled",
+  messageBubble: "messageBubble",
+  layers: "layers",
+  pencil: "pencil",
+  signout: "signout",
 };
 
 export type IconName = (typeof IconsMap)[keyof typeof IconsMap];
@@ -511,6 +516,21 @@ export const Icon: React.FC<IconProps> = ({
       break;
     case 'transformation':
       Component = <Icons.Transformation />;
+      break;
+    case 'copyFilled':
+      Component = <Icons.CopyFilled />;
+      break;
+    case 'messageBubble':
+      Component = <Icons.MessageBubble />;
+      break;
+    case 'layers':
+      Component = <Icons.Layers />;
+      break;
+    case 'pencil':
+      Component = <Icons.Pencil />;
+      break;
+    case 'signout':
+      Component = <Icons.Signout />;
       break;
   }
 
