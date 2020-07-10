@@ -14,6 +14,8 @@ export interface StyledTextAreaProps {
   onFocus?: () => void;
   iconLeft?: IconName;
   iconRight?: IconName;
+  rows?: number;
+  cols?: number;
 }
 
 export const StyledTextAreaWrapper = styled.div<StyledTextAreaProps>`
@@ -61,7 +63,10 @@ export const StyledTextArea = styled.textarea`
   user-select: text;
   width: 100%;
   max-width: 100%;
-  height: auto;
+  height: ${props =>
+    props.rows
+      ? props.rows * parseFloat(props.theme.height.md) + `px`
+      : `auto`};
   min-height: ${props => props.theme.height.md};
   padding: ${props => props.theme.padding.sm} ${props => props.theme.padding.md};
   margin: 0;

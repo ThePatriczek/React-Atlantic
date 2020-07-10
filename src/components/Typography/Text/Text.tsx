@@ -37,6 +37,8 @@ export interface TextProps {
   /** tooltip tooltip */
   tooltipProps?: Readonly<ReactTooltip.Props>;
   editIcon?: IconName;
+  /** set rows for textarea while editing text */
+  textAreaRows?: number;
 }
 
 const { TextArea } = Input;
@@ -52,7 +54,8 @@ export const Text: FC<TextProps> = (props: TextProps): ReactElement => {
     element,
     editText,
     tooltipProps,
-    editIcon
+    editIcon,
+    textAreaRows
   } = props;
   const id = v4();
   const [isEditing, setEditing] = useState<boolean>(false);
@@ -100,6 +103,7 @@ export const Text: FC<TextProps> = (props: TextProps): ReactElement => {
         }}
         autoFocus
         iconRight={'enter'}
+        rows={textAreaRows}
       />
     );
   }

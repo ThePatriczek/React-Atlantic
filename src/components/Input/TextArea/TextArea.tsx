@@ -21,6 +21,8 @@ export interface TextAreaProps {
   onFocus?: () => void;
   iconLeft?: IconName;
   iconRight?: IconName;
+  rows?: number;
+  cols?: number;
 }
 
 export const TextArea: React.FC<TextAreaProps> = (
@@ -33,7 +35,9 @@ export const TextArea: React.FC<TextAreaProps> = (
     onEnterPress,
     autoFocus,
     iconLeft,
-    iconRight
+    iconRight,
+    rows,
+    cols
   } = props;
 
   const { onKeyDownTextArea, onChangeInput, value } = useKeyboardChange({
@@ -66,6 +70,8 @@ export const TextArea: React.FC<TextAreaProps> = (
         onBlur={e => onBlur(e, props.onBlur)}
         onFocus={e => onFocus(e, props.onFocus)}
         autoFocus={autoFocus}
+        rows={rows}
+        cols={cols}
       />
 
       {iconLeft && (
