@@ -34,6 +34,8 @@ export interface TitleProps {
   onEditConfirm?: (value: string) => void;
   editIcon?: IconName;
   tooltipProps?: Readonly<ReactTooltip.Props>;
+  /** set rows for textarea while editing text */
+  textAreaRows?: number;
 }
 
 export const Title: FC<PropsWithChildren<TitleProps>> = (
@@ -47,7 +49,8 @@ export const Title: FC<PropsWithChildren<TitleProps>> = (
     editText,
     isEditable,
     onEditConfirm,
-    tooltipProps
+    tooltipProps,
+    textAreaRows
   } = props;
   const id = v4();
   const [isEditing, setEditing] = useState<boolean>(false);
@@ -81,6 +84,7 @@ export const Title: FC<PropsWithChildren<TitleProps>> = (
         }}
         autoFocus
         iconRight={'enter'}
+        rows={textAreaRows}
       />
     );
   }
