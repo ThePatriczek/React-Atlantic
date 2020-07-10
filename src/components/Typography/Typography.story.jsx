@@ -27,11 +27,20 @@ stories.add('Overview', () => {
           <Link href={`#`}>{`Custom link in paragraph`}</Link>
           <Text>{`Text`}</Text>
           <Text element={'strong'}>{`Strong Text`}</Text>
-          <Text isCopyable tooltipProps={{place: 'bottom'}}>{`Copyable Text`}</Text>
-          <Text isCopyable tooltipProps={{place: 'right'}}>{`Copyable Text`}</Text>
+          <Text
+            isCopyable
+            tooltipProps={{ place: 'bottom' }}
+          >{`Copyable Text`}</Text>
+          <Text
+            isCopyable
+            tooltipProps={{ place: 'right' }}
+          >{`Copyable Text`}</Text>
           <Text isEditable>{`Copyable Text`}</Text>
           <Text isEditable>{`Copyable Text`}</Text>
-          <Text isCopyable tooltipProps={{place: 'top'}}>{`Copyable Text`}</Text>
+          <Text
+            isCopyable
+            tooltipProps={{ place: 'top' }}
+          >{`Copyable Text`}</Text>
         </Paragraph>
       </div>
       <div>
@@ -64,6 +73,14 @@ stories.add('Overview', () => {
         </div>
         <div>
           <Text isEditable>{`Editable Text`}</Text>
+        </div>
+        <div>
+          <Title
+            level={5}
+            isEditable
+            editIcon={'send'}
+            editText={'Edit'}
+          >{`Editable Title`}</Title>
         </div>
       </div>
     </div>

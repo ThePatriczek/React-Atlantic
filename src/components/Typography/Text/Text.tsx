@@ -3,7 +3,7 @@ import ReactTooltip from 'react-tooltip';
 import { v4 } from 'uuid';
 import { Type } from '../../../types';
 import { StyledTypoButton } from '../../Button/Button.style';
-import { Icon } from '../../Icon';
+import { Icon, IconName } from '../../Icon';
 import { Input } from '../../Input';
 import { Tooltip } from '../../Tooltip';
 import {
@@ -36,6 +36,7 @@ export interface TextProps {
   editText?: string;
   /** tooltip tooltip */
   tooltipProps?: Readonly<ReactTooltip.Props>;
+  editIcon?: IconName;
 }
 
 const { TextArea } = Input;
@@ -50,7 +51,8 @@ export const Text: FC<TextProps> = (props: TextProps): ReactElement => {
     className,
     element,
     editText,
-    tooltipProps
+    tooltipProps,
+    editIcon
   } = props;
   const id = v4();
   const [isEditing, setEditing] = useState<boolean>(false);
@@ -122,7 +124,7 @@ export const Text: FC<TextProps> = (props: TextProps): ReactElement => {
           }}
           ref={editBtnRef}
         >
-          <Icon name={'edit'} />
+          <Icon name={editIcon ?? 'edit'} />
           <Tooltip id={id} {...tooltipProps}>
             {editText}
           </Tooltip>

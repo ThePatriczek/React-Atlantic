@@ -7,12 +7,13 @@ import {
   StyledTextAreaIcon,
   StyledTextAreaWrapper
 } from './TextArea.style';
+import { ReactText } from 'react';
 
 export interface TextAreaProps {
   isDisabled?: boolean;
   placeholder?: string;
   autoFocus?: boolean;
-  value?: string;
+  value?: ReactText;
   defaultValue?: string;
   onChange?: (value: string) => void;
   onEnterPress?: (value: string) => void;

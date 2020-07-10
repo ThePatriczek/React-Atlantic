@@ -1,4 +1,4 @@
-import { ChangeEvent, KeyboardEvent, useCallback, useState } from 'react';
+import { ChangeEvent, KeyboardEvent, ReactText, useCallback, useState } from 'react';
 
 export interface UseOnChangeValue {
   onChangeInput: (
@@ -20,7 +20,7 @@ export interface UseOnChangeValue {
 export interface UseEventHandlersProps {
   isDisabled?: Readonly<boolean>;
   defaultValue?: Readonly<unknown>;
-  value?: Readonly<string>;
+  value?: Readonly<ReactText>;
   onChange?: (x: string | ChangeEvent<HTMLInputElement>) => void;
   onKeyDown?: (
     e: KeyboardEvent<HTMLInputElement> | KeyboardEvent<HTMLTextAreaElement>
