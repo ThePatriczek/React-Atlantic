@@ -25,13 +25,13 @@ export const Component = (
 };
 
 export const tests = (
-  popconfirm = Component(defaultValues.type, undefined)
+  popconfirm = Component(defaultValues.position, defaultValues.position)
 ) => {
   let output = shallow(popconfirm);
 
-  return describe('Badge', () => {
-    it(`Should have type: ${popconfirm.props.type}`, () => {
-      expect(output.props().type).toEqual(popconfirm.props.type);
+  return describe('Popconfirm', () => {
+    it(`Should have type: ${popconfirm.props.position}`, () => {
+      expect(output.props().position).toEqual(popconfirm.props.position);
     });
   });
 };
