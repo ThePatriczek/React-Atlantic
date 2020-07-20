@@ -169,3 +169,7 @@ export const StyledPopconfirmContent = styled.div<StyledPopconfirmProps>`
 export const StyledPopconfirmContainer = styled.span<StyledPopconfirmProps>`
   display: contents;
 `;
+
+export const StyledCancelButtonContainer = styled.div<StyledPopconfirmProps>`
+  padding-right: 5px;
+`;

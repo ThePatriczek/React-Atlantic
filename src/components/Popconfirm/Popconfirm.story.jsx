@@ -13,9 +13,9 @@ stories.add(
   'Playground',
   () => {
     const children = text(`children:`, undefined);
-    const content = text(`content:`, `Are you sure?`);
-    const cancelText = text(`content:`, defaultValues.closeText);
-    const confirmText = text(`content:`, defaultValues.submitText);
+    const content = text(`content:`, undefined);
+    const cancelText = text(`cancelText:`, defaultValues.closeText);
+    const confirmText = text(`confirmText:`, defaultValues.submitText);
 
     const position = select(
       'Position: ',

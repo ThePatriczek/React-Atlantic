@@ -6,16 +6,17 @@ import { Position } from '../../types';
 import { Button, PureButton } from '../Button';
 import {
   StyledAnimatedPopconfirmContainer,
+  StyledCancelButtonContainer,
   StyledPopconfirmContainer,
   StyledPopconfirmContent,
   StyledPopconfirmFooter
 } from './Popconfirm.style';
 
 export interface PopconfirmProps {
-  children?: Readonly<JSX.Element>;
+  children: Readonly<JSX.Element>;
   position?: Readonly<Position>;
   className?: Readonly<string>;
-  onConfirm?: () => void;
+  onConfirm: () => void;
   onCancel?: () => void;
   content?: Readonly<JSX.Element | string>;
   cancelText?: Readonly<string>;
@@ -36,8 +37,8 @@ export const Popconfirm: FC<PopconfirmProps> = props => {
     executeDirectly
   } = props;
   const [isOpen, setOpen] = useState<Readonly<boolean>>(false);
-  const insideContainerRef = useRef<HTMLDivElement>(null);
-  const buttonContainerRef = useRef<HTMLSpanElement>(null);
+  const insideContainerRef = useRef<Readonly<HTMLDivElement>>(null);
+  const buttonContainerRef = useRef<Readonly<HTMLSpanElement>>(null);
 
   const {} = useEventListener({
     ref: insideContainerRef,
@@ -54,14 +55,20 @@ export const Popconfirm: FC<PopconfirmProps> = props => {
     }
   });
 
-  const positionAnimationFromLeave = new Map([
+  const positionAnimationFromLeave: ReadonlyMap<
+    Readonly<string>,
+    Readonly<string>
+  > = new Map([
     [`top`, `scale(0.7) translateY(50px)`],
     [`bottom`, `scale(0.7) translateY(-50px)`],
     [`right`, `scale(0.7) translateX(-50px)`],
     [`left`, `scale(0.7) translateX(50px)`]
   ]);
 
-  const positionAnimationEnter = new Map([
+  const positionAnimationEnter: ReadonlyMap<
+    Readonly<string>,
+    Readonly<string>
+  > = new Map([
     [`top`, `scale(1) translateY(0)`],
     [`bottom`, `scale(1) translateY(0)`],
     [`right`, `scale(1) translateX(0)`],
@@ -102,11 +109,11 @@ export const Popconfirm: FC<PopconfirmProps> = props => {
   );
 
   const CancelButton = () => (
-    <div style={{ paddingRight: '5px' }}>
+    <StyledCancelButtonContainer style={{ paddingRight: '5px' }}>
       <Button onClick={onCancelClick} type={'default'}>
         {cancelText}
       </Button>
-    </div>
+    </StyledCancelButtonContainer>
   );
 
   const ChildrenComponent = () => (
@@ -149,7 +156,6 @@ export const Popconfirm: FC<PopconfirmProps> = props => {
 Popconfirm.defaultProps = {
   position: 'top',
   confirmText: 'Confirm',
-  cancelText: 'Cancel',
-  content: <Text>{`Are you sure?`}</Text>
+  cancelText: 'Cancel'
 };
 Popconfirm.displayName = `Popconfirm`;
