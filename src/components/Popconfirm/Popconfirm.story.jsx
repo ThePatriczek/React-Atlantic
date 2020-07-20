@@ -14,6 +14,8 @@ stories.add(
   () => {
     const children = text(`children:`, undefined);
     const content = text(`content:`, `Are you sure?`);
+    const cancelText = text(`content:`, defaultValues.closeText);
+    const confirmText = text(`content:`, defaultValues.submitText);
 
     const position = select(
       'Position: ',
@@ -21,7 +23,13 @@ stories.add(
       defaultValues.position
     );
 
-    const popconfirm = Component(children, position, content);
+    const popconfirm = Component(
+      children,
+      position,
+      content,
+      cancelText,
+      confirmText
+    );
 
     specs(() => tests(popconfirm));
 
