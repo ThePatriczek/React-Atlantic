@@ -126,7 +126,7 @@ export const DeviceProvider: FC<Readonly<
 
   const onResize: () => void = () => {
     if (window) {
-      const device = getCurrentDeviceMemoized(window.innerWidth);
+      const device = getCurrentDeviceMemoized(window.outerWidth);
       setCurrentDevice(device);
     }
   };
