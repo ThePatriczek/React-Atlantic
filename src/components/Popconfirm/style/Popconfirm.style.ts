@@ -1,7 +1,7 @@
 import { animated } from 'react-spring/web.cjs';
 import styled, { css } from 'styled-components';
-import { theme } from '../../theme';
-import { Position, Size, Type } from '../../types';
+import { theme } from '../../../theme';
+import { Position, Size, Type } from '../../../types';
 
 export interface StyledPopconfirmProps {
   position?: Position;
@@ -16,7 +16,7 @@ export const StyledAnimatedPopconfirmContainer = styled(animated.div)<
   justify-content: space-between;
   position: absolute;
   box-sizing: border-box;
-  padding: 10px;
+  padding: ${props => props.theme.padding.md};
   background-color: ${props => props.theme.color.background.beta};
   height: 150px;
   width: 250px;
@@ -171,5 +171,5 @@ export const StyledPopconfirmContainer = styled.span<StyledPopconfirmProps>`
 `;
 
 export const StyledCancelButtonContainer = styled.div<StyledPopconfirmProps>`
-  padding-right: 5px;
+  padding-right: ${props => props.theme.padding.sm};
 `;

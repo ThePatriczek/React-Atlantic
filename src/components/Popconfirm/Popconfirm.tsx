@@ -10,7 +10,7 @@ import {
   StyledPopconfirmContainer,
   StyledPopconfirmContent,
   StyledPopconfirmFooter
-} from './Popconfirm.style';
+} from './style/Popconfirm.style';
 
 export interface PopconfirmProps {
   children: Readonly<JSX.Element>;
