@@ -34,7 +34,8 @@ export const StyledDropZone = styled.div<StyledDropZoneProps>`
     border: 1px dashed ${(props) => props.theme.color.border};
 
     &:hover {
-        border: 1px dashed ${(props) => props.theme.color.primary.alpha};
+        border-color: ${(props) => props.theme.color.primary.alpha};
+
         ${StyledDropZoneText} {
             color: ${(props) => props.theme.color.primary.alpha};
         }
@@ -67,7 +68,6 @@ export const StyledDropZoneIconWrapper = styled.div`
 `;
 
 export const StyledDropZoneIcon = styled(Icon)<StyledDropZoneIconProps>`
-
     ${(props) =>
         props.size === 'small' &&
         css`
@@ -109,6 +109,7 @@ export const StyledDropZoneIcon = styled(Icon)<StyledDropZoneIconProps>`
 
 export const StyledUploadingTitle = styled(Title)<StyledUploadingTitle>`
     text-align: center;
+
     ${(props) =>
         props.size === 'small' &&
         css`
@@ -121,27 +122,4 @@ export const StyledUploadingTitle = styled(Title)<StyledUploadingTitle>`
             width: 70%;
             padding-top: ${(props) => props.theme.padding.md};
         `}
-`;
-
-export const StyledProgressCircle = styled.div`
-    height: 100px;
-    width: 100px;
-    position: relative;
-`;
-
-export const StyledSVG = styled.svg`
-    display: block;
-    max-width: 100%;
-`;
-
-export const StyledSVGCircle = styled.circle``;
-
-export const StyledSVGCircleText = styled(Text)`
-    font-size: 26px;
-    text-anchor: middle;
-    color: #d9121a;
-    font-weight: bold;
-    position: absolute;
-    top: 25px;
-    left: 25px;
 `;

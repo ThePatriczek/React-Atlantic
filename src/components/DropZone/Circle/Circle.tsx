@@ -5,9 +5,8 @@ import {
     StyledSVG,
     StyledSVGCircleOne,
     StyledSVGCircleTwo,
-    StyledSVGCircleText,
+    StyledLoadingCircleText,
 } from './style/Circle.style';
-import { ColorResult } from 'react-color';
 import { Type } from 'src/types';
 
 interface LoadingCircleProps {
@@ -44,9 +43,9 @@ export const LoadingCircle: React.FC<LoadingCircleProps> = (props) => {
                     dashOffset={currentDashOffset}
                 />
             </StyledSVG>
-            <StyledSVGCircleText key={progress} type={circleTwoType}>
+            <StyledLoadingCircleText key={progress} type={circleTwoType}>
                 {`${progress}%`}
-            </StyledSVGCircleText>
+            </StyledLoadingCircleText>
         </StyledLoadingCircle>
     );
 };

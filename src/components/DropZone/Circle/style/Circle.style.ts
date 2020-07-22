@@ -36,22 +36,24 @@ export const StyledSVGCircleTwo = styled.circle<StyledSVGCircleTwoProps>`
     transform: rotate(-90deg);
     transition: stroke 1s ease;
     
-
     ${(props) =>
         props.type === 'error' &&
         css`
             stroke: ${props.theme.color.error.alpha};
         `}
+
     ${(props) =>
         props.type === 'warning' &&
         css`
             stroke: ${props.theme.color.warning.alpha};
         `}
+
     ${(props) =>
         props.type === 'primary' &&
         css`
             stroke: ${props.theme.color.primary.alpha};
         `}
+        
     ${(props) =>
         props.type === 'success' &&
         css`
@@ -59,7 +61,7 @@ export const StyledSVGCircleTwo = styled.circle<StyledSVGCircleTwoProps>`
         `}
 `;
 
-export const StyledSVGCircleText = styled(Text)<StyledSVGCircleText>`
+export const StyledLoadingCircleText = styled(Text)<StyledSVGCircleText>`
     font-size: 26px;
     text-anchor: middle;
     font-weight: bold;
@@ -74,16 +76,19 @@ export const StyledSVGCircleText = styled(Text)<StyledSVGCircleText>`
         css`
             color: ${props.theme.color.error.alpha};
         `}
+
     ${(props) =>
         props.type === 'warning' &&
         css`
             color: ${props.theme.color.warning.alpha};
         `}
+
     ${(props) =>
         props.type === 'primary' &&
         css`
             color: ${props.theme.color.primary.alpha};
         `}
+
     ${(props) =>
         props.type === 'success' &&
         css`

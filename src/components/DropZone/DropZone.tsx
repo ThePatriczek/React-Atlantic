@@ -8,10 +8,6 @@ import {
     StyledSmallText,
     StyledUploadingTitle,
     StyledDropZoneText,
-    StyledProgressCircle,
-    StyledSVG,
-    StyledSVGCircle,
-    StyledSVGCircleText,
 } from './style/DropZone.style';
 import { Size, Type } from 'src/types';
 import { LoadingCircle } from './Circle';
