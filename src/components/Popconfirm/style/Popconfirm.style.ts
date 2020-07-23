@@ -1,6 +1,7 @@
 import { animated } from 'react-spring/web.cjs';
 import styled, { css } from 'styled-components';
 import { Position } from '../../../types';
+import { StyledButton } from '../../Button/Button.style';
 
 interface StyledPopconfirmProps {
   position?: Position;
@@ -134,6 +135,10 @@ export const StyledPopconfirmFooter = styled.div<StyledPopconfirmProps>`
   flex-direction: row;
   justify-content: flex-end;
   justify-self: flex-end;
+  
+  ${StyledButton} {
+    margin-right: ${props => props.theme.margin.sm};
+  }
 `;
 
 export const StyledPopconfirmContent = styled.div<StyledPopconfirmProps>`
@@ -145,10 +150,6 @@ export const StyledPopconfirmContent = styled.div<StyledPopconfirmProps>`
 
 export const StyledPopconfirmContainer = styled.div<StyledPopconfirmProps>`
   position: relative;
-`;
-
-export const StyledCancelButtonContainer = styled.div<StyledPopconfirmProps>`
-  padding-right: ${props => props.theme.padding.sm};
 `;
 
 export const StyledPopconfirmChildren = styled.span`

@@ -7,7 +7,6 @@ import { Button, PureButton } from '../Button';
 import {
   StyledAnimatedPopconfirmContainer,
   StyledAnimatedPopconfirmContent,
-  StyledCancelButtonContainer,
   StyledPopconfirmChildren,
   StyledPopconfirmContainer,
   StyledPopconfirmContent,
@@ -106,17 +105,15 @@ export const Popconfirm: FC<PopconfirmProps> = props => {
   };
 
   const ConfirmButton = () => (
-    <Button onClick={onConfirmClick} type={'success'}>
+    <Button onClick={onConfirmClick} type={'primary'}>
       {confirmText}
     </Button>
   );
 
   const CancelButton = () => (
-    <StyledCancelButtonContainer style={{ paddingRight: '5px' }}>
-      <Button onClick={onCancelClick} type={'default'}>
-        {cancelText}
-      </Button>
-    </StyledCancelButtonContainer>
+    <Button onClick={onCancelClick} type={'default'}>
+      {cancelText}
+    </Button>
   );
 
   const ChildrenComponent = () => (
