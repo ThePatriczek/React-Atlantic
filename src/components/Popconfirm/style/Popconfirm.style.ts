@@ -140,6 +140,7 @@ export const StyledPopconfirmContent = styled.div<StyledPopconfirmProps>`
   display: flex;
   width: 100%;
   height: 100%;
+  margin-bottom: ${props => props.theme.margin.sm};
 `;
 
 export const StyledPopconfirmContainer = styled.div<StyledPopconfirmProps>`
