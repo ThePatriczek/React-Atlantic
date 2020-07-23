@@ -1,156 +1,132 @@
 import { animated } from 'react-spring/web.cjs';
 import styled, { css } from 'styled-components';
-import { theme } from '../../../theme';
-import { Position, Size, Type } from '../../../types';
+import { Position } from '../../../types';
 
-export interface StyledPopconfirmProps {
+interface StyledPopconfirmProps {
   position?: Position;
-  elementRect?: Readonly<any>;
 }
+
+const arrowSize = `18px`;
 
 export const StyledAnimatedPopconfirmContainer = styled(animated.div)<
   StyledPopconfirmProps
 >`
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  position: absolute;
   box-sizing: border-box;
-  padding: ${props => props.theme.padding.md};
-  background-color: ${props => props.theme.color.background.beta};
-  height: 150px;
-  width: 250px;
-  border-radius: ${props => props.theme.radius};
-  border: 1px solid ${props => props.theme.color.border};
+  position: absolute;
   z-index: 10;
 
   ${props =>
-      props.position === 'left'
-        ? css`
-            left: calc(${parseInt(props.elementRect.left, 0)}px - 260px);
-            top: calc(${parseInt(props.elementRect.top, 0)}px - 59px);
-          `
-        : props.position === 'right'
-        ? css`
-            left: calc(
-              ${parseInt(props.elementRect.left, 0)}px +
-                ${parseInt(props.elementRect.width, 0)}px + 20px
-            );
-            top: calc(${parseInt(props.elementRect.top, 0)}px - 59px);
-          `
-        : props.position === 'top'
-        ? css`
-            top: calc(${parseInt(props.elementRect.top, 0)}px - 170px);
-          `
-        : props.position === 'bottom' &&
-          css`
-            top: calc(${parseInt(props.elementRect.top, 0)}px + 55px);
-          `}
-    :after {
-    ${props =>
-      props.position === 'left'
-        ? css`
-            content: '';
-            position: absolute;
-            top: calc(50% - 16px);
-            left: 99%;
-            width: 0;
-            height: 0;
-            border-top: 16px solid transparent;
-            border-bottom: 16px solid transparent;
-            border-left: 16px solid
-              ${props => props.theme.color.background.beta};
-          `
-        : props.position === 'right'
-        ? css`
-            content: '';
-            position: absolute;
-            top: calc(50% - 16px);
-            right: 99%;
-            width: 0;
-            height: 0;
-            border-top: 16px solid transparent;
-            border-bottom: 16px solid transparent;
-            border-right: 16px solid
-              ${props => props.theme.color.background.beta};
-          `
-        : props.position === 'top'
-        ? css`
-            content: '';
-            position: absolute;
-            top: 99%;
-            left: calc(50% - 16px);
-            width: 0;
-            height: 0;
-            border-top: solid 16px ${props.theme.color.background.beta};
-            border-left: solid 16px transparent;
-            border-right: solid 16px transparent;
-          `
-        : props.position === 'bottom' &&
-          css`
-            content: '';
-            position: absolute;
-            bottom: 99%;
-            left: calc(50% - 16px);
-            width: 0;
-            height: 0;
-            border-left: 16px solid transparent;
-            border-right: 16px solid transparent;
-            border-bottom: 16px solid ${props.theme.color.background.beta};
-          `}
+    props.position === 'left'
+      ? css`
+          top: 50%;
+          right: calc(100% + ${arrowSize});
+        `
+      : props.position === 'right'
+      ? css`
+          top: 50%;
+          left: calc(100% + ${arrowSize});
+        `
+      : props.position === 'top'
+      ? css`
+          left: 50%;
+          bottom: calc(100% + ${arrowSize});
+        `
+      : props.position === 'bottom' &&
+        css`
+          left: 50%;
+          top: calc(100% + ${arrowSize});
+        `}
+  }
+`;
+
+export const StyledAnimatedPopconfirmContent = styled.div<
+  StyledPopconfirmProps
+>`
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: ${props => props.theme.padding.md};
+  border-radius: ${props => props.theme.radius};
+  background-color: ${props => props.theme.color.background.alpha};
+  box-shadow: ${props => props.theme.boxShadow.md};
+
+  &:after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 0;
+    border: 13px solid transparent;
   }
 
-  :before {
-    ${props =>
-      props.position === 'left'
-        ? css`
-            content: '';
-            position: absolute;
-            top: calc(50% - 16px);
-            left: 100%;
-            width: 0;
-            height: 0;
-            border-top: 16px solid transparent;
-            border-bottom: 16px solid transparent;
-            border-left: 16px solid ${props => props.theme.color.border};
-          `
-        : props.position === 'right'
-        ? css`
-            content: '';
-            position: absolute;
-            top: calc(50% - 16px);
-            right: 100%;
-            width: 0;
-            height: 0;
-            border-top: 16px solid transparent;
-            border-bottom: 16px solid transparent;
-            border-right: 16px solid ${props => props.theme.color.border};
-          `
-        : props.position === 'top'
-        ? css`
-            content: '';
-            position: absolute;
-            top: 100%;
-            left: calc(50% - 16px);
-            width: 0;
-            height: 0;
-            border-top: solid 16px ${props.theme.color.border};
-            border-left: solid 16px transparent;
-            border-right: solid 16px transparent;
-          `
-        : props.position === 'bottom' &&
-          css`
-            content: '';
-            position: absolute;
-            bottom: 100%;
-            left: calc(50% - 16px);
-            width: 0;
-            height: 0;
-            border-left: 16px solid transparent;
-            border-right: 16px solid transparent;
-            border-bottom: 16px solid ${props.theme.color.border};
-          `}
-  }
+  ${props =>
+    props.position === 'left'
+      ? css`
+          &:after {
+            top: 50%;
+            left: calc(100% - 1px);
+            margin-top: -13px;
+            border-left-color: ${props.theme.color.background.alpha};
+          }
+        `
+      : props.position === 'right'
+      ? css`
+          &:after {
+            top: 50%;
+            right: calc(100% - 1px);
+            margin-top: -13px;
+            border-right-color: ${props.theme.color.background.alpha};
+          }
+        `
+      : props.position === 'top'
+      ? css`
+          &:after {
+            top: calc(100% - 1px);
+            left: 50%;
+            margin-left: -13px;
+            border-top-color: ${props.theme.color.background.alpha};
+          }
+        `
+      : props.position === 'bottom' &&
+        css`
+          &:after {
+            bottom: calc(100% - 1px);
+            left: 50%;
+            margin-left: -13px;
+            border-bottom-color: ${props.theme.color.background.alpha};
+          }
+        `}
+`;
+
+export const StyledPopconfirmTriangle = styled.div<StyledPopconfirmProps>`
+  position: absolute;
+  width: ${arrowSize};
+  height: ${arrowSize};
+  box-shadow: ${props => props.theme.boxShadow.md};
+  transform: rotate(45deg);
+  z-index: -1;
+
+  ${props =>
+    props.position === 'left'
+      ? css`
+          top: calc(50% - ${parseInt(arrowSize, 0) / 2}px);
+          right: -${parseInt(arrowSize, 0) / 2}px;
+        `
+      : props.position === 'right'
+      ? css`
+          top: calc(50% - ${parseInt(arrowSize, 0) / 2}px);
+          left: -${parseInt(arrowSize, 0) / 2}px;
+        `
+      : props.position === 'top'
+      ? css`
+          left: calc(50% - ${parseInt(arrowSize, 0) / 2}px);
+          bottom: -${parseInt(arrowSize, 0) / 2}px;
+        `
+      : props.position === 'bottom' &&
+        css`
+          left: calc(50% - ${parseInt(arrowSize, 0) / 2}px);
+          top: -${parseInt(arrowSize, 0) / 2}px;
+        `}
 `;
 
 export const StyledPopconfirmFooter = styled.div<StyledPopconfirmProps>`
@@ -166,10 +142,14 @@ export const StyledPopconfirmContent = styled.div<StyledPopconfirmProps>`
   height: 100%;
 `;
 
-export const StyledPopconfirmContainer = styled.span<StyledPopconfirmProps>`
-  display: contents;
+export const StyledPopconfirmContainer = styled.div<StyledPopconfirmProps>`
+  position: relative;
 `;
 
 export const StyledCancelButtonContainer = styled.div<StyledPopconfirmProps>`
   padding-right: ${props => props.theme.padding.sm};
+`;
+
+export const StyledPopconfirmChildren = styled.span`
+  display: block;
 `;

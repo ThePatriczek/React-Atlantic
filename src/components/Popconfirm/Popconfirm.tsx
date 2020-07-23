@@ -6,10 +6,13 @@ import { Position } from '../../types';
 import { Button, PureButton } from '../Button';
 import {
   StyledAnimatedPopconfirmContainer,
+  StyledAnimatedPopconfirmContent,
   StyledCancelButtonContainer,
+  StyledPopconfirmChildren,
   StyledPopconfirmContainer,
   StyledPopconfirmContent,
-  StyledPopconfirmFooter
+  StyledPopconfirmFooter,
+  StyledPopconfirmTriangle
 } from './style/Popconfirm.style';
 
 export interface PopconfirmProps {
@@ -59,20 +62,20 @@ export const Popconfirm: FC<PopconfirmProps> = props => {
     Readonly<string>,
     Readonly<string>
   > = new Map([
-    [`top`, `scale(0.7) translateY(50px)`],
-    [`bottom`, `scale(0.7) translateY(-50px)`],
-    [`right`, `scale(0.7) translateX(-50px)`],
-    [`left`, `scale(0.7) translateX(50px)`]
+    [`top`, `scale(0.7) translateX(-50%) translateY(50px)`],
+    [`bottom`, `scale(0.7) translateX(-50%) translateY(-50px)`],
+    [`right`, `scale(0.7) translateX(-50px) translateY(-50%)`],
+    [`left`, `scale(0.7) translateX(50px) translateY(-50%)`]
   ]);
 
   const positionAnimationEnter: ReadonlyMap<
     Readonly<string>,
     Readonly<string>
   > = new Map([
-    [`top`, `scale(1) translateY(0)`],
-    [`bottom`, `scale(1) translateY(0)`],
-    [`right`, `scale(1) translateX(0)`],
-    [`left`, `scale(1) translateX(0)`]
+    [`top`, `scale(1) translateX(-50%) translateY(0)`],
+    [`bottom`, `scale(1) translateX(-50%) translateY(0)`],
+    [`right`, `scale(1) translateX(0) translateY(-50%)`],
+    [`left`, `scale(1) translateX(0) translateY(-50%)`]
   ]);
 
   const transitions = useTransition(isOpen, null, {
@@ -128,24 +131,28 @@ export const Popconfirm: FC<PopconfirmProps> = props => {
 
   return (
     <StyledPopconfirmContainer className={className}>
-      <span ref={buttonContainerRef}>
+      <StyledPopconfirmChildren ref={buttonContainerRef}>
         <ChildrenComponent />
-      </span>
+      </StyledPopconfirmChildren>
       {transitions.map(({ item, props }) =>
         item ? (
           <StyledAnimatedPopconfirmContainer
-            elementRect={buttonContainerRef?.current?.getBoundingClientRect()}
             ref={insideContainerRef}
             style={props}
             position={position}
           >
-            <StyledPopconfirmContent key={content?.toString()}>
-              {typeof content === 'string' ? <Text>{content}</Text> : content}
-            </StyledPopconfirmContent>
-            <StyledPopconfirmFooter>
-              <CancelButton />
-              <ConfirmButton />
-            </StyledPopconfirmFooter>
+            <StyledAnimatedPopconfirmContent position={position}>
+              <StyledPopconfirmTriangle position={position} />
+
+              <StyledPopconfirmContent key={content?.toString()}>
+                {typeof content === 'string' ? <Text>{content}</Text> : content}
+              </StyledPopconfirmContent>
+
+              <StyledPopconfirmFooter>
+                <CancelButton />
+                <ConfirmButton />
+              </StyledPopconfirmFooter>
+            </StyledAnimatedPopconfirmContent>
           </StyledAnimatedPopconfirmContainer>
         ) : null
       )}
