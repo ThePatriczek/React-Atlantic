@@ -150,8 +150,9 @@ export const StyledPopconfirmContent = styled.div<StyledPopconfirmProps>`
 
 export const StyledPopconfirmContainer = styled.div<StyledPopconfirmProps>`
   position: relative;
+  display: inline-block;
 `;
 
 export const StyledPopconfirmChildren = styled.span`
-  display: block;
+  display: inline-block;
 `;
