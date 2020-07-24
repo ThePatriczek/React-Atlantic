@@ -56,7 +56,7 @@ export const Popconfirm: FC<PopconfirmProps> = props => {
   }, [props.position]);
 
   useEffect(() => {
-    if ((changePositionOnScroll || changePositionOnResize) && isOpen) {
+    if (changePositionOnScroll || changePositionOnResize) {
       if (
         position !== props.position &&
         typeof props.position !== 'undefined'
@@ -125,6 +125,17 @@ export const Popconfirm: FC<PopconfirmProps> = props => {
         (window.innerHeight || document.documentElement.clientHeight);
       const outOfAll = outTop && outBottom && outLeft && outRight;
 
+      const outLeftRight = outLeft && bounding?.width > bounding?.right;
+      const outRightLeft =
+        outRight &&
+        bounding.right >
+          (window.innerWidth || document.documentElement.clientWidth);
+      const outTopBottom = bounding?.height > bounding?.bottom;
+      const outBottomTop =
+        outBottom &&
+        bounding.bottom >
+          (window.innerHeight || document.documentElement.clientHeight);
+
       const moveTop = (withOut = false) => {
         if (position !== 'top') {
           if (withOut) {
@@ -174,16 +185,12 @@ export const Popconfirm: FC<PopconfirmProps> = props => {
       };
 
       if (!outOfAll) {
-        console.log('----');
-        console.log(outRight, 'outRight');
-        console.log(outLeft, 'outLeft');
-        console.log('position', position);
-
-        if (
-          (outRight && position === 'left') ||
-          (outLeft && position === 'right')
-        ) {
-          moveTop();
+        if (outLeftRight || outRightLeft) {
+          if (!outTopBottom) {
+            moveTop();
+          } else if (!outBottomTop) {
+            moveBottom();
+          }
         } else {
           moveLeft(true);
           moveRight(true);
@@ -208,10 +215,9 @@ export const Popconfirm: FC<PopconfirmProps> = props => {
       opacity: 0
     },
     config: { mass: 1, tension: 500, friction: 24, precision: 0.00001 },
-    onRest: () => {
-      if (isOpen) {
-        inViewportCheck();
-      }
+    reset: true,
+    onFrame: () => {
+      inViewportCheck();
     }
   });
 

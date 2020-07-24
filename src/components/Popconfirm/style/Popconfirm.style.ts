@@ -135,7 +135,7 @@ export const StyledPopconfirmFooter = styled.div<StyledPopconfirmProps>`
   flex-direction: row;
   justify-content: flex-end;
   justify-self: flex-end;
-  
+
   ${StyledButton} {
     margin-right: ${props => props.theme.margin.sm};
   }
