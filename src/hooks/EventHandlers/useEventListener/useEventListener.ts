@@ -5,6 +5,8 @@ export interface UseEventListenerValue {
   onMouseDown: EventListener;
   onEscape: EventListener;
   onEnter: EventListener;
+  onResize: EventListener;
+  onScroll: EventListener;
 }
 
 export interface UseEventListenerProps {
@@ -13,6 +15,8 @@ export interface UseEventListenerProps {
   onKeyDown?: () => void;
   onEscape?: () => void;
   onEnter?: () => void;
+  onResize?: () => void;
+  onScroll?: () => void;
   isOpen?: Readonly<boolean>;
   deps?: ReadonlyArray<unknown>;
 }
@@ -34,6 +38,12 @@ export const useEventListener = (
       if (props.onEscape) {
         window?.addEventListener('keydown', onEscape);
       }
+      if (props.onResize) {
+        window?.addEventListener('resize', onResize);
+      }
+      if (props.onScroll) {
+        window?.addEventListener('scroll', onScroll);
+      }
     }
 
     return () => {
@@ -48,6 +58,12 @@ export const useEventListener = (
       }
       if (props.onEscape) {
         window?.removeEventListener('keydown', onEscape);
+      }
+      if (props.onResize) {
+        window?.removeEventListener('resize', onResize);
+      }
+      if (props.onScroll) {
+        window?.removeEventListener('scroll', onScroll);
       }
     };
   }, [props.deps]);
@@ -82,5 +98,17 @@ export const useEventListener = (
     }
   };
 
-  return { onKeyDown, onMouseDown, onEscape, onEnter };
+  const onResize: EventListener = () => {
+    if (props.onResize) {
+      props.onResize();
+    }
+  };
+
+  const onScroll: EventListener = () => {
+    if (props.onScroll) {
+      props.onScroll();
+    }
+  };
+
+  return { onKeyDown, onMouseDown, onEscape, onEnter, onResize, onScroll };
 };

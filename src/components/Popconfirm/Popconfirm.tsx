@@ -1,4 +1,4 @@
-import React, { FC, useRef, useState } from 'react';
+import React, { FC, useEffect, useRef, useState } from 'react';
 import { useTransition } from 'react-spring/web.cjs';
 import { Text } from '../../../lib/components/Typography/Text';
 import { useEventListener } from '../../hooks/EventHandlers/useEventListener';
@@ -12,11 +12,13 @@ import {
   StyledPopconfirmContent,
   StyledPopconfirmFooter,
   StyledPopconfirmTriangle
-} from './style/Popconfirm.style';
+} from './style';
 
 export interface PopconfirmProps {
   children: Readonly<JSX.Element>;
   position?: Readonly<Position>;
+  changePositionOnResize?: Readonly<boolean>;
+  changePositionOnScroll?: Readonly<boolean>;
   className?: Readonly<string>;
   onConfirm: () => void;
   onCancel?: () => void;
@@ -33,14 +35,36 @@ export const Popconfirm: FC<PopconfirmProps> = props => {
     onConfirm,
     onCancel,
     content,
-    position,
     confirmText,
     cancelText,
-    executeDirectly
+    executeDirectly,
+    changePositionOnResize,
+    changePositionOnScroll
   } = props;
   const [isOpen, setOpen] = useState<Readonly<boolean>>(false);
+  const [position, setPosition] = useState<Readonly<Position>>(
+    props.position || 'top'
+  );
   const insideContainerRef = useRef<Readonly<HTMLDivElement>>(null);
   const buttonContainerRef = useRef<Readonly<HTMLSpanElement>>(null);
+
+  useEffect(() => {
+    if (typeof props.position !== 'undefined' && props.position !== position) {
+      setPosition(props.position);
+      setOpen(false);
+    }
+  }, [props.position]);
+
+  useEffect(() => {
+    if ((changePositionOnScroll || changePositionOnResize) && isOpen) {
+      if (
+        position !== props.position &&
+        typeof props.position !== 'undefined'
+      ) {
+        setPosition(props.position);
+      }
+    }
+  }, [isOpen]);
 
   const {} = useEventListener({
     ref: insideContainerRef,
@@ -54,6 +78,16 @@ export const Popconfirm: FC<PopconfirmProps> = props => {
     },
     onEnter: () => {
       onConfirmClick();
+    },
+    onResize: () => {
+      if (changePositionOnResize && isOpen) {
+        inViewportCheck();
+      }
+    },
+    onScroll: () => {
+      if (changePositionOnScroll && isOpen) {
+        inViewportCheck();
+      }
     }
   });
 
@@ -77,6 +111,89 @@ export const Popconfirm: FC<PopconfirmProps> = props => {
     [`left`, `scale(1) translateX(0) translateY(-50%)`]
   ]);
 
+  const inViewportCheck = () => {
+    const bounding = insideContainerRef?.current?.getBoundingClientRect();
+
+    if (bounding) {
+      const outLeft = bounding.left < 0;
+      const outRight =
+        bounding.right >
+        (window.innerWidth || document.documentElement.clientWidth);
+      const outTop = bounding.top < 0;
+      const outBottom =
+        bounding.bottom >
+        (window.innerHeight || document.documentElement.clientHeight);
+      const outOfAll = outTop && outBottom && outLeft && outRight;
+
+      const moveTop = (withOut = false) => {
+        if (position !== 'top') {
+          if (withOut) {
+            if (outBottom) {
+              setPosition('top');
+            }
+          } else {
+            setPosition('top');
+          }
+        }
+      };
+
+      const moveBottom = (withOut = false) => {
+        if (position !== 'bottom') {
+          if (withOut) {
+            if (outTop) {
+              setPosition('bottom');
+            }
+          } else {
+            setPosition('bottom');
+          }
+        }
+      };
+
+      const moveLeft = (withOut = false) => {
+        if (position !== 'left') {
+          if (withOut) {
+            if (outRight) {
+              setPosition('left');
+            }
+          } else {
+            setPosition('left');
+          }
+        }
+      };
+
+      const moveRight = (withOut = false) => {
+        if (position !== 'right') {
+          if (withOut) {
+            if (outLeft) {
+              setPosition('right');
+            }
+          } else {
+            setPosition('right');
+          }
+        }
+      };
+
+      if (!outOfAll) {
+        console.log('----');
+        console.log(outRight, 'outRight');
+        console.log(outLeft, 'outLeft');
+        console.log('position', position);
+
+        if (
+          (outRight && position === 'left') ||
+          (outLeft && position === 'right')
+        ) {
+          moveTop();
+        } else {
+          moveLeft(true);
+          moveRight(true);
+          moveBottom(true);
+          moveTop(true);
+        }
+      }
+    }
+  };
+
   const transitions = useTransition(isOpen, null, {
     from: {
       transform: positionAnimationFromLeave.get(position || `top`),
@@ -90,8 +207,12 @@ export const Popconfirm: FC<PopconfirmProps> = props => {
       transform: positionAnimationFromLeave.get(position || `top`),
       opacity: 0
     },
-    unique: true,
-    config: { mass: 1, tension: 500, friction: 24, precision: 0.00001 }
+    config: { mass: 1, tension: 500, friction: 24, precision: 0.00001 },
+    onRest: () => {
+      if (isOpen) {
+        inViewportCheck();
+      }
+    }
   });
 
   const onConfirmClick = () => {
@@ -160,6 +281,8 @@ export const Popconfirm: FC<PopconfirmProps> = props => {
 Popconfirm.defaultProps = {
   position: 'top',
   confirmText: 'Confirm',
-  cancelText: 'Cancel'
+  cancelText: 'Cancel',
+  changePositionOnResize: true,
+  changePositionOnScroll: true
 };
 Popconfirm.displayName = `Popconfirm`;
