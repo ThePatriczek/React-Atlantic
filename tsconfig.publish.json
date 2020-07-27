@@ -19,5 +19,5 @@
     "types": ["react", "jest"]
   },
   "include": ["src/**/*"],
-  "exclude": ["node_modules", "lib", "dist", "**/*.d.ts"]
+  "exclude": ["node_modules", "lib"]
 }
