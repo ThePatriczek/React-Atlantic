@@ -1,5 +1,5 @@
 import React, { FC, useEffect, useRef, useState } from 'react';
-import { useTransition } from 'react-spring/web.cjs';
+import { SpringHandle, useTransition } from 'react-spring/web.cjs';
 import { Text } from '../../../lib/components/Typography/Text';
 import { useEventListener } from '../../hooks/EventHandlers/useEventListener';
 import { Position } from '../../types';
@@ -201,7 +201,7 @@ export const Popconfirm: FC<PopconfirmProps> = props => {
     }
   };
 
-  const transitions = useTransition(isOpen, null, {
+  const transitions = useTransition(isOpen, {
     from: {
       transform: positionAnimationFromLeave.get(position || `top`),
       opacity: 0
@@ -216,7 +216,8 @@ export const Popconfirm: FC<PopconfirmProps> = props => {
     },
     config: { mass: 1, tension: 500, friction: 24, precision: 0.00001 },
     reset: true,
-    onFrame: () => {
+    unique: true,
+    onChange: () => {
       inViewportCheck();
     }
   });
@@ -258,11 +259,11 @@ export const Popconfirm: FC<PopconfirmProps> = props => {
       <StyledPopconfirmChildren ref={buttonContainerRef}>
         <ChildrenComponent />
       </StyledPopconfirmChildren>
-      {transitions.map(({ item, props }) =>
+      {transitions((style, item) =>
         item ? (
           <StyledAnimatedPopconfirmContainer
             ref={insideContainerRef}
-            style={props}
+            style={style}
             position={position}
           >
             <StyledAnimatedPopconfirmContent position={position}>
