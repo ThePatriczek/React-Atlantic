@@ -1,9 +1,9 @@
 import React, { FC, useEffect, useRef, useState } from 'react';
-import { SpringHandle, useTransition } from 'react-spring/web.cjs';
-import { Text } from '../../../lib/components/Typography/Text';
+import { useTransition } from 'react-spring/web.cjs';
 import { useEventListener } from '../../hooks/EventHandlers/useEventListener';
 import { Position } from '../../types';
 import { Button, PureButton } from '../Button';
+import { Typography } from '../Typography';
 import {
   StyledAnimatedPopconfirmContainer,
   StyledAnimatedPopconfirmContent,
@@ -41,6 +41,7 @@ export const Popconfirm: FC<PopconfirmProps> = props => {
     changePositionOnResize,
     changePositionOnScroll
   } = props;
+  const { Text } = Typography;
   const [isOpen, setOpen] = useState<Readonly<boolean>>(false);
   const [position, setPosition] = useState<Readonly<Position>>(
     props.position || 'top'
@@ -92,7 +93,7 @@ export const Popconfirm: FC<PopconfirmProps> = props => {
   });
 
   const positionAnimationFromLeave: ReadonlyMap<
-    Readonly<string>,
+    Readonly<Position>,
     Readonly<string>
   > = new Map([
     [`top`, `scale(0.7) translateX(-50%) translateY(50px)`],
@@ -102,7 +103,7 @@ export const Popconfirm: FC<PopconfirmProps> = props => {
   ]);
 
   const positionAnimationEnter: ReadonlyMap<
-    Readonly<string>,
+    Readonly<Position>,
     Readonly<string>
   > = new Map([
     [`top`, `scale(1) translateX(-50%) translateY(0)`],
@@ -136,53 +137,25 @@ export const Popconfirm: FC<PopconfirmProps> = props => {
         bounding.bottom >
           (window.innerHeight || document.documentElement.clientHeight);
 
-      const moveTop = (withOut = false) => {
-        if (position !== 'top') {
+      const move = (place: Position, withOut: boolean = false) => {
+        if (position !== place) {
           if (withOut) {
             if (outBottom) {
-              setPosition('top');
+              setPosition(place);
             }
           } else {
-            setPosition('top');
+            setPosition(place);
           }
         }
       };
 
-      const moveBottom = (withOut = false) => {
-        if (position !== 'bottom') {
-          if (withOut) {
-            if (outTop) {
-              setPosition('bottom');
-            }
-          } else {
-            setPosition('bottom');
-          }
-        }
-      };
+      const moveTop = (withOut = false) => move('top', withOut);
 
-      const moveLeft = (withOut = false) => {
-        if (position !== 'left') {
-          if (withOut) {
-            if (outRight) {
-              setPosition('left');
-            }
-          } else {
-            setPosition('left');
-          }
-        }
-      };
+      const moveBottom = (withOut = false) => move('bottom', withOut);
 
-      const moveRight = (withOut = false) => {
-        if (position !== 'right') {
-          if (withOut) {
-            if (outLeft) {
-              setPosition('right');
-            }
-          } else {
-            setPosition('right');
-          }
-        }
-      };
+      const moveLeft = (withOut = false) => move('left', withOut);
+
+      const moveRight = (withOut = false) => move('right', withOut);
 
       if (!outOfAll) {
         if (outLeftRight || outRightLeft) {
@@ -269,7 +242,7 @@ export const Popconfirm: FC<PopconfirmProps> = props => {
             <StyledAnimatedPopconfirmContent position={position}>
               <StyledPopconfirmTriangle position={position} />
 
-              <StyledPopconfirmContent key={content?.toString()}>
+              <StyledPopconfirmContent>
                 {typeof content === 'string' ? <Text>{content}</Text> : content}
               </StyledPopconfirmContent>
 
