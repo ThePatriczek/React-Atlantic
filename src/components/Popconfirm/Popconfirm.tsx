@@ -67,30 +67,32 @@ export const Popconfirm: FC<PopconfirmProps> = props => {
     }
   }, [isOpen]);
 
-  const {} = useEventListener({
-    ref: insideContainerRef,
-    deps: [isOpen],
-    isOpen,
-    onMouseDown: () => {
-      onCancelClick();
-    },
-    onEscape: () => {
-      onCancelClick();
-    },
-    onEnter: () => {
-      onConfirmClick();
-    },
-    onResize: () => {
-      if (changePositionOnResize && isOpen) {
-        inViewportCheck();
+  useEventListener(
+    {
+      ref: insideContainerRef,
+      isOpen,
+      onMouseDown: () => {
+        onCancelClick();
+      },
+      onEscape: () => {
+        onCancelClick();
+      },
+      onEnter: () => {
+        onConfirmClick();
+      },
+      onResize: () => {
+        if (changePositionOnResize && isOpen) {
+          inViewportCheck();
+        }
+      },
+      onScroll: () => {
+        if (changePositionOnScroll && isOpen) {
+          inViewportCheck();
+        }
       }
     },
-    onScroll: () => {
-      if (changePositionOnScroll && isOpen) {
-        inViewportCheck();
-      }
-    }
-  });
+    [isOpen]
+  );
 
   const positionAnimationFromLeave: ReadonlyMap<
     Readonly<Position>,

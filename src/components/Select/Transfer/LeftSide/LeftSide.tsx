@@ -47,7 +47,6 @@ export interface LeftSideProps extends BothSidesProps {
   searchedValue: string;
   isAlternative?: boolean;
   inputOnChange: (value: string) => void;
-  onKeyDown: (e: any) => void;
   ListProps?: ListProps;
 }
 
@@ -56,7 +55,6 @@ export const LeftSide: FC<LeftSideProps> = props => {
     items,
     isFocused,
     isHalfOpen,
-    onKeyDown,
     inputOnChange,
     isOpen,
     searchedValue,
@@ -166,7 +164,6 @@ export const LeftSide: FC<LeftSideProps> = props => {
         isAlternative={isAlternative}
         direction={direction}
         isHalfOpen={isHalfOpen}
-        onKeyDown={onKeyDown}
         onChange={inputOnChange}
         isOpen={isOpen}
         value={isOpen ? searchedValue : resultValue}

@@ -104,9 +104,8 @@ export const Transfer: FC<PropsWithChildren<TransferProps>> & {
   const ref = useRef<HTMLDivElement>(null);
   const isHalfOpen: boolean = checkedItems.length > 0;
 
-  const { onKeyDown } = useEventListener({
+  useEventListener({
     ref,
-    deps: [isOpen],
     isOpen,
     onMouseDown: () => {
       setOpen(false);
@@ -116,7 +115,7 @@ export const Transfer: FC<PropsWithChildren<TransferProps>> & {
       setOpen(false);
       setFocus(false);
     }
-  });
+  },[isOpen]);
 
   useEffect(() => {
     if (defaultValue && !value) {
@@ -338,7 +337,6 @@ export const Transfer: FC<PropsWithChildren<TransferProps>> & {
             direction={direction}
             isHalfOpen={isHalfOpen}
             isOpen={isOpen}
-            onKeyDown={onKeyDown}
             inputOnChange={inputOnChange}
             searchedValue={searchedValue}
             placeholder={placeholder}
