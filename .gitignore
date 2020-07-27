@@ -28,3 +28,5 @@ typings/
 .next
 src/**/*.d.ts
 test
+.history
+.prettierrc
