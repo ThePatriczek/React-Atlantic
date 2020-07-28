@@ -17,7 +17,7 @@ stories.add(
         return (
             <>
                 <ProgressBar percent={75} positionText={'right'} />
-                <ProgressCircle percent={75} />
+                <ProgressCircle percent={50} />
             </>
         );
     },

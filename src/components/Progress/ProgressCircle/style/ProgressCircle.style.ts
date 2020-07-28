@@ -4,7 +4,13 @@ import { Text } from '../../../Typography/Text';
 
 interface StyledSVGCircleTwoProps {
     type: Type;
-    dashOffset: number;
+    dashOffset?: number;
+    strokeWidth: number;
+    dashArray: number;
+}
+
+interface StyledSVGCircleOneProps {
+    strokeWidth: number;
 }
 
 interface StyledSVGCircleText {
@@ -19,18 +25,20 @@ export const StyledLoadingCircle = styled.div`
 `;
 
 export const StyledSVG = styled.svg`
+    height: 100%;
+    width: 100%;
     display: block;
     max-width: 100%;
 `;
 
-export const StyledSVGCircleOne = styled.circle`
+export const StyledSVGCircleOne = styled.circle<StyledSVGCircleOneProps>`
     stroke: ${(props) => props.theme.color.border};
-    stroke-width: 3px;
+    stroke-width: ${(props) => props.strokeWidth};
 `;
 
 export const StyledSVGCircleTwo = styled.circle<StyledSVGCircleTwoProps>`
-    stroke-width: 3px;
-    stroke-dasharray: 251;
+    stroke-width: ${(props) => props.strokeWidth};
+    stroke-dasharray: ${(props) => props.dashArray};
     stroke-dashoffset: ${(props) => props.dashOffset};
     transform-origin: 50% 50%;
     transform: rotate(-90deg);

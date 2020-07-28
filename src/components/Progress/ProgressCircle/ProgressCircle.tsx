@@ -10,13 +10,20 @@ import { Type } from '../../../../src/types';
 
 interface ProgressCircleProps {
     percent: number;
+    circleSize?: number;
 }
 
-export const ProgressCircle: React.FC<ProgressCircleProps> = (props) => {
-    const { percent } = props;
-    const totalDashOffset = 251;
+export const ProgressCircle: React.FC<ProgressCircleProps> = ({
+    percent,
+    circleSize = 100,
+}) => {
+    const strokeWidth = 3;
+    const center = circleSize / 2;
+    const radius = center - strokeWidth;
+    const totalDashOffset = 2 * Math.PI * radius;
     const currentDashOffset =
         totalDashOffset - percent * (totalDashOffset / 100);
+
     let circleTwoType: Type = 'error';
 
     if (percent > 25) {
@@ -31,15 +38,23 @@ export const ProgressCircle: React.FC<ProgressCircleProps> = (props) => {
 
     return (
         <StyledLoadingCircle>
-            <StyledSVG height="100" width="100" className="svg">
-                <StyledSVGCircleOne cx="50" cy="50" r="40" fill="none" />
+            <StyledSVG>
+                <StyledSVGCircleOne
+                    cx={center}
+                    cy={center}
+                    r={radius}
+                    fill="none"
+                    strokeWidth={strokeWidth}
+                />
                 <StyledSVGCircleTwo
-                    cx="50"
-                    cy="50"
-                    r="40"
+                    cx={center}
+                    cy={center}
+                    r={radius}
                     fill="none"
                     type={circleTwoType}
+                    strokeWidth={strokeWidth}
                     dashOffset={currentDashOffset}
+                    dashArray={totalDashOffset}
                 />
             </StyledSVG>
             <StyledLoadingCircleText key={percent} type={circleTwoType}>
