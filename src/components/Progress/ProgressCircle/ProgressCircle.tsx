@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react';
+import React from 'react';
 import {
     StyledLoadingCircle,
     StyledSVG,
@@ -6,21 +6,26 @@ import {
     StyledSVGCircleTwo,
     StyledLoadingCircleText,
 } from './style/ProgressCircle.style';
+import { Type } from '../../../../src/types';
+
+interface ProgressCircleProps {
+    percent: number;
+}
 
 export const ProgressCircle: React.FC<ProgressCircleProps> = (props) => {
-    const { progress } = props;
+    const { percent } = props;
     const totalDashOffset = 251;
     const currentDashOffset =
-        totalDashOffset - progress * (totalDashOffset / 100);
+        totalDashOffset - percent * (totalDashOffset / 100);
     let circleTwoType: Type = 'error';
 
-    if (progress > 25) {
+    if (percent > 25) {
         circleTwoType = 'warning';
     }
-    if (progress > 50) {
+    if (percent > 50) {
         circleTwoType = 'primary';
     }
-    if (progress > 75) {
+    if (percent > 75) {
         circleTwoType = 'success';
     }
 
@@ -37,8 +42,8 @@ export const ProgressCircle: React.FC<ProgressCircleProps> = (props) => {
                     dashOffset={currentDashOffset}
                 />
             </StyledSVG>
-            <StyledLoadingCircleText key={progress} type={circleTwoType}>
-                {`${progress}%`}
+            <StyledLoadingCircleText key={percent} type={circleTwoType}>
+                {`${percent}%`}
             </StyledLoadingCircleText>
         </StyledLoadingCircle>
     );

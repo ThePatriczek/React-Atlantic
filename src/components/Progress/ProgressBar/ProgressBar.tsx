@@ -1,40 +1,43 @@
-import React, { FC, ReactElement, memo } from 'react';
+import React from 'react';
 import {
-    StyledProgress,
+    StyledProgressBar,
     StyledBar,
     StyledFill,
     StyledProgressText,
 } from './style/ProgressBar.style';
-import { Position, Type } from '../../../../lib'; //TODO: change to 'react-spring/web.cjs' => IE
+import { Position, Type } from '../../../../lib';
 
-interface ProgressProps {
+interface ProgressBarProps {
     percent: Readonly<number>;
-    type?: Readonly<Type>;
     positionText?: Readonly<Position>;
     className?: string;
 }
 
-export type ProgressTypeComponent = FC<Readonly<ProgressProps>>;
+export const ProgressBar: React.FC<ProgressBarProps> = (props) => {
+    const { percent, positionText, className } = props;
 
-export const ProgressBar: ProgressTypeComponent = memo(
-    (props: Readonly<ProgressProps>): Readonly<ReactElement> => {
-        const { percent, type, positionText, className } = props;
+    let fillType: Type = 'error';
 
-        return (
-            <StyledProgress positionText={positionText} className={className}>
-                {positionText && (
-                    <StyledProgressText
-                        positionText={positionText}
-                    >{`${percent.toFixed(0)}%`}</StyledProgressText>
-                )}
-                <StyledBar positionText={positionText}>
-                    <StyledFill type={type} width={percent} />
-                </StyledBar>
-            </StyledProgress>
-        );
+    if (percent > 25) {
+        fillType = 'warning';
     }
-);
+    if (percent > 50) {
+        fillType = 'primary';
+    }
+    if (percent > 75) {
+        fillType = 'success';
+    }
 
-ProgressBar.defaultProps = {
-    type: 'primary',
+    return (
+        <StyledProgressBar positionText={positionText} className={className}>
+            {positionText && (
+                <StyledProgressText
+                    positionText={positionText}
+                >{`${percent.toFixed(0)}%`}</StyledProgressText>
+            )}
+            <StyledBar positionText={positionText}>
+                <StyledFill type={fillType} width={percent} key={percent} />
+            </StyledBar>
+        </StyledProgressBar>
+    );
 };

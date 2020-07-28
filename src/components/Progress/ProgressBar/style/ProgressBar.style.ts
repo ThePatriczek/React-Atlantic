@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 import { Text } from '../../../Typography';
-import { Position, Type } from '../../../../../lib'; //TODO: change to 'react-spring/web.cjs' => IE
+import { Position, Type } from '../../../../../lib';
 
 interface StyledProgressProps {
     positionText?: Position;
@@ -19,7 +19,7 @@ interface StyledProgressTextProps {
     positionText?: Position;
 }
 
-export const StyledProgress = styled.div<StyledProgressProps>`
+export const StyledProgressBar = styled.div<StyledProgressProps>`
     display: flex;
     justify-content: space-between;
     width: 100%;

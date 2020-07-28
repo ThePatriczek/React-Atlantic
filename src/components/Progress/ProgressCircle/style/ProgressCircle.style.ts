@@ -1,5 +1,6 @@
 import styled, { css } from 'styled-components';
-import { Type } from 'react-tooltip';
+import { Type } from '../../../../../src/types';
+import { Text } from '../../../Typography/Text';
 
 interface StyledSVGCircleTwoProps {
     type: Type;

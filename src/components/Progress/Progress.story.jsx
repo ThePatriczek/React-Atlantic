@@ -5,6 +5,7 @@ import { specs } from 'storybook-addon-specifications';
 import { defaultValues } from '../../constants/defaultValues';
 import { Component, tests } from './Progress.test';
 import { ProgressBar } from './ProgressBar/ProgressBar';
+import { ProgressCircle } from './ProgressCircle/ProgressCircle';
 
 const stories = storiesOf('Progress', module);
 
@@ -15,7 +16,8 @@ stories.add(
     () => {
         return (
             <>
-                <ProgressBar percent={25} positionText={'right'} />
+                <ProgressBar percent={75} positionText={'right'} />
+                <ProgressCircle percent={75} />
             </>
         );
     },
