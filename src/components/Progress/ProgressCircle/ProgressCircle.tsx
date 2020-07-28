@@ -1,4 +1,11 @@
 import React, { ReactElement } from 'react';
+import {
+    StyledLoadingCircle,
+    StyledSVG,
+    StyledSVGCircleOne,
+    StyledSVGCircleTwo,
+    StyledLoadingCircleText,
+} from './style/ProgressCircle.style';
 
 export const ProgressCircle: React.FC<ProgressCircleProps> = (props) => {
     const { progress } = props;
