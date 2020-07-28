@@ -4,12 +4,17 @@ import { defaultValues } from '../../constants/defaultValues';
 import expect from 'expect';
 import { ProgressBar } from './ProgressBar/ProgressBar';
 
-export const Component = (type, state, progress) => {
+export const Component = (type, progress) => {
     return <ProgressBar type={type} progress={progress} />;
 };
 
 export const tests = (progress = Component()) => {
-    let output = shallow(progress);
+    describe('Progress', () => {
+        let output = shallow(progress);
+        it('should render something', () => {
+            expect(output).not.toBeFalsy();
+        });
+    });
 };
 
 tests();
