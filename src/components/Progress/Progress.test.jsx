@@ -2,12 +2,10 @@ import { shallow } from 'enzyme';
 import React from 'react';
 import { defaultValues } from '../../constants/defaultValues';
 import expect from 'expect';
-import { Progress } from './Progress';
+import { ProgressBar } from './ProgressBar/ProgressBar';
 
-export const Component = (size, type, state, progress) => {
-    return (
-        <Progress size={size} type={type} state={state} progress={progress} />
-    );
+export const Component = (type, state, progress) => {
+    return <ProgressBar type={type} progress={progress} />;
 };
 
 export const tests = (progress = Component()) => {
