@@ -2,10 +2,6 @@ import React from 'react';
 import * as Icons from '../../Icons';
 import { StyledIcon } from './Icon.style';
 
-/**
- * 1 : 1 relation - [same names]
- *
- * **/
 export const IconsMap = {
   arrowsVertical: 'arrowsVertical',
   arrowUp: 'arrowUp',
