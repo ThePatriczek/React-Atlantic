@@ -14,12 +14,10 @@ stories.addDecorator(withKnobs);
 
 stories.add('Overview', () => (
   <StyledLayout>
-    {Object.values(IconsMap).map(iconName => (
-      <StyledItem>
+    {Object.values(IconsMap).map((iconName, key) => (
+      <StyledItem key={key}>
         <Icon name={iconName} />
-        <StyledItemLabel>
-          {iconName}
-        </StyledItemLabel>
+        <StyledItemLabel>{iconName}</StyledItemLabel>
       </StyledItem>
     ))}
   </StyledLayout>
