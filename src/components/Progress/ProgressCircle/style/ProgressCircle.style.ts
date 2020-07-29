@@ -13,12 +13,15 @@ interface StyledSVGCircleOneProps {
     strokeWidth: number;
 }
 
-interface StyledSVGCircleText {
-    type: Type;
+interface StyledCircleText {
     key: number;
 }
 
-export const StyledLoadingCircle = styled.div`
+interface StyledCircleTextContainerProps {
+    type: Type;
+}
+
+export const StyledProgressCircle = styled.div`
     height: 100px;
     width: 100px;
     position: relative;
@@ -42,8 +45,7 @@ export const StyledSVGCircleTwo = styled.circle<StyledSVGCircleTwoProps>`
     stroke-dashoffset: ${(props) => props.dashOffset};
     transform-origin: 50% 50%;
     transform: rotate(-90deg);
-    transition: stroke 1s ease;
-    transition: stroke-dashoffset 2s ease;
+    transition: stroke 2s ease, stroke-dashoffset 2s ease;
     
     ${(props) =>
         props.type === 'error' &&
@@ -70,15 +72,21 @@ export const StyledSVGCircleTwo = styled.circle<StyledSVGCircleTwoProps>`
         `}
 `;
 
-export const StyledLoadingCircleText = styled(Text)<StyledSVGCircleText>`
+export const StyledCircleText = styled.span<StyledCircleText>`
+    font-family: ${(props) => props.theme.font.family};
     font-size: 26px;
     text-anchor: middle;
     font-weight: bold;
     position: absolute;
-    top: 25px;
+    top: 50%;
     left: 50%;
-    transform: translateX(-50%);
-    transition: color 1s ease;
+    transform: translateX(-50%) translateY(-50%);
+`;
+
+export const StyledCircleTextContainer = styled.div<
+    StyledCircleTextContainerProps
+>`
+    transition: color 3s ease;
 
     ${(props) =>
         props.type === 'error' &&
@@ -102,6 +110,6 @@ export const StyledLoadingCircleText = styled(Text)<StyledSVGCircleText>`
         props.type === 'success' &&
         css`
             color: ${props.theme.color.success.alpha};
-        `}
-        
+        `}   
+    
 `;

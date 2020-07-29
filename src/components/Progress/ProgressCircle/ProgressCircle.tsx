@@ -1,10 +1,11 @@
 import React from 'react';
 import {
-    StyledLoadingCircle,
+    StyledProgressCircle,
     StyledSVG,
     StyledSVGCircleOne,
     StyledSVGCircleTwo,
-    StyledLoadingCircleText,
+    StyledCircleTextContainer,
+    StyledCircleText,
 } from './style/ProgressCircle.style';
 import { Type } from '../../../../src/types';
 
@@ -37,7 +38,7 @@ export const ProgressCircle: React.FC<ProgressCircleProps> = ({
     }
 
     return (
-        <StyledLoadingCircle>
+        <StyledProgressCircle>
             <StyledSVG>
                 <StyledSVGCircleOne
                     cx={center}
@@ -57,9 +58,11 @@ export const ProgressCircle: React.FC<ProgressCircleProps> = ({
                     dashArray={totalDashOffset}
                 />
             </StyledSVG>
-            <StyledLoadingCircleText key={percent} type={circleTwoType}>
-                {`${percent}%`}
-            </StyledLoadingCircleText>
-        </StyledLoadingCircle>
+            <StyledCircleTextContainer type={circleTwoType}>
+                <StyledCircleText
+                    key={percent}
+                >{`${percent}%`}</StyledCircleText>
+            </StyledCircleTextContainer>
+        </StyledProgressCircle>
     );
 };
