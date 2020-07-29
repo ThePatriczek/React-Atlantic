@@ -36,17 +36,15 @@ stories.add(
             positionText = select(
                 `positionText:`,
                 ['top', 'left', 'right', 'bottom'],
-                'right'
+                defaultValues.position
             );
-        }
-        let circleSize = 0;
-        if (type === 'circle') {
-            circleSize = number(`circleSize: `, 100);
         }
 
         let Component = BarComponent(percent, positionText);
 
+        let circleSize = 0;
         if (type === 'circle') {
+            circleSize = number(`circleSize: `, 100);
             Component = CircleComponent(percent, circleSize);
         }
 

@@ -1,27 +1,17 @@
 import styled, { css } from 'styled-components';
 import { Type } from '../../../../../src/types';
 
-interface StyledSVGCircleTwoProps {
-    type: Type;
+interface StyledSVGCircleProps {
+    type?: Type;
     dashOffset?: number;
-    strokeWidth: number;
-    dashArray: number;
-}
-
-interface StyledSVGCircleOneProps {
-    strokeWidth: number;
-}
-
-interface StyledCircleText {
-    key: number;
-}
-
-interface StyledCircleTextContainerProps {
-    type: Type;
+    strokeWidth?: number;
+    dashArray?: number;
 }
 
 interface StyledProgressCircleProps {
     circleSize?: number;
+    type?: Type;
+    key?: number;
 }
 
 export const StyledProgressCircle = styled.div<StyledProgressCircleProps>`
@@ -30,25 +20,25 @@ export const StyledProgressCircle = styled.div<StyledProgressCircleProps>`
     position: relative;
 `;
 
-export const StyledSVG = styled.svg`
+export const StyledSVG = styled.svg<StyledSVGCircleProps>`
     height: 100%;
     width: 100%;
     display: block;
     max-width: 100%;
 `;
 
-export const StyledSVGCircleOne = styled.circle<StyledSVGCircleOneProps>`
+export const StyledSVGCircleOne = styled.circle<StyledSVGCircleProps>`
     stroke: ${(props) => props.theme.color.border};
     stroke-width: ${(props) => props.strokeWidth};
 `;
 
-export const StyledSVGCircleTwo = styled.circle<StyledSVGCircleTwoProps>`
+export const StyledSVGCircleTwo = styled.circle<StyledSVGCircleProps>`
     stroke-width: ${(props) => props.strokeWidth};
     stroke-dasharray: ${(props) => props.dashArray};
     stroke-dashoffset: ${(props) => props.dashOffset};
     transform-origin: 50% 50%;
     transform: rotate(-90deg);
-    transition: stroke 2s ease, stroke-dashoffset 2s ease;
+    transition: stroke 1s ease, stroke-dashoffset 1s ease;
     
     ${(props) =>
         props.type === 'error' &&
@@ -75,21 +65,18 @@ export const StyledSVGCircleTwo = styled.circle<StyledSVGCircleTwoProps>`
         `}
 `;
 
-export const StyledCircleText = styled.span<StyledCircleText>`
+export const StyledCircleText = styled.span<StyledProgressCircleProps>`
     font-family: ${(props) => props.theme.font.family};
     font-size: 26px;
-    text-anchor: middle;
-    font-weight: bold;
+    font-weight: 700;
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translateX(-50%) translateY(-50%);
 `;
 
-export const StyledCircleTextContainer = styled.div<
-    StyledCircleTextContainerProps
->`
-    transition: color 3s ease;
+export const StyledCircleTextContainer = styled.div<StyledProgressCircleProps>`
+    transition: color 1s ease;
 
     ${(props) =>
         props.type === 'error' &&

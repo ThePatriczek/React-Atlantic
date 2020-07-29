@@ -5,18 +5,20 @@ import {
     StyledFill,
     StyledProgressText,
     StyledFillContainer,
-} from './style/ProgressBar.style';
+} from './style';
 import { Position, Type } from '../../../../lib';
 
 interface ProgressBarProps {
     percent: Readonly<number>;
     positionText?: Readonly<Position>;
-    className?: string;
+    className?: Readonly<string>;
 }
 
-export const ProgressBar: React.FC<ProgressBarProps> = (props) => {
-    const { percent, positionText, className } = props;
-
+export const ProgressBar: React.FC<ProgressBarProps> = ({
+    percent,
+    positionText = 'right',
+    className,
+}) => {
     let fillType: Type = 'error';
 
     if (percent > 25) {
@@ -31,12 +33,10 @@ export const ProgressBar: React.FC<ProgressBarProps> = (props) => {
 
     return (
         <StyledProgressBar positionText={positionText} className={className}>
-            {positionText && (
-                <StyledProgressText
-                    positionText={positionText}
-                    key={percent}
-                >{`${percent.toFixed(0)}%`}</StyledProgressText>
-            )}
+            <StyledProgressText
+                positionText={positionText}
+                key={percent}
+            >{`${percent.toFixed(0)}%`}</StyledProgressText>
             <StyledBar positionText={positionText}>
                 <StyledFillContainer progress={percent}>
                     <StyledFill type={fillType} />

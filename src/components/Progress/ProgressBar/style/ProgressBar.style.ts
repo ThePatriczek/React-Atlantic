@@ -2,27 +2,23 @@ import styled, { css, keyframes } from 'styled-components';
 import { Text } from '../../../Typography';
 import { Position, Type } from '../../../../../lib';
 
-interface StyledProgressProps {
+interface StyledProgressBarProps {
     positionText?: Position;
-}
-
-interface StyledBarProps {
-    positionText?: Position;
-}
-
-interface StyledFillProps {
     type?: Type;
+    progress?: Readonly<number>;
 }
 
-interface StyledFillContainerProps {
-    progress: Readonly<number>;
-}
+const animationFill = keyframes`
+    0% {
+        width: 0%;
+    }
 
-interface StyledProgressTextProps {
-    positionText?: Position;
-}
+    100% {
+        width: 100%;
+    }
+`;
 
-export const StyledProgressBar = styled.div<StyledProgressProps>`
+export const StyledProgressBar = styled.div<StyledProgressBarProps>`
     display: flex;
     justify-content: space-between;
     width: 100%;
@@ -43,7 +39,7 @@ export const StyledProgressBar = styled.div<StyledProgressProps>`
         `}
 `;
 
-export const StyledBar = styled.div<StyledBarProps>`
+export const StyledBar = styled.div<StyledProgressBarProps>`
     width: 100%;
     height: 10px;
     position: relative;
@@ -55,6 +51,7 @@ export const StyledBar = styled.div<StyledBarProps>`
         css`
             order: 1;
         `}
+
     ${(props) =>
         (props.positionText === 'left' || props.positionText === 'right') &&
         css`
@@ -62,23 +59,13 @@ export const StyledBar = styled.div<StyledBarProps>`
         `};
 `;
 
-export const StyledFillContainer = styled.div<StyledFillContainerProps>`
+export const StyledFillContainer = styled.div<StyledProgressBarProps>`
     width: ${(props) => props.progress}%;
     height: 100%;
-    transition: width 2s ease;
+    transition: width 1s ease;
 `;
 
-const animationFill = keyframes`
-        0% {
-            width: 0%;
-        }
-
-        100% {
-            width: 100%;
-        }
-`;
-
-export const StyledFill = styled.span<StyledFillProps>`
+export const StyledFill = styled.span<StyledProgressBarProps>`
     display: block;
     width: 100%;
 	height: 100%;
@@ -87,7 +74,7 @@ export const StyledFill = styled.span<StyledFillProps>`
 	box-sizing: border-box;
 	margin: 0;
 	border-radius: ${(props) => props.theme.radius};
-    animation: ${animationFill} 2s linear;
+    animation: ${animationFill} 1s linear;
 
 	${(props) =>
         props.type === 'primary' &&
@@ -114,16 +101,17 @@ export const StyledFill = styled.span<StyledFillProps>`
         `}
 `;
 
-export const StyledProgressText = styled(Text)<StyledProgressTextProps>`
-  && {
-		font-weight: bold;
-		color: ${(props) => props.theme.color.text.alpha}
-		margin: ${(props) => props.theme.margin.sm} 0;
-  
-	${(props) =>
-        (props.positionText === 'right' || props.positionText === 'bottom') &&
-        css`
-            order: 2;
-        `}
-	}
+export const StyledProgressText = styled(Text)<StyledProgressBarProps>`
+    && {
+        font-weight: 700;
+        color: ${(props) => props.theme.color.text.alpha};
+        margin: ${(props) => props.theme.margin.sm} 0;
+
+        ${(props) =>
+            (props.positionText === 'right' ||
+                props.positionText === 'bottom') &&
+            css`
+                order: 2;
+            `}
+    }
 `;
