@@ -38,7 +38,7 @@ export const ProgressCircle: React.FC<ProgressCircleProps> = ({
     }
 
     return (
-        <StyledProgressCircle>
+        <StyledProgressCircle circleSize={circleSize}>
             <StyledSVG>
                 <StyledSVGCircleOne
                     cx={center}

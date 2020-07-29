@@ -1,6 +1,5 @@
 import styled, { css } from 'styled-components';
 import { Type } from '../../../../../src/types';
-import { Text } from '../../../Typography/Text';
 
 interface StyledSVGCircleTwoProps {
     type: Type;
@@ -21,9 +20,13 @@ interface StyledCircleTextContainerProps {
     type: Type;
 }
 
-export const StyledProgressCircle = styled.div`
-    height: 100px;
-    width: 100px;
+interface StyledProgressCircleProps {
+    circleSize?: number;
+}
+
+export const StyledProgressCircle = styled.div<StyledProgressCircleProps>`
+    height: ${(props) => props.circleSize}px;
+    width: ${(props) => props.circleSize}px;
     position: relative;
 `;
 

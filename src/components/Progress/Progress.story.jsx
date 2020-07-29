@@ -17,7 +17,7 @@ stories.add(
         return (
             <>
                 <ProgressBar percent={75} positionText={'right'} />
-                <ProgressCircle percent={50} />
+                <ProgressCircle percent={50} circleSize={100} />
             </>
         );
     },
@@ -39,11 +39,15 @@ stories.add(
                 'right'
             );
         }
+        let circleSize = 0;
+        if (type === 'circle') {
+            circleSize = number(`circleSize: `, 100);
+        }
 
         let Component = BarComponent(percent, positionText);
 
         if (type === 'circle') {
-            Component = CircleComponent(percent);
+            Component = CircleComponent(percent, circleSize);
         }
 
         specs(() => tests(Component));

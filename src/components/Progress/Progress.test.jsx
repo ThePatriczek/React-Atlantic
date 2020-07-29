@@ -9,8 +9,8 @@ export const BarComponent = (percent, positionText) => {
     return <ProgressBar percent={percent} positionText={positionText} />;
 };
 
-export const CircleComponent = (percent) => {
-    return <ProgressCircle percent={percent} />;
+export const CircleComponent = (percent, circleSize) => {
+    return <ProgressCircle percent={percent} circleSize={circleSize} />;
 };
 
 export const tests = () => {
