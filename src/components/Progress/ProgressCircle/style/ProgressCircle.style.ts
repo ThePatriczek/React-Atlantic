@@ -43,6 +43,7 @@ export const StyledSVGCircleTwo = styled.circle<StyledSVGCircleTwoProps>`
     transform-origin: 50% 50%;
     transform: rotate(-90deg);
     transition: stroke 1s ease;
+    transition: stroke-dashoffset 2s ease;
     
     ${(props) =>
         props.type === 'error' &&

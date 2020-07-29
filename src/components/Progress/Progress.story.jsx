@@ -3,7 +3,7 @@ import { storiesOf } from '@storybook/react';
 import * as React from 'react';
 import { specs } from 'storybook-addon-specifications';
 import { defaultValues } from '../../constants/defaultValues';
-import { Component, tests } from './Progress.test';
+import { BarComponent, CircleComponent, tests } from './Progress.test';
 import { ProgressBar } from './ProgressBar/ProgressBar';
 import { ProgressCircle } from './ProgressCircle/ProgressCircle';
 
@@ -26,29 +26,31 @@ stories.add(
     }
 );
 
-// stories.add(
-//     'Playground',
-//     () => {
-//         const size = select(
-//             `size:`,
-//             ['small', `medium`, 'large'],
-//             defaultValues.size
-//         );
-//         const type = select(
-//             `type:`,
-//             ['primary', 'success', 'warning', 'error'],
-//             defaultValues.type
-//         );
-//         const state = select(`state:`, ['default', 'uploading'], 'default');
-//         const progress = number(`progress: `, 0);
+stories.add(
+    'Playground',
+    () => {
+        const type = select('type: ', ['circle', 'bar'], 'bar');
+        const percent = number(`percent: `, 75);
+        let positionText = '';
+        if (type === 'bar') {
+            positionText = select(
+                `positionText:`,
+                ['top', 'left', 'right', 'bottom'],
+                'right'
+            );
+        }
 
-//         const progress = Component(size, type, state, progress);
+        let Component = BarComponent(percent, positionText);
 
-//         specs(() => tests(progress));
+        if (type === 'circle') {
+            Component = CircleComponent(percent);
+        }
 
-//         return progress;
-//     },
-//     {
-//         info: { inline: true },
-//     }
-// );
+        specs(() => tests(Component));
+
+        return Component;
+    },
+    {
+        info: { inline: true },
+    }
+);

@@ -4,6 +4,7 @@ import {
     StyledBar,
     StyledFill,
     StyledProgressText,
+    StyledFillContainer,
 } from './style/ProgressBar.style';
 import { Position, Type } from '../../../../lib';
 
@@ -33,10 +34,13 @@ export const ProgressBar: React.FC<ProgressBarProps> = (props) => {
             {positionText && (
                 <StyledProgressText
                     positionText={positionText}
+                    key={percent}
                 >{`${percent.toFixed(0)}%`}</StyledProgressText>
             )}
             <StyledBar positionText={positionText}>
-                <StyledFill type={fillType} width={percent} key={percent} />
+                <StyledFillContainer progress={percent}>
+                    <StyledFill type={fillType} />
+                </StyledFillContainer>
             </StyledBar>
         </StyledProgressBar>
     );

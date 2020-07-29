@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components';
+import styled, { css, keyframes } from 'styled-components';
 import { Text } from '../../../Typography';
 import { Position, Type } from '../../../../../lib';
 
@@ -12,7 +12,10 @@ interface StyledBarProps {
 
 interface StyledFillProps {
     type?: Type;
-    width: Readonly<number>;
+}
+
+interface StyledFillContainerProps {
+    progress: Readonly<number>;
 }
 
 interface StyledProgressTextProps {
@@ -59,17 +62,32 @@ export const StyledBar = styled.div<StyledBarProps>`
         `};
 `;
 
+export const StyledFillContainer = styled.div<StyledFillContainerProps>`
+    width: ${(props) => props.progress}%;
+    height: 100%;
+    transition: width 2s ease;
+`;
+
+const animationFill = keyframes`
+        0% {
+            width: 0%;
+        }
+
+        100% {
+            width: 100%;
+        }
+`;
+
 export const StyledFill = styled.span<StyledFillProps>`
-	width: ${(props) => props.width}%;
-	display: block;
+    display: block;
+    width: 100%;
 	height: 100%;
 	position: relative;
 	overflow: hidden;
 	box-sizing: border-box;
 	margin: 0;
-	padding: 0 ${(props) => props.theme.padding.md};
 	border-radius: ${(props) => props.theme.radius};
-	transition: width 0.3s ease;
+    animation: ${animationFill} 2s linear;
 
 	${(props) =>
         props.type === 'primary' &&

@@ -5,8 +5,8 @@ import expect from 'expect';
 import { ProgressBar } from './ProgressBar/ProgressBar';
 import { ProgressCircle } from './ProgressCircle/ProgressCircle';
 
-export const BarComponent = (type, percent) => {
-    return <ProgressBar type={type} percent={percent} />;
+export const BarComponent = (percent, positionText) => {
+    return <ProgressBar percent={percent} positionText={positionText} />;
 };
 
 export const CircleComponent = (percent) => {
