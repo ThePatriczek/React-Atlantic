@@ -139,7 +139,6 @@ export const IconsMap = {
   coinsOverlined: 'coinsOverlined',
   coins: 'coins',
   contextMenu: 'contextMenu',
-  czechpoint: 'czechpoint',
   downloadAlt: 'downloadAlt',
   externalLink: 'externalLink',
   lock: 'lock',
@@ -575,9 +574,6 @@ export const Icon: React.FC<IconProps> = ({
       break;
     case 'contextMenu':
       Component = <Icons.ContextMenu />;
-      break;
-    case 'czechpoint':
-      Component = <Icons.Czechpoint />;
       break;
     case 'downloadAlt':
       Component = <Icons.DownloadAlt />;
