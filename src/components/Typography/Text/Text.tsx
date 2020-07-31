@@ -1,4 +1,4 @@
-import React, { createRef, FC, Fragment, ReactElement, useState } from 'react';
+import React, { createRef, FC, Fragment, ReactElement, useEffect, useState } from 'react';
 import ReactTooltip from 'react-tooltip';
 import { v4 } from 'uuid';
 import { Type } from '../../../types';
@@ -76,6 +76,10 @@ export const Text: FC<TextProps> = (props: TextProps): ReactElement => {
     }
   };
 
+  useEffect(() => {
+    setValue(children);
+  }, [children]);
+
   const onEdit = () => {
     setEditing(true);
 
@@ -109,7 +113,7 @@ export const Text: FC<TextProps> = (props: TextProps): ReactElement => {
   }
 
   const Content = (
-    <Fragment key={value}>
+    <Fragment>
       {value}
       {isEditable && (
         <StyledTypoButton

@@ -1,3 +1,4 @@
+import { SpringStartFn } from '@react-spring/core/index.cjs';
 import React, {
   FC,
   PropsWithChildren,
@@ -7,11 +8,7 @@ import React, {
   useMemo,
   useState
 } from 'react';
-import {
-  SpringConfig,
-  SpringsUpdateFn,
-  useSprings
-} from 'react-spring/web.cjs';
+import { SpringConfig, useSprings } from 'react-spring/web.cjs';
 import { HookReturnType, UseDragConfig } from 'react-use-gesture/dist/types';
 import { useComposition } from '../../hooks/useComposition';
 import { StyledCarousel, StyledSlide } from './Carousel.style';
@@ -28,7 +25,7 @@ export interface CarouselProps {
   onSlideChange?: (slide: Readonly<number>) => void;
   springConfig?: SpringConfig;
   onDrag?: (
-    setSprings: SpringsUpdateFn<{
+    setSprings: SpringStartFn<{
       offset: Readonly<number>;
       opacity: Readonly<number>;
       display: Readonly<string>;
@@ -59,7 +56,7 @@ export const Carousel: FC<Readonly<CarouselProps>> & {
   const { autoHeight, ref, defaultSlide, auto, onSlideChange } = props;
   const children = getFilteredChildren(props.children, Slide.displayName);
 
-  const elements: HTMLDivElement[] = [];
+  const elements: Array<HTMLDivElement | null> = [];
   const width: Readonly<number> = useMemo(() => {
     return ref?.clientWidth || window.innerWidth;
   }, [ref]);
@@ -119,7 +116,7 @@ export const Carousel: FC<Readonly<CarouselProps>> & {
         opacity: slide === i ? 1 : 0,
         touchAction: `auto`
       };
-    });
+    }).catch(console.error);
   }, [slide, setSprings]);
 
   useEffect(() => {
@@ -166,13 +163,13 @@ export const Carousel: FC<Readonly<CarouselProps>> & {
             touchAction,
             display,
             opacity,
-            transform: offset.interpolate(
+            transform: offset.to(
               (offsetX: Readonly<number>) =>
                 `translate3d(${offsetX * 100}%, 0, 0)`
             )
           }}
         >
-          {display.value === `block` && children?.[i]}
+          {display.get() === `block` && children?.[i]}
         </StyledSlide>
       ))}
     </StyledCarousel>

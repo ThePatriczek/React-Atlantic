@@ -1,4 +1,4 @@
-import React, { DetailedHTMLProps } from 'react';
+import React from 'react';
 import * as Icons from '../../Icons';
 import { StyledIcon } from './Icon.style';
 
@@ -111,7 +111,7 @@ export const IconsMap = {
   cog: 'cog',
   hash: 'hash',
   robot: 'robot',
-  switchIcon: 'switch',
+  switch: 'switch',
   userAdd: 'userAdd',
   building: 'building',
   offer: 'offer',
@@ -152,7 +152,7 @@ export const IconsMap = {
   uploadSolid: 'uploadSolid'
 };
 
-export type IconName = typeof IconsMap[keyof typeof IconsMap];
+export type IconName = keyof typeof IconsMap;
 
 export interface IconProps extends React.HTMLAttributes<HTMLElement> {
   name: IconName;

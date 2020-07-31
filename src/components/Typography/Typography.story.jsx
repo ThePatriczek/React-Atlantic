@@ -1,8 +1,11 @@
-import { withKnobs } from '@storybook/addon-knobs';
-import { storiesOf } from '@storybook/react';
 import * as React from 'react';
-import { Typography } from './Typography';
+import { text, withKnobs } from '@storybook/addon-knobs';
+import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
+import { defaultValues } from '../../constants/defaultValues';
+import { specs } from 'storybook-addon-specifications';
+import { tests, Component } from '../Typography/Typography.test';
+import { Typography } from './Typography';
 
 const stories = storiesOf('Typography', module);
 
@@ -86,3 +89,18 @@ stories.add('Overview', () => {
     </div>
   );
 });
+
+stories.add(
+  'Playground',
+  () => {
+    const children = text(`text:`, defaultValues.value);
+    const textComponent = Component(children);
+
+    specs(() => tests(textComponent));
+
+    return textComponent;
+  },
+  {
+    info: { inline: true }
+  }
+);
