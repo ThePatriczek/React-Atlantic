@@ -1,1 +1,1 @@
-export * from './SizeChanger'
+export * from './SizeChanger';

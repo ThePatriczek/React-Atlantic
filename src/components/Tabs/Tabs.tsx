@@ -112,7 +112,11 @@ const TabsWithContext: FC<PropsWithChildren<TabsProps>> = props => {
 
   return (
     <>
-      <StyledTabsBar isAlternative={!!isAlternative} size={size as Size}>
+      <StyledTabsBar
+        isAlternative={!!isAlternative}
+        size={size as Size}
+        data-id={`react-atlantic-tab-component`}
+      >
         {tabs.map(item => (
           <Tab
             key={item.value}

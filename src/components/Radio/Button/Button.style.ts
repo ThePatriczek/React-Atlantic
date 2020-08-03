@@ -5,6 +5,7 @@ import { Size } from '../../../types';
 interface StyledRadioButtonProps {
   isChecked?: boolean;
   isDisabled?: boolean;
+  isTransparent?: boolean;
   size?: Size;
 }
 
@@ -42,7 +43,7 @@ export const StyledRadioButtonLabel = styled.label<StyledRadioButtonProps>`
   box-shadow: 0 0 4px rgba(0, 0, 0, 0.06);
 
   border: 1px solid ${props => props.theme.color.border};
-  border-radius: ${props => props.theme.radius}
+  border-radius: ${props => props.theme.radius};
 
   font-size: ${props => props.theme.font.size.md};
   font-family: ${props => props.theme.font.family};
@@ -75,6 +76,13 @@ export const StyledRadioButtonLabel = styled.label<StyledRadioButtonProps>`
         border: 1px solid ${props.theme.color.border};
       `}
   }
+  
+  ${props =>
+    props.isTransparent &&
+    css`
+      background-color: transparent;
+      box-shadow: none;
+    `}
   
   ${props =>
     props.isDisabled &&
