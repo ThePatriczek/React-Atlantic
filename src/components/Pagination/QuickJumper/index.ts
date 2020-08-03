@@ -1,1 +1,1 @@
-export * from './QuickJumper'
+export * from './QuickJumper';

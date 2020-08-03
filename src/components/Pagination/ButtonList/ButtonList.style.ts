@@ -1,7 +1,6 @@
-import { Button } from '../../Button';
 import styled, { css } from 'styled-components';
+import { Button } from '../../Button';
 import { Typography } from '../../Typography';
-import { StyledIcon } from '../../Icon/Icon.style';
 
 const { Text } = Typography;
 
@@ -41,8 +40,8 @@ export const StyledPaginationButton = styled(Button)<
           box-shadow: none;
           padding: 0
             ${props =>
-              `${parseInt(props.theme.padding.sm) +
-                parseInt(props.theme.padding.xs)}px`};
+              `${parseInt(props.theme.padding.sm, 0) +
+                parseInt(props.theme.padding.xs, 0)}px`};
           font-size: ${props => props.theme.font.size.sm};
           border: 0;
         `}
