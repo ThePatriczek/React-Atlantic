@@ -149,7 +149,8 @@ export const IconsMap = {
   save: 'save',
   starSolid: 'starSolid',
   testConnection: 'testConnection',
-  uploadSolid: 'uploadSolid'
+  uploadSolid: 'uploadSolid',
+  bulkDownload: 'bulkDownload'
 };
 
 export type IconName = typeof IconsMap[keyof typeof IconsMap];
@@ -607,6 +608,9 @@ export const Icon: React.FC<IconProps> = ({
       break;
     case 'uploadSolid':
       Component = <Icons.UploadSolid />;
+      break;
+    case 'bulkDownload':
+      Component = <Icons.BulkDownload />;
       break;
   }
 
