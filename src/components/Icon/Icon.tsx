@@ -132,7 +132,25 @@ export const IconsMap = {
   pencil: 'pencil',
   signout: 'signout',
   userSettings: 'userSettings',
-  downloadCloud: 'downloadCloud'
+  downloadCloud: 'downloadCloud',
+  addressBook: 'addressBook',
+  attachmentLeft: 'attachmentLeft',
+  back: 'back',
+  coinsOverlined: 'coinsOverlined',
+  coins: 'coins',
+  contextMenu: 'contextMenu',
+  downloadAlt: 'downloadAlt',
+  externalLink: 'externalLink',
+  lock: 'lock',
+  mailClosed: 'mailClosed',
+  mailOpened: 'mailOpened',
+  mail: 'mail',
+  pdf: 'pdf',
+  save: 'save',
+  starSolid: 'starSolid',
+  testConnection: 'testConnection',
+  uploadSolid: 'uploadSolid',
+  bulkDownload: 'bulkDownload'
 };
 
 export type IconName = keyof typeof IconsMap;
@@ -539,6 +557,60 @@ export const Icon: React.FC<IconProps> = ({
       break;
     case 'downloadCloud':
       Component = <Icons.DownloadCloud />;
+      break;
+    case 'addressBook':
+      Component = <Icons.AddressBook />;
+      break;
+    case 'attachmentLeft':
+      Component = <Icons.AttachmentLeft />;
+      break;
+    case 'back':
+      Component = <Icons.Back />;
+      break;
+    case 'coinsOverlined':
+      Component = <Icons.CoinsOverlined />;
+      break;
+    case 'coins':
+      Component = <Icons.Coins />;
+      break;
+    case 'contextMenu':
+      Component = <Icons.ContextMenu />;
+      break;
+    case 'downloadAlt':
+      Component = <Icons.DownloadAlt />;
+      break;
+    case 'externalLink':
+      Component = <Icons.ExternalLink />;
+      break;
+    case 'lock':
+      Component = <Icons.Lock />;
+      break;
+    case 'mailClosed':
+      Component = <Icons.MailClosed />;
+      break;
+    case 'mailOpened':
+      Component = <Icons.MailOpened />;
+      break;
+    case 'mail':
+      Component = <Icons.Mail />;
+      break;
+    case 'pdf':
+      Component = <Icons.PDF />;
+      break;
+    case 'save':
+      Component = <Icons.Save />;
+      break;
+    case 'starSolid':
+      Component = <Icons.StarSolid />;
+      break;
+    case 'testConnection':
+      Component = <Icons.TestConnection />;
+      break;
+    case 'uploadSolid':
+      Component = <Icons.UploadSolid />;
+      break;
+    case 'bulkDownload':
+      Component = <Icons.BulkDownload />;
       break;
   }
 

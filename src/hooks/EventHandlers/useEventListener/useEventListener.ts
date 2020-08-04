@@ -1,14 +1,5 @@
 import { MutableRefObject, useEffect } from 'react';
 
-export interface UseEventListenerValue {
-  onKeyDown: EventListener;
-  onMouseDown: EventListener;
-  onEscape: EventListener;
-  onEnter: EventListener;
-  onResize: EventListener;
-  onScroll: EventListener;
-}
-
 export interface UseEventListenerProps {
   ref?: Readonly<MutableRefObject<Readonly<null> | Readonly<Element>>>;
   onMouseDown?: () => void;
@@ -18,12 +9,12 @@ export interface UseEventListenerProps {
   onResize?: () => void;
   onScroll?: () => void;
   isOpen?: Readonly<boolean>;
-  deps?: ReadonlyArray<unknown>;
 }
 
 export const useEventListener = (
-  props: Readonly<UseEventListenerProps>
-): Readonly<UseEventListenerValue> => {
+  props: Readonly<UseEventListenerProps>,
+  deps?: ReadonlyArray<unknown>
+): void => {
   useEffect(() => {
     if (props.ref?.current) {
       if (props.onMouseDown) {
@@ -66,49 +57,35 @@ export const useEventListener = (
         window?.removeEventListener('scroll', onScroll);
       }
     };
-  }, [props.deps]);
+  }, [deps]);
 
   const onMouseDown: EventListener = (e: Event) => {
     if (!props.ref?.current?.contains(e.target as Node)) {
-      if (props.onMouseDown) {
-        props.onMouseDown();
-      }
+      props.onMouseDown?.();
     }
   };
 
   const onKeyDown: EventListener = (e: KeyboardEvent) => {
-    if (props.onKeyDown) {
-      props.onKeyDown();
-    }
+    props.onKeyDown?.();
   };
 
   const onEnter: EventListener = (e: KeyboardEvent) => {
     if (e.key === 'Enter') {
-      if (props.onEnter) {
-        props.onEnter();
-      }
+      props.onEnter?.();
     }
   };
 
   const onEscape: EventListener = (e: KeyboardEvent) => {
     if (e.key === 'Escape') {
-      if (props.onEscape) {
-        props.onEscape();
-      }
+      props.onEscape?.();
     }
   };
 
   const onResize: EventListener = () => {
-    if (props.onResize) {
-      props.onResize();
-    }
+    props.onResize?.();
   };
 
   const onScroll: EventListener = () => {
-    if (props.onScroll) {
-      props.onScroll();
-    }
+    props.onScroll?.();
   };
-
-  return { onKeyDown, onMouseDown, onEscape, onEnter, onResize, onScroll };
 };

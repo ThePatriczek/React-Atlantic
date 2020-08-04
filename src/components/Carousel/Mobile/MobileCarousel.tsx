@@ -1,5 +1,4 @@
 import React, { FC, ReactElement } from 'react';
-import { SpringStartFn } from 'react-spring/web.cjs';
 import { useDrag } from 'react-use-gesture';
 import { HookReturnType, UseDragConfig } from 'react-use-gesture/dist/types';
 import { Carousel, CarouselProps } from '../Carousel';
@@ -8,12 +7,7 @@ export const MobileCarousel: FC<Readonly<CarouselProps>> = (
   props
 ): Readonly<ReactElement> => {
   const dragGesture = (
-    setSprings: SpringStartFn<{
-      offset: Readonly<number>;
-      opacity: Readonly<number>;
-      display: Readonly<string>;
-      touchAction: Readonly<string>;
-    }>,
+    setSprings: any,
     setSlide: (value?: Readonly<boolean>) => void,
     width: Readonly<number>,
     index: Readonly<number>,
@@ -27,27 +21,34 @@ export const MobileCarousel: FC<Readonly<CarouselProps>> = (
         direction: [xDir],
         distance,
         cancel,
-        last
+        velocity
       }) => {
-        // if (down) {
-        //   ref.setAttribute('style', 'overflow:hidden');
-        // } else {
-        //   ref.setAttribute('style', 'overflow:visible');
-        // }
+        if (down) {
+          ref.setAttribute('style', 'overflow:hidden');
+        } else {
+          ref.setAttribute('style', 'overflow:visible');
+        }
+
+        if (down && velocity > 4) {
+          setSlide(!(xDir > 0));
+          cancel?.();
+        }
 
         if (down && distance > distanceMove) {
           setSlide(!(xDir > 0));
           cancel?.();
         }
 
-        setSprings((i: number) => ({
-          offset: (down ? xDelta : 0) / width + (i - index),
-          display:
-            index === i + 1 || index === i - 1 || i === index
-              ? `block`
-              : `none`,
-          touchAction: last ? `auto` : `none`
-        })).catch(console.error);
+        setSprings((i: number) => {
+          if (Math.abs(index - i) > 1) {
+            return { display: `none` };
+          }
+          return {
+            offset: (down ? xDelta : 0) / width + (i - index),
+            display: `block`
+          };
+          // tslint:disable-next-line:no-console
+        }).catch(console.error);
       },
       {
         axis: `x`
@@ -55,7 +56,7 @@ export const MobileCarousel: FC<Readonly<CarouselProps>> = (
     );
   };
 
-  return <Carousel {...props} onDrag={dragGesture} />;
+  return <Carousel {...props} isPagination={true} onDrag={dragGesture}/>;
 };
 
 MobileCarousel.displayName = `MobileCarousel`;
