@@ -15,6 +15,8 @@ import { StyledCarousel, StyledSlide } from './Carousel.style';
 import { ItemProps, Slide } from './Slide';
 
 export interface CarouselProps {
+  /** custom className */
+  className?: string;
   children: Readonly<JSX.Element[]>;
   activeSlide?: Readonly<number>;
   defaultSlide?: Readonly<number>;
@@ -53,7 +55,14 @@ export const Carousel: FC<Readonly<CarouselProps>> & {
   Slide: FC<Readonly<PropsWithChildren<ItemProps>>>;
 } = (props): Readonly<ReactElement> => {
   const { getFilteredChildren } = useComposition();
-  const { autoHeight, ref, defaultSlide, auto, onSlideChange } = props;
+  const {
+    autoHeight,
+    ref,
+    defaultSlide,
+    auto,
+    onSlideChange,
+    className
+  } = props;
   const children = getFilteredChildren(props.children, Slide.displayName);
 
   const elements: Array<HTMLDivElement | null> = [];
@@ -149,6 +158,7 @@ export const Carousel: FC<Readonly<CarouselProps>> & {
 
   return (
     <StyledCarousel
+      className={className}
       height={height}
       auto={props.auto}
       autoHeight={autoHeight}

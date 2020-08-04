@@ -9,6 +9,8 @@ export interface TimelineProps {
   onChange?: (index: Readonly<number>) => void;
   activeIndex?: Readonly<number>;
   defaultActiveIndex?: Readonly<number>;
+  /** custom className */
+  className?: string;
 }
 
 export const Timeline: FC<
@@ -16,7 +18,7 @@ export const Timeline: FC<
 > & {
   Item: FC<Readonly<ItemProps>>;
 } = (props): Readonly<ReactElement> => {
-  const { children, onChange, activeIndex, defaultActiveIndex } = props;
+  const { children, onChange, activeIndex, defaultActiveIndex, className } = props;
   const { getFilteredChildren } = useComposition();
 
   const items = getFilteredChildren(children, Timeline.Item.displayName);
@@ -27,7 +29,7 @@ export const Timeline: FC<
       activeIndex={activeIndex}
       defaultActiveIndex={defaultActiveIndex}
     >
-      <StyledTimelineContainer>
+      <StyledTimelineContainer className={className}>
         {items.map((item, index: Readonly<number>) => (
           <Timeline.Item key={index} {...item.props} index={index}>
             {item.props?.children}
