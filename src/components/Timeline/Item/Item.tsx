@@ -26,12 +26,16 @@ export interface TimelineButton {
   onClick?: () => void;
   hint?: HintType;
   isDisabled?: Readonly<boolean>;
+  /** custom className */
+  className?: string;
 }
 export interface TimelineCaption {
   value: Readonly<string>;
   onClick?: () => void;
   hint?: HintType;
   isDisabled?: Readonly<boolean>;
+  /** custom className */
+  className?: string;
 }
 
 export interface ItemProps {
@@ -97,6 +101,7 @@ export const Item: FC<ItemPropsPrivate> = (props): Readonly<ReactElement> => {
               onClick={() => !item.isDisabled && item?.onClick?.()}
               key={key}
               hasMarginRight={key < captions.length - 1}
+              className={item?.className}
             >
               <Text>
                 {key < captions.length - 1 ? `${item.value},` : item.value}
@@ -122,6 +127,7 @@ export const Item: FC<ItemPropsPrivate> = (props): Readonly<ReactElement> => {
                 isDisabled={button.isDisabled}
                 key={key}
                 onClick={button.onClick}
+                className={button?.className}
               >
                 <Icon name={button.icon} />
               </StyledTimelineButton>

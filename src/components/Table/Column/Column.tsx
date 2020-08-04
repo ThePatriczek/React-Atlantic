@@ -12,6 +12,7 @@ export interface ColumnProps {
   onDoubleClick?: () => void;
   className?: Readonly<string>;
   name?: string;
+
 }
 
 export interface HiddenColumnProps extends ColumnProps {

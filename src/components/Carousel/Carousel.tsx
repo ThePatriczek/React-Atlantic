@@ -24,6 +24,8 @@ import {
 import { ItemProps, Slide } from './Slide';
 
 export interface CarouselProps {
+  /** custom className */
+  className?: string;
   children: Readonly<JSX.Element[]>;
   isArrows?: Readonly<boolean>;
   isClickableEdge?: Readonly<boolean>;
@@ -73,7 +75,8 @@ export const Carousel: FC<Readonly<CarouselProps>> & {
     overflow,
     isPagination,
     isArrows,
-    isClickableEdge
+    isClickableEdge,
+    className
   } = props;
   const { getFilteredChildren } = useComposition();
   const children = useMemo(() => {
@@ -211,6 +214,7 @@ export const Carousel: FC<Readonly<CarouselProps>> & {
       )}
 
       <StyledCarousel
+        className={className}
         height={height}
         auto={props.auto}
         autoHeight={autoHeight}

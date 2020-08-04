@@ -11,6 +11,8 @@ interface TableProps {
   onSort?: (sortBy: Readonly<string>, order: Readonly<SortOrder>) => void;
   sortBy?: string;
   order?: Readonly<SortOrder>;
+  /** custom className */
+  className?: string;
 }
 
 export const Table: FC<PropsWithChildren<TableProps>> & {
@@ -19,7 +21,7 @@ export const Table: FC<PropsWithChildren<TableProps>> & {
   Head: FC<Readonly<HeadProps>>;
   Body: FC<Readonly<BodyProps>>;
 } = (props): Readonly<ReactElement> => {
-  const { children, onSort, order, sortBy } = props;
+  const { children, onSort, order, sortBy, className } = props;
   const { getFilteredChildren } = useComposition();
   const row = getFilteredChildren(children, Table.Row.displayName);
   const thead = getFilteredChildren(children, Table.Head.displayName);
@@ -28,7 +30,7 @@ export const Table: FC<PropsWithChildren<TableProps>> & {
 
   return (
     <TableContextProvider onSort={onSort} order={order} sortBy={sortBy}>
-      <StyledTable>{items}</StyledTable>
+      <StyledTable className={className}>{items}</StyledTable>
     </TableContextProvider>
   );
 };

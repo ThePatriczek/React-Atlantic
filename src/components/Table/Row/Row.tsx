@@ -7,12 +7,14 @@ import { StyledRow } from './Row.style';
 export interface RowProps {
   onClick?: () => void;
   onDoubleClick?: () => void;
+  /** custom className */
+  className?: string;
 }
 
 export const Row: FC<PropsWithChildren<RowProps>> & {
   Column: FC<ColumnProps>;
 } = (props): ReactElement => {
-  const { children, onClick, onDoubleClick } = props;
+  const { children, onClick, onDoubleClick, className } = props;
   const { getFilteredChildren } = useComposition();
   const items: JSX.Element[] = getFilteredChildren(
     children,
@@ -21,6 +23,7 @@ export const Row: FC<PropsWithChildren<RowProps>> & {
 
   return (
     <StyledRow
+      className={className}
       onClick={() => onClick?.()}
       onDoubleClick={() => onDoubleClick?.()}
     >

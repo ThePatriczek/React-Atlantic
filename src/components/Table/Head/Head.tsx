@@ -3,10 +3,13 @@ import { useComposition } from '../../../hooks';
 import { Table } from '../Table';
 import { StyledHead } from './Head.style';
 
-export interface HeadProps {}
+export interface HeadProps {
+  /** custom className */
+  className?: string;
+}
 
 export const Head: FC<PropsWithChildren<HeadProps>> = (props): ReactElement => {
-  const { children } = props;
+  const { children, className } = props;
   const { getFilteredChildren } = useComposition();
 
   const getHeaderColumns = (
@@ -33,7 +36,7 @@ export const Head: FC<PropsWithChildren<HeadProps>> = (props): ReactElement => {
     return <Table.Row>{items}</Table.Row>;
   });
 
-  return <StyledHead>{rows}</StyledHead>;
+  return <StyledHead className={className}>{rows}</StyledHead>;
 };
 
 Head.displayName = `Head`;

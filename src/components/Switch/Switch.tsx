@@ -20,6 +20,7 @@ export interface SwitchProps {
   className?: string;
   size?: Size;
   type?: Type;
+
 }
 
 export const Switch: React.FC<SwitchProps> = (
