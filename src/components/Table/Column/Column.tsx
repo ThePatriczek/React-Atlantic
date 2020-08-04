@@ -9,6 +9,7 @@ import {
 
 export interface ColumnProps {
   onClick?: () => void;
+  onDoubleClick?: () => void;
   className?: Readonly<string>;
   name?: string;
 }
@@ -35,11 +36,16 @@ export const Column: FC<Readonly<PropsWithChildren<HiddenColumnProps>>> = (
     }
   };
 
+  const onDoubleClick = () => {
+    props.onDoubleClick?.();
+  };
+
   if (isHeader) {
     return (
       <StyledColumnHeader
         isClickable={!!props.onClick || hasName}
         onClick={onClick}
+        onDoubleClick={onDoubleClick}
         className={className}
         isActive={isActive}
       >
@@ -52,7 +58,11 @@ export const Column: FC<Readonly<PropsWithChildren<HiddenColumnProps>>> = (
   }
 
   return (
-    <StyledColumn onClick={onClick} className={className}>
+    <StyledColumn
+      onClick={onClick}
+      onDoubleClick={onDoubleClick}
+      className={className}
+    >
       {children}
     </StyledColumn>
   );

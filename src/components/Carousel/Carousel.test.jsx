@@ -1,9 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { Carousel } from './Carousel';
-import { action } from '@storybook/addon-actions';
-import { boolean } from '@storybook/addon-knobs';
-import { defaultValues } from '../../constants/defaultValues';
 
 export const Component = (children, auto, autoHeight, activeSlide) => {
   //todo:add props

@@ -1,5 +1,5 @@
-import React, { FC, ReactElement, useState } from 'react';
-import { SpringsUpdateFn } from 'react-spring/web.cjs';
+import React, { FC, ReactElement } from 'react';
+import { SpringStartFn } from 'react-spring/web.cjs';
 import { useDrag } from 'react-use-gesture';
 import { HookReturnType, UseDragConfig } from 'react-use-gesture/dist/types';
 import { Carousel, CarouselProps } from '../Carousel';
@@ -8,8 +8,9 @@ export const MobileCarousel: FC<Readonly<CarouselProps>> = (
   props
 ): Readonly<ReactElement> => {
   const dragGesture = (
-    setSprings: SpringsUpdateFn<{
+    setSprings: SpringStartFn<{
       offset: Readonly<number>;
+      opacity: Readonly<number>;
       display: Readonly<string>;
       touchAction: Readonly<string>;
     }>,
@@ -46,7 +47,7 @@ export const MobileCarousel: FC<Readonly<CarouselProps>> = (
               ? `block`
               : `none`,
           touchAction: last ? `auto` : `none`
-        }));
+        })).catch(console.error);
       },
       {
         axis: `x`
