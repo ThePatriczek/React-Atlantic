@@ -25,10 +25,6 @@ export interface StyledTimelineTitleProps {
   isDisabled?: Readonly<boolean>;
 }
 
-export interface StyledTimelineContainerProps {
-  isMain?: boolean;
-}
-
 export const StyledTimelineItem = styled.li<StyledTimelineItemProps>`
   position: relative;
   display: flex;
@@ -166,12 +162,10 @@ export const StyledTimelineCaption = styled(Link)<{
     `}
 `;
 
-export const StyledTimelineContainer = styled.div<StyledTimelineContainerProps>`
-  ${props =>
-    props.isMain &&
-    css`
-      flex: 1 1 0;
-    `}
+export const StyledTimelineContainer = styled.div``;
+
+export const StyledTimelineMainContainer = styled(StyledTimelineContainer)`
+  flex: 1 1 0%;
 `;
 
 export const StyledTimelineButton = styled(PureButton)`

@@ -12,6 +12,7 @@ import {
   StyledTimelineCircle,
   StyledTimelineContainer,
   StyledTimelineItem,
+  StyledTimelineMainContainer,
   StyledTimelineSide,
   StyledTimelineTitle
 } from './Item.style';
@@ -165,10 +166,10 @@ export const Item: FC<ItemPropsPrivate> = (props): Readonly<ReactElement> => {
           isDisabled={props.isDisabled}
         />
       </StyledTimelineSide>
-      <StyledTimelineContainer isMain>
+      <StyledTimelineMainContainer>
         {TimelineTitle()}
         {TimelineCaptions()}
-      </StyledTimelineContainer>
+      </StyledTimelineMainContainer>
 
       {TimelineButtons()}
       {TimelineElements()}
