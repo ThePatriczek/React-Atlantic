@@ -19,6 +19,7 @@ import {
 
 interface HintType {
   description: Readonly<string>;
+  id?: string;
   hintComponent?: (hint: Readonly<string>, id: Readonly<string>) => JSX.Element;
 }
 
@@ -184,7 +185,7 @@ const tooltipFactory = (
   element: JSX.Element,
   key?: Readonly<number>
 ): JSX.Element => {
-  const tooltipTipKey: Readonly<string> = `${hint.description}-${key || -1}`;
+  const tooltipTipKey: Readonly<string> = hint.id ?? `${hint.description}-${key || -1}`;
   return hint?.hintComponent ? (
     <span data-tip data-for={tooltipTipKey} key={key}>
       {element}
