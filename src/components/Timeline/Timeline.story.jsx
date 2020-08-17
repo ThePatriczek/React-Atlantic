@@ -41,7 +41,7 @@ stories.add(
             buttons={[
               {
                 icon: 'trash',
-                hint: { description: `Hello World!` },
+                hint: { description: `Hello World!`, id: 'dumb' },
                 isDisabled: true
               }
             ]}
