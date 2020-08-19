@@ -13,6 +13,7 @@ export interface StyledTimelineItemProps {
   highlight?: boolean;
   isDisabled?: Readonly<boolean>;
   type?: Type;
+  isActive?: Readonly<boolean>;
 }
 
 export interface StyledTimelineCircleProps {
@@ -56,12 +57,14 @@ export const StyledTimelineItem = styled.li<StyledTimelineItemProps>`
   ${props =>
     props.type &&
     props.type !== 'default' &&
+    props.isActive &&
     css`
       background-color: ${props.theme.color[props.type]?.alpha};
     `}
   
   ${props =>
     props.type === 'default' &&
+    props.isActive &&
     css`
       background-color: ${props.theme.color.text.beta};
     `}
@@ -100,6 +103,7 @@ export const StyledTimelineCircle = styled.div<StyledTimelineCircleProps>`
 
   ${props =>
     props.isActive &&
+    !props.type &&
     css`
       border-color: ${props => props.theme.color.primary.alpha};
     `}
@@ -160,6 +164,7 @@ export const StyledTimelineTitle = styled(Link)<StyledTimelineTitleProps>`
 
   ${props =>
     props.type &&
+    props.isActive &&
     css`
       ${StyledTitle5} {
         color: ${props.theme.color.text.gamma};
@@ -171,6 +176,7 @@ export const StyledTimelineCaption = styled(Link)<{
   hasMarginRight: Readonly<boolean>;
   isDisabled?: Readonly<boolean>;
   type?: Type;
+  isActive?: Readonly<boolean>;
 }>`
   display: block;
   margin: 0;
@@ -195,6 +201,7 @@ export const StyledTimelineCaption = styled(Link)<{
 
   ${props =>
     props.type &&
+    props.isActive &&
     css`
       ${StyledText} {
         color: ${props.theme.color.text.gamma};
@@ -208,12 +215,24 @@ export const StyledTimelineMainContainer = styled(StyledTimelineContainer)`
   flex: 1 1 0%;
 `;
 
-export const StyledTimelineButton = styled(PureButton)<{ type?: Type }>`
+export const StyledTimelineButton = styled(PureButton)<{
+  type?: Type;
+  isActive?: Readonly<boolean>;
+}>`
   ${StyledIcon} {
     height: auto;
   }
   ${props =>
+    !props.isActive &&
+    css`
+      ${StyledIcon} {
+        color: ${props => props.theme.color.text.alpha};
+      }
+    `}
+
+  ${props =>
     props.type &&
+    props.isActive &&
     css`
       ${StyledIcon} {
         color: ${props.theme.color.text.gamma};

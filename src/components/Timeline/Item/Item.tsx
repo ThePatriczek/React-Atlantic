@@ -50,7 +50,7 @@ export interface ItemProps {
   elements?: ReadonlyArray<JSX.Element>;
   hint?: HintType;
   isDisabled?: Readonly<boolean>;
-  type?: Readonly<Type>
+  type?: Readonly<Type>;
 }
 
 interface ItemPropsPrivate extends ItemProps {
@@ -102,6 +102,7 @@ export const Item: FC<ItemPropsPrivate> = (props): Readonly<ReactElement> => {
         {captions.map((item, key) => {
           const element = (
             <StyledTimelineCaption
+              isActive={isActive}
               type={type}
               isDisabled={item.isDisabled}
               href={'#'}
@@ -131,6 +132,7 @@ export const Item: FC<ItemPropsPrivate> = (props): Readonly<ReactElement> => {
           (button: Readonly<TimelineButton>, key: Readonly<number>) => {
             const element = (
               <StyledTimelineButton
+                isActive={isActive}
                 type={type}
                 isDisabled={button.isDisabled}
                 key={key}
@@ -162,6 +164,7 @@ export const Item: FC<ItemPropsPrivate> = (props): Readonly<ReactElement> => {
 
   return (
     <StyledTimelineItem
+      isActive={isActive}
       type={type}
       className={className}
       highlight={isActive}
