@@ -58,6 +58,7 @@ export const StyledTimelineItem = styled.li<StyledTimelineItemProps>`
     props.type &&
     props.type !== 'default' &&
     props.isActive &&
+    !props.isDisabled &&
     css`
       background-color: ${props.theme.color[props.type]?.alpha};
     `}
@@ -65,6 +66,7 @@ export const StyledTimelineItem = styled.li<StyledTimelineItemProps>`
   ${props =>
     props.type === 'default' &&
     props.isActive &&
+    !props.isDisabled &&
     css`
       background-color: ${props.theme.color.text.beta};
     `}
