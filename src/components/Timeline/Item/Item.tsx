@@ -1,4 +1,5 @@
 import React, { FC, ReactElement } from 'react';
+import { Type } from '../../../types';
 import { Icon, IconName } from '../../Icon';
 import { Tooltip } from '../../Tooltip';
 import { Typography } from '../../Typography';
@@ -49,6 +50,7 @@ export interface ItemProps {
   elements?: ReadonlyArray<JSX.Element>;
   hint?: HintType;
   isDisabled?: Readonly<boolean>;
+  type?: Readonly<Type>
 }
 
 interface ItemPropsPrivate extends ItemProps {
@@ -65,7 +67,8 @@ export const Item: FC<ItemPropsPrivate> = (props): Readonly<ReactElement> => {
     captions,
     buttons,
     elements,
-    hint
+    hint,
+    type
   } = props;
   const { onChange, activeIndex } = useTimeline();
   const isActive: Readonly<boolean> = index === activeIndex;
@@ -162,6 +165,7 @@ export const Item: FC<ItemPropsPrivate> = (props): Readonly<ReactElement> => {
     >
       <StyledTimelineSide>
         <StyledTimelineCircle
+          type={type}
           isActive={isActive}
           onClick={() => !props.isDisabled && onClick()}
           isDisabled={props.isDisabled}

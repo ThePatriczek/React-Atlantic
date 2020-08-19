@@ -7,6 +7,7 @@ import { defaultValues } from '../../constants/defaultValues';
 export const Component = (index, onChange, onClick, onCaptionClick) => (
   <Timeline onChange={onChange} defaultActiveIndex={index} activeIndex={index}>
     <Timeline.Item
+      type={'primary'}
       captions={[
         { value: `Caption1`, onClick: onCaptionClick },
         { value: `Caption2` },
