@@ -86,25 +86,12 @@ export const StyledTimelineItem = styled.li<StyledTimelineItemProps>`
   margin-bottom: ${props => props.theme.margin.md};
   background-color: ${props => props.theme.color.default};
   border-radius: ${props => props.theme.radius};
-
-  ${props =>
-    props.isDisabled &&
-    css`
-      cursor: not-allowed;
-    `}
   
   ${props =>
-    props.type &&
-    props.type !== 'default' &&
     props.isActive &&
+    props.type &&
     !props.isDisabled &&
     css`
-      background-color: ${props.theme.color[props.type]?.alpha};
-
-      ${StyledIcon} {
-        color: ${props.theme.color.text.gamma};
-      }
-
       ${StyledTimelineCaption} {
         color: ${props.theme.color.text.gamma};
 
@@ -112,14 +99,42 @@ export const StyledTimelineItem = styled.li<StyledTimelineItemProps>`
           color: ${props => props.theme.color.text.gamma};
         }
       }
+      
+      ${StyledTimelineButton} {
+        ${StyledIcon} {
+          color: ${props => props.theme.color.text.gamma};
+        }
+      }
     `}
   
   ${props =>
-    props.type === 'default' &&
     props.isActive &&
-    !props.isDisabled &&
+    props.type &&
+    props.type !== 'default' && 
+    css`
+      background-color: ${props.theme.color[props.type]?.alpha};
+   `}
+  
+  ${props =>
+    props.isActive &&
+    props.type === 'default' &&
     css`
       background-color: ${props.theme.color.text.beta};
+    `}
+  
+  ${props =>
+    props.isDisabled &&
+    css`
+      cursor: not-allowed;
+      background-color: ${props => props.theme.color.default};
+      
+      ${StyledTimelineCaption} {
+        color: ${props => props.theme.color.text.beta};
+        
+        ${StyledText} {
+          color: ${props => props.theme.color.text.beta};
+        }
+      }
     `}
 `;
 
