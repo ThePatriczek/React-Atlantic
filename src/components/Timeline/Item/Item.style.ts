@@ -3,6 +3,7 @@ import { Type } from '../../../types';
 import { PureButton } from '../../Button/Pure';
 import { StyledIcon } from '../../Icon/Icon.style';
 import { Link } from '../../Typography/Link';
+import { StyledLink } from '../../Typography/Link/Link.style';
 import { StyledText } from '../../Typography/Text/Text.style';
 import { StyledTitle5 } from '../../Typography/Title/Title.style';
 
@@ -28,6 +29,50 @@ export interface StyledTimelineTitleProps {
   type?: Type;
 }
 
+export const StyledTimelineButton = styled(PureButton)<{
+  isDisabled?: Readonly<boolean>;
+}>`
+  ${StyledIcon} {
+    height: auto;
+  }
+
+  ${props =>
+    props.isDisabled &&
+    css`
+      ${StyledIcon} {
+        color: ${props.theme.color.text.beta};
+      }
+    `}
+`;
+
+export const StyledTimelineCaption = styled(Link)<{
+  hasMarginRight: Readonly<boolean>;
+  isDisabled?: Readonly<boolean>;
+  type?: Type;
+  isActive?: Readonly<boolean>;
+}>`
+  display: block;
+  margin: 0;
+  color: ${props => props.theme.color.text.beta};
+  font-size: ${props => props.theme.font.size.sm};
+
+  ${props =>
+    props.hasMarginRight &&
+    css`
+      margin-right: ${props.theme.margin.sm};
+    `}
+
+  ${StyledText} {
+    color: ${props => props.theme.color.text.beta};
+  }
+
+  ${props =>
+    props.isDisabled &&
+    css`
+      cursor: not-allowed;
+    `}
+`;
+
 export const StyledTimelineItem = styled.li<StyledTimelineItemProps>`
   position: relative;
   display: flex;
@@ -43,12 +88,6 @@ export const StyledTimelineItem = styled.li<StyledTimelineItemProps>`
   border-radius: ${props => props.theme.radius};
 
   ${props =>
-    props.highlight &&
-    css`
-      background-color: ${props => props.theme.color.default};
-    `}
-
-  ${props =>
     props.isDisabled &&
     css`
       cursor: not-allowed;
@@ -61,6 +100,18 @@ export const StyledTimelineItem = styled.li<StyledTimelineItemProps>`
     !props.isDisabled &&
     css`
       background-color: ${props.theme.color[props.type]?.alpha};
+
+      ${StyledIcon} {
+        color: ${props.theme.color.text.gamma};
+      }
+
+      ${StyledTimelineCaption} {
+        color: ${props.theme.color.text.gamma};
+
+        ${StyledText} {
+          color: ${props => props.theme.color.text.gamma};
+        }
+      }
     `}
   
   ${props =>
@@ -153,6 +204,8 @@ export const StyledTimelineTitle = styled(Link)<StyledTimelineTitleProps>`
   ${props =>
     props.isDisabled &&
     css`
+      cursor: not-allowed;
+
       &:hover {
         text-decoration: none;
       }
@@ -160,52 +213,14 @@ export const StyledTimelineTitle = styled(Link)<StyledTimelineTitleProps>`
       ${StyledTitle5} {
         color: ${props.theme.color.text.beta};
       }
-
-      cursor: not-allowed;
     `}
 
   ${props =>
     props.type &&
     props.isActive &&
+    !props.isDisabled &&
     css`
       ${StyledTitle5} {
-        color: ${props.theme.color.text.gamma};
-      }
-    `}
-`;
-
-export const StyledTimelineCaption = styled(Link)<{
-  hasMarginRight: Readonly<boolean>;
-  isDisabled?: Readonly<boolean>;
-  type?: Type;
-  isActive?: Readonly<boolean>;
-}>`
-  display: block;
-  margin: 0;
-  color: ${props => props.theme.color.text.beta};
-  font-size: ${props => props.theme.font.size.sm};
-
-  ${props =>
-    props.hasMarginRight &&
-    css`
-      margin-right: ${props.theme.margin.sm};
-    `}
-
-  ${StyledText} {
-    color: ${props => props.theme.color.text.beta};
-  }
-
-  ${props =>
-    props.isDisabled &&
-    css`
-      cursor: not-allowed;
-    `}
-
-  ${props =>
-    props.type &&
-    props.isActive &&
-    css`
-      ${StyledText} {
         color: ${props.theme.color.text.gamma};
       }
     `}
@@ -215,31 +230,6 @@ export const StyledTimelineContainer = styled.div``;
 
 export const StyledTimelineMainContainer = styled(StyledTimelineContainer)`
   flex: 1 1 0%;
-`;
-
-export const StyledTimelineButton = styled(PureButton)<{
-  type?: Type;
-  isActive?: Readonly<boolean>;
-}>`
-  ${StyledIcon} {
-    height: auto;
-  }
-  ${props =>
-    !props.isActive &&
-    css`
-      ${StyledIcon} {
-        color: ${props => props.theme.color.text.alpha};
-      }
-    `}
-
-  ${props =>
-    props.type &&
-    props.isActive &&
-    css`
-      ${StyledIcon} {
-        color: ${props.theme.color.text.gamma};
-      }
-    `}
 `;
 
 export const StyledTimelineCaptionContainer = styled.div`

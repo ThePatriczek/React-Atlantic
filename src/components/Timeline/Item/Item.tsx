@@ -68,7 +68,8 @@ export const Item: FC<ItemPropsPrivate> = (props): Readonly<ReactElement> => {
     buttons,
     elements,
     hint,
-    type
+    type,
+    isDisabled
   } = props;
   const { onChange, activeIndex } = useTimeline();
   const isActive: Readonly<boolean> = index === activeIndex;
@@ -87,8 +88,8 @@ export const Item: FC<ItemPropsPrivate> = (props): Readonly<ReactElement> => {
         type={type}
         href={'#'}
         isActive={isActive}
-        isDisabled={props.isDisabled}
-        onClick={() => !props.isDisabled && onClick()}
+        isDisabled={isDisabled}
+        onClick={() => !isDisabled && onClick()}
       >
         <Title level={5}>{children}</Title>
       </StyledTimelineTitle>
@@ -132,8 +133,6 @@ export const Item: FC<ItemPropsPrivate> = (props): Readonly<ReactElement> => {
           (button: Readonly<TimelineButton>, key: Readonly<number>) => {
             const element = (
               <StyledTimelineButton
-                isActive={isActive}
-                type={type}
                 isDisabled={button.isDisabled}
                 key={key}
                 onClick={button.onClick}
@@ -168,14 +167,14 @@ export const Item: FC<ItemPropsPrivate> = (props): Readonly<ReactElement> => {
       type={type}
       className={className}
       highlight={isActive}
-      isDisabled={props.isDisabled}
+      isDisabled={isDisabled}
     >
       <StyledTimelineSide>
         <StyledTimelineCircle
           type={type}
           isActive={isActive}
-          onClick={() => !props.isDisabled && onClick()}
-          isDisabled={props.isDisabled}
+          onClick={() => !isDisabled && onClick()}
+          isDisabled={isDisabled}
         />
       </StyledTimelineSide>
       <StyledTimelineMainContainer>

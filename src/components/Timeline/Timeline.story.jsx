@@ -49,6 +49,7 @@ stories.add(
             B
           </Timeline.Item>
           <Timeline.Item
+            type={'default'}
             isDisabled={true}
             elements={[<Button>Click</Button>]}
             captions={[
