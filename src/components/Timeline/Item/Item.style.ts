@@ -12,6 +12,7 @@ export interface StyledTimelineItemProps {
   index?: number;
   highlight?: boolean;
   isDisabled?: Readonly<boolean>;
+  type?: Type;
 }
 
 export interface StyledTimelineCircleProps {
@@ -23,6 +24,7 @@ export interface StyledTimelineCircleProps {
 export interface StyledTimelineTitleProps {
   isActive?: boolean;
   isDisabled?: Readonly<boolean>;
+  type?: Type;
 }
 
 export const StyledTimelineItem = styled.li<StyledTimelineItemProps>`
@@ -36,7 +38,7 @@ export const StyledTimelineItem = styled.li<StyledTimelineItemProps>`
     parseFloat(props.theme.margin.sm) + parseFloat(circleSize)}px;
   padding: ${props => props.theme.padding.sm};
   margin-bottom: ${props => props.theme.margin.md};
-  background-color: ${props => props.theme.color.background.alpha};
+  background-color: ${props => props.theme.color.default};
   border-radius: ${props => props.theme.radius};
 
   ${props =>
@@ -49,6 +51,19 @@ export const StyledTimelineItem = styled.li<StyledTimelineItemProps>`
     props.isDisabled &&
     css`
       cursor: not-allowed;
+    `}
+  
+  ${props =>
+    props.type &&
+    props.type !== 'default' &&
+    css`
+      background-color: ${props.theme.color[props.type]?.alpha};
+    `}
+  
+  ${props =>
+    props.type === 'default' &&
+    css`
+      background-color: ${props.theme.color.text.beta};
     `}
 `;
 
@@ -107,6 +122,7 @@ export const StyledTimelineTitle = styled(Link)<StyledTimelineTitleProps>`
 
   ${props =>
     !props.isDisabled &&
+    !props.type &&
     css`
       &:hover {
         color: ${props => props.theme.color.primary.alpha};
@@ -141,11 +157,20 @@ export const StyledTimelineTitle = styled(Link)<StyledTimelineTitleProps>`
 
       cursor: not-allowed;
     `}
+
+  ${props =>
+    props.type &&
+    css`
+      ${StyledTitle5} {
+        color: ${props.theme.color.text.gamma};
+      }
+    `}
 `;
 
 export const StyledTimelineCaption = styled(Link)<{
   hasMarginRight: Readonly<boolean>;
   isDisabled?: Readonly<boolean>;
+  type?: Type;
 }>`
   display: block;
   margin: 0;
@@ -167,6 +192,14 @@ export const StyledTimelineCaption = styled(Link)<{
     css`
       cursor: not-allowed;
     `}
+
+  ${props =>
+    props.type &&
+    css`
+      ${StyledText} {
+        color: ${props.theme.color.text.gamma};
+      }
+    `}
 `;
 
 export const StyledTimelineContainer = styled.div``;
@@ -175,10 +208,17 @@ export const StyledTimelineMainContainer = styled(StyledTimelineContainer)`
   flex: 1 1 0%;
 `;
 
-export const StyledTimelineButton = styled(PureButton)`
+export const StyledTimelineButton = styled(PureButton)<{ type?: Type }>`
   ${StyledIcon} {
     height: auto;
   }
+  ${props =>
+    props.type &&
+    css`
+      ${StyledIcon} {
+        color: ${props.theme.color.text.gamma};
+      }
+    `}
 `;
 
 export const StyledTimelineCaptionContainer = styled.div`

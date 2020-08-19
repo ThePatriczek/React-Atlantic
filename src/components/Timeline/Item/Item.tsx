@@ -84,6 +84,7 @@ export const Item: FC<ItemPropsPrivate> = (props): Readonly<ReactElement> => {
   const TimelineTitle = (): JSX.Element => {
     const element = (
       <StyledTimelineTitle
+        type={type}
         href={'#'}
         isActive={isActive}
         isDisabled={props.isDisabled}
@@ -101,6 +102,7 @@ export const Item: FC<ItemPropsPrivate> = (props): Readonly<ReactElement> => {
         {captions.map((item, key) => {
           const element = (
             <StyledTimelineCaption
+              type={type}
               isDisabled={item.isDisabled}
               href={'#'}
               onClick={() => !item.isDisabled && item?.onClick?.()}
@@ -129,6 +131,7 @@ export const Item: FC<ItemPropsPrivate> = (props): Readonly<ReactElement> => {
           (button: Readonly<TimelineButton>, key: Readonly<number>) => {
             const element = (
               <StyledTimelineButton
+                type={type}
                 isDisabled={button.isDisabled}
                 key={key}
                 onClick={button.onClick}
@@ -159,6 +162,7 @@ export const Item: FC<ItemPropsPrivate> = (props): Readonly<ReactElement> => {
 
   return (
     <StyledTimelineItem
+      type={type}
       className={className}
       highlight={isActive}
       isDisabled={props.isDisabled}

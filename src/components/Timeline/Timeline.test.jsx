@@ -21,8 +21,21 @@ export const Component = (index, onChange, onClick, onCaptionClick) => (
     >
       {`Item0`}
     </Timeline.Item>
-    <Timeline.Item>{`Item1`}</Timeline.Item>
-    <Timeline.Item buttons={[{ icon: 'diff' }]}>{`Item2`}</Timeline.Item>
+    <Timeline.Item type={'success'}>{`Item1`}</Timeline.Item>
+    <Timeline.Item
+      type={'error'}
+      buttons={[{ icon: 'diff' }]}
+    >{`Item2`}</Timeline.Item>
+    <Timeline.Item
+      type={'warning'}
+      onClick={onClick}
+      captions={[{ value: `Caption` }]}
+    >{`Item3`}</Timeline.Item>
+    <Timeline.Item
+      type={'default'}
+      onClick={onClick}
+      captions={[{ value: `Caption` }]}
+    >{`Item3`}</Timeline.Item>
     <Timeline.Item
       onClick={onClick}
       captions={[{ value: `Caption` }]}
