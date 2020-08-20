@@ -76,7 +76,7 @@ export const StyledTimelineCircle = styled.div<StyledTimelineCircleProps>`
   height: ${circleSize};
   cursor: pointer;
   border-radius: 50%;
-  border: 2px solid ${props => props.theme.color.border};
+  border: 2px solid ${props => props.theme.color.text.beta};
   background-color: ${props => props.theme.color.background.alpha};
 `;
 
@@ -169,20 +169,21 @@ export const StyledTimelineItem = styled.li<StyledTimelineItemProps>`
 
       ${StyledTimelineCircle} {
         cursor: default;
-        border-color: ${props.theme.color.text.beta};
       }
     `}
 
   ${props =>
-    props.isActive &&
     props.type &&
     props.type !== 'default' &&
     css`
-      background-color: ${props.theme.color[props.type]?.alpha};
-
       ${StyledTimelineCircle} {
         border-color: ${props.theme.color[props.type]?.alpha};
       }
+
+      ${props.isActive &&
+        css`
+          background-color: ${props.theme.color[props.type]?.alpha};
+        `}
     `}
 `;
 

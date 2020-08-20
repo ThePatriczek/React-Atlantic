@@ -20,7 +20,6 @@ stories.add(
       <>
         <Timeline>
           <Timeline.Item
-            isDisabled={true}
             elements={[
               <span data-tip data-for={`click-me`}>
                 <Button
@@ -38,6 +37,7 @@ stories.add(
             A
           </Timeline.Item>
           <Timeline.Item
+            type={'success'}
             buttons={[
               {
                 icon: 'trash',
@@ -50,7 +50,6 @@ stories.add(
           </Timeline.Item>
           <Timeline.Item
             type={'default'}
-            isDisabled={true}
             elements={[<Button>Click</Button>]}
             captions={[
               { value: `A`, hint: { description: `A` }, isDisabled: true },
@@ -60,7 +59,9 @@ stories.add(
           >
             C
           </Timeline.Item>
-          <Timeline.Item elements={[<Button>Click</Button>]}>D</Timeline.Item>
+          <Timeline.Item elements={[<Button>Click</Button>]} type={'warning'}>
+            D
+          </Timeline.Item>
         </Timeline>
       </>
     );
