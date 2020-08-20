@@ -89,7 +89,6 @@ export const Item: FC<ItemPropsPrivate> = (props): Readonly<ReactElement> => {
         type={type}
         href={'#'}
         isActive={isActive}
-        isDisabled={isDisabled}
         onClick={() => !isDisabled && onClick()}
       >
         <Title level={5}>{children}</Title>
@@ -168,14 +167,12 @@ export const Item: FC<ItemPropsPrivate> = (props): Readonly<ReactElement> => {
       type={type}
       className={className}
       highlight={isActive}
-      isDisabled={isDisabled}
     >
       <StyledTimelineSide>
         <StyledTimelineCircle
           type={type}
           isActive={isActive}
           onClick={() => !isDisabled && onClick()}
-          isDisabled={isDisabled}
         />
       </StyledTimelineSide>
       <StyledTimelineMainContainer>
