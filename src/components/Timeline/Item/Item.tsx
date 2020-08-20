@@ -49,7 +49,6 @@ export interface ItemProps {
   buttons?: ReadonlyArray<Readonly<TimelineButton>>;
   elements?: ReadonlyArray<JSX.Element>;
   hint?: HintType;
-  isDisabled?: Readonly<boolean>;
   type?: Readonly<Type>;
   isActive?: Readonly<boolean>;
 }
@@ -69,8 +68,7 @@ export const Item: FC<ItemPropsPrivate> = (props): Readonly<ReactElement> => {
     buttons,
     elements,
     hint,
-    type,
-    isDisabled
+    type
   } = props;
   const { onChange, activeIndex } = useTimeline();
   const isActive: boolean | undefined = index === activeIndex || props.isActive;
@@ -89,7 +87,7 @@ export const Item: FC<ItemPropsPrivate> = (props): Readonly<ReactElement> => {
         type={type}
         href={'#'}
         isActive={isActive}
-        onClick={() => !isDisabled && onClick()}
+        onClick={() => !isActive && onClick()}
       >
         <Title level={5}>{children}</Title>
       </StyledTimelineTitle>
@@ -172,7 +170,7 @@ export const Item: FC<ItemPropsPrivate> = (props): Readonly<ReactElement> => {
         <StyledTimelineCircle
           type={type}
           isActive={isActive}
-          onClick={() => !isDisabled && onClick()}
+          onClick={() => !isActive && onClick()}
         />
       </StyledTimelineSide>
       <StyledTimelineMainContainer>
