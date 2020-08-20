@@ -51,6 +51,7 @@ export interface ItemProps {
   hint?: HintType;
   isDisabled?: Readonly<boolean>;
   type?: Readonly<Type>;
+  isActive?: Readonly<boolean>;
 }
 
 interface ItemPropsPrivate extends ItemProps {
@@ -72,7 +73,7 @@ export const Item: FC<ItemPropsPrivate> = (props): Readonly<ReactElement> => {
     isDisabled
   } = props;
   const { onChange, activeIndex } = useTimeline();
-  const isActive: Readonly<boolean> = index === activeIndex;
+  const isActive: boolean | undefined = index === activeIndex || props.isActive;
 
   const onClick = () => {
     props.onClick?.();
