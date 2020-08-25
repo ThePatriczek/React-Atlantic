@@ -162,6 +162,10 @@ export const StyledTimelineItem = styled.li<StyledTimelineItemProps>`
       }
 
       ${StyledTimelineButton} {
+        ${StyledText} {
+          color: ${props => props.theme.color.text.gamma};
+        }
+
         ${StyledIcon} {
           color: ${props => props.theme.color.text.gamma};
         }

@@ -1,5 +1,5 @@
 import React, { FC, ReactElement } from 'react';
-import { Size, Type } from '../../../types';
+import { HorizontalPosition, Size, Type } from '../../../types';
 import { Icon, IconName } from '../../Icon';
 import { Tooltip } from '../../Tooltip';
 import { Typography } from '../../Typography';
@@ -24,8 +24,14 @@ interface HintType {
   hintComponent?: (hint: Readonly<string>, id: Readonly<string>) => JSX.Element;
 }
 
+interface TimelineButtonText {
+  content: Readonly<string>;
+  position?: Readonly<HorizontalPosition>;
+}
+
 export interface TimelineButton {
   icon: Readonly<IconName>;
+  text?: Readonly<TimelineButtonText>;
   size?: Readonly<Size>;
   onClick?: () => void;
   hint?: HintType;
@@ -130,6 +136,12 @@ export const Item: FC<ItemPropsPrivate> = (props): Readonly<ReactElement> => {
       <StyledTimelineContainer>
         {buttons.map(
           (button: Readonly<TimelineButton>, key: Readonly<number>) => {
+            // Set default value of text position
+            const textPosition =
+              button.text?.content &&
+              typeof button.text?.position === 'undefined'
+                ? 'right'
+                : button.text?.position;
             const element = (
               <StyledTimelineButton
                 isDisabled={button.isDisabled}
@@ -138,9 +150,16 @@ export const Item: FC<ItemPropsPrivate> = (props): Readonly<ReactElement> => {
                 onClick={button.onClick}
                 className={button?.className}
               >
+                {button.text?.content && textPosition === 'left' && (
+                  <Text>{`${button.text.content}`}</Text>
+                )}
                 <Icon name={button.icon} />
+                {button.text?.content && textPosition === 'right' && (
+                  <Text>{`${button.text.content}`}</Text>
+                )}
               </StyledTimelineButton>
             );
+
             return button.hint
               ? tooltipFactory(button.hint, element, key)
               : element;
