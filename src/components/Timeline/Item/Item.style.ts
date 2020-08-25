@@ -86,6 +86,7 @@ export const StyledTimelineTitle = styled(Link)<StyledTimelineTitleProps>`
   margin: 0;
   font-weight: 600;
   color: ${props => props.theme.color.text.alpha};
+  outline: none;
 
   ${StyledTitle5} {
     overflow: hidden;
