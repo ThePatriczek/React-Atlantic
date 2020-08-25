@@ -14,7 +14,7 @@ export const Component = (index, onChange, onClick, onCaptionClick) => (
       ]}
       onClick={onClick}
       buttons={[
-        { icon: 'diff', onClick },
+        { icon: 'diff', size: 'large', onClick },
         { icon: 'search', onClick }
       ]}
     >

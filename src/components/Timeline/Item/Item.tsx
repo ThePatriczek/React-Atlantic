@@ -1,5 +1,5 @@
 import React, { FC, ReactElement } from 'react';
-import { Type } from '../../../types';
+import { Size, Type } from '../../../types';
 import { Icon, IconName } from '../../Icon';
 import { Tooltip } from '../../Tooltip';
 import { Typography } from '../../Typography';
@@ -26,6 +26,7 @@ interface HintType {
 
 export interface TimelineButton {
   icon: Readonly<IconName>;
+  size?: Readonly<Size>;
   onClick?: () => void;
   hint?: HintType;
   isDisabled?: Readonly<boolean>;
@@ -132,6 +133,7 @@ export const Item: FC<ItemPropsPrivate> = (props): Readonly<ReactElement> => {
             const element = (
               <StyledTimelineButton
                 isDisabled={button.isDisabled}
+                size={button.size || 'medium'}
                 key={key}
                 onClick={button.onClick}
                 className={button?.className}
