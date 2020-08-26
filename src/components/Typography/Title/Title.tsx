@@ -5,6 +5,7 @@ import React, {
   PropsWithChildren,
   ReactElement,
   ReactText,
+  useEffect,
   useState
 } from 'react';
 import ReactTooltip from 'react-tooltip';
@@ -57,6 +58,10 @@ export const Title: FC<PropsWithChildren<TitleProps>> = (
   const [value, setValue] = useState<ReactText>(children);
   const editBtnRef = createRef<HTMLButtonElement>();
 
+  useEffect(() => {
+    setValue(children);
+  }, [children]);
+
   const onEdit = () => {
     setEditing(true);
 
@@ -90,7 +95,7 @@ export const Title: FC<PropsWithChildren<TitleProps>> = (
   }
 
   const Content = (
-    <Fragment key={value}>
+    <Fragment>
       {value}
       {isEditable && (
         <StyledTypoButton
