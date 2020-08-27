@@ -151,7 +151,9 @@ export const IconsMap = {
   testConnection: 'testConnection',
   uploadSolid: 'uploadSolid',
   bulkDownload: 'bulkDownload',
-  documentCompare: 'documentCompare'
+  documentCompare: 'documentCompare',
+  collapse: "collapse",
+  expand: "expand"
 };
 
 export type IconName = keyof typeof IconsMap;
@@ -615,6 +617,12 @@ export const Icon: React.FC<IconProps> = ({
       break;
     case 'documentCompare':
       Component = <Icons.DocumentCompare />;
+      break;
+    case 'collapse':
+      Component = <Icons.Collapse />;
+      break;
+    case 'expand':
+      Component = <Icons.Expand />;
       break;
   }
 
