@@ -2670,3 +2670,14 @@ export const Expand = () => (
     />
   </svg>
 );
+
+export const Shelf = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 9.67">
+    <g fill="#fff" stroke="#d9d9d9" fill-rule="evenodd">
+      <path
+        d="M508.366 5.507H3.634v3.089a.937.937 0 00.94.94h502.852a.937.937 0 00.94-.94zM502.683.134H9.317a.94.94 0 00-.664.276L3.824 5.238h504.352L503.347.41a.94.94 0 00-.664-.276z"
+        strokeWidth=".26862"
+      />
+    </g>
+  </svg>
+);

@@ -153,7 +153,8 @@ export const IconsMap = {
   bulkDownload: 'bulkDownload',
   documentCompare: 'documentCompare',
   collapse: "collapse",
-  expand: "expand"
+  expand: "expand",
+  shelf: 'shelf',
 };
 
 export type IconName = keyof typeof IconsMap;
@@ -623,6 +624,9 @@ export const Icon: React.FC<IconProps> = ({
       break;
     case 'expand':
       Component = <Icons.Expand />;
+      break;
+    case 'shelf':
+      Component = <Icons.Shelf />;
       break;
   }
 
