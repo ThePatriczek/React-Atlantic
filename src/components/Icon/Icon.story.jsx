@@ -39,7 +39,9 @@ stories.add(
         'arrowDoubleDown',
         'arrowDoubleLeft',
         'arrowDoubleRight',
-        'loading'
+        'loading',
+        'ban',
+        'hourGlass'
       ],
       defaultValues.iconName
     );

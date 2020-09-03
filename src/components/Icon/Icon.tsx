@@ -152,9 +152,11 @@ export const IconsMap = {
   uploadSolid: 'uploadSolid',
   bulkDownload: 'bulkDownload',
   documentCompare: 'documentCompare',
-  collapse: "collapse",
-  expand: "expand",
+  collapse: 'collapse',
+  expand: 'expand',
   shelf: 'shelf',
+  ban: 'ban',
+  hourGlass: 'hourGlass'
 };
 
 export type IconName = keyof typeof IconsMap;
@@ -627,6 +629,12 @@ export const Icon: React.FC<IconProps> = ({
       break;
     case 'shelf':
       Component = <Icons.Shelf />;
+      break;
+    case 'hourGlass':
+      Component = <Icons.HourGlass />;
+      break;
+    case 'ban':
+      Component = <Icons.Ban />;
       break;
   }
 
