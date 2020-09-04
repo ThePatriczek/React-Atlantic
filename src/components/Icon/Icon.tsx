@@ -154,7 +154,7 @@ export const IconsMap = {
   documentCompare: 'documentCompare',
   collapse: 'collapse',
   expand: 'expand',
-  shelf: 'shelf',
+  cart: 'cart',
   ban: 'ban',
   hourGlass: 'hourGlass'
 };
@@ -627,8 +627,8 @@ export const Icon: React.FC<IconProps> = ({
     case 'expand':
       Component = <Icons.Expand />;
       break;
-    case 'shelf':
-      Component = <Icons.Shelf />;
+    case 'cart':
+      Component = <Icons.Cart />;
       break;
     case 'hourGlass':
       Component = <Icons.HourGlass />;
