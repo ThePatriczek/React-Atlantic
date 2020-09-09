@@ -1,4 +1,4 @@
-import { select, text, withKnobs, number } from '@storybook/addon-knobs';
+import { select, withKnobs, number } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/react';
 import * as React from 'react';
 import { specs } from 'storybook-addon-specifications';

@@ -1,6 +1,5 @@
 import { shallow } from 'enzyme';
 import React from 'react';
-import { defaultValues } from '../../constants/defaultValues';
 import expect from 'expect';
 import { ProgressBar } from './ProgressBar/ProgressBar';
 import { ProgressCircle } from './ProgressCircle/ProgressCircle';
