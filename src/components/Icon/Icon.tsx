@@ -156,7 +156,24 @@ export const IconsMap = {
   expand: <Icons.Expand/>,
   cart: <Icons.Cart/>,
   ban: <Icons.Ban/>,
-  hourGlass: <Icons.HourGlass/>
+  hourGlass: <Icons.HourGlass/>,
+  fileAi: <Icons.FileAi/>,
+  fileUnknown: <Icons.FileUnknown/>,
+  fileJavascript: <Icons.FileJavascript/>,
+  fileAvi: <Icons.FileAvi/>,
+  fileCss: <Icons.FileCss/>,
+  fileGif: <Icons.FileGif/>,
+  fileJSON: <Icons.FileJSON/>,
+  fileMp3: <Icons.FileMp3/>,
+  fileMp4: <Icons.FileMp4/>,
+  filePsd: <Icons.FilePsd/>,
+  fileSvg: <Icons.FileSvg/>,
+  fileHtml: <Icons.FileHtml/>,
+  fileExe: <Icons.FileExe/>,
+  fileIso: <Icons.FileIso/>,
+  fileDbf: <Icons.FileDbf/>,
+  fileDwg: <Icons.FileDwg/>,
+  zoomOut: <Icons.ZoomOut/>
 };
 
 export type IconName = keyof typeof IconsMap;
