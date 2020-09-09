@@ -1,11 +1,11 @@
 import React from 'react';
 import { Position, Type } from '../../../types';
 import {
-    StyledBar,
-    StyledFill,
-    StyledFillContainer,
     StyledProgressBar,
-    StyledProgressText,
+    StyledProgressBarFill,
+    StyledProgressBarFillContainer,
+    StyledProgressBarLine,
+    StyledProgressBarText,
 } from './style';
 
 interface ProgressBarProps {
@@ -33,15 +33,15 @@ export const ProgressBar: React.FC<ProgressBarProps> = ({
 
     return (
         <StyledProgressBar positionText={positionText} className={className}>
-            <StyledProgressText
+            <StyledProgressBarText
                 positionText={positionText}
                 key={percent}
-            >{`${percent.toFixed(0)}%`}</StyledProgressText>
-            <StyledBar positionText={positionText}>
-                <StyledFillContainer progress={percent}>
-                    <StyledFill type={fillType} />
-                </StyledFillContainer>
-            </StyledBar>
+            >{`${percent.toFixed(0)}%`}</StyledProgressBarText>
+            <StyledProgressBarLine positionText={positionText}>
+                <StyledProgressBarFillContainer progress={percent}>
+                    <StyledProgressBarFill type={fillType} />
+                </StyledProgressBarFillContainer>
+            </StyledProgressBarLine>
         </StyledProgressBar>
     );
 };

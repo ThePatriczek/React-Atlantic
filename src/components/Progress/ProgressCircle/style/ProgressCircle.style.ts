@@ -20,19 +20,19 @@ export const StyledProgressCircle = styled.div<StyledProgressCircleProps>`
     position: relative;
 `;
 
-export const StyledSVG = styled.svg<StyledSVGCircleProps>`
+export const StyledProgressCircleSVG = styled.svg<StyledSVGCircleProps>`
     height: 100%;
     width: 100%;
     display: block;
     max-width: 100%;
 `;
 
-export const StyledSVGCircleOne = styled.circle<StyledSVGCircleProps>`
+export const StyledProgressCircleSVGBackground = styled.circle<StyledSVGCircleProps>`
     stroke: ${(props) => props.theme.color.border};
     stroke-width: ${(props) => props.strokeWidth};
 `;
 
-export const StyledSVGCircleTwo = styled.circle<StyledSVGCircleProps>`
+export const StyledProgressCircleSVGColorful = styled.circle<StyledSVGCircleProps>`
     stroke-width: ${(props) => props.strokeWidth};
     stroke-dasharray: ${(props) => props.dashArray};
     stroke-dashoffset: ${(props) => props.dashOffset};
@@ -65,7 +65,7 @@ export const StyledSVGCircleTwo = styled.circle<StyledSVGCircleProps>`
         `}
 `;
 
-export const StyledCircleText = styled.span<StyledProgressCircleProps>`
+export const StyledProgressCircleText = styled.span<StyledProgressCircleProps>`
     font-family: ${(props) => props.theme.font.family};
     font-size: 26px;
     font-weight: 700;
@@ -75,7 +75,7 @@ export const StyledCircleText = styled.span<StyledProgressCircleProps>`
     transform: translateX(-50%) translateY(-50%);
 `;
 
-export const StyledCircleTextContainer = styled.div<StyledProgressCircleProps>`
+export const StyledProgressCircleTextContainer = styled.div<StyledProgressCircleProps>`
     transition: color 1s ease;
 
     ${(props) =>

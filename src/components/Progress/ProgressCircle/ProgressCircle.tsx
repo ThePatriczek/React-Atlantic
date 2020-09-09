@@ -1,13 +1,13 @@
 import React from 'react';
+import { Type } from '../../../types';
 import {
     StyledProgressCircle,
-    StyledSVG,
-    StyledSVGCircleOne,
-    StyledSVGCircleTwo,
-    StyledCircleTextContainer,
-    StyledCircleText,
-} from './style/ProgressCircle.style';
-import { Type } from '../../../../src/types';
+    StyledProgressCircleSVG,
+    StyledProgressCircleSVGBackground,
+    StyledProgressCircleSVGColorful,
+    StyledProgressCircleText,
+    StyledProgressCircleTextContainer,
+} from './style';
 
 interface ProgressCircleProps {
     percent: number;
@@ -39,15 +39,15 @@ export const ProgressCircle: React.FC<ProgressCircleProps> = ({
 
     return (
         <StyledProgressCircle circleSize={circleSize}>
-            <StyledSVG>
-                <StyledSVGCircleOne
+            <StyledProgressCircleSVG>
+                <StyledProgressCircleSVGBackground
                     cx={center}
                     cy={center}
                     r={radius}
                     fill="none"
                     strokeWidth={strokeWidth}
                 />
-                <StyledSVGCircleTwo
+                <StyledProgressCircleSVGColorful
                     cx={center}
                     cy={center}
                     r={radius}
@@ -57,12 +57,12 @@ export const ProgressCircle: React.FC<ProgressCircleProps> = ({
                     dashOffset={currentDashOffset}
                     dashArray={totalDashOffset}
                 />
-            </StyledSVG>
-            <StyledCircleTextContainer type={circleTwoType}>
-                <StyledCircleText
-                    key={percent}
-                >{`${percent}%`}</StyledCircleText>
-            </StyledCircleTextContainer>
+            </StyledProgressCircleSVG>
+            <StyledProgressCircleTextContainer type={circleTwoType}>
+                <StyledProgressCircleText key={percent}>
+                    {`${percent}%`}
+                </StyledProgressCircleText>
+            </StyledProgressCircleTextContainer>
         </StyledProgressCircle>
     );
 };

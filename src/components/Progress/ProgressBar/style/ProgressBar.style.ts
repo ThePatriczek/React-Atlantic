@@ -39,7 +39,7 @@ export const StyledProgressBar = styled.div<StyledProgressBarProps>`
         `}
 `;
 
-export const StyledBar = styled.div<StyledProgressBarProps>`
+export const StyledProgressBarLine = styled.div<StyledProgressBarProps>`
     width: 100%;
     height: 10px;
     position: relative;
@@ -59,13 +59,13 @@ export const StyledBar = styled.div<StyledProgressBarProps>`
         `};
 `;
 
-export const StyledFillContainer = styled.div<StyledProgressBarProps>`
+export const StyledProgressBarFillContainer = styled.div<StyledProgressBarProps>`
     width: ${(props) => props.progress}%;
     height: 100%;
     transition: width 0.5s cubic-bezier(.79,.14,.15,.86);
 `;
 
-export const StyledFill = styled.span<StyledProgressBarProps>`
+export const StyledProgressBarFill = styled.span<StyledProgressBarProps>`
   display: block;
   width: 100%;
   height: 100%;
@@ -104,7 +104,7 @@ export const StyledFill = styled.span<StyledProgressBarProps>`
         `}
 `;
 
-export const StyledProgressText = styled(Text)<StyledProgressBarProps>`
+export const StyledProgressBarText = styled(Text)<StyledProgressBarProps>`
     && {
         font-weight: 700;
         color: ${(props) => props.theme.color.text.alpha};
