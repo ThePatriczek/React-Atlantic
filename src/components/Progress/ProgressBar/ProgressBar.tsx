@@ -1,12 +1,12 @@
 import React from 'react';
+import { Position, Type } from '../../../types';
 import {
-    StyledProgressBar,
     StyledBar,
     StyledFill,
-    StyledProgressText,
     StyledFillContainer,
+    StyledProgressBar,
+    StyledProgressText,
 } from './style';
-import { Position, Type } from '../../../../lib';
 
 interface ProgressBarProps {
     percent: Readonly<number>;

@@ -1,6 +1,6 @@
 import styled, { css, keyframes } from 'styled-components';
-import { Text } from '../../../Typography';
 import { Position, Type } from '../../../../../lib';
+import { Text } from '../../../Typography';
 
 interface StyledProgressBarProps {
     positionText?: Position;
@@ -55,49 +55,52 @@ export const StyledBar = styled.div<StyledProgressBarProps>`
     ${(props) =>
         (props.positionText === 'left' || props.positionText === 'right') &&
         css`
-            margin: 0 ${(props) => props.theme.margin.sm};
+            margin: 0 ${props.theme.margin.sm};
         `};
 `;
 
 export const StyledFillContainer = styled.div<StyledProgressBarProps>`
     width: ${(props) => props.progress}%;
     height: 100%;
-    transition: width 1s ease;
+    transition: width 0.5s cubic-bezier(.79,.14,.15,.86);
 `;
 
 export const StyledFill = styled.span<StyledProgressBarProps>`
-    display: block;
-    width: 100%;
-	height: 100%;
-	position: relative;
-	overflow: hidden;
-	box-sizing: border-box;
+  display: block;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+  box-sizing: border-box;
 	margin: 0;
 	border-radius: ${(props) => props.theme.radius};
-    animation: ${animationFill} 1s linear;
+	will-change: width;
+	contain: strict;
+	transition: background-color 0.5s;
+  animation: ${animationFill} 0.5s cubic-bezier(.79,.14,.15,.86);
 
 	${(props) =>
         props.type === 'primary' &&
         css`
-            background-color: ${(props) => props.theme.color.primary.alpha};
+            background-color: ${props.theme.color.primary.alpha};
         `}
 		
 	${(props) =>
         props.type === 'success' &&
         css`
-            background-color: ${(props) => props.theme.color.success.alpha};
+            background-color: ${props.theme.color.success.alpha};
         `}
 		
 	${(props) =>
         props.type === 'warning' &&
         css`
-            background-color: ${(props) => props.theme.color.warning.alpha};
+            background-color: ${props.theme.color.warning.alpha};
         `}
 		
 	${(props) =>
         props.type === 'error' &&
         css`
-            background-color: ${(props) => props.theme.color.error.alpha};
+            background-color: ${props.theme.color.error.alpha};
         `}
 `;
 
