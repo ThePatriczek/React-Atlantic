@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { Type } from '../../../types';
 import {
     StyledProgressCircle,
@@ -14,7 +14,9 @@ interface ProgressCircleProps {
     circleSize?: number;
 }
 
-export const ProgressCircle: React.FC<ProgressCircleProps> = ({
+export type ProgressCircleType = FC<ProgressCircleProps>;
+
+export const ProgressCircle: ProgressCircleType = ({
     percent,
     circleSize = 100,
 }) => {

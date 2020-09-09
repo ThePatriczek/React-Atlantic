@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { Position, Type } from '../../../types';
 import {
     StyledProgressBar,
@@ -14,7 +14,9 @@ interface ProgressBarProps {
     className?: Readonly<string>;
 }
 
-export const ProgressBar: React.FC<ProgressBarProps> = ({
+export type ProgressBarType = FC<ProgressBarProps>;
+
+export const ProgressBar: ProgressBarType = ({
     percent,
     positionText = 'right',
     className,

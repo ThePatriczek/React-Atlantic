@@ -1,15 +1,14 @@
 import { shallow } from 'enzyme';
 import React from 'react';
 import expect from 'expect';
-import { ProgressBar } from './ProgressBar/ProgressBar';
-import { ProgressCircle } from './ProgressCircle/ProgressCircle';
+import { Progress } from './index';
 
 export const BarComponent = (percent, positionText) => {
-    return <ProgressBar percent={percent} positionText={positionText} />;
+    return <Progress.Bar percent={percent} positionText={positionText} />;
 };
 
 export const CircleComponent = (percent, circleSize) => {
-    return <ProgressCircle percent={percent} circleSize={circleSize} />;
+    return <Progress.Circle percent={percent} circleSize={circleSize} />;
 };
 
 export const tests = () => {
