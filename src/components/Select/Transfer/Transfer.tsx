@@ -1,3 +1,4 @@
+import debounce from 'lodash.debounce';
 import React, {
   FC,
   PropsWithChildren,
@@ -12,6 +13,7 @@ import { ListProps } from 'react-virtualized';
 import { useEventListener } from '../../../hooks/EventHandlers/useEventListener';
 import { Direction, Size } from '../../../types';
 import { NotFound } from '../../NotFound';
+import { Tooltip } from '../../Tooltip';
 import { Option, OptionProps } from '../Option';
 import { checkChildrenAndOptions, OptionType } from '../Select.utils';
 import { Footer } from './Footer';
@@ -285,6 +287,7 @@ export const Transfer: FC<PropsWithChildren<TransferProps>> & {
 
   const inputOnChange = (value: string) => {
     setSearchedValue(value);
+    debounce(Tooltip.rebuild,50);
   };
 
   const sortedItems = () => {
