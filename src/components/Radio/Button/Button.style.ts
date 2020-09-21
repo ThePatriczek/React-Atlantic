@@ -55,7 +55,7 @@ export const StyledRadioButtonLabel = styled.label<StyledRadioButtonProps>`
       background-color: ${props.theme.color.primary.alpha};
       color: ${props.theme.color.text.gamma};
 
-      span {
+      ${StyledRadioButtonSpan} {
         color: ${props.theme.color.text.gamma};
       }
     `}
@@ -87,9 +87,14 @@ export const StyledRadioButtonLabel = styled.label<StyledRadioButtonProps>`
   ${props =>
     props.isDisabled &&
     css`
+      border-color: ${props.theme.color.border};
       background-color: ${props.theme.color.default};
       cursor: not-allowed;
       color: ${props.theme.color.text.beta};
+      
+      ${StyledRadioButtonSpan} {
+        color: ${props.theme.color.text.beta};
+      }
     `}
 
   ${props =>
