@@ -11,6 +11,7 @@ import { Typography } from '../Typography';
 import { defaultValues } from '../../constants/defaultValues';
 import { tests, Component } from './Button.test';
 import { PureButton } from './Pure';
+import { SimpleButton } from './Simple';
 
 const stories = storiesOf('Button', module);
 
@@ -30,6 +31,12 @@ stories.add(
         <Button isDisabled>{`Disabled`}</Button>
         <br />
         <Button>{`Upload`}</Button>
+        <br />
+        <SimpleButton>{`Simple`}</SimpleButton>
+        <br />
+        <SimpleButton isAlternative>{`Simple alternative`}</SimpleButton>
+        <br />
+        <PureButton>{`Pure`}</PureButton>
         <br />
         <Button isTransparent type={'primary'}>{`Primary`}</Button>
         <Button isTransparent type={'success'}>{`Success`}</Button>
@@ -145,11 +152,6 @@ stories.add(
           <Text>{`Full Width transparent`}</Text>
         </Button>
         <br/>
-      </div>
-      <div>
-        <PureButton isFullWidth>{`Pure Button`}</PureButton>
-        <br />
-        <PureButton isFullWidth isAlternative>{`Pure Button Alternative`}</PureButton>
       </div>
     </div>
   ),

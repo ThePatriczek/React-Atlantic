@@ -1,32 +1,18 @@
-import styled, { css } from 'styled-components';
-import { Button, ButtonProps } from '../Button';
+import styled from 'styled-components';
+import { Button } from '../Button';
 
-export type PureButtonProps = {
-    isAlternative?: boolean;
-} & ButtonProps;
-
-export const PureButton = styled(Button)<PureButtonProps>`
+export const PureButton = styled(Button)`
     && {
-        background: ${(props) => props.theme.color.background.alpha};
+        background: transparent;
         border: none;
         box-shadow: none;
 
-        :after {
+        &:after {
             display: none;
         }
 
         &:hover {
-            background: ${(props) => props.theme.color.background.beta};
+            background: transparent;
         }
-
-        ${(props) =>
-            props.isAlternative &&
-            css`
-                background: ${props.theme.color.background.beta};
-
-                &:hover {
-                    background: ${props.theme.color.background.alpha};
-                }
-            `}
     }
 `;
