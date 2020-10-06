@@ -10,6 +10,7 @@ import { Icon } from '../Icon';
 import { Typography } from '../Typography';
 import { defaultValues } from '../../constants/defaultValues';
 import { tests, Component } from './Button.test';
+import { PureButton } from './Pure';
 
 const stories = storiesOf('Button', module);
 
@@ -143,6 +144,12 @@ stories.add(
         <Button isFullWidth isTransparent type={'error'}>
           <Text>{`Full Width transparent`}</Text>
         </Button>
+        <br/>
+      </div>
+      <div>
+        <PureButton isFullWidth>{`Pure Button`}</PureButton>
+        <br />
+        <PureButton isFullWidth isAlternative>{`Pure Button Alternative`}</PureButton>
       </div>
     </div>
   ),
