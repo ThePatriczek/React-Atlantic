@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { MouseEvent } from 'react';
 import { useClick } from '../../hooks/EventHandlers/useClick';
 import { Size, Type } from '../../types';
 import { StyledButton } from './Button.style';
@@ -6,7 +6,7 @@ import { StyledButton } from './Button.style';
 export type ButtonType = Type | 'dashed';
 
 export interface ButtonProps {
-  onClick?: () => void;
+  onClick?: (e: MouseEvent<HTMLButtonElement>) => void;
   isDisabled?: boolean;
   isRound?: boolean;
   isFullWidth?: boolean;
@@ -36,14 +36,9 @@ export const Button: React.FC<React.PropsWithChildren<ButtonProps>> = (
   } = props;
   const [animation, setAnimation] = React.useState<boolean>(false);
 
-  const { onClick: hookOnClick } = useClick({
-    deps: [props.onClick],
-    onClick: props.onClick
-  });
-
-  const onClick = () => {
+  const onClick = (e) => {
     setAnimation(true);
-    hookOnClick();
+    props.onClick?.(e);
   };
 
   return (

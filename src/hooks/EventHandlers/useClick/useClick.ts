@@ -1,23 +1,24 @@
 import { MouseEvent, useCallback } from 'react';
 
-export interface UseClickValue {
-  onClick: () => void;
+export interface UseClickValue<El extends HTMLElement> {
+  onClick: (e: MouseEvent<El>) => void;
 }
 
-export interface UseClickProps {
+export interface UseClickProps<El extends HTMLElement> {
   deps?: ReadonlyArray<unknown>;
-  onClick?: () => void;
+  onClick?: (e: MouseEvent<El>) => void;
 }
 
-export const useClick = (
-  props: Readonly<UseClickProps>
-): Readonly<UseClickValue> => {
+export const useClick = <El extends HTMLElement>(
+  props: Readonly<UseClickProps<El>>
+): Readonly<UseClickValue<El>> => {
+
   const onClick = useCallback(
-    (e?: MouseEvent<HTMLAnchorElement>) => {
+    (e: MouseEvent<El>) => {
       if (props.onClick) {
         e?.preventDefault();
-        
-        props.onClick();
+
+        props.onClick(e);
       }
     },
     [props.deps]
