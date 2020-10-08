@@ -11,18 +11,25 @@ export const SimpleButton = styled(Button)<SimpleButtonProps>`
         box-shadow: none;
         border: none;
 
-        &:hover {
-            background: ${(props) => props.theme.color.background.beta};
-        }
-
         ${(props) =>
             props.isAlternative &&
             css`
                 background: ${props.theme.color.background.beta};
+            `}
 
+        ${(props) =>
+            !props.isDisabled &&
+            css`
                 &:hover {
-                    background: ${props.theme.color.background.alpha};
+                    background: ${props.theme.color.background.beta};
                 }
+
+                ${props.isAlternative &&
+                    css`
+                        &:hover {
+                            background: ${props.theme.color.background.alpha};
+                        }
+                    `}
             `}
     }
 `;

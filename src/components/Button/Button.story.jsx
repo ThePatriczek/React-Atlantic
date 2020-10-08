@@ -34,7 +34,7 @@ stories.add(
         <br />
         <SimpleButton>{`Simple`}</SimpleButton>
         <br />
-        <SimpleButton isAlternative>{`Simple alternative`}</SimpleButton>
+        <SimpleButton isDisabled isAlternative>{`Simple alternative`}</SimpleButton>
         <br />
         <PureButton>{`Pure`}</PureButton>
         <br />
