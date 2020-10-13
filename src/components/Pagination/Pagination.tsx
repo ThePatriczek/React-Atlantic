@@ -110,7 +110,7 @@ export const Pagination: FC<PaginationProps> = (props) => {
 	const count = total ? Math.ceil(total / pageSize) : 0;
 
 	return (
-		<StyledPagination {...props}>
+		<StyledPagination className={className} {...props}>
 			<ButtonList
 				isBadge={!!isBadge}
 				isSimple={!!isSimple}
