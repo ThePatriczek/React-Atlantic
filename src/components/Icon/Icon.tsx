@@ -173,7 +173,24 @@ export const IconsMap = {
   fileIso: <Icons.FileIso/>,
   fileDbf: <Icons.FileDbf/>,
   fileDwg: <Icons.FileDwg/>,
-  zoomOut: <Icons.ZoomOut/>
+  zoomOut: <Icons.ZoomOut/>,
+  sendFlat: <Icons.SendFlat />,
+  thumbUp: <Icons.ThumbUp />,
+  undo: <Icons.Undo />,
+  commentAlt: <Icons.CommentAlt />,
+  messageBubbleAlt: <Icons.MessageBubbleAlt />,
+  duotoneArrowTarget: <Icons.DuotoneArrowTarget />,
+  duotoneLayers: <Icons.DuotoneLayers />,
+  duotoneShield: <Icons.DuotoneShield />,
+  duotoneFlags: <Icons.DuotoneFlags />,
+  duotoneUniversity: <Icons.DuotoneUniversity />,
+  duotoneUsers: <Icons.DuotoneUsers />,
+  duotoneList: <Icons.DuotoneList />,
+  duotoneCoins: <Icons.DuotoneCoins />,
+  duotoneCopy: <Icons.DuotoneCopy />,
+  duotoneScreen: <Icons.DuotoneScreen />,
+  duotoneFolders: <Icons.DuotoneFolders />,
+  duotoneGlobe: <Icons.DuotoneGlobe />,
 };
 
 export type IconName = keyof typeof IconsMap;
