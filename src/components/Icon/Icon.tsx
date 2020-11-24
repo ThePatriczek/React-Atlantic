@@ -192,6 +192,7 @@ export const IconsMap = {
   duotoneFolders: <Icons.DuotoneFolders />,
   duotoneGlobe: <Icons.DuotoneGlobe />,
   archive: <Icons.Archive />,
+  share: <Icons.Share />,
 };
 
 export type IconName = keyof typeof IconsMap;
