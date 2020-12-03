@@ -16,35 +16,35 @@ interface StyledPopconfirmProps {
 const arrowSize = `18px`;
 
 export const StyledAnimatedPopconfirmContainer = styled(animated.div)<
-  StyledPopconfirmProps
->`
-  box-sizing: border-box;
-  position: fixed;
-  z-index: 10;
+         StyledPopconfirmProps
+       >`
+         box-sizing: border-box;
+         position: fixed;
+         z-index: 10;
 
-  ${props =>
-    props.dimensions && props.position === `left`
-      ? css`
-          top: ${props.dimensions.y}px;
-          right: calc(${props.dimensions.x}px + ${arrowSize});
-        `
-      : props.dimensions && props.position === `right`
-      ? css`
-          top: ${props.dimensions.y}px;
-          left: calc(${props.dimensions.x}px + ${arrowSize});
-        `
-      : props.dimensions && props.position === `top`
-      ? css`
-          top: calc(${props.dimensions.y}px - ${arrowSize});
-          left: ${props.dimensions.x}px;
-        `
-      : props.dimensions &&
-        props.position === `bottom` &&
-        css`
-          top: ${props.dimensions.y}px;
-          left: ${props.dimensions.x}px;
-        `}
-`;
+         ${props =>
+           props.dimensions && props.position === `left`
+             ? css`
+                 top: ${props.dimensions.y}px;
+                 right: calc(${props.dimensions.x}px + ${arrowSize});
+               `
+             : props.dimensions && props.position === `right`
+             ? css`
+                 top: ${props.dimensions.y}px;
+                 left: calc(${props.dimensions.x}px + ${arrowSize});
+               `
+             : props.dimensions && props.position === `top`
+             ? css`
+                 top: calc(${props.dimensions.y}px - ${arrowSize});
+                 left: ${props.dimensions.x}px;
+               `
+             : props.dimensions &&
+               props.position === `bottom` &&
+               css`
+                 top: calc(${props.dimensions.y}px + ${arrowSize});
+                 left: ${props.dimensions.x}px;
+               `}
+       `;
 
 export const StyledAnimatedPopconfirmContent = styled.div<
   StyledPopconfirmProps

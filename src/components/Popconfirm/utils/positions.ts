@@ -49,7 +49,7 @@ export const updateDimensions = ({
         (position === `top`
           ? -insideContainerRef?.current?.getBoundingClientRect().height!
           : position === `bottom`
-          ? insideContainerRef?.current?.getBoundingClientRect().height!
+          ? buttonContainerRef?.current?.getBoundingClientRect().height!
           : 0);
     } else if ([`left`, `right`].includes(position)) {
       rightDimension =
