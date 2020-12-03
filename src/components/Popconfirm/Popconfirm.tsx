@@ -1,10 +1,11 @@
-import React, { FC, useEffect, useRef, useState } from 'react';
-import { useTransition } from 'react-spring/web.cjs';
-import { useEventListener } from '../../hooks/EventHandlers/useEventListener';
-import { Position } from '../../types';
-import { Button, PureButton } from '../Button';
-import { Typography } from '../Typography';
+import React, { FC, useEffect, useRef, useState } from "react";
+import { useTransition } from "react-spring/web.cjs";
+import { useEventListener } from "../../hooks/EventHandlers/useEventListener";
+import { Position } from "../../types";
+import { Button } from "../Button";
+import { Typography } from "../Typography";
 import {
+  Dimensions,
   StyledAnimatedPopconfirmContainer,
   StyledAnimatedPopconfirmContent,
   StyledPopconfirmChildren,
@@ -12,7 +13,13 @@ import {
   StyledPopconfirmContent,
   StyledPopconfirmFooter,
   StyledPopconfirmTriangle
-} from './style';
+} from "./style";
+import {
+  inViewportCheck,
+  positionAnimationEnter,
+  positionAnimationFromLeave,
+  updateDimensions
+} from "./utils";
 
 export interface PopconfirmProps {
   children: Readonly<JSX.Element>;
@@ -26,6 +33,7 @@ export interface PopconfirmProps {
   cancelText?: Readonly<string>;
   confirmText?: Readonly<string>;
   executeDirectly?: Readonly<boolean>;
+  autoPosition?: Readonly<boolean>;
 }
 
 export const Popconfirm: FC<PopconfirmProps> = props => {
@@ -39,18 +47,23 @@ export const Popconfirm: FC<PopconfirmProps> = props => {
     cancelText,
     executeDirectly,
     changePositionOnResize,
-    changePositionOnScroll
+    changePositionOnScroll,
+    autoPosition
   } = props;
   const { Text } = Typography;
   const [isOpen, setOpen] = useState<Readonly<boolean>>(false);
   const [position, setPosition] = useState<Readonly<Position>>(
-    props.position || 'top'
+    props.position || "top"
   );
+  const [togglerDimensions, setTogglerDimensions] = useState<Dimensions>({
+    x: 0,
+    y: 0
+  });
   const insideContainerRef = useRef<Readonly<HTMLDivElement>>(null);
   const buttonContainerRef = useRef<Readonly<HTMLSpanElement>>(null);
 
   useEffect(() => {
-    if (typeof props.position !== 'undefined' && props.position !== position) {
+    if (typeof props.position !== "undefined" && props.position !== position) {
       setPosition(props.position);
       setOpen(false);
     }
@@ -60,7 +73,7 @@ export const Popconfirm: FC<PopconfirmProps> = props => {
     if (changePositionOnScroll || changePositionOnResize) {
       if (
         position !== props.position &&
-        typeof props.position !== 'undefined'
+        typeof props.position !== "undefined"
       ) {
         setPosition(props.position);
       }
@@ -81,100 +94,32 @@ export const Popconfirm: FC<PopconfirmProps> = props => {
         onConfirmClick();
       },
       onResize: () => {
-        if (changePositionOnResize && isOpen) {
-          inViewportCheck();
+        if (changePositionOnResize) {
+          if (isOpen && autoPosition) {
+            inViewportCheck({
+              position: [position, setPosition],
+              insideContainerRef
+            });
+          }
+        } else {
+          setOpen(false);
         }
       },
       onScroll: () => {
-        if (changePositionOnScroll && isOpen) {
-          inViewportCheck();
+        if (changePositionOnScroll) {
+          if (isOpen && autoPosition) {
+            inViewportCheck({
+              position: [position, setPosition],
+              insideContainerRef
+            });
+          }
+        } else {
+          setOpen(false);
         }
       }
     },
     [isOpen]
   );
-
-  const positionAnimationFromLeave: ReadonlyMap<
-    Readonly<Position>,
-    Readonly<string>
-  > = new Map([
-    [`top`, `scale(0.7) translateX(-50%) translateY(50px)`],
-    [`bottom`, `scale(0.7) translateX(-50%) translateY(-50px)`],
-    [`right`, `scale(0.7) translateX(-50px) translateY(-50%)`],
-    [`left`, `scale(0.7) translateX(50px) translateY(-50%)`]
-  ]);
-
-  const positionAnimationEnter: ReadonlyMap<
-    Readonly<Position>,
-    Readonly<string>
-  > = new Map([
-    [`top`, `scale(1) translateX(-50%) translateY(0)`],
-    [`bottom`, `scale(1) translateX(-50%) translateY(0)`],
-    [`right`, `scale(1) translateX(0) translateY(-50%)`],
-    [`left`, `scale(1) translateX(0) translateY(-50%)`]
-  ]);
-
-  const inViewportCheck = () => {
-    const bounding = insideContainerRef?.current?.getBoundingClientRect();
-
-    if (bounding) {
-      const outLeft = bounding.left < 0;
-      const outRight =
-        bounding.right >
-        (window.innerWidth || document.documentElement.clientWidth);
-      const outTop = bounding.top < 0;
-      const outBottom =
-        bounding.bottom >
-        (window.innerHeight || document.documentElement.clientHeight);
-      const outOfAll = outTop && outBottom && outLeft && outRight;
-
-      const outLeftRight = outLeft && bounding?.width > bounding?.right;
-      const outRightLeft =
-        outRight &&
-        bounding.right >
-          (window.innerWidth || document.documentElement.clientWidth);
-      const outTopBottom = bounding?.height > bounding?.bottom;
-      const outBottomTop =
-        outBottom &&
-        bounding.bottom >
-          (window.innerHeight || document.documentElement.clientHeight);
-
-      const move = (place: Position, withOut: boolean = false) => {
-        if (position !== place) {
-          if (withOut) {
-            if (outBottom) {
-              setPosition(place);
-            }
-          } else {
-            setPosition(place);
-          }
-        }
-      };
-
-      const moveTop = (withOut = false) => move('top', withOut);
-
-      const moveBottom = (withOut = false) => move('bottom', withOut);
-
-      const moveLeft = (withOut = false) => move('left', withOut);
-
-      const moveRight = (withOut = false) => move('right', withOut);
-
-      if (!outOfAll) {
-        if (outLeftRight || outRightLeft) {
-          if (!outTopBottom) {
-            moveTop();
-          } else if (!outBottomTop) {
-            moveBottom();
-          }
-        } else {
-          moveLeft(true);
-          moveRight(true);
-          moveBottom(true);
-          moveTop(true);
-        }
-      }
-    }
-  };
 
   const transitions = useTransition(isOpen, {
     from: {
@@ -192,8 +137,20 @@ export const Popconfirm: FC<PopconfirmProps> = props => {
     config: { mass: 1, tension: 500, friction: 24, precision: 0.00001 },
     reset: true,
     unique: true,
+    onStart: () =>
+      updateDimensions({
+        togglerDimensions: [togglerDimensions, setTogglerDimensions],
+        position,
+        buttonContainerRef,
+        insideContainerRef
+      }),
     onChange: () => {
-      inViewportCheck();
+      if (autoPosition) {
+        inViewportCheck({
+          position: [position, setPosition],
+          insideContainerRef
+        });
+      }
     }
   });
 
@@ -208,31 +165,26 @@ export const Popconfirm: FC<PopconfirmProps> = props => {
   };
 
   const ConfirmButton = () => (
-    <Button onClick={onConfirmClick} type={'primary'}>
+    <Button onClick={onConfirmClick} type={"primary"}>
       {confirmText}
     </Button>
   );
 
   const CancelButton = () => (
-    <Button onClick={onCancelClick} type={'default'}>
+    <Button onClick={onCancelClick} type={"default"}>
       {cancelText}
     </Button>
   );
 
-  const ChildrenComponent = () => (
-    <PureButton
-      onClick={() => {
-        executeDirectly ? onConfirmClick() : setOpen(prevState => !prevState);
-      }}
-    >
-      {children}
-    </PureButton>
-  );
-
   return (
     <StyledPopconfirmContainer className={className}>
-      <StyledPopconfirmChildren ref={buttonContainerRef}>
-        <ChildrenComponent />
+      <StyledPopconfirmChildren
+        ref={buttonContainerRef}
+        onClick={() =>
+          executeDirectly ? onConfirmClick() : setOpen(prevState => !prevState)
+        }
+      >
+        {children}
       </StyledPopconfirmChildren>
       {transitions((style, item) =>
         item ? (
@@ -240,12 +192,13 @@ export const Popconfirm: FC<PopconfirmProps> = props => {
             ref={insideContainerRef}
             style={style}
             position={position}
+            dimensions={togglerDimensions}
           >
             <StyledAnimatedPopconfirmContent position={position}>
               <StyledPopconfirmTriangle position={position} />
 
               <StyledPopconfirmContent>
-                {typeof content === 'string' ? <Text>{content}</Text> : content}
+                {typeof content === "string" ? <Text>{content}</Text> : content}
               </StyledPopconfirmContent>
 
               <StyledPopconfirmFooter>
@@ -261,10 +214,11 @@ export const Popconfirm: FC<PopconfirmProps> = props => {
 };
 
 Popconfirm.defaultProps = {
-  position: 'top',
-  confirmText: 'Confirm',
-  cancelText: 'Cancel',
-  changePositionOnResize: true,
-  changePositionOnScroll: true
+  position: "top",
+  confirmText: "Confirm",
+  cancelText: "Cancel",
+  changePositionOnResize: false,
+  changePositionOnScroll: false,
+  autoPosition: true
 };
 Popconfirm.displayName = `Popconfirm`;

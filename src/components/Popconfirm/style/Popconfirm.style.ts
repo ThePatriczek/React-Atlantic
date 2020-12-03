@@ -1,10 +1,16 @@
-import { animated } from 'react-spring/web.cjs';
-import styled, { css } from 'styled-components';
-import { Position } from '../../../types';
-import { StyledButton } from '../../Button/Button.style';
+import { animated } from "react-spring/web.cjs";
+import styled, { css } from "styled-components";
+import { Position } from "../../../types";
+import { StyledButton } from "../../Button/Button.style";
+
+export interface Dimensions {
+  x: number | undefined;
+  y: number | undefined;
+}
 
 interface StyledPopconfirmProps {
   position?: Position;
+  dimensions?: Dimensions;
 }
 
 const arrowSize = `18px`;
@@ -13,31 +19,31 @@ export const StyledAnimatedPopconfirmContainer = styled(animated.div)<
   StyledPopconfirmProps
 >`
   box-sizing: border-box;
-  position: absolute;
+  position: fixed;
   z-index: 10;
 
   ${props =>
-    props.position === 'left'
+    props.dimensions && props.position === `left`
       ? css`
-          top: 50%;
-          right: calc(100% + ${arrowSize});
+          top: ${props.dimensions.y}px;
+          right: calc(${props.dimensions.x}px + ${arrowSize});
         `
-      : props.position === 'right'
+      : props.dimensions && props.position === `right`
       ? css`
-          top: 50%;
-          left: calc(100% + ${arrowSize});
+          top: ${props.dimensions.y}px;
+          left: calc(${props.dimensions.x}px + ${arrowSize});
         `
-      : props.position === 'top'
+      : props.dimensions && props.position === `top`
       ? css`
-          left: 50%;
-          bottom: calc(100% + ${arrowSize});
+          top: calc(${props.dimensions.y}px - ${arrowSize});
+          left: ${props.dimensions.x}px;
         `
-      : props.position === 'bottom' &&
+      : props.dimensions &&
+        props.position === `bottom` &&
         css`
-          left: 50%;
-          top: calc(100% + ${arrowSize});
+          top: ${props.dimensions.y}px;
+          left: ${props.dimensions.x}px;
         `}
-  }
 `;
 
 export const StyledAnimatedPopconfirmContent = styled.div<
@@ -53,7 +59,7 @@ export const StyledAnimatedPopconfirmContent = styled.div<
   box-shadow: ${props => props.theme.boxShadow.md};
 
   &:after {
-    content: '';
+    content: "";
     position: absolute;
     width: 0;
     height: 0;
@@ -61,7 +67,7 @@ export const StyledAnimatedPopconfirmContent = styled.div<
   }
 
   ${props =>
-    props.position === 'left'
+    props.position === "left"
       ? css`
           &:after {
             top: 50%;
@@ -70,7 +76,7 @@ export const StyledAnimatedPopconfirmContent = styled.div<
             border-left-color: ${props.theme.color.background.alpha};
           }
         `
-      : props.position === 'right'
+      : props.position === "right"
       ? css`
           &:after {
             top: 50%;
@@ -79,7 +85,7 @@ export const StyledAnimatedPopconfirmContent = styled.div<
             border-right-color: ${props.theme.color.background.alpha};
           }
         `
-      : props.position === 'top'
+      : props.position === "top"
       ? css`
           &:after {
             top: calc(100% - 1px);
@@ -88,7 +94,7 @@ export const StyledAnimatedPopconfirmContent = styled.div<
             border-top-color: ${props.theme.color.background.alpha};
           }
         `
-      : props.position === 'bottom' &&
+      : props.position === "bottom" &&
         css`
           &:after {
             bottom: calc(100% - 1px);
@@ -108,22 +114,22 @@ export const StyledPopconfirmTriangle = styled.div<StyledPopconfirmProps>`
   z-index: -1;
 
   ${props =>
-    props.position === 'left'
+    props.position === "left"
       ? css`
           top: calc(50% - ${parseInt(arrowSize, 0) / 2}px);
           right: -${parseInt(arrowSize, 0) / 2}px;
         `
-      : props.position === 'right'
+      : props.position === "right"
       ? css`
           top: calc(50% - ${parseInt(arrowSize, 0) / 2}px);
           left: -${parseInt(arrowSize, 0) / 2}px;
         `
-      : props.position === 'top'
+      : props.position === "top"
       ? css`
           left: calc(50% - ${parseInt(arrowSize, 0) / 2}px);
           bottom: -${parseInt(arrowSize, 0) / 2}px;
         `
-      : props.position === 'bottom' &&
+      : props.position === "bottom" &&
         css`
           left: calc(50% - ${parseInt(arrowSize, 0) / 2}px);
           top: -${parseInt(arrowSize, 0) / 2}px;
