@@ -29,45 +29,45 @@ interface UpdateDimensionsProps {
   buttonContainerRef: RefObject<Readonly<HTMLSpanElement>>;
 }
 
-export const updateDimensions = ({
+export const updatePosition = ({
   position,
   togglerDimensions,
   insideContainerRef,
   buttonContainerRef
 }: UpdateDimensionsProps) => {
   if (insideContainerRef?.current && buttonContainerRef?.current) {
-    let topDimension;
-    let rightDimension;
+    let topPosition;
+    let leftPosition;
 
     if ([`top`, `bottom`].includes(position)) {
-      rightDimension =
-        buttonContainerRef?.current?.getBoundingClientRect().x! +
-        buttonContainerRef?.current?.getBoundingClientRect().width! / 2;
+      leftPosition =
+        buttonContainerRef?.current.getBoundingClientRect().x! +
+        buttonContainerRef?.current.getBoundingClientRect().width! / 2;
 
-      topDimension =
+      topPosition =
         buttonContainerRef?.current?.getBoundingClientRect().y! +
         (position === `top`
-          ? -insideContainerRef?.current?.getBoundingClientRect().height!
-          : position === `bottom`
-          ? buttonContainerRef?.current?.getBoundingClientRect().height!
-          : 0);
+          ? -insideContainerRef?.current.getBoundingClientRect().height!
+          : buttonContainerRef?.current.getBoundingClientRect().height!);
     } else if ([`left`, `right`].includes(position)) {
-      rightDimension =
+      leftPosition =
         buttonContainerRef?.current?.getBoundingClientRect().x! +
-        buttonContainerRef?.current?.getBoundingClientRect().width!;
+        (position === `left`
+          ? -insideContainerRef?.current.getBoundingClientRect().width!
+          : buttonContainerRef?.current.getBoundingClientRect().width!);
 
-      topDimension =
+      topPosition =
         buttonContainerRef?.current.getBoundingClientRect().y! +
         buttonContainerRef?.current.getBoundingClientRect().height! / 2;
     }
 
     if (
-      togglerDimensions[0].x !== Math.floor(rightDimension) ||
-      togglerDimensions[0].y !== Math.floor(topDimension)
+      togglerDimensions[0].x !== Math.floor(leftPosition) ||
+      togglerDimensions[0].y !== Math.floor(topPosition)
     ) {
       togglerDimensions[1]({
-        x: Math.floor(rightDimension),
-        y: Math.floor(topDimension)
+        x: Math.floor(leftPosition),
+        y: Math.floor(topPosition)
       });
     }
   }

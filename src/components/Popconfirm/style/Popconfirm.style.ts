@@ -26,7 +26,7 @@ export const StyledAnimatedPopconfirmContainer = styled(animated.div)<
            props.dimensions && props.position === `left`
              ? css`
                  top: ${props.dimensions.y}px;
-                 right: calc(${props.dimensions.x}px + ${arrowSize});
+                 left: calc(${props.dimensions.x}px - ${arrowSize});
                `
              : props.dimensions && props.position === `right`
              ? css`

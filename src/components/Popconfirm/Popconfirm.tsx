@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useRef, useState } from "react";
+import React, { FC, RefObject, useEffect, useRef, useState } from 'react';
 import { useTransition } from "react-spring/web.cjs";
 import { useEventListener } from "../../hooks/EventHandlers/useEventListener";
 import { Position } from "../../types";
@@ -18,7 +18,7 @@ import {
   inViewportCheck,
   positionAnimationEnter,
   positionAnimationFromLeave,
-  updateDimensions
+  updatePosition
 } from "./utils";
 
 export interface PopconfirmProps {
@@ -34,6 +34,7 @@ export interface PopconfirmProps {
   confirmText?: Readonly<string>;
   executeDirectly?: Readonly<boolean>;
   autoPosition?: Readonly<boolean>;
+  scrollContainer?: RefObject<HTMLElement | null>;
 }
 
 export const Popconfirm: FC<PopconfirmProps> = props => {
@@ -48,7 +49,8 @@ export const Popconfirm: FC<PopconfirmProps> = props => {
     executeDirectly,
     changePositionOnResize,
     changePositionOnScroll,
-    autoPosition
+    autoPosition,
+    scrollContainer
   } = props;
   const { Text } = Typography;
   const [isOpen, setOpen] = useState<Readonly<boolean>>(false);
@@ -82,6 +84,19 @@ export const Popconfirm: FC<PopconfirmProps> = props => {
 
   useEventListener(
     {
+      ref: scrollContainer,
+      isOpen,
+      onScroll: () => {
+        if (!changePositionOnScroll && scrollContainer?.current) {
+          setOpen(false);
+        }
+      }
+    },
+    [isOpen]
+  );
+
+  useEventListener(
+    {
       ref: insideContainerRef,
       isOpen,
       onMouseDown: () => {
@@ -106,15 +121,11 @@ export const Popconfirm: FC<PopconfirmProps> = props => {
         }
       },
       onScroll: () => {
-        if (changePositionOnScroll) {
-          if (isOpen && autoPosition) {
-            inViewportCheck({
-              position: [position, setPosition],
-              insideContainerRef
-            });
-          }
-        } else {
-          setOpen(false);
+        if (isOpen && autoPosition && changePositionOnScroll) {
+          inViewportCheck({
+            position: [position, setPosition],
+            insideContainerRef
+          });
         }
       }
     },
@@ -138,7 +149,7 @@ export const Popconfirm: FC<PopconfirmProps> = props => {
     reset: true,
     unique: true,
     onStart: () =>
-      updateDimensions({
+      updatePosition({
         togglerDimensions: [togglerDimensions, setTogglerDimensions],
         position,
         buttonContainerRef,

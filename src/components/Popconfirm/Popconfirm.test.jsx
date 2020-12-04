@@ -3,8 +3,6 @@ import React from "react";
 import { Popconfirm } from "./Popconfirm";
 import { defaultValues } from "../../constants/defaultValues";
 import expect from "expect";
-import { Text } from "../../../lib/components/Typography/Text";
-import { Icon } from "../../../lib/components/Icon";
 import { Button } from "../Button";
 
 export const Component = (
