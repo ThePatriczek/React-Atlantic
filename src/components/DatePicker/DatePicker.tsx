@@ -1,17 +1,17 @@
-import cs from 'date-fns/locale/cs';
-import * as React from 'react';
-import { ChangeEvent, useRef, useState } from 'react';
-import ReactDatePicker, { registerLocale } from 'react-datepicker';
-import { Input } from '../Input';
+import cs from "date-fns/locale/cs";
+import * as React from "react";
+import { ChangeEvent, useRef, useState } from "react";
+import ReactDatePicker, { registerLocale } from "react-datepicker";
+import { Input } from "../Input";
 import {
   StyledReactDatePicker,
   StyledReactDatePickerButton,
   StyledReactDatePickerButtonContainer,
   StyledReactDatePickerContainer
-} from './DatePicker.style';
-import { DatePickerHeader } from './DatePickerHeader/DatePickerHeader';
+} from "./DatePicker.style";
+import { DatePickerHeader } from "./DatePickerHeader/DatePickerHeader";
 
-registerLocale('cs', cs);
+registerLocale("cs", cs);
 
 export interface DatePickerProps {
   id?: string;
@@ -25,6 +25,7 @@ export interface DatePickerProps {
   maxDate?: Date;
   minDate?: Date;
   isFullWidth?: boolean;
+  strictParsing?: boolean;
 }
 
 export const DatePicker: React.FC<DatePickerProps> = (
@@ -40,7 +41,8 @@ export const DatePicker: React.FC<DatePickerProps> = (
     onKeyDown,
     maxDate,
     minDate,
-    isFullWidth
+    isFullWidth,
+    strictParsing
   } = props;
   const datePickerRef = useRef<ReactDatePicker>();
   const [isFocused, setFocused] = useState<boolean>(false);
@@ -54,10 +56,10 @@ export const DatePicker: React.FC<DatePickerProps> = (
 
     if (onChangeRaw) {
       onChangeRaw(
-        new Date().toLocaleDateString('cs', {
-          year: 'numeric',
-          month: '2-digit',
-          day: '2-digit'
+        new Date().toLocaleDateString("cs", {
+          year: "numeric",
+          month: "2-digit",
+          day: "2-digit"
         })
       );
     }
@@ -110,7 +112,7 @@ export const DatePicker: React.FC<DatePickerProps> = (
         }
         customInput={
           <Input
-            iconLeft={'calendarAlt'}
+            iconLeft={"calendarAlt"}
             handlersWithEvent
             isFullWidth={isFullWidth}
           />
@@ -135,6 +137,7 @@ export const DatePicker: React.FC<DatePickerProps> = (
         onFocus={() => setFocused(true)}
         onBlur={() => setFocused(false)}
         open={isFocused}
+        strictParsing={strictParsing}
       >
         <StyledReactDatePickerButtonContainer>
           <StyledReactDatePickerButton isFullWidth onClick={selectToday}>

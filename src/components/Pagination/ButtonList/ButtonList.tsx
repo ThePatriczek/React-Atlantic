@@ -158,6 +158,7 @@ export const ButtonList: FC<ButtonListProps> = (props) => {
 				return item === -1 ? (
 					<ThreeDots
 						isLight={isBadge}
+						isDisabled={isDisabled}
 						text={key > array.length / 2 ? textRight : textLeft}
 						unique={-key - 5}
 						onClick={isDisabled ? undefined : onStepClick}

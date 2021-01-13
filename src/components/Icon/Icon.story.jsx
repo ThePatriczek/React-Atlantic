@@ -16,8 +16,8 @@ stories.add('Overview', () => (
     <StyledLayout>
       {Object.keys(IconsMap).map(key => (
         <StyledItem>
-          <Icon name={IconsMap[key]} />
-          <StyledItemLabel>{IconsMap[key]}</StyledItemLabel>
+          <Icon name={key} />
+          <StyledItemLabel>{key}</StyledItemLabel>
         </StyledItem>
       ))}
     </StyledLayout>

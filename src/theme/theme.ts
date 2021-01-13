@@ -7,28 +7,32 @@ export const theme = {
       beta: `#47A6EE`,
       gamma: `#75BCF2`,
       delta: `#A3D2F7`,
-      epsilon: `#D1E9FB`
+      epsilon: `#D1E9FB`,
+      zeta: `#E7F4FD`,
     },
     success: {
       alpha: `#7CB305`,
       beta: `#96C237`,
       gamma: `#B0D169`,
       delta: `#CAE19B`,
-      epsilon: `#E5F0CD`
+      epsilon: `#E5F0CD`,
+      zeta: `#F2F7E5`,
     },
     warning: {
       alpha: `#FFA500`,
       beta: `#FFB733`,
       gamma: `#FFC966`,
       delta: `#FFDB99`,
-      epsilon: `#FFEDCC`
+      epsilon: `#FFEDCC`,
+      zeta: `#FFF6E5`,
     },
     error: {
       alpha: `#D9121A`,
       beta: `#E04147`,
       gamma: `#E87075`,
       delta: `#F0A0A3`,
-      epsilon: `#F8CFD1`
+      epsilon: `#F8CFD1`,
+      zeta: `#FBE6E7`,
     },
     text: {
       alpha: `#000`,
