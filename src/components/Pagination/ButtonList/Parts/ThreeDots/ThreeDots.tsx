@@ -6,13 +6,14 @@ import { StyledPaginationIcon, StyledPaginationStepIcon, StyledThreeDotsText } f
 interface ThreeDotsProps {
 	onClick?: (value: boolean) => void;
 	isLight?: boolean;
+	isDisabled?: boolean;
 	isRight: boolean;
 	unique: number;
 	text?: string;
 }
 
 export const ThreeDots: FC<ThreeDotsProps> = (props) => {
-	const { isRight, unique, text, isLight } = props;
+	const { isRight, unique, text, isLight, isDisabled } = props;
 	const [hovered, setHovered] = useState<boolean>(false);
 	const [isClicked, setClicked] = useState<boolean>(false);
 
@@ -35,7 +36,7 @@ export const ThreeDots: FC<ThreeDotsProps> = (props) => {
 	return (
 		<li data-tip data-for={unique.toString()} key={unique} onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
 			{!hovered ? (
-				<StyledPaginationIcon isLight={isLight}>•••</StyledPaginationIcon>
+				<StyledPaginationIcon isLight={isLight} isDisabled={isDisabled}>•••</StyledPaginationIcon>
 			) : (
 				!isLight && (
 					<StyledPaginationStepIcon onClick={onClick}>

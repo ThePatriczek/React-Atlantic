@@ -146,10 +146,27 @@ ${props =>
     }
 
     if (props.isTransparent) {
-      color = bgColor;
-      bgColor = `transparent`;
-      borderColor = bgColor;
-      hoverBgColor = bgColor;
+      if (props.styleType === 'primary') {
+        color = props.theme.color.primary.alpha;
+        bgColor = `transparent`;
+        borderColor = props.theme.color.primary.alpha;
+        hoverBgColor = props.theme.color.primary.epsilon;
+      } else if (props.styleType === 'success') {
+        color = props.theme.color.success.alpha;
+        bgColor = `transparent`;
+        borderColor = props.theme.color.success.alpha;
+        hoverBgColor = props.theme.color.success.epsilon;
+      } else if (props.styleType === 'warning') {
+        color = props.theme.color.warning.alpha;
+        bgColor = `transparent`;
+        borderColor = props.theme.color.warning.alpha;
+        hoverBgColor = props.theme.color.warning.epsilon;
+      } else if (props.styleType === 'error') {
+        color = props.theme.color.error.alpha;
+        bgColor = `transparent`;
+        borderColor = props.theme.color.error.alpha;
+        hoverBgColor = props.theme.color.error.epsilon;
+      }
     }
 
     return css`
@@ -164,7 +181,15 @@ ${props =>
       ${props.isTransparent &&
         css`
           box-shadow: none;
-          border: 1px ${borderType} ${color};
+          border: 1px ${borderType} ${borderColor};
+          
+          &:hover {
+            color: ${color};
+
+            ${StyledIcon} {
+              color: ${color};
+            }
+          }
         `}
 
       &:hover {

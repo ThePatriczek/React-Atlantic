@@ -1,13 +1,12 @@
-import { shallow } from 'enzyme';
-import React from 'react';
-import { Popconfirm } from './Popconfirm';
-import { defaultValues } from '../../constants/defaultValues';
-import expect from 'expect';
-import { Text } from '../../../lib/components/Typography/Text';
-import { Icon } from '../../../lib/components/Icon';
+import { shallow } from "enzyme";
+import React from "react";
+import { Popconfirm } from "./Popconfirm";
+import { defaultValues } from "../../constants/defaultValues";
+import expect from "expect";
+import { Button } from "../Button";
 
 export const Component = (
-  children = <Icon name={'trash'} />,
+  children = `Test`,
   position,
   content,
   cancelText,
@@ -22,7 +21,7 @@ export const Component = (
         cancelText={cancelText}
         confirmText={confirmText}
       >
-        {children}
+        <Button type={"default"}>{children}</Button>
       </Popconfirm>
     </div>
   );
@@ -39,7 +38,7 @@ export const tests = (
 ) => {
   let output = shallow(popconfirm);
 
-  return describe('Popconfirm', () => {
+  return describe("Popconfirm", () => {
     it(`x`, () => {
       expect(1).toEqual(1);
     });
