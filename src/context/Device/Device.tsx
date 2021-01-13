@@ -114,10 +114,11 @@ export const DeviceProvider: FC<Readonly<
   useEffect(() => {
     if (window) {
       window.onresize = debounce(onResize, 50);
-      onResize();
+      window.onfocus = () => setImmediate(onResize);
 
       return () => {
         window.onresize = null;
+        window.onfocus = null;
       };
     }
 
