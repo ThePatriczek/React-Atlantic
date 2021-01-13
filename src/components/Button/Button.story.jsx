@@ -33,10 +33,13 @@ stories.add(
         <Button>{`Upload`}</Button>
         <br />
         <SimpleButton>{`Simple`}</SimpleButton>
+        <SimpleButton type={'dashed'}>{`Dashed`}</SimpleButton>
+        <SimpleButton type={'primary'}>{`Primary`}</SimpleButton>
+        <SimpleButton type={'success'} isDisabled>{`Success isDisabled`}</SimpleButton>
+        <SimpleButton type={'warning'}>{`Warning`}</SimpleButton>
+        <SimpleButton type={'error'}>{`Error`}</SimpleButton>
         <br />
-        <SimpleButton isAlternative>{`Simple alternative`}</SimpleButton>
-        <br />
-        <PureButton>{`Pure`}</PureButton>
+        <SimpleButton isAlternative>{`Simple isAlternative`}</SimpleButton>
         <br />
         <Button isTransparent type={'primary'}>{`Primary`}</Button>
         <Button isTransparent type={'success'}>{`Success`}</Button>

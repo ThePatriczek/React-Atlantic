@@ -49,6 +49,7 @@ export const StyledPaginationButton = styled(Button)<
 
   ${props =>
     !props.isActive &&
+    !props.isDisabled &&
     css`
       &:hover {
         background-color: ${props.theme.color.background.gamma};
