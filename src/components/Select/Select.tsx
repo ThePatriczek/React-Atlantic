@@ -1,10 +1,11 @@
-import * as React from 'react';
-import { default as ReactSelect } from 'react-select';
-import { Size } from '../../types';
-import { Icon } from '../Icon';
-import { Option as OptionComponent } from './components';
-import { Option, OptionProps } from './Option';
-import { useState } from 'react';
+import * as React from "react";
+import { useRef, useState } from "react";
+import { default as ReactSelect } from "react-select";
+import { useEventListener } from "../../hooks/EventHandlers/useEventListener";
+import { Size } from "../../types";
+import { Icon } from "../Icon";
+import { Option as OptionComponent } from "./components";
+import { Option, OptionProps } from "./Option";
 import {
   ClearIndicator,
   Control,
@@ -23,8 +24,8 @@ import {
   SelectContainerWrapper,
   SingleValue,
   ValueContainer
-} from './Select.style';
-import { checkChildrenAndOptions, OptionType } from './Select.utils';
+} from "./Select.style";
+import { checkChildrenAndOptions, OptionType } from "./Select.utils";
 
 export interface SelectProps {
   onChange?: (value?: any) => void;
@@ -39,6 +40,7 @@ export interface SelectProps {
   size?: Size;
   className?: string;
   autoFocus?: boolean;
+  defaultIsOpen?: boolean;
 }
 
 export const Select: React.FC<React.PropsWithChildren<SelectProps>> & {
@@ -55,16 +57,20 @@ export const Select: React.FC<React.PropsWithChildren<SelectProps>> & {
     isAlternative,
     size,
     defaultValue,
-    autoFocus
+    autoFocus,
+    defaultIsOpen = false
   } = props;
+  const ref = useRef<any>(null);
   const [value, setValue] = React.useState<any>(defaultValue);
   const [isFocused, setFocused] = useState<boolean>(false);
+  const [isOpen, setIsOpen] = useState<boolean>(defaultIsOpen);
 
   let items: OptionType[] = [];
   items = checkChildrenAndOptions(children, options);
 
   const onChange = (value?: OptionType | OptionType[]) => {
     if (!isDisabled) {
+      setIsOpen(false);
       if (props.value === undefined) {
         setValue(value);
       }
@@ -77,8 +83,19 @@ export const Select: React.FC<React.PropsWithChildren<SelectProps>> & {
 
   const val: any[] = [];
 
+  useEventListener({
+    ref,
+    onMouseDown: () => {
+      setIsOpen(false);
+    },
+    onEscape: () => {
+      setIsOpen(false);
+    },
+    isOpen
+  });
+
   const fillValue = (value: any) => {
-    if (typeof value === 'string' || typeof value === 'number') {
+    if (typeof value === "string" || typeof value === "number") {
       items.forEach(item => item.value === value && val.push(item));
     } else {
       items.forEach(item => item.value === value.value && val.push(value));
@@ -103,6 +120,7 @@ export const Select: React.FC<React.PropsWithChildren<SelectProps>> & {
 
   return (
     <ReactSelect
+      menuIsOpen={isOpen}
       value={val}
       size={size}
       isDisabled={isDisabled}
@@ -123,12 +141,14 @@ export const Select: React.FC<React.PropsWithChildren<SelectProps>> & {
         ),
         ClearIndicator: ({ innerProps }) => (
           <ClearIndicator {...innerProps}>
-            <Icon name={'clear'} />
+            <Icon name={"clear"} />
           </ClearIndicator>
         ),
         Control: (props: any) => (
           <Control
             {...props.innerProps}
+            ref={ref}
+            onClick={() => setIsOpen(prev => !prev)}
             isMenuOpened={props.menuIsOpen}
             isFocused={isFocused}
             isMulti={props.isMulti}
@@ -148,13 +168,13 @@ export const Select: React.FC<React.PropsWithChildren<SelectProps>> & {
         DownChevron: ({ children, innerProps }) => (
           <div {...innerProps}>
             {children}
-            <Icon name={'arrowDown'} />
+            <Icon name={"arrowDown"} />
           </div>
         ),
         DropdownIndicator: ({ innerProps, selectProps }) => (
           <DropdownIndicator isDisabled={isDisabled} {...innerProps}>
-            {selectProps.menuIsOpen && <Icon name={'arrowUp'} />}
-            {!selectProps.menuIsOpen && <Icon name={'arrowDown'} />}
+            {selectProps.menuIsOpen && <Icon name={"arrowUp"} />}
+            {!selectProps.menuIsOpen && <Icon name={"arrowDown"} />}
           </DropdownIndicator>
         ),
         Group: ({ children }) => <div>{children}</div>,
@@ -194,7 +214,7 @@ export const Select: React.FC<React.PropsWithChildren<SelectProps>> & {
         ),
         MultiValueRemove: ({ ...props }) => (
           <MultiValueRemove {...props}>
-            <Icon name={'close'} />
+            <Icon name={"close"} />
           </MultiValueRemove>
         ),
         Placeholder: ({ children, innerProps }) => (
@@ -252,7 +272,7 @@ export const Select: React.FC<React.PropsWithChildren<SelectProps>> & {
 Select.defaultProps = {
   isMulti: false,
   isFullWidth: false,
-  size: 'medium'
+  size: "medium"
 };
 
 Select.displayName = `Select`;
