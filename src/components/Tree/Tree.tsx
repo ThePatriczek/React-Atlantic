@@ -28,6 +28,7 @@ export interface TreeProps {
   readonly withTooltips?: boolean;
   readonly TooltipProps?: TooltipProps;
   readonly defaultScrollTop?: number;
+  readonly onScroll?: (params: ScrollParams) => void;
 }
 
 export const Tree: FC<TreeProps> & {
@@ -59,6 +60,7 @@ export const Tree: FC<TreeProps> & {
   const onScroll = (params: ScrollParams) => {
     Tooltip.rebuild();
     setScrollTop(params.scrollTop);
+    props.onScroll?.(params);
   };
 
   const NodeContentRenderer: NodeContentRendererType = useCallback(
