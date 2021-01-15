@@ -4,15 +4,16 @@ import React, {
   useCallback,
   useEffect,
   useState
-} from 'react';
-import SortableTree, { NodeRendererProps, TreeItem } from 'react-sortable-tree';
-import { Props as TooltipProps } from 'react-tooltip';
-import { AutoSizer, Index } from 'react-virtualized';
-import { theme } from '../../theme';
-import { Size } from '../../types';
-import { Tooltip } from '../Tooltip';
-import { Node, NodeProps } from './Node';
-import { StyledTree, StyledTreeAlt } from './style';
+} from "react";
+import SortableTree, { NodeRendererProps, TreeItem } from "react-sortable-tree";
+import { Props as TooltipProps } from "react-tooltip";
+import { AutoSizer, Index, ScrollParams } from "react-virtualized";
+import { theme } from "../../theme";
+import { Size } from "../../types";
+import { Tooltip } from "../Tooltip";
+import { Node, NodeProps } from "./Node";
+import { StyledTree, StyledTreeAlt } from "./style";
+import _ from "lodash";
 
 type NodeContentRendererType = FC<Readonly<NodeContentRendererProps>>;
 
@@ -26,15 +27,24 @@ export interface TreeProps {
   readonly rowHeight?: ((info: Index) => number) | number;
   readonly withTooltips?: boolean;
   readonly TooltipProps?: TooltipProps;
+  readonly defaultScrollTop?: number;
 }
 
 export const Tree: FC<TreeProps> & {
   Node: FC<Readonly<NodeProps>>;
 } = (props): Readonly<ReactElement> => {
-  const { isAlternative, size, nodes, withTooltips, TooltipProps } = props;
+  const {
+    isAlternative,
+    size,
+    nodes,
+    withTooltips,
+    TooltipProps,
+    defaultScrollTop = 0
+  } = props;
   const TreeComponent = isAlternative ? StyledTreeAlt : StyledTree;
 
   const [treeData, setTreeData] = useState<Array<Readonly<TreeItem>>>(nodes);
+  const [scrollTop, setScrollTop] = useState<number>(defaultScrollTop);
 
   useEffect(() => {
     setTreeData(nodes);
@@ -44,6 +54,11 @@ export const Tree: FC<TreeProps> & {
   const onChange = treeData => {
     setTreeData(treeData);
     props.onChange?.(treeData);
+  };
+
+  const onScroll = (params: ScrollParams) => {
+    Tooltip.rebuild();
+    setScrollTop(params.scrollTop);
   };
 
   const NodeContentRenderer: NodeContentRendererType = useCallback(
@@ -71,9 +86,9 @@ export const Tree: FC<TreeProps> & {
 
   let rowHeight: string = theme.height.md;
 
-  if (size === 'small') {
+  if (size === "small") {
     rowHeight = theme.height.sm;
-  } else if (size === 'large') {
+  } else if (size === "large") {
     rowHeight = theme.height.lg;
   }
 
@@ -92,7 +107,8 @@ export const Tree: FC<TreeProps> & {
             rowHeight={props.rowHeight || parseInt(rowHeight, 0)}
             nodeContentRenderer={NodeContentRenderer}
             reactVirtualizedListProps={{
-              onScroll: () => Tooltip.rebuild(),
+              scrollTop,
+              onScroll: _.debounce(onScroll, 100),
               onRowsRendered: () => Tooltip.rebuild()
             }}
           />
@@ -104,7 +120,7 @@ export const Tree: FC<TreeProps> & {
 
 Tree.defaultProps = {
   isAlternative: false,
-  size: 'medium'
+  size: "medium"
 };
 
 Tree.Node = Node;
