@@ -48,6 +48,10 @@ export const Tree: FC<TreeProps> & {
   const [scrollTop, setScrollTop] = useState<number>(defaultScrollTop);
 
   useEffect(() => {
+    setScrollTop(defaultScrollTop);
+  }, [defaultScrollTop]);
+
+  useEffect(() => {
     setTreeData(nodes);
     Tooltip.rebuild();
   }, [nodes]);
@@ -110,7 +114,7 @@ export const Tree: FC<TreeProps> & {
             nodeContentRenderer={NodeContentRenderer}
             reactVirtualizedListProps={{
               scrollTop,
-              onScroll: _.debounce(onScroll, 100),
+              onScroll,
               onRowsRendered: () => Tooltip.rebuild()
             }}
           />
