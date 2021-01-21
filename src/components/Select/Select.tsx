@@ -1,7 +1,6 @@
 import * as React from "react";
 import { useRef, useState } from "react";
 import { default as ReactSelect } from "react-select";
-import { useEventListener } from "../../hooks/EventHandlers/useEventListener";
 import { Size } from "../../types";
 import { Icon } from "../Icon";
 import { Option as OptionComponent } from "./components";
@@ -83,17 +82,6 @@ export const Select: React.FC<React.PropsWithChildren<SelectProps>> & {
 
   const val: any[] = [];
 
-  useEventListener({
-    ref,
-    onMouseDown: () => {
-      setIsOpen(false);
-    },
-    onEscape: () => {
-      setIsOpen(false);
-    },
-    isOpen
-  });
-
   const fillValue = (value: any) => {
     if (typeof value === "string" || typeof value === "number") {
       items.forEach(item => item.value === value && val.push(item));
@@ -125,6 +113,22 @@ export const Select: React.FC<React.PropsWithChildren<SelectProps>> & {
       size={size}
       isDisabled={isDisabled}
       options={items}
+      openMenuOnClick={true}
+      onFocus={() => setFocused(true)}
+      onBlur={() => {
+        setFocused(false);
+        setIsOpen(false);
+      }}
+      onMenuOpen={() => {
+        if (!isOpen) {
+          setIsOpen(true);
+        }
+      }}
+      onMenuClose={() => {
+        if (isOpen) {
+          setIsOpen(false);
+        }
+      }}
       placeholder={isAlternative ? `` : placeholder}
       isSearchable={false}
       className={className || ``}
@@ -148,9 +152,6 @@ export const Select: React.FC<React.PropsWithChildren<SelectProps>> & {
           <Control
             {...props.innerProps}
             ref={ref}
-            onClick={() => setIsOpen(prev => !prev)}
-            isMenuOpened={props.menuIsOpen}
-            isFocused={isFocused}
             isMulti={props.isMulti}
             hasValue={props.hasValue}
             isFullWidth={props.isFullWidth}
@@ -173,8 +174,8 @@ export const Select: React.FC<React.PropsWithChildren<SelectProps>> & {
         ),
         DropdownIndicator: ({ innerProps, selectProps }) => (
           <DropdownIndicator isDisabled={isDisabled} {...innerProps}>
-            {selectProps.menuIsOpen && <Icon name={"arrowUp"} />}
-            {!selectProps.menuIsOpen && <Icon name={"arrowDown"} />}
+            {isOpen && <Icon name={"arrowUp"} />}
+            {!isOpen && <Icon name={"arrowDown"} />}
           </DropdownIndicator>
         ),
         Group: ({ children }) => <div>{children}</div>,
@@ -225,7 +226,11 @@ export const Select: React.FC<React.PropsWithChildren<SelectProps>> & {
             <SelectContainerWrapper
               isMulti={isMulti}
               hasValue={!!value}
-              onClick={() => !isDisabled && setFocused(!isFocused)}
+              onClick={() => {
+                if (!isDisabled) {
+                  setFocused(!isFocused);
+                }
+              }}
               isFullWidth={isFullWidth}
               size={size}
               isFocused={isFocused}
@@ -242,7 +247,11 @@ export const Select: React.FC<React.PropsWithChildren<SelectProps>> & {
             </SelectContainerWrapper>
           ) : (
             <SelectContainer
-              onClick={() => !isDisabled && setFocused(!isFocused)}
+              onClick={() => {
+                if (!isDisabled) {
+                  setFocused(!isFocused);
+                }
+              }}
               isFullWidth={isFullWidth}
               size={size}
               {...innerProps}
