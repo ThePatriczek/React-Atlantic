@@ -1,4 +1,4 @@
-import React, { FC, PropsWithChildren, ReactElement } from 'react';
+import React, { AnchorHTMLAttributes, FC, HTMLAttributes, PropsWithChildren, ReactElement } from 'react';
 import { Sorting } from '../components';
 import { useTable } from '../Context';
 import {
@@ -19,7 +19,7 @@ export interface HiddenColumnProps extends ColumnProps {
   isHeader?: Readonly<boolean>;
 }
 
-export const Column: FC<Readonly<PropsWithChildren<HiddenColumnProps>>> = (
+export const Column: FC<Readonly<PropsWithChildren<HiddenColumnProps & HTMLAttributes<HTMLTableHeaderCellElement>>>> = (
   props
 ): ReactElement => {
   const { children, isHeader, className, name } = props;
@@ -49,6 +49,7 @@ export const Column: FC<Readonly<PropsWithChildren<HiddenColumnProps>>> = (
         onDoubleClick={onDoubleClick}
         className={className}
         isActive={isActive}
+        {...props}
       >
         <StyledColumnHeaderBox>
           {children}
