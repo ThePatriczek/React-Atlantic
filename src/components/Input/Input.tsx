@@ -1,58 +1,61 @@
-import React, { useEffect } from 'react';
-import { Size } from '../../types';
-import { Icon, IconName } from '../Icon';
+import React, { useEffect } from "react";
+import { Size } from "../../types";
+import { Icon, IconName } from "../Icon";
 import {
   StyledInput,
+  StyledInputLeftIcon,
+  StyledInputLoadingIcon,
+  StyledInputRightIcon,
   StyledInputWrapper,
   StyledInputWrapperAlt
-} from './Input.style';
-import { TextArea, TextAreaProps } from './TextArea';
+} from "./Input.style";
+import { TextArea, TextAreaProps } from "./TextArea";
 
 export type AutoComplete =
-  | 'name'
-  | 'honorific-prefix'
-  | 'given-name'
-  | 'additional-name'
-  | 'family-name'
-  | 'honorific-suffix'
-  | 'nickname'
-  | 'username'
-  | 'new-password'
-  | 'current-password'
-  | 'one-time-code'
-  | 'organization-title'
-  | 'organization'
-  | 'street-address'
-  | 'address-line1'
-  | 'address-line2'
-  | 'address-line3'
-  | 'address-level4'
-  | 'address-level3'
-  | 'address-level2'
-  | 'address-level1'
-  | 'country'
-  | 'country-name'
-  | 'postal-code'
-  | 'cc-name'
-  | 'cc-given-name'
-  | 'cc-additional-name'
-  | 'cc-family-name'
-  | 'cc-number'
-  | 'cc-exp'
-  | 'cc-exp-month'
-  | 'cc-exp-year'
-  | 'cc-csc'
-  | 'cc-type'
-  | 'transaction-currency'
-  | 'transaction-amount'
-  | 'language'
-  | 'bday'
-  | 'bday-day'
-  | 'bday-month'
-  | 'bday-year'
-  | 'sex'
-  | 'url'
-  | 'photo';
+  | "name"
+  | "honorific-prefix"
+  | "given-name"
+  | "additional-name"
+  | "family-name"
+  | "honorific-suffix"
+  | "nickname"
+  | "username"
+  | "new-password"
+  | "current-password"
+  | "one-time-code"
+  | "organization-title"
+  | "organization"
+  | "street-address"
+  | "address-line1"
+  | "address-line2"
+  | "address-line3"
+  | "address-level4"
+  | "address-level3"
+  | "address-level2"
+  | "address-level1"
+  | "country"
+  | "country-name"
+  | "postal-code"
+  | "cc-name"
+  | "cc-given-name"
+  | "cc-additional-name"
+  | "cc-family-name"
+  | "cc-number"
+  | "cc-exp"
+  | "cc-exp-month"
+  | "cc-exp-year"
+  | "cc-csc"
+  | "cc-type"
+  | "transaction-currency"
+  | "transaction-amount"
+  | "language"
+  | "bday"
+  | "bday-day"
+  | "bday-month"
+  | "bday-year"
+  | "sex"
+  | "url"
+  | "photo";
 
 export interface InputProps {
   transferFocus?: boolean;
@@ -76,7 +79,7 @@ export interface InputProps {
   isLoading?: boolean;
   /** custom className */
   className?: string;
-  htmlType?: 'text' | 'email' | 'password';
+  htmlType?: "text" | "email" | "password";
   autoComplete?: AutoComplete;
   isFullWidth?: boolean;
   handlersWithEvent?: boolean;
@@ -133,7 +136,7 @@ export const Input: React.FC<InputProps> & {
     const val: string = e.target.value;
 
     if (!isDisabled) {
-      if (typeof props.value === 'undefined') {
+      if (typeof props.value === "undefined") {
         setValue(val);
       }
 
@@ -202,7 +205,7 @@ export const Input: React.FC<InputProps> & {
         <StyledInputWrapper
           size={size as Size}
           isFocused={
-            typeof transferFocus !== 'undefined' ? transferFocus : isFocused
+            typeof transferFocus !== "undefined" ? transferFocus : isFocused
           }
           isLeftComponent={!!iconLeft}
           isRightComponent={!!(iconRight || isLoading)}
@@ -214,13 +217,13 @@ export const Input: React.FC<InputProps> & {
           }}
           isFullWidth={isFullWidth}
         >
-          {iconLeft && <Icon name={iconLeft} />}
+          {iconLeft && <StyledInputLeftIcon name={iconLeft} />}
           {!!ComponentLeft && ComponentLeft}
           {Component}
 
           <label>{placeholder}</label>
-          {isLoading && <Icon name={'loading'} isRotating />}
-          {iconRight && !isLoading && <Icon name={iconRight} />}
+          {isLoading && <StyledInputLoadingIcon name={"loading"} isRotating />}
+          {iconRight && !isLoading && <StyledInputRightIcon name={iconRight} />}
           {!!ComponentRight && !isLoading && ComponentRight}
         </StyledInputWrapper>
       ) : (
@@ -251,19 +254,19 @@ export const Input: React.FC<InputProps> & {
       className={className}
       isFullWidth={isFullWidth}
     >
-      {iconLeft && <Icon name={iconLeft} />}
+      {iconLeft && <StyledInputLeftIcon name={iconLeft} />}
       {!!ComponentLeft && ComponentLeft}
       {Component}
-      {isLoading && <Icon name={'loading'} isRotating />}
-      {iconRight && !isLoading && <Icon name={iconRight} />}
+      {isLoading && <StyledInputLoadingIcon name={"loading"} isRotating />}
+      {iconRight && !isLoading && <StyledInputRightIcon name={iconRight} />}
       {!!ComponentRight && !isLoading && ComponentRight}
     </StyledInputWrapper>
   );
 };
 
 Input.defaultProps = {
-  size: 'medium',
-  htmlType: 'text'
+  size: "medium",
+  htmlType: "text"
 };
 
 Input.TextArea = TextArea;

@@ -1,6 +1,7 @@
-import styled, { css } from 'styled-components';
-import { theme } from '../../theme';
-import { Size } from '../../types';
+import styled, { css } from "styled-components";
+import { theme } from "../../theme";
+import { Size } from "../../types";
+import { Icon } from "../Icon";
 
 export interface StyledInputWrapperProps {
   isLoading?: boolean;
@@ -65,7 +66,7 @@ export const StyledInputWrapper = styled.span<StyledInputWrapperProps>`
           `};
     
     ${props =>
-      props.size === 'small' &&
+      props.size === "small" &&
       css`
         i {
           top: 7px;
@@ -75,7 +76,7 @@ export const StyledInputWrapper = styled.span<StyledInputWrapperProps>`
       `};
         
     ${props =>
-      props.size === 'medium' &&
+      props.size === "medium" &&
       css`
         i {
           top: 10px;
@@ -85,7 +86,7 @@ export const StyledInputWrapper = styled.span<StyledInputWrapperProps>`
       `};    
     
     ${props =>
-      props.size === 'large' &&
+      props.size === "large" &&
       css`
         i {
           top: 12px;
@@ -205,7 +206,7 @@ export const StyledInput = styled.input<{
     `} 
 
   ${props =>
-    props.size === 'small' &&
+    props.size === "small" &&
     css`
       width: 180px;
       height: ${props.theme.height.sm};
@@ -218,7 +219,7 @@ export const StyledInput = styled.input<{
     `} 
   
     ${props =>
-      props.size === 'large' &&
+      props.size === "large" &&
       css`
         width: 220px;
         height: ${props.theme.height.lg};
@@ -278,21 +279,21 @@ export const StyledInputWrapperAlt = styled.span<StyledInputWrapperProps>`
     transform: translateY(12px);
     
     ${props =>
-      props.size === 'small' &&
+      props.size === "small" &&
       css`
         font-size: ${props.theme.font.size.sm};
         height: ${parseInt(props.theme.height.sm, 0) - 2}px;
         line-height: ${parseInt(props.theme.height.sm, 0) - 2}px;
       `}
     ${props =>
-      props.size === 'medium' &&
+      props.size === "medium" &&
       css`
         font-size: ${props.theme.font.size.md};
         height: ${parseInt(props.theme.height.md, 0) - 2}px;
         line-height: ${parseInt(props.theme.height.md, 0) - 2}px;
       `}
     ${props =>
-      props.size === 'large' &&
+      props.size === "large" &&
       css`
         font-size: ${props.theme.font.size.lg};
         height: ${parseInt(props.theme.height.lg, 0) - 2}px;
@@ -315,7 +316,7 @@ export const StyledInputWrapperAlt = styled.span<StyledInputWrapperProps>`
         -webkit-transform-origin: 0 0;
         transform-origin: 0 0;
 
-        ${props.size === 'small' &&
+        ${props.size === "small" &&
           css`
             height: 16px;
             line-height: 16px;
@@ -366,20 +367,26 @@ export const StyledInputWrapperAlt = styled.span<StyledInputWrapperProps>`
      `} 
 `;
 
+export const StyledInputLoadingIcon = styled(Icon)``;
+
+export const StyledInputLeftIcon = styled(Icon)``;
+
+export const StyledInputRightIcon = styled(Icon)``;
+
 StyledInput.defaultProps = {
   theme
 };
 
-StyledInput.displayName = 'StyledInput';
+StyledInput.displayName = "StyledInput";
 
 StyledInputWrapper.defaultProps = {
   theme
 };
 
-StyledInputWrapper.displayName = 'StyledInputWrapper';
+StyledInputWrapper.displayName = "StyledInputWrapper";
 
 StyledInputWrapperAlt.defaultProps = {
   theme
 };
 
-StyledInputWrapperAlt.displayName = 'StyledInputWrapper.Alt';
+StyledInputWrapperAlt.displayName = "StyledInputWrapper.Alt";
