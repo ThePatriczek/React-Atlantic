@@ -1,6 +1,6 @@
-import styled, { css } from 'styled-components';
-import { theme } from '../../theme';
-import { Size } from '../../types';
+import styled, { css } from "styled-components";
+import { theme } from "../../theme";
+import { Size } from "../../types";
 
 interface SelectProps {
   isMenuOpened?: boolean;
@@ -17,7 +17,6 @@ export const SelectContainer = styled.div<SelectProps>`
   position: relative;
   width: 220px;
   line-height: 1;
-
   font-size: ${props => props.theme.font.size.md};
   font-family: ${props => props.theme.font.family};
 
@@ -34,13 +33,13 @@ export const SelectContainer = styled.div<SelectProps>`
     `}
   
   ${props =>
-    props.size === 'small' &&
+    props.size === "small" &&
     css`
       font-size: ${props => props.theme.font.size.sm};
     `}
   
   ${props =>
-    props.size === 'large' &&
+    props.size === "large" &&
     css`
       font-size: ${props => props.theme.font.size.lg};
     `}
@@ -57,7 +56,7 @@ export const Control = styled.div<SelectProps>`
   border-radius: ${props => props.theme.radius};
   background-color: ${props => props.theme.color.background.alpha};
   
-  :hover{
+  &:hover{
     border: 1px solid ${props => props.theme.color.primary.alpha};
   }
   
@@ -77,14 +76,13 @@ export const Control = styled.div<SelectProps>`
     props.isDisabled &&
     css`
       color: ${props.theme.color.text.beta};
-
-      ::placeholder {
-        color: ${props.theme.color.text.beta};
-      }
-
       background-color: ${props.theme.color.default};
       cursor: not-allowed;
       outline: 0;
+
+      &::placeholder {
+        color: ${props.theme.color.text.beta};
+      }
 
       &:hover,
       &:focus {
@@ -117,11 +115,11 @@ export const Control = styled.div<SelectProps>`
 `;
 
 export const SelectContainerWrapper = styled.span<any>`
-   font-family: ${props => props.theme.font.family};
+  font-family: ${props => props.theme.font.family};
   display: inline-block;
   position: relative;
-  margin-top: -${props => (props.isMulti ? '18px' : props.theme.margin.md)};
-  padding-top: ${props => (props.isMulti ? '18px' : props.theme.padding.md)};
+  margin-top: -${props => (props.isMulti ? "18px" : props.theme.margin.md)};
+  padding-top: ${props => (props.isMulti ? "18px" : props.theme.padding.md)};
   
    ${props =>
      props.isFocused &&
@@ -139,13 +137,13 @@ export const SelectContainerWrapper = styled.span<any>`
        }
      `}
   
-  :hover{
-    ${Control}{
-      border: 1px solid ${props => props.theme.color.primary.alpha};
-    }
-  }
+   &:hover {
+     ${Control}{
+       border: 1px solid ${props => props.theme.color.primary.alpha};
+     }
+   }
   
-    label {   
+  label {   
     z-index: 1;
     position: absolute;
     top: 0;
@@ -163,26 +161,28 @@ export const SelectContainerWrapper = styled.span<any>`
     -webkit-transform-origin: 0 100%;
     transform-origin: 0 100%;
     -webkit-transform:  ${props =>
-      props.isMulti ? 'translateY(18px)' : 'translateY(12px)'};
+      props.isMulti ? "translateY(18px)" : "translateY(12px)"};
     transform: ${props =>
-      props.isMulti ? 'translateY(18px)' : 'translateY(12px)'};
+      props.isMulti ? "translateY(18px)" : "translateY(12px)"};
     
     ${props =>
-      props.size === 'small' &&
+      props.size === "small" &&
       css`
         font-size: ${props.theme.font.size.sm};
         height: ${parseInt(props.theme.height.sm, 0) - 2}px;
         line-height: ${parseInt(props.theme.height.sm, 0) - 2}px;
       `}
+
     ${props =>
-      props.size === 'medium' &&
+      props.size === "medium" &&
       css`
         font-size: ${props.theme.font.size.md};
         height: ${parseInt(props.theme.height.md, 0) - 2}px;
         line-height: ${parseInt(props.theme.height.md, 0) - 2}px;
       `}
+
     ${props =>
-      props.size === 'large' &&
+      props.size === "large" &&
       css`
         font-size: ${props.theme.font.size.lg};
         height: ${parseInt(props.theme.height.lg, 0) - 2}px;
@@ -205,7 +205,7 @@ export const SelectContainerWrapper = styled.span<any>`
         -webkit-transform-origin: 0 0;
         transform-origin: 0 0;
 
-        ${props.size === 'small' &&
+        ${props.size === "small" &&
           css`
             height: 16px;
             line-height: 16px;
@@ -263,7 +263,7 @@ export const SingleValue = styled.div<SelectProps>`
     `}
   
   ${props =>
-    props.size === 'small' &&
+    props.size === "small" &&
     css`
       height: 24px;
       padding: 3px 3px 3px 0;
@@ -274,7 +274,7 @@ export const SingleValue = styled.div<SelectProps>`
     `}
   
   ${props =>
-    props.size === 'large' &&
+    props.size === "large" &&
     css`
       height: 38px;
       padding: 7px 7px 7px 0;
@@ -313,7 +313,7 @@ export const MultiValue = styled.div<SelectProps>`
   }
 
   ${props =>
-    props.size === 'small' &&
+    props.size === "small" &&
     css`
       height: 20px;
       padding: 0;
@@ -325,7 +325,7 @@ export const MultiValue = styled.div<SelectProps>`
     `}
 
   ${props =>
-    props.size === 'large' &&
+    props.size === "large" &&
     css`
       height: ${props => props.theme.height.md};
       padding: 0;
@@ -428,7 +428,7 @@ export const IndicatorsContainer = styled.div<SelectProps>`
   }
 
   ${props =>
-    props.size === 'small' &&
+    props.size === "small" &&
     css`
       min-height: 24px;
 
@@ -438,7 +438,7 @@ export const IndicatorsContainer = styled.div<SelectProps>`
     `}
 
   ${props =>
-    props.size === 'large' &&
+    props.size === "large" &&
     css`
       min-height: 38px;
 
@@ -513,7 +513,7 @@ Control.defaultProps = {
   theme
 };
 
-Control.displayName = 'Control';
+Control.displayName = "Control";
 
 ValueContainer.defaultProps = {
   theme
