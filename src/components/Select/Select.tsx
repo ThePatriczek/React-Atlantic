@@ -157,6 +157,8 @@ export const Select: React.FC<React.PropsWithChildren<SelectProps>> & {
             isFullWidth={props.isFullWidth}
             size={size}
             isDisabled={props.isDisabled}
+            isFocused={isFocused}
+            isMenuOpened={isOpen}
           >
             {props.children}
           </Control>
