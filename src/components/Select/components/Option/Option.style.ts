@@ -1,17 +1,17 @@
-import styled, { css } from 'styled-components';
-import { theme } from '../../../../theme';
-import { SelectProps } from '../../Select';
+import styled, { css } from "styled-components";
+import { theme } from "../../../../theme";
+import { SelectProps } from "../../Select";
 
-export const StyledOption = styled.div<SelectProps>`
+interface StyledOptionProps {
+  isMultiLine?: boolean;
+}
+
+export const StyledOption = styled.div<SelectProps & StyledOptionProps>`
   display: block;
   padding: 0 ${props => props.theme.padding.md};
-  height: ${props => props.theme.height.md};
   line-height: ${props => props.theme.height.md};
   background-color: ${props => props.theme.color.background.alpha};
   color: ${props => props.theme.color.text.alpha};
-
-  overflow: hidden;
-  text-overflow: ellipsis;
   cursor: pointer;
 
   &:nth-child(odd) {
@@ -22,17 +22,23 @@ export const StyledOption = styled.div<SelectProps>`
     background-color: ${props => props.theme.color.background.beta};
   }
 
-  span {
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow: hidden;
-  }
+  ${props =>
+    !props.isMultiLine &&
+    css`
+      height: ${props => props.theme.height.md};
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    `}
 
   ${props =>
-    props.size === 'small' &&
+    props.size === "small" &&
     css`
-      height: ${props => props.theme.height.sm};
       line-height: ${props => props.theme.height.sm};
+      ${!props.isMultiLine &&
+        css`
+          height: ${props => props.theme.height.sm};
+        `}
 
       span {
         font-size: ${props => props.theme.font.size.sm};
@@ -40,10 +46,13 @@ export const StyledOption = styled.div<SelectProps>`
     `}
 
   ${props =>
-    props.size === 'large' &&
+    props.size === "large" &&
     css`
-      height: ${props => props.theme.height.lg};
       line-height: ${props => props.theme.height.lg};
+      ${!props.isMultiLine &&
+        css`
+          height: ${props => props.theme.height.lg};
+        `}
 
       span {
         font-size: ${props => props.theme.font.size.lg};

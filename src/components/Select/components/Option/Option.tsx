@@ -1,15 +1,21 @@
-import * as React from 'react';
-import { StyledOption } from './Option.style';
+import * as React from "react";
+import { StyledOption } from "./Option.style";
 
-export const Option: React.FC<any> = props => {
-  const { innerRef, innerProps, label, size, ...others } = props;
-  const { className } = others.data;
+export const Option: React.FC<any> = ({
+  innerRef,
+  innerProps,
+  label,
+  size,
+  ...others
+}) => {
+  const { className, isMultiLine } = others.data;
   return (
     <StyledOption
       key={label}
       ref={innerRef}
       {...innerProps}
       size={size}
+      isMultiLine={isMultiLine}
       className={className}
     >
       {label}
