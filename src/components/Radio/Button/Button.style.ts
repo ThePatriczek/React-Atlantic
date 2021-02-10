@@ -1,6 +1,6 @@
-import styled, { css } from 'styled-components';
-import { theme } from '../../../theme';
-import { Size } from '../../../types';
+import styled, { css } from "styled-components";
+import { theme } from "../../../theme";
+import { Size } from "../../../types";
 
 interface StyledRadioButtonProps {
   isChecked?: boolean;
@@ -10,7 +10,7 @@ interface StyledRadioButtonProps {
 }
 
 export const StyledRadioButtonInputHidden = styled.input.attrs({
-  type: 'radio'
+  type: "radio"
 })`
   position: absolute;
   opacity: 0;
@@ -47,21 +47,47 @@ export const StyledRadioButtonLabel = styled.label<StyledRadioButtonProps>`
 
   font-size: ${props => props.theme.font.size.md};
   font-family: ${props => props.theme.font.family};
+  
+  & + & {
+    border-left: none;
+  }
+  
+  &:after {
+    content: "";
+    display: none;
+    position: absolute;
+    top: 0;
+    left: -1px;
+    bottom: 0;
+    right: -1px;
+    border: 1px solid ${props => props.theme.color.primary.alpha};
+    border-radius: ${props => props.theme.radius};
+  }
 
   ${props =>
     props.isChecked &&
     css`
-      border: 1px solid ${props.theme.color.primary.alpha};
       background-color: ${props.theme.color.primary.alpha};
       color: ${props.theme.color.text.gamma};
 
       span {
         color: ${props.theme.color.text.gamma};
       }
+
+      &:after {
+        display: block;
+      }
     `}
 
   :hover {
-    border: 1px solid ${props => props.theme.color.primary.alpha};
+    ${props =>
+      !props.isDisabled &&
+      css`
+        &:after {
+          display: block;
+        }
+      `}
+
     ${props =>
       !props.isChecked &&
       css`
@@ -72,8 +98,6 @@ export const StyledRadioButtonLabel = styled.label<StyledRadioButtonProps>`
       props.isDisabled &&
       css`
         color: ${props.theme.color.text.beta};
-        border: inherit;
-        border: 1px solid ${props.theme.color.border};
       `}
   }
   
@@ -87,18 +111,17 @@ export const StyledRadioButtonLabel = styled.label<StyledRadioButtonProps>`
   ${props =>
     props.isDisabled &&
     css`
-      border-color: ${props.theme.color.border};
       background-color: ${props.theme.color.default};
       cursor: not-allowed;
       color: ${props.theme.color.text.beta};
-      
+
       span {
         color: ${props.theme.color.text.beta};
       }
     `}
 
   ${props =>
-    props.size === 'small' &&
+    props.size === "small" &&
     css`
       height: ${props.theme.height.sm};
       line-height: ${props.theme.height.sm};
@@ -106,7 +129,7 @@ export const StyledRadioButtonLabel = styled.label<StyledRadioButtonProps>`
     `}
 
   ${props =>
-    props.size === 'large' &&
+    props.size === "large" &&
     css`
       height: ${props.theme.height.lg};
       line-height: ${props.theme.height.lg};
@@ -116,12 +139,12 @@ export const StyledRadioButtonLabel = styled.label<StyledRadioButtonProps>`
 export const StyledRadioButtonSpan = styled.span<StyledRadioButtonProps>`
   font-size: ${props => props.theme.font.size.md}
     ${props =>
-      props.size === 'small' &&
+      props.size === "small" &&
       css`
         font-size: ${props.theme.font.size.sm};
       `}
     ${props =>
-      props.size === 'large' &&
+      props.size === "large" &&
       css`
         font-size: ${props.theme.font.size.lg};
       `};
@@ -139,8 +162,8 @@ StyledRadioButtonSpan.defaultProps = {
   theme
 };
 
-StyledRadioButtonInputHidden.displayName = 'StyledRadioButtonInputHidden';
+StyledRadioButtonInputHidden.displayName = "StyledRadioButtonInputHidden";
 
-StyledRadioButtonLabel.displayName = 'StyledRadioButtonLabel';
+StyledRadioButtonLabel.displayName = "StyledRadioButtonLabel";
 
-StyledRadioButtonSpan.displayName = 'StyledRadioButtonSpan';
+StyledRadioButtonSpan.displayName = "StyledRadioButtonSpan";

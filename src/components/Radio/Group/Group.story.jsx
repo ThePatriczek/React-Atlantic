@@ -1,16 +1,16 @@
-import { withKnobs } from '@storybook/addon-knobs';
-import { storiesOf } from '@storybook/react';
-import * as React from 'react';
-import { Radio } from '../Radio';
-import { action } from '@storybook/addon-actions';
-import { Typography } from '../../Typography';
+import { withKnobs } from "@storybook/addon-knobs";
+import { storiesOf } from "@storybook/react";
+import * as React from "react";
+import { Radio } from "../Radio";
+import { action } from "@storybook/addon-actions";
+import { Typography } from "../../Typography";
 
-const stories = storiesOf('Radio', module);
+const stories = storiesOf("Radio", module);
 const { Text } = Typography;
 stories.addDecorator(withKnobs);
 
 stories.add(
-  'Radio.Group',
+  "Radio.Group",
   () => {
     const group = (
       <div>
