@@ -489,7 +489,7 @@ export const Menu = styled.div`
 `;
 
 export const MenuList = styled.div`
-  overflow-y: scroll;
+  overflow-y: auto;
   max-height: 175px;
   border: 1px solid ${props => props.theme.color.primary.alpha};
   border-top: 0;
